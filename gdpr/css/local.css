@@ -1,0 +1,25 @@
+.indent {
+margin-left: 1em;
+}
+
+h4 {
+color: #0895d3;
+}
+
+.gdpr-eu-tmp-notice {
+color: green;
+}
+
+.gdpr-eu-tmp-notice a {
+color: inherit;
+text-decoration: underline;
+}
+
+.gdpr-eu-tmp-notice:not(:empty):after {
+content: "(Success! Script has loaded!)";
+}
+
+.alert a {
+text-decoration: underline;
+font-weight: bold;
+}
