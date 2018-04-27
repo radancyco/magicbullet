@@ -9,7 +9,7 @@
 
   console.log("New location running...");
 
-  var magicBulletScript = document.getElementById("tmp-magic-bullet");
+  var magicBulletScript = document.getElementById("tmp-magicbullet");
 
   var magicBulletBody = document.body;
 
@@ -49,12 +49,12 @@
 
       if(hostName === "runmytests.com" || hostName === "talentbrew.com") {
 
-        gdprCSS.setAttribute("href", "https://tmpworldwide.github.io/tmp-resource-library/magicbullet/gdpr/qa.css");
+        gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/css/");
         gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/");
 
       } else {
 
-        gdprCSS.setAttribute("href", "https://tmpworldwide.github.io/tmp-resource-library/magicbullet/gdpr/prod.css");
+        gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/css/");
         gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/");
 
       }
@@ -70,7 +70,7 @@
 
   if (a11yScript === "true") {
 
-    magicBulletBody.classList.add("magicbullet-a11y");
+    magicBulletBody.classList.add("magic-bullet-a11y");
 
     console.log("Accessibility script is loading...");
 
