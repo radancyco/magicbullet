@@ -9,7 +9,7 @@
 
   console.log("New location running...");
 
-  var magicBulletScript = document.getElementById("tmp-magicbullet");
+  var magicBulletScript = document.getElementById("tmp-magic-bullet");
 
   var magicBulletBody = document.body;
 
