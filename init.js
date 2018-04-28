@@ -1,13 +1,11 @@
 /*
 
-  TalentBrew: Magic Bullet
+  TalentBrew: Magic Bullet - A script to chase all your troubles away.
   Developer: Michael "Spell" Spellacy, Email: michael.spellacy@tmp.com, Twitter: @spellacy, GitHub: michaelspellacy
 
 */
 
 (function() {
-
-  console.log("New location running...");
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet");
 
