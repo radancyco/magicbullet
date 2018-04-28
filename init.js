@@ -19,6 +19,8 @@
 
   var hostName = location.hostname;
 
+  var localHost = hostName;
+
   hostName = hostName.substring(hostName.indexOf(".") + 1);
 
   // Execute GDPR
@@ -38,10 +40,10 @@
     var gdprExec = document.createElement("script");
     gdprExec.setAttribute("id", "gdpr-notice");
 
-    if (location.hostname == "localhost" || location.hostname == "192.168.0.14" || location.hostname == "192.168.1.116" || location.hostname == "127.0.0.1") {
+    if (localHost === "localhost" || localHost === "192.168.0.14" || localHost === "192.168.1.116" || localHost === "127.0.0.1") {
 
-      gdprCSS.setAttribute("href", "qa.css");
-      gdprExec.setAttribute("src", "qa.js");
+      gdprCSS.setAttribute("href", "gdpr/qa.css");
+      gdprExec.setAttribute("src", "gdpr/qa.js");
 
     } else {
 
