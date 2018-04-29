@@ -7,17 +7,27 @@
 
 (function() {
 
+  // Get Magic Bullet Script
+
   var magicBulletScript = document.getElementById("tmp-magic-bullet");
+
+  // Get body of page script loads on.
 
   var magicBulletBody = document.body;
 
+  // Get data-gdpr attribute, if present.
+
   var gdprScript = magicBulletScript.getAttribute("data-gdpr");
+
+  // Get data-a11y attribute, if present.
 
   var a11yScript = magicBulletScript.getAttribute("data-a11y");
 
-  // Grab Hostname so that we can select between QA and Prod scripts.
+  // Get hostname so that we can select between QA and Production scripts.
 
   var hostName = location.hostname;
+
+  // Need to apply hostName to localHost var so we can load script locally.
 
   var localHost = hostName;
 
@@ -27,6 +37,8 @@
 
   if (gdprScript === "true") {
 
+    // Add GDPR hook for implementation team. May come in handy.
+
     magicBulletBody.classList.add("magic-bullet-gdpr");
 
     // Add GDPR CSS
@@ -35,10 +47,13 @@
     gdprCSS.setAttribute("id", "gdpr-css");
     gdprCSS.setAttribute("rel", "stylesheet");
 
-    // Add GDPR Script
+    // Create and add GDPR script
 
     var gdprExec = document.createElement("script");
     gdprExec.setAttribute("id", "gdpr-notice");
+
+    // Run script locally when these domains present...
+    // Feel free to add your own IP address.
 
     if (localHost === "localhost" || localHost === "192.168.0.14" || localHost === "192.168.1.116" || localHost === "127.0.0.1") {
 
@@ -47,7 +62,7 @@
 
     } else {
 
-      // Run QA script on following domains...
+      // Run QA version on following domains only...
 
       if(hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "github.io") {
 
@@ -58,7 +73,7 @@
 
       } else {
 
-        // ... else, run the production script.
+        // ... else, run the production version.
 
         gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/css/");
         gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/");
@@ -69,6 +84,8 @@
 
     }
 
+    // Append CSS and Script to DOM.
+
     document.head.appendChild(gdprCSS);
     document.body.appendChild(gdprExec);
 
@@ -78,7 +95,11 @@
 
   if (a11yScript === "true") {
 
+    // Add A11y hook for implementation team. May come in handy.
+
     magicBulletBody.classList.add("magic-bullet-a11y");
+
+    // Runy A11y enhancements. To be similar to how GDPR is added.
 
     console.log("Accessibility script is loading...");
 
