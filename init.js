@@ -47,7 +47,9 @@
 
     } else {
 
-      if(hostName === "runmytests.com" || hostName === "talentbrew.com") {
+      // Run QA script on following domains...
+
+      if(hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "github.io") {
 
         gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/css/");
         gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/");
@@ -55,6 +57,8 @@
         console.log("GDPR QA");
 
       } else {
+
+        // ... else, run the production script.
 
         gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/css/");
         gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/");
