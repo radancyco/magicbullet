@@ -271,6 +271,8 @@
 
   if(bannerDisplayed === null) {
 
+    setBanner();
+
     // Create Alert
 
     var gdprContainer = document.createElement("div");
