@@ -48,7 +48,7 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "ConsentCapture=" + new Date() + "; expires=" + expDate + "; Secure; path=/";
+    document.cookie = "ConsentCapture=" + new Date() + "; expires=" + expDate + "; Secure; HttpOnly; path=/";
 
     // dataLayer.push({'ConsentCapture': new Date()});
 
@@ -56,7 +56,7 @@
 
   function setBanner() {
 
-    document.cookie = "BannerDisplayed=yes; Secure; path=/";
+    document.cookie = "BannerDisplayed=yes; Secure; HttpOnly; path=/";
 
   }
 
