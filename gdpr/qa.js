@@ -48,7 +48,7 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "ConsentCapture=" + new Date() + "; expires=" + expDate + "; Secure; path=/";
+    document.cookie = "ConsentCapture=" + new Date() + "; expires=" + expDate + "; path=/";
 
     // dataLayer.push({'ConsentCapture': new Date()});
 
@@ -56,7 +56,7 @@
 
   function setBanner() {
 
-    document.cookie = "BannerDisplayed=yes; Secure; path=/";
+    document.cookie = "BannerDisplayed=yes; path=/";
 
   }
 
@@ -65,35 +65,29 @@
   var bannerDisplayed = getCookie("BannerDisplayed");
   var consentCapture = getCookie("ConsentCapture");
 
-  // If page has NOT been refreshed...
+  // Upon entering the site, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
+  // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
 
-  if(gdprPageRefresh != 1) {
+  if (bannerDisplayed === null) {
 
-    // Upon entering the site, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
-    // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
+    setBanner();
 
-    if (bannerDisplayed === null) {
+  }
 
-      setBanner();
+  // If bannerDisplayed exists and consent has NOT been set (and page not refreshed), then set consent when user visits another page.
 
-    }
+  if(bannerDisplayed !== null && consentCapture === null && gdprPageRefresh != 1) {
 
-    // If bannerDisplayed exists and consent has NOT been set, then set consent when user visits another page.
+    setConsent();
 
-    if(bannerDisplayed !== null && consentCapture === null) {
+  }
 
-      setConsent();
+  // If consent has been given, then set bannerDisplayed
 
-    }
+  if(consentCapture !== null) {
 
-    // If consent has been given, then set bannerDisplayed
-
-    if(consentCapture !== null) {
-
-      var bannerDisplayed = true;
-      setBanner();
-
-    }
+    var bannerDisplayed = true;
+    setBanner();
 
   }
 
@@ -270,8 +264,6 @@
   // Only load banner if banner has NEVER been displayed before.
 
   if(bannerDisplayed === null) {
-
-    setBanner();
 
     // Create Alert
 
