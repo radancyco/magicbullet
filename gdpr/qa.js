@@ -56,7 +56,6 @@
 
   function setBanner() {
 
-    bannerDisplayed = true;
     document.cookie = "BannerDisplayed=yes; path=/";
 
   }
@@ -91,6 +90,7 @@
 
     if(consentCapture !== null) {
 
+      var bannerDisplayed = true;
       setBanner();
 
     }
