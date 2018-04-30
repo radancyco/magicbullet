@@ -32,6 +32,8 @@
 
   var gdprDataFormSubmitBtn = document.querySelectorAll(".data-form .form-field.submit");
 
+  var gdprPageRefresh = performance.navigation.type;
+
   // Helper: Get Cookie(s)
 
   function getCookie(name) {
@@ -46,36 +48,52 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "ConsentCapture=" + new Date() + "; Secure; expires=" + expDate + "; path=/";
+    document.cookie = "ConsentCapture=" + new Date() + "; expires=" + expDate + "; path=/";
 
     // dataLayer.push({'ConsentCapture': new Date()});
 
   }
 
-  // Upon entering the site, immediately set BannerDisplayed cookie to "yes" and an expiration of 1 year.
+  function setBanner() {
 
-  var bannerDisplayed = getCookie("BannerDisplayed");
-
-  if (bannerDisplayed === null) {
-
-    var iniDate = new Date();
-    iniDate.setMonth(iniDate.getMonth() + 12);
-    document.cookie = "BannerDisplayed=yes; Secure; expires=" + iniDate + "; path=/";
+    document.cookie = "BannerDisplayed=yes; path=/";
 
   }
 
-  // Get Consent
+  // Let's get our cookies...
 
+  var bannerDisplayed = getCookie("BannerDisplayed");
   var consentCapture = getCookie("ConsentCapture");
 
-  // Implicit Consent
+  // If page has NOT been refreshed...
 
-  // If banner has been loaded and consent has not been set yet, then set consent
-  // The consent then applies to other pages visited or if page refreshed.
+  if(gdprPageRefresh != 1) {
 
-  if(bannerDisplayed !== null && consentCapture === null) {
+    // Upon entering the site, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
+    // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
+
+    if (bannerDisplayed === null) {
+
+      setBanner();
+
+    }
+
+    // If bannerDisplayed exists and consent has NOT been set, then set consent when user visits another page.
+
+    if(bannerDisplayed !== null && consentCapture === null) {
 
       setConsent();
+
+    }
+
+    // If consent has been given, then set bannerDisplayed
+
+    if(consentCapture !== null) {
+
+      var bannerDisplayed = true;
+      setBanner();
+
+    }
 
   }
 

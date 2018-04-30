@@ -57,8 +57,8 @@
 
     if (localHost === "localhost" || localHost === "192.168.0.14" || localHost === "192.168.1.116" || localHost === "127.0.0.1") {
 
-      gdprCSS.setAttribute("href", "gdpr/qa.css");
-      gdprExec.setAttribute("src", "gdpr/qa.js");
+      gdprCSS.setAttribute("href", "/gdpr/qa.css");
+      gdprExec.setAttribute("src", "/gdpr/qa.js");
 
     } else {
 
