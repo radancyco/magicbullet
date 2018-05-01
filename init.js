@@ -33,6 +33,12 @@
 
   hostName = hostName.substring(hostName.indexOf(".") + 1);
 
+  function runScript(css, js) {
+
+
+
+  }
+
   // Execute GDPR
 
   if (gdprScript === "true") {
@@ -99,9 +105,41 @@
 
     magicBulletBody.classList.add("magic-bullet-a11y");
 
-    // Runy A11y enhancements. To be similar to how GDPR is added.
+    // Create and add GDPR script
 
-    console.log("Accessibility script is loading...");
+    var a11yExec = document.createElement("script");
+    a11yExec.setAttribute("id", "a11y-fixes");
+
+    // Run script locally when these domains present...
+    // Feel free to add your own IP address.
+
+    if (localHost === "localhost" || localHost === "192.168.0.14" || localHost === "192.168.1.116" || localHost === "127.0.0.1") {
+
+      a11yExec.setAttribute("src", "/a11y/qa.js");
+
+    } else {
+
+      // Run QA version on following domains only...
+
+      if(hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "github.io") {
+
+        a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/qa/");
+
+      } else {
+
+        // ... else, run the production version.
+
+        a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/prod/");
+
+        console.log("A11y Production");
+
+      }
+
+    }
+
+    // Append Script to DOM.
+
+    document.body.appendChild(a11yExec);
 
   }
 
