@@ -119,7 +119,7 @@
 
   // if Google Translate exists, then fix...
 
-  $(".goog-te-combo").attr("id", "goog-te-combo").prepend("<label class='wai visably-hidden' for='goog-te-label'>Translate this page:</label>");
+  $(".goog-te-combo").attr("id", "goog-te-combo").prepend("<label class='wai visablly-hidden' for='goog-te-combo'>Translate this page:</label>");
 
 	// Future Enhancement
 
