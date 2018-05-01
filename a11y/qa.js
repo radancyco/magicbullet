@@ -117,9 +117,9 @@
 
   $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").remove();
 
-  // Google Translate Exists, then fix...
+  // if Google Translate exists, then fix...
 
-  $(".goog-te-combo").attr("aria-label", "Translate this page");
+  $("select.goog-te-combo").attr("id", "google-te-combo").prepend("<label class='wai visably-hidden' for='goog-te-label'>Translate this page:</label>");
 
 	// Future Enhancement
 
