@@ -117,6 +117,10 @@
 
   $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").remove();
 
+  // Google Translate Exists, then fix...
+
+  $(".goog-te-combo").attr("aria-label", "Translate this page");
+
 	// Future Enhancement
 
 	// Issue: We need to perform some additional form validation/manipulation after form is submitted
