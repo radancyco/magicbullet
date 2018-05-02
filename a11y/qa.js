@@ -119,7 +119,11 @@
 
   // if Google Translate exists, then fix...
 
-  $(".goog-te-combo").attr("id", "goog-te-combo").prepend("<label class='wai visablly-hidden' for='goog-te-combo'>Translate this page:</label>");
+  setTimeout(function(){
+
+    $(".goog-te-combo").attr("id", "goog-te-combo").prepend("<label class='wai visablly-hidden' for='goog-te-combo'>Translate this page:</label>");
+
+  }, 1000);
 
 	// Future Enhancement
 
