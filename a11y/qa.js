@@ -121,7 +121,7 @@
 
   setTimeout(function(){
 
-    $(".goog-te-combo").attr("id", "goog-te-combo").prepend("<label class='wai visablly-hidden' for='goog-te-combo'>Translate this page:</label>");
+    $(".goog-te-combo").attr("id", "goog-te-combo").before("<label class='wai visablly-hidden' for='goog-te-combo'>Translate this page:</label>");
 
   }, 1000);
 
