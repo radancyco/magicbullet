@@ -113,9 +113,9 @@
 
     $(".goog-te-combo").attr("id", "goog-te-combo").before("<label class='wai' for='goog-te-combo'>Translate this page:</label>");
 
-    // Hide unused component
+    // Add title to spinner
 
-    $("#goog-gt-tt").prop("hidden", true);
+    $(".goog-te-spinner").append("<title>Spinner</title>");
 
   }, 1000);
 
