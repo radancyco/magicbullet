@@ -109,21 +109,21 @@
 
 		// $(".form-field.form-message").attr("role", "alert");
 
-	}, 1000);
+    // if Google Translate exists, then fix...
+
+    $(".goog-te-combo").attr("id", "goog-te-combo").before("<label class='wai' for='goog-te-combo'>Translate this page:</label>");
+
+    // Hide unused component
+
+    $("#goog-gt-tt").prop("hidden", true);
+
+  }, 1000);
 
   // Issue: Job DEscriptions have horrible inaccessible garbage in them. This is an attemtp to remove some of that garbage...
 
   // Remove tabindex
 
   $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").remove();
-
-  // if Google Translate exists, then fix...
-
-  setTimeout(function(){
-
-    $(".goog-te-combo").attr("id", "goog-te-combo").before("<label class='wai visablly-hidden' for='goog-te-combo'>Translate this page:</label>");
-
-  }, 1000);
 
 	// Future Enhancement
 
