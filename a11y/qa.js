@@ -117,6 +117,10 @@
 
     $(".goog-te-spinner").append("<title>Spinner</title>");
 
+    // Remove autocomplete from checkbox inputs
+
+    $("input[type="checkbox"]").removeAttr("autocomplete");
+
   }, 1000);
 
   // Issue: Job DEscriptions have horrible inaccessible garbage in them. This is an attemtp to remove some of that garbage...
@@ -135,8 +139,8 @@
 
 	});
 
-  // Remove autocomplete from checkbox inputs
+  // Add role of "presentation" to every table found within a job description.
 
-  $("input[type="checkbox"]").removeAttr("autocomplete");
+  $(".ats-description table").attr("role", "presentation");
 
 })();
