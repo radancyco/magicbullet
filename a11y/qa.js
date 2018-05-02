@@ -135,4 +135,8 @@
 
 	});
 
+  // Remove autocomplete from checkbox inputs
+
+  $("input[type="checkbox"]").removeAttr("autocomplete");
+
 })();
