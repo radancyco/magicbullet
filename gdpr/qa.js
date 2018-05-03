@@ -50,8 +50,6 @@
     expDate.setMonth(expDate.getMonth() + 12);
     document.cookie = "ConsentCapture=" + new Date() + "; expires=" + expDate + "; path=/";
 
-    // dataLayer.push({'ConsentCapture': new Date()});
-
   }
 
   function setBanner() {
@@ -68,15 +66,15 @@
   // Upon entering the site, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
   // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
 
-  if (bannerDisplayed === null) {
+  if (bannerDisplayed == null) {
 
     setBanner();
 
   }
 
-  // If bannerDisplayed exists and consent has NOT been set (and page not refreshed), then set consent when user visits another page.
+  // If bannerDisplayed exists and consent has NOT been set, then set consent when user visits another page.
 
-  if(bannerDisplayed !== null && consentCapture === null && gdprPageRefresh != 1) {
+  if(bannerDisplayed !== null && consentCapture === null) {
 
     setConsent();
 
@@ -86,7 +84,6 @@
 
   if(consentCapture !== null) {
 
-    var bannerDisplayed = true;
     setBanner();
 
   }
@@ -432,7 +429,7 @@
 
       var gdprDynamicMessage = document.createElement("p");
 
-      gdprDynamicMessage.className = "gdpr-eu-tmp-notice";
+      gdprDynamicMessage.className = "form-field gdpr-eu-tmp-notice";
 
       gdprDynamicMessage.innerHTML = formMessage;
 
