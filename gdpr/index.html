@@ -274,7 +274,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
     <div class="indent">
 
-<pre><code>&lt;p class="gdpr-eu-tmp-notice"&gt;By submitting your information, you acknowledge that you have read our privacy policy (this content opens in new window) and consent to receive email communication from [company name].&lt;/p&gt;</code></pre>
+<pre><code>&lt;p class="form-field gdpr-eu-tmp-notice"&gt;By submitting your information, you acknowledge that you have read our privacy policy (this content opens in new window) and consent to receive email communication from [company name].&lt;/p&gt;</code></pre>
 
       <p>If you need to override the default behavior, then you may include the following data attribute and value.
 
@@ -286,15 +286,15 @@ document.body.appendChild(magicBullet);</code></pre>
 
 <pre><code>magicBullet.setAttribute("data-gdpr-form-bypass", "true");</code></pre>
 
-      <p>Removing the default behavior means that you may need to manually insert the message into the desired position withn the form. To do this, simply place the following markup wherever you would like the message to appear. The surrounding <code>p</code> tag can be replaced with a <code>span</code> or any other tag of your choosing, but please be sure to keep the <code>class</code> attribute and value in place, as the message will still be inserted into the tag, via JavaScript.</p>
+      <p>Removing the default behavior means that you may need to manually insert the message into the desired position withn the form. To do this, simply place the following markup wherever you would like the message to appear. The surrounding <code>p</code> tag can be replaced with a <code>span</code> or any other tag of your choosing, but please be sure to keep the <code>class</code> attribute and value in place, as the message will still be inserted into the tag, via JavaScript. The "form-feild" class may be removed if needed.</p>
 
       <p><strong>Note:</strong> CSS formatting may be safetly applied to this tag, as needed.</p>
 
-<pre><code>&lt;p class="gdpr-eu-tmp-notice"&gt;&lt;/p&gt;</code></pre>
+<pre><code>&lt;p class="form-field gdpr-eu-tmp-notice"&gt;&lt;/p&gt;</code></pre>
 
       <h3>Script Test:</h3>
 
-      <p class="gdpr-eu-tmp-notice"></p>
+      <p class="form-field gdpr-eu-tmp-notice"></p>
 
     </div>
 
