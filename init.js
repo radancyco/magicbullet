@@ -11,7 +11,7 @@
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet");
 
-  // Get body of page script loads on.
+  // Get body of page Magic Bullet loads on.
 
   var magicBulletBody = document.body;
 
@@ -27,17 +27,11 @@
 
   var hostName = location.hostname;
 
-  // Need to apply hostName to localHost var so we can load script locally.
+  // Need to apply hostName to localHost var so that we can load our script(s) locally.
 
   var localHost = hostName;
 
   hostName = hostName.substring(hostName.indexOf(".") + 1);
-
-  function runScript(css, js) {
-
-
-
-  }
 
   // Execute GDPR
 
@@ -97,7 +91,7 @@
 
   }
 
-  // Execute A11y (Future addition)
+  // Execute A11y
 
   if (a11yScript === "true") {
 
