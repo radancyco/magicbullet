@@ -139,7 +139,7 @@
 
   $(".ats-description table").attr("role", "presentation");
 
-  // Remove autocomplete from checkbox inputs
+  // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
 
   $("input[type=checkbox]").removeAttr("autocomplete");
 
