@@ -16,7 +16,9 @@ text-decoration: underline;
 }
 
 .gdpr-eu-tmp-notice:not(:empty):after {
-content: "(Success! Script has loaded!)";
+content: "(Success! The script has been loaded!)";
+display: block;
+margin-top: 1em;
 }
 
 .alert a {

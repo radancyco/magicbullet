@@ -8,7 +8,7 @@ localjs: js/local.js
 
 <div id="gdpr-notice">
 
-    <p>This script may be used to generate a General Data Protection Regulation (GDPR) consent notice on any TMP hosted website. Due to privacy concerns, European Union (EU) citizens who engage with any website that collects data, via cookies, must now be warned about this in advance and be able to (implicitly or explicitly) opt-in to data being used. You can learn more about the GDPR on the <a href="https://www.eugdpr.org/">official website</a>.</p>
+    <p>This script may be used to generate a General Data Protection Regulation (GDPR) consent notice on any TMP hosted website. Due to privacy concerns, European Union (EU) citizens who engage with any website that collects data, via cookies, must now be warned about this practice in advance and be able to (implicitly or explicitly) opt-in to permit data to be used. You can learn more about the GDPR on the <a href="https://www.eugdpr.org/">official website</a>.</p>
 
     <p class="alert"><strong>Note:</strong> This document is for internal TMP Worldwide use only.</p>
 
@@ -16,7 +16,7 @@ localjs: js/local.js
 
       <h2>Implementation</h2>
 
-      <p>To adhere to this regulation, a notice must be included on every page of your site. The following script may be implemented in various ways. Which way you choose to implement, largely depends on the size of your site and/or how it has been templated. In most cases, implementation should not take more than 30-60 minutes per site.</p>
+      <p>To adhere to this regulation, a notice must be included on every page of your site. The following script may be implemented on a site to achieve this goal. Which way you choose to implement the script, largely depends on the size of your site and/or how it has been templated. In most cases, implementation should not take more than 30-60 minutes per site.</p>
 
       <h3>HTML</h3>
 
@@ -79,7 +79,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
         <h3 id="data-gdpr-policy-url">Policy URL</h3>
 
-        <p>Passing this data attribute a policy URL, will include that URL within the notice and form message. The value must be in the form of a fully qualified URL. Protocol-relative URL's <a href="https://www.paulirish.com/2010/the-protocol-relative-url/" traget="_blank" rel="noopener"><strong>should not be used</strong></a>. If the privacy policy is local to the domain, then please use a relative path instead&mdash;e.g., "/privacy/" instead of "https://www.clarityrobotics.com/privacy/".</p>
+        <p>Passing this data attribute a policy URL, will include that URL within the notice and inline <a href="#data-collection-form">form message</a>. The value must be in the form of a fully qualified URL. Protocol-relative URL's <a href="https://www.paulirish.com/2010/the-protocol-relative-url/" target="_blank" rel="noopener"><strong>should not be used</strong></a>. If the privacy policy is local to the domain, then please use a relative path instead&mdash;e.g., "/privacy/" instead of "https://www.clarityrobotics.com/privacy/".</p>
 
         <h4>HTML</h4>
 
@@ -105,7 +105,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
         <p>The following language code values are accepted by the script:</p>
 
-        <p class="alert"><strong>Note:</strong> All language translations are currently pending, but should be complete by May 12th, 2018. If new languages are needed, please contact <a href="mailto:james.maliszewski@tmp.com">James Maliszewski</a>.</p>
+        <p class="alert"><strong>Note:</strong> All language translations are currently pending, but should be complete by May 20th, 2018. If new languages are required, please contact <a href="mailto:james.maliszewski@tmp.com">James Maliszewski</a>.</p>
 
         <ul>
           <li><strong>nl</strong> (Dutch)</li>
@@ -268,7 +268,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
     <h2>TalentBrew Data Collection Forms</h2>
 
-    <p>By default, the script will look for <code>.data-form form-field.submit</code> and <em>prepend</em> the following element before the form's "Submit" button:
+    <p>There is a second componenet to this script and that is to include a privacy polcy statement on all TalentBrew forms that collect data. By default, the script will look for <code>.data-form form-field.submit</code> class and <em>prepend</em> the following element before the form's "Submit" button:
 
     <br>
 
