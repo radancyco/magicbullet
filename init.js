@@ -33,6 +33,9 @@
 
   hostName = hostName.substring(hostName.indexOf(".") + 1);
 
+  var localPaths = localHost === "localhost" || localHost === "192.168.0.14" || localHost === "192.168.1.116" || localHost === "127.0.0.1";
+  var testPaths = hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "github.io";
+
   // Execute GDPR
 
   if (gdprScript === "true") {
@@ -55,7 +58,7 @@
     // Run script locally when these domains present...
     // Feel free to add your own IP address.
 
-    if (localHost === "localhost" || localHost === "192.168.0.14" || localHost === "192.168.1.116" || localHost === "127.0.0.1") {
+    if (localPaths) {
 
       gdprCSS.setAttribute("href", "/gdpr/qa.css");
       gdprExec.setAttribute("src", "/gdpr/qa.js");
@@ -64,7 +67,7 @@
 
       // Run QA version on following domains only...
 
-      if(hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "github.io") {
+      if(testPaths) {
 
         gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/css/");
         gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/");
@@ -107,7 +110,7 @@
     // Run script locally when these domains present...
     // Feel free to add your own IP address.
 
-    if (localHost === "localhost" || localHost === "192.168.0.14" || localHost === "192.168.1.116" || localHost === "127.0.0.1") {
+    if (localPaths) {
 
       a11yExec.setAttribute("src", "/a11y/qa.js");
 
@@ -115,7 +118,7 @@
 
       // Run QA version on following domains only...
 
-      if(hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "github.io") {
+      if(testPaths) {
 
         a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/qa/");
 
