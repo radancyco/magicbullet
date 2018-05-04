@@ -32,6 +32,8 @@
 
   var gdprDataFormSubmitBtn = document.querySelectorAll(".data-form .form-field.submit");
 
+  var gdprPageRefresh = performance.navigation.type;
+
   // Helper: Get Cookie(s)
 
   function getCookie(name) {
@@ -48,34 +50,41 @@
     expDate.setMonth(expDate.getMonth() + 12);
     document.cookie = "ConsentCapture=" + new Date() + "; Secure; expires=" + expDate + "; path=/";
 
-    // dataLayer.push({'ConsentCapture': new Date()});
+  }
+
+  function setBanner() {
+
+    document.cookie = "BannerDisplayed=yes; Secure; path=/";
 
   }
 
-  // Upon entering the site, immediately set BannerDisplayed cookie to "yes" and an expiration of 1 year.
+  // Let's get our cookies...
 
   var bannerDisplayed = getCookie("BannerDisplayed");
+  var consentCapture = getCookie("ConsentCapture");
 
-  if (bannerDisplayed === null) {
+  // Upon entering the site, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
+  // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
 
-    var iniDate = new Date();
-    iniDate.setMonth(iniDate.getMonth() + 12);
-    document.cookie = "BannerDisplayed=yes; Secure; expires=" + iniDate + "; path=/";
+  if (bannerDisplayed == null) {
+
+    setBanner();
 
   }
 
-  // Get Consent
-
-  var consentCapture = getCookie("ConsentCapture");
-
-  // Implicit Consent
-
-  // If banner has been loaded and consent has not been set yet, then set consent
-  // The consent then applies to other pages visited or if page refreshed.
+  // If bannerDisplayed exists and consent has NOT been set, then set consent when user visits another page.
 
   if(bannerDisplayed !== null && consentCapture === null) {
 
-      setConsent();
+    setConsent();
+
+  }
+
+  // If consent has been given, then set bannerDisplayed
+
+  if(consentCapture !== null) {
+
+    setBanner();
 
   }
 
@@ -105,7 +114,7 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else if (gdprLanguage === "de") {
 
@@ -115,7 +124,7 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else if (gdprLanguage === "fr") {
 
@@ -125,7 +134,7 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else if (gdprLanguage === "fr-ch") {
 
@@ -135,7 +144,7 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else if (gdprLanguage === "es") {
 
@@ -145,7 +154,7 @@
 
     var gdprConsentBtn = "Aceptar";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else if (gdprLanguage === "pt-br") {
 
@@ -155,7 +164,7 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else if (gdprLanguage === "pt-es") {
 
@@ -165,7 +174,7 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else if (gdprLanguage === "jp") {
 
@@ -175,7 +184,7 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else if (gdprLanguage === "pl") {
 
@@ -185,7 +194,7 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else if (gdprLanguage === "cs") {
 
@@ -195,7 +204,7 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else if (gdprLanguage === "hu") {
 
@@ -205,7 +214,7 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else if (gdprLanguage === "zh-hans") {
 
@@ -215,9 +224,9 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
-  } else if (gdprLanguage === "zh-hans") {
+  } else if (gdprLanguage === "zh-hant") {
 
     // Traditional Chinese
 
@@ -225,7 +234,7 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else if (gdprLanguage === "ru") {
 
@@ -235,7 +244,7 @@
 
     var gdprConsentBtn = "Pending";
 
-    var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
+    var formMessage = "Pellentesque awaiting translation tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
   } else {
 
@@ -420,7 +429,7 @@
 
       var gdprDynamicMessage = document.createElement("p");
 
-      gdprDynamicMessage.className = "gdpr-eu-tmp-notice";
+      gdprDynamicMessage.className = "form-field gdpr-eu-tmp-notice";
 
       gdprDynamicMessage.innerHTML = formMessage;
 

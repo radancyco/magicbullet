@@ -271,7 +271,7 @@
     gdprContainer.setAttribute("id", "gdpr-alert");
     gdprContainer.setAttribute("role", "alert");
 
-    gdprContainer.className = "dev-mode";
+    // gdprContainer.className = "dev-mode";
 
     if (gdprNoticeColor !== null) {
 
