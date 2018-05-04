@@ -48,13 +48,13 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "ConsentCapture=" + new Date() + "; expires=" + expDate + "; path=/";
+    document.cookie = "ConsentCapture=" + new Date() + "; Secure; expires=" + expDate + "; path=/";
 
   }
 
   function setBanner() {
 
-    document.cookie = "BannerDisplayed=yes; path=/";
+    document.cookie = "BannerDisplayed=yes; Secure; path=/";
 
   }
 
@@ -226,7 +226,7 @@
 
     var formMessage = "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> eu libero sit amet quam egestas semper " + gdprClientName + ".";
 
-  } else if (gdprLanguage === "zh-hans") {
+  } else if (gdprLanguage === "zh-hant") {
 
     // Traditional Chinese
 
