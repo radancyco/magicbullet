@@ -40,10 +40,6 @@
 
   if (gdprScript === "true") {
 
-    // Add GDPR hook for implementation team. May come in handy.
-
-    magicBulletBody.classList.add("magic-bullet-gdpr");
-
     // Add GDPR CSS
 
     var gdprCSS = document.createElement("link");
@@ -97,10 +93,6 @@
   // Execute A11y
 
   if (a11yScript === "true") {
-
-    // Add A11y hook for implementation team. May come in handy.
-
-    magicBulletBody.classList.add("magic-bullet-a11y");
 
     // Create and add GDPR script
 

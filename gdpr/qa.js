@@ -102,6 +102,10 @@
 
   };
 
+  // Add GDPR hook for implementation team. May come in handy.
+
+  gdprBody.classList.add("magic-bullet-gdpr");
+
   // Languages
 
   var gdprTrusteURL = "https://preferences-mgr.truste.com/"

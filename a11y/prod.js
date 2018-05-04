@@ -4,59 +4,66 @@
 
 (function(){
 
-    // A11y Fixes
+  var magicBulletScript = document.getElementById("tmp-magic-bullet");
+  var a11yBody = document.body;
 
-    // Issue: Validation Error (addLoadEvent)
+  // Add A11y hook for implementation team. May come in handy.
 
-    // Note: Asked Filip to remove.
+  a11yBody.classList.add("magic-bullet-a11y");
 
-    $("script[type='text/javascript']").removeAttr("type");
+  // A11y Fixes
 
-    // A11y: Remove "aria-expanded" from all adjacent elements of "expandable-parent"
+  // Issue: Validation Error (addLoadEvent)
 
-    $(".expandable-parent").attr("aria-expanded", "false").next().removeAttr("aria-expanded");
+  // Note: Asked Filip to remove.
 
-    $(".expandable-parent").on("click", function() {
+  $("script[type='text/javascript']").removeAttr("type");
 
-    	$(this).attr('aria-expanded', function (i, attr) {
+  // A11y: Remove "aria-expanded" from all adjacent elements of "expandable-parent"
 
-    		return attr == 'true' ? 'false' : 'true'
+  $(".expandable-parent").attr("aria-expanded", "false").next().removeAttr("aria-expanded");
 
-    	});
+  $(".expandable-parent").on("click", function() {
 
-    	$(this).next().removeAttr("aria-expanded");
+    $(this).attr('aria-expanded', function (i, attr) {
+
+    	return attr == 'true' ? 'false' : 'true'
 
     });
 
-    // Address any image with a missing alt attribute (usually tracking pixels, etc.)
+    $(this).next().removeAttr("aria-expanded");
 
-    $("img:not([alt])").attr("alt", "");
+  });
 
-    // Job Map Page - Remove target. These links only send information to Google Map UI. Target not needed.
+  // Address any image with a missing alt attribute (usually tracking pixels, etc.)
 
-    $(".job-map-nearby a").removeAttr("target");
+  $("img:not([alt])").attr("alt", "");
 
-    // Social Share Module Links require "Open New Window" text for assistive tech
+  // Job Map Page - Remove target. These links only send information to Google Map UI. Target not needed.
 
-    $(".social-share-items a").append(" <span class='wai'>(Opens in New Windows)</span>");
+  $(".job-map-nearby a").removeAttr("target");
 
-    // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
+  // Social Share Module Links require "Open New Window" text for assistive tech
 
-    $(document).ajaxStop(function() {
+  $(".social-share-items a").append(" <span class='wai'>(Opens in New Windows)</span>");
 
-  		$("#applied-filters").removeAttr("aria-hidden aria-expanded");
+  // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
+
+  $(document).ajaxStop(function() {
+
+  	$("#applied-filters").removeAttr("aria-hidden aria-expanded");
 
 	});
 
 	setTimeout(function(){
 
-		// A11y Form Fixes
+	  // A11y Form Fixes
 
 		// Issue: Remove aria-required from p element (it should not exist on this element) and various other elements.
 
-	    $(".data-form .form-field.required, .form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea").removeAttr("aria-required");
+	  $(".data-form .form-field.required, .form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea").removeAttr("aria-required");
 
-	    // Required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
+	  // Required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
 
 		$(".data-form input[required='required'], .data-form select[required='required'], .data-form textarea[required='required']").prop("required", true);
 
@@ -64,31 +71,31 @@
 
 		$("input[type='checkbox'][aria-required='true']").prop("required", true).removeAttr("aria-required");
 
-	    // Issue: Remove "autocomplete" from select element.
+	  // Issue: Remove "autocomplete" from select element.
 
-	    $(".data-form select").removeAttr("autocomplete");
+	  $(".data-form select").removeAttr("autocomplete");
 
-	    // Issue: Since input element is "valid", it requires no aria-describedy attribute, since there is no validation message to ever bind it to.
+	  // Issue: Since input element is "valid", it requires no aria-describedy attribute, since there is no validation message to ever bind it to.
 
-	    $(".valid").removeAttr("aria-describedby");
+	  $(".valid").removeAttr("aria-describedby");
 
-	    // Issue: Clutter, remove empty instruction-text spans
+	  // Issue: Clutter, remove empty instruction-text spans
 
 		$(".instruction-text").each(function() {
 
-			if ($(this).is(":empty")){
+      if ($(this).is(":empty")){
 
-  				$(this).remove();
+  		    $(this).remove();
 
-			}
+      }
 
-		});
+    });
 
-	    // Issue: Clutter, remove unused elements from fields that are not required.
+	  // Issue: Clutter, remove unused elements from fields that are not required.
 
-	    $(".form-field:not(.required").each(function() {
+	  $(".form-field:not(.required").each(function() {
 
-			$(this).find(".field-validation-valid").remove();
+      $(this).find(".field-validation-valid").remove();
 
 		});
 
@@ -109,7 +116,15 @@
 
 		// $(".form-field.form-message").attr("role", "alert");
 
-	}, 1000);
+    // if Google Translate exists, then fix...
+
+    $(".goog-te-combo").attr("id", "goog-te-combo").before("<label class='wai' for='goog-te-combo'>Translate this page:</label>");
+
+    // Add title to spinner
+
+    $(".goog-te-spinner").append("<title>Spinner</title>");
+
+  }, 1000);
 
   // Issue: Job DEscriptions have horrible inaccessible garbage in them. This is an attemtp to remove some of that garbage...
 
@@ -126,5 +141,13 @@
 		console.log ("Something accessible has happened");
 
 	});
+
+  // Add role of "presentation" to every table found within a job description.
+
+  $(".ats-description table").attr("role", "presentation");
+
+  // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
+
+  $("input[type=checkbox]").removeAttr("autocomplete");
 
 })();
