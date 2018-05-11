@@ -33,7 +33,7 @@
 
   hostName = hostName.substring(hostName.indexOf(".") + 1);
 
-  var localPaths = localHost === "localhost" || localHost === "192.168.0.14" || localHost === "192.168.1.116" || localHost === "127.0.0.1";
+  var localPaths = localHost === "localhost" || localHost === "192.168.0.14" || localHost === "192.168.1.115" || localHost === "127.0.0.1";
   var testPaths = hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "github.io";
 
   // Execute GDPR
