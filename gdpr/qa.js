@@ -339,13 +339,13 @@
 
     if (gdprNoticeColor !== null) {
 
-      gdprContainer.style.setProperty ("background-color", gdprNoticeColor, "important");
+      gdprContainer.style.setProperty ("background-color", gdprNoticeColor);
 
     }
 
     if (gdprNoticeColorText !== null) {
 
-      gdprContainer.style.setProperty ("color", gdprNoticeColorText, "important");
+      gdprContainer.style.setProperty ("color", gdprNoticeColorText);
 
     }
 
@@ -357,13 +357,13 @@
 
     if (gdprTextAlign !== null) {
 
-      gdprContainer.style.setProperty ("text-align", gdprTextAlign, "important");
+      gdprContainer.style.setProperty ("text-align", gdprTextAlign);
 
     }
 
     if (gdprzIndex !== null) {
 
-      gdprContainer.style.setProperty ("z-index", gdprzIndex, "important");
+      gdprContainer.style.setProperty ("z-index", gdprzIndex);
 
     }
 
