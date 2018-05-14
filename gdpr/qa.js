@@ -66,7 +66,7 @@
   // Upon entering the site, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
   // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
 
-  if (bannerDisplayed == null) {
+  if (bannerDisplayed === null) {
 
     setBanner();
 
