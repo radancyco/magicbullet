@@ -206,7 +206,7 @@
 
     var gdprMessage = "当社はクッキーやその他の追跡技術を使用することで、ナビゲーション、当社製品およびサービスの改善、および当社のマーケティング活動に役立てると同時に、サードパーティからのコンテンツの提供を行っています。このサイトを使用し続けることで、当社の <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>プライバシーポリシー <span id='gdpr-a11y-message' class='visually-hidden'>（新しいウィンドウでコンテンツが開きます）</span></a> に基づく、当社によるクッキーの使用に同意することとなります。サードパーティクッキーの設定を管理するには、<a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>こちらをクリック <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>（新しいウィンドウでコンテンツが開きます）</span></a> してください。";
 
-    var gdprConsentBtn = "Accept";
+    var gdprConsentBtn = "同意する";
 
     var formMessage = "この情報を提出することで、当社の <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>プライバシーポリシー <span class='visually-hidden'>（新しいウィンドウでコンテンツが開きます）</span></a> を読んだこと、また " + gdprClientName + " からメールでのメッセージを受け取ることに同意することとなります。";
 

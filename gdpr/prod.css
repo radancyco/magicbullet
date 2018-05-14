@@ -101,7 +101,7 @@ max-width: none !important;
 padding: .5em 0 !important;
 text-align: center !important;
 text-transform: none !important;
-width: 16% !important;
+width: 50% !important;
 }
 
 /* Form Message */
@@ -124,6 +124,8 @@ top: -3.8em;
 width :100%;
 }
 
+/* 780px */
+
 @media(min-width: 48.75em) {
 
   #gdpr-alert {
@@ -135,6 +137,20 @@ width :100%;
   display: inline-block !important;
   padding: 0 2.4em 0 0 !important;
   vertical-align: middle !important;
+  width: 85% !important;
+  }
+
+  #gdpr-button {
+  width: 15% !important;
+  }
+
+}
+
+/* 1280px */
+
+@media(min-width: 80em) {
+
+  #gdpr-content {
   width: 92% !important;
   }
 
