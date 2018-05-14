@@ -204,11 +204,11 @@
 
     // Japanese
 
-    var gdprMessage = "We use cookies and other tracking technologies to assist with navigation, improve our products and services, assist with our marketing efforts, and provide content from third parties. By continuing to use this site you agree to our use of cookies in accordance with our <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privacy policy <span id='gdpr-a11y-message' class='visually-hidden'>(this content opens in new window)</span></a>. To manage third-party cookie preferences, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>click here <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(this content opens in new window)</span></a>.";
+    var gdprMessage = "当社はクッキーやその他の追跡技術を使用することで、ナビゲーション、当社製品およびサービスの改善、および当社のマーケティング活動に役立てると同時に、サードパーティからのコンテンツの提供を行っています。このサイトを使用し続けることで、当社の <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>プライバシーポリシー <span id='gdpr-a11y-message' class='visually-hidden'>（新しいウィンドウでコンテンツが開きます）</span></a> に基づく、当社によるクッキーの使用に同意することとなります。サードパーティクッキーの設定を管理するには、<a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>こちらをクリック <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>（新しいウィンドウでコンテンツが開きます）</span></a> してください。";
 
     var gdprConsentBtn = "Accept";
 
-    var formMessage = "By submitting your information, you acknowledge that you have read our <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> and consent to receive email communication from " + gdprClientName + ".";
+    var formMessage = "この情報を提出することで、当社の <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>プライバシーポリシー <span class='visually-hidden'>（新しいウィンドウでコンテンツが開きます）</span></a> を読んだこと、また " + gdprClientName + " からメールでのメッセージを受け取ることに同意することとなります。";
 
   } else if(gdprLanguage === "nl") {
 
@@ -260,16 +260,6 @@
 
     var formMessage = "Ao enviar suas informações, você reconhece que leu nossa <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>política de privacidade <span class='visually-hidden'>(este conteúdo abre em uma nova janela)</span></a> e consente em receber comunicações por e-mail de " + gdprClientName + ".";
 
-  } else if (gdprLanguage === "pt-es") {
-
-    // Portuguese (Spanish)
-
-    var gdprMessage = "We use cookies and other tracking technologies to assist with navigation, improve our products and services, assist with our marketing efforts, and provide content from third parties. By continuing to use this site you agree to our use of cookies in accordance with our <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privacy policy <span id='gdpr-a11y-message' class='visually-hidden'>(this content opens in new window)</span></a>. To manage third-party cookie preferences, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>click here <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(this content opens in new window)</span></a>.";
-
-    var gdprConsentBtn = "Accept";
-
-    var formMessage = "By submitting your information, you acknowledge that you have read our <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> and consent to receive email communication from " + gdprClientName + ".";
-
   } else if (gdprLanguage === "ru") {
 
     // Russian
@@ -290,25 +280,35 @@
 
     var formMessage = "Genom att skicka in din information bekräftar du att du har läst vår <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>sekretesspolicy <span class='visually-hidden'>(det här innehållet öppnas i ett nytt fönster)</span></a> och samtycker till att ta emot e-postmeddelanden från " + gdprClientName + ".";
 
+  } else if (gdprLanguage === "tl") {
+
+    // Tagalog (Filipino)
+
+    var gdprMessage = "Gumagamit kami ng cookies at iba pang mga teknolohiya sa pagsubaybay upang tumulong sa pag-navigate, pahusayin ang aming mga produkto at serbisyo, tumulong sa aming mga pagsisikap sa marketing, at magbigay ng content mula sa mga third party. Sa pamamagitan ng patuloy na paggamit sa site na ito, sumasang-ayon ka sa aming paggamit ng cookies alinsunod sa aming <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>patakaran sa privacy <span id='gdpr-a11y-message' class='visually-hidden'>(bubukas sa bagong window ang content na ito)</span></a>. Para pamahalaan ang mga kagustuhan sa cookie ng third-party, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>mag-click dito <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(bubukas sa bagong window ang content na ito)</span></a>.";
+
+    var gdprConsentBtn = "tanggapin";
+
+    var formMessage = "Sa pamamagitan ng pagsusumite ng iyong impormasyon, kinikilala mo na binasa mo ang aming <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>patakaran sa privacy <span class='visually-hidden'>(bubukas sa bagong window ang content na ito)</span></a> at pumapayag kang makatanggap ng komunikasyon sa email mula sa " + gdprClientName + ".";
+
   } else if (gdprLanguage === "zh-hans") {
 
     // Simplified Chinese
 
-    var gdprMessage = "We use cookies and other tracking technologies to assist with navigation, improve our products and services, assist with our marketing efforts, and provide content from third parties. By continuing to use this site you agree to our use of cookies in accordance with our <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privacy policy <span id='gdpr-a11y-message' class='visually-hidden'>(this content opens in new window)</span></a>. To manage third-party cookie preferences, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>click here <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(this content opens in new window)</span></a>.";
+    var gdprMessage = "我们利用 Cookie 和其他跟踪技术，以协助导航、改进产品和服务、助力营销工作以及提供第三方的内容。继续使用本网站，即表明您同意我们按照我们的 <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privacy policy <span id='gdpr-a11y-message' class='visually-hidden'>(该内容将在新窗口中打开)</span></a> 使用 Cookie。如需管理对于第三方 Cookie 的偏好， <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>click here <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(该内容将在新窗口中打开)</span></a>。";
 
-    var gdprConsentBtn = "Accept";
+    var gdprConsentBtn = "接受";
 
-    var formMessage = "By submitting your information, you acknowledge that you have read our <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> and consent to receive email communication from " + gdprClientName + ".";
+    var formMessage = "一旦提交您的信息，即表明您确认已阅读我们的 <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(该内容将在新窗口中打开)</span></a>，并同意接收 " + gdprClientName + " 发送的电子邮件通信。";
 
   } else if (gdprLanguage === "zh-hant") {
 
     // Traditional Chinese
 
-    var gdprMessage = "We use cookies and other tracking technologies to assist with navigation, improve our products and services, assist with our marketing efforts, and provide content from third parties. By continuing to use this site you agree to our use of cookies in accordance with our <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privacy policy <span id='gdpr-a11y-message' class='visually-hidden'>(this content opens in new window)</span></a>. To manage third-party cookie preferences, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>click here <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(this content opens in new window)</span></a>.";
+    var gdprMessage = "我們會使用 cookies 及其他追蹤技術來輔助導覽、改善我們的產品與服務、輔助我們的行銷作業，以及提供第三方的內容。只要繼續使用此網站，即表示您同意我們可以根據我們的 <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>隱私政策 <span id='gdpr-a11y-message' class='visually-hidden'>（在新視窗開啟此內容）</span></a> 使用 cookies。若要管理第三方的 cookie 偏好設定， <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>請按一下這裡 <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>（在新視窗開啟此內容）</span></a>。";
 
-    var gdprConsentBtn = "Accept";
+    var gdprConsentBtn = "接受";
 
-    var formMessage = "By submitting your information, you acknowledge that you have read our <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> and consent to receive email communication from " + gdprClientName + ".";
+    var formMessage = "只要提交您的資訊，即表示您確認您已閱讀我們的 <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>隱私政策 <span class='visually-hidden'>（在新視窗開啟此內容）</span></a>，且同意收到來自 " + gdprClientName + "的電子郵件通訊。";
 
   } else {
 
@@ -339,13 +339,13 @@
 
     if (gdprNoticeColor !== null) {
 
-      gdprContainer.style.setProperty ("background-color", gdprNoticeColor);
+      gdprContainer.style.setProperty ("background-color", gdprNoticeColor, "important");
 
     }
 
     if (gdprNoticeColorText !== null) {
 
-      gdprContainer.style.setProperty ("color", gdprNoticeColorText);
+      gdprContainer.style.setProperty ("color", gdprNoticeColorText, "important");
 
     }
 
@@ -357,13 +357,13 @@
 
     if (gdprTextAlign !== null) {
 
-      gdprContainer.style.setProperty ("text-align", gdprTextAlign);
+      gdprContainer.style.setProperty ("text-align", gdprTextAlign, "important");
 
     }
 
     if (gdprzIndex !== null) {
 
-      gdprContainer.style.setProperty ("z-index", gdprzIndex);
+      gdprContainer.style.setProperty ("z-index", gdprzIndex, "important");
 
     }
 
