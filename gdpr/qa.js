@@ -20,7 +20,7 @@
   var gdprLanguage =  magicBulletScript.getAttribute("data-gdpr-language");
   var gdprNewWindow = magicBulletScript.getAttribute("data-gdpr-new-window");
   var gdprNoticeColor = magicBulletScript.getAttribute("data-gdpr-notice-color");
-  var gdprNoticeColorText = magicBulletScript.getAttribute("data-gdpr-notice-color-text");
+  var gdprNoticeColorText = magicBulletScript.getAttribute("data-gdpr-notice-text-color");
   var gdprPolicyURL = magicBulletScript.getAttribute("data-gdpr-policy-url");
   var gdprTextAlign = magicBulletScript.getAttribute("data-gdpr-text-align");
   var gdprformBypass = magicBulletScript.getAttribute("data-gdpr-form-bypass");

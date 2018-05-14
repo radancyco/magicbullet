@@ -20,7 +20,7 @@
   var gdprLanguage =  magicBulletScript.getAttribute("data-gdpr-language");
   var gdprNewWindow = magicBulletScript.getAttribute("data-gdpr-new-window");
   var gdprNoticeColor = magicBulletScript.getAttribute("data-gdpr-notice-color");
-  var gdprNoticeColorText = magicBulletScript.getAttribute("data-gdpr-notice-color-text");
+  var gdprNoticeColorText = magicBulletScript.getAttribute("data-gdpr-notice-text-color");
   var gdprPolicyURL = magicBulletScript.getAttribute("data-gdpr-policy-url");
   var gdprTextAlign = magicBulletScript.getAttribute("data-gdpr-text-align");
   var gdprformBypass = magicBulletScript.getAttribute("data-gdpr-form-bypass");
@@ -339,13 +339,13 @@
 
     if (gdprNoticeColor !== null) {
 
-      gdprContainer.style.setProperty ("background-color", gdprNoticeColor, "important");
+      gdprContainer.style.setProperty ("background-color", gdprNoticeColor);
 
     }
 
     if (gdprNoticeColorText !== null) {
 
-      gdprContainer.style.setProperty ("color", gdprNoticeColorText, "important");
+      gdprContainer.style.setProperty ("color", gdprNoticeColorText);
 
     }
 
@@ -357,13 +357,13 @@
 
     if (gdprTextAlign !== null) {
 
-      gdprContainer.style.setProperty ("text-align", gdprTextAlign, "important");
+      gdprContainer.style.setProperty ("text-align", gdprTextAlign);
 
     }
 
     if (gdprzIndex !== null) {
 
-      gdprContainer.style.setProperty ("z-index", gdprzIndex, "important");
+      gdprContainer.style.setProperty ("z-index", gdprzIndex);
 
     }
 
