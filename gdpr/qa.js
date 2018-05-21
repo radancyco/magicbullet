@@ -126,7 +126,7 @@
 
     var gdprMessage = "Používáme soubory cookies a jiné sledovací technologie, abychom vám pomohli s orientací na našich stránkách, zlepšili naše produkty a služby, podpořili naše marketingové úsilí a poskytli vám obsah od třetích stran. Dalším využíváním těchto stránek souhlasíte s tím, jak používáme soubory cookies v souladu s našimi <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>zásadami o ochraně soukromí <span id='gdpr-a11y-message' class='visually-hidden'>(tento obsah se otevře v novém okně)</span></a>. Abyste mohli spravovat preference třetích stran ohledně souborů cookies, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>klikněte zde <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(tento obsah se otevře v novém okně)</span></a>.";
 
-    var gdprConsentBtn = "přijmout";
+    var gdprConsentBtn = "Přijmout";
 
     var formMessage = "Odesláním vašich informací potvrzujete, že jste si přečetli naše <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>zásady o ochraně soukromí <span class='visually-hidden'>(tento obsah se otevře v novém okně)</span></a> a souhlasíte s tím, že obdržíte e-mailové zprávy od " + gdprClientName + ".";
 
@@ -146,7 +146,7 @@
 
     var gdprMessage = "Utilizamos cookies y otras tecnologías de seguimiento para ayudar con la navegación, mejorar nuestros productos y servicios, ayudar con nuestras estrategias de marketing y proporcionar contenido de terceros. Si sigue utilizando este sitio, acepta nuestro uso de cookies de acuerdo con nuestra <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>política de privacidad <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(este contenido se abre en una nueva ventana)</span></a>. Para administrar las preferencias de cookies de terceros, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>haga clic aquí <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(este contenido se abre en una nueva ventana)</span></a>.";
 
-    var gdprConsentBtn = "aceptar";
+    var gdprConsentBtn = "Aceptar";
 
     var formMessage = "Al enviar su información, reconoce que ha leído nuestra <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>política de privacidad <span class='visually-hidden'>(este contenido se abre en una nueva ventana)</span></a> y acepta recibir comunicaciones por correo electrónico de " + gdprClientName + ".";
 
@@ -156,7 +156,7 @@
 
     var gdprMessage = "Usamos cookies y otras tecnologías de rastreo para facilitar la navegación, mejorar nuestros productos y servicios, facilitar nuestros esfuerzos de marketing y brindar contenido de terceros. Al continuar utilizando este sitio, acepta el uso de las cookies de acuerdo a nuestra <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>política de privacidad <span id='gdpr-a11y-message' class='visually-hidden'>(el contenido se abre en una nueva ventana)</span></a>. Para controlar sus preferencias con respecto a las cookies de terceros, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>haga clic aquí <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(el contenido se abre en una nueva ventana)</span></a>.";
 
-    var gdprConsentBtn = "aceptar";
+    var gdprConsentBtn = "Aceptar";
 
     var formMessage = "Al enviar sus datos, usted reconoce que ha leído nuestra <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>política de privacidad <span class='visually-hidden'>(el contenido se abre en una nueva ventana)</span></a> y acepta recibir comunicaciones por correo electrónico de " + gdprClientName + ".";
 
@@ -166,7 +166,7 @@
 
     var gdprMessage = "Nous utilisons des cookies et d’autres technologies de suivi afin de faciliter la navigation, d’améliorer nos produits et nos services, de soutenir nos efforts de marketing et de fournir du contenu provenant de tiers. En continuant à utiliser ce site, vous acceptez l’utilisation des cookies conformément à notre <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>politique de confidentialité <span id='gdpr-a11y-message' class='visually-hidden'>(ce contenu s’ouvre dans une nouvelle fenêtre)</span></a>. Afin de gérer vos préférences concernant les cookies de tiers, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>cliquez ici <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(ce contenu s’ouvre dans une nouvelle fenêtre)</span></a>.";
 
-    var gdprConsentBtn = "accepter";
+    var gdprConsentBtn = "Accepter";
 
     var formMessage = "En soumettant vos informations, vous reconnaissez avoir lu notre <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>politique de confidentialité <span class='visually-hidden'>(ce contenu s’ouvre dans une nouvelle fenêtre)</span></a> et acceptez de recevoir des communications par e-mail de la part de " + gdprClientName + ".";
 
@@ -186,7 +186,7 @@
 
     var gdprMessage = "A navigáció segítéséhez, termékeink és szolgáltatásaink fejlesztéséhez, marketingtevékenységeink támogatásához és harmadik felek tartalmainak megjelenítéséhez cookie-kat használunk. Az oldal használatának folytatásával Ön elfogadja, hogy – <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>adatvédelmi irányelveinknek <span id='gdpr-a11y-message' class='visually-hidden'>(ez a tartalom új ablakban nyílik meg)</span></a>megfelelően – cookie-kat használunk. A harmadik felekhez kapcsolódó cookie-beállítások kezeléséhez <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>kattintson ide <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(ez a tartalom új ablakban nyílik meg)</span></a>.";
 
-    var gdprConsentBtn = "elfogadom";
+    var gdprConsentBtn = "Elfogadom";
 
     var formMessage = "Az adatok beküldésével Ön nyilatkozik, hogy elolvasta <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>adatvédelmi irányelveinket <span class='visually-hidden'>(ez a tartalom új ablakban nyílik meg)</span></a> e-mailben kommunikáljon Önnel " + gdprClientName + ".";
 
@@ -196,7 +196,7 @@
 
     var gdprMessage = "Usiamo cookie e altre tecnologie di monitoraggio per agevolare la navigazione, migliorare i nostri prodotti e servizi, supportare le nostre iniziative di marketing e fornire contenuti di parti terze. Continuando a usare questo sito, accetti il nostro uso dei cookie come descritto nella nostra <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>politica sulla privacy <span id='gdpr-a11y-message' class='visually-hidden'>(questo contenuto si apre in una nuova finestra)</span></a>. Per gestire le preferenze relative ai cookie di parti terze, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>fai clic qui <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(questo contenuto si apre in una nuova finestra)</span></a>.";
 
-    var gdprConsentBtn = "accetta";
+    var gdprConsentBtn = "Accetta";
 
     var formMessage = "Inviando le tue informazioni, dichiari aver letto la nostra <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>politica sulla privacy <span class='visually-hidden'>(questo contenuto si apre in una nuova finestra)</span></a> e accetti di ricevere comunicazioni via e-mail da " + gdprClientName + ".";
 
@@ -216,7 +216,7 @@
 
     var gdprMessage = "We gebruiken cookies en andere trackingstechnologieën om te helpen met de navigatie, het verbeteren van onze producten en diensten, het assisteren bij onze marketinginspanningen, en het leveren van inhoud van derden. Door deze website te blijven gebruiken gaat u akkoord met ons gebruik van cookies overeenkomstig ons <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privacybeleid <span id='gdpr-a11y-message' class='visually-hidden'>(deze inhoud wordt in een nieuw venster geopend)</span></a>. <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>Klik hier <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(deze inhoud wordt in een nieuw venster geopend)</span></a> om de cookie-voorkeuren van derden te beheren.";
 
-    var gdprConsentBtn = "accepteren";
+    var gdprConsentBtn = "Accepteren";
 
     var formMessage = "Door uw informatie in te dienen, erkent u dat u ons <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacybeleid gelezen hebt <span class='visually-hidden'>(deze inhoud wordt in een nieuw venster geopend)</span></a> en dat u toestemming geeft om e-mailcommunicatie van " + gdprClientName + " te ontvangen.";
 
@@ -226,7 +226,7 @@
 
     var gdprMessage = "We gebruiken cookies en andere trackingstechnologieën om te helpen met de navigatie, het verbeteren van onze producten en diensten, het assisteren bij onze marketinginspanningen, en het leveren van inhoud van derden. Door deze website te blijven gebruiken gaat u akkoord met ons gebruik van cookies overeenkomstig ons <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privacybeleid <span id='gdpr-a11y-message' class='visually-hidden'>(deze inhoud wordt in een nieuw venster geopend)</span></a>. <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>Klik hier <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(deze inhoud wordt in een nieuw venster geopend)</span></a> om de cookie-voorkeuren van derden te beheren.";
 
-    var gdprConsentBtn = "accepteren";
+    var gdprConsentBtn = "Accepteren";
 
     var formMessage = "Door uw informatie in te dienen, erkent u dat u ons <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacybeleid gelezen hebt <span class='visually-hidden'>(deze inhoud wordt in een nieuw venster geopend)</span></a> en dat u toestemming geeft om e-mailcommunicatie van " + gdprClientName + " te ontvangen.";
 
@@ -246,7 +246,7 @@
 
     var gdprMessage = "Utilizamos cookies e outras tecnologias de seguimento para ajudar na navegação, melhorar os nossos produtos e serviços, apoiar os nossos esforços de marketing e fornecer conteúdos de terceiros. Ao continuar a utilizar este website, o utilizador concorda com a nossa utilização de cookies de acordo com a nossa <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>política de privacidade <span id='gdpr-a11y-message' class='visually-hidden'>(este conteúdo abre numa janela nova)</span></a>. Para gerir as preferências de cookies de terceiros, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>clique aqui <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(este conteúdo abre numa janela nova)</span></a>.";
 
-    var gdprConsentBtn = "aceitar";
+    var gdprConsentBtn = "Aceitar";
 
     var formMessage = "Ao submeter as suas informações, confirma que leu a nossa <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>política de privacidade <span class='visually-hidden'>(este conteúdo abre numa janela nova)</span></a> e aceita receber comunicações por e mail de " + gdprClientName + ".";
 
@@ -256,7 +256,7 @@
 
     var gdprMessage = "Usamos cookies e outras tecnologias de rastreamento para auxiliar na navegação, aprimorar nossos produtos e serviços, ajudar em nossos esforços de marketing e fornecer conteúdo terceirizado. Ao continuar utilizando este site, você concorda com o uso de cookies de acordo com nossa <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>política de privacidade <span id='gdpr-a11y-message' class='visually-hidden'>(este conteúdo abre em uma nova janela)</span></a>. Para gerenciar as preferências de cookies de terceiros, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>clique aqui <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(este conteúdo abre em uma nova janela)</span></a>.";
 
-    var gdprConsentBtn = "aceitar";
+    var gdprConsentBtn = "Aceitar";
 
     var formMessage = "Ao enviar suas informações, você reconhece que leu nossa <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>política de privacidade <span class='visually-hidden'>(este conteúdo abre em uma nova janela)</span></a> e consente em receber comunicações por e-mail de " + gdprClientName + ".";
 
@@ -276,7 +276,7 @@
 
     var gdprMessage = "Vi använder cookies och annan spårningsteknik för att hjälpa till med att navigera, förbättra våra produkter och tjänster, hjälpa till med vår marknadsföring samt tillhandahålla innehåll från tredje part. Genom att fortsätta använda denna webbplats godkänner du vår användning av cookies i enlighet med vår <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>sekretesspolicy <span id='gdpr-a11y-message' class='visually-hidden'>(det här innehållet öppnas i ett nytt fönster)</span></a>. För att hantera inställningar för cookies från tredje part, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>klicka här <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(det här innehållet öppnas i ett nytt fönster)</span></a>.";
 
-    var gdprConsentBtn = "acceptera";
+    var gdprConsentBtn = "Acceptera";
 
     var formMessage = "Genom att skicka in din information bekräftar du att du har läst vår <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>sekretesspolicy <span class='visually-hidden'>(det här innehållet öppnas i ett nytt fönster)</span></a> och samtycker till att ta emot e-postmeddelanden från " + gdprClientName + ".";
 
@@ -286,7 +286,7 @@
 
     var gdprMessage = "Gumagamit kami ng cookies at iba pang mga teknolohiya sa pagsubaybay upang tumulong sa pag-navigate, pahusayin ang aming mga produkto at serbisyo, tumulong sa aming mga pagsisikap sa marketing, at magbigay ng content mula sa mga third party. Sa pamamagitan ng patuloy na paggamit sa site na ito, sumasang-ayon ka sa aming paggamit ng cookies alinsunod sa aming <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>patakaran sa privacy <span id='gdpr-a11y-message' class='visually-hidden'>(bubukas sa bagong window ang content na ito)</span></a>. Para pamahalaan ang mga kagustuhan sa cookie ng third-party, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>mag-click dito <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(bubukas sa bagong window ang content na ito)</span></a>.";
 
-    var gdprConsentBtn = "tanggapin";
+    var gdprConsentBtn = "Tanggapin";
 
     var formMessage = "Sa pamamagitan ng pagsusumite ng iyong impormasyon, kinikilala mo na binasa mo ang aming <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>patakaran sa privacy <span class='visually-hidden'>(bubukas sa bagong window ang content na ito)</span></a> at pumapayag kang makatanggap ng komunikasyon sa email mula sa " + gdprClientName + ".";
 
@@ -324,7 +324,7 @@
 
   // Only load banner if banner has NEVER been displayed before.
 
-  if(consentCapture === null) {
+  if(bannerDisplayed !== null && consentCapture === null) {
 
     // Create Alert
 
