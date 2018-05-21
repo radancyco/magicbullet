@@ -32,7 +32,7 @@
 
   var gdprDataFormSubmitBtn = document.querySelectorAll(".data-form .form-field.submit");
 
-  var gdprPageRefresh = performance.navigation.type;
+  var gdprPageRefresh = performance.navigation.type; // Not used now
 
   // Helper: Get Cookie(s)
 
@@ -48,13 +48,13 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "ConsentCapture=" + new Date() + "; expires=" + expDate + "; path=/";
+    document.cookie = "ConsentCapture=" + new Date() + "; Secure; expires=" + expDate + "; path=/";
 
   }
 
   function setBanner() {
 
-    document.cookie = "BannerDisplayed=yes; path=/";
+    document.cookie = "BannerDisplayed=yes; Secure; path=/";
 
   }
 
@@ -324,7 +324,7 @@
 
   // Only load banner if banner has NEVER been displayed before.
 
-  if(consentCapture === null || bannerDisplayed === null) {
+  if(consentCapture === null || bannerDisplayed !== null) {
 
     // Create Alert
 
