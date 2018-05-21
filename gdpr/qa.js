@@ -38,38 +38,9 @@
 
   function getCookie(name) {
 
-    // var re = new RegExp(name + "=([^;]+)");
-    // var value = re.exec(document.cookie);
-    // return (value !== null) ? unescape(value[1]):null;
-
-    var dc = document.cookie;
-    var prefix = name + "=";
-    var begin = dc.indexOf("; " + prefix);
-
-    if (begin == -1) {
-
-      begin = dc.indexOf(prefix);
-
-      if (begin != 0) return null;
-
-    } else {
-
-      begin += 2;
-
-      var end = document.cookie.indexOf(";", begin);
-
-      if (end == -1) {
-
-        end = dc.length;
-
-      }
-
-    }
-
-    // because unescape has been deprecated, replaced with decodeURI
-    // return unescape(dc.substring(begin + prefix.length, end));
-
-    return decodeURI(dc.substring(begin + prefix.length, end));
+    var re = new RegExp(name + "=([^;]+)");
+    var value = re.exec(document.cookie);
+    return (value !== null) ? unescape(value[1]):null;
 
   }
 
@@ -353,7 +324,7 @@
 
   // Only load banner if banner has NEVER been displayed before.
 
-  if(bannerDisplayed !== null || consentCapture === null) {
+  if(bannerDisplayed != null || consentCapture == null) {
 
     // Create Alert
 
