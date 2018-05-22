@@ -70,8 +70,6 @@
 
     setBanner();
 
-    var bannerVisible = "true";
-
   }
 
   // If bannerDisplayed exists and consent has NOT been set, then set consent when user visits another page.
@@ -80,8 +78,6 @@
 
     setConsent();
 
-    var bannerVisible = "false";
-
   }
 
   // If consent has been given, then set bannerDisplayed
@@ -89,8 +85,6 @@
   if(consentCapture !== null) {
 
     setBanner();
-
-    var bannerVisible = "true";
 
   }
 
@@ -330,7 +324,7 @@
 
   // Only load banner if banner has NEVER been displayed before.
 
-  if(consentCapture === null || bannerVisible === "true") {
+  if(consentCapture === null) {
 
     // Create Alert
 
