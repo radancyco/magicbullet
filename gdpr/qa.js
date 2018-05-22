@@ -52,13 +52,13 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "ConsentCapture=" + new Date() + "; Secure; expires=" + expDate + "; path=/";
+    document.cookie = "ConsentCapture=" + new Date() + "; expires=" + expDate + "; path=/";
 
   }
 
   function setBanner() {
 
-    document.cookie = "BannerDisplayed=yes; Secure; path=/";
+    document.cookie = "BannerDisplayed=yes; path=/";
 
   }
 
@@ -66,6 +66,8 @@
 
   var bannerDisplayed = getCookie("BannerDisplayed");
   var consentCapture = getCookie("ConsentCapture");
+
+  alert(bannerDisplayed);
 
   // Upon entering the site, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
   // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
@@ -324,7 +326,7 @@
 
   // Only load banner if banner has NEVER been displayed before.
 
-  if(bannerDisplayed !== null) {
+  if(bannerDisplayed === null) {
 
     // Create Alert
 
