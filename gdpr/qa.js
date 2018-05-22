@@ -324,8 +324,6 @@
 
   // Only load banner if banner has NEVER been displayed before.
 
-  setTimeout(function(){
-
   if(consentCapture === null) {
 
     // Create Alert
@@ -464,8 +462,6 @@
     };
 
   }
-
-}, 500);
 
   // If form bypass is true...
 
