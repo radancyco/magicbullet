@@ -324,7 +324,7 @@
 
   // Only load banner if banner has NEVER been displayed before.
 
-  if(consentCapture === null || bannerDisplayed === null) {
+  if(consentCapture === null || bannerDisplayed !== "yes") {
 
     // Create Alert
 
