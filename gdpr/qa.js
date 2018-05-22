@@ -76,7 +76,7 @@
 
   if(bannerDisplayed !== null && consentCapture === null) {
 
-    setConsent();
+    // setConsent();
 
   }
 
