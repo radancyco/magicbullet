@@ -324,11 +324,7 @@
 
   // Only load banner if banner has NEVER been displayed before.
 
-
-
-if(bannerDisplayed !== null) {
-
-    if(consentCapture === null) {
+  if(consentCapture === null) {
 
     // Create Alert
 
@@ -466,8 +462,6 @@ if(bannerDisplayed !== null) {
     };
 
   }
-
-}
 
   // If form bypass is true...
 
