@@ -34,6 +34,10 @@
 
   var gdprPageRefresh = performance.navigation.type; // Not used now
 
+  // Add GDPR hook for implementation team. May come in handy.
+
+  gdprBody.classList.add("magic-bullet-gdpr");
+
   // Helper: Get Cookie(s)
 
   function getCookie(name) {
@@ -101,10 +105,6 @@
     setConsent();
 
   };
-
-  // Add GDPR hook for implementation team. May come in handy.
-
-  gdprBody.classList.add("magic-bullet-gdpr");
 
   // Languages
 
@@ -322,9 +322,9 @@
 
   }
 
-  // Only load banner if banner has NEVER been displayed before.
+  // Only load banner if banner has NEVER existed before.
 
-  if(consentCapture == null || bannerDisplayed != null) {
+  if(bannerDisplayed != null) {
 
     // Create Alert
 
