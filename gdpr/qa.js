@@ -78,7 +78,7 @@
 
     setConsent();
 
-    var bannerVisible = true;
+    var bannerVisible = false;
 
   }
 
@@ -326,7 +326,7 @@
 
   // Only load banner if banner has NEVER been displayed before.
 
-  if(consentCapture === null || bannerVisible !== true) {
+  if(consentCapture === null || bannerVisible === true) {
 
     // Create Alert
 
