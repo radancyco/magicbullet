@@ -326,6 +326,8 @@
 
   if(consentCapture === null) {
 
+if(bannerDisplayed !== null) {
+
     // Create Alert
 
     var gdprContainer = document.createElement("div");
@@ -462,6 +464,8 @@
     };
 
   }
+
+}
 
   // If form bypass is true...
 
