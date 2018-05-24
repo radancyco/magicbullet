@@ -115,7 +115,7 @@ display: none;
 .dev-mode::before {
 background-image: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%);
 color: #fff;
-content: "Spell is testing. Nothing to worry about. Move along.";
+content: "Spell is testing. Nothing to worry about.";
 display: block;
 left: 0;
 padding: 1em;

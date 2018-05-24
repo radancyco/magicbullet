@@ -140,7 +140,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
     </div>
 
-    <h3 id="gdpr-formatting">Formatting</h3>
+    <h3 id="gdpr-formatting">Visual Formatting</h3>
 
     <p class="alert"><strong>Warning:</strong> Please do not attempt to override the banner notice with CSS or JavaScript at the <strong>implementation level</strong>. Local overrides may interfere with future formatting changes required within the GDPR script itself. If you run into any formatting issues that can't be solved with any available parameters the GDPR script offers, then please contact <a href="mailto:michael.spellacy@tmp.com?subject=GDPR%20Formatting%20Issue">Michael Spellacy</a> for assistance. The inline form message may be safetly manipulated with CSS.</p>
 
@@ -254,7 +254,15 @@ document.body.appendChild(magicBullet);</code></pre>
 
       <h3 id="data-gdpr-new-window">New Window</h3>
 
-      <p>Passing this data attribute a value of "false" will disable the privacy policy link from opening in a new window. The default behavior is for all notice links to open in a new window. The visual cue associated with these links is a usability best practice. These cues will not appear when new windows are disabled. This parameter is optional.</p>
+      <p>Passing this data attribute a value of "false" will disable the privacy policy link from opening in a new window. The default behavior is for all notice links to open in a new window. These visual cues will not appear when new windows are disabled. This parameter is optional.</p>
+
+      <div id="new-window-icon" class="callout accessibility">
+
+      <h2>New Window Icons</h2>
+
+      <p>The visual cue ( <img src="data:image/gif;base64,R0lGODlhCgAKAPcCAP///5mZmQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4zLWMwMTEgNjYuMTQ1NjYxLCAyMDEyLzAyLzA2LTE0OjU2OjI3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozMkE2QzgzMzRBNDUxMUU4QUM2OUI2MzA2MjA0RTM3MiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozMkE2QzgzNDRBNDUxMUU4QUM2OUI2MzA2MjA0RTM3MiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjMyQTZDODMxNEE0NTExRThBQzY5QjYzMDYyMDRFMzcyIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjMyQTZDODMyNEE0NTExRThBQzY5QjYzMDYyMDRFMzcyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAAAgAsAAAAAAoACgAACDAABQj8R7DgP4EC/gFYuPDgQAAFIRpsqJAgQ4gYLTa8qFGhxIgeISIM2XCkQYIIAwIAOw==" alt="" style="display: inline-block; margin: 0;"> ) associated with these links are a usability and accessibility best practice that serve to indicate that the links will spawn a new tab or window. They cannot be changed or removed at this point in time, unless new windows are disabled. You can read more about this best practice in <a href="/uid/code-standards/#new-window-links">TMP's code standard guidelines</a>.</p>
+
+    </div>
 
       <h4>HTML</h4>
 
@@ -334,4 +342,4 @@ document.body.appendChild(magicBullet);</code></pre>
 
 <!-- Example Implementation -->
 
-<script id="tmp-magic-bullet" src="../init.js" data-gdpr="true" data-gdpr-policy-url="https://www.tmp.com/privacy/" data-gdpr-client-name="TMP Worldwide"></script>
+<script id="tmp-magic-bullet" data-gdpr="true" data-gdpr-policy-url="https://www.tmp.com/privacy/" data-gdpr-client-name="TMP Worldwide" data-gdpr-form-bypass="true" src="../init.js"></script>
