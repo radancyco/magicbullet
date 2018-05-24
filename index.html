@@ -1,11 +1,31 @@
 ---
 layout: default
 title: "TMP Magic Bullet"
+noindex: true
 ---
 
-<p>A script to chase all your troubles away.</p>
+<p><em>A script to chase all your troubles away.</em></p>
 
-<p><img src="/assets/img/tmp-standards.png" alt="" class="article-image"></p>
+<p>Magic Bullet is a control, or placeholder script with one single purpose in mind &mdash; to load other scripts. On it's own, the script will do nothing until you start passing parameters into it. This allows you to load different scripts in for different client needs. For example, let's say we want to load in a script that can fix accessibility issues on a client's site. To do that, all you would need to do is add the following paramater to the Magic Bullet script:</p>
 
-<p>Coming soon...</p>
+<pre><code>&lt;script id="tmp-magic-bullet" <strong>data-a11y="true"</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;
+</code></pre>
 
+<p>This will append and initiate the following script:</p>
+
+<pre><code>&lt;script id="a11y-fixes" src="https://services.tmpwebeng.com/magicbullet/a11y/prod.js"&gt;&lt;/script&gt;</code></pre>
+
+<h2>Why?</h2>
+
+<p>Managing scripts in this manner allows us to maintain multiple enhancements from a <em>single location</em>. The more sites we include Magic Bullet on, the more leverage the implementation team will have in addressing unforseen future needs or issues that occur across multiple sites. Rather than asking the implementation team to update multiple sites, we could, <em>potentially</em>, apply a single solution, which will affect all of the sites that Magic Bullet is included on.</p>
+
+<h2>Scripts</h2>
+
+<p>Magic Bullet already has a couple of solutions associated with it. These are:</p>
+
+<ul>
+  <li><a href="a11y">Accessibility Patch</a> <span class="alert">(Coming Soon)</span></li>
+  <li><a href="gdpr">General Data Protection Regulation (GDPR) Notice</a></li>
+</ul>
+
+<p class="alert"><strong>Note:</strong> This document is for internal TMP Worldwide use only.</p>
