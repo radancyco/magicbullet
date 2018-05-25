@@ -326,146 +326,146 @@
 
   if(consentCapture === null) {
 
-  if(bannerDisplayed === null) {
+    if(bannerDisplayed === null) {
 
-    // Create Alert
+      // Create Alert
 
-    var gdprContainer = document.createElement("div");
+      var gdprContainer = document.createElement("div");
 
-    // Set Alert Attributes
+      // Set Alert Attributes
 
-    gdprContainer.setAttribute("id", "gdpr-alert");
-    gdprContainer.setAttribute("role", "alert");
+      gdprContainer.setAttribute("id", "gdpr-alert");
+      gdprContainer.setAttribute("role", "alert");
 
-    // gdprContainer.className = "dev-mode";
+      // gdprContainer.className = "dev-mode";
 
-    if (gdprNoticeColor !== null) {
+      if (gdprNoticeColor !== null) {
 
-      gdprContainer.style.setProperty ("background-color", gdprNoticeColor);
+        gdprContainer.style.setProperty ("background-color", gdprNoticeColor);
 
-    }
+      }
 
-    if (gdprNoticeColorText !== null) {
+      if (gdprNoticeColorText !== null) {
 
-      gdprContainer.style.setProperty ("color", gdprNoticeColorText);
+        gdprContainer.style.setProperty ("color", gdprNoticeColorText);
 
-    }
+      }
 
-    if (gdprFontSize !== null) {
+      if (gdprFontSize !== null) {
 
-      gdprContainer.style.setProperty ("font-size", gdprFontSize, "important");
+        gdprContainer.style.setProperty ("font-size", gdprFontSize, "important");
 
-    }
+      }
 
-    if (gdprTextAlign !== null) {
+      if (gdprTextAlign !== null) {
 
-      gdprContainer.style.setProperty ("text-align", gdprTextAlign);
+        gdprContainer.style.setProperty ("text-align", gdprTextAlign);
 
-    }
+      }
 
-    if (gdprzIndex !== null) {
+      if (gdprzIndex !== null) {
 
-      gdprContainer.style.setProperty ("z-index", gdprzIndex);
+        gdprContainer.style.setProperty ("z-index", gdprzIndex);
 
-    }
+      }
 
-    // Now create the element...
+      // Now create the element...
 
-    var gdprContentTag = document.createElement("p");
-    gdprContentTag.setAttribute("id", "gdpr-content");
-    gdprContentTag.innerHTML = gdprMessage;
+      var gdprContentTag = document.createElement("p");
+      gdprContentTag.setAttribute("id", "gdpr-content");
+      gdprContentTag.innerHTML = gdprMessage;
 
-    // Now add message to notice...
+      // Now add message to notice...
 
-    if (gdprPolicyURL !== null && gdprClientName !== null) {
+      if (gdprPolicyURL !== null && gdprClientName !== null) {
 
+          gdprContainer.appendChild(gdprContentTag);
+
+      } else {
+
+        var gdprMessage = "A consent message cannot be generated until a client name and privacy policy URL have been provided.";
+
+        gdprContentTag.innerHTML = gdprMessage;
         gdprContainer.appendChild(gdprContentTag);
 
-    } else {
+      }
 
-      var gdprMessage = "A consent message cannot be generated until a client name and privacy policy URL have been provided.";
+      // Create Alert Button
 
-      gdprContentTag.innerHTML = gdprMessage;
-      gdprContainer.appendChild(gdprContentTag);
+      var gdprButton = document.createElement("button");
+
+      // Set Alert Button Attributes
+
+      gdprButton.setAttribute("id", "gdpr-button");
+
+      // Add Alert Button Text
+
+      if (gdprButtonText === null) {
+
+        gdprButtonText = gdprConsentBtn;
+
+      }
+
+      gdprButton.textContent  = gdprButtonText;
+
+      if (gdprButtonColor !== null) {
+
+        gdprButton.style.setProperty ("background-color", gdprButtonColor, "important");
+
+      }
+
+      if (gdprButtonColorText !== null) {
+
+        gdprButton.style.setProperty ("color", gdprButtonColorText, "important");
+
+      }
+
+      if (gdprPolicyURL !== null && gdprClientName !== null) {
+
+        // Append Alert Button to Alert Policy
+
+        gdprContainer.appendChild(gdprButton);
+
+      }
+
+      // Append Alert to Body Element
+
+      gdprBody.appendChild(gdprContainer);
+
+      // Remove Target Attribute
+
+      if (gdprNewWindow === "false") {
+
+        var gdprPolicyLink = document.getElementById("gdpr-policy-link");
+        var gdprPrivacyRefLink = document.getElementById("gdpr-privacy-preference-link");
+
+        gdprPolicyLink.removeAttribute("target");
+        gdprPolicyLink.removeAttribute("rel");
+        gdprPrivacyRefLink.removeAttribute("target");
+        gdprPrivacyRefLink.removeAttribute("rel");
+
+        var gdprA11yMessage = document.getElementById("gdpr-a11y-message");
+        var gdprPrivacyA11y = document.getElementById("gdpr-privacy-preference-a11y");
+
+        gdprPolicyLink.removeChild(gdprA11yMessage);
+        gdprPrivacyRefLink.removeChild(gdprPrivacyA11y)
+
+      }
+
+      /******* Consent Types *********/
+
+      // Button Consent
+
+      gdprButton.onclick = function(){
+
+        removeAlert();
+        return false;
+
+      };
 
     }
-
-    // Create Alert Button
-
-    var gdprButton = document.createElement("button");
-
-    // Set Alert Button Attributes
-
-    gdprButton.setAttribute("id", "gdpr-button");
-
-    // Add Alert Button Text
-
-    if (gdprButtonText === null) {
-
-      gdprButtonText = gdprConsentBtn;
-
-    }
-
-    gdprButton.textContent  = gdprButtonText;
-
-    if (gdprButtonColor !== null) {
-
-      gdprButton.style.setProperty ("background-color", gdprButtonColor, "important");
-
-    }
-
-    if (gdprButtonColorText !== null) {
-
-      gdprButton.style.setProperty ("color", gdprButtonColorText, "important");
-
-    }
-
-    if (gdprPolicyURL !== null && gdprClientName !== null) {
-
-      // Append Alert Button to Alert Policy
-
-      gdprContainer.appendChild(gdprButton);
-
-    }
-
-    // Append Alert to Body Element
-
-    gdprBody.appendChild(gdprContainer);
-
-    // Remove Target Attribute
-
-    if (gdprNewWindow === "false") {
-
-      var gdprPolicyLink = document.getElementById("gdpr-policy-link");
-      var gdprPrivacyRefLink = document.getElementById("gdpr-privacy-preference-link");
-
-      gdprPolicyLink.removeAttribute("target");
-      gdprPolicyLink.removeAttribute("rel");
-      gdprPrivacyRefLink.removeAttribute("target");
-      gdprPrivacyRefLink.removeAttribute("rel");
-
-      var gdprA11yMessage = document.getElementById("gdpr-a11y-message");
-      var gdprPrivacyA11y = document.getElementById("gdpr-privacy-preference-a11y");
-
-      gdprPolicyLink.removeChild(gdprA11yMessage);
-      gdprPrivacyRefLink.removeChild(gdprPrivacyA11y)
-
-    }
-
-    /******* Consent Types *********/
-
-    // Button Consent
-
-    gdprButton.onclick = function(){
-
-      removeAlert();
-      return false;
-
-    };
 
   }
-
-}
 
   // If form bypass is true...
 
