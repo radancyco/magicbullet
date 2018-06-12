@@ -16,6 +16,7 @@
   var gdprButtonColorText = magicBulletScript.getAttribute("data-gdpr-button-color-text");
   var gdprButtonText = magicBulletScript.getAttribute("data-gdpr-button-text");
   var gdprClientName = magicBulletScript.getAttribute("data-gdpr-client-name");
+  var gdprCustomMessage = magicBulletScript.getAttribute("data-gdpr-custom-message");
   var gdprFontSize = magicBulletScript.getAttribute("data-gdpr-font-size");
   var gdprLanguage =  magicBulletScript.getAttribute("data-gdpr-language");
   var gdprNewWindow = magicBulletScript.getAttribute("data-gdpr-new-window");
@@ -322,6 +323,12 @@
 
   }
 
+  if (gdprPolicyURL === null && gdprClientName === null) {
+
+    var gdprMessage = "A consent and privacy message cannot be generated until a client name and privacy policy URL have been provided. Please see <a href='https://tmpworldwide.github.io/tmp-magic-bullet/gdpr/#gdpr-mandatory'>mandatory requirements</a> for this script to run.";
+
+  }
+
   // Only load banner if banner has NEVER been displayed before.
 
   if(consentCapture === null) {
@@ -373,17 +380,18 @@
 
       var gdprContentTag = document.createElement("p");
       gdprContentTag.setAttribute("id", "gdpr-content");
-      gdprContentTag.innerHTML = gdprMessage;
 
-      // Now add message to notice...
+      var gdprCustomContentTag = document.createElement("div");
+      gdprCustomContentTag.setAttribute("id", "gdpr-content");
 
-      if (gdprPolicyURL !== null && gdprClientName !== null) {
+      // Add custom message if present...
 
-          gdprContainer.appendChild(gdprContentTag);
+      if (gdprCustomMessage !== null) {
 
-      } else {
+        gdprCustomContentTag.innerHTML = gdprCustomMessage;
+        gdprContainer.appendChild(gdprCustomContentTag);
 
-        var gdprMessage = "A consent message cannot be generated until a client name and privacy policy URL have been provided.";
+      } else  {
 
         gdprContentTag.innerHTML = gdprMessage;
         gdprContainer.appendChild(gdprContentTag);

@@ -22,15 +22,8 @@
 }
 
 #gdpr-alert {
-box-sizing: border-box;
-}
-
-#gdpr-alert *, #gdpr-alert *::before, #gdpr-alert *::after {
-box-sizing: inherit;
-}
-
-#gdpr-alert {
 animation: gdrp-slide 0.8s 0s ease-in-out;
+box-sizing: border-box;
 background-color: #fff;
 border-top: 1px solid #666;
 bottom: 0 !important;
@@ -45,25 +38,11 @@ width: 100%;
 z-index: 10000;
 }
 
-#gdpr-content {
-color: inherit !important;
-font: inherit !important;
-margin: 0 !important;
-padding: 0 0 1em 0 !important;
+#gdpr-alert *, #gdpr-alert *::before, #gdpr-alert *::after {
+box-sizing: inherit;
 }
 
-#gdpr-content a {
-color: inherit !important;
-display: inline-block;
-font: inherit !important;
-text-decoration: underline !important;
-}
-
-#gdpr-content a:focus, #gdpr-content a:hover {
-text-decoration: none !important;
-}
-
-#gdpr-content .visually-hidden, .gdpr-eu-tmp-notice .visually-hidden {
+#gdpr-alert .visually-hidden, .gdpr-eu-tmp-notice .visually-hidden {
 clip: rect(1px, 1px, 1px, 1px);
 height: 1px;
 overflow: hidden;
@@ -73,8 +52,50 @@ width: 1px;
 margin:
 }
 
-#gdpr-content a {
+/* Test */
+
+.dev-mode::before {
+background-image: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%);
+color: #fff;
+content: "Spell is testing. Nothing to worry about.";
+display: block;
+left: 0;
+padding: 1em;
+position :absolute;
+top: -3.8em;
+width :100%;
+}
+
+#gdpr-content {
+color: inherit !important;
+font: inherit !important;
+margin: 0 !important;
+padding: 0 0 1em 0 !important;
+}
+
+#gdpr-content h1, #gdpr-content h2, #gdpr-content h3, #gdpr-content h4, #gdpr-content h5, #gdpr-content h6 {
+color: #000 !important;
+font-weight: bold !important;
+margin: 0 0 0.5em !important;
 padding: 0 !important;
+font-size: 14px !important;
+}
+
+#gdpr-content p {
+margin: 0 !important;
+padding: 0 !important;
+}
+
+#gdpr-content a {
+color: inherit !important;
+display: inline-block;
+font: inherit !important;
+padding: 0 !important;
+text-decoration: underline !important;
+}
+
+#gdpr-content a:focus, #gdpr-content a:hover {
+text-decoration: none !important;
 }
 
 #gdpr-content a[target] {
@@ -108,20 +129,6 @@ width: 50% !important;
 
 .gdpr-eu-tmp-notice:empty {
 display: none;
-}
-
-/* Test */
-
-.dev-mode::before {
-background-image: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%);
-color: #fff;
-content: "Spell is testing. Nothing to worry about.";
-display: block;
-left: 0;
-padding: 1em;
-position :absolute;
-top: -3.8em;
-width :100%;
 }
 
 /* 780px */
