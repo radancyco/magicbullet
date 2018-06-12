@@ -18,6 +18,7 @@
   var gdprClientName = magicBulletScript.getAttribute("data-gdpr-client-name");
   var gdprCustomMessage = magicBulletScript.getAttribute("data-gdpr-custom-message");
   var gdprFontSize = magicBulletScript.getAttribute("data-gdpr-font-size");
+  var gdprGACustomLabel = magicBulletScript.getAttribute("data-gdpr-ga-custom-label");
   var gdprLanguage =  magicBulletScript.getAttribute("data-gdpr-language");
   var gdprNewWindow = magicBulletScript.getAttribute("data-gdpr-new-window");
   var gdprNoticeColor = magicBulletScript.getAttribute("data-gdpr-notice-color");
@@ -405,6 +406,20 @@
       // Set Alert Button Attributes
 
       gdprButton.setAttribute("id", "gdpr-button");
+      gdprButton.setAttribute("data-custom-event", "true");
+      gdprButton.setAttribute("data-custom-category", "Custom Event");
+
+      // Client Custom Label 
+
+      if(gdprGACustomLabel !== null) {
+
+        gdprButton.setAttribute("data-custom-label", gdprGACustomLabel);
+
+      } else {
+
+        gdprButton.setAttribute("data-custom-label", "GDPR Accept Button");
+
+      }
 
       // Add Alert Button Text
 
