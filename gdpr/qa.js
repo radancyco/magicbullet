@@ -406,20 +406,6 @@
       // Set Alert Button Attributes
 
       gdprButton.setAttribute("id", "gdpr-button");
-      gdprButton.setAttribute("data-custom-event", "true");
-      gdprButton.setAttribute("data-custom-category", "Custom Event");
-
-      // Client Custom Label 
-
-      if(gdprGACustomLabel !== null) {
-
-        gdprButton.setAttribute("data-custom-label", gdprGACustomLabel);
-
-      } else {
-
-        gdprButton.setAttribute("data-custom-label", "GDPR Accept Button");
-
-      }
 
       // Add Alert Button Text
 
@@ -482,6 +468,23 @@
       gdprButton.onclick = function(){
 
         removeAlert();
+
+        // Client Custom Label
+
+        if (typeof ga == "function") {
+
+          if(gdprGACustomLabel !== null) {
+
+            ga("send", "event", "Custom Event", "Click", gdprGACustomLabel);
+
+          } else {
+
+            ga("send", "event", "Custom Event", "Click", "GDPR Accept Button");
+
+          }
+
+        }
+
         return false;
 
       };
