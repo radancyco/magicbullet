@@ -16,6 +16,7 @@
   var gdprButtonColorText = magicBulletScript.getAttribute("data-gdpr-button-color-text");
   var gdprButtonText = magicBulletScript.getAttribute("data-gdpr-button-text");
   var gdprClientName = magicBulletScript.getAttribute("data-gdpr-client-name");
+  var gdprCookieManageURL = magicBulletScript.getAttribute("data-gdpr-cookie-mgr-url");
   var gdprCustomMessage = magicBulletScript.getAttribute("data-gdpr-custom-message");
   var gdprFontSize = magicBulletScript.getAttribute("data-gdpr-font-size");
   var gdprGACustomLabel = magicBulletScript.getAttribute("data-gdpr-ga-custom-label");
@@ -110,7 +111,15 @@
 
   // Languages
 
-  var gdprTrusteURL = "https://preferences-mgr.truste.com/"
+  if (gdprCookieManageURL !== null) {
+
+    var gdprTrusteURL = gdprCookieManageURL;
+
+  } else {
+
+    var gdprTrusteURL = "https://preferences-mgr.truste.com/";
+
+  }
 
   if (gdprLanguage === "ar") {
 
