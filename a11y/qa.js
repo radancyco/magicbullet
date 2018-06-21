@@ -51,7 +51,7 @@
 
   // Pagination: Previous Page
 
-  $(".pagination-paging .disabled").removeAttr("aria-hidden, href");
+  $(".pagination-paging .disabled").removeAttr("aria-hidden href");
 
   // Simple Navigation
 
