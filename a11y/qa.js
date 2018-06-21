@@ -59,9 +59,13 @@
 
     if($(".pagination-page-count.no-form").length) {
 
+      if(!$(".pagination-page-count label").length) {
+
       $(".pagination-page-count").append("<p class='pagination-page-status' tabindex='0'>" + pageStatus + "</p>");
 
       $(".pagination-page-count label, .pagination-page-count input, .pagination-page-count span, .pagination-page-count button").remove();
+
+    }
 
     }
 
