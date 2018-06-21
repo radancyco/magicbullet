@@ -55,7 +55,7 @@
 
     var pageStatus = $(".pagination-current-label span").text() + " " + $(".pagination-current").val() + " " + $(".pagination-total-pages").text();
 
-    $("search-results")attr("aria-label", pageStatus);
+    $("#search-results").attr("aria-label", pageStatus);
 
     if($(".pagination-page-count.no-form").length) {
 
