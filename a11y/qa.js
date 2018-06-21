@@ -49,9 +49,9 @@
 
   // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
 
-  $(document).ajaxStop(function() {
+  // Simple Navigation
 
-  	$("#applied-filters").removeAttr("aria-hidden aria-expanded");
+  function noFormPagination() {
 
     var pageStatus = $(".pagination-current-label span").text() + " " + $(".pagination-current").val() + " " + $(".pagination-total-pages").text();
 
@@ -64,6 +64,16 @@
       $(".pagination-page-count label, .pagination-page-count input, .pagination-page-count span, .pagination-page-count button").remove();
 
     }
+
+  }
+
+  noFormPagination();
+
+  $(document).ajaxStop(function() {
+
+  	$("#applied-filters").removeAttr("aria-hidden aria-expanded");
+
+    noFormPagination();
 
   });
 
