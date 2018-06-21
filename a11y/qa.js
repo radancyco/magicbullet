@@ -51,7 +51,13 @@
 
   // Pagination: Previous Page
 
-  $(".pagination-paging .disabled").removeAttr("aria-hidden href");
+  function fixDisabledButton() {
+
+    $(".pagination-paging .disabled").removeAttr("aria-hidden href");
+
+  }
+
+  fixDisabledButton();
 
   // Simple Navigation
 
@@ -78,6 +84,8 @@
   	$("#applied-filters").removeAttr("aria-hidden aria-expanded");
 
     noFormPagination();
+
+    fixDisabledButton();
 
   });
 
