@@ -43,13 +43,11 @@
 
   $(".job-map-nearby a").removeAttr("target");
 
-  // Social Share Module Links require "Open New Window" text for assistive tech
+  // Issue: Certain links require "Open New Window" text for assistive tech
 
-  $(".social-share-items a").append(" <span class='wai'>(Opens in New Windows)</span>");
+  $(".social-share-items a").append(" <span class='wai'>(Opens in New Window)</span>");
 
-  // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
-
-  // Pagination: Previous Page
+  // Issue: Search Results pagination disabled button can be tabbed to. To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
   function fixDisabledButton() {
 
@@ -57,9 +55,10 @@
 
   }
 
-  fixDisabledButton();
+  fixDisabledButton(); // Initial Page Load
 
-  // Simple Navigation
+  // Issue: The search navigation is often style not to look like a form and submit button is removed
+  // So we need to strip this functionality and simply show text.
 
   function noFormPagination() {
 
@@ -71,9 +70,9 @@
 
       if(!$(".pagination-page-status").length) {
 
-        $(".pagination-page-count").append("<p class='pagination-page-status' tabindex='0'>" + pageStatus + "</p>");
-
         $(".pagination-page-count label, .pagination-page-count input, .pagination-page-count span, .pagination-page-count button").remove();
+
+        $(".pagination-page-count").append("<p class='pagination-page-status' tabindex='0'>" + pageStatus + "</p>");
 
       }
 
@@ -81,9 +80,11 @@
 
   }
 
-  noFormPagination();
+  noFormPagination(); // Initial Page Load
 
   $(document).ajaxStop(function() {
+
+    // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
 
   	$("#applied-filters").removeAttr("aria-hidden aria-expanded");
 
@@ -92,6 +93,8 @@
     fixDisabledButton();
 
   });
+
+  // Sometime we can only do things after TB has finished (slowly) loading it's portion of the DOM.
 
 	setTimeout(function(){
 
