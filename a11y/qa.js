@@ -49,6 +49,10 @@
 
   // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
 
+  // Pagination: Previous Page
+
+  $(".pagination-paging .disabled").removeAttr("aria-hidden, href");
+
   // Simple Navigation
 
   function noFormPagination() {
