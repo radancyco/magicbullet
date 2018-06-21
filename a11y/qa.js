@@ -67,6 +67,8 @@
 
   }
 
+  noFormPagination();
+
   $(document).ajaxStop(function() {
 
   	$("#applied-filters").removeAttr("aria-hidden aria-expanded");
@@ -76,8 +78,6 @@
   });
 
 	setTimeout(function(){
-
-      noFormPagination();
 
 	  // A11y Form Fixes
 
