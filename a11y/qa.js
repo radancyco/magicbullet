@@ -64,7 +64,7 @@
 
     var pageStatus = $(".pagination-current-label span").text() + " " + $(".pagination-current").val() + " " + $(".pagination-total-pages").text();
 
-    // While we are in here, let's indicate to screen readers what page they are on - cool! 
+    // While we are in here, let's indicate to screen readers what page they are on - cool!
 
     $("#search-results").attr("aria-label", pageStatus);
 
@@ -72,7 +72,7 @@
 
       if(!$(".pagination-page-status").length) {
 
-        $(".pagination-page-count").after("<p class='pagination-page-status' tabindex='0'>" + pageStatus + "</p>");
+        $(".pagination-page-count").append("<p class='pagination-page-status' tabindex='0'>" + pageStatus + "</p>");
 
         $(".pagination-no-form").remove();
 
