@@ -64,15 +64,17 @@
 
     var pageStatus = $(".pagination-current-label span").text() + " " + $(".pagination-current").val() + " " + $(".pagination-total-pages").text();
 
+    // While we are in here, let's indicate to screen readers what page they are on - cool! 
+
     $("#search-results").attr("aria-label", pageStatus);
 
-    if($(".pagination-page-count.no-form").length) {
+    if($(".pagination-no-form").length) {
 
       if(!$(".pagination-page-status").length) {
 
-        $(".pagination-page-count").after("<div class='pagination-page-count'><p class='pagination-page-status' tabindex='0'>" + pageStatus + "</p></div>");
+        $(".pagination-page-count").after("<p class='pagination-page-status' tabindex='0'>" + pageStatus + "</p>");
 
-        $(".pagination-page-count label, .pagination-page-count input, .pagination-page-count span, .pagination-page-count button").remove();
+        $(".pagination-no-form").remove();
 
       }
 
