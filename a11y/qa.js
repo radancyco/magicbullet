@@ -70,7 +70,7 @@
 
       if(!$(".pagination-page-status").length) {
 
-        $(".pagination-page-count label, .pagination-page-count input, .pagination-page-count span, .pagination-page-count button").remove();
+        $(".pagination-page-count label, .pagination-page-count input, .pagination-page-count span, .pagination-page-count button").prop("hidden", true).remove();
 
         $(".pagination-page-count").append("<p class='pagination-page-status' tabindex='0'>" + pageStatus + "</p>");
 
