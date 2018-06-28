@@ -284,6 +284,19 @@ document.body.appendChild(magicBullet);</code></pre>
 
       <pre><code>magicBullet.setAttribute("data-gdpr-custom-message", "&lt;h2&gt;About Cookies&lt;/h2&gt; &lt;p&gt;We use cookies to help make this website better, to improve our services and for advertising purposes. You can learn more about our use of cookies by &lt;a href='https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/cookies-policy/'>clicking here&lt;/a&gt;.&lt;/p&gt;");</code></pre>
 
+      <h3 id="data-gdpr-custom-form-message">Custom Form Message</h3>
+
+      <p>Passing this data attribute a string value will override the default form message. HTML may be be included. This parameter is optional.</p>
+
+      <h4>HTML</h4>
+
+      <pre><code>data-gdpr-custom-form-message="By submitting your information, you acknowledge that you have read our &lt;a href='/privacy/' target='_blank'&gt;candidate privacy policy&lt;/a&gt; and consent to receive email communication."</code></pre>
+
+      <h4>JavaScript</h4>
+
+      <pre><code>magicBullet.setAttribute("data-gdpr-custom-form-message", "By submitting your information, you acknowledge that you have read our &lt;a href='/privacy/' target='_blank'&gt;candidate privacy policy&lt;/a&gt; and consent to receive email communication.");</code></pre>
+
+
     </div>
 
   </section>
@@ -322,6 +335,8 @@ document.body.appendChild(magicBullet);</code></pre>
 
       <p class="form-field gdpr-eu-tmp-notice"></p>
 
+      <p><strong>Customize:</strong> If you would like to override the default message with a custom one, then please see <a href="#data-gdpr-custom-form-message">Custom Form Message</a>.</p>
+
     </div>
 
   </section>
@@ -352,6 +367,6 @@ document.body.appendChild(magicBullet);</code></pre>
 
 </div>
 
-<!-- Example Implementation -->
+<!-- Implementation Example -->
 
 <script id="tmp-magic-bullet" data-gdpr="true" data-gdpr-policy-url="https://www.tmp.com/privacy/" data-gdpr-client-name="TMP Worldwide" data-gdpr-form-bypass="true" src="../init.js"></script>

@@ -18,6 +18,7 @@
   var gdprClientName = magicBulletScript.getAttribute("data-gdpr-client-name");
   var gdprCookieManageURL = magicBulletScript.getAttribute("data-gdpr-cookie-mgr-url");
   var gdprCustomMessage = magicBulletScript.getAttribute("data-gdpr-custom-message");
+  var gdprCustomFormMessage = magicBulletScript.getAttribute("data-gdpr-custom-form-message");
   var gdprFontSize = magicBulletScript.getAttribute("data-gdpr-font-size");
   var gdprGACustomLabel = magicBulletScript.getAttribute("data-gdpr-ga-custom-label");
   var gdprLanguage =  magicBulletScript.getAttribute("data-gdpr-language");
@@ -516,7 +517,15 @@
 
         if (gdprClientName !== null) {
 
-          gdprFormMessage[i].innerHTML = formMessage;
+          if (gdprCustomFormMessage !== null) {
+
+            gdprFormMessage[i].innerHTML = gdprCustomFormMessage;
+
+          } else {
+
+            gdprFormMessage[i].innerHTML = formMessage;
+
+          }
 
         }
 

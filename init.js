@@ -56,8 +56,8 @@
 
     if (localPaths) {
 
-      gdprCSS.setAttribute("href", "/gdpr/qa.css");
-      gdprExec.setAttribute("src", "/gdpr/qa.js");
+      gdprCSS.setAttribute("href", "/gdpr/init.css");
+      gdprExec.setAttribute("src", "/gdpr/init.js");
 
     } else {
 
@@ -68,16 +68,12 @@
         gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/css/");
         gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/");
 
-        console.log("GDPR QA");
-
       } else {
 
         // ... else, run the production version.
 
         gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/css/");
         gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/");
-
-        console.log("GDPR Production");
 
       }
 
@@ -104,7 +100,7 @@
 
     if (localPaths) {
 
-      a11yExec.setAttribute("src", "/a11y/qa.js");
+      a11yExec.setAttribute("src", "/a11y/qa/init.js");
 
     } else {
 
@@ -119,8 +115,6 @@
         // ... else, run the production version.
 
         a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/prod/");
-
-        console.log("A11y Production");
 
       }
 
