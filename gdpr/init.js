@@ -503,6 +503,18 @@
 
   }
 
+  // Select Default or Custom Message...
+
+  if (gdprCustomFormMessage !== null) {
+
+    var gdprInlineMessage = gdprCustomFormMessage;
+
+  } else {
+
+    var gdprInlineMessage = formMessage;
+
+  }
+
   // If form bypass is true...
 
   if (gdprformBypass === "true") {
@@ -517,15 +529,7 @@
 
         if (gdprClientName !== null) {
 
-          if (gdprCustomFormMessage !== null) {
-
-            gdprFormMessage[i].innerHTML = gdprCustomFormMessage;
-
-          } else {
-
-            gdprFormMessage[i].innerHTML = formMessage;
-
-          }
+          gdprFormMessage[i].innerHTML = gdprInlineMessage;
 
         }
 
@@ -543,7 +547,7 @@
 
       gdprDynamicMessage.className = "form-field gdpr-eu-tmp-notice";
 
-      gdprDynamicMessage.innerHTML = formMessage;
+      gdprDynamicMessage.innerHTML = gdprInlineMessage;
 
       var dataFormSubmitBtn = gdprDataFormSubmitBtn[x]
 
