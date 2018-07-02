@@ -1,0 +1,39 @@
+---
+layout: default
+title: "Accessibility Enhancements"
+noindex: true
+---
+
+<style>
+
+  .js .content {
+  display: none;
+  }
+
+  .content.active {
+  display: block;
+  }
+
+</style>
+
+<h2 class="heading">Hello</h2>
+
+<div class="content">
+
+<p>Now is the time for all good men to come to the aid of their country.</p>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script>
+
+setTimeout(function(){
+
+  a11yHeadingToggle($(".heading"), $(".content"));
+
+}, 500);
+
+</script>
+
+<script id="tmp-magic-bullet" data-a11y="true" src="../init.js"></script>

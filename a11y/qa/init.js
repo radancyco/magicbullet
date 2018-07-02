@@ -194,3 +194,77 @@
   $("input[type=checkbox]").removeAttr("autocomplete");
 
 })();
+
+// ************ Global Functions ************
+
+// Global Variables
+
+var $customActiveState = "active";
+
+// Element Toggle
+
+function a11yHeadingToggle(heading, target) {
+
+  $a11yHeading = heading;
+  $a11yTarget = target;
+
+  $a11yHeading.wrap("<div class='a11y-button' aria-expanded='false' role='button' tabindex='0'/>")
+
+  $a11yButton = $(".a11y-button");
+
+  $a11yButton.on("click keypress", function(e) {
+
+    toggleA11yElement($(this), $a11yTarget);
+
+    e.stopPropagation();
+
+  });
+
+}
+
+function toggleA11yElement(obj, parent) {
+
+  // Let's make the "button" we access toggle when clicked
+  // Note: We are setting ARIA to indicate to screen readers when navigation is expanded.
+  // We set this on the element being accessed (and not the element we are revealing).
+
+  if(obj.hasClass($customActiveState)) {
+
+    // Set ARIA to false, remove class
+
+    obj.attr("aria-expanded", "false").removeClass($customActiveState);
+    parent.removeClass($customActiveState);
+
+  } else {
+
+    // Now add change ARIA value and class to content we want shown.
+
+    obj.attr("aria-expanded", "true").addClass($customActiveState);
+    parent.addClass($customActiveState);
+
+  }
+
+}
+
+function closeA11yElement() {
+
+  if($a11yButton.hasClass($customActiveState)) {
+
+    $a11yButton.attr("aria-expanded", "false").removeClass($customActiveState);
+    $a11yTarget.removeClass($customActiveState);
+
+  }
+
+}
+
+// Event: Manage all Escape Key events here
+
+$(document).on("keyup", function(e) {
+
+  if (e.keyCode === 27) {
+
+    closeA11yElement();
+
+  }
+
+});
