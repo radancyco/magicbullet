@@ -6,21 +6,52 @@ noindex: true
 
 <style>
 
-  .js .content {
+  .search-filter-wrapper {
+  background: #335bb3;
+  }
+
+  .search-filter-heading {
+  color: #fff;
+  cursor: pointer;
+  margin: .2rem 0;
+  padding: .35rem .9rem;
+  }
+
+  .search-filter-heading-button {
+  position: relative;
+  }
+
+  .search-filter-heading-button::after {
+  background-image: url("https://tbcdn.talentbrew.com/company/1501-preview-site/v1_0/img/ico-plus-white.png");
+  background-position: left top;
+  background-repeat: no-repeat;
+  content: "";
+  display: inline-block;
+  height: 22px;
+  padding: .5rem 0 0 1rem;
+  position: absolute;
+  right: .9rem;
+  top: .7rem;
+  vertical-align: middle;
+  width: 21px;
+  }
+
+  .search-filter-heading-button.active::after {
+  background-image: url("https://tbcdn.talentbrew.com/company/1501-preview-site/v1_0/img/ico-x-white.png");
+  }
+
+  .js .search-filter-content {
   display: none;
   }
 
-  .content.active {
+  .search-filter-content.active {
   display: block;
   }
 
 </style>
 
-<h2 class="heading">Hello</h2>
+<div class="search-filter-wrapper">
 
-<div class="content">
-
-<p>Now is the time for all good men to come to the aid of their country.</p>
 
 </div>
 
@@ -30,7 +61,7 @@ noindex: true
 
 setTimeout(function(){
 
-  a11yHeadingToggle($(".heading"), $(".content"));
+  a11yHeadingToggle($(".search-filter-heading"), $(".search-filter-content"));
 
 }, 500);
 
