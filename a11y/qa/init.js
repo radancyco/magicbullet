@@ -208,9 +208,9 @@ function a11yHeadingToggle(heading, target) {
   $a11yHeading = heading;
   $a11yTarget = target;
 
-  $a11yHeading.wrap("<div class='a11y-button' aria-expanded='false' role='button' tabindex='0'/>")
+  $a11yHeading.wrap("<div class='a11y-heading-button' aria-expanded='false' role='button' tabindex='0'/>")
 
-  $a11yButton = $(".a11y-button");
+  $a11yButton = $(".a11y-heading-button");
 
   $a11yButton.on("click keypress", function(e) {
 
