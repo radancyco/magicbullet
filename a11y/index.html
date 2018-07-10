@@ -1,70 +1,77 @@
 ---
 layout: default
-title: "Accessibility Enhancements"
+title: "Accessibility Patch"
 noindex: true
 ---
 
 <style>
 
-  .search-filter-wrapper {
-  background: #335bb3;
-  }
+.a11y-button .search-filter-heading {
+background-color: #666;
+color: #fff;
+margin: 1em 0;
+padding: 1em 3em 1em 1em;
+}
 
-  .search-filter-heading {
-  color: #fff;
-  cursor: pointer;
-  margin: .2rem 0;
-  padding: .35rem .9rem;
-  }
+.a11y-button:focus .search-filter-heading, .a11y-button:hover .search-filter-heading {
+background-color: #263343;
+}
 
-  .search-filter-heading-button {
-  position: relative;
-  }
+.a11y-button {
+position: relative;
+cursor: pointer;
+}
 
-  .search-filter-heading-button::after {
-  background-image: url("https://tbcdn.talentbrew.com/company/1501-preview-site/v1_0/img/ico-plus-white.png");
-  background-position: left top;
-  background-repeat: no-repeat;
-  content: "";
-  display: inline-block;
-  height: 22px;
-  padding: .5rem 0 0 1rem;
-  position: absolute;
-  right: .9rem;
-  top: .7rem;
-  vertical-align: middle;
-  width: 21px;
-  }
+.a11y-button::after {
+background-image: url("https://tbcdn.talentbrew.com/company/1501-preview-site/v1_0/img/ico-plus-white.png");
+background-position: left top;
+background-repeat: no-repeat;
+content: "";
+display: block;
+height: 22px;
+position: absolute;
+right: 1em;
+width: 21px;
+top: 50%;
+transform: translateY(-50%);
+}
 
-  .search-filter-heading-button.active::after {
-  background-image: url("https://tbcdn.talentbrew.com/company/1501-preview-site/v1_0/img/ico-x-white.png");
-  }
+.a11y-button[aria-expanded="true"]::after {
+background-image: url("https://tbcdn.talentbrew.com/company/1501-preview-site/v1_0/img/ico-x-white.png");
+}
 
-  .js .search-filter-content {
-  display: none;
-  }
+.js [data-a11y-content] {
+display: none;
+}
 
-  .search-filter-content.active {
-  display: block;
-  }
+[aria-expanded="true"] + [data-a11y-content] {
+display: block;
+}
 
 </style>
 
-<div class="search-filter-wrapper">
+<h2 class="search-filter-heading" data-a11y-button>Heading</h2>
 
+<div data-a11y-content>
+
+  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
 
 </div>
 
+<button data-a11y-button>Button</button>
+
+<section data-a11y-content>
+
+  <h2>Section Heading</h2>
+
+  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+</section>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script>
-
-setTimeout(function(){
-
-  a11yHeadingToggle($(".search-filter-heading"), $(".search-filter-content"));
-
-}, 500);
-
-</script>
 
 <script id="tmp-magic-bullet" data-a11y="true" src="../init.js"></script>

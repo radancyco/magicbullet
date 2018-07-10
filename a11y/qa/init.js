@@ -1,5 +1,5 @@
 
-// TalentBrew Accessibility Issues & Enhancements
+// TalentBrew: Accessibility Patch
 // Developer(s): Michael "Spell" Spellacy, Twitter: spellacy, GitHub: michaelspellacy, michael.spellacy[at]tmp.com
 
 (function(){
@@ -193,80 +193,131 @@
 
   $("input[type=checkbox]").removeAttr("autocomplete");
 
+
+  // ++++++ Common Functions ++++++
+
+  // ****** Simple Toggle ******
+
+  var a11yButton = document.querySelectorAll("[data-a11y-button]");
+  var a11yContent = document.querySelectorAll("[data-a11y-content]");
+  var a11yButtonName = "a11y-button";
+
+  for (var i = 0; i < a11yButton.length; i++) {
+
+    var a11yButtonNode = a11yButton[i].nodeName;
+
+    // No need to apply an extra div in these cases, so let's not...
+
+    if(a11yButtonNode === "BUTTON" || a11yButtonNode === "DIV" ) {
+
+      a11yButton[i].setAttribute("aria-expanded", "false");
+      a11yButton[i].className = a11yButtonName;
+
+    // We never want to use link to toggle content...
+
+    } else if(a11yButton[i].nodeName === "A") {
+
+      alert("Hyperlinks should not be used to toggle elements.");
+
+    } else {
+
+      var a11yPress = document.createElement("div");
+      a11yPress.setAttribute("aria-expanded", "false");
+      a11yPress.className = a11yButtonName;
+      a11yPress.setAttribute("role", "button");
+      a11yPress.setAttribute("tabindex", 0);
+
+      // Insert wrapper before element in the DOM tree
+
+      a11yButton[i].parentNode.insertBefore(a11yPress, a11yButton[i]);
+
+      // Move element into the wrapper
+
+      a11yPress.appendChild(a11yButton[i]);
+
+    }
+
+  }
+
+  // Get all newly created or class applied buttons...
+
+  var a11yPush = document.getElementsByClassName(a11yButtonName);
+
+  for (var i = 0; i < a11yPush.length; i++) {
+
+    a11yPush[i].addEventListener('click', function() {
+
+      simpleToggle(this);
+
+    });
+
+    a11yPush[i].addEventListener('keydown', function(e) {
+
+      var code = e.which;
+
+      if((code === 32) || (code === 13)){
+
+        simpleToggle(this);
+
+        e.preventDefault();
+
+      }
+
+    });
+
+  }
+
+  function simpleToggle(obj) {
+
+    // Note: We are setting ARIA to indicate to screen readers when navigation is expanded.
+    // We set this on the element being accessed (and not the element we are revealing).
+
+    if(obj.getAttribute("aria-expanded") === "true") {
+
+      // Set expanded to false
+
+      obj.setAttribute("aria-expanded", "false");
+
+    } else {
+
+      closeSimpleToggle();
+
+      // Set expanded to true
+
+      obj.setAttribute("aria-expanded", "true");
+
+    }
+
+    if (typeof ga == "function") {
+
+      //ga("send", "event", "Custom Event", "Click", gdprGACustomLabel);
+
+    }
+
+  }
+
+  // Reset ARIA to false on any currenty active items that may be open (we only desire one section open at a time so as not to obstruct anything that may be adjacent to element)
+
+  function closeSimpleToggle() {
+
+    for (var i = 0; i < a11yPush.length; i++) {
+
+      a11yPush[i].setAttribute("aria-expanded", "false");
+
+    }
+
+  }
+
+  // Manage all Escape Key events here
+
+  document.onkeydown = function(e) {
+
+    if (e.which === 27) {
+
+      closeSimpleToggle();
+
+    }
+
+  };
+
 })();
-
-// ************ Global Functions ************
-
-// Global Variables
-
-var $customActiveState = "active";
-
-// Element Toggle
-
-function a11yHeadingToggle(heading, target) {
-
-  $a11yHeading = heading;
-  $a11yTarget = target;
-
-  var newButtonName = $a11yHeading.attr("class") + "-button";
-
-  $a11yHeading.wrap("<div class=" + newButtonName + " aria-expanded='false' role='button' tabindex='0'/>")
-
-  $a11yButton = $("." + newButtonName);
-
-  $a11yButton.on("click keypress", function(e) {
-
-    toggleA11yElement($(this), $a11yTarget);
-
-    e.stopPropagation();
-
-  });
-
-}
-
-function toggleA11yElement(obj, parent) {
-
-  // Let's make the "button" we access toggle when clicked
-  // Note: We are setting ARIA to indicate to screen readers when navigation is expanded.
-  // We set this on the element being accessed (and not the element we are revealing).
-
-  if(obj.hasClass($customActiveState)) {
-
-    // Set ARIA to false, remove class
-
-    obj.attr("aria-expanded", "false").removeClass($customActiveState);
-    parent.removeClass($customActiveState);
-
-  } else {
-
-    // Now add change ARIA value and class to content we want shown.
-
-    obj.attr("aria-expanded", "true").addClass($customActiveState);
-    parent.addClass($customActiveState);
-
-  }
-
-}
-
-function closeA11yElement() {
-
-  if($a11yButton.hasClass($customActiveState)) {
-
-    $a11yButton.attr("aria-expanded", "false").removeClass($customActiveState);
-    $a11yTarget.removeClass($customActiveState);
-
-  }
-
-}
-
-// Event: Manage all Escape Key events here
-
-$(document).on("keyup", function(e) {
-
-  if (e.keyCode === 27) {
-
-    closeA11yElement();
-
-  }
-
-});

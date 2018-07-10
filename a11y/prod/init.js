@@ -1,5 +1,5 @@
 
-// TalentBrew Accessibility Issues & Enhancements
+// TalentBrew: Accessibility Patch
 // Developer(s): Michael "Spell" Spellacy, Twitter: spellacy, GitHub: michaelspellacy, michael.spellacy[at]tmp.com
 
 (function(){
@@ -72,7 +72,7 @@
 
       if(!$(".pagination-page-status").length) {
 
-        $(".pagination-page-count").append("<p class='pagination-page-status' tabindex='0'>" + pageStatus + "</p>");
+        $(".pagination-page-count").append("<p class='pagination-page-status' role='status' tabindex='0'>" + pageStatus + "</p>");
 
         $(".pagination-no-form").remove();
 
