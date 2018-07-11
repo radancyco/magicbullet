@@ -193,7 +193,6 @@
 
   $("input[type=checkbox]").removeAttr("autocomplete");
 
-
   // ++++++ Common Functions ++++++
 
   // ****** Simple Toggle ******

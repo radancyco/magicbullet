@@ -193,4 +193,130 @@
 
   $("input[type=checkbox]").removeAttr("autocomplete");
 
+  // ++++++ Common Functions ++++++
+
+  // ****** Simple Toggle ******
+
+  var a11yButton = document.querySelectorAll("[data-a11y-button]");
+  var a11yContent = document.querySelectorAll("[data-a11y-content]");
+  var a11yButtonName = "a11y-button";
+
+  for (var i = 0; i < a11yButton.length; i++) {
+
+    var a11yButtonNode = a11yButton[i].nodeName;
+
+    // No need to apply an extra div in these cases, so let's not...
+
+    if(a11yButtonNode === "BUTTON" || a11yButtonNode === "DIV" ) {
+
+      a11yButton[i].setAttribute("aria-expanded", "false");
+      a11yButton[i].className = a11yButtonName;
+
+    // We never want to use link to toggle content...
+
+    } else if(a11yButton[i].nodeName === "A") {
+
+      alert("Hyperlinks should not be used to toggle elements.");
+
+    } else {
+
+      var a11yPress = document.createElement("div");
+      a11yPress.setAttribute("aria-expanded", "false");
+      a11yPress.className = a11yButtonName;
+      a11yPress.setAttribute("role", "button");
+      a11yPress.setAttribute("tabindex", 0);
+
+      // Insert wrapper before element in the DOM tree
+
+      a11yButton[i].parentNode.insertBefore(a11yPress, a11yButton[i]);
+
+      // Move element into the wrapper
+
+      a11yPress.appendChild(a11yButton[i]);
+
+    }
+
+  }
+
+  // Get all newly created or class applied buttons...
+
+  var a11yPush = document.getElementsByClassName(a11yButtonName);
+
+  for (var i = 0; i < a11yPush.length; i++) {
+
+    a11yPush[i].addEventListener('click', function() {
+
+      simpleToggle(this);
+
+    });
+
+    a11yPush[i].addEventListener('keydown', function(e) {
+
+      var code = e.which;
+
+      if((code === 32) || (code === 13)){
+
+        simpleToggle(this);
+
+        e.preventDefault();
+
+      }
+
+    });
+
+  }
+
+  function simpleToggle(obj) {
+
+    // Note: We are setting ARIA to indicate to screen readers when navigation is expanded.
+    // We set this on the element being accessed (and not the element we are revealing).
+
+    if(obj.getAttribute("aria-expanded") === "true") {
+
+      // Set expanded to false
+
+      obj.setAttribute("aria-expanded", "false");
+
+    } else {
+
+      closeSimpleToggle();
+
+      // Set expanded to true
+
+      obj.setAttribute("aria-expanded", "true");
+
+    }
+
+    if (typeof ga == "function") {
+
+      //ga("send", "event", "Custom Event", "Click", gdprGACustomLabel);
+
+    }
+
+  }
+
+  // Reset ARIA to false on any currenty active items that may be open (we only desire one section open at a time so as not to obstruct anything that may be adjacent to element)
+
+  function closeSimpleToggle() {
+
+    for (var i = 0; i < a11yPush.length; i++) {
+
+      a11yPush[i].setAttribute("aria-expanded", "false");
+
+    }
+
+  }
+
+  // Manage all Escape Key events here
+
+  document.onkeydown = function(e) {
+
+    if (e.which === 27) {
+
+      closeSimpleToggle();
+
+    }
+
+  };
+
 })();
