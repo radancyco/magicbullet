@@ -110,11 +110,11 @@
 
         if(this.dataset.jobSaved === "true") {
 
-          this.textContent = this.dataset.a11ySavedButtonOn;
+          this.textContent = this.dataset.a11ySavedButtonOff;
 
         } else {
 
-          this.textContent = this.dataset.a11ySavedButtonOff;
+          this.textContent = this.dataset.a11ySavedButtonOn;
 
         }
 
