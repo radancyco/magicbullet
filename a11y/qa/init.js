@@ -102,7 +102,7 @@
 
       savedJobs[i].addEventListener("click", function() {
 
-        this.textContent = dataset.a11ySavedButtonOn;
+        this.textContent = this.dataset.a11ySavedButtonOn;
 
       });
 
