@@ -100,9 +100,23 @@
 
     for (var i = 0; i < savedJobs.length; i++) {
 
-      savedJobs[i].addEventListener("click", function() {
+      if(this.dataset.jobSaved === "true") {
 
         this.textContent = this.dataset.a11ySavedButtonOn;
+
+      }
+
+      savedJobs[i].addEventListener("click", function() {
+
+        if(this.dataset.jobSaved === "true") {
+
+          this.textContent = this.dataset.a11ySavedButtonOn;
+
+        } else {
+
+          this.textContent = this.dataset.a11ySavedButtonOff;
+
+        }
 
       });
 
