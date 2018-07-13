@@ -102,7 +102,7 @@
 
       if(savedJobs[i].dataset.jobSaved === "true") {
 
-        this.textContent = this.dataset.a11ySavedButtonOn;
+        savedJobs[i].textContent = savedJobs[i].dataset.a11ySavedButtonOn;
 
       }
 
