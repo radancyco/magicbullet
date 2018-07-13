@@ -167,6 +167,22 @@
 
     $(".goog-te-spinner").append("<title>Spinner</title>");
 
+    // Save Job for later
+
+    var savedJobs = document.querySelectorAll("[data-a11y-saved-button]");
+
+    for (var i = 0; i < savedJobs.length; i++) {
+
+      savedJobs[i].setAttribute("aria-expanded", "false");
+
+      savedJobs[i].addEventListener("click", function() {
+
+        alert("Test");
+
+      });
+
+    }
+
   }, 1000);
 
   // Issue: Job DEscriptions have horrible inaccessible garbage in them. This is an attemtp to remove some of that garbage...
@@ -318,23 +334,5 @@
     }
 
   };
-
-  // Save Job for later
-
-  var savedJobs = document.querySelectorAll("[data-a11y-saved-button]");
-
-  for (var i = 0; i < savedJobs.length; i++) {
-
-    savedJobs[i].setAttribute("aria-expanded", "false");
-
-    savedJobs[i].addEventListener("click", function() {
-
-      alert("Test");
-
-    });
-
-
-  }
-
 
 })();
