@@ -319,4 +319,17 @@
 
   };
 
+  // Save Job for later
+
+  var savedJobs = document.getElementsByClassName("js-save-job-btn");
+
+  for (var i = 0; i < savedJobs.length; i++) {
+
+    savedJobs[i].setAttribute("aria-expanded", "false");
+
+    alert("Test");
+
+  }
+
+
 })();
