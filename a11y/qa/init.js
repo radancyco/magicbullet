@@ -100,7 +100,7 @@
 
     for (var i = 0; i < savedJobs.length; i++) {
 
-      if(this.dataset.jobSaved === "true") {
+      if(savedJobs[i].dataset.jobSaved === "true") {
 
         this.textContent = this.dataset.a11ySavedButtonOn;
 
