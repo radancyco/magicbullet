@@ -321,13 +321,18 @@
 
   // Save Job for later
 
-  var savedJobs = document.getElementsByClassName("js-save-job-btn");
+  var savedJobs = document.querySelectorAll("[data-a11y-saved-button]");
 
   for (var i = 0; i < savedJobs.length; i++) {
 
     savedJobs[i].setAttribute("aria-expanded", "false");
 
-    alert("Test");
+    savedJobs[i].addEventListener("click", function() {
+
+      alert("Test");
+
+    });
+
 
   }
 
