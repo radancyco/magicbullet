@@ -84,15 +84,9 @@
 
   noFormPagination(); // Initial Page Load
 
-  $(document).ajaxStop(function() {
+  // Issue: The "Save Jobs" button has accessibility issues.
 
-    // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
-
-  	$("#applied-filters").removeAttr("aria-hidden aria-expanded");
-
-    noFormPagination();
-
-    fixDisabledButton();
+  function saveJobButton() {
 
     // Save Job for later
 
@@ -121,6 +115,22 @@
       });
 
     }
+
+  }
+
+  saveJobButton(); // Initial Page Load
+
+  $(document).ajaxStop(function() {
+
+    // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
+
+  	$("#applied-filters").removeAttr("aria-hidden aria-expanded");
+
+    noFormPagination();
+
+    fixDisabledButton();
+
+    saveJobButton();
 
   });
 
