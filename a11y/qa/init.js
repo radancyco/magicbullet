@@ -100,11 +100,9 @@
 
     for (var i = 0; i < savedJobs.length; i++) {
 
-      savedJobs[i].setAttribute("aria-expanded", "false");
-
       savedJobs[i].addEventListener("click", function() {
 
-        alert("Test");
+        this.textContent = dataset.a11ySavedButtonOn;
 
       });
 
