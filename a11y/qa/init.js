@@ -94,8 +94,6 @@
 
     for (var i = 0; i < savedJobs.length; i++) {
 
-      savedJobs[i].setAttribute("data-a11y-saved-button-off", savedJobs[i].textContent);
-
       if(savedJobs[i].dataset.jobSaved === "true") {
 
         savedJobs[i].textContent = savedJobs[i].dataset.a11ySavedButtonOn;
