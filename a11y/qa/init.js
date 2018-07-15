@@ -96,7 +96,7 @@
 
       if(savedJobs[i].dataset.jobSaved === "true") {
 
-        savedJobs[i].textContent = savedJobs[i].dataset.a11ySavedButtonOn;
+        savedJobs[i].setAttribute("aria-pressed", "true");
 
       }
 
@@ -104,11 +104,11 @@
 
         if(this.dataset.jobSaved === "true") {
 
-          this.textContent = this.dataset.a11ySavedButtonOff;
+          this.removeAttribute("aria-pressed");
 
         } else {
 
-          this.textContent = this.dataset.a11ySavedButtonOn;
+          this.setAttribute("aria-pressed", "true");
 
         }
 
