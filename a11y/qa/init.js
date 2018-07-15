@@ -98,13 +98,17 @@
 
         savedJobs[i].setAttribute("aria-pressed", "true");
 
+      } else {
+
+        savedJobs[i].setAttribute("aria-pressed", "false");
+
       }
 
       savedJobs[i].addEventListener("click", function() {
 
         if(this.dataset.jobSaved === "true") {
 
-          this.removeAttribute("aria-pressed");
+          this.setAttribute("aria-pressed", "false");
 
         } else {
 
