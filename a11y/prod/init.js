@@ -47,7 +47,7 @@
 
   $(".social-share-items a").append(" <span class='wai'>(Opens in New Window)</span>");
 
-  // Issue: Search Results pagination disabled button can be tabbed to. To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
+  // Issue: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
   function fixDisabledButton() {
 
@@ -72,7 +72,7 @@
 
       if(!$(".pagination-page-status").length) {
 
-        $(".pagination-page-count").append("<p class='pagination-page-status' role='status' tabindex='0'>" + pageStatus + "</p>");
+        $(".pagination-page-count").append("<p class='pagination-page-status' tabindex='0'>" + pageStatus + "</p>");
 
         $(".pagination-no-form").remove();
 
@@ -84,6 +84,46 @@
 
   noFormPagination(); // Initial Page Load
 
+  // Issue: The "Save Jobs" button has accessibility issues.
+
+  function saveJobButton() {
+
+    // Save Job for later
+
+    var savedJobs = document.querySelectorAll("[data-a11y-saved-button]");
+
+    for (var i = 0; i < savedJobs.length; i++) {
+
+      if(savedJobs[i].dataset.jobSaved === "true") {
+
+        savedJobs[i].setAttribute("aria-pressed", "true");
+
+      } else {
+
+        savedJobs[i].setAttribute("aria-pressed", "false");
+
+      }
+
+      savedJobs[i].addEventListener("click", function() {
+
+        if(this.dataset.jobSaved === "true") {
+
+          this.setAttribute("aria-pressed", "false");
+
+        } else {
+
+          this.setAttribute("aria-pressed", "true");
+
+        }
+
+      });
+
+    }
+
+  }
+
+  saveJobButton(); // Initial Page Load
+
   $(document).ajaxStop(function() {
 
     // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
@@ -93,6 +133,8 @@
     noFormPagination();
 
     fixDisabledButton();
+
+    saveJobButton();
 
   });
 

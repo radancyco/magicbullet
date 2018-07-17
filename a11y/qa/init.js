@@ -47,7 +47,7 @@
 
   $(".social-share-items a").append(" <span class='wai'>(Opens in New Window)</span>");
 
-  // Issue: Search Results pagination disabled button can be tabbed to. To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
+  // Issue: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
   function fixDisabledButton() {
 
