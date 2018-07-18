@@ -209,12 +209,6 @@
 
     $(".goog-te-spinner").append("<title>Spinner</title>");
 
-    // Slick is a piece of junk, let's fix a few things...
-
-    // Issue: When autoplay is enabled, the carousle keep announcing changes. Especially problemative when multiple carousles are on the page.
-
-    $(".slick-list").removeAttr("aria-live");
-
   }, 1000);
 
   // Issue: Job DEscriptions have horrible inaccessible garbage in them. This is an attemtp to remove some of that garbage...
