@@ -142,6 +142,16 @@
 
     var formMessage = "Odesláním vašich informací potvrzujete, že jste si přečetli naše <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>zásady o ochraně soukromí <span class='visually-hidden'>(tento obsah se otevře v novém okně)</span></a> a souhlasíte s tím, že obdržíte e-mailové zprávy od " + gdprClientName + ".";
 
+  } else if (gdprLanguage === "da") {
+
+    // Danish
+
+    var gdprMessage = "Vi bruger cookies og anden sporingsteknologi til at hjælpe med navigation, forbedring af vores produkter og tjenester, hjælpe med vores markedsføring og levere indhold fra tredjeparter. Ved at fortsætte din brug af dette websted giver du dit samtykke til vores brug af cookies i overensstemmelse med vores <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privatlivspolitik <span id='gdpr-a11y-message' class='visually-hidden'>(dette indhold åbnes i et nyt vindue)</span></a>. Hvis du vil administrere dine indstillinger for tredjepartscookies, skal du <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>klikke her <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(dette indhold åbnes i et nyt vindue)</span></a>.";
+
+    var gdprConsentBtn = "Accepter";
+
+    var formMessage = "Ved at indsende dine oplysninger bekræfter du, at du har læst vores <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privatlivspolitik <span class='visually-hidden'>(dette indhold åbnes i et nyt vindue)</span></a> og giver dit samtykke til at modtage e-mails fra " + gdprClientName + ".";
+
   } else if (gdprLanguage === "de") {
 
     // German
@@ -221,6 +231,26 @@
     var gdprConsentBtn = "同意する";
 
     var formMessage = "この情報を提出することで、当社の <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>プライバシーポリシー <span class='visually-hidden'>（新しいウィンドウでコンテンツが開きます）</span></a> を読んだこと、また " + gdprClientName + " からメールでのメッセージを受け取ることに同意することとなります。";
+
+  } else if (gdprLanguage === "ko") {
+
+    // Korean
+
+    var gdprMessage = "당사는 탐색하는데 도움을 주고, 당사의 제품 및 서비스를 개선하고, 마케팅 노력을 지원하고, 제3자로부터의 내용을 제공하기 위해 쿠키 및 다른 추적 기술들을 사용합니다. 이 사이트를 계속 사용함으로써 귀하는 당사의 <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>개인정보 보호 정책 <span id='gdpr-a11y-message' class='visually-hidden'>(이 내용은 새로운 창에서 열립니다)</span></a>에 따라 당사가 쿠키를 사용하는 것에 동의하는 것입니다. 제3자 쿠키 기본설정을 관리하기 위해서, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>여기를 클릭하십시오 <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(이 내용은 새로운 창에서 열립니다)</span></a>.";
+
+    var gdprConsentBtn = "동의";
+
+    var formMessage = "귀하의 정보를 제출함으로써 귀하는 당사의 <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>개인정보 보호 정책 <span class='visually-hidden'>(이 내용은 새로운 창에서 열립니다)</span></a> 을 읽었으며 %%로부터 이메일 통지를 받는 것에 동의한다는 것을 인정하는 것입니다 " + gdprClientName + ".";
+
+  } else if (gdprLanguage === "lt") {
+
+    // Lithuanian
+
+    var gdprMessage = "Naudojame slapukus ir kitas sekimo technologijas, kad palengvintume naršymą, pagerintume savo produktus bei paslaugas, prisidėtume prie rinkodaros pastangų ir teiktume turinį trečiosioms šalims. Toliau naudodamiesi šia svetaine sutinkate su mūsų slapukų naudojimu pagal mūsų <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privatumo politiką <span id='gdpr-a11y-message' class='visually-hidden'>(atsiveria naujame lange)</span></a>. Norėdami pakeisti trečiųjų šalių slapukų parinktis, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>spustelėkite <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(atsiveria naujame lange)</span></a>.";
+
+    var gdprConsentBtn = "Sutikti";
+
+    var formMessage = "Pateikdami savo duomenis patvirtinate, kad perskaitėte mūsų <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privatumo taisykles <span class='visually-hidden'>(atsiveria naujame lange)</span></a>  ir sutinkate gauti pranešimą el. paštu iš " + gdprClientName + ".";
 
   } else if(gdprLanguage === "nl") {
 
