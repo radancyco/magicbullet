@@ -94,6 +94,8 @@
 
     for (var i = 0; i < savedJobs.length; i++) {
 
+      savedJobs[i].setAttribute("type", "button"); // Needed for VoiceOver :-(
+
       if(savedJobs[i].dataset.jobSaved === "true") {
 
         savedJobs[i].setAttribute("aria-pressed", "true");
