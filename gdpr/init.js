@@ -126,11 +126,11 @@
 
     // Arabic
 
-    var gdprMessage = "We use cookies and other tracking technologies to assist with navigation, improve our products and services, assist with our marketing efforts, and provide content from third parties. By continuing to use this site you agree to our use of cookies in accordance with our <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privacy policy <span id='gdpr-a11y-message' class='visually-hidden'>(this content opens in new window)</span></a>. To manage third-party cookie preferences, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>click here <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(this content opens in new window)</span></a>.";
+    var gdprMessage = "نستخدم ملفات تعريف الارتباط وتقنيات التتبّع الأخرى للمساعدة في عملية التنقل وتحسين المنتجات والخدمات، وكذلك المساعدة في جهود التسويق، وتقديم المحتوى من الأطراف الخارجية. باستمرارك في استخدام هذا الموقع، فأنت توافق على استخدامنا لملفات تعريف الارتباط وفقًا لـ<a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>سياسة الخصوصية <span id='gdpr-a11y-message' class='visually-hidden'>(يفتح هذا المحتوى في نافذة جديدة)</span></a>. للتحكم في تفضيلات ملفات تعريف الارتباط عند الأطراف الخارجية، <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>انقر هنا <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(يفتح هذا المحتوى في نافذة جديدة)</span></a>.";
 
-    var gdprConsentBtn = "Accept";
+    var gdprConsentBtn = "قبول";
 
-    var formMessage = "By submitting your information, you acknowledge that you have read our <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>privacy policy <span class='visually-hidden'>(this content opens in new window)</span></a> and consent to receive email communication from " + gdprClientName + ".";
+    var formMessage = "بتقديمك لمعلوماتك، فأنت تُقر بأنّك قرأت <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>سياسة الخصوصية الخاصة بنا <span class='visually-hidden'>(يفتح هذا المحتوى في نافذة جديدة)</span></a> وتوافق على تلقّي مراسلات عبر البريد الإلكتروني من  " + gdprClientName + ".";
 
   } else if (gdprLanguage === "cs") {
 
