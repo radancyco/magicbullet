@@ -39,6 +39,10 @@
 
   $("img:not([alt])").attr("alt", "");
 
+  // Search Forms should contain a role of "search"
+
+  $("form.search-form").attr("role", "search");
+
   // Job Map Page - Remove target. These links only send information to Google Map UI. Target not needed.
 
   $(".job-map-nearby a").removeAttr("target");
