@@ -3,7 +3,7 @@
   General Data Protection Regulation (GDPR) Notice
   Developer: Michael "Spell" Spellacy, Email: michael.spellacy@tmp.com, Twitter: @spellacy, GitHub: michaelspellacy
 
-*/
+*/ 
 
 (function() {
 
