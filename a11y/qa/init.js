@@ -264,7 +264,18 @@
 
     } else if(a11yButton[i].nodeName === "A") {
 
-      alert("Hyperlinks should not be used to toggle elements.");
+      // So we are going to transform it into a button.
+
+      var oldButton = a11yButton[i];
+      var newButton = document.createElement("button");
+
+      newButton.innerHTML = oldButton.textContent;
+      newButton.setAttribute("aria-expanded", "false");
+      newButton.className = a11yButtonName;
+
+      // Replace oldButton with newButton
+
+      oldButton.parentNode.replaceChild(newButton, oldButton);
 
     } else {
 
