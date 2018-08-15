@@ -260,11 +260,11 @@
       a11yButton[i].setAttribute("aria-expanded", "false");
       a11yButton[i].className = a11yButtonName;
 
-    // We never want to use link to toggle content...
+    // We never want to use link to toggle hidden content...
 
     } else if(a11yButton[i].nodeName === "A") {
 
-      // So we are going to transform it into a button.
+      // ...so we are going to transform it into a button.
 
       var oldButton = a11yButton[i];
       var newButton = document.createElement("button");
@@ -303,13 +303,13 @@
 
   for (var i = 0; i < a11yPush.length; i++) {
 
-    a11yPush[i].addEventListener('click', function() {
+    a11yPush[i].addEventListener("click", function() {
 
       simpleToggle(this);
 
     });
 
-    a11yPush[i].addEventListener('keydown', function(e) {
+    a11yPush[i].addEventListener("keydown", function(e) {
 
       var code = e.which;
 
@@ -328,7 +328,7 @@
   function simpleToggle(obj) {
 
     // Note: We are setting ARIA to indicate to screen readers when navigation is expanded.
-    // We set this on the element being accessed (and not the element we are revealing).
+    // We set this on the element being accessed (and not the element we are revealing - a common mistake).
 
     if(obj.getAttribute("aria-expanded") === "true") {
 
@@ -343,6 +343,16 @@
       // Set expanded to true
 
       obj.setAttribute("aria-expanded", "true");
+
+      /* if (obj.hasAttribute("data-a11y-target")) {
+
+        var targetElement = document.getElementById(obj.dataset.a11yTarget);
+
+        targetElement.className = "active";
+        targetElement.setAttribute("tabindex", -1);
+        targetElement.focus();
+
+      } */
 
     }
 
@@ -363,6 +373,14 @@
       a11yPush[i].setAttribute("aria-expanded", "false");
 
     }
+
+    /* var test = document.getElementsByClassName("active");
+
+    for (var x = 0; x < test.length; x++) {
+
+      test[x].classList.remove("active");
+
+    } */
 
   }
 
