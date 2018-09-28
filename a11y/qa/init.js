@@ -197,9 +197,13 @@
 
 		$(".field-validation-valid").removeAttr("role");
 
-		// Issue: The Job Alerts upload includes an aria-describedby with no associated ID.
+		// Issue: The Job Alerts upload includes an aria-describedby with no associated ID when no Field Instructions are included.
 
-    $(".form-field input[name='Resume']").hide();
+    
+
+    $(".form-field input[name='Resume']").prev().attr("id", $(".form-field input[name='Resume']").attr("aria-describedby"));
+
+
 
     // if Google Translate exists, then fix...
 
