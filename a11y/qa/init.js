@@ -199,11 +199,13 @@
 
 		// Issue: The Job Alerts upload includes an aria-describedby with no associated ID when no Field Instructions are included.
 
+    if(!$(".form-field input[name='Resume']").prev(".instruction-text").length) {
 
+      // If upload instruction text does not exist, then remove aria-describedby
 
-      $(".form-field input[name='Resume']").prev().attr("id", $(".form-field input[name='Resume']").attr("aria-describedby"));
+      $(".form-field input[name='Resume']").removeAttr("aria-describedby");
 
-
+    }
 
     // if Google Translate exists, then fix...
 
