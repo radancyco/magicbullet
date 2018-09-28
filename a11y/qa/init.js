@@ -13,12 +13,6 @@
 
   // A11y Fixes
 
-  // Issue: Validation Error (addLoadEvent)
-
-  // Note: Asked Filip to remove.
-
-  $("script[type='text/javascript']").removeAttr("type");
-
   // A11y: Remove "aria-expanded" from all adjacent elements of "expandable-parent"
 
   $(".expandable-parent").attr("aria-expanded", "false").next().removeAttr("aria-expanded");
@@ -203,9 +197,9 @@
 
 		$(".field-validation-valid").removeAttr("role");
 
-		// Issue: We need to alert AT when submission is successful, so let's do that...
+		// Issue: The Job Alerts upload includes an aria-describedby with no associated ID.
 
-		// $(".form-field.form-message").attr("role", "alert");
+    $(".form-field input[name='Resume']").hide();
 
     // if Google Translate exists, then fix...
 
