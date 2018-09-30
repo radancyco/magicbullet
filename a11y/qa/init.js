@@ -207,6 +207,16 @@
 
     }
 
+    // The file upload remove button is a link with an href hash...can;t have that so let's change it....
+
+    // First, get the text...
+
+    var ResumeRemoveTxt = $(".form-field input[name='Resume']").next(".file-remove").text();
+
+    // Now replace with a button 
+
+    $(".form-field input[name='Resume']").next(".file-remove").replaceWith("<button aria-hidden='true' class='file-remove'>" + ResumeRemoveTxt + "</button>");
+
     // if Google Translate exists, then fix...
 
     $(".goog-te-combo").attr("id", "goog-te-combo").before("<label class='wai' for='goog-te-combo'>Translate this page:</label>");
