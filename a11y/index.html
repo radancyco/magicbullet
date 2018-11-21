@@ -69,7 +69,7 @@ color: #fff;
 
   <h4>Code</h4>
 
-<pre><code>{{ bug.code }}</code></pre>
+<pre><code>{{ bug.code | replace: "<", "&lt;" | replace: ">", "&gt;" }}</code></pre>
 
 {% if bug.screengrab == blank %}
 
