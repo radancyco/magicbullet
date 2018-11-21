@@ -4,113 +4,92 @@ title: "Accessibility Patch"
 noindex: true
 ---
 
-<h2>Example CSS</h2>
+<style>
 
-<style style="display: block; font-family: monospace; white-space: pre; height: 500px; overflow: auto; background-color: #263343; color: #fff; margin: 1em 0; padding: 0 1em;" contenteditable="true">
-
-.a11y-button .search-filter-heading {
-background-color: #666;
-color: #fff;
-margin: 1em 0;
-padding: 1em 3em 1em 1em;
+.bug {
+border: 1px #000 solid;
+border-radius: 5px;
+padding: 0.5em 2em;
+margin-bottom: 1em;
 }
 
-.a11y-button:focus .search-filter-heading, .a11y-button:hover .search-filter-heading {
-background-color: #263343;
+.bug h3 {
+text-transform: uppercase;
 }
 
-.a11y-button {
-display: block;
-position: relative;
-cursor: pointer;
-}
-
-.a11y-button::after {
-background-image: url("https://tbcdn.talentbrew.com/company/1501-preview-site/v1_0/img/ico-plus-white.png");
-background-position: left top;
-background-repeat: no-repeat;
-content: "";
-display: block;
-height: 22px;
-position: absolute;
-right: 1em;
-width: 21px;
-top: 50%;
-transform: translateY(-50%);
-}
-
-.a11y-button[aria-expanded="true"]::after {
-background-image: url("https://tbcdn.talentbrew.com/company/1501-preview-site/v1_0/img/ico-x-white.png");
-}
-
-.js [data-a11y-content] {
-display: none;
-}
-
-[aria-expanded="true"] + [data-a11y-content], [data-a11y-content].active {
-display: block;
+.bug li {
+display: inline-block;
+margin-right: 1em;
 }
 
 </style>
 
-<p>This is a normal button.</p>
+<h2>TalentBrew Accessibility Issues</h2>
 
-<button data-a11y-button>Button</button>
+<p>This patch addresses the following accessibility issues on TalentBrew. Many of these issues will be resolved by the product team at a later date.</p>
 
-<div data-a11y-content>
+{% for bug in site.data.a11y %}
 
-  <h2>Section Heading</h2>
+<div id="tb-a11y-{{ bug.id }}" class="bug">
 
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+  <h3>#{{ bug.id }} {{ bug.summary }}</h3>
 
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+  <p><em><time datetime="{{ bug.time }}">{{ bug.time | date: "%A, %B %-d, %Y %I:%M:%S %p %Z" }}</time></em></p>
 
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+  <ul> 
+    <li><strong>Status:</strong> {{ bug.status }}</li>
+    <li><strong>Priority:</strong> 
+
+    {% if bug.priority == "High" %}
+
+    <em class="alert">{{ bug.priority }}</em>
+
+    {% else %}
+
+    {{ bug.priority }}
+
+    {% endif %}
+
+    </li>
+    {% if bug.jira %}
+    <li><strong>Jira:</strong> <a href="{{ bug.jira }}" rel="noopener" target="_blank">View</a></li>
+    {% endif %}
+    <li><strong>Product:</strong> {{ bug.product }}</li>
+    <li><strong>Feature:</strong> {{ bug.feature }}</li>
+    <li><strong>Implementation:</strong> <a href="#implementation">{{ bug.implementation }}</a></li>
+  </ul>
+
+  <h4>Details</h4>
+
+  {{ bug.details }} 
+
+  <h4>Code</h4>
+
+<pre><code>{{ bug.code }}</code></pre>
+
+{% if bug.screengrab == blank %}
+
+  <h4>Screen Grab</h4>
+
+  <p>{{ bug.screengrab }}</p>
+
+{% endif %}
 
 </div>
 
-<p>This is a link that has been changed into a button.</p>
+{% endfor %}
 
-<a href="#my-content" data-a11y-button>Link (Button)</a>
+<h2>Features</h2>
 
-<div id="my-content" data-a11y-content>
+<ul>
+  <li><a href="magic-buttons.html">Magic Buttons</a></li>
+</ul>
 
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+<h2>Terminology</h2>
 
-</div>
+<h3 id="implementation">Implementation</h3>
 
-<p>This is a heading that has a div wrapped around it with a proper role and tabindex added.</p>
-
-<h2 class="search-filter-heading" data-a11y-button>Heading (Button)</h2>
-
-<div data-a11y-content>
-
-  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-
-</div>
-
-<!-- button data-a11y-button data-a11y-target="my-non-adjacent-content">Button (NA)</button>
-
-<div>
-
-  <div>
-
-    <div id="my-non-adjacent-content" data-a11y-content>
-
-      <h2>Section Heading</h2>
-
-      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-
-      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-
-      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-
-    </div>
-
-  </div>
-
-</div -->
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<script id="tmp-magic-bullet" data-a11y="true" src="../init.js"></script>
+<ul>
+  <li><strong>Global</strong> - Issues immediately corrected by the script as soon it loads on a TalentBrew page.</li>
+  <li><strong>Opt-in</strong> - Solutions to common accessibility issues on TalentBrew. An implementation developer must opt-in to use them.</li>
+</ul>

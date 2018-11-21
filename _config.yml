@@ -1,4 +1,5 @@
 markdown: kramdown
+highlighter: rouge
 destination: _httpdocs
 repo: https://github.com/tmpworldwide/tmp-magicbullet/
 ghpage: https://tmpworldwide.github.io/tmp-magicbullet/

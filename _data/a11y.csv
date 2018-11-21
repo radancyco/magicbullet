@@ -1,0 +1,14 @@
+id,time,summary,status,priority,jira,product,feature,implementation,details,code,screengrab
+1,2018-11-21 15:31:3,aria-expanded is placed on wrong element,New,Medium,http://jira.tmp.com/browse/TCDQ-29452,Site Admin (Client Facing),Multiple,Global,"The aria-expanded attribute is incorrectly placed on target elements and not the elements that are being engaged with by user. Overall, this causes no harm to assistive technology users, but often causes TMP to fail automated scans. The following fix places aria-expanded on the clickable element and removes it from the adjacent element.","$("".expandable-parent"").attr(""aria-expanded"", ""false"").next().removeAttr(""aria-expanded"");",
+2,2018-11-21 15:31:10,TB Core still adds aria-expanded to target element,New,Medium,,Site Admin (Client Facing),Multiple,Global,"Now that aria-expanded has been applied to the clickable element, we need to toggle the value of that attribute here and prevent TB Core from placing aria-expanded back on the adjacent element.","$("".expandable-parent"").on(""click"", function() {
+
+  $(this).attr('aria-expanded', function (i, attr) {
+
+    return attr == 'true' ? 'false' : 'true'
+
+  });
+
+  $(this).next().removeAttr(""aria-expanded"");
+
+});",
+3,2018-11-21 15:31:18,Images are missing alt attributes,New,High,,Site Admin (Client Facing),Multiple,Global,"Developers and third-party providers often forget to include alt attributes on images that do not require descriptions. Any image with a missing alt attribute will now have a ""null alt"" (alt="""") applied to it. This is an ongoing issue. ","$(""img:not([alt])"").attr(""alt"", """");",

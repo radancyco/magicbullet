@@ -1,0 +1,171 @@
+---
+layout: default
+title: "Magic Buttons"
+noindex: true
+---
+
+<style>
+
+.btn-global-standard, button {
+padding: 1em;
+width: auto;
+max-width: none;
+font-size: 1em;
+}
+
+</style>
+
+<p>The following hooks may be used to generate accessible toggle buttons on any web page that leverages the magic bullet script.</p>
+
+<h2>CSS</h2>
+
+<p>Styles marked "required" are necessary for the interface to function. Feel free to edit these styles in your browser.</p>
+
+<style style="display: block; font-family: monospace; white-space: pre; height: 400px; overflow: auto; background-color: #263343; color: #fff; margin: 1em 0; padding: 0 1em;" contenteditable="true">
+
+/* State (Not Required) */
+
+.a11y-button[aria-expanded="true"] {
+background-color: #000;
+}
+
+/* Functional (Required) */
+
+.a11y-content {
+display: none;
+}
+
+.a11y-content.active {
+display: block;
+}
+
+</style>
+
+<h2>HTML</h2>
+
+<p>To prepare your button, just add the following data attributes to your <code>button</code> element.</p>
+
+<pre><code>&lt;button <strong>data-a11y-button</strong> <strong>data-a11y-target="my-content"</strong>&gt;Click Me!&lt;/button&gt;</code></pre>
+
+<p>The <code>data-a11y-button</code> attribute initiates the function, while the <code>data-a11y-target</code> attribute tells the functionality which element to toggle. Both of these elements are required. The <code>data-a11y-target</code> attribute value, like the <code>id</code> attribute, must always be unique.</p>
+
+<p>To set up your toggle area, add an <code>id</code> attribute. The value must match the value used in the <code>data-a11y-target</code> attribute of your button. Also, add a <code>data-a11y-content</code> attribute. This is used as a hook by the script.</p>
+
+<pre><code>&lt;div <strong>id="my-content"</strong> <strong>data-a11y-content</strong>&gt;
+
+  ...
+
+&lt;/div&gt;</code></pre>
+
+<h2>Result</h2>
+
+<p>A fully accessible button that can toggle content.</p>
+
+<button data-a11y-button data-a11y-target="my-content">Click Me!</button>
+
+<div id="my-content" data-a11y-content>
+
+  <h2>Morbi Tristique</h2>
+
+  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+</div>
+
+<h2>Headings</h2>
+
+<p>These attributes can be applied to headings, as well. For example, lets say we have a scenario like this:</p>
+
+<pre><code>&lt;h2&gt;Locations&lt;/h2&gt;
+
+&lt;div&gt;
+
+  ...
+
+&lt;/div&gt;</code></pre>
+
+<p>If we would like to enhance this content and allow it to toggle, then we just add the same attributes as above, like so:
+
+<pre><code>&lt;h2 <strong>data-a11y-button</strong> <strong>data-a11y-target="about-locations"</strong>&gt;Locations&lt;/h2&gt;
+
+&lt;div <strong>id="about-locations"</strong> <strong>data-a11y-content</strong>&gt;
+
+  ...
+
+&lt;/div&gt;</code></pre>
+
+<p>Which will render the following:</p>
+
+<pre><code>&lt;h2&gt;&lt;button aria-expanded="false" aria-controls="about-locations" class="a11y-button"&gt;Locations&lt;/button&gt;&lt;/h2&gt;
+
+&lt;div id="about-locations" class="a11y-content"&gt;
+
+  ...
+
+&lt;/div&gt;</code></pre>
+
+<h2>Result</h2>
+
+<p>A fully accessible heading button that can toggle content.</p>
+
+<h2 class="my-heading" data-a11y-button data-a11y-target="about-locations">Locations</h2>
+
+<div id="about-locations" data-a11y-content>
+
+  <h3>Morbi Tristique</h3>
+
+  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+</div>
+
+<h2>Faux Buttons</h2>
+
+<p>If one needs to replace a hyperlink, then the right thing to do is to swap out that link with a button. However, if you are short on time, the same attributes above can be used on hyperlinks as well.<p>
+
+<pre><code>&lt;a href="#" class="btn-cupcake" <strong>data-a11y-button</strong> <strong>data-a11y-target="cupcakes"</strong>&gt;Cupcake Recipe&lt;/a&gt;
+
+&lt;div class="content-cupcake" <strong>id="cupcakes"</strong> <strong>data-a11y-content</strong>&gt;
+
+  ...
+
+&lt;/div&gt;</code></pre>
+
+<p>Which will remove the hyperlink altogether and replace with a button:</p>
+
+<pre><code><strong>&lt;button aria-expanded="false" aria-controls="cupcakes" class="btn-cupcake a11y-button"&gt;Cupcake Recipe&lt;/button&gt;</strong>
+
+&lt;div id="cupcakes" class="content-cupcake a11y-content"&gt;
+
+  ...
+
+&lt;/div&gt;</code></pre>
+
+<aside id="a11y-caption" class="callout accessibility">
+
+  <h2>Accessibility</h2>
+
+  <p>Hyperlinks are often used to masquerade as buttons. This is bad for accessibility. When links are used as buttons, assistive technology may read them out as links, which can be confusing. Links are supposed to take us to other destinations, while buttons should perform actions. Disabled users also expect buttons to work with the enter key <em>and</em> space bar. Click events applied to hyperlinks only work with the enter key, while click events applied to buttons work with both the enter key and the space bar. That's cool. Browsers are smart.</p>
+
+</aside>  
+
+<h2>Result</h2>
+
+<p>A now fully accessible button that can toggle content.</p>
+
+<a href="#" class="btn-cupcakes non-dairy" data-a11y-button data-a11y-target="cupcakes">Cupcake Recipe</a>
+
+<div class="content-cupcake" id="cupcakes" data-a11y-content>
+
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+</div>
+
+
+<ul>
+  <li>Clicking the escape key will reset the activated element.</li>
+</ul>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script id="tmp-magic-bullet" data-a11y="true" src="../init.js"></script>
