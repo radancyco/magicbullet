@@ -7,10 +7,15 @@ noindex: true
 <style>
 
 .bug {
+background-color: #eee;
 border: 1px #000 solid;
 border-radius: 5px;
 padding: 0.5em 2em;
 margin-bottom: 1em;
+}
+
+.bug a {
+text-decoration: underline;
 }
 
 .bug h3 {
@@ -22,6 +27,15 @@ display: inline-block;
 margin-right: 1em;
 }
 
+.bug.high {
+background-color: #A61C00;
+color: #fff;
+}
+
+.bug.high a {
+color: #fff;
+}
+
 </style>
 
 <h2>TalentBrew Accessibility Issues</h2>
@@ -30,7 +44,7 @@ margin-right: 1em;
 
 {% for bug in site.data.a11y %}
 
-<div id="tb-a11y-{{ bug.id }}" class="bug">
+<div id="tb-a11y-{{ bug.id }}" class="bug {% if bug.priority == "High" %} high{% endif %}">
 
   <h3>#{{ bug.id }} {{ bug.summary }}</h3>
 
@@ -38,19 +52,7 @@ margin-right: 1em;
 
   <ul> 
     <li><strong>Status:</strong> {{ bug.status }}</li>
-    <li><strong>Priority:</strong> 
-
-    {% if bug.priority == "High" %}
-
-    <em class="alert">{{ bug.priority }}</em>
-
-    {% else %}
-
-    {{ bug.priority }}
-
-    {% endif %}
-
-    </li>
+    <li><strong>Priority:</strong> {{ bug.priority }}</li>
     {% if bug.jira %}
     <li><strong>Jira:</strong> <a href="{{ bug.jira }}" rel="noopener" target="_blank">View</a></li>
     {% endif %}
