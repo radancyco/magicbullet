@@ -44,7 +44,9 @@ color: #fff;
 
 {% for bug in site.data.a11y %}
 
-<div id="tb-a11y-{{ bug.id }}" class="bug {% if bug.priority == "High" %} high{% endif %}">
+{% assign issueID = bug.id | plus: 0 %}
+
+<div id="issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.id }}" class="bug {% if bug.priority == "High" %}high{% endif %}">
 
   <h3>#{{ bug.id }} {{ bug.summary }}</h3>
 
