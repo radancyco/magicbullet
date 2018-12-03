@@ -11,17 +11,19 @@
 
   a11yBody.classList.add("magic-bullet-a11y");
 
-  // A11y Fixes
+  // TalentBrew Accessibility Fixes
 
-  // A11y: Remove "aria-expanded" from all adjacent elements of "expandable-parent"
+  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0001
 
   $(".expandable-parent").attr("aria-expanded", "false").next().removeAttr("aria-expanded");
+
+  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0002
 
   $(".expandable-parent").on("click", function() {
 
     $(this).attr('aria-expanded', function (i, attr) {
 
-    	return attr == 'true' ? 'false' : 'true'
+      return attr == 'true' ? 'false' : 'true'
 
     });
 
@@ -29,21 +31,48 @@
 
   });
 
-  // Address any image with a missing alt attribute (usually tracking pixels, etc.)
+  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0003
 
   $("img:not([alt])").attr("alt", "");
 
-  // Search Forms should contain a role of "search"
+  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0004
 
   $("form.search-form").attr("role", "search");
 
-  // Job Map Page - Remove target. These links only send information to Google Map UI. Target not needed.
+  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0005
 
   $(".job-map-nearby a").removeAttr("target");
 
-  // Issue: Certain links require "Open New Window" text for assistive tech
+  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0006
 
   $(".social-share-items a").append(" <span class='wai'>(Opens in New Window)</span>");
+
+  // Job Description Garbage
+
+  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0007
+
+  $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").remove();
+
+  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0008
+
+  $(".ats-description table").attr("role", "presentation");
+
+  // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
+
+  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0009
+
+  $("input[type=checkbox]").removeAttr("autocomplete");
+
+  // Future Enhancement
+
+  // Issue: We need to perform some additional form validation/manipulation after form is submitted
+
+  $(".data-form").on("submit", function() {
+
+    console.log ("Something accessible has happened");
+
+  });
+
 
   // Issue: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
@@ -128,7 +157,7 @@
 
     // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
 
-  	$("#applied-filters").removeAttr("aria-hidden aria-expanded");
+    $("#applied-filters").removeAttr("aria-hidden aria-expanded");
 
     noFormPagination();
 
@@ -140,64 +169,64 @@
 
   // Sometime we can only do things after TB has finished (slowly) loading it's portion of the DOM.
 
-	setTimeout(function(){
+  setTimeout(function(){
 
-	  // A11y Form Fixes
+    // A11y Form Fixes
 
-		// Issue: Remove aria-required from p element (it should not exist on this element) and various other elements.
+    // Issue: Remove aria-required from p element (it should not exist on this element) and various other elements.
 
-	  $(".data-form .form-field.required, .form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea").removeAttr("aria-required");
+    $(".data-form .form-field.required, .form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea").removeAttr("aria-required");
 
-	  // Required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
+    // Required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
 
-		$(".data-form input[required='required'], .data-form select[required='required'], .data-form textarea[required='required']").prop("required", true);
+    $(".data-form input[required='required'], .data-form select[required='required'], .data-form textarea[required='required']").prop("required", true);
 
-		// Checkboxes missing due to reset above, so let's add them back
+    // Checkboxes missing due to reset above, so let's add them back
 
-		$("input[type='checkbox'][aria-required='true']").prop("required", true).removeAttr("aria-required");
+    $("input[type='checkbox'][aria-required='true']").prop("required", true).removeAttr("aria-required");
 
-	  // Issue: Remove "autocomplete" from select element.
+    // Issue: Remove "autocomplete" from select element.
 
-	  $(".data-form select").removeAttr("autocomplete");
+    $(".data-form select").removeAttr("autocomplete");
 
-	  // Issue: Since input element is "valid", it requires no aria-describedy attribute, since there is no validation message to ever bind it to.
+    // Issue: Since input element is "valid", it requires no aria-describedy attribute, since there is no validation message to ever bind it to.
 
-	  $(".valid").removeAttr("aria-describedby");
+    $(".valid").removeAttr("aria-describedby");
 
-	  // Issue: Clutter, remove empty instruction-text spans
+    // Issue: Clutter, remove empty instruction-text spans
 
-		$(".instruction-text").each(function() {
+    $(".instruction-text").each(function() {
 
       if ($(this).is(":empty")){
 
-  		    $(this).remove();
+          $(this).remove();
 
       }
 
     });
 
-	  // Issue: Clutter, remove unused elements from fields that are not required.
+    // Issue: Clutter, remove unused elements from fields that are not required.
 
-	  $(".form-field:not(.required").each(function() {
+    $(".form-field:not(.required").each(function() {
 
       $(this).find(".field-validation-valid").remove();
 
-		});
+    });
 
-		// Issue: Remove inline style on honeypot field and use hidden attribute instead
+    // Issue: Remove inline style on honeypot field and use hidden attribute instead
 
-		$(".form-field.confirm-email").prop("hidden", true).removeAttr("aria-hidden style");
+    $(".form-field.confirm-email").prop("hidden", true).removeAttr("aria-hidden style");
 
-		// Issue: Remove aria-hidden from honeybot label and input. The parent element should hide this from all assistive tech.
-		// Note: Not CSS dependent, so fields will always be hidden.
+    // Issue: Remove aria-hidden from honeypot label and input. The parent element should hide this from all assistive tech.
+    // Note: Not CSS dependent, so fields will always be hidden.
 
-		$(".form-field.confirm-email label, .form-field.confirm-email input").removeAttr("aria-hidden");
+    $(".form-field.confirm-email label, .form-field.confirm-email input").removeAttr("aria-hidden");
 
-		// Issue: Remove Role from field-validation-error (it's really not needed)
+    // Issue: Remove Role from field-validation-error (it's really not needed)
 
-		$(".field-validation-valid").removeAttr("role");
+    $(".field-validation-valid").removeAttr("role");
 
-		// Issue: The Job Alerts upload includes an aria-describedby with no associated ID when no Field Instructions are included.
+    // Issue: The Job Alerts upload includes an aria-describedby with no associated ID when no Field Instructions are included.
 
     if(!$(".form-field input[name='Resume']").prev(".instruction-text").length) {
 
@@ -213,7 +242,7 @@
 
     var ResumeRemoveTxt = $(".form-field input[name='Resume']").next(".file-remove").text();
 
-    // Now replace with a button
+    // Now replace with a button 
 
     $(".form-field input[name='Resume']").next(".file-remove").replaceWith("<button aria-hidden='true' class='file-remove'>" + ResumeRemoveTxt + "</button>");
 
@@ -227,30 +256,6 @@
 
   }, 1000);
 
-  // Issue: Job DEscriptions have horrible inaccessible garbage in them. This is an attemtp to remove some of that garbage...
-
-  // Remove tabindex
-
-  $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").remove();
-
-	// Future Enhancement
-
-	// Issue: We need to perform some additional form validation/manipulation after form is submitted
-
-	$(".data-form").on("submit", function() {
-
-		console.log ("Something accessible has happened");
-
-	});
-
-  // Add role of "presentation" to every table found within a job description.
-
-  $(".ats-description table").attr("role", "presentation");
-
-  // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
-
-  $("input[type=checkbox]").removeAttr("autocomplete");
-
   // ++++++ Common Functions ++++++
 
   // ****** Simple Toggle ******
@@ -258,19 +263,25 @@
   var a11yButton = document.querySelectorAll("[data-a11y-button]");
   var a11yContent = document.querySelectorAll("[data-a11y-content]");
   var a11yButtonName = "a11y-button";
+  var a11yContentName = "a11y-content";
+
+  // For each button...
 
   for (var i = 0; i < a11yButton.length; i++) {
 
     var a11yButtonNode = a11yButton[i].nodeName;
+    var a11yTarget = a11yButton[i].dataset.a11yTarget;
+    var a11yExistingClass = a11yButton[i].className.trim();
 
-    // No need to apply an extra div in these cases, so let's not...
+    // See what type of element it is. If it's a button already, then enhance it...
 
-    if(a11yButtonNode === "BUTTON" || a11yButtonNode === "DIV" ) {
+    if(a11yButtonNode === "BUTTON") {
 
       a11yButton[i].setAttribute("aria-expanded", "false");
-      a11yButton[i].className = a11yButtonName;
+      a11yButton[i].setAttribute("aria-controls", a11yTarget);
+      a11yButton[i].classList.add(a11yButtonName);
 
-    // We never want to use link to toggle hidden content...
+    // We never want to use a link to toggle hidden content. Links take us to destinations, while buttons do things. 
 
     } else if(a11yButton[i].nodeName === "A") {
 
@@ -281,7 +292,17 @@
 
       newButton.innerHTML = oldButton.textContent;
       newButton.setAttribute("aria-expanded", "false");
-      newButton.className = a11yButtonName;
+      newButton.setAttribute("aria-controls", a11yTarget);
+
+      // Carry over existing classes
+      
+      if(a11yExistingClass !== null) {
+
+        newButton.className = a11yExistingClass;
+
+      } 
+
+      newButton.classList.add(a11yButtonName);
 
       // Replace oldButton with newButton
 
@@ -289,47 +310,51 @@
 
     } else {
 
-      var a11yPress = document.createElement("div");
-      a11yPress.setAttribute("aria-expanded", "false");
-      a11yPress.className = a11yButtonName;
-      a11yPress.setAttribute("role", "button");
-      a11yPress.setAttribute("tabindex", 0);
+      var oldButton = a11yButton[i];
+      var newButton = document.createElement("button");
 
-      // Insert wrapper before element in the DOM tree
+      newButton.innerHTML = oldButton.textContent;
+      newButton.setAttribute("aria-expanded", "false");
+      newButton.setAttribute("aria-controls", a11yTarget);
+      newButton.classList.add(a11yButtonName);
 
-      a11yButton[i].parentNode.insertBefore(a11yPress, a11yButton[i]);
-
-      // Move element into the wrapper
-
-      a11yPress.appendChild(a11yButton[i]);
+      oldButton.innerHTML = "";
+      oldButton.appendChild(newButton)
 
     }
 
+    // Remove these attributes from parent element. We don't want them used as hooks.
+
+    a11yButton[i].removeAttribute("data-a11y-button");
+    a11yButton[i].removeAttribute("data-a11y-target");
+
   }
 
-  // Get all newly created or class applied buttons...
+  // Add class to each content div. 
+
+  for (var i = 0; i < a11yContent.length; i++) {
+
+    a11yContent[i].classList.add(a11yContentName);
+
+    // Remove attribute from parent element. We don't want them used as hooks.
+
+    a11yContent[i].removeAttribute("data-a11y-content");
+
+  }
+
+  var a11yContainer = document.getElementsByClassName(a11yContentName);
+
+  // Loop through all newly created buttons and apply event(s)
 
   var a11yPush = document.getElementsByClassName(a11yButtonName);
 
   for (var i = 0; i < a11yPush.length; i++) {
 
-    a11yPush[i].addEventListener("click", function() {
+    a11yPush[i].addEventListener("click", function(e) {
 
       simpleToggle(this);
 
-    });
-
-    a11yPush[i].addEventListener("keydown", function(e) {
-
-      var code = e.which;
-
-      if((code === 32) || (code === 13)){
-
-        simpleToggle(this);
-
-        e.preventDefault();
-
-      }
+      e.preventDefault();
 
     });
 
@@ -340,31 +365,30 @@
     // Note: We are setting ARIA to indicate to screen readers when navigation is expanded.
     // We set this on the element being accessed (and not the element we are revealing - a common mistake).
 
+    var targetElement = document.getElementById(obj.getAttribute("aria-controls"));
+
     if(obj.getAttribute("aria-expanded") === "true") {
 
-      // Set expanded to false
-
-      obj.setAttribute("aria-expanded", "false");
-
-    } else {
+      // Set button and content to close
 
       closeSimpleToggle();
 
-      // Set expanded to true
+    } else {
+
+      // Set button and content to close
+
+      closeSimpleToggle();
+
+      // Set button and content to open
 
       obj.setAttribute("aria-expanded", "true");
-
-      /* if (obj.hasAttribute("data-a11y-target")) {
-
-        var targetElement = document.getElementById(obj.dataset.a11yTarget);
-
-        targetElement.className = "active";
-        targetElement.setAttribute("tabindex", -1);
-        targetElement.focus();
-
-      } */
+      targetElement.classList.add("active");
+      targetElement.setAttribute("tabindex", -1);
+      targetElement.focus();
 
     }
+
+    // Google Analytics
 
     if (typeof ga == "function") {
 
@@ -374,9 +398,11 @@
 
   }
 
-  // Reset ARIA to false on any currenty active items that may be open (we only desire one section open at a time so as not to obstruct anything that may be adjacent to element)
+  // Reset all active items that may be open (we only desire one section open at a time so as not to obstruct anything that may be adjacent to element)
 
   function closeSimpleToggle() {
+
+    // Buttons
 
     for (var i = 0; i < a11yPush.length; i++) {
 
@@ -384,17 +410,18 @@
 
     }
 
-    /* var test = document.getElementsByClassName("active");
+    // Content
 
-    for (var x = 0; x < test.length; x++) {
+    for (var x = 0; x < a11yContainer.length; x++) {
 
-      test[x].classList.remove("active");
+      a11yContainer[x].classList.remove("active");
+      a11yContainer[x].removeAttribute("tabindex");
 
-    } */
+    }
 
   }
 
-  // Manage all Escape Key events here
+  // Escape Key event(s) here
 
   document.onkeydown = function(e) {
 
