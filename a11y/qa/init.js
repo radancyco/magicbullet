@@ -153,84 +153,64 @@
 
   saveJobButton(); // Initial Page Load
 
-  $(document).ajaxStop(function() {
+  function miscA11yFixes() {
 
-    // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
-
-  	$("#applied-filters").removeAttr("aria-hidden aria-expanded");
-
-    noFormPagination();
-
-    fixDisabledButton();
-
-    saveJobButton();
+    // A11y Form Fixes
 
     // Issue: Remove aria-required from p element (it should not exist on this element) and various other elements.
 
-	  $(".data-form .form-field.required, .form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea").removeAttr("aria-required");
+    $(".data-form .form-field.required, .form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea").removeAttr("aria-required");
 
-  });
+    // Required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
 
-  // Sometime we can only do things after TB has finished (slowly) loading it's portion of the DOM.
+    $(".data-form input[required='required'], .data-form select[required='required'], .data-form textarea[required='required']").prop("required", true);
 
-	setTimeout(function(){
+    // Checkboxes missing due to reset above, so let's add them back
 
-	  // A11y Form Fixes
+    $("input[type='checkbox'][aria-required='true']").prop("required", true).removeAttr("aria-required");
 
-    // Issue: Remove aria-required from p element (it should not exist on this element) and various other elements.
+    // Issue: Remove "autocomplete" from select element.
 
-	  $(".data-form .form-field.required, .form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea").removeAttr("aria-required");
+    $(".data-form select").removeAttr("autocomplete");
 
-	  // Required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
+    // Issue: Since input element is "valid", it requires no aria-describedy attribute, since there is no validation message to ever bind it to.
 
-		$(".data-form input[required='required'], .data-form select[required='required'], .data-form textarea[required='required']").prop("required", true);
+    $(".valid").removeAttr("aria-describedby");
 
-		// Checkboxes missing due to reset above, so let's add them back
+    // Issue: Clutter, remove empty instruction-text spans
 
-		$("input[type='checkbox'][aria-required='true']").prop("required", true).removeAttr("aria-required");
-
-	  // Issue: Remove "autocomplete" from select element.
-
-	  $(".data-form select").removeAttr("autocomplete");
-
-	  // Issue: Since input element is "valid", it requires no aria-describedy attribute, since there is no validation message to ever bind it to.
-
-	  $(".valid").removeAttr("aria-describedby");
-
-	  // Issue: Clutter, remove empty instruction-text spans
-
-		$(".instruction-text").each(function() {
+    $(".instruction-text").each(function() {
 
       if ($(this).is(":empty")){
 
-  		    $(this).remove();
+          $(this).remove();
 
       }
 
     });
 
-	  // Issue: Clutter, remove unused elements from fields that are not required.
+    // Issue: Clutter, remove unused elements from fields that are not required.
 
-	  $(".form-field:not(.required").each(function() {
+    $(".form-field:not(.required").each(function() {
 
       $(this).find(".field-validation-valid").remove();
 
-		});
+    });
 
-		// Issue: Remove inline style on honeypot field and use hidden attribute instead
+    // Issue: Remove inline style on honeypot field and use hidden attribute instead
 
-		$(".form-field.confirm-email").prop("hidden", true).removeAttr("aria-hidden style");
+    $(".form-field.confirm-email").prop("hidden", true).removeAttr("aria-hidden style");
 
-		// Issue: Remove aria-hidden from honeypot label and input. The parent element should hide this from all assistive tech.
-		// Note: Not CSS dependent, so fields will always be hidden.
+    // Issue: Remove aria-hidden from honeypot label and input. The parent element should hide this from all assistive tech.
+    // Note: Not CSS dependent, so fields will always be hidden.
 
-		$(".form-field.confirm-email label, .form-field.confirm-email input").removeAttr("aria-hidden");
+    $(".form-field.confirm-email label, .form-field.confirm-email input").removeAttr("aria-hidden");
 
-		// Issue: Remove Role from field-validation-error (it's really not needed)
+    // Issue: Remove Role from field-validation-error (it's really not needed)
 
-		$(".field-validation-valid").removeAttr("role");
+    $(".field-validation-valid").removeAttr("role");
 
-		// Issue: The Job Alerts upload includes an aria-describedby with no associated ID when no Field Instructions are included.
+    // Issue: The Job Alerts upload includes an aria-describedby with no associated ID when no Field Instructions are included.
 
     if(!$(".form-field input[name='Resume']").prev(".instruction-text").length) {
 
@@ -257,6 +237,30 @@
     // Add title to spinner
 
     $(".goog-te-spinner").append("<title>Spinner</title>");
+
+    // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
+
+    $("#applied-filters").removeAttr("aria-hidden aria-expanded");
+
+  }
+
+  $(document).ajaxStop(function() {
+
+    noFormPagination();
+
+    fixDisabledButton();
+
+    saveJobButton();
+
+    miscA11yFixes();
+
+  });
+
+  // Sometime we can only do things after TB has finished (slowly) loading it's portion of the DOM.
+
+	setTimeout(function(){
+
+    miscA11yFixes();
 
   }, 1000);
 
