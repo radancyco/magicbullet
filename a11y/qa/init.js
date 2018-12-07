@@ -165,6 +165,11 @@
 
     saveJobButton();
 
+    // Issue: Remove aria-required from p element (it should not exist on this element) and various other elements.
+
+	  $(".data-form .form-field.required, .form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea").removeAttr("aria-required");
+
+
   });
 
   // Sometime we can only do things after TB has finished (slowly) loading it's portion of the DOM.
@@ -173,9 +178,6 @@
 
 	  // A11y Form Fixes
 
-		// Issue: Remove aria-required from p element (it should not exist on this element) and various other elements.
-
-	  //$(".data-form .form-field.required, .form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea").removeAttr("aria-required");
 
 	  // Required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
 
