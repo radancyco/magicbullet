@@ -242,7 +242,7 @@
 
     var ResumeRemoveTxt = $(".form-field input[name='Resume']").next(".file-remove").text();
 
-    // Now replace with a button 
+    // Now replace with a button
 
     $(".form-field input[name='Resume']").next(".file-remove").replaceWith("<button aria-hidden='true' class='file-remove'>" + ResumeRemoveTxt + "</button>");
 
@@ -254,7 +254,7 @@
 
     $(".goog-te-spinner").append("<title>Spinner</title>");
 
-  }, 1000);
+  }, 3000);
 
   // ++++++ Common Functions ++++++
 
@@ -281,7 +281,7 @@
       a11yButton[i].setAttribute("aria-controls", a11yTarget);
       a11yButton[i].classList.add(a11yButtonName);
 
-    // We never want to use a link to toggle hidden content. Links take us to destinations, while buttons do things. 
+    // We never want to use a link to toggle hidden content. Links take us to destinations, while buttons do things.
 
     } else if(a11yButton[i].nodeName === "A") {
 
@@ -295,12 +295,12 @@
       newButton.setAttribute("aria-controls", a11yTarget);
 
       // Carry over existing classes
-      
+
       if(a11yExistingClass !== null) {
 
         newButton.className = a11yExistingClass;
 
-      } 
+      }
 
       newButton.classList.add(a11yButtonName);
 
@@ -330,7 +330,7 @@
 
   }
 
-  // Add class to each content div. 
+  // Add class to each content div.
 
   for (var i = 0; i < a11yContent.length; i++) {
 
