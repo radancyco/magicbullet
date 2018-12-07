@@ -256,7 +256,7 @@
 
     $(".goog-te-spinner").append("<title>Spinner</title>");
 
-  }, 3000);
+  }, 1000);
 
   // ++++++ Common Functions ++++++
 
