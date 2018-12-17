@@ -18,6 +18,9 @@
   // Get data-gdpr attribute, if present.
 
   var gdprScript = magicBulletScript.getAttribute("data-gdpr");
+  
+  // Get data-location-aware, if present.
+  var locationAware = magicBulletScript.getAttribute("data-location-aware");
 
   // Get data-a11y attribute, if present.
 
@@ -40,50 +43,39 @@
 
   if (gdprScript === "true") {
 
-    // Add GDPR CSS
-
-    var gdprCSS = document.createElement("link");
-    gdprCSS.setAttribute("id", "gdpr-css");
-    gdprCSS.setAttribute("rel", "stylesheet");
-
-    // Create and add GDPR script
-
-    var gdprExec = document.createElement("script");
-    gdprExec.setAttribute("id", "gdpr-notice");
-
-    // Run script locally when these domains present...
-    // Feel free to add your own IP address.
-
-    if (localPaths) {
-
-      gdprCSS.setAttribute("href", "/gdpr/init.css");
-      gdprExec.setAttribute("src", "/gdpr/init.js");
-
+    if(locationAware  === "true") {
+    
+      //TB Country ID for Europe countries need to list full here
+    
+      //Albania,Armenia,Austria,Belarus,Bulgaria,Croatia,Cyprus,Czech Republic,Denmark,Finland,France,Georgia,Germany,Greece,Hungary,Iceland,Ireland,Italy,Kazakhstan,Kosovo,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Romania,Russia,Serbia,Slovakia,Slovenia,Spain,Sweden,Switzerland,Turkey,Ukraine,UK
+    
+      var locationIDEurope = '783754,174982,2782113,630336,732800,3202326,146669,3077311,2623032,660013,3017382,614540,2921044,390903,719819,2629691,2963597,3175395,1522867,831053,458258,597427,2960313,2562770,2750405,3144096,798544,2264397,798549,2017370,6290252,3057568,3190538,2510769,2661886,2658434,298795,690791,2635167';
+    
+      postAjax(function(dataLoc) {
+      
+        var location = dataLoc.l;
+        var locationID = dataLoc.lp.split('-')[0];
+        
+        console.log("location = " + location);
+        console.log("locationId = " + locationID);
+      
+        if(locationIDEurope.indexOf(locationID)!=-1) {
+        
+          //Show GDPR only for Europe
+        
+          console.log("showGDPR");
+          showGDPR();
+      
+        }
+    
+      });
+    
     } else {
-
-      // Run QA version on following domains only...
-
-      if(testPaths) {
-
-        gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/css/");
-        gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/");
-
-      } else {
-
-        // ... else, run the production version.
-
-        gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/css/");
-        gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/");
-
-      }
-
+    
+      showGDPR();
+  
     }
-
-    // Append CSS and Script to DOM.
-
-    document.head.appendChild(gdprCSS);
-    document.body.appendChild(gdprExec);
-
+  
   }
 
   // Execute A11y
@@ -126,4 +118,76 @@
 
   }
 
+  function showGDPR() {
+
+    // Add GDPR CSS
+  
+    var gdprCSS = document.createElement("link");
+    gdprCSS.setAttribute("id", "gdpr-css");
+    gdprCSS.setAttribute("rel", "stylesheet");
+
+    // Create and add GDPR script
+
+    var gdprExec = document.createElement("script");
+    gdprExec.setAttribute("id", "gdpr-notice");
+
+    // Run script locally when these domains present...
+    // Feel free to add your own IP address.
+
+    if (localPaths) {
+
+      gdprCSS.setAttribute("href", "/gdpr/init.css");
+      gdprExec.setAttribute("src", "/gdpr/init.js");
+
+    } else {
+
+      // Run QA version on following domains only...
+
+      if(testPaths) {
+
+        gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/css/");
+        gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/");
+
+      } else {
+
+        // ... else, run the production version.
+
+        gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/css/");
+        gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/");
+
+      }
+
+    }
+
+    // Append CSS and Script to DOM.
+
+    document.head.appendChild(gdprCSS);
+    document.body.appendChild(gdprExec);
+  
+  }
+
+  function postAjax(success) {
+    
+    //To get Location data from Server
+
+    var params = 'lat=&lon=&IsUsingGeolocation=true&HasHtml5GeoError=false&GeoType=ipambientonly';
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+    
+    xhr.open('POST', "/search-jobs/SetSearchRequestGeoLocation");
+    xhr.onreadystatechange = function() {
+      
+      if (xhr.readyState>3 && xhr.status==200) { 
+        //Send data to call back funtion
+        success(JSON.parse(xhr.responseText)); 
+      
+      }
+    
+    };
+    
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(params);
+
+  }
+  
 })();
