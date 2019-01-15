@@ -20,6 +20,7 @@
   var gdprScript = magicBulletScript.getAttribute("data-gdpr");
   
   // Get data-location-aware, if present.
+
   var locationAware = magicBulletScript.getAttribute("data-location-aware");
 
   // Get data-a11y attribute, if present.
@@ -64,6 +65,7 @@
           //Show GDPR only for Europe
         
           console.log("showGDPR");
+
           showGDPR();
       
         }
