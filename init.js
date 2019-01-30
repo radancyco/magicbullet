@@ -20,7 +20,6 @@
   var gdprScript = magicBulletScript.getAttribute("data-gdpr");
   
   // Get data-location-aware, if present.
-
   var locationAware = magicBulletScript.getAttribute("data-location-aware");
 
   // Get data-a11y attribute, if present.
@@ -48,9 +47,9 @@
     
       //TB Country ID for Europe countries need to list full here
     
-      //Albania,Armenia,Austria,Belarus,Bulgaria,Croatia,Cyprus,Czech Republic,Denmark,Finland,France,Georgia,Germany,Greece,Hungary,Iceland,Ireland,Italy,Kazakhstan,Kosovo,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Romania,Russia,Serbia,Slovakia,Slovenia,Spain,Sweden,Switzerland,Turkey,Ukraine,UK
+      //Albania,Armenia,Austria,Belarus,Belgium,Bulgaria,Croatia,Cyprus,Czech Republic,Denmark,Finland,France,Georgia,Germany,Greece,Hungary,Iceland,Ireland,Italy,Kazakhstan,Kosovo,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Romania,Russia,Serbia,Slovakia,Slovenia,Spain,Sweden,Switzerland,Turkey,Ukraine,UK
     
-      var locationIDEurope = '783754,174982,2782113,630336,732800,3202326,146669,3077311,2623032,660013,3017382,614540,2921044,390903,719819,2629691,2963597,3175395,1522867,831053,458258,597427,2960313,2562770,2750405,3144096,798544,2264397,798549,2017370,6290252,3057568,3190538,2510769,2661886,2658434,298795,690791,2635167';
+      var locationIDEurope = '783754,174982,2782113,630336,2802361,732800,3202326,146669,3077311,2623032,660013,3017382,614540,2921044,390903,719819,2629691,2963597,3175395,1522867,831053,458258,597427,2960313,2562770,2750405,3144096,798544,2264397,798549,2017370,6290252,3057568,3190538,2510769,2661886,2658434,298795,690791,2635167';
     
       postAjax(function(dataLoc) {
       
@@ -65,7 +64,6 @@
           //Show GDPR only for Europe
         
           console.log("showGDPR");
-
           showGDPR();
       
         }

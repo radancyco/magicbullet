@@ -51,7 +51,7 @@
 
   // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0007
 
-  $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").remove();
+  $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").removeAttr("tabindex");
 
   // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0008
 

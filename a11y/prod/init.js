@@ -51,7 +51,7 @@
 
   // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0007
 
-  $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").remove();
+  $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").removeAttr("tabindex");
 
   // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0008
 
@@ -153,23 +153,7 @@
 
   saveJobButton(); // Initial Page Load
 
-  $(document).ajaxStop(function() {
-
-    // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
-
-    $("#applied-filters").removeAttr("aria-hidden aria-expanded");
-
-    noFormPagination();
-
-    fixDisabledButton();
-
-    saveJobButton();
-
-  });
-
-  // Sometime we can only do things after TB has finished (slowly) loading it's portion of the DOM.
-
-  setTimeout(function(){
+  function miscA11yFixes() {
 
     // A11y Form Fixes
 
@@ -242,7 +226,7 @@
 
     var ResumeRemoveTxt = $(".form-field input[name='Resume']").next(".file-remove").text();
 
-    // Now replace with a button 
+    // Now replace with a button
 
     $(".form-field input[name='Resume']").next(".file-remove").replaceWith("<button aria-hidden='true' class='file-remove'>" + ResumeRemoveTxt + "</button>");
 
@@ -253,6 +237,30 @@
     // Add title to spinner
 
     $(".goog-te-spinner").append("<title>Spinner</title>");
+
+    // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
+
+    $("#applied-filters").removeAttr("aria-hidden aria-expanded");
+
+  }
+
+  $(document).ajaxStop(function() {
+
+    noFormPagination();
+
+    fixDisabledButton();
+
+    saveJobButton();
+
+    miscA11yFixes();
+
+  });
+
+  // Sometime we can only do things after TB has finished (slowly) loading it's portion of the DOM.
+
+  setTimeout(function(){
+
+    miscA11yFixes();
 
   }, 1000);
 
@@ -281,7 +289,7 @@
       a11yButton[i].setAttribute("aria-controls", a11yTarget);
       a11yButton[i].classList.add(a11yButtonName);
 
-    // We never want to use a link to toggle hidden content. Links take us to destinations, while buttons do things. 
+    // We never want to use a link to toggle hidden content. Links take us to destinations, while buttons do things.
 
     } else if(a11yButton[i].nodeName === "A") {
 
@@ -295,12 +303,12 @@
       newButton.setAttribute("aria-controls", a11yTarget);
 
       // Carry over existing classes
-      
+
       if(a11yExistingClass !== null) {
 
         newButton.className = a11yExistingClass;
 
-      } 
+      }
 
       newButton.classList.add(a11yButtonName);
 
@@ -330,7 +338,7 @@
 
   }
 
-  // Add class to each content div. 
+  // Add class to each content div.
 
   for (var i = 0; i < a11yContent.length; i++) {
 
