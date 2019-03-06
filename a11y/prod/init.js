@@ -13,11 +13,11 @@
 
   // TalentBrew Accessibility Fixes
 
-  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0001
+  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0001
 
   $(".expandable-parent").attr("aria-expanded", "false").next().removeAttr("aria-expanded");
 
-  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0002
+  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0002
 
   $(".expandable-parent").on("click", function() {
 
@@ -31,35 +31,35 @@
 
   });
 
-  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0003
+  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0003
 
   $("img:not([alt])").attr("alt", "");
 
-  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0004
+  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0004
 
   $("form.search-form").attr("role", "search");
 
-  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0005
+  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0005
 
   $(".job-map-nearby a").removeAttr("target");
 
-  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0006
+  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0006
 
   $(".social-share-items a").append(" <span class='wai'>(Opens in New Window)</span>");
 
   // Job Description Garbage
 
-  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0007
+  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0007
 
   $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").removeAttr("tabindex");
 
-  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0008
+  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0008
 
   $(".ats-description table").attr("role", "presentation");
 
   // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
 
-  // https://tmpworldwide.github.io/tmp-magic-bullet/a11y/#issue-0009
+  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0009
 
   $("input[type=checkbox]").removeAttr("autocomplete");
 

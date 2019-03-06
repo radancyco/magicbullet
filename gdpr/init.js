@@ -3,7 +3,7 @@
   General Data Protection Regulation (GDPR) Notice
   Developer: Michael "Spell" Spellacy, Email: michael.spellacy@tmp.com, Twitter: @spellacy, GitHub: michaelspellacy
 
-*/ 
+*/
 
 (function() {
 
@@ -366,7 +366,7 @@
 
   if (gdprPolicyURL === null && gdprClientName === null) {
 
-    var gdprMessage = "A consent and privacy message cannot be generated until a client name and privacy policy URL have been provided. Please see <a href='https://tmpworldwide.github.io/tmp-magic-bullet/gdpr/#gdpr-mandatory'>mandatory requirements</a> for this script to run.";
+    var gdprMessage = "A consent and privacy message cannot be generated until a client name and privacy policy URL have been provided. Please see <a href='https://tmpworldwide.dev/tmp-magic-bullet/gdpr/#gdpr-mandatory'>mandatory requirements</a> for this script to run.";
 
   }
 
