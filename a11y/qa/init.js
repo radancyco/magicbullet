@@ -92,8 +92,6 @@
 
     var pageStatus = pageStatusText.trim();
 
-    console.log(pageStatus);
-
     // While we are in here, let's indicate to screen readers what page they are on - cool!
 
     if (pageStatus !== "undefined"){
