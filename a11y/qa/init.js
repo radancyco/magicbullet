@@ -92,7 +92,7 @@
 
     // While we are in here, let's indicate to screen readers what page they are on - cool!
 
-    if (!pageStatus){
+    if (pageStatus !== null || pageStatus !== "undefined"){
 
       $("#search-results").attr("aria-label", pageStatus);
 
