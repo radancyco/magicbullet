@@ -23,7 +23,7 @@
 
     $(this).attr('aria-expanded', function (i, attr) {
 
-      return attr == 'true' ? 'false' : 'true'
+    	return attr == 'true' ? 'false' : 'true'
 
     });
 
@@ -73,7 +73,6 @@
 
   });
 
-
   // Issue: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
   function fixDisabledButton() {
@@ -89,11 +88,17 @@
 
   function noFormPagination() {
 
-    var pageStatus = $(".pagination-current-label span").text() + " " + $(".pagination-current").val() + " " + $(".pagination-total-pages").text();
+    var pageStatusText = $(".pagination-current-label span").text() + " " + $(".pagination-current").val() + " " + $(".pagination-total-pages").text();
+
+    var pageStatus = pageStatusText.trim();
 
     // While we are in here, let's indicate to screen readers what page they are on - cool!
 
-    $("#search-results").attr("aria-label", pageStatus);
+    if (pageStatus !== "undefined"){
+
+      $("#search-results").attr("aria-label", pageStatus);
+
+    }
 
     if($(".pagination-no-form").length) {
 
@@ -153,6 +158,60 @@
 
   saveJobButton(); // Initial Page Load
 
+  // Issue: Focus is lost when "Filtered by" button is clicked
+
+  function setFilterButtonFocus() {
+
+    $(".filter-button").on("click", function() {
+
+      var selectedButtonIndex = $(".filter-button").index(this);
+
+      setTimeout(function(){
+
+        var remainingButtonIndex = $(".filter-button").length;
+
+        // console.log(selectedButtonIndex)
+
+        if(remainingButtonIndex) {
+
+          if(selectedButtonIndex >= remainingButtonIndex) {
+
+            $(".filter-button").last().focus();
+
+          } else {
+
+            $(".filter-button").eq(selectedButtonIndex).focus();
+
+          }
+
+        } else {
+
+          $("#search-results-list ul a:first, #search-results-list table a:first").focus();
+
+        }
+
+      }, 1000);
+
+    });
+
+  }
+
+  setFilterButtonFocus(); // Initial Page Load
+
+  // Issue: Filter Buttons could be more firendly to screen readers
+
+  function fixFilterButton() {
+
+    $("button.filter-button").each(function() {
+
+      $(this).attr("aria-label", $(this).text() + " (press enter or space bar to remove filter)");
+
+    });
+
+  }
+
+  fixFilterButton(); // Initial Page Load
+
   function miscA11yFixes() {
 
     // A11y Form Fixes
@@ -191,7 +250,7 @@
 
     // Issue: Clutter, remove unused elements from fields that are not required.
 
-    $(".form-field:not(.required").each(function() {
+    $(".form-field:not(.required)").each(function() {
 
       $(this).find(".field-validation-valid").remove();
 
@@ -242,6 +301,19 @@
 
     $("#applied-filters").removeAttr("aria-hidden aria-expanded");
 
+    // Issue: Remove role="status" from h1 and h2 elements
+
+    $("h1, h2").removeAttr("role");
+
+    // Issue: Remove tabindex from search-filter element. Only interactive elements should receive focus.
+
+    $("#search-filters").removeAttr("tabindex", 0);
+
+    // BUG: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
+    // For now, a hacky fix...
+
+    $("#search-results").attr("tabindex", -1);
+
   }
 
   $(document).ajaxStop(function() {
@@ -252,13 +324,17 @@
 
     saveJobButton();
 
+    setFilterButtonFocus();
+
+    fixFilterButton();
+
     miscA11yFixes();
 
   });
 
   // Sometime we can only do things after TB has finished (slowly) loading it's portion of the DOM.
 
-  setTimeout(function(){
+	setTimeout(function(){
 
     miscA11yFixes();
 
