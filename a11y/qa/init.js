@@ -73,7 +73,6 @@
 
   });
 
-
   // Issue: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
   function fixDisabledButton() {
@@ -152,6 +151,46 @@
   }
 
   saveJobButton(); // Initial Page Load
+
+  // Issue: Focus is lost when "Filtered by" button is clicked
+
+  function setFilterButtonFocus() {
+
+    $(".filter-button").on("click", function() {
+
+      var selectedButtonIndex = $(".filter-button").index(this);
+
+      setTimeout(function(){
+
+        var remainingButtonIndex = $(".filter-button").length;
+
+        // console.log(selectedButtonIndex)
+
+        if(remainingButtonIndex) {
+
+          if(selectedButtonIndex >= remainingButtonIndex) {
+
+            $(".filter-button").last().focus();
+
+          } else {
+
+            $(".filter-button").eq(selectedButtonIndex).focus();
+
+          }
+
+        } else {
+
+          $("#search-results-list ul a:first").focus();
+
+        }
+
+      }, 1000);
+
+    });
+
+  }
+
+  setFilterButtonFocus(); // Initial Page Load
 
   function miscA11yFixes() {
 
@@ -251,6 +290,8 @@
     fixDisabledButton();
 
     saveJobButton();
+
+    setFilterButtonFocus();
 
     miscA11yFixes();
 
