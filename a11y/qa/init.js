@@ -198,6 +198,20 @@
 
   setFilterButtonFocus(); // Initial Page Load
 
+  // Issue: Filter Buttons could be more firendly to screen readers
+
+  function fixFilterButton() {
+
+    $("button.filter-buttons").each(function() {
+
+      $(this).attr("aria-label", $(this).text() + "(remove)");
+
+    });
+
+  }
+
+  fixFilterButton(); // Initial Page Load
+
   function miscA11yFixes() {
 
     // A11y Form Fixes
@@ -236,7 +250,7 @@
 
     // Issue: Clutter, remove unused elements from fields that are not required.
 
-    $(".form-field:not(.required").each(function() {
+    $(".form-field:not(.required)").each(function() {
 
       $(this).find(".field-validation-valid").remove();
 
@@ -300,6 +314,10 @@
 
     $("#search-results").attr("tabindex", -1);
 
+    // Issue: Filter buttons are not very friendly when it comes to Accessibility
+
+    $("button.filter-button").append(" <span class='wai visually-hidden'>(press enter or space bar key to remove filter)</span>");
+
   }
 
   $(document).ajaxStop(function() {
@@ -311,6 +329,8 @@
     saveJobButton();
 
     setFilterButtonFocus();
+
+    fixFilterButton();
 
     miscA11yFixes();
 
