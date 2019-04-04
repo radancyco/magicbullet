@@ -281,6 +281,10 @@
 
     $("#applied-filters").removeAttr("aria-hidden aria-expanded");
 
+    // Issue: Remove role="status" from h1 and h2 elements
+
+    $("h1, h2").removeAttr("role");
+
   }
 
   $(document).ajaxStop(function() {
