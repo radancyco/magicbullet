@@ -285,6 +285,10 @@
 
     $("h1, h2").removeAttr("role");
 
+    // Issue: Remove tabindex from search-results and search-filter elements. Only interactive elements should receive focus.
+
+    $("#search-filters, #search-results").removeAttr("tabindex", "0");
+
   }
 
   $(document).ajaxStop(function() {
