@@ -186,7 +186,7 @@
 
         } else {
 
-          $("#search-results-list ul a:first").focus();
+          $("#search-results-list ul a:first, #search-results-list table a:first").focus();
 
         }
 
