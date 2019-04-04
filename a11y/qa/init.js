@@ -314,10 +314,6 @@
 
     $("#search-results").attr("tabindex", -1);
 
-    // Issue: Filter buttons are not very friendly when it comes to Accessibility
-
-    $("button.filter-button").append(" <span class='wai visually-hidden'>(press enter or space bar key to remove filter)</span>");
-
   }
 
   $(document).ajaxStop(function() {
