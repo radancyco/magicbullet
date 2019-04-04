@@ -202,9 +202,9 @@
 
   function fixFilterButton() {
 
-    $("button.filter-buttons").each(function() {
+    $("button.filter-button").each(function() {
 
-      $(this).attr("aria-label", $(this).text() + "(remove)");
+      $(this).attr("aria-label", $(this).text() + " (press enter or space bar to remove filter)");
 
     });
 
