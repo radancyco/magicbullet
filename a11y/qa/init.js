@@ -92,9 +92,11 @@
 
     var pageStatus = pageStatusText.trim();
 
+    console.log(pageStatus);
+
     // While we are in here, let's indicate to screen readers what page they are on - cool!
 
-    if (pageStatus !== null || pageStatus !== "undefined"){
+    if (pageStatus !== "undefined"){
 
       $("#search-results").attr("aria-label", pageStatus);
 
