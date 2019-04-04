@@ -92,7 +92,11 @@
 
     // While we are in here, let's indicate to screen readers what page they are on - cool!
 
-    $("#search-results").attr("aria-label", pageStatus);
+    if (pageStatus !== null || !== "undefined"){
+
+      $("#search-results").attr("aria-label", pageStatus);
+
+    }
 
     if($(".pagination-no-form").length) {
 
