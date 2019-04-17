@@ -469,6 +469,21 @@
 
       }
 
+      // Tracking
+
+      gdprButton.setAttribute("data-custom-event", "true");
+      gdprButton.setAttribute("data-custom-category", "true");
+
+      if(gdprGACustomLabel !== null) {
+
+        gdprButton.setAttribute("data-custom-label", gdprGACustomLabel);
+
+      } else {
+
+        gdprButton.setAttribute("data-custom-label", "GDPR Accept Button");
+
+      }
+
       if (gdprPolicyURL !== null && gdprClientName !== null) {
 
         // Append Alert Button to Alert Policy
@@ -508,22 +523,6 @@
       gdprButton.onclick = function(){
 
         removeAlert();
-
-        // Client Custom Label
-
-        if (typeof ga == "function") {
-
-          if(gdprGACustomLabel !== null) {
-
-            ga("send", "event", "Custom Event", "Click", gdprGACustomLabel);
-
-          } else {
-
-            ga("send", "event", "Custom Event", "Click", "GDPR Accept Button");
-
-          }
-
-        }
 
         return false;
 
