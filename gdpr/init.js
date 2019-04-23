@@ -92,6 +92,8 @@
 
     }
 
+  }
+
     // If consent has been given, then set bannerDisplayed
 
     if(consentCapture !== null) {
@@ -100,7 +102,7 @@
 
     }
 
-  }
+
 
   // Remove Alert
 
