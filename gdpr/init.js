@@ -75,15 +75,16 @@
   // Upon entering the site, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
   // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
 
-  if (bannerDisplayed === null) {
 
-    setBanner();
+  if(gdprBannerPersist !== null) {
 
-  }
+    if (bannerDisplayed === null) {
 
-  // If bannerDisplayed exists and consent has NOT been set, then set consent when user visits another page.
+      setBanner();
 
-  if(gdprBannerPersist === null) {
+    }
+
+    // If bannerDisplayed exists and consent has NOT been set, then set consent when user visits another page.
 
     if(bannerDisplayed !== null && consentCapture === null) {
 
@@ -91,21 +92,13 @@
 
     }
 
-  } else {
+    // If consent has been given, then set bannerDisplayed
 
     if(consentCapture !== null) {
 
-      setConsent();
+      setBanner();
 
     }
-
-  }
-
-  // If consent has been given, then set bannerDisplayed
-
-  if(consentCapture !== null) {
-
-    setBanner();
 
   }
 
