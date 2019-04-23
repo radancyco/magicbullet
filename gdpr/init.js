@@ -29,6 +29,7 @@
   var gdprPolicyURL = magicBulletScript.getAttribute("data-gdpr-policy-url");
   var gdprTextAlign = magicBulletScript.getAttribute("data-gdpr-text-align");
   var gdprformBypass = magicBulletScript.getAttribute("data-gdpr-form-bypass");
+  var gdprformOmit = magicBulletScript.getAttribute("data-gdpr-form-omit");
   var gdprzIndex = magicBulletScript.getAttribute("data-gdpr-z-index");
 
   // Targeted TalentBrew Elements
@@ -556,43 +557,47 @@
 
   // If form bypass is true...
 
-  if (gdprformBypass === "true") {
+  if (gdprformOmit !== null) {
 
-    // Append form message.
+    if (gdprformBypass === "true") {
 
-    if (gdprFormMessage) {
+      // Append form message.
 
-      // Append to each form on page...
+      if (gdprFormMessage) {
 
-      for (var i = 0; i < gdprFormMessage.length; i++) {
+        // Append to each form on page...
 
-        if (gdprClientName !== null) {
+        for (var i = 0; i < gdprFormMessage.length; i++) {
 
-          gdprFormMessage[i].innerHTML = gdprInlineMessage;
+          if (gdprClientName !== null) {
+
+            gdprFormMessage[i].innerHTML = gdprInlineMessage;
+
+          }
 
         }
 
       }
 
-    }
+    } else {
 
-  } else {
+      // Apply message above all submit buttons...
 
-    // Apply message above all submit buttons...
+      for (var x = 0; x < gdprDataFormSubmitBtn.length; x++) {
 
-    for (var x = 0; x < gdprDataFormSubmitBtn.length; x++) {
+        var gdprDynamicMessage = document.createElement("p");
 
-      var gdprDynamicMessage = document.createElement("p");
+        gdprDynamicMessage.className = "form-field gdpr-eu-tmp-notice";
 
-      gdprDynamicMessage.className = "form-field gdpr-eu-tmp-notice";
+        gdprDynamicMessage.innerHTML = gdprInlineMessage;
 
-      gdprDynamicMessage.innerHTML = gdprInlineMessage;
+        var dataFormSubmitBtn = gdprDataFormSubmitBtn[x]
 
-      var dataFormSubmitBtn = gdprDataFormSubmitBtn[x]
+        var dataFormParent = dataFormSubmitBtn.parentNode;
 
-      var dataFormParent = dataFormSubmitBtn.parentNode;
+        dataFormParent.insertBefore(gdprDynamicMessage, dataFormSubmitBtn);
 
-      dataFormParent.insertBefore(gdprDynamicMessage, dataFormSubmitBtn);
+      }
 
     }
 
