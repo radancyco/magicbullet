@@ -65,7 +65,7 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "BannerDisplayed=yes; Secure; expires=" + expDate + "; path=/";
+    document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; path=/";
 
   }
 
