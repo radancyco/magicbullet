@@ -145,7 +145,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
     <h3 id="gdpr-formatting">Visual Formatting</h3>
 
-    <p class="alert"><strong>Warning:</strong> Please do not attempt to override the banner notice with CSS or JavaScript at the <strong>implementation level</strong>. Local overrides may interfere with future formatting changes required within the GDPR script itself. If you run into any formatting issues that can't be solved with any available parameters the GDPR script offers, then please contact <a href="mailto:michael.spellacy@tmp.com?subject=GDPR%20Formatting%20Issue">Michael Spellacy</a> for assistance. The inline form message may be safetly manipulated with CSS.</p>
+    <p class="alert"><strong>Warning:</strong> Please do not attempt to override the banner notice with CSS or JavaScript at the <strong>implementation level</strong>. Local overrides may interfere with future formatting changes required within the GDPR script itself. If you run into any formatting issues that can't be solved with any available parameters the GDPR script offers, then please contact <a href="mailto:michael.spellacy@tmp.com?subject=GDPR%20Formatting%20Issue">Michael Spellacy</a> for assistance. The inline form message may be safely manipulated with CSS.</p>
 
     <p>The following parameter(s) can be used to apply basic formatting to the notice:</p>
 
@@ -255,6 +255,18 @@ document.body.appendChild(magicBullet);</code></pre>
 
     <div class="indent">
 
+      <h3 id="data-gdpr-explicit-consent">Explicit Consent</h3>
+
+      <p>If your site requires that consent to track and use cookies be <em>explicitly given</em>, then you may use this data attribute to accomplish that. Passing this data attribute a string value of "true" will override the default behavior, which is set to passive consent, an implied acceptance via the continued use of the website. The banner will now persist from page to page until the user <em>explicitly</em> clicks on the "Accept" button in the banner. This parameter is optional.</p>
+
+      <h4>HTML</h4>
+
+      <pre><code>data-gdpr-explicit-consent="true"</code></pre>
+
+      <h4>JavaScript</h4>
+
+      <pre><code>magicBullet.setAttribute("data-gdpr-explicit-consent", "true");</code></pre>
+
       <h3 id="data-gdpr-new-window">New Window</h3>
 
       <p>Passing this data attribute a value of "false" will disable the privacy policy link from opening in a new window. The default behavior is for all notice links to open in a new window. These visual cues will not appear when new windows are disabled. This parameter is optional.</p>
@@ -277,7 +289,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
       <h3 id="data-gdpr-custom-message">Custom Message</h3>
 
-      <p>Passing this data attribute a string value will override the default message. HTML may be be included. This parameter is optional.</p>
+      <p>Passing this data attribute a string value will override the default message. HTML may be included. This parameter is optional.</p>
 
       <h4>HTML</h4>
 
@@ -289,7 +301,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
       <h3 id="data-gdpr-custom-form-message">Custom Form Message</h3>
 
-      <p>Passing this data attribute a string value will override the default form message. HTML may be be included. This parameter is optional.</p>
+      <p>Passing this data attribute a string value will override the default form message. HTML may be included. This parameter is optional.</p>
 
       <h4>HTML</h4>
 
@@ -299,6 +311,17 @@ document.body.appendChild(magicBullet);</code></pre>
 
       <pre><code>magicBullet.setAttribute("data-gdpr-custom-form-message", "By submitting your information, you acknowledge that you have read our &lt;a href='/privacy/' target='_blank'&gt;candidate privacy policy&lt;/a&gt; and consent to receive email communication.");</code></pre>
 
+      <h3 id="data-gdpr-custom-form-message">Custom Form Message</h3>
+
+      <p>Passing this data attribute a string value will override the default form message. HTML may be included. This parameter is optional.</p>
+
+      <h4>HTML</h4>
+
+      <pre><code>data-gdpr-custom-form-message="By submitting your information, you acknowledge that you have read our &lt;a href='/privacy/' target='_blank'&gt;candidate privacy policy&lt;/a&gt; and consent to receive email communication."</code></pre>
+
+      <h4>JavaScript</h4>
+
+      <pre><code>magicBullet.setAttribute("data-gdpr-custom-form-message", "By submitting your information, you acknowledge that you have read our &lt;a href='/privacy/' target='_blank'&gt;candidate privacy policy&lt;/a&gt; and consent to receive email communication.");</code></pre>
 
     </div>
 
@@ -330,7 +353,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
       <p>Removing the default behavior means that you may need to manually insert the message into the desired position withn the form. To do this, simply place the following markup wherever you would like the message to appear. The surrounding <code>p</code> tag can be replaced with a <code>span</code> or any other tag of your choosing, but please be sure to keep the <code>gdpr-eu-tmp-notice</code> class name in place, as the message will still be inserted into the tag, via JavaScript. The "form-feild" class may be removed, if needed.</p>
 
-      <p><strong>Note:</strong> CSS formatting may be safetly applied to this tag, as needed.</p>
+      <p><strong>Note:</strong> CSS formatting may be safely applied to this tag, as needed.</p>
 
 <pre><code>&lt;p class="form-field gdpr-eu-tmp-notice"&gt;&lt;/p&gt;</code></pre>
 

@@ -12,7 +12,6 @@
 
   // Data Attributes
 
-  var gdprBannerPersist = magicBulletScript.getAttribute("data-gdpr-banner-persist");
   var gdprButtonColor = magicBulletScript.getAttribute("data-gdpr-button-color");
   var gdprButtonColorText = magicBulletScript.getAttribute("data-gdpr-button-color-text");
   var gdprButtonText = magicBulletScript.getAttribute("data-gdpr-button-text");
@@ -20,6 +19,7 @@
   var gdprCookieManageURL = magicBulletScript.getAttribute("data-gdpr-cookie-mgr-url");
   var gdprCustomMessage = magicBulletScript.getAttribute("data-gdpr-custom-message");
   var gdprCustomFormMessage = magicBulletScript.getAttribute("data-gdpr-custom-form-message");
+  var gdprExplicitConsent = magicBulletScript.getAttribute("data-gdpr-explicit-consent");
   var gdprFontSize = magicBulletScript.getAttribute("data-gdpr-font-size");
   var gdprGACustomLabel = magicBulletScript.getAttribute("data-gdpr-ga-custom-label");
   var gdprLanguage =  magicBulletScript.getAttribute("data-gdpr-language");
@@ -72,11 +72,13 @@
   var bannerDisplayed = getCookie("BannerDisplayed");
   var consentCapture = getCookie("ConsentCapture");
 
-  // Upon entering the site, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
-  // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
+  // While the default behavior for the cookie is passive consent, there may be times where we want to explicitly have user click on "Accept"
+  // So we bypass default behavior by adding data-gdpr-explicit-consent
 
+  if(gdprExplicitConsent === null) {
 
-  if(gdprBannerPersist === null) {
+    // if explicit consent not needed, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
+    // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
 
     if (bannerDisplayed === null) {
 
@@ -94,15 +96,13 @@
 
   }
 
-    // If consent has been given, then set bannerDisplayed
+  // If consent has been given, then set bannerDisplayed
 
-    if(consentCapture !== null) {
+  if(consentCapture !== null) {
 
-      setBanner();
+    setBanner();
 
-    }
-
-
+  }
 
   // Remove Alert
 
