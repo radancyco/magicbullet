@@ -76,7 +76,7 @@
   // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
 
 
-  if(gdprBannerPersist !== null) {
+  if(gdprBannerPersist === null) {
 
     if (bannerDisplayed === null) {
 
