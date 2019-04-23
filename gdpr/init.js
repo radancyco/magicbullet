@@ -12,6 +12,7 @@
 
   // Data Attributes
 
+  var gdprBannerPersist = magicBulletScript.getAttribute("data-gdpr-banner-persist");
   var gdprButtonColor = magicBulletScript.getAttribute("data-gdpr-button-color");
   var gdprButtonColorText = magicBulletScript.getAttribute("data-gdpr-button-color-text");
   var gdprButtonText = magicBulletScript.getAttribute("data-gdpr-button-text");
@@ -82,9 +83,21 @@
 
   // If bannerDisplayed exists and consent has NOT been set, then set consent when user visits another page.
 
-  if(bannerDisplayed !== null && consentCapture === null) {
+  if(gdprBannerPersist === null) {
 
-    setConsent();
+    if(bannerDisplayed !== null && consentCapture === null) {
+
+      setConsent();
+
+    }
+
+  } else {
+
+    if(consentCapture !== null) {
+
+      setConsent();
+
+    }
 
   }
 
