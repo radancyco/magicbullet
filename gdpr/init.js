@@ -118,6 +118,12 @@
 
     setBanner();
 
+    // We need to always be sending variable to Data Layer on each page load, so let's grab that from ConsentCapture cookie
+
+    var userConsentedOn = Date.parse(consentCapture);
+
+    setDataLayer(userConsentedOn);
+
   }
 
   // Remove Alert
@@ -390,7 +396,7 @@
 
   if (gdprPolicyURL === null && gdprClientName === null) {
 
-    var gdprMessage = "A consent and privacy message cannot be generated until a client name and privacy policy URL have been provided. Please see <a href='https://tmpworldwide.dev/tmp-magic-bullet/gdpr/#gdpr-mandatory'>mandatory requirements</a> for this script to run.";
+    var gdprMessage = "A consent and privacy message cannot be generated until a client name and privacy policy URL have been provided. Please see <a href='https://tmpworldwide.dev/tmp-magic-bullet/gdpr/#gdpr-mandatory'>mandatory requirements</a> needed for this script to run.";
 
   }
 
@@ -609,16 +615,6 @@
       dataFormParent.insertBefore(gdprDynamicMessage, dataFormSubmitBtn);
 
     }
-
-  }
-
-  // We need to always be sending variable to Data Layer on each page load, so let's grab that from ConsentCapture cookie
-
-  if(consentCapture !== null) {
-
-    var userConsentedOn = Date.parse(consentCapture);
-
-    setDataLayer(userConsentedOn);
 
   }
 
