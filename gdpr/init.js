@@ -53,20 +53,25 @@
 
   }
 
+  function setDataLayer(timestamp) {
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+
+      "Explicit Consent": timestamp
+
+    });
+
+  }
+
   function setConsent() {
 
     var expDate = new Date();
     var consentDate = new Date();
     var convertDate = Date.parse(consentDate);
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "ConsentCapture=" + consentDate + "; expires=" + expDate + "; path=/";
-
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-
-      "Explicit Consent": convertDate
-
-    });
+    document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; path=/";
+    setDataLayer(convertDate);
 
   }
 
@@ -74,7 +79,7 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "BannerDisplayed=true; expires=" + expDate + "; path=/";
+    document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; path=/";
 
   }
 
@@ -607,18 +612,13 @@
 
   }
 
-  // We need to always be sending variable to Data Layer, so let's grab that from ConsentCapture cookies
+  // We need to always be sending variable to Data Layer on each page load, so let's grab that from ConsentCapture cookie
 
   if(consentCapture !== null) {
 
     var userConsentedOn = Date.parse(consentCapture);
 
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-
-      "Explicit Consent": userConsentedOn
-
-    });
+    setDataLayer(userConsentedOn);
 
   }
 
