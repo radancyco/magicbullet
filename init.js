@@ -188,19 +188,19 @@
 
       // Run QA version on following domains only...
 
-      if(testPaths) {
+      //if(testPaths) {
 
         gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/css/");
         gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/");
 
-      } else {
+      //} else {
 
         // ... else, run the production version.
 
-        gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/css/");
-        gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/");
+        //gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/css/");
+        //gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/");
 
-      }
+    //  }
 
     }
 
