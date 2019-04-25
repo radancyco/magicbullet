@@ -56,8 +56,17 @@
   function setConsent() {
 
     var expDate = new Date();
+    var consentDate = new Date();
+    var convertDate = Date.parse(consentDate);
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "ConsentCapture=" + new Date() + "; Secure; expires=" + expDate + "; path=/";
+    document.cookie = "ConsentCapture=" + consentDate + "; expires=" + expDate + "; path=/";
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+
+      "Explicit Consent": convertDate
+
+    });
 
   }
 
@@ -65,7 +74,7 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; path=/";
+    document.cookie = "BannerDisplayed=true; expires=" + expDate + "; path=/";
 
   }
 
@@ -595,6 +604,22 @@
       dataFormParent.insertBefore(gdprDynamicMessage, dataFormSubmitBtn);
 
     }
+
+  }
+
+
+  // We need to always be sending variable to Data Layer, so let's grab that from ConsentCapture cookies
+
+  var userConsentedOn = Date.parse(consentCapture);
+
+  if (!isNaN(userConsentedOn)) {
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+
+      "Explicit Consent": userConsentedOn
+
+    });
 
   }
 

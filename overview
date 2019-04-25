@@ -1,0 +1,32 @@
+GDPR Explicit Consent: Overview of Issues (A Tale of Two GDPR Consents)
+
+1. The Request
+
+	* The client (Duff & Phelps) is looking to disable TB360 until user opts into cookie usage by clicking "Accept" button in banner. This is called "Explicit Consent".
+  * Spell implemented this request into the banner script, but ran into (and flagged the possibility of this happening, over a week ago) the following:
+
+2. The Disconnect
+
+  * The dimension we need to target, GDPR Consent, which we are looking to control when banner is engaged with, is actually handled product-side and is sent to Google as soon as page loads.
+  * Upon landing on any given page for first time, the value of GDPR Consent is "null", which is sent to Google.
+  * When user navigates to another page (or refreshes), a time-stamp value is passed to GDPR Consent, which is then sent to Google.
+
+      * This behavior sits outside of the banner script, which indicates that TalentBrew (TB) has its own programming in place for passive consent. (Is this documented somewhere? Nothing on Confluence.)
+      * Because GA works outside of the banner script, there is no way for Spell to intercept this dimension _before_ it is sent to Google.
+
+3. The Possible Solution
+
+  * Instead of passing the GDPR Consent dimension to Google via TB, we can pass the dimension into the data layer, when user clicks on "Accept" button. (Thanks, Bobby!)
+  * In order for this happen, the GDPR Consent dimension would need to be removed from TB.
+
+      * Note: The dimension would need to be removed on a client by client basis only.
+
+4. The Ultimate Solution
+
+  Work the banner script into TB itself for easier and more granular control over what is and isn't tracked when user engages with banner.
+
+    * Note: Not holding breath as 2019 Roadmap already in play, but this would likely be most correct way to handle GDPR moving forward. :-)
+
+5. Action Items
+
+Try Bobby's idea , see if GDPR Consent can be overwritten.
