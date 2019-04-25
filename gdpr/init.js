@@ -621,6 +621,17 @@
 
     });
 
+  } else {
+
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+
+      "Explicit Consent": undefined
+
+    });
+
+
   }
 
 })();
