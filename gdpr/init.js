@@ -607,12 +607,11 @@
 
   }
 
-
   // We need to always be sending variable to Data Layer, so let's grab that from ConsentCapture cookies
 
-  var userConsentedOn = Date.parse(consentCapture);
+  if(consentCapture !== null) {
 
-  if (!isNaN(userConsentedOn)) {
+    var userConsentedOn = Date.parse(consentCapture);
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
