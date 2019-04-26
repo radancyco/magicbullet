@@ -53,12 +53,18 @@
 
   }
 
+  // Adding to Data Layer, if it exists, is done for both passive and explicit consent.
+  // You can use Google Tag Assistant to view the new variables being set (https://chrome.google.com/webstore/detail/tag-assistant-by-google/kejbdjndbnbjgmefkgdddjlbokphdefk?hl=en)
+  // If client requires that we disable specific functionality or tracking based on user acceptance, then the SEO team
+  // must be instructed to leverage the "Privacy Consent" variable instead of the system default, GDPR Consent, which is ignored
+  // by this script.
+
   function setDataLayer(timestamp) {
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
 
-      "Explicit Consent": timestamp
+      "Privacy Consent": timestamp
 
     });
 
@@ -71,6 +77,7 @@
     var convertDate = Date.parse(consentDate);
     expDate.setMonth(expDate.getMonth() + 12);
     document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; path=/";
+
     setDataLayer(convertDate);
 
   }
@@ -88,12 +95,13 @@
   var bannerDisplayed = getCookie("BannerDisplayed");
   var consentCapture = getCookie("ConsentCapture");
 
-  // While the default behavior for the cookie is passive consent, there may be times where we want to explicitly have user click on "Accept"
+  // While the default behavior for the cookie is passive consent, there may be times
+  // where we want to explicitly have user click on "Accept".
   // So we bypass default behavior by adding data-gdpr-explicit-consent
 
   if(gdprExplicitConsent === null) {
 
-    // if explicit consent not needed, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
+    // If explicit consent not needed, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
     // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
 
     if (bannerDisplayed === null) {
@@ -542,7 +550,7 @@
         var gdprPrivacyA11y = document.getElementById("gdpr-privacy-preference-a11y");
 
         gdprPolicyLink.removeChild(gdprA11yMessage);
-        gdprPrivacyRefLink.removeChild(gdprPrivacyA11y)
+        gdprPrivacyRefLink.removeChild(gdprPrivacyA11y);
 
       }
 
@@ -608,7 +616,7 @@
 
       gdprDynamicMessage.innerHTML = gdprInlineMessage;
 
-      var dataFormSubmitBtn = gdprDataFormSubmitBtn[x]
+      var dataFormSubmitBtn = gdprDataFormSubmitBtn[x];
 
       var dataFormParent = dataFormSubmitBtn.parentNode;
 
