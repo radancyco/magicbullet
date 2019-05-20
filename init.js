@@ -27,10 +27,6 @@
 
   var a11yScript = magicBulletScript.getAttribute("data-a11y");
 
-  // Get data-notice attribute, if present.
-
-  var noticeScript = magicBulletScript.getAttribute("data-notice");
-
   // Get hostname so that we can select between QA and Production scripts.
 
   var hostName = location.hostname;
@@ -120,46 +116,6 @@
     // Append Script to DOM.
 
     document.body.appendChild(a11yExec);
-
-  }
-
-  // Execute Notice
-
-  if (noticeScript === "true") {
-
-    // Create and add GDPR script
-
-    var noticeExec = document.createElement("script");
-    noticeExec.setAttribute("id", "a11y-fixes");
-
-    // Run script locally when these domains present...
-    // Feel free to add your own IP address.
-
-    if (localPaths) {
-
-      noticeExec.setAttribute("src", "/notice/qa/init.js");
-
-    } else {
-
-      // Run QA version on following domains only...
-
-      if(testPaths) {
-
-        noticeExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/notice/qa/");
-
-      } else {
-
-        // ... else, run the production version.
-
-        noticeExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/notice/prod/");
-
-      }
-
-    }
-
-    // Append Script to DOM.
-
-    document.body.appendChild(noticeExec);
 
   }
 
