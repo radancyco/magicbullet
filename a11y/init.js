@@ -204,7 +204,7 @@
 
     $("button.filter-button").each(function() {
 
-      $(this).attr("aria-label", $(this).text() + " (press enter or space bar to remove filter)");
+      // $(this).attr("aria-label", $(this).text() + " (press enter or space bar to remove filter)");
 
     });
 
