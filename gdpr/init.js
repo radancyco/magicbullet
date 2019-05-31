@@ -510,7 +510,7 @@
       // Tracking
 
       gdprButton.setAttribute("data-custom-event", "true");
-      gdprButton.setAttribute("data-custom-category", "true");
+      gdprButton.setAttribute("data-custom-category", "GDPR");
 
       if(gdprGACustomLabel !== null) {
 
