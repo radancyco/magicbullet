@@ -47,6 +47,8 @@ document.body.appendChild(magicBullet);</code></pre>
 
       <p>The following is a list of parameters that can be passed to the script to exhibit more control over the notice.</p>
 
+      <!-- Begin Section -->
+
       <h3 id="gdpr-mandatory">Mandatory</h3>
 
       <p>The following parameter(s) are <strong><em>mandatory</em></strong>.</p>
@@ -90,6 +92,8 @@ document.body.appendChild(magicBullet);</code></pre>
 <pre><code>magicBullet.setAttribute("data-gdpr-policy-url", "https://www.clarityrobotics.com/privacy/");</code></pre>
 
       </div>
+
+      <!-- Begin Section -->
 
       <h3 id="gdpr-translation">Translation</h3>
 
@@ -142,6 +146,8 @@ document.body.appendChild(magicBullet);</code></pre>
 <pre><code>magicBullet.setAttribute("data-gdpr-language", "zh-hant");</code></pre>
 
     </div>
+
+    <!-- Begin Section -->
 
     <h3 id="gdpr-formatting">Visual Formatting</h3>
 
@@ -249,6 +255,8 @@ document.body.appendChild(magicBullet);</code></pre>
 
     </div>
 
+    <!-- Begin Section -->
+
     <h3 id="gdpr-behavior">Behavior</h3>
 
     <p>The following parameter(s) can be used to apply or remove basic behaviors to the notice:</p>
@@ -327,6 +335,40 @@ document.body.appendChild(magicBullet);</code></pre>
 
     </div>
 
+    <!-- Begin Section -->
+
+    <h3 id="gdpr-behavior">Google Analytics Tracking</h3>
+
+    <p>The following parameter(s) can be used to customize certain tracking variables that are sent to Google Analytics</p>
+
+    <div class="indent">
+
+      <h3 id="data-gdpr-ga-custom-category">Google Analytics Category</h3>
+
+      <p>Passing this data attribute a custom value will override the Google Analytics category name, which currently defaults to "GDPR". This parameter is optional.</p>
+
+      <h4>HTML</h4>
+
+      <pre><code>data-gdpr-ga-custom-category="Dogs"</code></pre>
+
+      <h4>JavaScript</h4>
+
+      <pre><code>magicBullet.setAttribute("data-gdpr-ga-custom-category", "Dogs");</code></pre>
+
+      <h3 id="data-gdpr-ga-custom-category">Google Analytics Label</h3>
+
+      <p>Passing this data attribute a custom value will override the Google Analytics label name, which currently defaults to "GDPR Accept Button". This parameter is optional.</p>
+
+      <h4>HTML</h4>
+
+      <pre><code>data-gdpr-ga-custom-label="Fido"</code></pre>
+
+      <h4>JavaScript</h4>
+
+      <pre><code>magicBullet.setAttribute("data-gdpr-ga-custom-label", "Fido");</code></pre>
+
+    </div>
+
   </section>
 
   <section id="data-collection-form">
@@ -375,7 +417,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
     <h2>Styling Hook</h2>
 
-    <p>Please be aware that a CSS hook is being added to the <code>body</code> tag of each page the script loads on, which could come in handy for any GDPR related formatting issue that may come up. The name of the class is <code>magic-bullet-gdpr</code>.</p>
+    <p>Please be aware that a CSS hook is being added to the <code>body</code> tag of each page the script loads on, which could come in handy for any GDPR related formatting issues/needs that may come up. The name of the class is <code>magic-bullet-gdpr</code>.</p>
 
     <br>
 

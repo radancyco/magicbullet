@@ -21,6 +21,7 @@
   var gdprCustomFormMessage = magicBulletScript.getAttribute("data-gdpr-custom-form-message");
   var gdprExplicitConsent = magicBulletScript.getAttribute("data-gdpr-explicit-consent");
   var gdprFontSize = magicBulletScript.getAttribute("data-gdpr-font-size");
+  var gdprGACustomCategory = magicBulletScript.getAttribute("data-gdpr-ga-custom-category");
   var gdprGACustomLabel = magicBulletScript.getAttribute("data-gdpr-ga-custom-label");
   var gdprLanguage =  magicBulletScript.getAttribute("data-gdpr-language");
   var gdprNewWindow = magicBulletScript.getAttribute("data-gdpr-new-window");
@@ -510,7 +511,16 @@
       // Tracking
 
       gdprButton.setAttribute("data-custom-event", "true");
-      gdprButton.setAttribute("data-custom-category", "GDPR");
+
+      if(gdprGACustomCategory !== null) {
+
+        gdprButton.setAttribute("data-custom-category", gdprGACustomCategory);
+
+      } else {
+
+        gdprButton.setAttribute("data-custom-category", "GDPR");
+
+      }
 
       if(gdprGACustomLabel !== null) {
 
