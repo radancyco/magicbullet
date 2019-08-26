@@ -277,6 +277,18 @@ document.body.appendChild(magicBullet);</code></pre>
 
       <pre><code>magicBullet.setAttribute("data-gdpr-explicit-consent", "true");</code></pre>
 
+      <h3 id="data-location-aware">Location Awareness</h3>
+
+      <p>Some clients may want the GDPR banner to load <em>only</em> when EU jobs are present on their site(s). To do this, just add the following parameter. Some backend configuration may be needed, so be sure to reach out to <a href="bobby.kc@tmp.com">Bobby KC</a> for more information. This parameter is optional.</p>
+
+      <h4>HTML</h4>
+
+      <pre><code>data-location-aware="true"</code></pre>
+
+      <h4>JavaScript</h4>
+
+      <pre><code>magicBullet.setAttribute("data-location-aware", "true");</code></pre>
+
       <h3 id="data-gdpr-new-window">New Window</h3>
 
       <p>Passing this data attribute a value of "false" will disable the privacy policy link from opening in a new window. The default behavior is for all notice links to open in a new window. These visual cues will not appear when new windows are disabled. This parameter is optional.</p>
