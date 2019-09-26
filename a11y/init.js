@@ -287,7 +287,7 @@
 
     // Now replace with a button
 
-    $(".form-field input[name='Resume']").next(".file-remove").replaceWith("<button class='file-remove'>" + ResumeRemoveTxt + "</button>");
+    $(".form-field input[name='Resume']").next(".file-remove").replaceWith("<button class='file-remove' style='display:none;'>" + ResumeRemoveTxt + "</button>");
 
     // if Google Translate exists, then fix...
 
