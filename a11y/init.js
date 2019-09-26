@@ -250,11 +250,11 @@
 
     // Issue: Clutter, remove unused elements from fields that are not required.
 
-    $(".form-field:not(.required)").each(function() {
+    /* $(".form-field:not(.required),").each(function() {
 
       $(this).find(".field-validation-valid").remove();
 
-    });
+    }); */
 
     // Issue: Remove inline style on honeypot field and use hidden attribute instead
 
@@ -287,7 +287,7 @@
 
     // Now replace with a button
 
-    $(".form-field input[name='Resume']").next(".file-remove").replaceWith("<button aria-hidden='true' class='file-remove'>" + ResumeRemoveTxt + "</button>");
+    $(".form-field input[name='Resume']").next(".file-remove").replaceWith("<button class='file-remove'>" + ResumeRemoveTxt + "</button>");
 
     // if Google Translate exists, then fix...
 
