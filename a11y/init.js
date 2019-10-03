@@ -303,7 +303,7 @@
 
     // Issue: Remove role="status" from h1 and h2 elements
 
-    $("h1, h2").removeAttr("role");
+    $(".search-results h1, .search-results h2").removeAttr("role");
 
     // Issue: Remove tabindex from search-filter element. Only interactive elements should receive focus.
 
