@@ -49,7 +49,7 @@
 
   if(gdprDomainName === null) {
 
-    gdprDomainName = window.location.hostname;
+    gdprDomainName = window.location.host;
 
   }
 
