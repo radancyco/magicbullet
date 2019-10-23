@@ -19,7 +19,7 @@
   var gdprCookieManageURL = magicBulletScript.getAttribute("data-gdpr-cookie-mgr-url");
   var gdprCustomMessage = magicBulletScript.getAttribute("data-gdpr-custom-message");
   var gdprCustomFormMessage = magicBulletScript.getAttribute("data-gdpr-custom-form-message");
-  // var gdprDomainName = magicBulletScript.getAttribute("data-gdpr-domain");
+  var gdprDomainName = magicBulletScript.getAttribute("data-gdpr-domain");
   var gdprExplicitConsent = magicBulletScript.getAttribute("data-gdpr-explicit-consent");
   var gdprFontSize = magicBulletScript.getAttribute("data-gdpr-font-size");
   var gdprGACustomCategory = magicBulletScript.getAttribute("data-gdpr-ga-custom-category");
@@ -72,15 +72,13 @@
 
   }
 
-  var gdprDomainName = ".runmytests.com";
-
   function setConsent() {
 
     var expDate = new Date();
     var consentDate = new Date();
     var convertDate = Date.parse(consentDate);
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
+    document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; domain=." + gdprDomainName + "; path=/";
 
     setDataLayer(convertDate);
 
@@ -90,7 +88,7 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
+    document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; domain=." + gdprDomainName + "; path=/";
 
   }
 
