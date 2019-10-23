@@ -78,7 +78,7 @@
     var consentDate = new Date();
     var convertDate = Date.parse(consentDate);
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; domain=" gdprDomainName + "; path=/";
+    document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
 
     setDataLayer(convertDate);
 
@@ -88,7 +88,7 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; domain=" gdprDomainName + "; path=/";
+    document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
 
   }
 
