@@ -19,7 +19,7 @@
   var gdprCookieManageURL = magicBulletScript.getAttribute("data-gdpr-cookie-mgr-url");
   var gdprCustomMessage = magicBulletScript.getAttribute("data-gdpr-custom-message");
   var gdprCustomFormMessage = magicBulletScript.getAttribute("data-gdpr-custom-form-message");
-  var gdprDomainName = magicBulletScript.getAttribute("data-gdpr-domain");
+  // var gdprDomainName = magicBulletScript.getAttribute("data-gdpr-domain");
   var gdprExplicitConsent = magicBulletScript.getAttribute("data-gdpr-explicit-consent");
   var gdprFontSize = magicBulletScript.getAttribute("data-gdpr-font-size");
   var gdprGACustomCategory = magicBulletScript.getAttribute("data-gdpr-ga-custom-category");
@@ -71,6 +71,8 @@
     });
 
   }
+
+  var gdprDomainName = ".runmytests.com";
 
   function setConsent() {
 
