@@ -45,6 +45,14 @@
 
   gdprBody.classList.add("magic-bullet-gdpr");
 
+  // Get custom domain name, if not present, then load in default domain.
+
+  if(gdprDomainName === null) {
+
+    gdprDomainName = window.location.hostname;
+
+  }
+
   // Helper: Get Cookie(s)
 
   function getCookie(name) {
@@ -78,7 +86,7 @@
     var consentDate = new Date();
     var convertDate = Date.parse(consentDate);
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; domain=." + gdprDomainName + "; path=/";
+    document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
 
     setDataLayer(convertDate);
 
@@ -88,7 +96,7 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; domain=." + gdprDomainName + "; path=/";
+    document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
 
   }
 
@@ -396,7 +404,7 @@
 
     // English (Default)
 
-    var gdprMessage = "We use cookies and other tracking technologies to assist with navigation, improve our products and services, assist with our marketing efforts, and provide content from third parties. By continuing to use this site you agree to our use of cookies in accordance with our <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privacy policy <span id='gdpr-a11y-message' class='visually-hidden'>(this content opens in new window)</span></a>. To manage third-party cookie preferences, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>click here <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(this content opens in new window)</span></a>.";
+    var gdprMessage = "We use cookies and other tracking technologies to assist with navigation, improve our products and services, assist with our marketing efforts, and provide content from third parties. By continuing to use this site you agree to our use of cookies in accordance with our <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privacy policy <span id='gdpr-a11y-message' class='visually-hidden'>(opens in new window)</span></a>. To manage third-party cookie preferences, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>click here <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(opens in new window)</span></a>.";
 
     var gdprConsentBtn = "Accept";
 
