@@ -19,7 +19,8 @@
   var gdprCookieManageURL = magicBulletScript.getAttribute("data-gdpr-cookie-mgr-url");
   var gdprCustomMessage = magicBulletScript.getAttribute("data-gdpr-custom-message");
   var gdprCustomFormMessage = magicBulletScript.getAttribute("data-gdpr-custom-form-message");
-  var gdprDomainName = magicBulletScript.getAttribute("data-gdpr-domain");
+  var gdprDateExpire = magicBulletScript.getAttribute("data-gdpr-date-expire");
+  var gdprDomainName = magicBulletScript.getAttribute("data-gdpr-domain"); // Note, must be set on each domain banner exists on.
   var gdprExplicitConsent = magicBulletScript.getAttribute("data-gdpr-explicit-consent");
   var gdprFontSize = magicBulletScript.getAttribute("data-gdpr-font-size");
   var gdprGACustomCategory = magicBulletScript.getAttribute("data-gdpr-ga-custom-category");
@@ -77,7 +78,18 @@
     var expDate = new Date();
     var consentDate = new Date();
     var convertDate = Date.parse(consentDate);
-    expDate.setMonth(expDate.getMonth() + 12);
+
+    // Some clients want cookies to expire after one day, so we'll accomodate that request...
+
+    if(gdprDateExpire !== null) {
+
+      expDate.setMonth(expDate.getDate() + 1);
+
+    } else {
+
+      expDate.setMonth(expDate.getMonth() + 12);
+
+    }
 
     // Get custom domain name, if not present, then load in default domain.
 
@@ -99,6 +111,20 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
+
+    // Some clients want cookies to expire after one day, so we'll accomodate that request...
+
+    if(gdprDateExpire !== null) {
+
+      expDate.setMonth(expDate.getDate() + 1);
+
+    } else {
+
+      expDate.setMonth(expDate.getMonth() + 12);
+
+    }
+
+    // Get custom domain name, if not present, then load in default domain.
 
     if(gdprDomainName !== null) {
 
