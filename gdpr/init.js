@@ -45,14 +45,6 @@
 
   gdprBody.classList.add("magic-bullet-gdpr");
 
-  // Get custom domain name, if not present, then load in default domain.
-
-  if(gdprDomainName === null) {
-
-    gdprDomainName = window.location.host;
-
-  }
-
   // Helper: Get Cookie(s)
 
   function getCookie(name) {
@@ -86,7 +78,18 @@
     var consentDate = new Date();
     var convertDate = Date.parse(consentDate);
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
+
+    // Get custom domain name, if not present, then load in default domain.
+
+    if(gdprDomainName !== null) {
+
+      document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
+
+    } else {
+
+      document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; path=/";
+
+    }
 
     setDataLayer(convertDate);
 
@@ -96,7 +99,16 @@
 
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 12);
-    document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
+
+    if(gdprDomainName !== null) {
+
+      document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
+
+    } else {
+
+      document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; path=/";
+
+    }
 
   }
 
