@@ -83,7 +83,7 @@
 
     if(gdprDateExpire !== null) {
 
-      expDate.setMonth(expDate.getDate() + 1);
+      expDate.setDate(expDate.getDate() + 1);
 
     } else {
 
@@ -116,7 +116,7 @@
 
     if(gdprDateExpire !== null) {
 
-      expDate.setMonth(expDate.getDate() + 1);
+      expDate.setDate(expDate.getDate() + 1);
 
     } else {
 
