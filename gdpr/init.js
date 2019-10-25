@@ -95,11 +95,11 @@
 
     if(gdprDomainName !== null) {
 
-      document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
+      document.cookie = "ConsentCapture=" + consentDate + "; Secure; SameSite=None; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
 
     } else {
 
-      document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; path=/";
+      document.cookie = "ConsentCapture=" + consentDate + "; Secure; SameSite=None; expires=" + expDate + "; path=/";
 
     }
 
@@ -110,7 +110,6 @@
   function setBanner() {
 
     var expDate = new Date();
-    expDate.setMonth(expDate.getMonth() + 12);
 
     // Some clients want cookies to expire after one day, so we'll accomodate that request...
 
@@ -128,11 +127,11 @@
 
     if(gdprDomainName !== null) {
 
-      document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
+      document.cookie = "BannerDisplayed=true; Secure; SameSite=None; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
 
     } else {
 
-      document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; path=/";
+      document.cookie = "BannerDisplayed=true; Secure; SameSite=None; expires=" + expDate + "; path=/";
 
     }
 
