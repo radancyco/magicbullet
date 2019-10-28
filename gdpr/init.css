@@ -128,7 +128,7 @@ width: 50% !important;
 
 #gdpr-button:focus, #gdpr-button:hover {
 background-color: inherit;
-color: #eee;
+color: #000;
 }
 
 /* Form Message */
