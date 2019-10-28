@@ -43,13 +43,13 @@ box-sizing: inherit;
 }
 
 #gdpr-alert .visually-hidden, .gdpr-eu-tmp-notice .visually-hidden {
-clip: rect(1px, 1px, 1px, 1px);
+clip: rect(0 0 0 0);
+clip-path: inset(100%);
 height: 1px;
 overflow: hidden;
 position: absolute;
 white-space: nowrap;
 width: 1px;
-margin:
 }
 
 /* Test */
@@ -63,7 +63,7 @@ left: 0;
 padding: 1em;
 position :absolute;
 top: -3.8em;
-width :100%;
+width: 100%;
 }
 
 #gdpr-content {
@@ -124,6 +124,12 @@ padding: .5em 0 !important;
 text-align: center !important;
 text-transform: none !important;
 width: 50% !important;
+
+  &:focus, &:hover {
+  background-color: inherit;
+  color: #eee;
+  }
+
 }
 
 /* Form Message */
