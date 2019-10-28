@@ -124,12 +124,11 @@ padding: .5em 0 !important;
 text-align: center !important;
 text-transform: none !important;
 width: 50% !important;
+}
 
-  &:focus, &:hover {
-  background-color: inherit;
-  color: #eee;
-  }
-
+#gdpr-button:focus, #gdpr-button:hover {
+background-color: inherit;
+color: #eee;
 }
 
 /* Form Message */
