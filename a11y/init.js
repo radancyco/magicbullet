@@ -57,6 +57,8 @@
 
   $(".ats-description table").attr("role", "presentation");
 
+  $(".ats-description *").removeAttr("align style face size class title id");
+
   // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
 
   // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0009
@@ -204,7 +206,7 @@
 
     $("button.filter-button").each(function() {
 
-      $(this).attr("aria-label", $(this).text());
+      $(this).attr("aria-label", "Remove " + $(this).text());
 
     });
 
