@@ -57,7 +57,7 @@
 
   $(".ats-description table").attr("role", "presentation");
 
-  $(".ats-description *").removeAttr("align style face size class title id");
+  $(".ats-description *").removeAttr("align style face size title id");
 
   // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
 
