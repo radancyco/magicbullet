@@ -45,16 +45,16 @@ font-weight: bold;
 
 /* Banner Functionality (Testing) */
 
-.gdpr-eu-tmp-notice {
+.ccpa-eu-tmp-notice {
 color: green;
 }
 
-.gdpr-eu-tmp-notice a {
+.ccpa-eu-tmp-notice a {
 color: inherit;
 text-decoration: underline;
 }
 
-.gdpr-eu-tmp-notice:not(:empty):after {
+.ccpa-eu-tmp-notice:not(:empty):after {
 content: "(Success! The script has been loaded!)";
 display: block;
 margin-top: 1em;

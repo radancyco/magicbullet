@@ -27,6 +27,10 @@
 
   var a11yScript = magicBulletScript.getAttribute("data-a11y");
 
+  // Get data-ccpa attribute, if present.
+
+  var ccpaScript = magicBulletScript.getAttribute("data-ccpa");
+
   // Get hostname so that we can select between QA and Production scripts.
 
   var hostName = location.hostname;
@@ -50,6 +54,8 @@
 
       //Albania,Armenia,Austria,Belarus,Belgium,Bulgaria,Croatia,Cyprus,Czech Republic,Denmark,Finland,France,Georgia,Germany,Greece,Hungary,Iceland,Ireland,Italy,Kazakhstan,Kosovo,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Romania,Russia,Serbia,Slovakia,Slovenia,Spain,Sweden,Switzerland,Turkey,Ukraine,UK
 
+      // TODO: Eventually move this over to gdpr/init.js
+
       var locationIDEurope = '783754,174982,2782113,630336,2802361,732800,3202326,146669,3077311,2623032,660013,3017382,614540,2921044,390903,719819,2629691,2963597,3175395,1522867,831053,458258,597427,2960313,2562770,2750405,3144096,798544,2264397,798549,2017370,6290252,3057568,3190538,2510769,2661886,2658434,298795,690791,2635167';
 
       postAjax(function(dataLoc) {
@@ -62,9 +68,8 @@
 
         if(locationIDEurope.indexOf(locationID)!=-1) {
 
-          //Show GDPR only for Europe
+          // Show GDPR only for Europe
 
-          console.log("showGDPR");
           showGDPR();
 
         }
@@ -79,43 +84,45 @@
 
   }
 
+  // Execute General Privacy Notice (CCPA)
+
+  if (ccpaScript === "true") {
+
+      showCCPA();
+
+  }
+
   // Execute A11y
 
   if (a11yScript === "true") {
 
-    // Create and add GDPR script
+    showA11y();
 
-    var a11yExec = document.createElement("script");
-    a11yExec.setAttribute("id", "a11y-fixes");
+  }
 
-    // Run script locally when these domains present...
-    // Feel free to add your own IP address.
+  // Functions
 
-    if (localPaths) {
+  function postAjax(success) {
 
-      a11yExec.setAttribute("src", "/a11y/qa/init.js");
+    //To get Location data from Server
 
-    } else {
+    var params = 'lat=&lon=&IsUsingGeolocation=true&HasHtml5GeoError=false&GeoType=ipambientonly';
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
 
-      // Run QA version on following domains only...
+    xhr.open('POST', "/search-jobs/SetSearchRequestGeoLocation");
+    xhr.onreadystatechange = function() {
 
-      if(testPaths) {
-
-        a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/qa/");
-
-      } else {
-
-        // ... else, run the production version.
-
-        a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/prod/");
+      if (xhr.readyState>3 && xhr.status==200) {
+        //Send data to call back funtion
+        success(JSON.parse(xhr.responseText));
 
       }
 
-    }
+    };
 
-    // Append Script to DOM.
-
-    document.body.appendChild(a11yExec);
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(params);
 
   }
 
@@ -130,7 +137,7 @@
     // Create and add GDPR script
 
     var gdprExec = document.createElement("script");
-    gdprExec.setAttribute("id", "gdpr-notice");
+    gdprExec.setAttribute("id", "gdpr-notice-js");
 
     // Run script locally when these domains present...
     // Feel free to add your own IP address.
@@ -167,27 +174,89 @@
 
   }
 
-  function postAjax(success) {
+  function showCCPA() {
 
-    //To get Location data from Server
+    // Add Privacy Notice CSS
 
-    var params = 'lat=&lon=&IsUsingGeolocation=true&HasHtml5GeoError=false&GeoType=ipambientonly';
-    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+    var ccpaCSS = document.createElement("link");
+    ccpaCSS.setAttribute("id", "ccpa-css");
+    ccpaCSS.setAttribute("rel", "stylesheet");
 
-    xhr.open('POST', "/search-jobs/SetSearchRequestGeoLocation");
-    xhr.onreadystatechange = function() {
+    // Create and add Privacy Notice script
 
-      if (xhr.readyState>3 && xhr.status==200) {
-        //Send data to call back funtion
-        success(JSON.parse(xhr.responseText));
+    var ccpaExec = document.createElement("script");
+    ccpaExec.setAttribute("id", "ccpa-js");
+
+    // Run script locally when these domains present...
+    // Feel free to add your own IP address.
+
+    if (localPaths) {
+
+      ccpaCSS.setAttribute("href", "/ccpa/init.css");
+      ccpaExec.setAttribute("src", "/ccpa/init.js");
+
+    } else {
+
+      // Run QA version on following domains only...
+
+      if(testPaths) {
+
+        ccpaCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/ccpa/qa/css/");
+        ccpaExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/ccpa/qa/");
+
+      } else {
+
+        // ... else, run the production version.
+
+        ccpaCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/ccpa/prod/css/");
+        ccpaExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/ccpa/prod/");
 
       }
 
-    };
+    }
 
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send(params);
+    // Append CSS and Script to DOM.
+
+    document.head.appendChild(ccpaCSS);
+    document.body.appendChild(ccpaExec);
+
+  }
+
+  function showA11y() {
+
+    // Create and add GDPR script
+
+    var a11yExec = document.createElement("script");
+    a11yExec.setAttribute("id", "a11y-fixes");
+
+    // Run script locally when these domains present...
+    // Feel free to add your own IP address.
+
+    if (localPaths) {
+
+      a11yExec.setAttribute("src", "/a11y/qa/init.js");
+
+    } else {
+
+      // Run QA version on following domains only...
+
+      if(testPaths) {
+
+        a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/qa/");
+
+      } else {
+
+        // ... else, run the production version.
+
+        a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/prod/");
+
+      }
+
+    }
+
+    // Append Script to DOM.
+
+    document.body.appendChild(a11yExec);
 
   }
 

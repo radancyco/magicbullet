@@ -3,13 +3,13 @@ layout: default
 localcss: css/local.css
 localjs: js/local.js
 noindex: true
-title: "General Data Protection Regulation (GDPR) Notice"
+title: "California Consumer Privacy Act (CCPA) Notice"
 toc: true
 ---
 
-<div id="gdpr-notice" class="main-content">
+<div id="ccpa-notice" class="main-content">
 
-    <p>This script may be used to generate a General Data Protection Regulation (GDPR) consent notice on any TMP hosted website. Due to privacy concerns, European Union (EU) citizens who engage with any website that collects data, via cookies, must now be warned about this practice in advance and be able to (implicitly or explicitly) opt-in to permit this data to be used. You can learn more about GDPR on the <a href="https://www.eugdpr.org/">official website</a>.</p>
+    <p>This script may be used to generate a California Consumer Privacy Act (CCPA) notice on any TMP hosted website. Due to privacy concerns, California residents who engage with any website that collects data, via cookies, must now be warned about this practice in advance and be able to opt-in, if necessary, to permit this data to be used. You can learn more about the CCPA on the <a href="https://www.caprivacy.org/">official website</a>.</p>
 
     <p class="alert"><strong>Note:</strong> This document is for internal TMP Worldwide use only.</p>
 
@@ -27,7 +27,7 @@ toc: true
 
         <p>If you require HTML, add the following script before the closing <code>body</code> tag of your page or template:</p>
 
-  <pre><code>&lt;script id="tmp-magic-bullet" data-gdpr="true" data-gdpr-client-name="[client name]" data-gdpr-policy-url="[site policy url]" src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;
+  <pre><code>&lt;script id="tmp-magic-bullet" data-ccpa="true" data-ccpa-client-name="[client name]" data-ccpa-policy-url="[site policy url]" src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;
   </code></pre>
 
       <h3 id="banner-implementation-js">JavaScript</h3>
@@ -36,13 +36,13 @@ toc: true
 
   <pre><code>var magicBullet = document.createElement("script");
   magicBullet.setAttribute("id", "tmp-magic-bullet");
-  magicBullet.setAttribute("data-gdpr", "true");
-  magicBullet.setAttribute("data-gdpr-client-name", "[client name]");
-  magicBullet.setAttribute("data-gdpr-policy-url", "[site policy url]");
+  magicBullet.setAttribute("data-ccpa", "true");
+  magicBullet.setAttribute("data-ccpa-client-name", "[client name]");
+  magicBullet.setAttribute("data-ccpa-policy-url", "[site policy url]");
   magicBullet.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/");
   document.body.appendChild(magicBullet);</code></pre>
 
-      <p><strong>Note:</strong> The <code>data-gdpr</code>, <code>data-gdpr-client-name</code> and <code>data-gdpr-policy-url</code> attributes are <a href="#banner-mandatory">mandatory</a> parameters.</p>
+      <p><strong>Note:</strong> The <code>data-ccpa</code>, <code>data-ccpa-client-name</code> and <code>data-ccpa-policy-url</code> attributes are <a href="#banner-mandatory">mandatory</a> parameters.</p>
 
     </section>
 
@@ -66,41 +66,41 @@ toc: true
 
         <div class="indent">
 
-          <h4 id="data-gdpr">Script Initiation</h4>
+          <h4 id="data-ccpa">Script Initiation</h4>
 
-          <p>Passing this data attribute a value of "true", will initiate the GDPR script.</p>
+          <p>Passing this data attribute a value of "true", will initiate the CCPA script.</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr="true"</code></pre>
+<pre><code>data-ccpa="true"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr", "true");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa", "true");</code></pre>
 
-          <h4 id="data-gdpr-client-name">Client Name</h4>
+          <h4 id="data-ccpa-client-name">Client Name</h4>
 
           <p>Passing this data attribute a string value, such as the name of the client, will include that value in any needed legal verbiage, such as the notice placed within <a href="#banner-collection-form">TalentBrew's Data Collection Forms</a>.</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-client-name="Clarity Robotics"</code></pre>
+<pre><code>data-ccpa-client-name="Clarity Robotics"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-client-name", "Clarity Robotis");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-client-name", "Clarity Robotis");</code></pre>
 
-          <h4 id="data-gdpr-policy-url">Policy URL</h4>
+          <h4 id="data-ccpa-policy-url">Policy URL</h4>
 
           <p>Passing this data attribute a policy URL, will include that URL within the notice and inline <a href="#banner-collection-form">form message</a>. The value must be in the form of a fully qualified URL. Protocol-relative URL's <a href="https://www.paulirish.com/2010/the-protocol-relative-url/" target="_blank" rel="noopener"><strong>should not be used</strong></a>. If the privacy policy is local to the domain, then please use a relative path instead&mdash;e.g., "/privacy/" instead of "https://www.clarityrobotics.com/privacy/".</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-policy-url="https://www.clarityrobotics.com/privacy/"</code></pre>
+<pre><code>data-ccpa-policy-url="https://www.clarityrobotics.com/privacy/"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-policy-url", "https://www.clarityrobotics.com/privacy/");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-policy-url", "https://www.clarityrobotics.com/privacy/");</code></pre>
 
         </div>
 
@@ -114,53 +114,31 @@ toc: true
 
         <h3 id="banner-translation">Translation</h3>
 
-        <p>The following parameter can be used to change the language of the GDPR notice and the <a href="#banner-collection-form">TalentBrew Data Collection Form</a> message.</p>
+        <p>The following parameter can be used to change the language of the CCPA notice and the <a href="#banner-collection-form">TalentBrew Data Collection Form</a> message.</p>
 
         <div class="indent">
 
-          <h4 id="data-gdpr-language">Language</h4>
+          <h4 id="data-ccpa-language">Language</h4>
 
           <p>Passing this data attribute a language code, will translate the notice and form message into the desired language. The default language is English.</p>
 
-          <h5 id="gdpr-language-code">Language Codes</h5>
+          <h5 id="ccpa-language-code">Language Codes</h5>
 
           <p>The following language code values are accepted by the script:</p>
 
-          <p class="alert"><strong>Note:</strong> Some language translations are currently pending, but should be complete by May 20th, 2018. If new languages are required, please contact <a href="mailto:dan.green@tmp.com">Dan Green</a>.</p>
+          <p class="alert"><strong>Note:</strong> If new languages are required, please contact <a href="mailto:dan.green@tmp.com">Dan Green</a>.</p>
 
           <ul>
-            <li><strong>ar</strong> (Arabic) <span class="alert"> - Pending</span></li>
-            <li><strong>cs</strong> (Czezh)</li>
-            <li><strong>da</strong> (Danish)</li>
-            <li><strong>de</strong> (German)</li>
             <li><strong>es</strong> (Spanish)</li>
-            <li><strong>es-mx</strong> (Spanish Mexican)</li>
-            <li><strong>fr</strong> (French)</li>
-            <li><strong>fr-ch</strong> (French Canadian)</li>
-            <li><strong>hu</strong> (Hungarian)</li>
-            <li><strong>it</strong> (Italian)</li>
-            <li><strong>jp</strong> (Japanese)</li>
-            <li><strong>ko</strong> (Korean)</li>
-            <li><strong>lt</strong> (Lithuanian)</li>
-            <li><strong>nl</strong> (Dutch)</li>
-            <li><strong>nl-be</strong> (Dutch Belgium)</li>
-            <li><strong>pl</strong> (Polish)</li>
-            <li><strong>pt</strong> (Portuguese)</li>
-            <li><strong>pt-br</strong> (Brazillian Portuguese)</li>
-            <li><strong>ru</strong> (Russian)</li>
-            <li><strong>sv</strong> (Swedish)</li>
-            <li><strong>tl</strong> (Tagalog)</li>
-            <li><strong>zh-hans</strong> (Simplified Chinese)</li>
-            <li><strong>zh-hant</strong> (Traditional Chinese)</li>
           </ul>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-language="zh-hant"</code></pre>
+<pre><code>data-ccpa-language="es"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-language", "zh-hant");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-language", "es");</code></pre>
 
         </div>
 
@@ -174,119 +152,131 @@ toc: true
 
         <h3 id="banner-formatting">Visual Formatting</h3>
 
-        <p class="alert"><strong>Warning:</strong> Please do not attempt to override the banner notice with CSS or JavaScript at the <strong>implementation level</strong>. Local overrides may interfere with future formatting changes required within the GDPR script itself. If you run into any formatting issues that can't be solved with any available parameters the GDPR script offers, then please contact <a href="mailto:michael.spellacy@tmp.com?subject=GDPR%20Formatting%20Issue">Michael Spellacy</a> for assistance. The inline form message may be safely manipulated with CSS.</p>
+        <p class="alert"><strong>Warning:</strong> Please do not attempt to override the banner notice with CSS or JavaScript at the <strong>implementation level</strong>. Local overrides may interfere with future formatting changes required within the CCPA script itself. If you run into any formatting issues that can't be solved with any available parameters the CCPA script offers, then please contact <a href="mailto:michael.spellacy@tmp.com?subject=CCPA%20Formatting%20Issue">Michael Spellacy</a> for assistance. The inline form message may be safely manipulated with CSS.</p>
 
         <p>The following parameter(s) can be used to apply basic formatting to the notice. All parameters are optional:</p>
 
         <div class="indent">
 
-          <h4 id="data-gdpr-banner-top">Banner Position</h4>
+          <h4 id="data-ccpa-banner-top">Banner Position</h4>
 
-          <p>Passing this data attribute a value of "true", will will position the GDPR banner at the top of the page. The default position is to load at the bottom of the page.</p>
+          <p>Passing this data attribute a value of "true", will will position the CCPA banner at the top of the page. The default position is to load at the bottom of the page.</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-banner-top="true"</code></pre>
+<pre><code>data-ccpa-banner-top="true"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-banner-top", "true");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-banner-top", "true");</code></pre>
 
-          <h4 id="data-gdpr-button-color">Button Color</h4>
+          <h4 id="data-ccpa-button-color">Button Color</h4>
 
           <p>Passing this data attribute any valid CSS color value will change the background color of the "Accept" button.</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-button-color="lavender"</code></pre>
+<pre><code>data-ccpa-button-color="lavender"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-button-color", "lavender");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-close-button-color", "lavender");</code></pre>
 
-          <h4 id="data-gdpr-button-text">Button Text</h4>
+          <h4 id="data-ccpa-accept-button-text">Button Text (Accept)</h4>
 
           <p>Passing this data attribute any string value will change the text of the "Accept" button. The default text is "Accept".</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-button-text="OK"</code></pre>
+<pre><code>data-ccpa-accept-button-text="Submit"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-button-text", "OK");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-accept-button-text", "Submit");</code></pre>
 
-          <h4 id="data-gdpr-button-color-text">Button Text Color</h4>
+          <h4 id="data-ccpa-close-button-text">Button Text (Close)</h4>
+
+          <p>Passing this data attribute any string value will change the text of the "Close" button. The default text is "Close".</p>
+
+          <h5>HTML</h5>
+
+<pre><code>data-ccpa-close-button-text="OK"</code></pre>
+
+          <h5>JavaScript</h5>
+
+<pre><code>magicBullet.setAttribute("data-ccpa-close-button-text", "OK");</code></pre>
+
+          <h4 id="data-ccpa-button-color-text">Button Text Color</h4>
 
           <p>Passing this data attribute any valid CSS color value will change the text color of the "Accept" button.</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-button-color-text="lime"</code></pre>
+<pre><code>data-ccpa-button-color-text="lime"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-button-color-text", "lime");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-button-color-text", "lime");</code></pre>
 
-          <h4 id="data-gdpr-font-size">Font Size</h4>
+          <h4 id="data-ccpa-font-size">Font Size</h4>
 
           <p>Passing this data attribute any valid CSS unit, will change the font size used within the notice.</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-font-size="18px"</code></pre>
+<pre><code>data-ccpa-font-size="18px"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-font-size", "18px");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-font-size", "18px");</code></pre>
 
-          <h4 id="data-gdpr-notice-color">Notice Background Color</h4>
+          <h4 id="data-ccpa-notice-color">Notice Background Color</h4>
 
           <p>Passing this data attribute any valid CSS color value will change the background color of the notice.</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-notice-color="tomato"</code></pre>
+<pre><code>data-ccpa-notice-color="tomato"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-notice-color", "18px");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-notice-color", "18px");</code></pre>
 
-          <h4 id="data-gdpr-notice-text-color">Notice Text Color</h4>
+          <h4 id="data-ccpa-notice-text-color">Notice Text Color</h4>
 
           <p>Passing this data attribute any valid CSS color value will change the text color of the notice.</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-notice-text-color="purple"</code></pre>
+<pre><code>data-ccpa-notice-text-color="purple"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-notice-text-color", "purple");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-notice-text-color", "purple");</code></pre>
 
-          <h4 id="data-gdpr-text-alignment">Text Alignment</h4>
+          <h4 id="data-ccpa-text-alignment">Text Alignment</h4>
 
           <p>Passing this data attribute any valid CSS text-align value, will change the alignment of the text within the notice. The default value is "center".</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-text-align="right"</code></pre>
+<pre><code>data-ccpa-text-align="right"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-text-align", "right");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-text-align", "right");</code></pre>
 
-          <h4 id="data-gdpr-z-index">Z-Index</h4>
+          <h4 id="data-ccpa-z-index">Z-Index</h4>
 
           <p>Passing this data attribute any number from 1 to 2147483647, will change the z-index stack. The default value is "10000".</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-z-index="12000"</code></pre>
+<pre><code>data-ccpa-z-index="12000"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-z-index", "12000");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-z-index", "12000");</code></pre>
 
         </div>
 
@@ -304,69 +294,73 @@ toc: true
 
         <div class="indent">
 
-          <h4 id="data-gdpr-date-expire">Banner Expiration</h4>
+          <h4 id="data-ccpa-date-expire">Banner Expiration</h4>
 
           <p>Passing this data attribute a value of "true", will allow the banner to expire after one day, instead of the default 30 days.</p>
 
+          <p><strong>Note:</strong> This attribute should only be used with <a href="#data-ccpa-opt-in">Explicit Opt-In</a></p>
+
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-date-expire="true"</code></pre>
+<pre><code>data-ccpa-date-expire="true"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-date-expire", "true");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-date-expire", "true");</code></pre>
 
-          <h4 id="data-gdpr-custom-message">Custom Message</h4>
+          <h4 id="data-ccpa-custom-message">Custom Message</h4>
 
           <p>Passing this data attribute a string value will override the default message. HTML may be included.</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-custom-message="&lt;h2&gt;About Cookies&lt;/h2&gt; &lt;p&gt;We use cookies to help make this website better, to improve our services and for advertising purposes. You can learn more about our use of cookies by &lt;a href='https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/cookies-policy/'>clicking here&lt;/a&gt;.&lt;/p&gt;"</code></pre>
+<pre><code>data-ccpa-custom-message="&lt;h2&gt;About Cookies&lt;/h2&gt; &lt;p&gt;We use cookies to help make this website better, to improve our services and for advertising purposes. You can learn more about our use of cookies by &lt;a href='https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/cookies-policy/'>clicking here&lt;/a&gt;.&lt;/p&gt;"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-custom-message", "&lt;h2&gt;About Cookies&lt;/h2&gt; &lt;p&gt;We use cookies to help make this website better, to improve our services and for advertising purposes. You can learn more about our use of cookies by &lt;a href='https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/cookies-policy/'>clicking here&lt;/a&gt;.&lt;/p&gt;");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-custom-message", "&lt;h2&gt;About Cookies&lt;/h2&gt; &lt;p&gt;We use cookies to help make this website better, to improve our services and for advertising purposes. You can learn more about our use of cookies by &lt;a href='https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/cookies-policy/'>clicking here&lt;/a&gt;.&lt;/p&gt;");</code></pre>
 
-          <h4 id="data-gdpr-domain">Cross-Domain Sharing</h4>
+          <h4 id="data-ccpa-domain">Cross-Domain Sharing</h4>
 
           <p>There are times when a client may wish to share cookie values and ensure the banner is hidden across multiple URL's with the same domain or subdomain. This is possible if the Magic Bullet script is placed on all needed sites and each include the following data attribute:</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-domain=".domain.com"</code></pre>
+<pre><code>data-ccpa-domain=".domain.com"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-domain", ".domain.com");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-domain", ".domain.com");</code></pre>
 
-          <h4 id="data-gdpr-explicit-consent">Explicit Consent</h4>
+          <h4 id="data-ccpa-explicit-consent">Explicit Consent</h4>
 
           <p>If your site requires that consent to track and use cookies be <em>explicitly given</em>, then you may use this data attribute to accomplish that. Passing this data attribute a string value of "true" will override the default behavior, which is set to passive consent, an implied acceptance via the continued use of the website. The banner will now persist from page to page until the user <em>explicitly</em> clicks on the "Accept" button in the banner.</p>
+
+          <p><strong>Note:</strong> This attribute should only be used with <a href="#data-ccpa-opt-in">Explicit Opt-In</a></p>
 
           <p><strong>Note:</strong> If explicit consent is used, it is very likely that the SEO team will need to be adjusting desired tracking behaviors in this scenario, so be sure to remind your DPM of this task.</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-explicit-consent="true"</code></pre>
+<pre><code>data-ccpa-explicit-consent="true"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-explicit-consent", "true");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-explicit-consent", "true");</code></pre>
 
-          <h4 id="data-location-aware">Location Awareness</h4>
+          <h4 id="data-ccpa-opt-in">Explicit Opt-in</h4>
 
-          <p>Some clients may want the GDPR banner to load <em>only</em> within EU countries. To do this, just add the following parameter:</p>
+          <p>As it stands currently, the CCPA banner's primary purpose is to alert users to a client's privacy practices. However, if a client collects and <em>shares</em> information with third-parties, then user's will be required to explicitly opt-in. To enable this behavior, just add the following:</p>
 
           <h5>HTML</h5>
 
-<pre><code>data-location-aware="true"</code></pre>
+<pre><code>data-ccpa-opt-in="true"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-location-aware", "true");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-opt-in", "true");</code></pre>
 
-          <h4 id="data-gdpr-new-window">New Window</h4>
+          <h4 id="data-ccpa-new-window">New Window</h4>
 
           <p>Passing this data attribute a value of "false" will disable the privacy policy link from opening in a new window. The default behavior is for all notice links to open in a new window. These visual cues will not appear when new windows are disabled.</p>
 
@@ -380,23 +374,11 @@ toc: true
 
           <h5>HTML</h5>
 
-<pre><code>data-gdpr-new-window="false"</code></pre>
+<pre><code>data-ccpa-new-window="false"</code></pre>
 
           <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-new-window", "false");</code></pre>
-
-          <h4 id="data-gdpr-cookie-mgr-url">Third-Party Cookie Manager</h4>
-
-          <p>Passing this data attribute a string value, in the form of a URL, will override the default URL (<a href="https://preferences-mgr.truste.com/">https://preferences-mgr.truste.com</a>).</p>
-
-          <h5>HTML</h5>
-
-<pre><code>data-gdpr-cookie-mgr-url="https://example.destroyallcookies.com"</code></pre>
-
-          <h5>JavaScript</h5>
-
-<pre><code>magicBullet.setAttribute("data-gdpr-cookie-mgr-url", "https://example.destroyallcookies.com");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-new-window", "false");</code></pre>
 
         </div>
 
@@ -414,7 +396,7 @@ toc: true
 
       <h2 id="banner-ga-tracking">Google Analytics Tracking</h2>
 
-      <p>Parameters can be used to customize certain tracking variables that are applied to the GDPR Accept button and sent to Google Analytics:</p>
+      <p>Parameters can be used to customize certain tracking variables that are applied to the CCPA Accept button and sent to Google Analytics:</p>
 
       <h3 id="banner-ga-tracking-parameters">Parameters</h3>
 
@@ -422,29 +404,29 @@ toc: true
 
       <div class="indent">
 
-        <h4 id="data-gdpr-ga-custom-category">Google Analytics Category</h4>
+        <h4 id="data-ccpa-ga-custom-category">Google Analytics Category</h4>
 
-        <p>Passing this data attribute a custom value will override the value of <code>data-custom-category</code>, which currently defaults to "GDPR".</p>
-
-        <h5>HTML</h5>
-
-        <pre><code>data-gdpr-ga-custom-category="Dogs"</code></pre>
-
-        <h5>JavaScript</h5>
-
-<pre><code>magicBullet.setAttribute("data-gdpr-ga-custom-category", "Dogs");</code></pre>
-
-        <h4 id="data-gdpr-ga-custom-label">Google Analytics Label</h4>
-
-        <p>Passing this data attribute a custom value will override the value of <code>data-custom-label</code>, which currently defaults to "GDPR Accept Button".</p>
+        <p>Passing this data attribute a custom value will override the value of <code>data-custom-category</code>, which currently defaults to "CCPA".</p>
 
         <h5>HTML</h5>
 
-<pre><code>data-gdpr-ga-custom-label="Fido"</code></pre>
+        <pre><code>data-ccpa-ga-custom-category="Dogs"</code></pre>
 
         <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-ga-custom-label", "Fido");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-ga-custom-category", "Dogs");</code></pre>
+
+        <h4 id="data-ccpa-ga-custom-label">Google Analytics Label</h4>
+
+        <p>Passing this data attribute a custom value will override the value of <code>data-custom-label</code>, which currently defaults to "CCPA Accept Button".</p>
+
+        <h5>HTML</h5>
+
+<pre><code>data-ccpa-ga-custom-label="Fido"</code></pre>
+
+        <h5>JavaScript</h5>
+
+<pre><code>magicBullet.setAttribute("data-ccpa-ga-custom-label", "Fido");</code></pre>
 
       </div>
 
@@ -460,7 +442,7 @@ toc: true
 
       <p>The second task of this script is to include a privacy policy statement on all TalentBrew forms that collect data. By default, the script will look for the <code>.data-form form-field.submit</code> class and <em>prepend</em> the following element, and message, before the form's "Submit" button:</p>
 
-<pre><code>&lt;p class="form-field gdpr-eu-tmp-notice"&gt;By submitting your information, you acknowledge that you have read our privacy policy (this content opens in new window) and consent to receive email communication from [company name].&lt;/p&gt;</code></pre>
+<pre><code>&lt;p class="form-field ccpa-eu-tmp-notice"&gt;By submitting your information, you acknowledge that you have read our privacy policy (this content opens in new window) and consent to receive email communication from [company name].&lt;/p&gt;</code></pre>
 
       <h3 id="banner-collection-form-parameters">Parameters</h3>
 
@@ -468,47 +450,47 @@ toc: true
 
       <div class="indent">
 
-        <h4 id="data-gdpr-custom-form-message">Custom Form Message</h4>
+        <h4 id="data-ccpa-custom-form-message">Custom Form Message</h4>
 
         <p>Passing this data attribute a string value will override the default form message. HTML may be included.</p>
 
         <h5>HTML</h5>
 
-<pre><code>data-gdpr-custom-form-message="By submitting your information, you acknowledge that you have read our &lt;a href='/privacy/' target='_blank'&gt;candidate privacy policy&lt;/a&gt; and consent to receive email communication."</code></pre>
+<pre><code>data-ccpa-custom-form-message="By submitting your information, you acknowledge that you have read our &lt;a href='/privacy/' target='_blank'&gt;candidate privacy policy&lt;/a&gt; and consent to receive email communication."</code></pre>
 
         <h5>JavaScript</h5>
 
-<pre><code>magicBullet.setAttribute("data-gdpr-custom-form-message", "By submitting your information, you acknowledge that you have read our &lt;a href='/privacy/' target='_blank'&gt;candidate privacy policy&lt;/a&gt; and consent to receive email communication.");</code></pre>
+<pre><code>magicBullet.setAttribute("data-ccpa-custom-form-message", "By submitting your information, you acknowledge that you have read our &lt;a href='/privacy/' target='_blank'&gt;candidate privacy policy&lt;/a&gt; and consent to receive email communication.");</code></pre>
 
-        <h4 id="data-gdpr-form-msg-exception">Form Message Exception</h4>
+        <h4 id="data-ccpa-form-msg-exception">Form Message Exception</h4>
 
-        <p>There may be instances where one may only require the GDPR message to load on certain forms and not others. By default, the script looks for the <code>.data-form</code> class and applies the message, but if you wish to exclude the message, simply add <code>data-gdpr-form-msg-exception</code> to the opening <code>form</code> element.</p>
+        <p>There may be instances where one may only require the CCPA message to load on certain forms and not others. By default, the script looks for the <code>.data-form</code> class and applies the message, but if you wish to exclude the message, simply add <code>data-ccpa-form-msg-exception</code> to the opening <code>form</code> element.</p>
 
         <h5>HTML</h5>
 
-<pre><code>&lt;form class="data-form" ... <strong>data-gdpr-form-msg-exception</strong>&gt; ... &lt;/form&gt;</code></pre>
+<pre><code>&lt;form class="data-form" ... <strong>data-ccpa-form-msg-exception</strong>&gt; ... &lt;/form&gt;</code></pre>
 
-        <h4 id="data-gdpr-form-bypass">Form Message Position</h4>
+        <h4 id="data-ccpa-form-bypass">Form Message Position</h4>
 
         <p>If you need to override the default behavior of placing the form message over the submit button, then you may include the following data attribute and value.
 
         <h5>HTML</h5>
 
-        <pre><code>data-gdpr-form-bypass="true"</code></pre>
+        <pre><code>data-ccpa-form-bypass="true"</code></pre>
 
         <h5>JavaScript</h5>
 
-        <pre><code>magicBullet.setAttribute("data-gdpr-form-bypass", "true");</code></pre>
+        <pre><code>magicBullet.setAttribute("data-ccpa-form-bypass", "true");</code></pre>
 
-        <p>Removing the default behavior means that you will need to manually insert the message into the desired position within the form. To do this, place the following markup wherever you would like the message to appear. The surrounding <code>p</code> tag can be replaced with a <code>span</code> or any other tag of your choosing, but please be sure to keep the <code>gdpr-eu-tmp-notice</code> class name in place, as the message will still be inserted into the tag, via JavaScript. The "form-feild" class may be removed, if needed.</p>
+        <p>Removing the default behavior means that you will need to manually insert the message into the desired position within the form. To do this, place the following markup wherever you would like the message to appear. The surrounding <code>p</code> tag can be replaced with a <code>span</code> or any other tag of your choosing, but please be sure to keep the <code>ccpa-eu-tmp-notice</code> class name in place, as the message will still be inserted into the tag, via JavaScript. The "form-feild" class may be removed, if needed.</p>
 
         <p><strong>Note:</strong> CSS formatting may be safely applied to this tag, as needed.</p>
 
-        <pre><code>&lt;p class="form-field gdpr-eu-tmp-notice"&gt;&lt;/p&gt;</code></pre>
+        <pre><code>&lt;p class="form-field ccpa-eu-tmp-notice"&gt;&lt;/p&gt;</code></pre>
 
         <!-- h5>Script Test</h5>
 
-        <p class="form-field gdpr-eu-tmp-notice"></p -->
+        <p class="form-field ccpa-eu-tmp-notice"></p -->
 
       </div>
 
@@ -518,7 +500,7 @@ toc: true
 
       <h2 id="banner-styling-hook">Styling Hook</h2>
 
-      <p>Please be aware that a CSS hook is being added to the <code>body</code> tag of each page the script loads on, which could come in handy for any GDPR related formatting issues/needs that may come up. The name of the class is <code>magic-bullet-gdpr</code>.</p>
+      <p>Please be aware that a CSS hook is being added to the <code>body</code> tag of each page the script loads on, which could come in handy for any CCPA related formatting issues/needs that may come up. The name of the class is <code>magic-bullet-ccpa</code>.</p>
 
     </section>
 
@@ -544,4 +526,4 @@ toc: true
 
 <!-- Implementation Example -->
 
-<script id="tmp-magic-bullet" data-gdpr="true" data-gdpr-policy-url="https://www.tmp.com/privacy/" data-gdpr-client-name="TMP Worldwide" src="../init.js"></script>
+<script id="tmp-magic-bullet" data-ccpa="true" data-ccpa-policy-url="https://www.tmp.com/privacy/" data-ccpa-client-name="TMP Worldwide" src="../init.js"></script>

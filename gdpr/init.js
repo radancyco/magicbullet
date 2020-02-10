@@ -12,6 +12,7 @@
 
   // Data Attributes
 
+  var gdprBannerTop = magicBulletScript.getAttribute("data-gdpr-banner-top");
   var gdprButtonColor = magicBulletScript.getAttribute("data-gdpr-button-color");
   var gdprButtonColorText = magicBulletScript.getAttribute("data-gdpr-button-color-text");
   var gdprButtonText = magicBulletScript.getAttribute("data-gdpr-button-text");
@@ -20,7 +21,7 @@
   var gdprCustomMessage = magicBulletScript.getAttribute("data-gdpr-custom-message");
   var gdprCustomFormMessage = magicBulletScript.getAttribute("data-gdpr-custom-form-message");
   var gdprDateExpire = magicBulletScript.getAttribute("data-gdpr-date-expire");
-  var gdprDomainName = magicBulletScript.getAttribute("data-gdpr-domain"); // Note, must be set on each domain banner exists on.
+  var gdprDomainName = magicBulletScript.getAttribute("data-gdpr-domain");
   var gdprExplicitConsent = magicBulletScript.getAttribute("data-gdpr-explicit-consent");
   var gdprFontSize = magicBulletScript.getAttribute("data-gdpr-font-size");
   var gdprGACustomCategory = magicBulletScript.getAttribute("data-gdpr-ga-custom-category");
@@ -38,7 +39,7 @@
 
   var gdprFormMessage = document.getElementsByClassName("gdpr-eu-tmp-notice");
 
-  var gdprDataFormSubmitBtn = document.querySelectorAll(".data-form .form-field.submit");
+  var gdprDataFormSubmitBtn = document.querySelectorAll(".data-form:not([data-gdpr-form-msg-exception]) .form-field.submit");
 
   var gdprPageRefresh = performance.navigation.type; // Not used now
 
@@ -87,7 +88,7 @@
 
     } else {
 
-      expDate.setMonth(expDate.getMonth() + 12);
+      expDate.setDate(expDate.getDate() + 30);
 
     }
 
@@ -95,11 +96,11 @@
 
     if(gdprDomainName !== null) {
 
-      document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
+      document.cookie = "ConsentCapture=" + consentDate + "; Secure; SameSite=None; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
 
     } else {
 
-      document.cookie = "ConsentCapture=" + consentDate + "; Secure; expires=" + expDate + "; path=/";
+      document.cookie = "ConsentCapture=" + consentDate + "; Secure; SameSite=None; expires=" + expDate + "; path=/";
 
     }
 
@@ -119,7 +120,7 @@
 
     } else {
 
-      expDate.setMonth(expDate.getMonth() + 12);
+      expDate.setDate(expDate.getDate() + 30);
 
     }
 
@@ -127,11 +128,11 @@
 
     if(gdprDomainName !== null) {
 
-      document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
+      document.cookie = "BannerDisplayed=true; Secure; SameSite=None; expires=" + expDate + "; domain=" + gdprDomainName + "; path=/";
 
     } else {
 
-      document.cookie = "BannerDisplayed=true; Secure; expires=" + expDate + "; path=/";
+      document.cookie = "BannerDisplayed=true; Secure; SameSite=None; expires=" + expDate + "; path=/";
 
     }
 
@@ -195,8 +196,6 @@
 
   };
 
-  // Languages
-
   if (gdprCookieManageURL !== null) {
 
     var gdprTrusteURL = gdprCookieManageURL;
@@ -206,6 +205,8 @@
     var gdprTrusteURL = "https://preferences-mgr.truste.com/";
 
   }
+
+  // Languages
 
   if (gdprLanguage === "ar") {
 
@@ -441,7 +442,7 @@
 
     // English (Default)
 
-    var gdprMessage = "We use cookies and other tracking technologies to assist with navigation, improve our products and services, assist with our marketing efforts, and provide content from third parties. By continuing to use this site you agree to our use of cookies in accordance with our <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privacy policy <span id='gdpr-a11y-message' class='visually-hidden'>(opens in new window)</span></a>. To manage third-party cookie preferences, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>click here <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(opens in new window)</span></a>.";
+    var gdprMessage = "We use cookies and other tracking technologies to assist with navigation, improve our products and services, assist with our marketing efforts, and provide content from third parties. By continuing to use this site you agree to our use of cookies in accordance with our <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>privacy policy <span id='gdpr-a11y-message' class='visually-hidden'>(opens in new window)</span></a>. <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>Manage third-party cookie preferences here <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(opens in new window)</span></a>.";
 
     var gdprConsentBtn = "Accept";
 
@@ -451,7 +452,7 @@
 
   if (gdprPolicyURL === null && gdprClientName === null) {
 
-    var gdprMessage = "A consent and privacy message cannot be generated until a client name and privacy policy URL have been provided. Please see <a href='https://tmpworldwide.dev/tmp-magic-bullet/gdpr/#gdpr-mandatory'>mandatory requirements</a> needed for this script to run.";
+    var gdprMessage = "A consent and privacy message cannot be generated until a client name and privacy policy URL have been provided. Please see <a href='https://tmpworldwide.dev/tmp-magic-bullet/gdpr/#banner-mandatory'>mandatory requirements</a> needed for this script to run.";
 
   }
 
@@ -470,7 +471,11 @@
       gdprContainer.setAttribute("id", "gdpr-alert");
       gdprContainer.setAttribute("role", "alert");
 
-      // gdprContainer.className = "dev-mode";
+      if (gdprBannerTop !== null) {
+
+        gdprContainer.classList.add("gdpr-banner-top");
+
+      }
 
       if (gdprNoticeColor !== null) {
 
@@ -588,7 +593,17 @@
 
       // Append Alert to Body Element
 
-      gdprBody.appendChild(gdprContainer);
+      if (gdprBannerTop !== null) {
+
+        gdprBody.insertBefore(gdprContainer, gdprBody.childNodes[0] || null);
+
+      } else {
+
+        gdprBody.appendChild(gdprContainer);
+
+      }
+
+      //gdprBody.insertBefore(gdprContainer, null);
 
       // Remove Target Attribute
 
