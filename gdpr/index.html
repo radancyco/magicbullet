@@ -27,20 +27,19 @@ toc: true
 
         <p>If you require HTML, add the following script before the closing <code>body</code> tag of your page or template:</p>
 
-  <pre><code>&lt;script id="tmp-magic-bullet" data-gdpr="true" data-gdpr-client-name="[client name]" data-gdpr-policy-url="[site policy url]" src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;
-  </code></pre>
+<pre><code>&lt;script id="tmp-magic-bullet" data-gdpr="true" data-gdpr-client-name="[client name]" data-gdpr-policy-url="[site policy url]" src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
 
       <h3 id="banner-implementation-js">JavaScript</h3>
 
       <p>If your site contains many templates, but leverages the same, single JavaScript file, implementing a sitewide notice may be more <em>easily achieved</em> by adding the following <abbr title="Document Object Model">DOM</abbr> method to your global script: </p>
 
-  <pre><code>var magicBullet = document.createElement("script");
-  magicBullet.setAttribute("id", "tmp-magic-bullet");
-  magicBullet.setAttribute("data-gdpr", "true");
-  magicBullet.setAttribute("data-gdpr-client-name", "[client name]");
-  magicBullet.setAttribute("data-gdpr-policy-url", "[site policy url]");
-  magicBullet.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/");
-  document.body.appendChild(magicBullet);</code></pre>
+<pre><code>var magicBullet = document.createElement("script");
+magicBullet.setAttribute("id", "tmp-magic-bullet");
+magicBullet.setAttribute("data-gdpr", "true");
+magicBullet.setAttribute("data-gdpr-client-name", "[client name]");
+magicBullet.setAttribute("data-gdpr-policy-url", "[site policy url]");
+magicBullet.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/");
+document.body.appendChild(magicBullet);</code></pre>
 
       <p><strong>Note:</strong> The <code>data-gdpr</code>, <code>data-gdpr-client-name</code> and <code>data-gdpr-policy-url</code> attributes are <a href="#banner-mandatory">mandatory</a> parameters.</p>
 
@@ -122,11 +121,17 @@ toc: true
 
           <p>Passing this data attribute a language code, will translate the notice and form message into the desired language. The default language is English.</p>
 
+          <h5>HTML</h5>
+
+<pre><code>data-gdpr-language="zh-hant"</code></pre>
+
+          <h5>JavaScript</h5>
+
+<pre><code>magicBullet.setAttribute("data-gdpr-language", "zh-hant");</code></pre>
+
           <h5 id="gdpr-language-code">Language Codes</h5>
 
           <p>The following language code values are accepted by the script:</p>
-
-          <p class="alert"><strong>Note:</strong> Some language translations are currently pending, but should be complete by May 20th, 2018. If new languages are required, please contact <a href="mailto:dan.green@tmp.com">Dan Green</a>.</p>
 
           <ul>
             <li><strong>ar</strong> (Arabic) <span class="alert"> - Pending</span></li>
@@ -154,13 +159,7 @@ toc: true
             <li><strong>zh-hant</strong> (Traditional Chinese)</li>
           </ul>
 
-          <h5>HTML</h5>
-
-<pre><code>data-gdpr-language="zh-hant"</code></pre>
-
-          <h5>JavaScript</h5>
-
-<pre><code>magicBullet.setAttribute("data-gdpr-language", "zh-hant");</code></pre>
+          <p><strong>Note:</strong> Some language translations are currently pending, but should be complete by May 20th, 2018. If new languages are required, please contact <a href="mailto:dan.green@tmp.com">Dan Green</a>.</p>
 
         </div>
 

@@ -27,20 +27,19 @@ toc: true
 
         <p>If you require HTML, add the following script before the closing <code>body</code> tag of your page or template:</p>
 
-  <pre><code>&lt;script id="tmp-magic-bullet" data-ccpa="true" data-ccpa-client-name="[client name]" data-ccpa-policy-url="[site policy url]" src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;
-  </code></pre>
+<pre><code>&lt;script id="tmp-magic-bullet" data-ccpa="true" data-ccpa-client-name="[client name]" data-ccpa-policy-url="[site policy url]" src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
 
       <h3 id="banner-implementation-js">JavaScript</h3>
 
       <p>If your site contains many templates, but leverages the same, single JavaScript file, implementing a sitewide notice may be more <em>easily achieved</em> by adding the following <abbr title="Document Object Model">DOM</abbr> method to your global script: </p>
 
-  <pre><code>var magicBullet = document.createElement("script");
-  magicBullet.setAttribute("id", "tmp-magic-bullet");
-  magicBullet.setAttribute("data-ccpa", "true");
-  magicBullet.setAttribute("data-ccpa-client-name", "[client name]");
-  magicBullet.setAttribute("data-ccpa-policy-url", "[site policy url]");
-  magicBullet.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/");
-  document.body.appendChild(magicBullet);</code></pre>
+<pre><code>var magicBullet = document.createElement("script");
+magicBullet.setAttribute("id", "tmp-magic-bullet");
+magicBullet.setAttribute("data-ccpa", "true");
+magicBullet.setAttribute("data-ccpa-client-name", "[client name]");
+magicBullet.setAttribute("data-ccpa-policy-url", "[site policy url]");
+magicBullet.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/");
+document.body.appendChild(magicBullet);</code></pre>
 
       <p><strong>Note:</strong> The <code>data-ccpa</code>, <code>data-ccpa-client-name</code> and <code>data-ccpa-policy-url</code> attributes are <a href="#banner-mandatory">mandatory</a> parameters.</p>
 
@@ -122,16 +121,6 @@ toc: true
 
           <p>Passing this data attribute a language code, will translate the notice and form message into the desired language. The default language is English.</p>
 
-          <h5 id="ccpa-language-code">Language Codes</h5>
-
-          <p>The following language code values are accepted by the script:</p>
-
-          <p class="alert"><strong>Note:</strong> If new languages are required, please contact <a href="mailto:dan.green@tmp.com">Dan Green</a>.</p>
-
-          <ul>
-            <li><strong>es</strong> (Spanish)</li>
-          </ul>
-
           <h5>HTML</h5>
 
 <pre><code>data-ccpa-language="es"</code></pre>
@@ -139,6 +128,16 @@ toc: true
           <h5>JavaScript</h5>
 
 <pre><code>magicBullet.setAttribute("data-ccpa-language", "es");</code></pre>
+
+          <h5 id="ccpa-language-code">Language Codes</h5>
+
+          <p>The following language code values are accepted by the script:</p>
+
+          <ul>
+            <li><strong>es</strong> (Spanish)</li>
+          </ul>
+
+          <p><strong>Note:</strong> If new languages are required, please contact <a href="mailto:dan.green@tmp.com">Dan Green</a>.</p>
 
         </div>
 
