@@ -44,53 +44,63 @@
   var localPaths = localHost === "localhost";
   var testPaths = hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "github.io";
 
-  // Execute GDPR
+  // Check to see if both the GDPR and CCPA attributes exist together.
 
-  if (gdprScript === "true") {
+  if (gdprScript === "true" && ccpaScript === "true") {
 
-    if(locationAware  === "true") {
+    alert("CCPA & GDPR cannot be initiated on the same site. You may only use data-ccpa=\"true\" or data-gdpr=\"true\".");
 
-      //TB Country ID for Europe countries need to list full here
+  } else {
 
-      //Albania,Armenia,Austria,Belarus,Belgium,Bulgaria,Croatia,Cyprus,Czech Republic,Denmark,Finland,France,Georgia,Germany,Greece,Hungary,Iceland,Ireland,Italy,Kazakhstan,Kosovo,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Romania,Russia,Serbia,Slovakia,Slovenia,Spain,Sweden,Switzerland,Turkey,Ukraine,UK
+    // Execute GDPR
 
-      // TODO: Eventually move this over to gdpr/init.js
+    if (gdprScript === "true") {
 
-      var locationIDEurope = '783754,174982,2782113,630336,2802361,732800,3202326,146669,3077311,2623032,660013,3017382,614540,2921044,390903,719819,2629691,2963597,3175395,1522867,831053,458258,597427,2960313,2562770,2750405,3144096,798544,2264397,798549,2017370,6290252,3057568,3190538,2510769,2661886,2658434,298795,690791,2635167';
+      if(locationAware  === "true") {
 
-      postAjax(function(dataLoc) {
+        //TB Country ID for Europe countries need to list full here
 
-        var location = dataLoc.l;
-        var locationID = dataLoc.lp.split('-')[0];
+        //Albania,Armenia,Austria,Belarus,Belgium,Bulgaria,Croatia,Cyprus,Czech Republic,Denmark,Finland,France,Georgia,Germany,Greece,Hungary,Iceland,Ireland,Italy,Kazakhstan,Kosovo,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Romania,Russia,Serbia,Slovakia,Slovenia,Spain,Sweden,Switzerland,Turkey,Ukraine,UK
 
-        console.log("location = " + location);
-        console.log("locationId = " + locationID);
+        // TODO: Eventually move this over to gdpr/init.js
 
-        if(locationIDEurope.indexOf(locationID)!=-1) {
+        var locationIDEurope = '783754,174982,2782113,630336,2802361,732800,3202326,146669,3077311,2623032,660013,3017382,614540,2921044,390903,719819,2629691,2963597,3175395,1522867,831053,458258,597427,2960313,2562770,2750405,3144096,798544,2264397,798549,2017370,6290252,3057568,3190538,2510769,2661886,2658434,298795,690791,2635167';
 
-          // Show GDPR only for Europe
+        postAjax(function(dataLoc) {
 
-          showGDPR();
+          var location = dataLoc.l;
+          var locationID = dataLoc.lp.split('-')[0];
 
-        }
+          console.log("location = " + location);
+          console.log("locationId = " + locationID);
 
-      });
+          if(locationIDEurope.indexOf(locationID)!=-1) {
 
-    } else {
+            // Show GDPR only for Europe
 
-      showGDPR();
+            showGDPR();
+
+          }
+
+        });
+
+      } else {
+
+        showGDPR();
+
+      }
 
     }
 
-  }
+    // Execute CCPA
 
-  // Execute General Privacy Notice (CCPA)
+    if (ccpaScript === "true") {
 
-  if (ccpaScript === "true") {
+        showCCPA();
 
-      showCCPA();
+    }
 
-  }
+  } // end check
 
   // Execute A11y
 
