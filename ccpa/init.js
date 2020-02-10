@@ -44,7 +44,7 @@
 
   var ccpaPageRefresh = performance.navigation.type; // Not used now
 
-  // Add ccpa hook for implementation team. May come in handy.
+  // Add CCPA hook for implementation team. May come in handy.
 
   ccpaBody.classList.add("magic-bullet-ccpa");
 
@@ -390,7 +390,7 @@
 
       } else {
 
-        ccpaButton.setAttribute("data-custom-label", "ccpa Accept Button");
+        ccpaButton.setAttribute("data-custom-label", "CCPA Button");
 
       }
 
