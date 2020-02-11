@@ -179,7 +179,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
         <div class="indent">
 
-          <h4 id="data-gdpr-banner-top">Banner Position</h4>
+          <h4 id="data-gdpr-banner-top">Banner Position <span class="alert">(New)</span></h4>
 
           <p>Passing this data attribute a value of "true", will will position the GDPR banner at the top of the page. The default position is to load at the bottom of the page.</p>
 
@@ -303,7 +303,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
         <div class="indent">
 
-          <h4 id="data-gdpr-date-expire">Banner Expiration</h4>
+          <h4 id="data-gdpr-date-expire">Banner Expiration <span class="alert">(New)</span></h4>
 
           <p>Passing this data attribute a value of "true", will allow the banner to expire after one day, instead of the default 30 days.</p>
 
@@ -327,7 +327,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
 <pre><code>magicBullet.setAttribute("data-gdpr-custom-message", "&lt;h2&gt;About Cookies&lt;/h2&gt; &lt;p&gt;We use cookies to help make this website better, to improve our services and for advertising purposes. You can learn more about our use of cookies by &lt;a href='https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/cookies-policy/'>clicking here&lt;/a&gt;.&lt;/p&gt;");</code></pre>
 
-          <h4 id="data-gdpr-domain">Cross-Domain Sharing</h4>
+          <h4 id="data-gdpr-domain">Cross-Domain Sharing <span class="alert">(New)</span></h4>
 
           <p>There are times when a client may wish to share cookie values and ensure the banner is hidden across multiple URL's with the same domain or subdomain. This is possible if the Magic Bullet script is placed on all needed sites and each include the following data attribute:</p>
 
@@ -385,7 +385,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
 <pre><code>magicBullet.setAttribute("data-gdpr-new-window", "false");</code></pre>
 
-          <h4 id="data-gdpr-cookie-mgr-url">Third-Party Cookie Manager</h4>
+          <h4 id="data-gdpr-cookie-mgr-url">Third-Party Cookie Manager <span class="alert">(New)</span></h4>
 
           <p>Passing this data attribute a string value, in the form of a URL, will override the default URL (<a href="https://preferences-mgr.truste.com/">https://preferences-mgr.truste.com</a>).</p>
 
@@ -479,7 +479,7 @@ document.body.appendChild(magicBullet);</code></pre>
 
 <pre><code>magicBullet.setAttribute("data-gdpr-custom-form-message", "By submitting your information, you acknowledge that you have read our &lt;a href='/privacy/' target='_blank'&gt;candidate privacy policy&lt;/a&gt; and consent to receive email communication.");</code></pre>
 
-        <h4 id="data-gdpr-form-msg-exception">Form Message Exception</h4>
+        <h4 id="data-gdpr-form-msg-exception">Form Message Exception <span class="alert">(New)</span></h4>
 
         <p>There may be instances where one may only require the GDPR message to load on certain forms and not others. By default, the script looks for the <code>.data-form</code> class and applies the message, but if you wish to exclude the message, simply add <code>data-gdpr-form-msg-exception</code> to the opening <code>form</code> element.</p>
 
