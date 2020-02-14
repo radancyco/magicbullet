@@ -67,11 +67,15 @@
 
           {% if page.toc %}
 
-          <nav id="toc" aria-label="table of content">
+          <nav id="toc">
 
-            <h2>Table of Contents</h2>
+            <details>
 
-            {% include toc.html html=content h_max=4 ordered=true %}
+              <summary>Table of Contents</summary>
+
+              {% include toc.html html=content h_max=4 ordered=true %}
+
+            </details>
 
           </nav>
 

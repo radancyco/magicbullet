@@ -10,6 +10,15 @@ scroll-behavior: smooth;
 
 }
 
+main a {
+text-decoration: underline;
+}
+
+details summary {
+color: #0895d3;
+font-weight: bold;
+}
+
 #toc ol {
 margin: .5em 1em;
 }
