@@ -59,6 +59,8 @@
 
   $(".ats-description *").removeAttr("align style face size title id");
 
+  $(".ats-description font").contents().unwrap(); // Remove font element.
+
   // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
 
   // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0009
