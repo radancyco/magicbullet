@@ -16,6 +16,7 @@
   var gdprButtonColor = magicBulletScript.getAttribute("data-gdpr-button-color");
   var gdprButtonColorText = magicBulletScript.getAttribute("data-gdpr-button-color-text");
   var gdprButtonText = magicBulletScript.getAttribute("data-gdpr-button-text");
+  var gdprBannerRemove = magicBulletScript.getAttribute("data-gdpr-banner-remove");
   var gdprClientName = magicBulletScript.getAttribute("data-gdpr-client-name");
   var gdprCookieManageURL = magicBulletScript.getAttribute("data-gdpr-cookie-mgr-url");
   var gdprCustomMessage = magicBulletScript.getAttribute("data-gdpr-custom-message");
@@ -140,61 +141,65 @@
 
   // Let's get our cookies...
 
-  var bannerDisplayed = getCookie("BannerDisplayed");
-  var consentCapture = getCookie("ConsentCapture");
+  if(gdprBannerRemove === null) {
 
-  // While the default behavior for the cookie is passive consent, there may be times
-  // where we want to explicitly have user click on "Accept".
-  // So we bypass default behavior by adding data-gdpr-explicit-consent
+    var bannerDisplayed = getCookie("BannerDisplayed");
+    var consentCapture = getCookie("ConsentCapture");
 
-  if(gdprExplicitConsent === null) {
+    // While the default behavior for the cookie is passive consent, there may be times
+    // where we want to explicitly have user click on "Accept".
+    // So we bypass default behavior by adding data-gdpr-explicit-consent
 
-    // If explicit consent not needed, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
-    // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
+    if(gdprExplicitConsent === null) {
 
-    if (bannerDisplayed === null) {
+      // If explicit consent not needed, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
+      // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
+
+      if (bannerDisplayed === null) {
+
+        setBanner();
+
+      }
+
+      // If bannerDisplayed exists and consent has NOT been set, then set consent when user visits another page.
+
+      if(bannerDisplayed !== null && consentCapture === null) {
+
+        setConsent();
+
+      }
+
+    }
+
+    // If consent has been given, then set bannerDisplayed
+
+    if(consentCapture !== null) {
 
       setBanner();
 
-    }
+      // We need to always be sending variable to Data Layer on each page load, so let's grab that from ConsentCapture cookie
 
-    // If bannerDisplayed exists and consent has NOT been set, then set consent when user visits another page.
+      var userConsentedOn = Date.parse(consentCapture);
 
-    if(bannerDisplayed !== null && consentCapture === null) {
-
-      setConsent();
+      setDataLayer(userConsentedOn);
 
     }
-
-  }
-
-  // If consent has been given, then set bannerDisplayed
-
-  if(consentCapture !== null) {
-
-    setBanner();
-
-    // We need to always be sending variable to Data Layer on each page load, so let's grab that from ConsentCapture cookie
-
-    var userConsentedOn = Date.parse(consentCapture);
-
-    setDataLayer(userConsentedOn);
-
-  }
-
-  // Remove Alert
-
-  var removeAlert = function() {
 
     // Remove Alert
 
-    gdprBody.removeChild(gdprContainer);
+    var removeAlert = function() {
 
-    // Set Cookie
+      // Remove Alert
+
+      gdprBody.removeChild(gdprContainer);
+
+      // Set Cookie
 
     setConsent();
 
-  };
+    };
+
+  }
 
   if (gdprCookieManageURL !== null) {
 
@@ -593,17 +598,19 @@
 
       // Append Alert to Body Element
 
-      if (gdprBannerTop !== null) {
+      if(gdprBannerRemove === null) {
 
-        gdprBody.insertBefore(gdprContainer, gdprBody.childNodes[0] || null);
+        if (gdprBannerTop !== null) {
 
-      } else {
+          gdprBody.insertBefore(gdprContainer, gdprBody.childNodes[0] || null);
 
-        gdprBody.appendChild(gdprContainer);
+        } else {
+
+          gdprBody.appendChild(gdprContainer);
+
+        }
 
       }
-
-      //gdprBody.insertBefore(gdprContainer, null);
 
       // Remove Target Attribute
 
