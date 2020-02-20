@@ -13,10 +13,10 @@
   // Data Attributes
 
   var gdprBannerTop = magicBulletScript.getAttribute("data-gdpr-banner-top");
+  var gdprBannerRemove = magicBulletScript.getAttribute("data-gdpr-banner-remove");
   var gdprButtonColor = magicBulletScript.getAttribute("data-gdpr-button-color");
   var gdprButtonColorText = magicBulletScript.getAttribute("data-gdpr-button-color-text");
   var gdprButtonText = magicBulletScript.getAttribute("data-gdpr-button-text");
-  var gdprBannerRemove = magicBulletScript.getAttribute("data-gdpr-banner-remove");
   var gdprClientName = magicBulletScript.getAttribute("data-gdpr-client-name");
   var gdprCookieManageURL = magicBulletScript.getAttribute("data-gdpr-cookie-mgr-url");
   var gdprCustomMessage = magicBulletScript.getAttribute("data-gdpr-custom-message");
@@ -33,7 +33,7 @@
   var gdprNoticeColorText = magicBulletScript.getAttribute("data-gdpr-notice-text-color");
   var gdprPolicyURL = magicBulletScript.getAttribute("data-gdpr-policy-url");
   var gdprTextAlign = magicBulletScript.getAttribute("data-gdpr-text-align");
-  var gdprformBypass = magicBulletScript.getAttribute("data-gdpr-form-bypass");
+  var gdprFormBypass = magicBulletScript.getAttribute("data-gdpr-form-bypass");
   var gdprzIndex = magicBulletScript.getAttribute("data-gdpr-z-index");
 
   // Targeted TalentBrew Elements
@@ -662,7 +662,7 @@
 
   // If form bypass is true...
 
-  if (gdprformBypass === "true") {
+  if (gdprFormBypass === "true") {
 
     // Append form message.
 

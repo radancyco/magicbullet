@@ -13,6 +13,7 @@
   // Data Attributes
 
   var ccpaBannerTop = magicBulletScript.getAttribute("data-ccpa-banner-top");
+  var ccpaBannerRemove = magicBulletScript.getAttribute("data-ccpa-banner-remove");
   var ccpaAcceptButtonText = magicBulletScript.getAttribute("data-ccpa-accept-button-text");
   var ccpaButtonColor = magicBulletScript.getAttribute("data-ccpa-button-color");
   var ccpaButtonColorText = magicBulletScript.getAttribute("data-ccpa-button-color-text");
@@ -33,7 +34,7 @@
   var ccpaOptIn = magicBulletScript.getAttribute("data-ccpa-opt-in");
   var ccpaPolicyURL = magicBulletScript.getAttribute("data-ccpa-policy-url");
   var ccpaTextAlign = magicBulletScript.getAttribute("data-ccpa-text-align");
-  var ccpaformBypass = magicBulletScript.getAttribute("data-ccpa-form-bypass");
+  var ccpaFormBypass = magicBulletScript.getAttribute("data-ccpa-form-bypass");
   var ccpazIndex = magicBulletScript.getAttribute("data-ccpa-z-index");
 
   // Targeted TalentBrew Elements
@@ -147,67 +148,71 @@
 
   // Let's get our cookies...
 
-  var bannerDisplayed = getCookie("BannerDisplayed");
-  var consentCapture = getCookie("ConsentCapture");
+  if(ccpaBannerRemove === null) {
 
-  // While the default behavior for the cookie is passive consent, there may be times
-  // where we want to explicitly have user click on "Accept".
-  // So we bypass default behavior by adding data-ccpa-explicit-consent
+    var bannerDisplayed = getCookie("BannerDisplayed");
+    var consentCapture = getCookie("ConsentCapture");
 
-  if(ccpaExplicitConsent === null) {
+    // While the default behavior for the cookie is passive consent, there may be times
+    // where we want to explicitly have user click on "Accept".
+    // So we bypass default behavior by adding data-ccpa-explicit-consent
 
-    // If explicit consent not needed, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
-    // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
+    if(ccpaExplicitConsent === null) {
 
-    if (bannerDisplayed === null) {
+      // If explicit consent not needed, check if bannerDisplayed exists. If not, then create it and set it's value to "yes".
+      // It's presense on other pages, thoughout user session, will ensure that notice never appears again.
+
+      if (bannerDisplayed === null) {
+
+        setBanner();
+
+      }
+
+      // If bannerDisplayed exists and consent has NOT been set, then set consent when user visits another page.
+
+      if(bannerDisplayed !== null && consentCapture === null) {
+
+        setConsent();
+
+      }
+
+    }
+
+    // If consent has been given, then set bannerDisplayed
+
+    if(consentCapture !== null) {
 
       setBanner();
 
-    }
+      // Only send info to data layer if client explicitly collectes data.
 
-    // If bannerDisplayed exists and consent has NOT been set, then set consent when user visits another page.
+      if (ccpaOptIn !== null) {
 
-    if(bannerDisplayed !== null && consentCapture === null) {
+        // We need to always be sending variable to Data Layer on each page load, so let's grab that from ConsentCapture cookie
 
-      setConsent();
+        var userConsentedOn = Date.parse(consentCapture);
 
-    }
+        setDataLayer(userConsentedOn);
 
-  }
-
-  // If consent has been given, then set bannerDisplayed
-
-  if(consentCapture !== null) {
-
-    setBanner();
-
-    // Only send info to data layer if client explicitly collectes data.
-
-    if (ccpaOptIn !== null) {
-
-      // We need to always be sending variable to Data Layer on each page load, so let's grab that from ConsentCapture cookie
-
-      var userConsentedOn = Date.parse(consentCapture);
-
-      setDataLayer(userConsentedOn);
+      }
 
     }
-
-  }
-
-  // Remove Alert
-
-  var removeAlert = function() {
 
     // Remove Alert
 
-    ccpaBody.removeChild(ccpaContainer);
+    var removeAlert = function() {
 
-    // Set Cookie
+      // Remove Alert
 
-    setConsent();
+      ccpaBody.removeChild(ccpaContainer);
 
-  };
+      // Set Cookie
+
+      setConsent();
+
+    };
+
+  }
 
   // Languages
 
@@ -404,13 +409,17 @@
 
       // Append Alert to Body Element
 
-      if (ccpaBannerTop !== null) {
+      if(ccpaBannerRemove === null) {
 
-        ccpaBody.insertBefore(ccpaContainer, ccpaBody.childNodes[0] || null);
+        if (ccpaBannerTop !== null) {
 
-      } else {
+          ccpaBody.insertBefore(ccpaContainer, ccpaBody.childNodes[0] || null);
 
-        ccpaBody.appendChild(ccpaContainer);
+        } else {
+
+          ccpaBody.appendChild(ccpaContainer);
+
+        }
 
       }
 
@@ -464,7 +473,7 @@
 
   // If form bypass is true...
 
-  if (ccpaformBypass === "true") {
+  if (ccpaFormBypass === "true") {
 
     // Append form message.
 
