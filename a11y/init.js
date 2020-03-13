@@ -57,9 +57,13 @@
 
   $(".ats-description table").attr("role", "presentation");
 
-  $(".ats-description *").removeAttr("align style face size title id");
+  $(".ats-description *").removeAttr("align style face size title id").html(function (i, html) {
 
-  $(".ats-description font").contents().unwrap(); // Remove font element.
+      return html.replace(/&nbsp;/g, ""); // Remove nbsp;
+
+  });
+
+  $(".ats-description font, .ats-description o").contents().unwrap(); // Remove font element.
 
   // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
 
