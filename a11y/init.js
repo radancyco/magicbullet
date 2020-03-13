@@ -63,7 +63,7 @@
 
   });
 
-  $(".ats-description font, .ats-description o").contents().unwrap(); // Remove font element.
+  $(".ats-description font").contents().unwrap(); // Remove font element.
 
   // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
 
