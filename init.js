@@ -31,6 +31,10 @@
 
   var ccpaScript = magicBulletScript.getAttribute("data-ccpa");
 
+  // Get data-alert attribute, if present.
+
+  var alertScript = magicBulletScript.getAttribute("data-alert");
+
   // Get hostname so that we can select between QA and Production scripts.
 
   var hostName = location.hostname;
@@ -107,6 +111,14 @@
   if (a11yScript === "true") {
 
     showA11y();
+
+  }
+
+  // Execute Alert
+
+  if (alertScript === "true") {
+
+    showAlert();
 
   }
 
@@ -267,6 +279,54 @@
     // Append Script to DOM.
 
     document.body.appendChild(a11yExec);
+
+  }
+
+  function showAlert() {
+
+    // Add Privacy Notice CSS
+
+    var alertCSS = document.createElement("link");
+    alertCSS.setAttribute("id", "alert-css");
+    alertCSS.setAttribute("rel", "stylesheet");
+
+    // Create and add Alert script
+
+    var alertExec = document.createElement("script");
+    alertExec.setAttribute("id", "alert-js");
+
+    // Run script locally when these domains present...
+    // Feel free to add your own IP address.
+
+    if (localPaths) {
+
+      alertCSS.setAttribute("href", "/alert/init.css");
+      alertExec.setAttribute("src", "/alert/init.js");
+
+    } else {
+
+      // Run QA version on following domains only...
+
+      if(testPaths) {
+
+        alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/qa/css/");
+        alertExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/alert/qa/");
+
+      } else {
+
+        // ... else, run the production version.
+
+        alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/prod/css/");
+        alertExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/alert/prod/");
+
+      }
+
+    }
+
+    // Append CSS and Script to DOM.
+
+    document.head.appendChild(alertCSS);
+    document.body.appendChild(alertExec);
 
   }
 
