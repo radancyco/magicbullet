@@ -1,3 +1,9 @@
+/*
+
+  System Alert
+  Developer: Michael "Spell" Spellacy, Email: michael.spellacy@tmp.com, Twitter: @spellacy, GitHub: michaelspellacy
+
+*/
 
 @keyframes fadein {
 
@@ -134,6 +140,18 @@ text-decoration: underline;
 
 .system-alert-css #system-message a:hover, .system-alert-css #system-message a:focus {
 text-decoration: none;
+}
+
+.system-alert-css #system-message a[target] {
+background-color: transparent;
+background-image: url(data:image/gif;base64,R0lGODlhCgAKAJECAP///5mZmQAAAAAAACH5BAEAAAIALAAAAAAKAAoAAAIalIMZJgH/1gGJqugQpFzH7TlWJVJMGZ0KwhQAOw==);
+background-position: center right;
+background-repeat: no-repeat;
+padding-right: 14px;
+}
+
+.system-alert-css #system-message a[target]:focus, .system-alert-css #system-message a[target]:hover {
+background-image: url(data:image/gif;base64,R0lGODlhCgAKAJECAP///2eIpAAAAAAAACH5BAEAAAIALAAAAAAKAAoAAAIalIMZJgH/1gGJqugQpFzH7TlWJVJMGZ0KwhQAOw==);
 }
 
 .system-alert-css #system-message button {

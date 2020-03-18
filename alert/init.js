@@ -70,13 +70,17 @@
 
   var alertDisplayed = getCookie("AlertDisplayed");
 
+  if (alertDisplayed === null) {
+
+    setBanner();
+
+  }
+
   // Remove Alert
 
   var removeAlert = function() {
 
     // Remove Alert
-
-    setBanner();
 
     alertBody.removeChild(alertContainer);
     alertBody.classList.remove("system-alert-active");
