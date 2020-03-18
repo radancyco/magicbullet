@@ -94,6 +94,8 @@
 
     var alertCloseBtn = "Cerca";
 
+    // COVID-19 Message
+
     var alertCovidMessage = "<p>La salud y seguridad de nuestros empleados y candidatos es muy importante para nosotros. Debido a la situación actual relacionada con el Coronavirus (COVID-19), estamos aprovechando nuestras capacidades digitales para garantizar que podamos continuar reclutando a los mejores talentos.</p> <p>A medida que avanza su solicitud, es posible que se le solicite que use una de nuestras herramientas digitales para ayudarlo en su viaje de reclutamiento. Si es así, uno de nuestros colegas de Recursos le explicará cómo se utilizará nuestra tecnología de video-entrevista durante todo el proceso de reclutamiento y estará disponible para responder cualquier pregunta que pueda tener.</p>";
 
   } else {
@@ -101,6 +103,8 @@
     // English (Default)
 
     var alertCloseBtn = "Close";
+
+    // COVID-19 Message
 
     var alertCovidMessage = "<p>The health and safety of our employees and candidates is very important to us. Due to the current situation related to the Coronavirus (COVID-19), we're leveraging our digital capabilities to ensure we can continue to recruit top talent.</p> <p>As your application progresses, you may be asked to use one of our digital tools to help you through your recruitment journey. If so, one of our colleagues will explain how these tools will be used throughout the recruitment process and will be on hand to answer any questions you might have.</p>";
 
@@ -168,7 +172,6 @@
     alertContent.setAttribute("id", "system-message");
     alertContent.setAttribute("role", "dialog");
     alertContent.setAttribute("aria-modal", "true");
-    // alertContent.classList.add("hidden");
 
     // Add custom message if present...
 

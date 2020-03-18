@@ -1,7 +1,8 @@
 
 body.system-alert-active {
-position: fixed;
 overflow-y:scroll;
+position: fixed;
+width: 100%;
 }
 
 body.system-alert-active #page {
