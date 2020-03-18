@@ -99,9 +99,10 @@ transform: translate(-50%, -40%) scale(0.9);
 
 .system-alert-css #system-message {
 background-color: #fff;
-border: 1px #ccc solid;
 border-radius: 5px;
+border: 1px #ccc solid;
 box-shadow: 0 3px 7px rgba(0, 0, 0, 0.7);
+line-height: 1.7;
 padding: 20px 40px;
 width: 90%;
 }
@@ -117,6 +118,14 @@ width: 90%;
 
   }
 
+}
+
+.system-alert-css #system-message p {
+margin-bottom: 1em;
+}
+
+.system-alert-css #system-message p:last-of-type {
+margin-bottom: 0;
 }
 
 .system-alert-css #system-message button {
