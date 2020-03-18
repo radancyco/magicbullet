@@ -1,10 +1,11 @@
 
 body.system-alert-active {
-overflow: hidden;
+position: fixed;
+overflow-y:scroll;
 }
 
 body.system-alert-active #page {
-filter: blur(1.3px);
+filter: blur(4.5px);
 }
 
 @keyframes fadein {
@@ -12,33 +13,49 @@ filter: blur(1.3px);
   0% {
 
     opacity: 0;
-    margin-bottom: -20px;
 
   }
 
   100% {
 
     opacity: 1;
-    margin-bottom: 0;
+
+  }
+
+}
+
+@keyframes reveal {
+
+  0% {
+
+    opacity: 0;
+    transform: translate(-50%, -40%);
+
+  }
+
+  100% {
+
+    opacity: 1;
+    transform: translate(-50%, -50%);
 
   }
 
 }
 
 #system-alert {
-animation: fadein 900ms forwards;
+animation: fadein 300ms forwards;
 background-color: rgba(0, 0, 0, 0.6);
 height: 100%;
 left: 0;
 position: fixed;
 top: 0;
 width: 100%;
-z-index: 10001;
+z-index: 2147483647;
 opacity: 0;
 }
 
 #system-message {
-animation: fadein 2s 900ms forwards;
+animation: reveal 300ms 700ms forwards;
 background-color: #fff;
 border: 1px #ccc solid;
 border-radius: 5px;
@@ -48,8 +65,7 @@ opacity: 0;
 padding: 20px 40px;
 position: absolute;
 top: 50%;
-margin-bottom: -20px
-transform: translate(-50%, -75%);
+transform: translate(-50%, -40%);
 width: 90%;
 }
 
@@ -60,7 +76,6 @@ width: 90%;
   #system-message {
 
     padding: 40px;
-    transform: translate(-50%, -50%);
     width: 50%;
 
   }
