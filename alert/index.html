@@ -4,16 +4,65 @@ localcss: css/local.css
 localjs: js/local.js
 noindex: true
 title: "System Alert"
-toc: true
+toc: false
 ---
 
-<p>Documentation coming soon.</p>
+<p class="alert"><strong>Note:</strong> This document is for internal TMP Worldwide use only.</p>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<h2>Prerequisites</h2>
 
-<!-- QA/Production  -->
+<p>Magic Bullet - <a href="/tmp-magic-bullet/">https://tmpworldwide.dev/tmp-magic-bullet/</a></p>
 
-<!-- script id="tmp-magic-bullet" data-alert="true" data-alert-covid src="https://service.tmpwebeng.com/magicbullet"></script -->
+<h2>Implementation</h2>
+
+<h3>COVID-19</h3>
+
+<p>We begin with a clean installation of the Magic Bullet script. However, before implementation, please ensure that the Magic Bullet script is not already running on a site. If it is already running with GDPR, CCPA, or A11y, then all you need to do is include the following data attributes to get started:
+
+<ul>
+  <li><strong>data-alert="true"</strong> - This will initiate the alert script.</li>
+  <li><strong>data-alert-covid</strong> (boolean, no value required) - This will load the built in, COVID-19 message.</li>
+</ul>
+
+<h4>Example:</h4>
+
+<pre><code>&lt;script id="tmp-magic-bullet" <strong>data-alert="true"</strong> <strong>data-alert-covid</strong> src="https://service.tmpwebeng.com/magicbullet"&gt;&lt;/script&gt;</code></pre>
+
+<p><strong>Result:</strong> <a href="https://www.screencast.com/t/sZaHyNxno">https://www.screencast.com/t/sZaHyNxno</a></p>
+
+<h3>Custom Message</h3>
+
+<p>If you wish to include a custom message, then replace data-alert-covid with:</p>
+
+<ul>
+  <li><strong>data-alert-message</strong> - Accepts any valid html needed to produce a custom message.</li>
+</ul>
+
+<h4>Example:</h4>
+
+<pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" <strong>data-alert-message=”&lt;h2&gt;Hello World&lt;/h2&gt; &lt;p&gt;Now is the time for all good TMP’ers to get down and boogie.&lt;/p&gt;"</strong> src="https://service.tmpwebeng.com/magicbullet"&gt;&lt;/script&gt;</code></pre>
+
+<p><b>Result:</b> <a href="https://www.screencast.com/t/OiMsH67Zt">https://www.screencast.com/t/OiMsH67Zt</a></p>
+
+<h3>Custom Styles</h3>
+
+<p>If you wish to style the modal to suit a client’s brand guidelines, then you can turn off many of the default CSS properties and roll your own:</p>
+
+<ul>
+  <li><strong>data-alert-remove-css</strong> (boolean, no value required) - Removes many default CSS properties from alert (modal and banner). Once removed, theme level CSS will take over, which you can edit as you see fit.</li>
+</ul>
+
+<h4>Example:</h4>
+
+<pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" data-alert-message="..." <strong>data-alert-remove-css</strong> src="https://service.tmpwebeng.com/magicbullet"&gt;&lt;/script&gt;</code></pre>
+
+<p><strong>Result:</strong> <a href="">https://www.screencast.com/t/5D9qcgzbUt</a></p>
+
+<h3>Problems?</h3>
+
+<p>If during implementation you have any questions or run into conflicts, please reach out to <a href="mailto:michael.spellacy@tmp.com">Michael Spellacy</a>.</p>
+
+<p>Feature requests for the System Alert can be logged here: <a href="http://jira.tmp.com/browse/TCDQ-48957">http://jira.tmp.com/browse/TCDQ-48957</a></p>
 
 <!-- Local  -->
 
