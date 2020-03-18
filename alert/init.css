@@ -43,6 +43,7 @@ body.system-alert-active {
 overflow-y:scroll;
 position: fixed;
 width: 100%;
+height: 100%;
 }
 
 body.system-alert-active #page {
@@ -111,6 +112,8 @@ box-shadow: 0 3px 7px rgba(0, 0, 0, 0.7);
 line-height: 1.7;
 padding: 40px;
 width: 90%;
+height: 90%;
+overflow: auto;
 }
 
 /* 780px */
@@ -120,6 +123,7 @@ width: 90%;
   .system-alert-css #system-message {
 
     width: 50%;
+    height: auto;
 
   }
 
