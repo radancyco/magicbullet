@@ -46,21 +46,21 @@
 
       // Expires (Future Enhancement):
 
-      // document.cookie = "AlertDisplayed=true; expires=" + expDate + "; domain=" + alertDomainName + "; path=/";
+      // document.cookie = "AlertDisplayed=true; expires=" + expDate + "; domain=" + alertDomainName + "; Secure; SameSite=None; path=/";
 
       // Session:
 
-      document.cookie = "AlertDisplayed=true; domain=" + alertDomainName + "; path=/";
+      document.cookie = "AlertDisplayed=true; domain=" + alertDomainName + "; Secure; SameSite=None; path=/";
 
     } else {
 
       // Expires (Future Enhancement):
 
-      // document.cookie = "AlertDisplayed=true; expires=" + expDate + "; path=/";
+      // document.cookie = "AlertDisplayed=true; expires=" + expDate + "; Secure; SameSite=None; path=/";
 
       // Session:
 
-      document.cookie = "AlertDisplayed=true; path=/";
+      document.cookie = "AlertDisplayed=true; Secure; SameSite=None; path=/";
 
     }
 
@@ -195,18 +195,6 @@
     }
 
     alertButton.textContent  = alertButtonText;
-
-    /* if (alertButtonColor !== null) {
-
-      alertButton.style.setProperty ("background-color", alertButtonColor, "important");
-
-    }
-
-    if (alertButtonColorText !== null) {
-
-      alertButton.style.setProperty ("color", alertButtonColorText, "important");
-
-    } */
 
     // Append Alert Button to Alert Dialog
 
