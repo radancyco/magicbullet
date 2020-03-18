@@ -18,10 +18,7 @@
   var alertLanguage =  magicBulletScript.getAttribute("data-alert-language");
   var alertStatic =  magicBulletScript.getAttribute("data-alert-static");
   var alertCovid =  magicBulletScript.getAttribute("data-alert-covid");
-  // var alertFontSize = magicBulletScript.getAttribute("data-alert-font-size");
-  // var alertBackgroundColor = magicBulletScript.getAttribute("data-alert-background-color");
-  // var alertTextColor = magicBulletScript.getAttribute("data-alert-text-color");
-  // var alertModalzIndex = magicBulletScript.getAttribute("data-alert-modal-zindex");
+  var alertRemoveCSS =  magicBulletScript.getAttribute("data-alert-remove-css");
 
   // Add alert hook for implementation team. May come in handy.
 
@@ -136,35 +133,13 @@
 
     }
 
-    /* if (alertNoticeColor !== null) {
+    // For dev is they wish to not load some of the custom CSS
 
-      alertContainer.style.setProperty ("background-color", alertNoticeColor);
+    if(alertRemoveCSS === null) {
 
-    }
-
-    if (alertNoticeColorText !== null) {
-
-      alertContainer.style.setProperty ("color", alertNoticeColorText);
+      alertContainer.classList.add("system-alert-css");
 
     }
-
-    if (alertFontSize !== null) {
-
-      alertContainer.style.setProperty ("font-size", alertFontSize, "important");
-
-    }
-
-    if (alertTextAlign !== null) {
-
-      alertContainer.style.setProperty ("text-align", alertTextAlign);
-
-    }
-
-    if (alertzIndex !== null) {
-
-      alertContainer.style.setProperty ("z-index", alertzIndex);
-
-    } */
 
     // Now create the element...
 
@@ -201,7 +176,7 @@
 
     // Set Alert Button Attributes
 
-    alertButton.setAttribute("id", "alert-button");
+    alertButton.setAttribute("id", "system-alert-button");
 
     // Add Close Button Text
 
