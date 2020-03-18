@@ -12,10 +12,11 @@
 
   // Data Attributes
 
-  var alertCloseButtonText = magicBulletScript.getAttribute("data-alert-close-button-text");
+  var alertCloseButtonText = magicBulletScript.getAttribute("data-alert-button-text");
   var alertMessage = magicBulletScript.getAttribute("data-alert-message");
   var alertDomainName = magicBulletScript.getAttribute("data-alert-domain");
   var alertLanguage =  magicBulletScript.getAttribute("data-alert-language");
+  var alertStatic =  magicBulletScript.getAttribute("data-alert-static");
   var alertCovid =  magicBulletScript.getAttribute("data-alert-covid");
   // var alertFontSize = magicBulletScript.getAttribute("data-alert-font-size");
   // var alertBackgroundColor = magicBulletScript.getAttribute("data-alert-background-color");
@@ -72,17 +73,13 @@
 
   var alertDisplayed = getCookie("AlertDisplayed");
 
-  if (alertDisplayed === null) {
-
-    setBanner();
-
-  }
-
   // Remove Alert
 
   var removeAlert = function() {
 
     // Remove Alert
+
+    setBanner();
 
     alertBody.removeChild(alertContainer);
     alertBody.classList.remove("system-alert-active");
@@ -113,7 +110,11 @@
 
   if(alertDisplayed === null) {
 
-    alertBody.classList.add("system-alert-active");
+    if (alertStatic === null) {
+
+      alertBody.classList.add("system-alert-active");
+
+    }
 
     // Create Alert
 
@@ -121,7 +122,15 @@
 
     // Set Alert Attributes
 
-    alertContainer.setAttribute("id", "system-alert");
+    if (alertStatic !== null) {
+
+      alertContainer.setAttribute("id", "system-alert-static");
+
+    } else {
+
+      alertContainer.setAttribute("id", "system-alert");
+
+    }
 
     /* if (alertNoticeColor !== null) {
 
