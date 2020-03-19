@@ -61,7 +61,7 @@
 
       // Session:
 
-      document.cookie = "AlertDisplayed=true; path=/";
+      document.cookie = "AlertDisplayed=true; Secure; SameSite=None; path=/";
 
     }
 
