@@ -204,7 +204,7 @@
 
     }
 
-    alertButton.textContent  = alertButtonText;
+    alertButton.textContent = alertButtonText;
 
     // Append Alert Button to Alert Dialog if Bypass Cookie not set
 
