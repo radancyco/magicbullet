@@ -65,6 +65,8 @@ body {
 
 }
 
+// Modal
+
 #system-alert {
 animation: fadein 300ms forwards;
 background-color: rgba(0, 0, 0, 0.6);
@@ -102,6 +104,7 @@ z-index: 2147483647;
   }
 
   // Default CSS
+  // Note: data-alert-remove-css will remove all alert styles, leaving it up to developer to style on their own.
 
   &.system-alert-css {
 
@@ -135,12 +138,20 @@ z-index: 2147483647;
 
 }
 
-#system-alert-static {
+// Banner
+
+#system-alert-banner {
+
+  // Default CSS
+  // Note: data-alert-remove-css will remove all alert styles, leaving it up to developer to style on their own.
 
   &.system-alert-css {
 
     #system-message {
-    padding: 13px 50px 16px 20px;
+    background-color: #fff;
+    border-bottom: 1px #000 solid;
+    padding: 14px 50px;
+    text-align: center;
 
       p {
       margin: 0 0 0.8em;
@@ -152,7 +163,12 @@ z-index: 2147483647;
 
 }
 
-#system-alert, #system-alert-static {
+// Modal & Banner
+
+#system-alert, #system-alert-banner {
+
+  // Default CSS
+  // Note: data-alert-remove-css will remove all alert styles, leaving it up to developer to style on their own.
 
   &.system-alert-css {
 

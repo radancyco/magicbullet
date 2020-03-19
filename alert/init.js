@@ -16,7 +16,8 @@
   var alertMessage = magicBulletScript.getAttribute("data-alert-message");
   var alertDomainName = magicBulletScript.getAttribute("data-alert-domain");
   var alertLanguage =  magicBulletScript.getAttribute("data-alert-language");
-  var alertStatic =  magicBulletScript.getAttribute("data-alert-static");
+  var alertBanner =  magicBulletScript.getAttribute("data-alert-banner");
+  var alertBypassCookie =  magicBulletScript.getAttribute("data-alert-bypass-cookie");
   var alertCovid =  magicBulletScript.getAttribute("data-alert-covid");
   var alertRemoveCSS =  magicBulletScript.getAttribute("data-alert-remove-css");
 
@@ -60,7 +61,7 @@
 
       // Session:
 
-      document.cookie = "AlertDisplayed=true; Secure; SameSite=None; path=/";
+      document.cookie = "AlertDisplayed=true; path=/";
 
     }
 
@@ -70,7 +71,7 @@
 
   var alertDisplayed = getCookie("AlertDisplayed");
 
-  if (alertDisplayed === null) {
+  if (alertDisplayed === null && alertBypassCookie === null) {
 
     setBanner();
 
@@ -115,7 +116,7 @@
 
   if(alertDisplayed === null) {
 
-    if (alertStatic === null) {
+    if (alertBanner === null) {
 
       alertBody.classList.add("system-alert-active");
 
@@ -127,9 +128,9 @@
 
     // Set Alert Attributes
 
-    if (alertStatic !== null) {
+    if (alertBanner !== null) {
 
-      alertContainer.setAttribute("id", "system-alert-static");
+      alertContainer.setAttribute("id", "system-alert-banner");
 
     } else {
 
@@ -150,7 +151,7 @@
     var alertContent = document.createElement("div");
     alertContent.setAttribute("id", "system-message");
 
-    if (alertStatic !== null) {
+    if (alertBanner !== null) {
 
       alertContent.setAttribute("role", "alert");
 
@@ -205,9 +206,13 @@
 
     alertButton.textContent  = alertButtonText;
 
-    // Append Alert Button to Alert Dialog
+    // Append Alert Button to Alert Dialog if Bypass Cookie not set
 
-    alertContent.appendChild(alertButton);
+    if(alertBypassCookie === null) {
+
+      alertContent.appendChild(alertButton);
+
+    }
 
     // Prepend Alert to Body Element
 
@@ -215,7 +220,7 @@
 
     // Apply focus to close button
 
-    if (alertStatic === null) {
+    if (alertBanner === null) {
 
       alertButton.focus();
 

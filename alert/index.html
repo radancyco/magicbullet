@@ -15,7 +15,7 @@ toc: false
 
 <h2>Implementation</h2>
 
-<h3>COVID-19</h3>
+<h3 id="data-alert-covid">COVID-19</h3>
 
 <p>We begin with a clean installation of the Magic Bullet script. However, before implementation, please ensure that the Magic Bullet script is not already running on a site. If it is already running with GDPR, CCPA, or A11y, then all you need to do is include the following data attributes to get started:
 
@@ -30,7 +30,7 @@ toc: false
 
 <p><strong>Result:</strong> <a href="https://www.screencast.com/t/sZaHyNxno">https://www.screencast.com/t/sZaHyNxno</a></p>
 
-<h3>Custom Message</h3>
+<h3 id="data-alert-message">Custom Message</h3>
 
 <p>If you wish to include a custom message, then replace data-alert-covid with:</p>
 
@@ -44,7 +44,7 @@ toc: false
 
 <p><strong>Result:</strong> <a href="https://www.screencast.com/t/OiMsH67Zt">https://www.screencast.com/t/OiMsH67Zt</a></p>
 
-<h3>Custom Styles</h3>
+<h3 id="data-alert-remove-css">Custom Styles</h3>
 
 <p>If you wish to style the modal to suit a client’s brand guidelines, then you can turn off many of the default CSS properties and roll your own:</p>
 
@@ -58,6 +58,34 @@ toc: false
 
 <p><strong>Result:</strong> <a href="https://www.screencast.com/t/5D9qcgzbUt">https://www.screencast.com/t/5D9qcgzbUt</a></p>
 
+<h3 id="data-alert-banner">Banner Mode</h3>
+
+<p>If you wish to load the alert as a banner to be appended to the very top of the page, use</p>
+
+<ul>
+  <li><strong>data-alert-banner</strong> (boolean, no value required) - Appends a banner to the top of the page instead of showing a modal window. The same data attributes that are used to control the modal window, can be used here as well.</li>
+</ul>
+
+<h4>Example:</h4>
+
+<pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" <strong>data-alert-banner</strong> src="https://service.tmpwebeng.com/magicbullet"&gt;&lt;/script&gt;</code></pre>
+
+<p><strong>Result:</strong> <a href="https://www.screencast.com/t/reISBtAK">https://www.screencast.com/t/reISBtAK</a></p>
+
+<h3 id="data-alert-bypass-cookie">Persistent Banner</h3>
+
+<p>By default, the banner will always show a close button and can be dismissed in the same way that the modal can. If you wish to have the banner persist, then use:</p>
+
+<ul>
+  <li><strong>data-alert-bypass-cookie</strong> (boolean, no value required) - Bypasses default behavior of including a button to close banner and set cookie.</li>
+</ul>
+
+<h4>Example:</h4>
+
+<pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" data-alert-banner <strong>data-alert-bypass-cookie</strong> src="https://service.tmpwebeng.com/magicbullet"&gt;&lt;/script&gt;</code></pre>
+
+<p><strong>Result:</strong> <a href="https://www.screencast.com/t/7pAsb9CUU">https://www.screencast.com/t/7pAsb9CUU</a></p>
+
 <h3>Problems?</h3>
 
 <p>If during implementation you have any questions or run into conflicts, please reach out to <a href="mailto:michael.spellacy@tmp.com">Michael Spellacy</a>.</p>
@@ -66,4 +94,4 @@ toc: false
 
 <!-- Local  -->
 
-<script id="tmp-magic-bullet" data-alert="true"  data-alert-covid src="../init.js"></script>
+<script id="tmp-magic-bullet" data-alert="true" data-alert-covid src="../init.js"></script>
