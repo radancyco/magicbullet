@@ -149,8 +149,17 @@
 
     var alertContent = document.createElement("div");
     alertContent.setAttribute("id", "system-message");
-    alertContent.setAttribute("role", "dialog");
-    alertContent.setAttribute("aria-modal", "true");
+
+    if (alertStatic !== null) {
+
+      alertContent.setAttribute("role", "alert");
+
+    } else {
+
+      alertContent.setAttribute("role", "dialog");
+      alertContent.setAttribute("aria-modal", "true");
+
+    }
 
     // Add custom message if present...
 
@@ -206,11 +215,15 @@
 
     // Apply focus to close button
 
-    alertButton.focus();
+    if (alertStatic === null) {
 
-    var systemMessage = document.getElementById("system-message");
+      alertButton.focus();
 
-    trapFocus(systemMessage);
+      var systemMessage = document.getElementById("system-message");
+
+      trapFocus(systemMessage);
+
+    }
 
     /******* Consent Types *********/
 
