@@ -188,14 +188,14 @@ z-index: 2147483647;
         text-decoration: none;
         }
 
-        &[target] {
-        background-image: url(data:image/gif;base64,R0lGODlhCgAKAJECAP///5mZmQAAAAAAACH5BAEAAAIALAAAAAAKAAoAAAIalIMZJgH/1gGJqugQpFzH7TlWJVJMGZ0KwhQAOw==);
+        &[target="_blank"] {
+        background-image: url("data:image/gif;base64,R0lGODlhCgAKAJECAP///5mZmQAAAAAAACH5BAEAAAIALAAAAAAKAAoAAAIalIMZJgH/1gGJqugQpFzH7TlWJVJMGZ0KwhQAOw==");
         background-position: center right;
         background-repeat: no-repeat;
         padding-right: 14px;
 
           &:focus, &:focus {
-          background-image: url(data:image/gif;base64,R0lGODlhCgAKAJECAP///2eIpAAAAAAAACH5BAEAAAIALAAAAAAKAAoAAAIalIMZJgH/1gGJqugQpFzH7TlWJVJMGZ0KwhQAOw==);
+          background-image: url("data:image/gif;base64,R0lGODlhCgAKAJECAP///2eIpAAAAAAAACH5BAEAAAIALAAAAAAKAAoAAAIalIMZJgH/1gGJqugQpFzH7TlWJVJMGZ0KwhQAOw==");
           }
 
         }
