@@ -21,7 +21,7 @@
   var alertMessage = magicBulletScript.getAttribute("data-alert-message");
   var alertRemoveCSS = magicBulletScript.getAttribute("data-alert-remove-css");
 
-  // Helper: Get Cookie
+  // Function: Get Cookie
 
   function getCookie(name) {
 
@@ -69,6 +69,9 @@
   function trapFocus(element, namespace) {
 
     var focusableEls = element.querySelectorAll("a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type='text']:not([disabled]), input[type='radio']:not([disabled]), input[type='checkbox']:not([disabled]), select:not([disabled])");
+    var firstFocusableEl;
+    var lastFocusableEl;
+    var KEYCODE_TAB;
 
     firstFocusableEl = focusableEls[0];
     lastFocusableEl = focusableEls[focusableEls.length - 1];
