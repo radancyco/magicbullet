@@ -7,27 +7,27 @@
 
 (function () {
 
-  var magicBulletScript = document.getElementById("tmp-magic-bullet")
-  var alertBody = document.body
+  var magicBulletScript = document.getElementById("tmp-magic-bullet");
+  var alertBody = document.body;
 
   // Data Attributes
 
-  var alertCloseButtonText = magicBulletScript.getAttribute("data-alert-button-text")
-  var alertMessage = magicBulletScript.getAttribute("data-alert-message")
-  var alertDomainName = magicBulletScript.getAttribute("data-alert-domain")
-  var alertLanguage =  magicBulletScript.getAttribute("data-alert-language")
-  var alertBanner =  magicBulletScript.getAttribute("data-alert-banner")
-  var alertBypassCookie =  magicBulletScript.getAttribute("data-alert-bypass-cookie")
-  var alertCovid =  magicBulletScript.getAttribute("data-alert-covid")
-  var alertRemoveCSS =  magicBulletScript.getAttribute("data-alert-remove-css")
+  var alertBanner = magicBulletScript.getAttribute("data-alert-banner");
+  var alertBypassCookie = magicBulletScript.getAttribute("data-alert-bypass-cookie");
+  var alertCloseButtonText = magicBulletScript.getAttribute("data-alert-button-text");
+  var alertCovid = magicBulletScript.getAttribute("data-alert-covid");
+  var alertDomainName = magicBulletScript.getAttribute("data-alert-domain");
+  var alertLanguage = magicBulletScript.getAttribute("data-alert-language");
+  var alertMessage = magicBulletScript.getAttribute("data-alert-message");
+  var alertRemoveCSS = magicBulletScript.getAttribute("data-alert-remove-css");
 
   // Helper: Get Cookie
 
   function getCookie(name) {
 
-    var re = new RegExp(name + "=([^;]+)")
-    var value = re.exec(document.cookie)
-    return (value !== null) ? unescape(value[1]) : null
+    var re = new RegExp(name + "=([^;]+)");
+    var value = re.exec(document.cookie);
+    return (value !== null) ? unescape(value[1]) : null;
 
   }
 
@@ -35,23 +35,23 @@
 
   var setBanner = function() {
 
-    var expDate = new Date()
+    var expDate = new Date();
 
-    expDate.setDate(expDate.getDate() + 30)
+    expDate.setDate(expDate.getDate() + 30);
 
     // Get custom domain name, if not present, then load in default domain.
 
     if(alertDomainName !== null) {
 
-      document.cookie = "AlertDisplayed=true; domain=" + alertDomainName + "; Secure; SameSite=None; path=/"
+      document.cookie = "AlertDisplayed=true; domain=" + alertDomainName + "; Secure; SameSite=None; path=/";
 
     } else {
 
-      document.cookie = "AlertDisplayed=true; Secure; SameSite=None; path=/"
+      document.cookie = "AlertDisplayed=true; Secure; SameSite=None; path=/";
 
     }
 
-  }
+  };
 
   // Function: Remove Alert
 
@@ -62,26 +62,26 @@
     alertBody.removeChild(alertContainer);
     alertBody.classList.remove("system-alert-active");
 
-  }
+  };
 
   // Function: Trap Focus (Accessibility)
 
   function trapFocus(element, namespace) {
 
-    var focusableEls = element.querySelectorAll("a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type='text']:not([disabled]), input[type='radio']:not([disabled]), input[type='checkbox']:not([disabled]), select:not([disabled])"),
+    var focusableEls = element.querySelectorAll("a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type='text']:not([disabled]), input[type='radio']:not([disabled]), input[type='checkbox']:not([disabled]), select:not([disabled])");
 
-    firstFocusableEl = focusableEls[0]
-    lastFocusableEl = focusableEls[focusableEls.length - 1]
+    firstFocusableEl = focusableEls[0];
+    lastFocusableEl = focusableEls[focusableEls.length - 1];
 
-    KEYCODE_TAB = 9
+    KEYCODE_TAB = 9;
 
     element.addEventListener("keydown", function(e) {
 
-      var isTabPressed = (e.key === "Tab" || e.keyCode === KEYCODE_TAB)
+      var isTabPressed = (e.key === "Tab" || e.keyCode === KEYCODE_TAB);
 
       if (!isTabPressed) {
 
-        return
+        return;
 
       }
 
@@ -89,8 +89,8 @@
 
         if (document.activeElement === firstFocusableEl) {
 
-          lastFocusableEl.focus()
-          e.preventDefault()
+          lastFocusableEl.focus();
+          e.preventDefault();
 
         }
 
@@ -100,31 +100,31 @@
 
         if (document.activeElement === lastFocusableEl) {
 
-          firstFocusableEl.focus()
-          e.preventDefault()
+          firstFocusableEl.focus();
+          e.preventDefault();
 
         }
 
       }
 
-    })
+    });
 
   }
 
   // Add alert hook for implementation team. May come in handy.
 
-  alertBody.classList.add("magic-bullet-alert")
+  alertBody.classList.add("magic-bullet-alert");
 
   // Get Cookie
 
-  var alertDisplayed = getCookie("AlertDisplayed")
+  var alertDisplayed = getCookie("AlertDisplayed");
 
   // Rather than set our cookie when user clicks on close button, we set it immediately.
   // This prevents banner from continually loading on other pages if message has links to internal pages.
 
   if (alertDisplayed === null && alertBypassCookie === null) {
 
-    setBanner()
+    setBanner();
 
   }
 
@@ -134,21 +134,21 @@
 
     // Spanish
 
-    var alertCloseBtn = "Cerca"
+    var alertCloseBtn = "Cerca";
 
     // COVID-19 Message
 
-    var alertCovidMessage = "<p>La salud y seguridad de nuestros empleados y candidatos es muy importante para nosotros. Debido a la situación actual relacionada con el Coronavirus (COVID-19), estamos aprovechando nuestras capacidades digitales para garantizar que podamos continuar reclutando a los mejores talentos.</p> <p>A medida que avanza su solicitud, es posible que se le solicite que use una de nuestras herramientas digitales para ayudarlo en su viaje de reclutamiento. Si es así, uno de nuestros colegas de Recursos le explicará cómo se utilizará nuestra tecnología de video-entrevista durante todo el proceso de reclutamiento y estará disponible para responder cualquier pregunta que pueda tener.</p>"
+    var alertCovidMessage = "<p>La salud y seguridad de nuestros empleados y candidatos es muy importante para nosotros. Debido a la situación actual relacionada con el Coronavirus (COVID-19), estamos aprovechando nuestras capacidades digitales para garantizar que podamos continuar reclutando a los mejores talentos.</p> <p>A medida que avanza su solicitud, es posible que se le solicite que use una de nuestras herramientas digitales para ayudarlo en su viaje de reclutamiento. Si es así, uno de nuestros colegas de Recursos le explicará cómo se utilizará nuestra tecnología de video-entrevista durante todo el proceso de reclutamiento y estará disponible para responder cualquier pregunta que pueda tener.</p>";
 
   } else {
 
     // English (Default)
 
-    var alertCloseBtn = "Close"
+    var alertCloseBtn = "Close";
 
     // COVID-19 Message
 
-    var alertCovidMessage = "<p>The health and safety of our employees and candidates is very important to us. Due to the current situation related to the Coronavirus (COVID-19), we're leveraging our digital capabilities to ensure we can continue to recruit top talent.</p> <p>As your application progresses, you may be asked to use one of our digital tools to help you through your recruitment journey. If so, one of our colleagues will explain how these tools will be used throughout the recruitment process and will be on hand to answer any questions you might have.</p>"
+    var alertCovidMessage = "<p>The health and safety of our employees and candidates is very important to us. Due to the current situation related to the Coronavirus (COVID-19), we're leveraging our digital capabilities to ensure we can continue to recruit top talent.</p> <p>As your application progresses, you may be asked to use one of our digital tools to help you through your recruitment journey. If so, one of our colleagues will explain how these tools will be used throughout the recruitment process and will be on hand to answer any questions you might have.</p>";
 
   }
 
@@ -160,23 +160,23 @@
 
     if (alertBanner === null) {
 
-      alertBody.classList.add("system-alert-active")
+      alertBody.classList.add("system-alert-active");
 
     }
 
     // Create Alert
 
-    var alertContainer = document.createElement("div")
+    var alertContainer = document.createElement("div");
 
     // Set Alert Attributes
 
     if (alertBanner !== null) {
 
-      alertContainer.setAttribute("id", "system-alert-banner")
+      alertContainer.setAttribute("id", "system-alert-banner");
 
     } else {
 
-      alertContainer.setAttribute("id", "system-alert")
+      alertContainer.setAttribute("id", "system-alert");
 
     }
 
@@ -184,23 +184,23 @@
 
     if(alertRemoveCSS === null) {
 
-      alertContainer.classList.add("system-alert-css")
+      alertContainer.classList.add("system-alert-css");
 
     }
 
     // Now create the element...
 
-    var alertContent = document.createElement("div")
-    alertContent.setAttribute("id", "system-message")
+    var alertContent = document.createElement("div");
+    alertContent.setAttribute("id", "system-message");
 
     if (alertBanner !== null) {
 
-      alertContent.setAttribute("role", "alert")
+      alertContent.setAttribute("role", "alert");
 
     } else {
 
-      alertContent.setAttribute("role", "dialog")
-      alertContent.setAttribute("aria-modal", "true")
+      alertContent.setAttribute("role", "dialog");
+      alertContent.setAttribute("aria-modal", "true");
 
     }
 
@@ -208,67 +208,68 @@
 
     if (alertCovid !== null) {
 
-      alertContent.innerHTML = alertCovidMessage
+      alertContent.innerHTML = alertCovidMessage;
 
     } else {
 
       if (alertMessage !== null) {
 
-        alertContent.innerHTML = alertMessage
+        alertContent.innerHTML = alertMessage;
 
       } else {
 
-        alertContent.innerHTML = "Please add a message using <b>data-alert-message</b>. Thanks!"
+        alertContent.innerHTML = "Please add a message using <b>data-alert-message</b>. Thanks!";
 
       }
 
     }
 
-    alertContainer.appendChild(alertContent)
+    alertContainer.appendChild(alertContent);
 
     // Create Alert Button
 
-    var alertButton = document.createElement("button")
+    var alertButton = document.createElement("button");
+    var alertButtonText;
 
     // Set Alert Button Attributes
 
-    alertButton.setAttribute("id", "system-alert-button")
+    alertButton.setAttribute("id", "system-alert-button");
 
     // Add Close Button Text
 
     if (alertCloseButtonText !== null) {
 
-      alertButtonText = alertCloseButtonText
+      alertButtonText = alertCloseButtonText;
 
     } else {
 
-      alertButtonText = alertCloseBtn
+      alertButtonText = alertCloseBtn;
 
     }
 
-    alertButton.textContent = alertButtonText
+    alertButton.textContent = alertButtonText;
 
     // Append Alert Button to Alert Dialog if Bypass Cookie not set
 
     if(alertBypassCookie === null) {
 
-      alertContent.appendChild(alertButton)
+      alertContent.appendChild(alertButton);
 
     }
 
     // Prepend Alert to Body element
 
-    alertBody.insertBefore(alertContainer, alertBody.childNodes[0] || null)
+    alertBody.insertBefore(alertContainer, alertBody.childNodes[0] || null);
 
     // Apply focus to close button
 
     if (alertBanner === null) {
 
-      alertButton.focus()
+      alertButton.focus();
 
-      var systemMessage = document.getElementById("system-message")
+      var systemMessage = document.getElementById("system-message");
 
-      trapFocus(systemMessage)
+      trapFocus(systemMessage);
 
     }
 
@@ -276,11 +277,11 @@
 
     alertButton.onclick = function(){
 
-      removeAlert()
+      removeAlert();
 
-      return false
+      return false;
 
-    }
+    };
 
   }
 
@@ -288,12 +289,12 @@
 
   window.onkeyup = function (event) {
 
-    if (event.keyCode == 27) {
+    if (event.keyCode === 27) {
 
-      removeAlert()
+      removeAlert();
 
     }
 
-  }
+  };
 
-})()
+})();
