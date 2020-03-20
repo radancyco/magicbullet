@@ -62,6 +62,12 @@
     alertBody.removeChild(alertContainer);
     alertBody.classList.remove("system-alert-active");
 
+    if(autoPlayingVideo) {
+
+      autoPlayingVideo.play();
+
+    }
+
   };
 
   // Function: Trap Focus (Accessibility)
@@ -117,6 +123,10 @@
   // Add alert hook for implementation team. May come in handy.
 
   alertBody.classList.add("magic-bullet-alert");
+
+  // See if video exists on page.
+
+  var autoPlayingVideo = document.getElementsByTagName("video")[0];
 
   // Get Cookie
 
@@ -180,6 +190,12 @@
     } else {
 
       alertContainer.setAttribute("id", "system-alert");
+
+      if(autoPlayingVideo) {
+
+        autoPlayingVideo.pause();
+
+      }
 
     }
 
