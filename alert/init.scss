@@ -50,8 +50,8 @@ body {
   width: 100%;
   height: 100%;
 
-    #page {
-    filter: blur(4.5px);
+    > *:not(#system-alert) {
+    filter: blur(2.5px);
 
       @media (prefers-reduced-motion: reduce) {
 
@@ -234,4 +234,12 @@ z-index: 2147483647;
 
   }
 
+}
+
+// Annoying overrides because Third-party vendors are annoying
+
+// Chat widget spotted on Bayada (jobs.bayada.com)
+
+#hubspot-messages-iframe-container {
+z-index: 2147483646 !important;
 }
