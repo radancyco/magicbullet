@@ -43,11 +43,11 @@
 
     if(alertDomainName !== null) {
 
-      document.cookie = "AlertDisplayed=true; domain=" + alertDomainName + "; Secure; SameSite=None; path=/";
+      document.cookie = "AlertDisplayed=true; domain=" + alertDomainName + "; path=/";
 
     } else {
 
-      document.cookie = "AlertDisplayed=true; Secure; SameSite=None; path=/";
+      document.cookie = "AlertDisplayed=true; path=/";
 
     }
 
