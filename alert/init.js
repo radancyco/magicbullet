@@ -161,7 +161,7 @@
 
     // Add hook to body for modal or banner specific styling.
 
-    if (alertBanner === null) {
+    if (alertBanner === null && alertBypassCookie === null) {
 
       alertBody.classList.add("system-alert-active");
 
@@ -262,7 +262,15 @@
 
     // Prepend Alert to Body element
 
-    alertBody.insertBefore(alertContainer, alertBody.childNodes[0] || null);
+    if (alertBanner === null && alertBypassCookie !== null) {
+
+      alert("The cookie may only be bypassed when data-alert-banner is in use.");
+
+    } else {
+
+      alertBody.insertBefore(alertContainer, alertBody.childNodes[0] || null);
+
+    }
 
     // Apply focus to close button
 
