@@ -20,6 +20,7 @@
   var alertLanguage = magicBulletScript.getAttribute("data-alert-language");
   var alertMessage = magicBulletScript.getAttribute("data-alert-message");
   var alertRemoveCSS = magicBulletScript.getAttribute("data-alert-remove-css");
+  var alertUnsecureCookie = magicBulletScript.getAttribute("data-alert-unsecure-cookie");
 
   // Function: Get Cookie
 
@@ -43,11 +44,27 @@
 
     if(alertDomainName !== null) {
 
-      document.cookie = "AlertDisplayed=true; domain=" + alertDomainName + "; path=/";
+      if (location.protocol !== "https:") {
+
+        document.cookie = "AlertDisplayed=true; domain=" + alertDomainName + "; path=/";
+
+      } else {
+
+        document.cookie = "AlertDisplayed=true; domain=" + alertDomainName + "; Secure; SameSite=None; path=/";
+
+      }
 
     } else {
 
-      document.cookie = "AlertDisplayed=true; path=/";
+      if (location.protocol !== "https:") {
+
+        document.cookie = "AlertDisplayed=true; path=/";
+
+      } else {
+
+        document.cookie = "AlertDisplayed=true; Secure; SameSite=None; path=/";
+
+      }
 
     }
 
