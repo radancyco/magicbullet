@@ -220,6 +220,7 @@
     } else {
 
       alertContent.setAttribute("role", "dialog");
+      alertContent.setAttribute("aria-label", "Important System Message");
       alertContent.setAttribute("aria-modal", "true");
 
     }
