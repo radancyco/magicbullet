@@ -455,7 +455,7 @@
 
   }
 
-  if (gdprPolicyURL === null && gdprClientName === null) {
+  if (gdprPolicyURL === null || gdprClientName === null) {
 
     var gdprMessage = "A consent and privacy message cannot be generated until a client name and privacy policy URL have been provided. Please see <a href='https://tmpworldwide.dev/tmp-magic-bullet/gdpr/#banner-mandatory'>mandatory requirements</a> needed for this script to run.";
 
