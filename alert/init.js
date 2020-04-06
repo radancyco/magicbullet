@@ -286,7 +286,15 @@
 
     } else {
 
-      alertBody.insertBefore(alertContainer, alertBody.childNodes[0] || null);
+      if (alertBanner !== null) {
+
+        alertBody.insertBefore(alertContainer, alertBody.childNodes[0] || null);
+
+      } else {
+
+        alertBody.appendChild(alertContainer);
+
+      }
 
     }
 
