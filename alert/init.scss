@@ -148,13 +148,24 @@ z-index: 2147483647;
     #system-message {
     background-color: #fff;
     border-bottom: 1px #000 solid;
-    padding: 14px 50px;
+    padding: 14px;
     text-align: center;
 
       p {
       margin: 0 0 0.8em;
       }
 
+    }
+
+  }
+
+  // If banner contains button...
+
+  &.system-alert-button {
+
+    #system-message {
+    padding-right: 50px;
+    padding-left: 50px;
     }
 
   }

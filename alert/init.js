@@ -204,7 +204,15 @@
 
     if(alertRemoveCSS === null) {
 
-      alertContainer.classList.add("system-alert-css");
+      if(alertBypassCookie === null) {
+
+        alertContainer.classList.add("system-alert-css",  "system-alert-button");
+
+      } else {
+  
+        alertContainer.classList.add("system-alert-css");
+
+      }
 
     }
 
@@ -239,7 +247,7 @@
 
       } else {
 
-        alertContent.innerHTML = "Please add a message using <b>data-alert-message</b>. Thanks!";
+        alertContent.innerHTML = "Please add a message using <strong>data-alert-message</strong>. Thanks!";
 
       }
 
@@ -286,15 +294,7 @@
 
     } else {
 
-      if (alertBanner !== null) {
-
-        alertBody.insertBefore(alertContainer, alertBody.childNodes[0] || null);
-
-      } else {
-
-        alertBody.appendChild(alertContainer);
-
-      }
+      alertBody.insertBefore(alertContainer, alertBody.childNodes[0] || null);
 
     }
 
