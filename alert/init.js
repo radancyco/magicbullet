@@ -209,7 +209,7 @@
         alertContainer.classList.add("system-alert-css",  "system-alert-button");
 
       } else {
-  
+
         alertContainer.classList.add("system-alert-css");
 
       }
@@ -294,7 +294,15 @@
 
     } else {
 
-      alertBody.insertBefore(alertContainer, alertBody.childNodes[0] || null);
+      if (alertBanner !== null) {
+
+        alertBody.insertBefore(alertContainer, alertBody.childNodes[0] || null);
+
+      } else {
+
+        alertBody.appendChild(alertContainer);
+
+      }
 
     }
 
