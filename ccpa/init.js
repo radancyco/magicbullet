@@ -98,11 +98,27 @@
 
     if(ccpaDomainName !== null) {
 
-      document.cookie = "ConsentCapture=" + consentDate + "; Secure; SameSite=None; expires=" + expDate + "; domain=" + ccpaDomainName + "; path=/";
+      if (location.protocol !== "https:") {
+
+        document.cookie = "ConsentCapture=" + consentDate + "; expires=" + expDate + "; domain=" + ccpaDomainName + "; path=/";
+
+      } else {
+
+        document.cookie = "ConsentCapture=" + consentDate + "; Secure; SameSite=None; expires=" + expDate + "; domain=" + ccpaDomainName + "; path=/";
+
+      }
 
     } else {
 
-      document.cookie = "ConsentCapture=" + consentDate + "; Secure; SameSite=None; expires=" + expDate + "; path=/";
+      if (location.protocol !== "https:") {
+
+        document.cookie = "ConsentCapture=" + consentDate + "; expires=" + expDate + "; path=/";
+
+      } else {
+
+        document.cookie = "ConsentCapture=" + consentDate + "; Secure; SameSite=None; expires=" + expDate + "; path=/";
+
+      }
 
     }
 
@@ -136,11 +152,27 @@
 
     if(ccpaDomainName !== null) {
 
-      document.cookie = "BannerDisplayed=true; Secure; SameSite=None; expires=" + expDate + "; domain=" + ccpaDomainName + "; path=/";
+      if (location.protocol !== "https:") {
+
+        document.cookie = "BannerDisplayed=true; expires=" + expDate + "; domain=" + ccpaDomainName + "; path=/";
+
+      } else {
+
+        document.cookie = "BannerDisplayed=true; Secure; SameSite=None; expires=" + expDate + "; domain=" + ccpaDomainName + "; path=/";
+
+      }
 
     } else {
 
-      document.cookie = "BannerDisplayed=true; Secure; SameSite=None; expires=" + expDate + "; path=/";
+      if (location.protocol !== "https:") {
+
+        document.cookie = "BannerDisplayed=true; expires=" + expDate + "; path=/";
+
+      } else {
+
+        document.cookie = "BannerDisplayed=true; Secure; SameSite=None; expires=" + expDate + "; path=/";
+
+      }
 
     }
 
