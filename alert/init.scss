@@ -139,6 +139,7 @@ z-index: 2147483647;
 // Banner
 
 #system-alert-banner {
+position: relative;
 
   // Default CSS
   // Note: data-alert-remove-css will remove all alert styles, leaving it up to developer to style on their own.
@@ -147,9 +148,12 @@ z-index: 2147483647;
 
     #system-message {
     background-color: #fff;
-    border-bottom: 1px #000 solid;
     padding: 14px;
     text-align: center;
+
+      body > & {
+      border-bottom: 1px #000 solid;
+      }
 
       p {
       margin: 0 0 0.8em;

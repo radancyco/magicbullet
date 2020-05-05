@@ -13,6 +13,7 @@
   // Data Attributes
 
   var alertBanner = magicBulletScript.getAttribute("data-alert-banner");
+  var alertBannerTarget = magicBulletScript.getAttribute("data-alert-banner-target");
   var alertBypassCookie = magicBulletScript.getAttribute("data-alert-bypass-cookie");
   var alertCloseButtonText = magicBulletScript.getAttribute("data-alert-button-text");
   var alertCovid = magicBulletScript.getAttribute("data-alert-covid");
@@ -21,6 +22,12 @@
   var alertMessage = magicBulletScript.getAttribute("data-alert-message");
   var alertRemoveCSS = magicBulletScript.getAttribute("data-alert-remove-css");
   var alertUnsecureCookie = magicBulletScript.getAttribute("data-alert-unsecure-cookie");
+
+  if(alertBannerTarget !== null) {
+
+    alertTarget = document.getElementById(alertBannerTarget);
+
+  }
 
   // Function: Get Cookie
 
@@ -76,7 +83,16 @@
 
     // Remove Alert
 
-    alertBody.removeChild(alertContainer);
+    if(alertBannerTarget !== null) {
+
+      alertTarget.removeChild(alertContainer);
+
+    } else {
+
+      alertBody.removeChild(alertContainer);
+
+    }
+
     alertBody.classList.remove("system-alert-active");
 
   };
@@ -294,7 +310,15 @@
 
     } else {
 
-      alertBody.insertBefore(alertContainer, alertBody.childNodes[0] || null);
+      if(alertBannerTarget !== null) {
+
+        alertTarget.insertBefore(alertContainer, alertTarget.childNodes[0] || null);
+
+      } else {
+
+        alertBody.insertBefore(alertContainer, alertBody.childNodes[0] || null);
+
+      }
 
     }
 
