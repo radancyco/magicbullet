@@ -82,10 +82,6 @@
     var consentDate = consentRawDate.toISOString();
     var convertDate = Date.parse(consentDate);
 
-    alert(consentRawDate);
-    alert(consentDate);
-    alert(convertDate);
-
     // Some clients want cookies to expire after one day, so we'll accomodate that request...
 
     if(gdprDateExpire !== null) {
