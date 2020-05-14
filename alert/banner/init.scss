@@ -42,99 +42,6 @@
 
 }
 
-body {
-
-  &.system-alert-active {
-  overflow-y: scroll;
-  width: 100%;
-  height: 100%;
-
-    > *:not(#system-alert) {
-    filter: blur(2.5px);
-
-      @media (prefers-reduced-motion: reduce) {
-
-        filter: none;
-
-      }
-
-    }
-
-  }
-
-}
-
-// Modal
-
-#system-alert {
-animation: fadein 300ms forwards;
-background-color: rgba(0, 0, 0, 0.6);
-height: 100%;
-left: 0;
-opacity: 0;
-position: fixed;
-top: 0;
-width: 100%;
-z-index: 2147483647;
-
-  @media (prefers-reduced-motion: reduce) {
-
-    animation: none;
-    opacity: 1;
-
-  }
-
-  #system-message {
-  animation: reveal 300ms 700ms forwards;
-  left: 50%;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -40%) scale(0.9);
-
-    @media (prefers-reduced-motion: reduce) {
-
-      animation: none;
-      opacity: 1;
-      transform: translate(-50%, -40%);
-
-    }
-
-  }
-
-  // Default CSS
-  // Note: data-alert-remove-css will remove all alert styles, leaving it up to developer to style on their own.
-
-  &.system-alert-css {
-
-    #system-message {
-    background-color: #fff;
-    border-radius: 5px;
-    border: 2px #ccc solid;
-    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.7);
-    max-height: 90%;
-    line-height: 1.7;
-    overflow: auto;
-    padding: 40px;
-    width: 90%;
-
-      /* 780px */
-
-      @media(min-width: 48.75em) {
-
-        width: 50%;
-
-      }
-
-      p {
-      margin: 0 0 0.8em;
-      }
-
-    }
-
-  }
-
-}
 
 // Banner
 
@@ -176,9 +83,7 @@ position: relative;
 
 }
 
-// Modal & Banner
-
-#system-alert, #system-alert-banner {
+#system-alert-banner {
 
   // Default CSS
   // Note: data-alert-remove-css will remove all alert styles, leaving it up to developer to style on their own.

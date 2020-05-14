@@ -136,49 +136,9 @@ z-index: 2147483647;
 
 }
 
-// Banner
+// Modal
 
-#system-alert-banner {
-position: relative;
-
-  // Default CSS
-  // Note: data-alert-remove-css will remove all alert styles, leaving it up to developer to style on their own.
-
-  &.system-alert-css {
-
-    #system-message {
-    background-color: #fff;
-    padding: 14px;
-    text-align: center;
-
-      body > & {
-      border-bottom: 1px #000 solid;
-      }
-
-      p {
-      margin: 0 0 0.8em;
-      }
-
-    }
-
-  }
-
-  // If banner contains button...
-
-  &.system-alert-button {
-
-    #system-message {
-    padding-right: 50px;
-    padding-left: 50px;
-    }
-
-  }
-
-}
-
-// Modal & Banner
-
-#system-alert, #system-alert-banner {
+#system-alert {
 
   // Default CSS
   // Note: data-alert-remove-css will remove all alert styles, leaving it up to developer to style on their own.
