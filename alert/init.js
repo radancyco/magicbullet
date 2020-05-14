@@ -279,6 +279,7 @@
     // Set Alert Button Attributes
 
     alertButton.setAttribute("id", "system-alert-button");
+    alertButton.classList.add("system-alert-close");
 
     // Add Close Button Text
 
