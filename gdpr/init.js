@@ -316,9 +316,19 @@
 
     var formMessage = "En soumettant vos informations, vous reconnaissez avoir lu notre <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>politique de confidentialité <span class='visually-hidden'>(ce contenu s’ouvre dans une nouvelle fenêtre)</span></a> et acceptez de recevoir des communications par e-mail de la part de " + gdprClientName + ".";
 
-  } else if (gdprLanguage === "fr-ch") {
+  } else if (gdprLanguage === "fr-ca") {
 
     // French (Canadian)
+
+    var gdprMessage = "Nous utilisons des témoins et d’autres technologies de pistage pour faciliter la navigation, améliorer nos produits et services, appuyer nos efforts de marketing et fournir du contenu provenant de tiers. En continuant d’utiliser ce site, vous acceptez que des témoins soient utilisés conformément à notre <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>politique de confidentialité <span id='gdpr-a11y-message' class='visually-hidden'>(ce contenu ouvre dans une nouvelle fenêtre)</span></a>. Pour gérer vos préférences en matière de témoins tiers, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>cliquez ici <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(ce contenu ouvre dans une nouvelle fenêtre)</span></a>.";
+
+    var gdprConsentBtn = "Accepter";
+
+    var formMessage = "En soumettant vos renseignements, vous reconnaissez avoir lu notre <a href=" + gdprPolicyURL + " target='_blank' rel='noopener'>politique de confidentialité <span class='visually-hidden'>(ce contenu ouvre dans une nouvelle fenêtre)</span></a> et vous consentez à recevoir des communications par courriel de la part de " + gdprClientName + ".";
+
+  } else if (gdprLanguage === "fr-ch") {
+
+    // French (Switzerland)
 
     var gdprMessage = "Nous utilisons des témoins et d’autres technologies de pistage pour faciliter la navigation, améliorer nos produits et services, appuyer nos efforts de marketing et fournir du contenu provenant de tiers. En continuant d’utiliser ce site, vous acceptez que des témoins soient utilisés conformément à notre <a href=" + gdprPolicyURL + " id='gdpr-policy-link' target='_blank' rel='noopener'>politique de confidentialité <span id='gdpr-a11y-message' class='visually-hidden'>(ce contenu ouvre dans une nouvelle fenêtre)</span></a>. Pour gérer vos préférences en matière de témoins tiers, <a href=" + gdprTrusteURL + " id='gdpr-privacy-preference-link' target='_blank' rel='noopener'>cliquez ici <span id='gdpr-privacy-preference-a11y' class='visually-hidden'>(ce contenu ouvre dans une nouvelle fenêtre)</span></a>.";
 
