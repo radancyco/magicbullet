@@ -57,7 +57,7 @@
 
   $(".ats-description table").attr("role", "presentation");
 
-  $(".ats-description *").removeAttr("align style face size title id").html(function (i, html) {
+  $(".ats-description *").removeAttr("align face size title id").html(function (i, html) {
 
       return html.replace(/&nbsp;/g, ""); // Remove nbsp;
 
@@ -75,11 +75,11 @@
 
   // Issue: We need to perform some additional form validation/manipulation after form is submitted
 
-  $(".data-form").on("submit", function() {
+  /* $(".data-form").on("submit", function() {
 
     console.log ("Something accessible has happened");
 
-  });
+  }); */
 
   // Issue: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
@@ -279,6 +279,8 @@
 
     // Issue: The Job Alerts upload includes an aria-describedby with no associated ID when no Field Instructions are included.
 
+    // TODO: Need to upodate this so it works with ajax callback.
+
     if(!$(".form-field input[name='Resume']").prev(".instruction-text").length) {
 
       // If upload instruction text does not exist, then remove aria-describedby
@@ -287,7 +289,7 @@
 
     }
 
-    // The file upload remove button is a link with an href hash...can;t have that so let's change it....
+    // The file upload remove button is a link with an href hash...can't have that, so let's change it....
 
     // First, get the text...
 

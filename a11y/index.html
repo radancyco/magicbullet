@@ -52,7 +52,7 @@ color: #fff;
 
   <p><em><time datetime="{{ bug.time }}">{{ bug.time | date: "%A, %B %-d, %Y %I:%M:%S %p %Z" }}</time></em></p>
 
-  <ul> 
+  <ul>
     <li><strong>Status:</strong> {{ bug.status }}</li>
     <li><strong>Priority:</strong> {{ bug.priority }}</li>
     {% if bug.jira %}
@@ -65,7 +65,7 @@ color: #fff;
 
   <h4>Details</h4>
 
-  {{ bug.details }} 
+  {{ bug.details }}
 
   <h4>Code</h4>
 
