@@ -57,7 +57,7 @@
 
   $(".ats-description table").attr("role", "presentation");
 
-  $(".ats-description *").removeAttr("align face size title id").html(function (i, html) {
+  $(".ats-description *").removeAttr("face size title id").html(function (i, html) {
 
       return html.replace(/&nbsp;/g, ""); // Remove nbsp;
 
