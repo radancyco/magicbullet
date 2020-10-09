@@ -7,82 +7,106 @@ title: "System Alert"
 toc: true
 ---
 
-<div id="target-test"></div>
+<div id="alert-notice" class="main-content">
 
-<p class="alert"><strong>Note:</strong> This document is for internal TMP Worldwide use only.</p>
+  <p class="alert"><strong>Note:</strong> This document is for internal TMP Worldwide use only.</p>
 
-<h2>Prerequisites</h2>
+  <p>This script may be used to generate an alert notice on any TMP hosted website. If during implementation you have any questions or run into conflicts, please reach out to <a href="mailto:michael.spellacy@tmp.com">Michael Spellacy</a>. Feature requests for the System Alert can be logged here: <a href="http://jira.tmp.com/browse/TCDQ-48957">http://jira.tmp.com/browse/TCDQ-48957</a></p>
 
-<p>Magic Bullet - <a href="/tmp-magic-bullet/">https://tmpworldwide.dev/tmp-magic-bullet/</a></p>
+  <div id="toc-placeholder"></div>
 
-<h2>Implementation</h2>
+  <div id="target-test"></div>
 
-<h3 id="data-alert-covid">COVID-19</h3>
+  <section>
 
-<p>We begin with a clean installation of the Magic Bullet script. However, before implementation, please ensure that the Magic Bullet script is not already running on a site. If it is already running with GDPR, CCPA, or A11y, then all you need to do is include the following data attributes to get started:</p>
+    <h2 id="alert-prerequisites">Prerequisites</h2>
 
-<ul>
-  <li><strong>data-alert="true"</strong> - This will initiate the alert script.</li>
-  <li><strong>data-alert-covid</strong> (Boolean, no value required) - This will load the built in, COVID-19 message.</li>
-</ul>
+    <p><a href="/">Magic Bullet</a></p>
 
-<h4>Example:</h4>
+  </section>
+
+  <section>
+
+    <h2 id="alert-implementation">Implementation</h2>
+
+    <section>
+
+      <h3 id="data-alert-covid">COVID-19</h3>
+
+      <p>We begin with a clean installation of the Magic Bullet script. However, before implementation, please ensure that the Magic Bullet script is not already running on a site. If it is already running with GDPR, CCPA, or A11y, then all you need to do is include the following data attributes to get started:</p>
+
+      <ul>
+        <li><strong>data-alert="true"</strong> - This will initiate the alert script.</li>
+        <li><strong>data-alert-covid</strong> (Boolean, no value required) - This will load the built in, COVID-19 message.</li>
+      </ul>
 
 <pre><code>&lt;script id="tmp-magic-bullet" <strong>data-alert="true"</strong> <strong>data-alert-covid</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
 
-<p><strong>Result:</strong> <a href="https://www.screencast.com/t/sZaHyNxno">https://www.screencast.com/t/sZaHyNxno</a></p>
+    </section>
 
-<h3 id="data-alert-message">Custom Message</h3>
+    <section>
 
-<p>If you wish to include a custom message, then replace <code>data-alert-covid</code> with:</p>
+      <h3 id="data-alert-button-text">Close Button Text</h3>
 
-<ul>
-  <li><strong>data-alert-message</strong> - Accepts any valid html needed to produce a custom message.</li>
-</ul>
+      <ul>
+        <li><strong>data-alert-button-text</strong> (string) - Overrides the default close button value, which is "Close".</li>
+      </ul>
 
-<h4>Example:</h4>
+<pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" data-alert-covid data-alert-remove-css <strong>data-alert-button-text="OK"</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
+
+    </section>
+
+    <section>
+
+      <h3 id="data-alert-message">Custom Message</h3>
+
+      <p>If you wish to include a custom message, then replace <code>data-alert-covid</code> with:</p>
+
+      <ul>
+        <li><strong>data-alert-message</strong> - Accepts any valid html needed to produce a custom message.</li>
+      </ul>
 
 <pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" <strong>data-alert-message="&lt;h2&gt;Hello World&lt;/h2&gt; &lt;p&gt;Now is the time for all good TMP'ers to get down and boogie.&lt;/p&gt;"</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
 
-<p><strong>Result:</strong> <a href="https://www.screencast.com/t/OiMsH67Zt">https://www.screencast.com/t/OiMsH67Zt</a></p>
+    </section>
 
-<h3 id="data-alert-remove-css">Custom Styles</h3>
+    <section>
 
-<p>If you wish to style the modal to suit a client’s brand guidelines, then you can turn off many of the default CSS properties and roll your own:</p>
+      <h3 id="data-alert-remove-css">Custom Styles</h3>
 
-<ul>
-  <li><strong>data-alert-remove-css</strong> (Boolean, no value required) - Removes many default CSS properties from alert (modal and banner). Once removed, theme level CSS will take over, which you can edit as you see fit.</li>
-</ul>
+      <p>If you wish to style the modal to suit a client’s brand guidelines, then you can turn off many of the default CSS properties and roll your own:</p>
 
-<h4>Example:</h4>
+      <ul>
+        <li><strong>data-alert-remove-css</strong> (Boolean, no value required) - Removes many default CSS properties from alert (modal and banner). Once removed, theme level CSS will take over, which you can edit as you see fit.</li>
+      </ul>
 
 <pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" data-alert-message="..." <strong>data-alert-remove-css</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
 
-<p><strong>Result:</strong> <a href="https://www.screencast.com/t/5D9qcgzbUt">https://www.screencast.com/t/5D9qcgzbUt</a></p>
+    </section>
 
-<h3 id="data-alert-banner">Banner Mode</h3>
+    <section>
 
-<p>If you wish to load the alert as a banner to be appended to the very top of the page, use:</p>
+      <h3 id="data-alert-banner">Banner Mode</h3>
 
-<ul>
-  <li><strong>data-alert-banner</strong> (Boolean, no value required) - Appends a banner to the top of the page instead of showing a modal window. The same data attributes that are used to control the modal window, can be used here as well.</li>
-</ul>
+      <p>If you wish to load the alert as a banner to be appended to the very top of the page, use:</p>
 
-<h4>Example:</h4>
+      <ul>
+        <li><strong>data-alert-banner</strong> (Boolean, no value required) - Appends a banner to the top of the page instead of showing a modal window. The same data attributes that are used to control the modal window, can be used here as well.</li>
+      </ul>
 
 <pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" <strong>data-alert-banner</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
 
-<p><strong>Result:</strong> <a href="https://www.screencast.com/t/reISBtAK">https://www.screencast.com/t/reISBtAK</a></p>
+    </section>
 
-<h3 id="data-alert-banner-target">Banner Target <span class="alert">(New)</span></h3>
+    <section>
 
-<p>If you wish to customize placement of the banner, you may do so by creating an empty <code>div</code> element with a unique <code>id</code> value. This element can then be placed anywhere on the page you wish for message to appear. This <code>id</code> can then be refrenced via the following parameter:</p>
+      <h3 id="data-alert-banner-target">Banner Target <span class="alert">(New)</span></h3>
 
-<ul>
-  <li><strong>data-alert-banner-target="[DIV ID VALUE]"</strong> - Accepts value of id on element you are targeting.</li>
-</ul>
+      <p>If you wish to customize placement of the banner, you may do so by creating an empty <code>div</code> element with a unique <code>id</code> value. This element can then be placed anywhere on the page you wish for message to appear. This <code>id</code> can then be refrenced via the following parameter:</p>
 
-<h4>Example:</h4>
+      <ul>
+        <li><strong>data-alert-banner-target="[DIV ID VALUE]"</strong> - Accepts value of id on element you are targeting.</li>
+      </ul>
 
 <pre><code>&lt;div <strong>id="my-alert"</strong>&gt;&lt;/div&gt;
 
@@ -90,42 +114,28 @@ toc: true
 
 &lt;script id="tmp-magic-bullet" data-alert="true" data-alert-banner <strong>data-alert-banner-target="my-alert"</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
 
-<p><strong>Result:</strong> <a href="https://www.screencast.com/t/tpNLwLutB">https://www.screencast.com/t/tpNLwLutB</a></p>
+      <p><strong>Note:</strong> May only be used with <a href="#data-alert-banner">data-alert-banner</a>. Also, if you wish for message to remain persistent, then <a href="#data-alert-bypass-cookie">data-alert-bypass-cookie</a> must also be used.</p>
 
-<p><strong>Note:</strong> May only be used with <a href="#data-alert-banner">data-alert-banner</a>. Also, if you wish for message to remain persistent, then <a href="#data-alert-bypass-cookie">data-alert-bypass-cookie</a> must also be used.</p>
+    </section>
 
-<h3 id="data-alert-bypass-cookie">Persistent Banner</h3>
+    <section>
 
-<p>By default, the banner will always show a close button and can be dismissed in the same way that the modal can. If you wish to have the banner persist, then use:</p>
+      <h3 id="data-alert-bypass-cookie">Persistent Banner</h3>
 
-<ul>
-  <li><strong>data-alert-bypass-cookie</strong> (Boolean, no value required) - Bypasses default behavior of including a button to close banner and set cookie.</li>
-</ul>
+        <p>By default, the banner will always show a close button and can be dismissed in the same way that the modal can. If you wish to have the banner persist, then use:</p>
 
-<h4>Example:</h4>
+        <ul>
+          <li><strong>data-alert-bypass-cookie</strong> (Boolean, no value required) - Bypasses default behavior of including a button to close banner and set cookie.</li>
+        </ul>
 
 <pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" data-alert-banner <strong>data-alert-bypass-cookie</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
 
-<p><strong>Result:</strong> <a href="https://www.screencast.com/t/7pAsb9CUU">https://www.screencast.com/t/7pAsb9CUU</a></p>
+    </section>
 
-<h3 id="data-alert-button-text">Close Button Text</h3>
+  </section>
 
-<ul>
-  <li><strong>data-alert-button-text</strong> (string) - Overrides the default close button value, which is "Close".</li>
-</ul>
+</div>
 
-<h4>Example:</h4>
-
-<pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" data-alert-covid data-alert-remove-css <strong>data-alert-button-text="OK"</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
-
-<p><strong>Result:</strong> <a href="https://www.screencast.com/t/11oN8VJI">https://www.screencast.com/t/11oN8VJI</a></p>
-
-<h3>Problems?</h3>
-
-<p>If during implementation you have any questions or run into conflicts, please reach out to <a href="mailto:michael.spellacy@tmp.com">Michael Spellacy</a>.</p>
-
-<p>Feature requests for the System Alert can be logged here: <a href="http://jira.tmp.com/browse/TCDQ-48957">http://jira.tmp.com/browse/TCDQ-48957</a></p>
-
-<!-- Local  -->
+<!-- Local -->
 
 <script id="tmp-magic-bullet" data-alert="true" data-alert-covid  src="../init.js"></script>
