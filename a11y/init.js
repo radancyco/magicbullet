@@ -328,6 +328,10 @@
 
     $("section[data-selector-name='joblist']").removeAttr("tabindex");
 
+    // BUG: Sitemap pages have tabindex on certain header. Inactive elements should nto receive focus. 
+
+    $(".job-location h2, .job-category h2").removeAttr("tabindex aria-expanded").removeClass("expandable-parent");
+
   }
 
   $(document).ajaxStop(function() {
