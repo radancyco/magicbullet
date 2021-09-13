@@ -13,11 +13,11 @@
 
   // TalentBrew Accessibility Fixes
 
-  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0001
+  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0001
 
   $(".expandable-parent").attr("aria-expanded", "false").next().removeAttr("aria-expanded");
 
-  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0002
+  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0002
 
   $(".expandable-parent").on("click", function() {
 
@@ -31,29 +31,29 @@
 
   });
 
-  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0003
+  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0003
 
   $("img:not([alt])").attr("alt", "");
 
-  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0004
+  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0004
 
   $("form.search-form").attr("role", "search");
 
-  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0005
+  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0005
 
   $(".job-map-nearby a").removeAttr("target");
 
-  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0006
+  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0006
 
   $(".social-share-items a").append(" <span class='wai'>(Opens in New Window)</span>");
 
   // Job Description Garbage
 
-  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0007
+  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0007
 
   $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").removeAttr("tabindex");
 
-  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0008
+  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0008
 
   $(".ats-description table").attr("role", "presentation");
 
@@ -67,7 +67,7 @@
 
   // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
 
-  // https://tmpworldwide.dev/tmp-magic-bullet/a11y/#issue-0009
+  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0009
 
   $("input[type=checkbox]").removeAttr("autocomplete");
 
@@ -323,6 +323,10 @@
     // For now, a hacky fix...
 
     $("#search-results").attr("tabindex", -1);
+
+    // BUG: All section elements used for personbalization, appear to have tabindex="0" on them. These should not exist.
+
+    $("section[data-selector-name='joblist']").removeAttr("tabindex");
 
   }
 
