@@ -35,10 +35,6 @@
 
   var alertScript = magicBulletScript.getAttribute("data-alert");
 
-  // Temp: Get alert type
-
-  var alertBanner = magicBulletScript.getAttribute("data-alert-banner");
-
   // Get hostname so that we can select between QA and Production scripts.
 
   var hostName = location.hostname;
@@ -50,7 +46,7 @@
   hostName = hostName.substring(hostName.indexOf(".") + 1);
 
   var localPaths = localHost === "localhost";
-  var testPaths = hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "tmpworldwide.dev" || hostName === "tmpqa.com";
+  var testPaths = hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "radancy.dev" || hostName === "tmpworldwide.dev" || hostName === "tmpqa.com";
 
   // Check to see if both the GDPR and CCPA attributes exist together.
 
@@ -304,18 +300,7 @@
 
     if (localPaths) {
 
-      if (alertBanner !== null) {
-
-        alertCSS.setAttribute("href", "/alert/banner/init.css");
-
-      } else {
-
-        alertCSS.setAttribute("href", "/alert/modal/init.css");
-
-      }
-
-      // alertCSS.setAttribute("href", "/alert/init.css");
-
+      alertCSS.setAttribute("href", "/alert/init.css");
       alertExec.setAttribute("src", "/alert/init.js");
 
     } else {
@@ -324,35 +309,14 @@
 
       if(testPaths) {
 
-        if (alertBanner !== null) {
-
-          alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/qa/css/banner/");
-
-        } else {
-
-          alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/qa/css/modal/");
-
-        }
-
-        // alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/qa/css/");
-
+        alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/qa/css/");
         alertExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/alert/qa/");
 
       } else {
 
         // ... else, run the production version.
 
-        if (alertBanner !== null) {
-
-          alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/prod/css/banner/");
-
-        } else {
-
-          alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/prod/css/modal/");
-
-        }
-
-        // alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/prod/css/");
+        alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/prod/css/");
         alertExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/alert/prod/");
 
       }

@@ -328,9 +328,13 @@
 
     $("section[data-selector-name='joblist']").removeAttr("tabindex");
 
-    // BUG: Sitemap pages have tabindex on certain header. Inactive elements should nto receive focus. 
+    // BUG: Sitemap pages have tabindex on certain header. Inactive elements should nto receive focus.
 
     $(".job-location h2, .job-category h2").removeAttr("tabindex aria-expanded").removeClass("expandable-parent");
+
+    // Issue: Level Access suggested adding autocomplete to Search Location field on default search, which is probably not a bad idea.
+
+    $(".search-form .search-location").attr("autocomplete", "postal-code");
 
   }
 
