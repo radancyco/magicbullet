@@ -7,6 +7,10 @@
   var magicBulletScript = document.getElementById("tmp-magic-bullet");
   var a11yBody = document.body;
 
+  // Data Attributes
+
+  var a11yJobList = magicBulletScript.getAttribute("data-a11y-job-list");
+
   // Add A11y hook for implementation team. May come in handy.
 
   a11yBody.classList.add("magic-bullet-a11y");
@@ -45,7 +49,7 @@
 
   // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0006
 
-  $(".social-share-items a").append(" <span class='wai'>(Opens in New Window)</span>");
+  $(".social-share-items a").append(" <span class='wai'>(Opens in new tab)</span>");
 
   // Job Description Garbage
 
@@ -335,6 +339,18 @@
     // Issue: Level Access suggested adding autocomplete to Search Location field on default search, which is probably not a bad idea.
 
     $(".search-form .search-location").attr("autocomplete", "postal-code");
+
+    // Issue: Job Lists should really have the location appear inside of a link so that job links with same title can be more descriptive and discernable.
+
+    if(a11yJobList === null) {
+
+      $(".job-list .location").each(function() {
+
+        $(this).appendTo($(this).prev());
+
+      });
+
+    }
 
   }
 
