@@ -90,15 +90,17 @@
   $(".search-location").attr({
 
     "aria-describedby": "search-error",
+    "aria-required": "true",
     "aria-invalid": "true"
 
   });
 
-  $(".search-location-error").attr("id", "search-error");
+  $(".search-location-error").attr({
 
-  // HACK
+    "id": "search-error",
+    "style": "outline: 0 !important"
 
-  $(".search-location-error").attr("style", "outline: 0 !important");
+  }).removeAttr("tabindex");
 
   $(".search-form button").on("click", function(){
 
