@@ -89,6 +89,7 @@
 
   $(".search-location").attr({
 
+    "autocomplete": "postal-code",
     "aria-describedby": "search-error",
     "aria-required": "true",
     "aria-invalid": "true"
@@ -370,10 +371,6 @@
     // BUG: Sitemap pages have tabindex on certain header. Inactive elements should nto receive focus.
 
     $(".job-location h2, .job-category h2").removeAttr("tabindex aria-expanded").removeClass("expandable-parent");
-
-    // Issue: Level Access suggested adding autocomplete to Search Location field on default search, which is probably not a bad idea.
-
-    $(".search-form .search-location").attr("autocomplete", "postal-code");
 
     // Issue: Job Lists should really have the location appear inside of a link so that job links with same title can be more descriptive and discernable.
 
