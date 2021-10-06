@@ -92,7 +92,7 @@
     "autocomplete": "postal-code",
     "aria-describedby": "search-error",
     "aria-required": "true",
-    "aria-invalid": "true"
+    "aria-invalid": "false"
 
   });
 
@@ -109,11 +109,11 @@
 
       if($(".search-location-error").is(":visible")){
 
-        $(".search-location").focus();
+        $(".search-location").attr("aria-invalid", "true").focus();
 
       } else {
 
-        $(".search-location").attr("aria-invalid", "true");
+        $(".search-location").attr("aria-invalid", "false");
 
       }
 
