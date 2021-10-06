@@ -85,6 +85,35 @@
 
   }); */
 
+  // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
+
+  $(".search-location").attr({
+
+    "aria-describedby": "search-error",
+    "aria-invalid": "true"
+
+  });
+
+  $(".search-location-error").attr("id", "search-error");
+
+  // HACK
+
+  $(".search-location-error").attr("style", "outline: 0 !important");
+
+  $(".search-form button").on("click", function(){
+
+    setTimeout(function(){
+
+      if($(".search-location-error").is(":visible")){
+
+        $(".search-location").focus();
+
+      }
+
+    }, 100);
+
+  });
+
   // Issue: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
   function fixDisabledButton() {
@@ -344,7 +373,7 @@
 
     if(a11yJobList === null) {
 
-      $(".job-list .location").each(function() {
+      $(".job-list .location, .job-list .date").each(function() {
 
         $(this).appendTo($(this).prev());
 
