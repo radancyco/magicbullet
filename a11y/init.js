@@ -110,6 +110,10 @@
 
         $(".search-location").focus();
 
+      } else {
+
+        $(".search-location").attr("aria-invalid", "true");
+
       }
 
     }, 100);
