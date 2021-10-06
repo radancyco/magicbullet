@@ -101,9 +101,11 @@
     "id": "search-error",
     "style": "outline: 0 !important"
 
-  }).removeAttr("tabindex");
+  });
 
   $(".search-form button").on("click", function(){
+
+    $(".search-location-error").removeAttr("tabindex");
 
     setTimeout(function(){
 
