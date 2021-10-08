@@ -39,10 +39,6 @@
 
   $("img:not([alt])").attr("alt", "");
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0004
-
-  $("form.search-form").attr("role", "search");
-
   // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0005
 
   $(".job-map-nearby a").removeAttr("target");
@@ -85,13 +81,16 @@
 
   }); */
 
+  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0004
+
+  $("form.search-form").attr("role", "search");
+
   // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
 
   $(".search-location").attr({
 
     "autocomplete": "postal-code",
     "aria-describedby": "search-error",
-    "aria-required": "true",
     "aria-invalid": "false"
 
   });
