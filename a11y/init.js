@@ -158,7 +158,7 @@
   $(".search-form .job-search-legend").each(function(i) {
 
     $(this).attr("id", "job-search-legend-" + (i + 1));
-    $(this).parent().attr("aria-labelledby", "job-search-legend"-" + (i + 1));
+    $(this).parent().attr("aria-labelledby", "job-search-legend-" + (i + 1));
 
   });
 
