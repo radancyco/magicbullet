@@ -83,22 +83,38 @@
 
   // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0004
 
-  $("form.search-form").attr("role", "search");
+  $(".search-form").attr("role", "search");
 
   // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
 
   $(".search-location").attr({
 
     "autocomplete": "postal-code",
-    "aria-describedby": "search-error",
     "aria-invalid": "false"
+
+  });
+
+  // Multiple location fields on page need unique ID's
+
+  $(".search-location").each(function(i) {
+
+    $(this).attr("aria-describedby",  "search-error-" + (i + 1));
 
   });
 
   $(".search-location-error").attr({
 
-    "id": "search-error",
     "style": "outline: 0 !important"
+
+  });
+
+  // Multiple forms on page need unique ID's
+
+  $(".search-location-error").each(function(i) {
+
+    var searchLocationID = $(this).attr("id");
+
+    $(this).attr("id", "search-location-" + (i + 1));
 
   });
 
@@ -133,6 +149,16 @@
         $(this).attr("aria-invalid", "false");
 
       }
+
+  });
+
+  // Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
+  // Note: Currently only used on Wegmans
+
+  $(".search-form .job-search-legend").each(function(i) {
+
+    $(this).attr("id", "job-search-legend-" + (i + 1));
+    $(this).parent().attr("aria-labelledby", "job-search-legend"-" + (i + 1));
 
   });
 
