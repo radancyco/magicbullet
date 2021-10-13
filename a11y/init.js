@@ -87,34 +87,30 @@
 
   // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
 
-  $(".search-location").attr({
-
-    "autocomplete": "postal-code",
-    "aria-invalid": "false"
-
-  });
-
-  // Multiple location fields on page need unique ID's
-
-  $(".search-location").each(function(i) {
-
-    $(this).attr("aria-describedby",  "search-error-" + (i + 1));
-
-  });
-
-  $(".search-location-error").attr({
-
-    "style": "outline: 0 !important"
-
-  });
-
-  // Multiple forms on page need unique ID's
+  // Note: Multiple Search location errors, require unique ID's
 
   $(".search-location-error").each(function(i) {
 
-    var searchLocationID = $(this).attr("id");
+    $(this).attr({
 
-    $(this).attr("id", "search-location-" + (i + 1));
+      "id": "search-error-" + (i + 1),
+      "style": "outline: 0 !important"
+
+    });
+
+  });
+
+  // Note: Multiple Search location fields, require unique aria-describedby
+
+  $(".search-location").each(function(i) {
+
+    $(this).attr({
+
+      "aria-describedby": "search-error-" + (i + 1),
+      "autocomplete": "postal-code",
+      "aria-invalid": "false"
+
+    });
 
   });
 
