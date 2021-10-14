@@ -421,6 +421,10 @@
 
     }
 
+    // Issue: Pagination in Search Results should really have a label so it can be differentiated between other navs on page.
+
+    $(".pagination").attr("aria-label", "Pagination");
+
   }
 
   $(document).ajaxStop(function() {
