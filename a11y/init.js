@@ -108,7 +108,7 @@
     $(this).attr({
 
       "aria-describedby": "search-error-" + (i + 1),
-      "autocomplete": "postal-code", // May need to remove.
+      // "autocomplete": "postal-code", // May need to remove.
       "aria-invalid": "false"
 
     });
