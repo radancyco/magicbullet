@@ -108,7 +108,6 @@
     $(this).attr({
 
       "aria-describedby": "search-error-" + (i + 1),
-      // "autocomplete": "postal-code", // May need to remove.
       "aria-invalid": "false"
 
     });
@@ -168,18 +167,24 @@
     var $searchLocation = $(".search-location");
     var $mindReaderResults = $(".mindreader-results");
 
+    $searchLocation.attr("autocomplete", "postal-code"); // Adding postal code now to satisify certain requirements, but may need to remove.
+
     $searchLocation.attr("list", "search-location-datalist").after("<datalist id='search-location-datalist' class='search-location-datalist'></div>");
 
     var $searchLocationDatalist = $(".search-location-datalist");
 
-    $searchLocation.keypress(function() {
+    $searchLocation.on("keypress", function() {
 
       var $htmlStr = $mindReaderResults.find("a");
       var $cloneList = $htmlStr.clone();
 
+      // Get all links from mindreader, clone them, make a new list.
+
       $searchLocationDatalist.html($cloneList);
 
       var newList = $searchLocationDatalist.find("a");
+
+      // Grag each data-* from list and apply to new element (option)
 
       newList.each(function(){
 
@@ -196,7 +201,7 @@
 
     });
 
-    $searchLocation.change(function() {
+    $searchLocation.on("change", function() {
 
       var val = $(this).val();
 
