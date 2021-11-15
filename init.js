@@ -1,7 +1,7 @@
 /*
 
-  TalentBrew: Magic Bullet - A script to chase all your troubles away.
-  Developer: Michael "Spell" Spellacy, Email: michael.spellacy@tmp.com, Twitter: @spellacy, GitHub: michaelspellacy
+  Radancy: Magic Bullet - A script to chase all your troubles away.
+  Developer(s): Michael "Spell" Spellacy, Twitter: spellacy, GitHub: michaelspellacy, michael.spellacy[at]radancy.com
 
 */
 
@@ -39,7 +39,7 @@
 
   var hostName = location.hostname;
 
-  // Need to apply hostName to localHost var so that we can load our script(s) locally.
+  // Need to apply hostName to localHost var so that we can load our assets locally.
 
   var localHost = hostName;
 
@@ -50,7 +50,7 @@
 
   // Check to see if both the GDPR and CCPA attributes exist together.
 
-  if (gdprScript === "true" && ccpaScript === "true") {
+  if (gdprScript !== null && ccpaScript !== null) {
 
     alert("CCPA & GDPR cannot be initiated on the same site. You may only use data-ccpa=\"true\" or data-gdpr=\"true\".");
 
@@ -58,7 +58,7 @@
 
     // Execute GDPR
 
-    if (gdprScript === "true") {
+    if (gdprScript !== null) {
 
       if(locationAware  === "true") {
 
@@ -98,17 +98,17 @@
 
     // Execute CCPA
 
-    if (ccpaScript === "true") {
+    if (ccpaScript !== null) {
 
         showCCPA();
 
     }
 
-  } // end check
+  }
 
   // Execute A11y
 
-  if (a11yScript === "true") {
+  if (a11yScript !== null) {
 
     showA11y();
 
@@ -116,7 +116,7 @@
 
   // Execute Alert
 
-  if (alertScript === "true") {
+  if (alertScript !== null) {
 
     showAlert();
 
@@ -198,13 +198,13 @@
 
   function showCCPA() {
 
-    // Add Privacy Notice CSS
+    // Create Privacy Notice CSS
 
     var ccpaCSS = document.createElement("link");
     ccpaCSS.setAttribute("id", "ccpa-css");
     ccpaCSS.setAttribute("rel", "stylesheet");
 
-    // Create and add Privacy Notice script
+    // Create Privacy Notice script
 
     var ccpaExec = document.createElement("script");
     ccpaExec.setAttribute("id", "ccpa-js");
@@ -246,7 +246,13 @@
 
   function showA11y() {
 
-    // Create and add GDPR script
+    // Add A11y CSS
+
+    var a11yCSS = document.createElement("link");
+    a11yCSS.setAttribute("id", "a11y-css");
+    a11yCSS.setAttribute("rel", "stylesheet");
+
+    // Create GDPR Script
 
     var a11yExec = document.createElement("script");
     a11yExec.setAttribute("id", "a11y-fixes");
@@ -264,33 +270,36 @@
 
       if(testPaths) {
 
+        a11yCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/a11y/qa/css/");
         a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/qa/");
 
       } else {
 
         // ... else, run the production version.
 
+        a11yCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/a11y/prod/css/");
         a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/prod/");
 
       }
 
     }
 
-    // Append Script to DOM.
+    // Append CSS and Script to DOM.
 
+    document.head.appendChild(a11yCSS);
     document.body.appendChild(a11yExec);
 
   }
 
   function showAlert() {
 
-    // Add Privacy Notice CSS
+    // Create Alert CSS
 
     var alertCSS = document.createElement("link");
     alertCSS.setAttribute("id", "alert-css");
     alertCSS.setAttribute("rel", "stylesheet");
 
-    // Create and add Alert script
+    // Create Alert Script
 
     var alertExec = document.createElement("script");
     alertExec.setAttribute("id", "alert-js");

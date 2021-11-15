@@ -1,0 +1,16 @@
+/*
+
+  Radancy: Accessibility Patch
+  Developer(s): Michael "Spell" Spellacy, Twitter: spellacy, GitHub: michaelspellacy, michael.spellacy[at]radancy.com
+
+*/
+
+/* Search Location Datalist */
+
+.a11y-search-location .mindreader-results, .a11y-search-location .mindreader-status, .a11y-search-location .display-typeahead {
+display: none !important;
+}
+
+.a11y-search-location .search-location {
+z-index: 0 !important;
+}
