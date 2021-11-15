@@ -262,7 +262,8 @@
 
     if (localPaths) {
 
-      a11yExec.setAttribute("src", "/a11y/qa/init.js");
+      a11yCSS.setAttribute("href", "/a11y/init.css");
+      a11yExec.setAttribute("src", "/a11y/init.js");
 
     } else {
 
