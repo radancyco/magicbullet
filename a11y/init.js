@@ -412,7 +412,7 @@
 
     // Issue: Job Lists should really have the location appear inside of a link so that job links with same title can be more descriptive and discernable.
 
-    if(a11yJobList !== null) {
+    if(a11yJobList) {
 
       $(".job-list .location, .job-list .date").each(function() {
 
@@ -424,7 +424,7 @@
 
     // Issue: The Job Search custom datalist is really horrible. Now that IE11 is not supported, we should begin using datalist instead.
 
-    if(a11ySearchDataList !== null) {
+    if(a11ySearchDataList) {
 
       a11yBody.classList.add("a11y-search-location");
 
