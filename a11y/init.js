@@ -167,7 +167,7 @@
     var $searchLocation = $(".search-location");
     var $mindReaderResults = $(".mindreader-results");
 
-    $searchLocation.attr("autocomplete", "postal-code"); // Adding postal code now to satisify certain requirements, but may need to remove.
+    // $searchLocation.attr("autocomplete", "postal-code"); // Adding postal code now to satisify certain requirements, but may need to remove.
 
     $searchLocation.attr("list", "search-location-datalist").after("<datalist id='search-location-datalist' class='search-location-datalist'></div>");
 
