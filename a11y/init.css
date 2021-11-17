@@ -18,5 +18,5 @@ z-index: 0 !important;
 /* Issue: In Job Alerts, Job Location and Category are always required fields. */
 
 .form-field.required label::after {
-content: "*";
+content: " *";
 }
