@@ -1,93 +1,70 @@
 ---
-layout: default
 title: "Accessibility Patch"
 noindex: true
 ---
 
-<style>
+<p>This patch addresses the following accessibility issues on Career Sites that include <a href="/tmp-magic-bullet/">MagicBullet</a>. This is a temporary solution until many of these issues can be resolved by the product team.</p>
 
-.bug {
-background-color: #eee;
-border: 1px #000 solid;
-border-radius: 5px;
-padding: 0.5em 2em;
-margin-bottom: 1em;
-}
+<details class="nav">
 
-.bug a {
-text-decoration: underline;
-}
+  <summary class="btn">Accessibility Issues</summary>
 
-.bug h3 {
-text-transform: uppercase;
-}
+    <ol>
 
-.bug li {
-display: inline-block;
-margin-right: 1em;
-}
+      {% for bug in site.data.a11y %}
 
-.bug.high {
-background-color: #A61C00;
-color: #fff;
-}
+      {% assign issueID = bug.ID | plus: 0 %}
 
-.bug.high a {
-color: #fff;
-}
+      <li><a href="#issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}">{{ bug.Summary }}</a></li>
 
-</style>
+      {% endfor %}
 
-<h2>TalentBrew Accessibility Issues</h2>
+    </ol>
 
-<p>This patch addresses the following accessibility issues on TalentBrew. Many of these issues will be resolved by the product team at a later date.</p>
+</details>
 
 {% for bug in site.data.a11y %}
 
-{% assign issueID = bug.id | plus: 0 %}
+{% assign issueID = bug.ID | plus: 0 %}
 
-<div id="issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.id }}" class="bug {% if bug.priority == "High" %}high{% endif %}">
+<div id="issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}" class="bug {% if bug.Priority == "High" %}high{% endif %}">
 
-  <h3>#{{ bug.id }} {{ bug.summary }}</h3>
+  <h3><a href="#issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}">#{{ bug.ID }} {{ bug.Summary }}</a></h3>
 
-  <p><em><time datetime="{{ bug.time }}">{{ bug.time | date: "%A, %B %-d, %Y %I:%M:%S %p %Z" }}</time></em></p>
+  <p><b>Logged:</b> <time datetime="{{ bug.Time }}">{{ bug.Time | date: "%A, %B %-d, %Y %I:%M:%S %p %Z" }}</time></p>
 
   <ul>
-    <li><strong>Status:</strong> {{ bug.status }}</li>
-    <li><strong>Priority:</strong> {{ bug.priority }}</li>
-    {% if bug.jira %}
-    <li><strong>Jira:</strong> <a href="{{ bug.jira }}" rel="noopener" target="_blank">View</a></li>
+    <li><b>Status:</b> {{ bug.Status }}</li>
+    <li><b>Priority:</b> {{ bug.Priority }}</li>
+    {% if bug.JIRA %}
+    <li><b>JIRA:</b> <a class="external" href="{{ bug.JIRA }}" rel="noopener" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></li>
     {% endif %}
-    <li><strong>Product:</strong> {{ bug.product }}</li>
-    <li><strong>Feature:</strong> {{ bug.feature }}</li>
-    <li><strong>Implementation:</strong> <a href="#implementation">{{ bug.implementation }}</a></li>
+    <li><b>Product:</b> {{ bug.Product }}</li>
+    <li><b>Feature:</b> {{ bug.Feature }}</li>
+    <li><b>Implementation:</b> <a href="#implementation">{{ bug.Implementation }}</a></li>
   </ul>
 
   <h4>Details</h4>
 
-  {{ bug.details }}
+  {{ bug.Details }}
 
   <h4>Code</h4>
 
-<pre><code>{{ bug.code | replace: "<", "&lt;" | replace: ">", "&gt;" }}</code></pre>
+<pre><code>{{ bug.Code | replace: "<", "&lt;" | replace: ">", "&gt;" }}</code></pre>
 
-{% if bug.screengrab == blank %}
+{% if bug.Screengrab == blank %}
 
   <h4>Screen Grab</h4>
 
-  <p>{{ bug.screengrab }}</p>
+  <p>{{ bug.Screengrab }}</p>
 
 {% endif %}
+
+<p><a href="#content">Back to top</a></p>
 
 </div>
 
 {% endfor %}
-
-<h2>Features</h2>
-
-<ul>
-  <li><a href="magic-buttons.html">Magic Buttons</a></li>
-</ul>
 
 <h2>Terminology</h2>
 

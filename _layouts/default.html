@@ -33,17 +33,13 @@
 
       {% if page.toc %}
 
-      <nav id="toc">
+      <details class="nav">
 
-        <details>
+        <summary class="btn">Table of Contents</summary>
 
-          <summary>Table of Contents</summary>
+        {% include toc.html html=content h_max=4 ordered=true %}
 
-          {% include toc.html html=content h_max=4 ordered=true %}
-
-        </details>
-
-      </nav>
+      </details>
 
       {% endif %}
 
