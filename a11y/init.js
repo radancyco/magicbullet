@@ -78,8 +78,6 @@
 
   $("input[type=checkbox]").removeAttr("autocomplete");
 
-
-
   // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
 
   // Note: Multiple Search location errors, require unique ID's
