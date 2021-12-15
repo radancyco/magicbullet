@@ -503,6 +503,18 @@
 
     $(".pagination").attr("aria-label", "Pagination");
 
+    // Issue: Older versions of slick that do not inlcude the accessibility flag, have several issues. We will fry to fix them here
+    // but reccomend upgrading to AccessibleSlick.
+
+    var slickPagingBtn = $(".slide-m-prev, .slide-m-next").attr("aria-label");
+
+    if (typeof slickPagingBtn == "undefined" && slickPagingBtn == false) {
+
+      $(".slide-m-prev").attr("aria-label", "Previous");
+      $(".slide-m-next").attr("aria-label", "Next");
+
+    }
+
   }
 
   $(document).ajaxStop(function() {
