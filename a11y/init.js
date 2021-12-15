@@ -506,8 +506,12 @@
     // Issue: Older versions of slick that do not inlcude the accessibility flag, have several issues. We will fry to fix many of them here
     // but reccomend upgrading to AccessibleSlick.
 
-    $(".slide-m-prev:not([aria-label])").attr("aria-label", "Previous Slide");
-    $(".slide-m-next:not([aria-label])").attr("aria-label", "Next Slide");
+    setTimeout(function(){
+
+      $(".slide-m-prev:not([aria-label])").attr("aria-label", "Previous Slide");
+      $(".slide-m-next:not([aria-label])").attr("aria-label", "Next Slide");
+
+    }, 3000);
 
   }
 
