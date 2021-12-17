@@ -292,7 +292,7 @@
       savedJobs[i].removeAttr("type");
 
       // aria-pressed not working with type attribute on it, which makes sense.
-      // TODO: See if still an issue in VO, too. 
+      // TODO: See if still an issue in VO, too.
 
       if(savedJobs[i].dataset.jobSaved === "true") {
 
@@ -413,6 +413,16 @@
       }
 
     });
+
+    // Issue: "Add" button should be more explicit.
+    // Hack, this is only for english at the moment.
+
+    $(".data-form .keyword-add").attr("aria-label", "Add Job Alert");
+
+    // Issue: "Sign Up" button should be more explicit.
+    // Hack, this is only for english at the moment.
+
+    $(".data-form .form-field.submit button").attr("aria-label", "Sign Up for Job Alerts");
 
     // Issue: Clutter, remove unused elements from fields that are not required.
 
