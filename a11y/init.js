@@ -289,7 +289,7 @@
 
     for (var i = 0; i < savedJobs.length; i++) {
 
-      savedJobs[i].setAttribute("type", "button"); // Needed for VoiceOver :-(
+      // savedJobs[i].setAttribute("type", "button"); // Needed for VoiceOver :-(
 
       if(savedJobs[i].dataset.jobSaved === "true") {
 
@@ -508,8 +508,8 @@
 
     setTimeout(function(){
 
-      $(".slide-m-prev:not([aria-label])").attr("aria-label", "Previous Slide");
-      $(".slide-m-next:not([aria-label])").attr("aria-label", "Next Slide");
+      $(".slick-prev:not([aria-label])").attr("aria-label", "Previous");
+      $(".slick-next:not([aria-label])").attr("aria-label", "Next");
 
     }, 3000);
 
