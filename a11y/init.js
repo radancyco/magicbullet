@@ -289,7 +289,10 @@
 
     for (var i = 0; i < savedJobs.length; i++) {
 
-      // savedJobs[i].setAttribute("type", "button"); // Needed for VoiceOver :-(
+      savedJobs[i].removeAttr("type");
+
+      // aria-pressed not working with type attribute on it, which makes sense.
+      // TODO: See if still an issue in VO, too. 
 
       if(savedJobs[i].dataset.jobSaved === "true") {
 
