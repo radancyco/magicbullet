@@ -150,6 +150,12 @@
 
   });
 
+  // Issue "Keyword Selectd list requires a heading"
+
+  $(".data-form .keyword-selected").attr("aria-labelledby", "selected-keywords");
+
+  $("<div hidden id='selected-keywords'>Selected Job Alerts</div>").insertBefore(".data-form .keyword-selected");
+
   // Issue: The Job Search custom datalist is really horrible. Now that IE11 is not supported, we should begin using datalist instead.
 
   if(a11ySearchDataList !== null) {
@@ -423,10 +429,6 @@
     // Hack, this is only for english at the moment.
 
     $(".data-form .form-field.submit button").attr("aria-label", "Sign Up for Job Alerts");
-
-    // Issue "Keyword Selectd list requires a heading"
-
-    $(".data-form .keyword-selected").attr("aria-labelledby", "selected-keywords").prepend("<div hidden id='selected-keywords'>Selected Job Alerts</div>");
 
     // Issue: Clutter, remove unused elements from fields that are not required.
 
