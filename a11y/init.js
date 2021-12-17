@@ -424,6 +424,10 @@
 
     $(".data-form .form-field.submit button").attr("aria-label", "Sign Up for Job Alerts");
 
+    // Issue "Keyword Selectd list requires a heading"
+
+    $(".data-form .keyword-selected").attr("aria-labelledby", "selected-keywords").prepend("<div hidden id='selected-keywords'>Selected Job Alerts</div>");
+
     // Issue: Clutter, remove unused elements from fields that are not required.
 
     /* $(".form-field:not(.required),").each(function() {
