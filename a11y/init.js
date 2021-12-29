@@ -263,11 +263,13 @@
 
     // While we are in here, let's indicate to screen readers what page they are on - cool!
 
-    if (pageStatus !== "undefined"){
+    // Level Access suggest removing this. https://docs.google.com/spreadsheets/d/18Ua04NT6ecf8EBEwn_2HcDW0lJ0E_mLNXnD9uNp-A3c/edit#gid=1370565666&range=141:141
 
-      $("#search-results").attr("aria-label", pageStatus);
+    // if (pageStatus !== "undefined"){
 
-    }
+      // $("#search-results").attr("aria-label", pageStatus);
+
+    // }
 
     if($(".pagination-no-form").length) {
 
@@ -295,7 +297,7 @@
 
     for (var i = 0; i < savedJobs.length; i++) {
 
-      savedJobs[i].removeAttr("type");
+      savedJobs[i].removeAttribute("type");
 
       // aria-pressed not working with type attribute on it, which makes sense.
       // TODO: See if still an issue in VO, too.
