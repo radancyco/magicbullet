@@ -502,7 +502,7 @@
 
     // BUG: All section elements used for personbalization, appear to have tabindex="0" on them. These should not exist.
 
-    $("section[data-selector-name='joblist']").removeAttr("tabindex");
+    $("section[data-module-type='Personalization']").removeAttr("tabindex");
 
     // BUG: Sitemap pages have tabindex on certain header. Inactive elements should nto receive focus.
 
