@@ -297,11 +297,7 @@
 
     for (var i = 0; i < savedJobs.length; i++) {
 
-      savedJobs[i].removeAttribute("type");
-
       savedJobs[i].setAttribute("aria-label", "Save Job");
-
-      savedJobs[i].setAttribute("role", "button");
 
       // aria-pressed not working with type attribute on it, which makes sense.
       // TODO: See if still an issue in VO, too.
