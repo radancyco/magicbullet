@@ -297,6 +297,8 @@
 
     for (var i = 0; i < savedJobs.length; i++) {
 
+      savedJobs[i].setAttribute("type", "button");
+
       savedJobs[i].setAttribute("aria-label", "Save Job");
 
       // aria-pressed not working with type attribute on it, which makes sense.
