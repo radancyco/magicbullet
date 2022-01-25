@@ -297,12 +297,14 @@
 
     for (var i = 0; i < savedJobs.length; i++) {
 
-      savedJobs[i].setAttribute("type", "button");
-
-      savedJobs[i].setAttribute("aria-label", "Save Job");
-
       // aria-pressed not working with type attribute on it, which makes sense.
       // TODO: See if still an issue in VO, too.
+
+      savedJobs[i].removeAttribute("type");
+
+      savedJobs[i].setAttribute("role", "button"); // iOS, NVDA bug, state not reading back so need to implicitly call role. Do not remove until support better.
+
+      savedJobs[i].setAttribute("aria-label", "Save Job");
 
       if(savedJobs[i].dataset.jobSaved === "true") {
 
