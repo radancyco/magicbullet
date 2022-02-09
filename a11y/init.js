@@ -538,6 +538,10 @@
 
     }, 3000);
 
+    // Issue: Cookie Management Page has some aria-describedby attributes on the page that do nothing. Remove.
+
+    $("input[aria-describedby='cookieDescriptionIdAttr']").removeAttr("aria-describedby");
+
   }
 
   $(document).ajaxStop(function() {
