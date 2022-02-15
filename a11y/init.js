@@ -64,11 +64,7 @@
 
   $(".ats-description table").attr("role", "presentation");
 
-  $(".ats-description *").removeAttr("face size title id").html(function (i, html) {
-
-      return html.replace(/&nbsp;/g, ""); // Remove nbsp;
-
-  });
+  $(".ats-description *").removeAttr("face size title id"); // Remove useless attributes.
 
   $(".ats-description font").contents().unwrap(); // Remove font element.
 
