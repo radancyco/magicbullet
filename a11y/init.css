@@ -20,3 +20,14 @@ z-index: 0 !important;
 .form-field.required label::after {
 content: " *";
 }
+
+/* Issue: Chnage color of all placeholder text to make more contrast friendly */
+
+::-moz-placeholder {
+color: #797676;
+opacity: 1;
+}
+
+::-webkit-input-placeholder {
+color: #797676;
+}
