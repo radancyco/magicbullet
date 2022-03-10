@@ -538,6 +538,10 @@
 
     $("input[aria-describedby='cookieDescriptionIdAttr']").removeAttr("aria-describedby");
 
+    // Issue: Some scripts drop in their owm meta viewport tags, that can be harmful to pinch and zoom. This is an effort to address that:
+
+    $("meta[content*='user-scalable=no']").remove();
+
   }
 
   $(document).ajaxStop(function() {
