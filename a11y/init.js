@@ -542,6 +542,16 @@
 
     $("meta[content*='user-scalable=no']").remove();
 
+    // Issue: Various Altru Fixes
+
+    $(".altru-content").each(function() {
+
+	     var videoTitle = $(this).find(".altru-question-text").text();
+
+	     $(this).find(".altru-video-player__video").attr("aria-label", videoTitle + " (Video)");
+
+     });
+
   }
 
   $(document).ajaxStop(function() {
