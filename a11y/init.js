@@ -552,11 +552,13 @@
 
      });
 
+     // Issue: Altru: Remove aria-label from <time> element. No proper role on <time>, so why inclkude a label?
+
      $(".altru-video-overlay time").removeAttr("aria-label");
 
-     // Tint-Up fixes
+     // Issue: Altru: Duplicate ID
 
-     $("g[id='artboard']").removeAttr("id");
+     $("g[id='Artboard'], polygon[id='Star']").removeAttr("id");
 
   }
 
