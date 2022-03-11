@@ -525,7 +525,7 @@
     $(".pagination").attr("aria-label", "Pagination");
 
     // Issue: Older versions of slick that do not inlcude the accessibility flag, have several issues. We will fry to fix many of them here
-    // but reccomend upgrading to AccessibleSlick.
+    // but recommend upgrading to AccessibleSlick.
 
     setTimeout(function(){
 
@@ -551,6 +551,10 @@
 	     $(this).find(".altru-video-player__video").attr("aria-label", videoTitle + " (Video)");
 
      });
+
+     // Tint-Up fixes
+
+     $("g[id='artboard']").removeAttr("id");
 
   }
 
