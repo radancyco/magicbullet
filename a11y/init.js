@@ -552,6 +552,8 @@
 
      });
 
+     $(".altru-video-overlay time").removeAttr("aria-label");
+
      // Tint-Up fixes
 
      $("g[id='artboard']").removeAttr("id");
