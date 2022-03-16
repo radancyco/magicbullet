@@ -207,9 +207,7 @@
 
   });
 
-  $(".data-form input, .data-form select").on("change", function(){
-
-      setTimeout(function(){
+  $(".data-form input, .data-form select").on("blur", function(){
 
         if($(this).hasClass("input-validation-error")) {
 
@@ -220,8 +218,6 @@
           $(this).attr("aria-invalid", "false");
 
         }
-
-      }, 100);
 
   });
 
