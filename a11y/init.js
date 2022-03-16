@@ -207,7 +207,7 @@
 
   });
 
-  $(".data-form input, .data-form select").on("blur", function(){
+  $(".data-form input, .data-form select").on("change", function(){
 
       setTimeout(function(){
 
