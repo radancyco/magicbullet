@@ -478,9 +478,11 @@
 
         if($(".data-form .keyword-location").hasClass("input-validation-error")){
 
-          var ariaDescribedByCategory = $(".data-form .category-location").attr("aria-describedby");
+          var ariaDescribedByCategory = $(".data-form .keyword-category").attr("aria-describedby");
 
-        $(".data-form .keyword-location").attr("aria-describedby", ariaDescribedByCategory); 
+          $(".data-form .keyword-location").attr("aria-describedby", ariaDescribedByCategory);
+
+          console.log(ariaDescribedByCategory);
 
         }
 
