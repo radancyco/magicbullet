@@ -207,7 +207,7 @@
 
   });
 
-  $(".data-form input, .data-form select").on("change", function(){
+  $(".data-form input, .data-form select").on("blur", function(){
 
       if($(this).hasClass("input-validation-error")) {
 
