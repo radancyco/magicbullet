@@ -480,7 +480,7 @@
 
           var ariaDescribedByCategory = $(".data-form .category-location").attr("aria-describedby");
 
-        $(".data-form .keyword-location").attr("aria-describedby, " + ariaDescribedByCategory);
+        $(".data-form .keyword-location").attr("aria-describedby, " + ariaDescribedByCategory + "");
 
         }
 
