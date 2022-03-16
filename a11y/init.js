@@ -179,7 +179,7 @@
 
   $(".data-form .form-field.required input, .data-form .form-field.required select").attr("aria-invalid", "false");
 
-  // Issue: We need to perform some additional form validation/manipulation after form is submitted
+  // Issue: We need to perform some additional form validation/manipulation after form is submitted (and on change)
 
   $(".data-form").on("submit", function() {
 
@@ -204,6 +204,20 @@
         });
 
     }, 100);
+
+  });
+
+  $(".data-form input, .data-form select").on("change", function(){
+
+      if($(this).hasClass("input-validation-error")) {
+
+        $(this).attr("aria-invalid", "true");
+
+      } else {
+
+        $(this).attr("aria-invalid", "false");
+
+      }
 
   });
 
