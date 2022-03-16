@@ -474,7 +474,17 @@
 
     $(".data-form").on("submit", function() {
 
-      console.log ("Something accessible has happened");
+      setTimeout(function(){
+
+        if($(".data-form .keyword-location").hasClass("input-validation-error")){
+
+          var ariaDescribedByCategory = $(".data-form .category-location").attr("aria-describedby");
+
+        $(".data-form .keyword-location").attr("aria-describedby, " + ariaDescribedByCategory);
+
+        }
+
+      }, 100);
 
     });
 
