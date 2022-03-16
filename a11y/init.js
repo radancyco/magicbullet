@@ -179,6 +179,34 @@
 
   $(".data-form .form-field.required input, .data-form .form-field.required select").attr("aria-invalid", "false");
 
+  // Issue: We need to perform some additional form validation/manipulation after form is submitted
+
+  $(".data-form").on("submit", function() {
+
+    setTimeout(function(){
+
+        var ariaDescribedByCategory = $(".data-form .keyword-category").attr("aria-describedby");
+
+        $(".data-form .keyword-location").attr("aria-describedby", ariaDescribedByCategory);
+
+        $(".data-form input, .data-form select").each(function() {
+
+          if($(this).hasClass("input-validation-error")) {
+
+            $(this).attr("aria-invalid", "true");
+
+          } else {
+
+            $(this).attr("aria-invalid", "false");
+
+          }
+
+        });
+
+    }, 100);
+
+  });
+
   // Issue: The Job Search custom datalist is really horrible. Now that IE11 is not supported, we should begin using datalist instead.
 
   if(a11ySearchDataList !== null) {
@@ -496,34 +524,6 @@
       $(".form-field input[name='Resume']").removeAttr("aria-describedby");
 
     }
-
-    // Issue: We need to perform some additional form validation/manipulation after form is submitted
-
-    $(".data-form").on("submit", function() {
-
-      setTimeout(function(){
-
-          var ariaDescribedByCategory = $(".data-form .keyword-category").attr("aria-describedby");
-
-          $(".data-form .keyword-location").attr("aria-describedby", ariaDescribedByCategory);
-
-          $(".data-form input, .data-form select").each(function() {
-
-            if($(this).not(".input-validation-error")) {
-
-              $(this).attr("aria-invalid", "true");
-
-            } else {
-
-              $(this).attr("aria-invalid", "false");
-
-            }
-
-          });
-
-      }, 100);
-
-    });
 
     // The file upload remove button is a link with an href hash...can't have that, so let's change it....
 
