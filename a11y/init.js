@@ -209,6 +209,8 @@
 
   $(".data-form input, .data-form select").on("blur", function(){
 
+      setTimeout(function(){
+
         if($(this).hasClass("input-validation-error")) {
 
           $(this).attr("aria-invalid", "true");
@@ -218,6 +220,8 @@
           $(this).attr("aria-invalid", "false");
 
         }
+
+      }, 250);
 
   });
 
