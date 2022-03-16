@@ -440,6 +440,11 @@
 
     }); */
 
+    // Issue: For some odd reason the Location and Category inout fields have an aria-label on them. These should not exist on any form fields.
+    // Note: The aria-label is also being appended with the label text AND the placeholder text!!!! Ex: aria-label="Select a Location eg: New York, Arizona..."
+
+    $(".data-form input, .data-form select").removeAttr("aria-label");
+
     // Issue: Remove inline style on honeypot field and use hidden attribute instead
 
     $(".form-field.confirm-email").prop("hidden", true).removeAttr("aria-hidden style");
