@@ -177,7 +177,7 @@
 
   // Issue: All required fields should include aria-invalid="false" on page load
 
-  $(".data-form .form-field.required input, .data-form .form-field.required select").attr("aria-invalid", "true");
+  $(".data-form .form-field.required input, .data-form .form-field.required select").attr("aria-invalid", "false");
 
   // Issue: The Job Search custom datalist is really horrible. Now that IE11 is not supported, we should begin using datalist instead.
 
