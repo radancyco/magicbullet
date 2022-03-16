@@ -209,15 +209,19 @@
 
   $(".data-form input, .data-form select").on("blur", function(){
 
-      if($(this).hasClass("input-validation-error")) {
+      setTimeout(function(){
 
-        $(this).attr("aria-invalid", "true");
+        if($(this).hasClass("input-validation-error")) {
 
-      } else {
+          $(this).attr("aria-invalid", "true");
 
-        $(this).attr("aria-invalid", "false");
+        } else {
 
-      }
+          $(this).attr("aria-invalid", "false");
+
+        }
+
+      }, 100);
 
   });
 
