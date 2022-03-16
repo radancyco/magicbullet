@@ -470,6 +470,14 @@
 
     }
 
+    // Issue: We need to perform some additional form validation/manipulation after form is submitted
+
+    $(".data-form").on("submit", function() {
+
+      console.log ("Something accessible has happened");
+
+    });
+
     // The file upload remove button is a link with an href hash...can't have that, so let's change it....
 
     // First, get the text...
