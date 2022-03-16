@@ -509,7 +509,7 @@
 
           $(".data-form input, .data-form select").each(function() {
 
-            if(!$(this).hasClass("input-validation-error") {
+            if(!$(this).hasClass("input-validation-error")) {
 
               $(this).attr("aria-invalid", "false");
 
