@@ -394,6 +394,10 @@
 
     $(".data-form .form-field.required, .form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea").removeAttr("aria-required");
 
+    // Issue. Removing CSS asterick, including as span with aria-hidden.
+
+    $(".data-form .form-field.required label").append(" <span class='ico-required-indicator' aria-hidden='true'>*</span>");
+
     // Required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
 
     $(".data-form input[required='required'], .data-form select[required='required'], .data-form textarea[required='required']").prop("required", true);

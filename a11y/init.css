@@ -21,7 +21,7 @@ z-index: 0 !important;
 display: none;
 }
 
-.form-field.required label .asterick {
+.form-field.required label .ico-required-indicator {
 display: inline-block;
 }
 
