@@ -152,6 +152,10 @@
 
   $("<div hidden id='selected-keywords'>Selected Job Alerts</div>").insertBefore(".data-form .keyword-selected");
 
+  // Issue. Removing CSS asterick, including as span with aria-hidden.
+
+  $(".data-form .form-field.required label").append(" <span class='ico-required-indicator' aria-hidden='true'>*</span>");
+
   // Issue: The Job Search custom datalist is really horrible. Now that IE11 is not supported, we should begin using datalist instead.
 
   if(a11ySearchDataList !== null) {
@@ -393,10 +397,6 @@
     // Issue: Remove aria-required from p element (it should not exist on this element) and various other elements.
 
     $(".data-form .form-field.required, .form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea").removeAttr("aria-required");
-
-    // Issue. Removing CSS asterick, including as span with aria-hidden.
-
-    $(".data-form .form-field.required label").append(" <span class='ico-required-indicator' aria-hidden='true'>*</span>");
 
     // Required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
 
