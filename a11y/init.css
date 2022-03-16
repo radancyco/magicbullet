@@ -15,10 +15,14 @@ display: none !important;
 z-index: 0 !important;
 }
 
-/* Issue: In Job Alerts, Job Location and Category are always required fields. */
+/* Issue: Remove all CSS astericks. These are being read back by AT */
 
 .form-field.required label::after {
-content: " *";
+display: none;
+}
+
+.form-field.required label .asterick {
+display: inline-block;
 }
 
 /* Issue: Chnage color of all placeholder text to make more contrast friendly */
