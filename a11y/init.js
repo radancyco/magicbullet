@@ -156,6 +156,25 @@
 
   $(".data-form .form-field.required label").append(" <span class='ico-required-indicator' aria-hidden='true'>*</span>");
 
+  // Issue: Include More Friendly Autocompletes
+
+  // First Name
+
+  $(".data-form input[name='FirstName']").attr("autocomplete", "given-name");
+
+  // Last Name
+
+  $(".data-form input[name='LastName']").attr("autocomplete", "family-name");
+
+  // Email
+
+  $(".data-form input[name='EmailAddress']").attr({
+
+    "type":"email",
+    "autocomplete": "email",
+
+  });
+
   // Issue: The Job Search custom datalist is really horrible. Now that IE11 is not supported, we should begin using datalist instead.
 
   if(a11ySearchDataList !== null) {
