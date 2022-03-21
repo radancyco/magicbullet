@@ -498,7 +498,7 @@
     // Issue: "Add" button should be more explicit.
     // Hack, this is only for english at the moment.
 
-    $(".data-form .keyword-add").attr("aria-label", "Add Job Alert");
+    $("html[lang='en'] .data-form .keyword-add").attr("aria-label", "Add Job Alert");
 
     // Issue: "Sign Up" button should be more explicit.
     // Hack, this is only for english at the moment.
