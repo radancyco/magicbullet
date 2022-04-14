@@ -640,7 +640,7 @@
 
      // Olivia Chatbot
 
-     $(".toggle-olivia").attr("aria-label", "Chat with our recruiting assistant");
+     $("#toggle-olivia").attr("aria-label", "Chat with our recruiting assistant");
 
   }
 
