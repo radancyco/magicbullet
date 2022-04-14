@@ -38,10 +38,6 @@
 
   });
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0003
-
-  $("img:not([alt])").attr("alt", "");
-
   // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0004
 
   $(".search-form").attr("role", "search");
@@ -460,6 +456,10 @@
   fixFilterButton(); // Initial Page Load
 
   function miscA11yFixes() {
+
+    // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0003
+
+    $("img:not([alt])").attr("alt", "");
 
     // A11y Form Fixes
 
