@@ -638,6 +638,10 @@
 
      $("g[id='Artboard'], polygon[id='Star']").removeAttr("id");
 
+     // Olivia Chatbot
+
+     $(".toggle-olivia").attr("aria-label", "Chat with our recruiting assistant");
+
   }
 
   $(document).ajaxStop(function() {
