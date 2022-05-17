@@ -40,7 +40,7 @@
 
   // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0004
 
-  $(".search-form").attr("role", "search");
+  $(".search-form, .advanced-search-form").attr("role", "search");
 
   // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0005
 
@@ -135,7 +135,7 @@
   // Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
   // Note: Currently only used on Wegmans
 
-  $(".search-form .job-search-legend").each(function(i) {
+  $(".search-form .job-search-legend, .advanced-search-form .job-search-legend").each(function(i) {
 
     $(this).attr("id", "job-search-legend-" + (i + 1));
     $(this).parent().attr("aria-labelledby", "job-search-legend-" + (i + 1));
