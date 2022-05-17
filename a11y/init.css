@@ -5,6 +5,12 @@
 
 */
 
+/* Access Link - Ensure accesslink always has higher index. */
+
+.access-link {
+z-index: 2147483647 !important;
+}
+
 /* Search Location Datalist */
 
 .a11y-search-location .mindreader-results, .a11y-search-location .mindreader-status, .a11y-search-location .display-typeahead {
@@ -22,16 +28,16 @@ display: none;
 }
 
 .form-field.required label .ico-required-indicator[aria-hidden="true"] {
-display: inline-block;
+display: inline-block !important;
 }
 
 /* Issue: Chnage color of all placeholder text to make more contrast friendly */
 
 ::-moz-placeholder {
-color: #797676;
+color: #767676;
 opacity: 1;
 }
 
 ::-webkit-input-placeholder {
-color: #797676;
+color: #767676;
 }
