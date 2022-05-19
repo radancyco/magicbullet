@@ -144,9 +144,12 @@
 
   // Issue "Keyword Selectd list requires a heading"
 
-  $(".data-form .keyword-selected").attr("aria-labelledby", "selected-keywords");
+  $(".data-form .keyword-selected").each(function( index ) {
 
-  $("<div hidden id='selected-keywords'>Selected Job Alerts</div>").insertBefore(".data-form .keyword-selected");
+    $(this).attr("aria-labelledby", "selected-keywords-" + (index + 1) + "");
+    $("<div hidden id=selected-keywords-" + (index + 1) + ">Selected Job Alerts</div>").insertBefore($(this));
+
+  });
 
   // Issue. Removing CSS asterick, including as span with aria-hidden.
 
