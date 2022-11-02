@@ -450,7 +450,7 @@
 
     $("button.filter-button").each(function() {
 
-      $(this).attr("aria-label", "Remove " + $(this).text());
+      $(this).attr("aria-label", "Remove " + $(this).text() + " filter");
 
     });
 
