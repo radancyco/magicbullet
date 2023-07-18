@@ -8,6 +8,8 @@ toc: true
 
 <div id="ccpa-notice" class="main-content">
 
+    {% include deprecated.html %}
+
     <p>This script may be used to generate a California Consumer Privacy Act (CCPA) notice on any Radancy hosted website. Due to privacy concerns, California residents who engage with any website that collects data, via cookies, must now be warned about this practice in advance and be able to opt-in, if necessary, to permit this data to be used. You can learn more about the CCPA on the <a href="https://www.caprivacy.org/">official website</a>.</p>
 
     <p class="alert"><strong>Note:</strong> This document is for internal Radancy use only.</p>
@@ -584,4 +586,4 @@ document.body.appendChild(magicBullet);</code></pre>
 
 <!-- Implementation Example -->
 
-<script id="tmp-magic-bullet" data-ccpa="true" data-ccpa-policy-url="https://www.radancy.com/privacy/" data-ccpa-client-name="Radancy" src="../init.js"></script>
+<script id="tmp-magic-bullet" data-ccpa="flase" data-ccpa-policy-url="https://www.radancy.com/privacy/" data-ccpa-client-name="Radancy" src="../init.js"></script>

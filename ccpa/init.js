@@ -7,6 +7,8 @@
 
 (function() {
 
+  console.log('%c Radancy Msg: The custom CCPA feature is deprecated. Career sites should now be using the product version of this feature.', 'background: #cc0000; color: #fff');
+
   var magicBulletScript = document.getElementById("tmp-magic-bullet");
   var ccpaBody = document.body;
 

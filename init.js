@@ -7,6 +7,8 @@
 
 (function() {
 
+  console.log('%c Radancy Msg: The custom GDPR feature is deprecated. Career sites should now be using the product version of this feature.', 'background: #cc0000; color: #fff');
+
   // Get Magic Bullet Script
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet");
@@ -60,37 +62,41 @@
 
     if (gdprScript !== null) {
 
-      if(locationAware  === "true") {
+      if(gdprScript === "true") {
 
-        //TB Country ID for Europe countries need to list full here
+        if(locationAware  === "true") {
 
-        //Albania,Armenia,Austria,Belarus,Belgium,Bulgaria,Croatia,Cyprus,Czech Republic,Denmark,Finland,France,Georgia,Germany,Greece,Hungary,Iceland,Ireland,Italy,Kazakhstan,Kosovo,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Romania,Russia,Serbia,Slovakia,Slovenia,Spain,Sweden,Switzerland,Turkey,Ukraine,UK
+          //TB Country ID for Europe countries need to list full here
 
-        // TODO: Eventually move this over to gdpr/init.js
+          // Albania,Armenia,Austria,Belarus,Belgium,Bulgaria,Croatia,Cyprus,Czech Republic,Denmark,Finland,France,Georgia,Germany,Greece,Hungary,Iceland,Ireland,Italy,Kazakhstan,Kosovo,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Romania,Russia,Serbia,Slovakia,Slovenia,Spain,Sweden,Switzerland,Turkey,Ukraine,UK
 
-        var locationIDEurope = '783754,174982,2782113,630336,2802361,732800,3202326,146669,3077311,2623032,660013,3017382,614540,2921044,390903,719819,2629691,2963597,3175395,1522867,831053,458258,597427,2960313,2562770,2750405,3144096,798544,2264397,798549,2017370,6290252,3057568,3190538,2510769,2661886,2658434,298795,690791,2635167';
+          // TODO: Eventually move this over to gdpr/init.js
 
-        postAjax(function(dataLoc) {
+          var locationIDEurope = '783754,174982,2782113,630336,2802361,732800,3202326,146669,3077311,2623032,660013,3017382,614540,2921044,390903,719819,2629691,2963597,3175395,1522867,831053,458258,597427,2960313,2562770,2750405,3144096,798544,2264397,798549,2017370,6290252,3057568,3190538,2510769,2661886,2658434,298795,690791,2635167';
 
-          var location = dataLoc.l;
-          var locationID = dataLoc.lp.split('-')[0];
+          postAjax(function(dataLoc) {
 
-          console.log("location = " + location);
-          console.log("locationId = " + locationID);
+            var location = dataLoc.l;
+            var locationID = dataLoc.lp.split('-')[0];
 
-          if(locationIDEurope.indexOf(locationID)!=-1) {
+            console.log("location = " + location);
+            console.log("locationId = " + locationID);
 
-            // Show GDPR only for Europe
+            if(locationIDEurope.indexOf(locationID)!=-1) {
 
-            showGDPR();
+              // Show GDPR only for Europe
 
-          }
+              showGDPR();
 
-        });
+            }
 
-      } else {
+          });
 
-        showGDPR();
+        } else {
+
+          showGDPR();
+
+        }
 
       }
 
@@ -100,7 +106,11 @@
 
     if (ccpaScript !== null) {
 
+      if(ccpaScript === "true") {
+
         showCCPA();
+
+      }
 
     }
 
