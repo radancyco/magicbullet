@@ -7,7 +7,7 @@
 
 (function() {
 
-  console.log('%c Radancy Msg: The custom GDPR feature is deprecated. Career sites should now be using the product version of this feature.', 'background: #cc0000; color: #fff');
+  console.log('%c Radancy Msg: The custom GDPR feature is deprecated. Career sites should now be using the product version of this feature.', 'background: #cc0000; color: #fff'); 
 
   // Get Magic Bullet Script
 
