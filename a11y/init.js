@@ -645,6 +645,14 @@
 
      $("#toggle-olivia").attr("aria-label", "Chat with our recruiting assistant");
 
+     // If cooke banner present, place focus on it. 
+
+     if($("#igdpr-button").length){
+
+        $("#igdpr-button").focus();
+   
+     }
+
   }
 
   $(document).ajaxStop(function() {
