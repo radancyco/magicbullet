@@ -1,5 +1,5 @@
 ---
-title: "Magic Bullet"
+title: "MagicBullet"
 ---
 
 <div class="warning">
@@ -8,19 +8,15 @@ title: "Magic Bullet"
 
 </div>
 
-<p>Magic Bullet is a script importer. Its sole purpose is to load other scripts when needed. On its own, the script will do nothing until you start passing parameters into it. This allows a developer to load different scripts in for different client needs. Managing scripts in this manner allows development to maintain website enhancements from a <em>single location</em>. The more websites we include Magic Bullet on, the more leverage the development team will have in addressing unforeseen future needs (or issues) that may arise across multiple websites.</p>
+<p>MagicBullet is a script importer. On its own, the script will do nothing until you begin passing parameters to it. For example:</p>
 	
-<p>To load it, all we would need to do is add the following parameter to the Magic Bullet <code>script</code> element:</p>
-
 {% highlight javascript %}<script id="tmp-magic-bullet" data-a11y="true" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
 
-<p>This will append and initiate the following script:</p>
+<p>Adding <code>data-a11y="true"</code> will append and initiate the <a href="a11y">accessibility patch</a>:</p>
 
 {% highlight javascript %}<script id="a11y-fixes" src="https://services.tmpwebeng.com/magicbullet/a11y/prod/"></script>{% endhighlight %}
 
-<p><strong>Note:</strong> <em>On runmytests.com and talentbrew.com, the QA version of the script will load: https://services.tmpwebeng.com/magicbullet/a11y/qa/</em></p>
-
-<p>Here is how you load multiple scripts in:</p>
+<p>Here is an example of how you would load multiple scripts in:</p>
 
 {% highlight javascript %}<script id="tmp-magic-bullet" data-a11y="true" data-gdpr="true" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
 
@@ -36,37 +32,52 @@ title: "Magic Bullet"
     <tr>
         <th>Attribute</th>
         <th>Note</th>
-        <th>Description</th>
+        <th>Value</th>
+		<th>Description</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td><code>id</code></td>
-        <td>String,  Mandatory </td>
-        <td>An <code>id</code> attribute with a value of <code>tmp-magic-bullet</code> is required. This value is needed for vital functions within the script.</td>
+        <td>String,  Mandatory</td>
+        <td><code>tmp-magic-bullet</code></td>
+		<td>This value is required for critical functions within the script.</td>
     </tr>
 	<tr>
         <td><code>src</code></td>
-        <td>String,  Mandatory </td>
-        <td>A <code>src</code> attribute with a value of <code>https://services.tmpwebeng.com/magicbullet/</code> is required.</td>
+        <td>URL,  Mandatory </td>
+        <td><code>https://services.tmpwebeng.com/magicbullet/</code></td>
+		<td>Please note that on the <em>runmytests.com</em> and <em>talentbrew.com</em> domains, the <a href="https://services.tmpwebeng.com/magicbullet/a11y/qa/">QA version</a> of the script will run, which lives on this website.</td>
     </tr>
 	<tr>
-        <td><code>data-*</code></td>
+        <td><code>data-a11y</code></td>
         <td>String,  Optional </td>
-        <td>Data attributes are what load the desired scripts. All data attributes, when used, must always equal <code>true</code>.</td>
+        <td><code>true</code></td>
+		<td>Learn more about <a href="a11y">Accessibility Patch</a></td>
+    </tr>
+	<tr>
+        <td><code>data-alert</code></td>
+        <td>String,  Optional </td>
+        <td><code>true</code></td>
+		<td>Learn more about <a href="alert">System Alert</a></td>
+    </tr>
+	<tr>
+        <td><code>data-ccpa</code></td>
+        <td>String,  Optional </td>
+        <td><code>true</code></td>
+		<td>Learn more about <a href="ccpa">California Consumer Privacy Act (CCPA) Notice</a></td>
+    </tr>
+	<tr>
+        <td><code>data-gdpr</code></td>
+        <td>String,  Optional </td>
+        <td><code>true</code></td>
+		<td>Learn more about <a href="gdpr">General Data Protection Regulation (GDPR) Notice</a></td>
     </tr>
     </tbody>
     </table>
   
 </div>
 
-<h2 id="scripts">Scripts</h2>
+<h2 id="issues">Report Issues</h2>
 
-<p>The following scripts are available to use in Magic Bullet. You may visit each page listed below to learn more about them.</p>
-
-<ul>
-  	<li><a href="a11y">Accessibility Patch (data-a11y)</a></li>
-	<li><a href="alert" rel="nofollow">System Alert (data-alert)</a></li>
-	<li><a href="ccpa" rel="nofollow">California Consumer Privacy Act (CCPA) Notice (data-ccpa)</a></li>
-  	<li><a href="gdpr" rel="nofollow">General Data Protection Regulation (GDPR) Notice (data-gdpr)</a></li>
-</ul>
+<p>Find a bug? Report it on <a href="https://jira.tmp.com/secure/Dashboard.jspa#create_link">JIRA</a>. You're so awesome!</p>
