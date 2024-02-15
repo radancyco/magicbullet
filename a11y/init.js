@@ -108,7 +108,7 @@
 
     $(".search-location-error").removeAttr("tabindex");
 
-    /* setTimeout(function(){
+    setTimeout(function(){
 
       if($(".search-location-error").is(":visible")){
 
@@ -120,13 +120,11 @@
 
       }
 
-    }, 100); */
+    }, 100);
 
   });
 
-  // Removed following because causing issues with cookies. See https://jira.tmp.com/browse/UDS-5793 
-
-  /* $(".search-location").on("change", function(){
+  $(".search-location").on("change", function(){
 
       if($(".search-location-error").is(":visible")){
 
@@ -138,7 +136,7 @@
 
       }
 
-  }); */
+  });
 
   // Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
   // Note: Currently only used on Wegmans
@@ -655,11 +653,13 @@
 
      // If cooke banner present, place focus on it. 
 
-     if($("#igdpr-button").length){
+    // Removed following because causing issues with cookies. See https://jira.tmp.com/browse/UDS-5793 
+
+     /* if($("#igdpr-button").length){
 
         $("#igdpr-button").focus();
    
-     }
+     } */
 
   }
 
