@@ -108,7 +108,7 @@
 
     $(".search-location-error").removeAttr("tabindex");
 
-    setTimeout(function(){
+    /* setTimeout(function(){
 
       if($(".search-location-error").is(":visible")){
 
@@ -120,7 +120,7 @@
 
       }
 
-    }, 100);
+    }, 100); */
 
   });
 
