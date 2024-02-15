@@ -1,6 +1,12 @@
 
-// Radancy: Accessibility Patch
-// Developer(s): Michael "Spell" Spellacy, Twitter: spellacy, GitHub: michaelspellacy, michael.spellacy[at]radancy.com
+/*!
+
+  Radancy MagicBullet: Accessibility Patch
+
+  Contributor(s):
+  Michael "Spell" Spellacy
+
+*/
 
 (function(){
 
@@ -118,7 +124,9 @@
 
   });
 
-  $(".search-location").on("change", function(){
+  // Removed following because causing issues with cookies. See https://jira.tmp.com/browse/UDS-5793 
+
+  /* $(".search-location").on("change", function(){
 
       if($(".search-location-error").is(":visible")){
 
@@ -130,7 +138,7 @@
 
       }
 
-  });
+  }); */
 
   // Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
   // Note: Currently only used on Wegmans
