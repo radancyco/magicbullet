@@ -1,83 +1,83 @@
 ---
-title: "MagicBullet"
+attributes:
+
+  - name: data-alert
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Accepts value of <code>true</code> or null. Learn more about <a href="alert">System Alert</a>.
+  
+  - name: data-a11y
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Accepts value of <code>true</code> or null. Learn more about <a href="a11y">Accessibility Patch</a>.
+
+  - name: data-ccpa
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Accepts value of <code>true</code> or null. Learn more about <a href="ccpa">California Consumer Privacy Act (CCPA) Notice</a>.
+
+  - name: data-gdpr
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Accepts value of <code>true</code> or null. Learn more about <a href="gdpr">General Data Protection Regulation (GDPR) Notice</a>.
+
+  - name: id
+    html: script
+    note:
+
+      - String
+      - Mandatory
+
+    desc: Accepts value of <code>radancy-magicbullet</code>. This value is required for critical functions within the script. The script also accepts <strong>tmp-magic-bullet</strong> but this should no longer be used.
+
+  - name: src
+    html: script
+    note:
+
+      - URL
+      - Mandatory
+
+    desc: Accepts value of <code>https://services.tmpwebeng.com/magicbullet/</code>.
+
+notes: 
+
+  - Please note that on the <em>runmytests.com</em> domain, the <a href="https://radancy.dev/magicbullet/init.js">QA version</a> of the script will run, which lives on this website.
+
+title: "MagicBullet v2.2"
 ---
 
-<div class="warning">
+{% capture contentblock %}
 
-	<p><strong>Note:</strong> This document is for internal TMP Worldwide use only.</p>
-
-</div>
-
-<p>MagicBullet is a script importer. On its own, the script will do nothing until you begin passing parameters to it. For example:</p>
+    <p>MagicBullet is a script importer. On its own, the script will do nothing until you begin passing parameters to it. For example:</p>
 	
-{% highlight javascript %}<script id="tmp-magic-bullet" data-a11y="true" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
+    <h2>Implementation</h2>
 
-<p>Adding <code>data-a11y="true"</code> will append and initiate the <a href="a11y">accessibility patch</a>:</p>
+    <h3>HTML</h3>
 
-{% highlight javascript %}<script id="a11y-fixes" src="https://services.tmpwebeng.com/magicbullet/a11y/prod/"></script>{% endhighlight %}
+    <p>In this example, adding <code>data-a11y="true"</code> would initiate the <a href="a11y">Accessibility Patch</a>.</p>
+    
+    {% highlight html %}<script id="radancy-magicbullet" data-a11y="true" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
 
-<p>Here is an example of how you would load multiple scripts in:</p>
+    <p>Here is an example of how you would load multiple scripts in:</p>
 
-{% highlight javascript %}<script id="tmp-magic-bullet" data-a11y="true" data-gdpr="true" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
+    {% highlight html %}<script id="radancy-magicbullet" data-a11y="true" data-gdpr="true" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
 
-<h2 id="properties">Properties</h2>
+{% endcapture %}
 
-<p>Use the following properties to configure this component.</p>
-
-<div class="table-container">
-
-    <table id="attributes">
-    <caption><a class="anchor" href="#attributes"><span class="icon icon-anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"></path></svg></span> <span class="sr-only">Anchor (Attributes)</span></a> Attributes</caption>
-    <thead>
-    <tr>
-        <th>Attribute</th>
-        <th>Note</th>
-        <th>Value</th>
-		<th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><code>id</code></td>
-        <td>String,  Mandatory</td>
-        <td><code>tmp-magic-bullet</code></td>
-		<td>This value is required for critical functions within the script.</td>
-    </tr>
-	<tr>
-        <td><code>src</code></td>
-        <td>URL,  Mandatory </td>
-        <td><code>https://services.tmpwebeng.com/magicbullet/</code></td>
-		<td>Please note that on the <em>runmytests.com</em> and <em>talentbrew.com</em> domains, the <a href="https://services.tmpwebeng.com/magicbullet/a11y/qa/">QA version</a> of the script will run, which lives on this website.</td>
-    </tr>
-	<tr>
-        <td><code>data-a11y</code></td>
-        <td>String,  Optional </td>
-        <td><code>true</code></td>
-		<td>Learn more about <a href="a11y">Accessibility Patch</a></td>
-    </tr>
-	<tr>
-        <td><code>data-alert</code></td>
-        <td>String,  Optional </td>
-        <td><code>true</code></td>
-		<td>Learn more about <a href="alert">System Alert</a></td>
-    </tr>
-	<tr>
-        <td><code>data-ccpa</code></td>
-        <td>String,  Optional </td>
-        <td><code>true</code></td>
-		<td>Learn more about <a href="ccpa">California Consumer Privacy Act (CCPA) Notice</a></td>
-    </tr>
-	<tr>
-        <td><code>data-gdpr</code></td>
-        <td>String,  Optional </td>
-        <td><code>true</code></td>
-		<td>Learn more about <a href="gdpr">General Data Protection Regulation (GDPR) Notice</a></td>
-    </tr>
-    </tbody>
-    </table>
-  
-</div>
-
-<h2 id="issues">Report Issues</h2>
-
-<p>Find a bug? Report it on <a href="https://jira.tmp.com/secure/Dashboard.jspa#create_link">JIRA</a>. You're so awesome!</p>
+{% include template.html %}

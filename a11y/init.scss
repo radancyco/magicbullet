@@ -1,0 +1,75 @@
+/*!
+
+  Radancy MagicBullet: Accessibility Patch
+
+  Contributor(s):
+  Michael "Spell" Spellacy
+
+
+  Dependencies: Sass
+
+  Instructions: 
+  sass --watch .:. --style compressed
+
+*/
+
+/* Access Link - Ensure accesslink always has higher index. */
+
+.access-link {
+z-index: 2147483647 !important;
+}
+
+/* Search Location Datalist */
+
+.a11y-search-location {
+
+    .mindreader-results, .mindreader-status, .display-typeahead {
+    display: none !important;
+    }
+
+}
+
+.a11y-search-location { 
+
+    .search-location {
+    z-index: 0 !important;
+    }
+
+}
+
+/* Issue: Remove all CSS astericks. These are being read back by AT */
+
+.form-field.required label {
+
+    &::after {
+    display: none;
+    }
+
+}
+
+.form-field {
+
+    &.required label { 
+        
+        .ico-required-indicator {
+            
+            &[aria-hidden="true"] {
+            display: inline-block !important;
+            }
+
+        }
+
+    }
+
+}
+
+/* Issue: Chnage color of all placeholder text to make more contrast friendly */
+
+::-moz-placeholder {
+color: #767676;
+opacity: 1;
+}
+
+::-webkit-input-placeholder {
+color: #767676;
+}

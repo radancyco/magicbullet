@@ -1,13 +1,17 @@
-/*
+/*!
 
-  California Consumer Privacy Act (CCPA) Notice
-  Developer: Michael "Spell" Spellacy, Email: michael.spellacy@tmp.com, Twitter: @spellacy, GitHub: michaelspellacy
+  Radancy MagicBullet: California Consumer Privacy Act (CCPA) Notice
+
+  Contributor(s):
+  Michael "Spell" Spellacy
 
 */
 
 (function() {
 
-  var magicBulletScript = document.getElementById("tmp-magic-bullet");
+  console.log("%c Warning: Legacy CCPA in use. Please upgrade to the product version.", 'background: #ff0000; color: #fff');
+
+  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
   var ccpaBody = document.body;
 
   // Data Attributes

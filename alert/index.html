@@ -1,178 +1,132 @@
 ---
-layout: default
-localcss: css/local.css
-localjs: js/local.js
-noindex: true
-title: "System Alert"
-toc: true
+attributes:
+
+  - name: data-alert
+    html: script
+    note:
+
+      - Boolean
+      - Mandatory
+
+    desc: This will initiate the alert script.
+
+  - name: data-alert-banner
+    html: script
+    note:
+
+      - Boolean
+      - Optional
+
+    desc: Appends a banner to the top of the page instead of showing a dialog window. The same data attributes that are used to control the dialog window, can be used here as well.
+
+  - name: data-alert-banner-target
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Accepts value of id on element you are targeting. If you wish to customize placement of the banner, you may do so by creating an empty <code>div</code> element with a unique <code>id</code> value. This element can then be placed anywhere on the page you wish for message to appear. May only be used with <code>data-alert-banner</code>. Also, if you wish for message to remain persistent, then <code>data-alert-bypass-cookie</code> must also be used.
+  
+  - name: data-alert-button-text
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Overrides the default close button value, which is "Close".
+
+  - name: data-alert-bypass-cookie
+    html: script
+    note:
+
+      - Boolean
+      - Optional
+
+    desc: Bypasses default behavior of including a button to close banner and set cookie. By default, the banner will always show a close button and can be dismissed in the same way that the dialog can.
+  
+  - name: data-alert-covid
+    html: script
+    note:
+
+      - Boolean
+      - Optional
+
+    desc: This will load the built in, COVID-19 message.
+
+  - name: data-alert-message
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a string value will override the default message. HTML may be included.
+
+  - name: data-alert-remove-css
+    html: script
+    note:
+
+      - Boolean
+      - Optional
+
+    desc: Removes many default CSS properties from alert (dialog and banner). Once removed, theme level CSS will take over, which you can edit as you see fit.
+
+classes:
+
+  - name: .magic-bullet-alert
+    html: body
+    note: Component
+    desc: Added to the <code>body</code> element as a hook for System Alert related formatting.
+
+cookies: 
+
+  - name: AlertDisplayed
+    value: True
+    type: Session
+    secure: Yes
+    samesite: None
+    domain: N/A
+    path: /
+
+title: "System Alert v1.8"
+desc: This script may be used to generate an alert notice on any Radancy hosted website. 
 ---
 
-<div id="alert-notice" class="main-content">
+{% include icon.html %}
 
-  <p class="alert"><strong>Note:</strong> This document is for internal Radancy use only.</p>
-
-  <p>This script may be used to generate an alert notice on any Radancy hosted website. If during implementation you have any questions or run into conflicts, please reach out to <a href="mailto:michael.spellacy@radancy.com">Michael Spellacy</a>. Feature requests for the System Alert can be logged here: <a href="http://jira.tmp.com/browse/TCDQ-48957">http://jira.tmp.com/browse/TCDQ-48957</a></p>
-
-  <div id="toc-placeholder"></div>
+{% capture contentblock %}
 
   <div id="target-test"></div>
 
-  <section>
+  <h2>Implementation</h2>
 
-    <h2 id="alert-prerequisites">Prerequisites</h2>
+  <h3>HTML</h3>
 
-    <p><a href="/">Magic Bullet</a></p>
+  <p>If you require HTML, add the following script before the closing <code>body</code> tag of your page or template:</p>
 
-  </section>
+  {% highlight html %}<script id="radancy-magicbullet" data-alert="true" data-alert-covid src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
 
-  <section>
+  <h3>JavaScript</h3>
 
-    <h2 id="alert-implementation">Implementation</h2>
+  <p>If your site contains many templates, but leverages the same, single JavaScript file, implementing a sitewide alert may be achieved by adding the following script: </p>
 
-    <section>
+  {% highlight javascript %}var magicBullet = document.createElement("script");
+magicBullet.setAttribute("id", "radancy-magicbullet");
+magicBullet.setAttribute("data-alert", "true");
+magicBullet.setAttribute("data-alert-covid", "");
+magicBullet.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/");
+document.body.appendChild(magicBullet);{% endhighlight %}
 
-      <h3 id="data-alert-covid">COVID-19</h3>
+  <h2>Testing</h2>
 
-      <p>We begin with a clean installation of the Magic Bullet script. However, before implementation, please ensure that the Magic Bullet script is not already running on a site. If it is already running with GDPR, CCPA, or A11y, then all you need to do is include the following data attributes to get started:</p>
+  <p>Before you add the alert to your site, you can preview how it is going to look in the browser by adding the JavaScript version into your development console. If you encounter any issues during this testing, then please get in touch with <a href="mailto:michael.spellacy@radancy.com">Michael Spellacy</a> for assistance.</p>
 
-      <ul>
-        <li><strong>data-alert="true"</strong> - This will initiate the alert script.</li>
-        <li><strong>data-alert-covid</strong> (Boolean, no value required) - This will load the built in, COVID-19 message.</li>
-      </ul>
+  <img src="example.png" loading="lazy" alt="">
 
-<pre><code>&lt;script id="tmp-magic-bullet" <strong>data-alert="true"</strong> <strong>data-alert-covid</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
+  <script id="radancy-magicbullet" data-alert="true" data-alert-covid src="../init.js"></script>
 
-    </section>
+{% endcapture %}
 
-    <section>
-
-      <h3 id="data-alert-button-text">Close Button Text</h3>
-
-      <ul>
-        <li><strong>data-alert-button-text</strong> (string) - Overrides the default close button value, which is "Close".</li>
-      </ul>
-
-<pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" data-alert-covid data-alert-remove-css <strong>data-alert-button-text="OK"</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
-
-    </section>
-
-    <section>
-
-      <h3 id="data-alert-message">Custom Message</h3>
-
-      <p>If you wish to include a custom message, then replace <code>data-alert-covid</code> with:</p>
-
-      <ul>
-        <li><strong>data-alert-message</strong> - Accepts any valid html needed to produce a custom message.</li>
-      </ul>
-
-<pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" <strong>data-alert-message="&lt;h2&gt;Hello World&lt;/h2&gt; &lt;p&gt;Now is the time for all good Radancy peeps to get down and boogie.&lt;/p&gt;"</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
-
-    </section>
-
-    <section>
-
-      <h3 id="data-alert-remove-css">Custom Styles</h3>
-
-      <p>If you wish to style the modal to suit a client’s brand guidelines, then you can turn off many of the default CSS properties and roll your own:</p>
-
-      <ul>
-        <li><strong>data-alert-remove-css</strong> (Boolean, no value required) - Removes many default CSS properties from alert (modal and banner). Once removed, theme level CSS will take over, which you can edit as you see fit.</li>
-      </ul>
-
-<pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" data-alert-message="..." <strong>data-alert-remove-css</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
-
-    </section>
-
-    <section>
-
-      <h3 id="data-alert-banner">Banner Mode</h3>
-
-      <p>If you wish to load the alert as a banner to be appended to the very top of the page, use:</p>
-
-      <ul>
-        <li><strong>data-alert-banner</strong> (Boolean, no value required) - Appends a banner to the top of the page instead of showing a modal window. The same data attributes that are used to control the modal window, can be used here as well.</li>
-      </ul>
-
-<pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" <strong>data-alert-banner</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
-
-    </section>
-
-    <section>
-
-      <h3 id="data-alert-banner-target">Banner Target <span class="alert">(New)</span></h3>
-
-      <p>If you wish to customize placement of the banner, you may do so by creating an empty <code>div</code> element with a unique <code>id</code> value. This element can then be placed anywhere on the page you wish for message to appear. This <code>id</code> can then be refrenced via the following parameter:</p>
-
-      <ul>
-        <li><strong>data-alert-banner-target="[DIV ID VALUE]"</strong> - Accepts value of id on element you are targeting.</li>
-      </ul>
-
-<pre><code>&lt;div <strong>id="my-alert"</strong>&gt;&lt;/div&gt;
-
-...
-
-&lt;script id="tmp-magic-bullet" data-alert="true" data-alert-banner <strong>data-alert-banner-target="my-alert"</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
-
-      <p><strong>Note:</strong> May only be used with <a href="#data-alert-banner">data-alert-banner</a>. Also, if you wish for message to remain persistent, then <a href="#data-alert-bypass-cookie">data-alert-bypass-cookie</a> must also be used.</p>
-
-    </section>
-
-    <section>
-
-      <h3 id="data-alert-bypass-cookie">Persistent Banner</h3>
-
-        <p>By default, the banner will always show a close button and can be dismissed in the same way that the modal can. If you wish to have the banner persist, then use:</p>
-
-        <ul>
-          <li><strong>data-alert-bypass-cookie</strong> (Boolean, no value required) - Bypasses default behavior of including a button to close banner and set cookie.</li>
-        </ul>
-
-<pre><code>&lt;script id="tmp-magic-bullet" data-alert="true" data-alert-banner <strong>data-alert-bypass-cookie</strong> src="https://services.tmpwebeng.com/magicbullet/"&gt;&lt;/script&gt;</code></pre>
-
-    </section>
-
-  </section>
-
-  <!-- Begin Section -->
-
-  <section>
-
-    <h2 id="cookies">Cookies</h2>
-
-    <p>Cookie(s) currently used in this script:</p>
-
-    <div class="table-container">
-
-      <table>
-      <tr>
-        <th>Name</th>
-        <th>Value</th>
-        <th>Type</th>
-        <th>Secure</th>
-        <th>SameSite</th>
-        <th>Domain</th>
-        <th>Path</th>
-      </tr>
-      <tr>
-        <td>AlertDisplayed</td>
-        <td>True</td>
-        <td>Session</td>
-        <td>Yes</td>
-        <td>None</td>
-        <td>Page URL</td>
-        <td>/</td>
-      </tr>
-      </table>
-
-    </div>
-
-  </section>
-
-  <!-- End Section -->
-
-</div>
-
-<!-- Local -->
-
-<script id="tmp-magic-bullet" data-alert="true" data-alert-covid  src="../init.js"></script>
+{% include template.html %}

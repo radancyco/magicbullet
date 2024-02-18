@@ -1,677 +1,359 @@
 ---
-localcss: css/local.css
-localjs: js/local.js
+messages: 
+
+  - deprecated
+
+attributes:
+
+  - name: data-gdpr
+    html: script
+    note:
+
+      - String
+      - Mandatory
+
+    desc: Passing this data attribute a value of "true", will initiate the GDPR script.
+
+  - name: data-gdpr-client-name
+    html: script
+    note:
+
+      - String
+      - Mandatory
+
+    desc: Passing this data attribute a string value, such as the name of the client, will include that value in any needed verbiage used within the notice and form message.
+
+  - name: data-gdpr-policy-url
+    html: script
+    note:
+
+      - String
+      - Mandatory
+
+    desc: Passing this data attribute a policy URL, will include that URL within the notice and form message. The value must be in the form of a fully qualified URL.
+
+  - name: data-gdpr-language
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a language code, will translate the notice and form message into the desired language. The default language is English. 
+
+  - name: data-gdpr-banner-top
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a value of "true", will will position the GDPR banner at the top of the page. The default position is to load at the bottom of the page.
+
+  - name: data-gdpr-button-color
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any valid CSS color value will change the background color of the "Accept" button.
+
+  - name: data-gdpr-button-text
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any string value will change the text of the "Accept" button. The default text is "Accept".
+
+  - name: data-gdpr-button-color-text
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any valid CSS color value will change the text color of the "Accept" button.
+
+  - name: data-gdpr-font-size
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any valid CSS unit, will change the font size used within the notice.
+
+  - name: data-gdpr-notice-color
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any valid CSS color value will change the background color of the notice.
+
+  - name: data-gdpr-notice-text-color
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any valid CSS color value will change the text color of the notice.
+
+  - name: data-gdpr-text-align
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any valid CSS text-align value, will change the alignment of the text within the notice. The default value is "center".
+
+  - name: data-gdpr-z-index
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any number from 1 to 2147483647, will change the z-index stack. The default value is "10000".
+
+  - name: data-gdpr-date-expire
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a value of "true", will allow the banner to expire after one day, instead of the default 30 days.
+
+  - name: data-gdpr-banner-remove
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a value of "true", will prevent the banner notice from loading. Implied consent will also not be captured. Dynamically generated form messages will still be applied to all forms on the site.
+
+  - name: data-gdpr-custom-message
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a string value will override the default message. HTML may be included.</code>
+
+  - name: data-gdpr-date-expire
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a value of "true", will allow the banner to expire after <strong>one day</strong>, instead of the default 30 days.
+
+  - name: data-gdpr-banner-remove
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a value of "true", will prevent the banner notice from loading. Implied consent will also not be captured. Dynamically generated form messages will still be applied to all forms on the site.
+
+  - name: data-gdpr-custom-message
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a string value will override the default message. HTML may be included.
+
+  - name: data-gdpr-domain
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: There are times when a client may wish to share cookie values and ensure the banner is hidden across multiple URL's with the same domain or subdomain. This is possible if the MagicBullet script is placed on all needed sites and each include the value of the domain.
+
+  - name: data-gdpr-explicit-consent
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: If your site requires that consent to track and use cookies be explicitly given, then you may use this data attribute to accomplish that. Passing this data attribute a string value of "true" will override the default behavior, which is set to passive consent, an implied acceptance via the continued use of the website. The banner will now persist from page to page until the user explicitly clicks on the "Accept" button in the banner.  If explicit consent is used, it is very likely that the SEO team will need to be adjusting desired tracking behaviors in this scenario, so be sure to remind your DPM of this task.
+
+  - name: data-location-aware
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a value of "true", will load the notice only within EU countries.
+
+  - name: data-gdpr-new-window
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a value of "false" will disable the privacy policy link from opening in a new window. The default behavior is for all notice links to open in a new window, which is best practice. These visual cues will not appear when new windows are disabled.
+
+  - name: data-gdpr-ga-custom-category
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a custom value will override the value of <code>data-custom-category</code>, which currently defaults to "GDPR".
+
+  - name: data-gdpr-ga-custom-label
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a custom value will override the value of <code>data-custom-label</code>, which currently defaults to "GDPR Accept Button".
+
+  - name: data-gdpr-custom-form-message
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a string value will override the default message that is appended to the form. HTML may be included.
+
+  - name: data-gdpr-form-msg-exception
+    html: .data-form
+    note:
+
+      - String
+      - Optional
+
+    desc: Used to exclude the default form message on desired form.
+
+  - name: data-gdpr-form-bypas
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: If you need to override the default behavior of placing the form message over the submit button, then you may include the following data attribute and value. Removing the default behavior means that you will need to manually insert the message into the desired position within the form. To do this, place the following markup wherever you would like the message to appear. 
+
+classes:
+
+  - name: .magic-bullet-gdpr
+    html: body
+    note: Component
+    desc: Added to the <code>body</code> element as a hook for GDPR related formatting.
+
+cookies: 
+
+  - name: BannerDisplayed
+    value: Date (30 Days)
+    type: Persistent
+    secure: Yes
+    samesite: None
+    domain: N/A
+    path: /
+
+  - name: ConsentCapture
+    value: Date (30 Days)
+    type: Persistent
+    secure: Yes
+    samesite: None
+    domain: N/A
+    path: /
+
+notes: 
+
+  - <b>Behavior:</b> Both cookies expire after 30 days unless <code>data-gdpr-date-expire</code> is used, in which experation is set to <strong>one day</strong>.
+
 title: "General Data Protection Regulation (GDPR) Notice"
+desc: This script may be used to generate a General Data Protection Regulation (GDPR) consent notice on any Radancy hosted website. Due to privacy concerns, European Union (EU) citizens who engage with any website that collects data, via cookies, must now be warned about this practice in advance and be able to (implicitly or explicitly) opt-in to permit this data to be used. You can learn more about GDPR on the <a href="https://gdpr.eu/">official website</a>.
 ---
 
-<div id="gdpr-notice" class="main-content">
+{% include icon.html %}
 
-    {% include message/internal-use.html %}
+{% capture contentblock %}
 
-    {% include message/deprecated.html %}
+  <h2>Implementation</h2>
 
-    <p>This script may be used to generate a General Data Protection Regulation (GDPR) consent notice on any Radancy hosted website. Due to privacy concerns, European Union (EU) citizens who engage with any website that collects data, via cookies, must now be warned about this practice in advance and be able to (implicitly or explicitly) opt-in to permit this data to be used. You can learn more about GDPR on the <a href="https://www.eugdpr.org/">official website</a>.</p>
+  <p>To adhere to this regulation, a notice must be included on every page of your site. The following script may be implemented on a site to achieve this goal. Which way you choose to implement the script, largely depends on the size of your site and/or how it has been templated. In most cases, implementation should not take more than 30-60 minutes per site.</p>
 
-    <h2>Table of Contents</h2>
+  <h3>HTML</h3>
 
-    <ol>
-      <li><a href="#banner-implementation">Implementation</a>
-        <ol>
-          <li><a href="#banner-implementation-html">HTML</a></li>
-          <li><a href="#banner-implementation-js">JavaScript</a></li>
-        </ol>
-      </li>
-      <li><a href="#banner-parameters">Banner Parameters</a>
-        <ol>
-          <li><a href="#banner-mandatory">Mandatory</a>
-            <ol>
-              <li><a href="#data-gdpr">Script Initiation</a></li>
-              <li><a href="#data-gdpr-client-name">Client Name</a></li>
-              <li><a href="#data-gdpr-policy-url">Policy URL</a></li>
-            </ol>
-          </li>
-          <li><a href="#banner-translation">Translation</a>
-            <ol>
-              <li><a href="#data-gdpr-language">Language</a></li>
-            </ol>
-          </li>
-          <li><a href="#banner-formatting">Visual Formatting</a>
-            <ol>
-              <li><a href="#data-gdpr-banner-top">Banner Position</a></li>
-              <li><a href="#data-gdpr-button-color">Button Color</a></li>
-              <li><a href="#data-gdpr-button-text">Button Text</a></li>
-              <li><a href="#data-gdpr-button-color-text">Button Text Color</a></li>
-              <li><a href="#data-gdpr-font-size">Font Size</a></li>
-              <li><a href="#data-gdpr-notice-color">Notice Background Color</a></li>
-              <li><a href="#data-gdpr-notice-text-color">Notice Text Color</a></li>
-              <li><a href="#data-gdpr-text-alignment">Text Alignment</a></li>
-              <li><a href="#data-gdpr-z-index">Z-Index</a></li>
-            </ol>
-          </li>
-          <li><a href="#banner-behavior">Behavior</a>
-            <ol>
-              <li><a href="#data-gdpr-date-expire">Banner Expiration</a></li>
-              <li><a href="#data-gdpr-banner-remove">Banner Removal</a></li>
-              <li><a href="#data-gdpr-custom-message">Custom Message</a></li>
-              <li><a href="#data-gdpr-domain">Cross-Domain Sharing</a></li>
-              <li><a href="#data-gdpr-explicit-consent">Explicit Consent</a></li>
-              <li><a href="#data-location-aware">Location Awareness</a></li>
-              <li><a href="#data-gdpr-new-window">New Window</a></li>
-              <li><a href="#data-gdpr-cookie-mgr-url">Third-Party Cookie Manager</a></li>
-            </ol>
-          </li>
-        </ol>
-      </li>
-      <li><a href="#banner-ga-tracking">Google Analytics Tracking</a>
-        <ol>
-          <li><a href="#banner-ga-tracking-parameters">Parameters</a>
-            <ol>
-              <li><a href="#data-gdpr-ga-custom-category">Google Analytics Category</a></li>
-              <li><a href="#data-gdpr-ga-custom-label">Google Analytics Label</a></li>
-            </ol>
-          </li>
-        </ol>
-      </li>
-      <li><a href="#banner-collection-form">TalentBrew Data Collection Forms</a>
-        <ol>
-          <li><a href="#banner-collection-form-parameters">Parameters</a>
-            <ol>
-              <li><a href="#data-gdpr-custom-form-message">Custom Form Message</a></li>
-              <li><a href="#data-gdpr-form-msg-exception">Form Message Exception</a></li>
-              <li><a href="#data-gdpr-form-bypass">Form Message Position</a></li>
-            </ol>
-          </li>
-        </ol>
-      </li>
-      <li><a href="#banner-styling-hook">Styling Hook</a></li>
-      <li><a href="#banner-testing">Testing You Banner</a></li>
-      <li><a href="#cookies">Cookies</a></li>
-    </ol>
+  <p>If you require HTML, add the following script before the closing <code>body</code> tag of your page or template:</p>
 
-    <!-- Begin Section -->
+  {% highlight html %}<script id="radancy-magicbullet" data-gdpr="true" data-gdpr-client-name="[client name]" data-gdpr-policy-url="[site policy url]" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
 
-    <section aria-labelledby="banner-implementation">
+  <h3>JavaScript</h3>
 
-      <h2 id="banner-implementation">Implementation</h2>
+  <p>If your site contains many templates, but leverages the same, single JavaScript file, implementing a sitewide notice may be achieved by adding the following script:</p>
 
-      <p>To adhere to this regulation, a notice must be included on every page of your site. The following script may be implemented on a site to achieve this goal. Which way you choose to implement the script, largely depends on the size of your site and/or how it has been templated. In most cases, implementation should not take more than 30-60 minutes per site.</p>
-
-      <h3 id="banner-implementation-html">HTML</h3>
-
-      <p>If you require HTML, add the following script before the closing <code>body</code> tag of your page or template:</p>
-
-{% highlight javascript %}<script id="tmp-magic-bullet" data-gdpr="true" data-gdpr-client-name="[client name]" data-gdpr-policy-url="[site policy url]" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
-
-      <h3 id="banner-implementation-js">JavaScript</h3>
-
-      <p>If your site contains many templates, but leverages the same, single JavaScript file, implementing a sitewide notice may be more <em>easily achieved</em> by adding the following <abbr>DOM</abbr> (Document Object Model) method to your global script: </p>
-
-{% highlight javascript %}var magicBullet = document.createElement("script");
-magicBullet.setAttribute("id", "tmp-magic-bullet");
+  {% highlight javascript %}var magicBullet = document.createElement("script");
+magicBullet.setAttribute("id", "radancy-magicbullet");
 magicBullet.setAttribute("data-gdpr", "true");
 magicBullet.setAttribute("data-gdpr-client-name", "[client name]");
 magicBullet.setAttribute("data-gdpr-policy-url", "[site policy url]");
 magicBullet.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/");
 document.body.appendChild(magicBullet);{% endhighlight %}
 
-      <p><strong>Note:</strong> The <code>data-gdpr</code>, <code>data-gdpr-client-name</code> and <code>data-gdpr-policy-url</code> attributes are <a href="#banner-mandatory">mandatory</a> parameters.</p>
-
-    </section>
-
-    <!-- End Section -->
-
-    <!-- Begin Section -->
-
-    <section aria-labelledby="banner-parameters">
-
-      <h2 id="banner-parameters">Banner Parameters</h2>
-
-      <p>The following is a list of parameters that can be passed to the script to exhibit more control over the notice.</p>
-
-      <!-- Begin Inner Section -->
-
-      <section aria-labelledby="banner-mandatory">
-
-        <h3 id="banner-mandatory">Mandatory</h3>
-
-        <p>The following parameter(s) are <strong><em>mandatory</em></strong>.</p>
-
-        <div class="indent">
-
-          <h4 id="data-gdpr">Script Initiation</h4>
-
-          <p>Passing this data attribute a value of "true", will initiate the GDPR script.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr="true"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr", "true");{% endhighlight %}
-
-          <h4 id="data-gdpr-client-name">Client Name</h4>
-
-          <p>Passing this data attribute a string value, such as the name of the client, will include that value in any needed legal verbiage, such as the notice placed within <a href="#banner-collection-form">TalentBrew's Data Collection Forms</a>.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-client-name="Clarity Robotics"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-client-name", "Clarity Robotis");{% endhighlight %}
-
-          <h4 id="data-gdpr-policy-url">Policy URL</h4>
-
-          <p>Passing this data attribute a policy URL, will include that URL within the notice and inline <a href="#banner-collection-form">form message</a>. The value must be in the form of a fully qualified URL. Protocol-relative URL's <a href="https://www.paulirish.com/2010/the-protocol-relative-url/" target="_blank"><strong>should not be used</strong></a>. If the privacy policy is local to the domain, then please use a relative path instead&mdash;e.g., "/privacy/" instead of "https://www.clarityrobotics.com/privacy/".</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-policy-url="https://www.clarityrobotics.com/privacy/"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-policy-url", "https://www.clarityrobotics.com/privacy/");{% endhighlight %}
-
-        </div>
-
-      </section>
-
-      <!-- End Inner Section -->
-
-      <!-- Begin Inner Section -->
-
-      <section aria-labelledby="banner-translation">
-
-        <h3 id="banner-translation">Translation</h3>
-
-        <p>The following parameter can be used to change the language of the GDPR notice and the <a href="#banner-collection-form">TalentBrew Data Collection Form</a> message.</p>
-
-        <div class="indent">
-
-          <h4 id="data-gdpr-language">Language</h4>
-
-          <p>Passing this data attribute a language code, will translate the notice and form message into the desired language. The default language is English.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-language="zh-hant"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-language", "zh-hant");{% endhighlight %}
-
-          <h5 id="gdpr-language-code">Language Codes</h5>
-
-          <p>The following language code values are accepted by the script:</p>
-
-          <ul>
-            <li><strong>cs</strong> (Czezh)</li>
-            <li><strong>da</strong> (Danish)</li>
-            <li><strong>de</strong> (German)</li>
-            <li><strong>es</strong> (Spanish)</li>
-            <li><strong>es-mx</strong> (Spanish Mexican)</li>
-            <li><strong>fr</strong> (French)</li>
-            <li><strong>fr-ca</strong> (French Canadian)</li>
-            <li><strong>fr-ch</strong> (French Switzerland)</li>
-            <li><strong>hu</strong> (Hungarian)</li>
-            <li><strong>it</strong> (Italian)</li>
-            <li><strong>jp</strong> (Japanese)</li>
-            <li><strong>ko</strong> (Korean)</li>
-            <li><strong>lt</strong> (Lithuanian)</li>
-            <li><strong>nl</strong> (Dutch)</li>
-            <li><strong>nl-be</strong> (Dutch Belgium)</li>
-            <li><strong>pl</strong> (Polish)</li>
-            <li><strong>pt</strong> (Portuguese)</li>
-            <li><strong>pt-br</strong> (Brazillian Portuguese)</li>
-            <li><strong>ru</strong> (Russian)</li>
-            <li><strong>sv</strong> (Swedish)</li>
-            <li><strong>tl</strong> (Tagalog)</li>
-            <li><strong>zh-hans</strong> (Simplified Chinese)</li>
-            <li><strong>zh-hant</strong> (Traditional Chinese)</li>
-          </ul>
-
-          <p><strong>Note:</strong> Some language translations are currently pending, but should be complete by May 20th, 2018. If new languages are required, please contact <a href="mailto:dan.green@radancy.com">Dan Green</a>.</p>
-
-        </div>
-
-      </section>
-
-      <!-- End Inner Section -->
-
-      <!-- Begin Inner Section -->
-
-      <section aria-labelledby="banner-formatting">
-
-        <h3 id="banner-formatting">Visual Formatting</h3>
-
-        <p class="alert"><strong>Warning:</strong> Please do not attempt to override the banner notice with CSS or JavaScript at the <strong>implementation level</strong>. Local overrides may interfere with future formatting changes required within the GDPR script itself. If you run into any formatting issues that can't be solved with any available parameters the GDPR script offers, then please contact <a href="mailto:michael.spellacy@radancy.com?subject=GDPR%20Formatting%20Issue">Michael Spellacy</a> for assistance. The inline form message may be safely manipulated with CSS.</p>
-
-        <p>The following parameter(s) can be used to apply basic formatting to the notice. All parameters are optional:</p>
-
-        <div class="indent">
-
-          <h4 id="data-gdpr-banner-top">Banner Position</h4>
-
-          <p>Passing this data attribute a value of "true", will will position the GDPR banner at the top of the page. The default position is to load at the bottom of the page.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-banner-top="true"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-banner-top", "true");{% endhighlight %}
-
-          <h4 id="data-gdpr-button-color">Button Color</h4>
-
-          <p>Passing this data attribute any valid CSS color value will change the background color of the "Accept" button.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-button-color="lavender"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-button-color", "lavender");{% endhighlight %}
-
-          <h4 id="data-gdpr-button-text">Button Text</h4>
-
-          <p>Passing this data attribute any string value will change the text of the "Accept" button. The default text is "Accept".</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-button-text="OK"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-button-text", "OK");{% endhighlight %}
-
-          <h4 id="data-gdpr-button-color-text">Button Text Color</h4>
-
-          <p>Passing this data attribute any valid CSS color value will change the text color of the "Accept" button.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-button-color-text="lime"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-button-color-text", "lime");{% endhighlight %}
-
-          <h4 id="data-gdpr-font-size">Font Size</h4>
-
-          <p>Passing this data attribute any valid CSS unit, will change the font size used within the notice.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-font-size="1.6rem"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-font-size", "1.6rem");{% endhighlight %}
-
-          <h4 id="data-gdpr-notice-color">Notice Background Color</h4>
-
-          <p>Passing this data attribute any valid CSS color value will change the background color of the notice.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-notice-color="tomato"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-notice-color", "tomato");{% endhighlight %}
-
-          <h4 id="data-gdpr-notice-text-color">Notice Text Color</h4>
-
-          <p>Passing this data attribute any valid CSS color value will change the text color of the notice.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-notice-text-color="purple"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-notice-text-color", "purple");{% endhighlight %}
-
-          <h4 id="data-gdpr-text-alignment">Text Alignment</h4>
-
-          <p>Passing this data attribute any valid CSS text-align value, will change the alignment of the text within the notice. The default value is "center".</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-text-align="right"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-text-align", "right");{% endhighlight %}
-
-          <h4 id="data-gdpr-z-index">Z-Index</h4>
-
-          <p>Passing this data attribute any number from 1 to 2147483647, will change the z-index stack. The default value is "10000".</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-z-index="12000"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-z-index", "12000");{% endhighlight %}
-
-        </div>
-
-      </section>
-
-      <!-- End Inner Section -->
-
-      <!-- Begin Inner Section -->
-
-      <section aria-labelledby="banner-behavior">
-
-        <h3 id="banner-behavior">Behavior</h3>
-
-        <p>The following parameter(s) can be used to apply or remove basic behaviors to the notice. All parameters are optional:</p>
-
-        <div class="indent">
-
-          <h4 id="data-gdpr-date-expire">Banner Expiration</h4>
-
-          <p>Passing this data attribute a value of "true", will allow the banner to expire after one day, instead of the default 30 days.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-date-expire="true"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-date-expire", "true");{% endhighlight %}
-
-          <h4 id="data-gdpr-banner-remove">Banner Removal</h4>
-
-          <p>Passing this data attribute a value of "true", will prevent the banner notice from loading. Implied consent will also not be captured. Dynamically generated form messages will still be applied to all forms on the site.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-banner-remove="true"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-banner-remove", "true");{% endhighlight %}
-
-          <h4 id="data-gdpr-custom-message">Custom Message</h4>
-
-          <p>Passing this data attribute a string value will override the default message. HTML may be included.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-custom-message="<h2>About Cookies</h2> <p>We use cookies to help make this website better, to improve our services and for advertising purposes. You can learn more about our use of cookies by <a href='https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/cookies-policy/'>clicking here</a>.</p>"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-custom-message", "<h2>About Cookies</h2> <p>We use cookies to help make this website better, to improve our services and for advertising purposes. You can learn more about our use of cookies by <a href='https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/cookies-policy/'>clicking here</a>.</p>");{% endhighlight %}
-
-          <h4 id="data-gdpr-domain">Cross-Domain Sharing</h4>
-
-          <p>There are times when a client may wish to share cookie values and ensure the banner is hidden across multiple URL's with the same domain or subdomain. This is possible if the Magic Bullet script is placed on all needed sites and each include the following data attribute:</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-domain=".domain.com"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-domain", ".domain.com");{% endhighlight %}
-
-          <h4 id="data-gdpr-explicit-consent">Explicit Consent</h4>
-
-          <p>If your site requires that consent to track and use cookies be <em>explicitly given</em>, then you may use this data attribute to accomplish that. Passing this data attribute a string value of "true" will override the default behavior, which is set to passive consent, an implied acceptance via the continued use of the website. The banner will now persist from page to page until the user <em>explicitly</em> clicks on the "Accept" button in the banner.</p>
-
-          <p><strong>Note:</strong> If explicit consent is used, it is very likely that the SEO team will need to be adjusting desired tracking behaviors in this scenario, so be sure to remind your DPM of this task.</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-explicit-consent="true"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-explicit-consent", "true");{% endhighlight %}
-
-          <h4 id="data-location-aware">Location Awareness</h4>
-
-          <p>Some clients may want the GDPR banner to load <em>only</em> within EU countries. To do this, just add the following parameter:</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-location-aware="true"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-location-aware", "true");{% endhighlight %}
-
-          <h4 id="data-gdpr-new-window">New Window</h4>
-
-          <p>Passing this data attribute a value of "false" will disable the privacy policy link from opening in a new window. The default behavior is for all notice links to open in a new window. These visual cues will not appear when new windows are disabled.</p>
-
-          <div id="new-window-icon" class="callout accessibility">
-
-            <h5 class="hdr-accessibility">New Window Icons</h5>
-
-            <p>The visual cue ( <img src="data:image/gif;base64,R0lGODlhCgAKAPcCAP///5mZmQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4zLWMwMTEgNjYuMTQ1NjYxLCAyMDEyLzAyLzA2LTE0OjU2OjI3ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozMkE2QzgzMzRBNDUxMUU4QUM2OUI2MzA2MjA0RTM3MiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozMkE2QzgzNDRBNDUxMUU4QUM2OUI2MzA2MjA0RTM3MiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjMyQTZDODMxNEE0NTExRThBQzY5QjYzMDYyMDRFMzcyIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjMyQTZDODMyNEE0NTExRThBQzY5QjYzMDYyMDRFMzcyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQAAAgAsAAAAAAoACgAACDAABQj8R7DgP4EC/gFYuPDgQAAFIRpsqJAgQ4gYLTa8qFGhxIgeISIM2XCkQYIIAwIAOw==" alt="" style="display: inline-block; margin: 0;"> ) associated with these links are a usability and accessibility best practice that serve to indicate that the links will spawn a new tab or window. They cannot be changed or removed at this point in time, unless new windows are disabled. You can read more about this best practice in <a href="/uid/code-standards/#new-window-links">Radancy's code standard guidelines</a>.</p>
-
-          </div>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-new-window="false"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-new-window", "false");{% endhighlight %}
-
-          <h4 id="data-gdpr-cookie-mgr-url">Third-Party Cookie Manager</h4>
-
-          <p>Passing this data attribute a string value, in the form of a URL, will override the default URL (<a href="https://preferences-mgr.truste.com/">https://preferences-mgr.truste.com</a>).</p>
-
-          <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-cookie-mgr-url="https://example.destroyallcookies.com"{% endhighlight %}
-
-          <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-cookie-mgr-url", "https://example.destroyallcookies.com");{% endhighlight %}
-
-        </div>
-
-      </section>
-
-      <!-- End Inner Section -->
-
-    </section>
-
-    <!-- End Section -->
-
-    <!-- Begin Section -->
-
-    <section aria-labelledby="banner-ga-tracking">
-
-      <h2 id="banner-ga-tracking">Google Analytics Tracking</h2>
-
-      <p>Parameters can be used to customize certain tracking variables that are applied to the GDPR Accept button and sent to Google Analytics:</p>
-
-      <h3 id="banner-ga-tracking-parameters">Parameters</h3>
-
-      <p>The following parameter(s) are <strong><em>optional</em></strong>.</p>
-
-      <div class="indent">
-
-        <h4 id="data-gdpr-ga-custom-category">Google Analytics Category</h4>
-
-        <p>Passing this data attribute a custom value will override the value of <code>data-custom-category</code>, which currently defaults to "GDPR".</p>
-
-        <h5>HTML</h5>
-
-        {% highlight javascript %}data-gdpr-ga-custom-category="Dogs"{% endhighlight %}
-
-        <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-ga-custom-category", "Dogs");{% endhighlight %}
-
-        <h4 id="data-gdpr-ga-custom-label">Google Analytics Label</h4>
-
-        <p>Passing this data attribute a custom value will override the value of <code>data-custom-label</code>, which currently defaults to "GDPR Accept Button".</p>
-
-        <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-ga-custom-label="Fido"{% endhighlight %}
-
-        <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-ga-custom-label", "Fido");{% endhighlight %}
-
-      </div>
-
-    </section>
-
-    <!-- End Section -->
-
-    <!-- Begin Section -->
-
-    <section aria-labelledby="banner-collection-form">
-
-      <h2 id="banner-collection-form">TalentBrew Data Collection Forms</h2>
-
-      <p>The second task of this script is to include a privacy policy statement on all TalentBrew forms that collect data. By default, the script will look for the <code>.data-form form-field.submit</code> class and <em>prepend</em> the following element, and message, before the form's "Submit" button:</p>
-
-{% highlight javascript %}<p class="form-field gdpr-eu-tmp-notice">By submitting your information, you acknowledge that you have read our privacy policy (this content opens in new window) and consent to receive email communication from [company name].</p>{% endhighlight %}
-
-      <h3 id="banner-collection-form-parameters">Parameters</h3>
-
-      <p>The following parameter(s) are <strong><em>optional</em></strong>:</p>
-
-      <div class="indent">
-
-        <h4 id="data-gdpr-custom-form-message">Custom Form Message</h4>
-
-        <p>Passing this data attribute a string value will override the default form message. HTML may be included.</p>
-
-        <h5>HTML</h5>
-
-{% highlight javascript %}data-gdpr-custom-form-message="By submitting your information, you acknowledge that you have read our <a href='/privacy/' target='_blank'>candidate privacy policy</a> and consent to receive email communication."{% endhighlight %}
-
-        <h5>JavaScript</h5>
-
-{% highlight javascript %}magicBullet.setAttribute("data-gdpr-custom-form-message", "By submitting your information, you acknowledge that you have read our <a href='/privacy/' target='_blank'>candidate privacy policy</a> and consent to receive email communication.");{% endhighlight %}
-
-        <h4 id="data-gdpr-form-msg-exception">Form Message Exception</h4>
-
-        <p>There may be instances where one may only require the GDPR message to load on certain forms and not others. By default, the script looks for the <code>.data-form</code> class and applies the message, but if you wish to exclude the message, simply add <code>data-gdpr-form-msg-exception</code> to the opening <code>form</code> element.</p>
-
-        <h5>HTML</h5>
-
-{% highlight javascript %}<form class="data-form" ... data-gdpr-form-msg-exception> ... </form>{% endhighlight %}
-
-        <h4 id="data-gdpr-form-bypass">Form Message Position</h4>
-
-        <p>If you need to override the default behavior of placing the form message over the submit button, then you may include the following data attribute and value.
-
-        <h5>HTML</h5>
-
-        {% highlight javascript %}data-gdpr-form-bypass="true"{% endhighlight %}
-
-        <h5>JavaScript</h5>
-
-        {% highlight javascript %}magicBullet.setAttribute("data-gdpr-form-bypass", "true");{% endhighlight %}
-
-        <p>Removing the default behavior means that you will need to manually insert the message into the desired position within the form. To do this, place the following markup wherever you would like the message to appear. The surrounding <code>p</code> tag can be replaced with a <code>span</code> or any other tag of your choosing, but please be sure to keep the <code>gdpr-eu-tmp-notice</code> class name in place, as the message will still be inserted into the tag, via JavaScript. The "form-feild" class may be removed, if needed.</p>
-
-        <p><strong>Note:</strong> CSS formatting may be safely applied to this tag, as needed.</p>
-
-        {% highlight javascript %}<p class="form-field gdpr-eu-tmp-notice"></p>{% endhighlight %}
-
-        <!-- h5>Script Test</h5>
-
-        <p class="form-field gdpr-eu-tmp-notice"></p -->
-
-      </div>
-
-    </section>
-
-    <section aria-labelledby="banner-styling-hook">
-
-      <h2 id="banner-styling-hook">Styling Hook</h2>
-
-      <p>Please be aware that a CSS hook is being added to the <code>body</code> tag of each page the script loads on, which could come in handy for any GDPR related formatting issues/needs that may come up. The name of the class is <code>magic-bullet-gdpr</code>.</p>
-
-    </section>
-
-    <!-- End Section -->
-
-    <!-- Begin Section -->
-
-    <section aria-labelledby="banner-testing">
-
-      <h2 id="banner-testing">Testing You Banner</h2>
-
-      <p>Before you add the notice to your site, you can preview how it is going to look in the browser by dropping the JavaScript version into your development console. If you encounter any issues during this testing, then please get in touch with <a href="mailto:michael.spellacy@radancy.com">Michael Spellacy</a> for assistance.</p>
-
-      <img src="https://content.screencast.com/users/Spellacy/folders/Jing/media/1b741766-aa2f-4f26-8b1c-332d80edc822/2018-04-26_1817.png" loading="lazy" alt="">
-
-    </section>
-
-    <!-- End Section -->
-
-    <!-- Begin Section -->
-
-    <section aria-labelledby="cookies">
-
-      <h2 id="cookies">Cookies</h2>
-
-      <p>Cookie(s) currently used in this script:</p>
-
-      <div class="table-container">
-
-        <table>
-        <tr>
-          <th>Name</th>
-          <th>Value</th>
-          <th>Type</th>
-          <th>Secure</th>
-          <th>SameSite</th>
-          <th>Domain</th>
-          <th>Path</th>
-        </tr>
-        <tr>
-          <td>BannerDisplayed</td>
-          <td>Date (30 Days)</td>
-          <td>Persistent</td>
-          <td>Yes</td>
-          <td>None</td>
-          <td>N/A</td>
-          <td>/</td>
-        </tr>
-        <tr>
-          <td>ConsentCapture</td>
-          <td>Date (30 Days)</td>
-          <td>Persistent</td>
-          <td>Yes</td>
-          <td>None</td>
-          <td>N/A</td>
-          <td>/</td>
-        </tr>
-        </table>
-
-      </div>
-
-      <p><strong>Note:</strong> Both cookies expire after 30 days unless <a href="#data-gdpr-date-expire">Banner Experation</a> is used, in which experation is set to 1 day.</p>
-
-    </section>
-
-    <!-- End Section -->
-
-</div>
-
-<!-- Implementation Example -->
-
-<script id="tmp-magic-bullet" data-gdpr="true" data-gdpr-policy-url="https://www.radancy.com/privacy/" data-gdpr-client-name="Radancy" src="../init.js"></script>
+  <h2>Internationalization</h2>
+
+  <p>The following language code values are accepted by the script:</p>
+
+  <ul>
+    <li><strong>cs</strong> (Czezh)</li>
+    <li><strong>da</strong> (Danish)</li>
+    <li><strong>de</strong> (German)</li>
+    <li><strong>es</strong> (Spanish)</li>
+    <li><strong>es-mx</strong> (Spanish Mexican)</li>
+    <li><strong>fr</strong> (French)</li>
+    <li><strong>fr-ca</strong> (French Canadian)</li>
+    <li><strong>fr-ch</strong> (French Switzerland)</li>
+    <li><strong>hu</strong> (Hungarian)</li>
+    <li><strong>it</strong> (Italian)</li>
+    <li><strong>jp</strong> (Japanese)</li>
+    <li><strong>ko</strong> (Korean)</li>
+    <li><strong>lt</strong> (Lithuanian)</li>
+    <li><strong>nl</strong> (Dutch)</li>
+    <li><strong>nl-be</strong> (Dutch Belgium)</li>
+    <li><strong>pl</strong> (Polish)</li>
+    <li><strong>pt</strong> (Portuguese)</li>
+    <li><strong>pt-br</strong> (Brazillian Portuguese)</li>
+    <li><strong>ru</strong> (Russian)</li>
+    <li><strong>sv</strong> (Swedish)</li>
+    <li><strong>tl</strong> (Tagalog)</li>
+    <li><strong>zh-hans</strong> (Simplified Chinese)</li>
+    <li><strong>zh-hant</strong> (Traditional Chinese)</li>
+  </ul>
+
+  <h2>Testing</h2>
+
+  <p>Before you add the notice to your site, you can preview how it is going to look in the browser by adding the JavaScript version into your development console. If you encounter any issues during this testing, then please get in touch with <a href="mailto:michael.spellacy@radancy.com">Michael Spellacy</a> for assistance.</p>
+
+  <img src="example.png" loading="lazy" alt="">
+
+  <script id="radancy-magicbullet" data-gdpr="true" data-gdpr-policy-url="https://www.radancy.com/privacy/" data-gdpr-client-name="Radancy" src="../init.js"></script>
+
+{% endcapture %}
+
+{% include template.html %}

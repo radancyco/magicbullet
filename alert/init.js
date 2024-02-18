@@ -1,13 +1,17 @@
-/*
+/*!
 
-  System Alert
-  Developer: Michael "Spell" Spellacy, Email: michael.spellacy@tmp.com, Twitter: @spellacy, GitHub: michaelspellacy
+  Radancy MagicBullet: System Alert
+
+  Contributor(s):
+  Michael "Spell" Spellacy
 
 */
 
 (function () {
 
-  var magicBulletScript = document.getElementById("tmp-magic-bullet");
+  console.log('%c MagicBullet: System Alert v1.8 in use. ', 'background: #6e00ee; color: #fff');
+
+  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
   var alertBody = document.body;
 
   // Data Attributes
@@ -33,9 +37,8 @@
 
   function getCookie(name) {
 
-    var re = new RegExp(name + "=([^;]+)");
-    var value = re.exec(document.cookie);
-    return (value !== null) ? unescape(value[1]) : null;
+    var match = document.cookie.match(RegExp('(?:^|;\\s*)' + name + '=([^;]*)')); 
+    return match ? match[1] : null;
 
   }
 

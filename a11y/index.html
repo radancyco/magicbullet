@@ -1,75 +1,67 @@
 ---
-title: "Accessibility Patch"
+notes: 
+
+  - <b>Global:</b> Issues immediately corrected by the script as soon it loads on a Career Site page.
+  - <b>Opt-in:</b> Solutions to common accessibility issues on TalentBrew. An implementation developer must opt-in to use them.
+  - <b>New Issues:</b> To log a new issue, please visit the <a href="https://docs.google.com/spreadsheets/d/1J61XcI_k-oxQamYPrMHDaK9TRKXZzntGq1oKZdwKFYI/edit?usp=sharing">Accessibility Patch Log (APL)</a>.
+  - <b>Roadmap:</b> Create Google Form to easily submit issue to APL.
+
+title: "Accessibility Patch v1.6"
 ---
 
-<p>This patch addresses the following accessibility issues on Career Sites that include <a href="/tmp-magic-bullet/">MagicBullet</a>. This is a temporary solution until many of these issues can be resolved by the product team.</p>
+{% include icon.html %}
 
-<details class="nav">
+{% capture contentblock %}
 
-  <summary class="btn">Accessibility Issues</summary>
+  <p>This patch addresses the following accessibility issues on Career Sites that include <a href="../">MagicBullet</a> with the <code>data-a11y</code> attribute. This is a temporary solution until many of these issues can be resolved by the product team. If there are any questions or concerns with the script, please reach out to <a href="mailto:{{ site.owner-email }}?subject={{ page.title }}">{{ site.owner-name }}</a></a></p>
 
-    <ol>
+  {% for bug in site.data.a11y %}
 
-      {% for bug in site.data.a11y %}
+    {% assign issueID = bug.ID | plus: 0 %}
 
-      {% assign issueID = bug.ID | plus: 0 %}
+    <div id="issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}" class="bug {% if bug.Priority == "High" %}warning{% endif %}">
 
-      <li><a href="#issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}">{{ bug.Summary }}</a></li>
+      <h2><a class="anchor" href="#issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}">{{ iconAnchor }} <span class="sr-only">Anchor (#{{ bug.ID }})</span></a> Issue #{{ bug.ID }}: {{ bug.Summary }}</h2>
 
-      {% endfor %}
+      <dl>
+        <dt>Logged</dt>
+        <dd><time datetime="{{ bug.Time }}">{{ bug.Time | date: "%A, %B %-d, %Y %I:%M:%S %p %Z" }}</time></dd>
+        <dt>Status</dt>
+        <dd>{{ bug.Status }}</dd>
+        <dt>Priority</dt>
+        <dd>{{ bug.Priority }}</dd>
+        <dt>Product</dt>
+        <dd>{{ bug.Product }}</dd>
+        <dt>Feature</dt>
+        <dd>{{ bug.Feature }}</dd>
+        <dt>Implementation</dt>
+        <dd><a href="#notes">{{ bug.Implementation }}</a></dd>
+        {% if bug.JIRA %}
+        <dt>JIRA</dt>
+        <dd><a href="{{ bug.JIRA }}" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></dd>
+        {% endif %}
+      </dl>
 
-    </ol>
+      <h3>Details</h3>
 
-</details>
+      {{ bug.Details }}
 
-{% for bug in site.data.a11y %}
+      <h3>Code</h3>
 
-{% assign issueID = bug.ID | plus: 0 %}
+      {% highlight javascript %}{{ bug.Code | replace: "<", "&lt;" | replace: ">", "&gt;" }}{% endhighlight %}
 
-<div id="issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}" class="bug {% if bug.Priority == "High" %}high{% endif %}">
+      {% if bug.Screengrab == blank %}
 
-  <h3><a href="#issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}">#{{ bug.ID }} {{ bug.Summary }}</a></h3>
+      <h3>Screen</h3>
 
-  <p><b>Logged:</b> <time datetime="{{ bug.Time }}">{{ bug.Time | date: "%A, %B %-d, %Y %I:%M:%S %p %Z" }}</time></p>
+      <p>{{ bug.Screengrab }}</p>
 
-  <ul>
-    <li><b>Status:</b> {{ bug.Status }}</li>
-    <li><b>Priority:</b> {{ bug.Priority }}</li>
-    {% if bug.JIRA %}
-    <li><b>JIRA:</b> <a class="external" href="{{ bug.JIRA }}" rel="noopener" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></li>
-    {% endif %}
-    <li><b>Product:</b> {{ bug.Product }}</li>
-    <li><b>Feature:</b> {{ bug.Feature }}</li>
-    <li><b>Implementation:</b> <a href="#implementation">{{ bug.Implementation }}</a></li>
-  </ul>
+      {% endif %}
 
-  <h4>Details</h4>
+    </div>
 
-  {{ bug.Details }}
+  {% endfor %}
 
-  <h4>Code</h4>
+{% endcapture %}
 
-<pre><code>{{ bug.Code | replace: "<", "&lt;" | replace: ">", "&gt;" }}</code></pre>
-
-{% if bug.Screengrab == blank %}
-
-  <h4>Screen Grab</h4>
-
-  <p>{{ bug.Screengrab }}</p>
-
-{% endif %}
-
-<p><a href="#content">Back to top</a></p>
-
-</div>
-
-{% endfor %}
-
-<h2>Terminology</h2>
-
-<h3 id="implementation">Implementation</h3>
-
-<ul>
-  <li><strong>Global</strong> - Issues immediately corrected by the script as soon it loads on a TalentBrew page.</li>
-  <li><strong>Opt-in</strong> - Solutions to common accessibility issues on TalentBrew. An implementation developer must opt-in to use them.</li>
-</ul>
+{% include template.html %}

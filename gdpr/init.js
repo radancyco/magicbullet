@@ -1,13 +1,17 @@
-/*
+/*!
 
-  General Data Protection Regulation (GDPR) Notice
-  Developer: Michael "Spell" Spellacy, Email: michael.spellacy@tmp.com, Twitter: @spellacy, GitHub: michaelspellacy
+  Radancy MagicBullet: General Data Protection Regulation (GDPR) Notice
+
+  Contributor(s):
+  Michael "Spell" Spellacy
 
 */
 
 (function() {
 
-  var magicBulletScript = document.getElementById("tmp-magic-bullet");
+  console.log("%c Warning: Legacy GDPR in use. Please upgrade to the product version.", 'background: #ff0000; color: #fff');
+
+  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
   var gdprBody = document.body;
 
   // Data Attributes

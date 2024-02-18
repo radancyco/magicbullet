@@ -1,17 +1,21 @@
-/*
+/*!
 
-  Radancy: Magic Bullet - A script to chase all your troubles away.
-  Developer(s): Michael "Spell" Spellacy, Twitter: spellacy, GitHub: michaelspellacy, michael.spellacy[at]radancy.com
+  Radancy MagicBullet
+
+  Contributor(s):
+  Michael "Spell" Spellacy
 
 */
 
 (function() {
 
-  // Get Magic Bullet Script
+  console.log('%c MagicBullet v2.2 in use. ', 'background: #6e00ee; color: #fff');
 
-  var magicBulletScript = document.getElementById("tmp-magic-bullet");
+  // Get MagicBullet Script
 
-  // Get body of page Magic Bullet loads on.
+  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
+
+  // Get body of page MagicBullet loads on.
 
   var magicBulletBody = document.body;
 
@@ -187,8 +191,8 @@
 
       if(testPaths) {
 
-        gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/css/");
-        gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/qa/");
+        gdprCSS.setAttribute("href", "https://radancy.dev/magicbullet/gdpr/init.css");
+        gdprExec.setAttribute("src", "https://radancy.dev/magicbullet/gdpr/init.js");
 
       } else {
 
@@ -235,8 +239,8 @@
 
       if(testPaths) {
 
-        ccpaCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/ccpa/qa/css/");
-        ccpaExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/ccpa/qa/");
+        ccpaCSS.setAttribute("href", "https://radancy.dev/magicbullet/ccpa/init.css");
+        ccpaExec.setAttribute("src", "https://radancy.dev/magicbullet/ccpa/init.js");
 
       } else {
 
@@ -283,8 +287,8 @@
 
       if(testPaths) {
 
-        a11yCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/a11y/qa/css/");
-        a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/qa/");
+        a11yCSS.setAttribute("href", "https://radancy.dev/magicbullet/a11y/init.css");
+        a11yExec.setAttribute("src", "https://radancy.dev/magicbullet/a11y/init.js");
 
       } else {
 
@@ -324,17 +328,15 @@
 
       if (alertBanner !== null) {
 
-        alertCSS.setAttribute("href", "/alert/banner/init.css");
+        alertCSS.setAttribute("href", "/alert/banner.css");
 
       } else {
 
-        alertCSS.setAttribute("href", "/alert/modal/init.css");
+        alertCSS.setAttribute("href", "/alert/dialog.css");
 
       }
 
-      // alertCSS.setAttribute("href", "/alert/init.css");
-
-     alertExec.setAttribute("src", "/alert/init.js");
+      alertExec.setAttribute("src", "/alert/init.js");
 
     } else {
 
@@ -344,17 +346,15 @@
 
         if (alertBanner !== null) {
 
-          alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/qa/css/banner/");
+          alertCSS.setAttribute("href", "https://radancy.dev/magicbullet/alert/banner.css");
 
         } else {
 
-          alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/qa/css/modal/");
+          alertCSS.setAttribute("href", "https://radancy.dev/magicbullet/alert/dialog.css");
 
         }
 
-        // alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/qa/css/");
-
-       alertExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/alert/qa/");
+        alertExec.setAttribute("src", "https://radancy.dev/magicbullet/alert/init.js");
 
       } else {
 
@@ -370,7 +370,6 @@
 
         }
 
-        // alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/prod/css/");
        alertExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/alert/prod/");
 
       }

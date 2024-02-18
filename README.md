@@ -1,4 +1,4 @@
 
-# TMP Magic Bullet
+# Radancy MagicBullet
 
-Please see [https://radancy.dev/magic-bullet/](https://radancy.dev/magic-bullet/) for more details.
+Please see [https://radancy.dev/magicbullet/](https://radancy.dev/magicbullet/) for more details.

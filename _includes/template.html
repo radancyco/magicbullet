@@ -1,0 +1,542 @@
+{% include icon.html %}
+
+{% if page.messages %} 
+
+    {% assign sortMessages = page.messages %}
+
+    {% for message in sortMessages %}
+
+    {% include message/{{ message }}.html %}
+
+    {% endfor %}
+
+{% endif %}
+
+{% if page.desc %}
+
+  <p>{{ page.desc }}</p>
+
+{% endif %}
+
+{% if contentblock %}
+
+  {{ contentblock }}
+
+{% endif %}
+
+  {% if page.in-page-custom %}
+
+    <div class="in-page-custom" data-in-page-dynamic>
+
+  {% endif %}
+
+  {% if page.in-page-custom %}
+
+    <h2 id="examples">Examples</h2>
+
+    <nav aria-label="Example" class="in-page-custom__nav">
+
+        <label class="in-page-custom__label">Choose an example:</label>
+
+        <select class="in-page-custom__select">
+
+        </select>
+
+        <div class="sr-only" aria-live="polite"></div>
+
+    </nav>
+
+  {% else %}
+
+  {% if !page.components %}
+
+    <h2 id="basic-setup">Default Setup</h2>
+
+  {% endif %}
+
+  {% endif %}
+
+  {% assign counter = 1 %}
+  
+  {% for component in page.components %}
+
+    {% capture html %}{% include_relative html/{{ component.id }}.html %}{% endcapture %}
+
+    {% if page.localcss %}
+
+      {% capture css %}{% include_relative init.scss %}{% endcapture %}
+
+    {% endif %}
+
+    {% if page.localjs %}
+
+      {% capture js %}{% include_relative init.js %}{% endcapture %}
+
+    {% endif %}
+
+    {% if component.customcss %}
+
+      {% capture customcss %}{% include_relative {{ component.customcss }}.scss %}{% endcapture %}
+
+    {% endif %}
+
+    {% if component.customjs %}
+
+      {% capture customjs %}{% include_relative {{ component.customjs }} %}{% endcapture %}
+
+    {% endif %}
+
+    {% if page.in-page-custom %}
+
+    <div class="in-page-custom__content" data-in-page-name="{{ component.name }}" data-in-page-id="{{ component.id }}">
+
+    {% endif %}
+  
+      {% include_relative html/{{ component.id }}.html %}
+  
+      {% if component.note %}
+  
+        <div class="note">
+          
+          <p><strong>Note:</strong> {{ component.note }}</p>
+
+        </div>
+  
+      {% endif %}
+
+      <nav aria-label="Code Functions" class="component-functions">
+        
+        <ul>
+          <li><button data-code="{{ page.url | absolute_url }}#{{ component.id }}">{{ iconCheck }}{{ iconCopyURL }} Copy link to example</button></li>
+          <li><form action="https://codepen.io/pen/define" id="{{ component.id }}-codepen" method="POST" target="_blank"><button>{{ iconCodePen }} Edit on CodePen</button></form></li>
+          <li><a href="{{ component.id }}" target="_blank">{{ iconNewWindow }} Open in new window</a></li>
+          <li><a href="{{ site.repo }}/blob/main/{{ page.folder }}/">{{ iconGit }} Visit Repository</a></li>
+        </ul>
+
+      </nav>
+
+      <script>
+
+      var codePenForm = document.getElementById("{{ component.id }}-codepen");
+
+      var obj = {
+        
+        title: "{{ page.title }} {% if component.name %}: {{ component.name }} {% endif %}",
+        html: {{ html | jsonify }},
+        css_external: "https://radancy.dev/css/init.css",
+        css_pre_processor: "scss",
+        {% if component.customcss %}
+        css: {{ css | append: customcss | jsonify }},
+        {% else %}
+        css: {{ css | jsonify }}, 
+        {% endif %}
+        {% if component.customjs %}
+        js: {{ js | append: customjs | jsonify }},
+        {% else %}
+        js: {{ js | jsonify }},
+        {% endif %}
+        {% if component.codepenjs %}
+        js_external: '{% for item in component.codepenjs %}{% if item contains "://" %}{{ item }}{% else %}{{site.url}}/animation-library/{{ item }}{% endif %}{% if forloop.last %}{% else %};{% endif %}{% endfor %}',
+        {% endif %}
+
+      };
+
+      var json = JSON.stringify(obj);
+
+      var codePenInput = document.createElement("input");
+      codePenInput.setAttribute("type", "hidden");
+      codePenInput.setAttribute("name", "data");
+      codePenInput.setAttribute("value", json);
+      codePenForm.prepend(codePenInput);
+
+      </script>
+
+      {% assign counter = counter | plus: 1 %}
+
+      <h2>Code</h2> 
+  
+      <div class="tab-accordion" data-tab-disable-url data-tab-breakpoint="(min-width: 0)">
+
+        <button class="tab-accordion__button">{{ iconHTML }} HTML</button>
+      
+        <div class="tab-accordion__panel">
+      
+          <div class="tab-accordion__content" contenteditable spellcheck="false">
+      
+            {% highlight html %}{% include_relative html/{{ component.id }}.html %}{% endhighlight %}
+            
+          </div>
+      
+        </div>
+
+        {% if page.localcss %}
+      
+          <button class="tab-accordion__button">{{ iconGlobal }} CSS</button>
+      
+          <div class="tab-accordion__panel">
+      
+            <div class="tab-accordion__content" contenteditable spellcheck="false">
+      
+              {% highlight css %}{% include_relative init.scss %}{% endhighlight %}
+            
+            </div>
+      
+          </div>
+
+        {% endif %}
+
+        {% if component.customcss %}
+      
+          <button class="tab-accordion__button">{{ iconCustom }} CSS</button>
+    
+          <div class="tab-accordion__panel">
+    
+            <div class="tab-accordion__content" contenteditable spellcheck="false">
+    
+              {% highlight javascript %}{% include_relative {{ component.customcss }}.scss %}{% endhighlight %}
+          
+            </div>
+    
+          </div>
+
+        {% endif %}
+
+        {% if page.localjs %}
+      
+          <button class="tab-accordion__button">{{ iconGlobal }} JS</button>
+      
+          <div class="tab-accordion__panel">
+      
+            <div class="tab-accordion__content" contenteditable spellcheck="false">
+      
+              {% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
+            
+            </div>
+      
+          </div>
+
+        {% endif %}
+
+        {% if component.customjs %}
+      
+          <button class="tab-accordion__button">{{ iconCustom }} JS</button>
+      
+          <div class="tab-accordion__panel">
+      
+            <div class="tab-accordion__content" contenteditable spellcheck="false">
+      
+              {% highlight javascript %}{% include_relative {{ component.customjs }} %}{% endhighlight %}
+            
+            </div>
+      
+          </div>
+
+        {% endif %}
+      
+      </div>
+
+    {% if page.in-page-custom %}
+  
+    </div>
+
+    {% endif %}
+  
+  {% endfor %}
+
+  {% if page.in-page-custom %}
+  
+  </div>
+
+  {% endif %}
+
+  {% if page.guidance %} 
+
+    {% assign sortGuidance = page.guidance %}
+
+    {% for item in sortGuidance %}
+
+      {% include guidance/{{ item }}.html %}
+
+    {% endfor %}
+
+  {% endif %}
+
+  {% if page.elements or page.aria or page.attributes or page.sass or page.class or page.cookies or page.parameters %}
+
+  <h2 id="properties">Properties</h2>
+
+  <p>Use the following properties to configure this component.</p>
+
+  {% endif %}
+
+  {% if page.elements %} 
+
+  <div class="table-container">
+
+    <table id="elements">
+    <caption><a class="anchor" href="#elements">{{ iconAnchor }} <span class="sr-only">Anchor (Elements)</span></a> Elements</caption>
+    <thead>
+    <tr>
+        <th>Element</th>
+        <th>Note</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% assign sortElements = page.elements %}
+
+    {% for element in sortElements %}
+
+    <tr>
+        <td>{% for html in element.html %}<code>{{ html }}</code>{% if forloop.last %}{% else %}, {% endif %} {% endfor %}</td>
+        <td>{% for note in element.note %}{{ note }}{% if forloop.last %}{% else %}, {% endif %} {% endfor %}</td>
+        <td>{{ element.desc }}</td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+    </table>
+  
+  </div>
+
+  {% endif %}
+
+  {% if page.aria %} 
+
+  <div class="table-container">
+
+    <table id="aria">
+    <caption><a class="anchor" href="#aria">{{ iconAnchor }} <span class="sr-only">Anchor (ARIA)</span></a> ARIA</caption>
+    <thead>
+    <tr>
+        <th>ARIA</th>
+        <th>Applies To</th>
+        <th>Note</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% assign sortAria = page.aria %}
+
+    {% for aria in sortAria %}
+
+    <tr>
+        <td><code>{{ aria.name }}</code></td>
+        <td><code>{% for html in aria.html %}<code>{{ html }}</code>{% if forloop.last %}{% else %}, {% endif %} {% endfor %}</code></td>
+        <td>{% for note in aria.note %}{{ note }}{% if forloop.last %}{% else %}, {% endif %} {% endfor %}</td>
+        <td>{{ aria.desc }}</td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+    </table>
+  
+  </div>
+
+  {% endif %}
+
+  {% if page.attributes %} 
+
+  <div class="table-container">
+
+    <table id="attributes">
+    <caption><a class="anchor" href="#attributes">{{ iconAnchor }} <span class="sr-only">Anchor (Attributes)</span></a> Attributes</caption>
+    <thead>
+    <tr>
+        <th>Attribute</th>
+        <th>Applies To</th>
+        <th>Note</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% assign sortAttributes = page.attributes %}
+
+    {% for attribute in sortAttributes %}
+
+    <tr>
+        <td><code>{{ attribute.name }}</code></td>
+        <td>{% for html in attribute.html %}<code>{{ html }}</code>{% if forloop.last %}{% else %}, {% endif %} {% endfor %}</td>
+        <td>{% for note in attribute.note %}{{ note }}{% if forloop.last %}{% else %}, {% endif %} {% endfor %}</td>
+        <td>{{ attribute.desc }}</td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+    </table>
+  
+  </div>
+
+  {% endif %}
+
+  {% if page.sass %} 
+
+  <div class="table-container">
+
+    <table id="scss">
+    <caption><a class="anchor" href="#scss">{{ iconAnchor }} <span class="sr-only">Anchor (SCSS)</span></a> SCSS</caption>
+    <thead>
+    <tr>
+        <th>Variable</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% assign sortSass = page.sass %}
+
+    {% for scss in sortSass %}
+
+    <tr>
+        <td><code>{{ scss.name }}</code></td>
+        <td>{{ scss.desc }}</td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+    </table>
+  
+  </div>
+
+  {% endif %}
+
+  {% if page.classes %} 
+
+  <div class="table-container">
+
+    <table id="classes">
+    <caption><a class="anchor" href="#classes">{{ iconAnchor }} <span class="sr-only">Anchor (Classes)</span></a> Classes</caption>
+    <thead>
+    <tr>
+        <th>Class</th>
+        <th>Applies To</th>
+        <th>Note</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% assign sortClasses = page.classes %}
+
+    {% for class in sortClasses %}
+
+    <tr>
+        <td><code>{{ class.name }}</code></td>
+        <td>{% for html in class.html %}<code>{{ html }}</code>{% if forloop.last %}{% else %}, {% endif %} {% endfor %}</td>
+        <td>{% for note in class.note %}{{ note }}{% if forloop.last %}{% else %}, {% endif %} {% endfor %}</td>
+        <td>{{ class.desc }}</td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+    </table>
+  
+  </div>
+
+  {% endif %}
+
+  {% if page.cookies %} 
+
+  <div class="table-container">
+
+    <table id="cookies">
+    <caption><a class="anchor" href="#cookies">{{ iconAnchor }} <span class="sr-only">Anchor (Cookies)</span></a> Cookies</caption>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Value</th>
+        <th>Type</th>
+        <th>Secure</th>
+        <th>SameSite</th>
+        <th>Domain</th>
+        <th>Path</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% assign sortCookies = page.cookies %}
+
+    {% for cookie in sortCookies %}
+
+    <tr>
+        <td>{{ cookie.name }}</td>
+        <td>{{ cookie.value }}</td>
+        <td>{{ cookie.type }}</td>
+        <td>{{ cookie.secure }}</td>
+        <td>{{ cookie.samesite }}</td>
+        <td>{{ cookie.domain }}</td>
+        <td>{{ cookie.path }}</td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+    </table>
+  
+  </div>
+
+  {% endif %}
+
+  {% if page.parameters %} 
+
+  <div class="table-container">
+
+    <table id="parameters">
+    <caption><a class="anchor" href="#parameters">{{ iconAnchor }} <span class="sr-only">Anchor (Parameters)</span></a> Parameters</caption>
+    <thead>
+    <tr>
+        <th>Parameter</th>
+        <th>Note</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% assign sortParameters = page.parameters %}
+
+    {% for parameter in sortParameters %}
+
+    <tr>
+        <td>{{ parameter.name }}</td>
+        <td>{% for note in parameter.note %}{{ note }}{% if forloop.last %}{% else %}, {% endif %} {% endfor %}</td>
+        <td>{{ parameter.desc }}</td>
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+    </table>
+  
+  </div>
+
+  {% endif %}
+
+  {% if page.notes %} 
+
+  <h2 id="notes"><a class="anchor" href="#notes">{{ iconAnchor }} <span class="sr-only">Anchor (Notes)</span></a> Additional Notes</h2>
+
+  <ul>
+    
+    {% assign sortNotes = page.notes %}
+
+    {% for note in sortNotes %}
+    
+    <li>{{ note }}</li> 
+    
+    {% endfor %}
+
+  </ul>
+
+  {% endif %}
+
+  <h2 id="issues">Report Issues</h2>
+
+  <p>Find a bug? Report it on <a href="https://jira.tmp.com/secure/Dashboard.jspa#create_link">JIRA</a>. You're so awesome!</p>
