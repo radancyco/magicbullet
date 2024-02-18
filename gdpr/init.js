@@ -9,7 +9,7 @@
 
 (function() {
 
-  console.log("%c Warning: Legacy GDPR in use. Please upgrade to the product version.", 'background: #ff0000; color: #fff');
+  console.log("%c Legacy: GDPR v1.7 in use. Please upgrade to product version.", 'background: #ff0000; color: #fff');
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
   var gdprBody = document.body;

@@ -54,7 +54,7 @@
   hostName = hostName.substring(hostName.indexOf(".") + 1);
 
   var localPaths = localHost === "localhost";
-  var testPaths = hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "radancy.dev" || hostName === "tmpworldwide.dev" || hostName === "tmpqa.com";
+  var testPaths = hostName === "runmytests.com" || hostName === "talentbrew.com" || hostName === "tmpqa.com";
 
   // Check to see if both the GDPR and CCPA attributes exist together.
 
@@ -198,8 +198,8 @@
 
         // ... else, run the production version.
 
-        gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/css/");
-        gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/prod/");
+        gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/init.css");
+        gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/init.js");
 
       }
 
@@ -246,8 +246,8 @@
 
         // ... else, run the production version.
 
-        ccpaCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/ccpa/prod/css/");
-        ccpaExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/ccpa/prod/");
+        ccpaCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/ccpa/init.css");
+        ccpaExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/ccpa/init.js");
 
       }
 
@@ -294,8 +294,8 @@
 
         // ... else, run the production version.
 
-        a11yCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/a11y/prod/css/");
-        a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/prod/");
+        a11yCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/a11y/init.css");
+        a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/init.js");
 
       }
 
@@ -362,15 +362,15 @@
 
         if (alertBanner !== null) {
 
-          alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/prod/css/banner/");
+          alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/banner.css");
 
         } else {
 
-          alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/prod/css/modal/");
+          alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/dialog.css");
 
         }
 
-       alertExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/alert/prod/");
+       alertExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/alert/init.js");
 
       }
 
