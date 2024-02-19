@@ -57,26 +57,29 @@ attributes:
 
 notes: 
 
-  - Please note that on the <em>runmytests.com</em> domain, the <a href="https://radancy.dev/magicbullet/init.js">QA version</a> of the script will run, which lives on this website.
+  - Please be aware that the <a href="init.js">QA version</a> of MagicBullet, along with all associated imports, will be loaded on <em>runmytests.com</em> sites.
 
 title: "MagicBullet v2.2"
+desc: MagicBullet is a script importer. On its own, the script will do nothing until you begin passing parameters to it.
 ---
 
 {% capture contentblock %}
 
-    <p>MagicBullet is a script importer. On its own, the script will do nothing until you begin passing parameters to it. For example:</p>
-	
     <h2>Implementation</h2>
 
     <h3>HTML</h3>
-
-    <p>In this example, adding <code>data-a11y="true"</code> would initiate the <a href="a11y">Accessibility Patch</a>.</p>
     
-    {% highlight html %}<script id="radancy-magicbullet" data-a11y="true" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
+    {% highlight html %}<script id="radancy-magicbullet" data-a11y="true" data-alert="true" data-alert-covid src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
 
-    <p>Here is an example of how you would load multiple scripts in:</p>
-
-    {% highlight html %}<script id="radancy-magicbullet" data-a11y="true" data-gdpr="true" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
+    <h3>JavaScript</h3>
+  
+    {% highlight javascript %}var magicBullet = document.createElement("script");
+magicBullet.setAttribute("id", "radancy-magicbullet");
+magicBullet.setAttribute("data-gdpr", "true");
+magicBullet.setAttribute("data-gdpr-client-name", "Radancy");
+magicBullet.setAttribute("data-gdpr-policy-url", "https://radamcy.com/privacy/");
+magicBullet.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/");
+document.body.appendChild(magicBullet);{% endhighlight %}
 
 {% endcapture %}
 

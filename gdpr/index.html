@@ -287,7 +287,7 @@ notes:
   - <b>Behavior:</b> Both cookies expire after 30 days unless <code>data-gdpr-date-expire</code> is used, in which experation is set to <strong>one day</strong>.
 
 title: "General Data Protection Regulation (GDPR) Notice v1.7"
-desc: This script may be used to generate a General Data Protection Regulation (GDPR) consent notice on any Radancy hosted website. Due to privacy concerns, European Union (EU) citizens who engage with any website that collects data, via cookies, must now be warned about this practice in advance and be able to (implicitly or explicitly) opt-in to permit this data to be used. You can learn more about GDPR on the <a href="https://gdpr.eu/">official website</a>.
+desc: This script may be used to generate a GDPR consent notice on any Radancy hosted website. Due to privacy concerns, European Union (EU) citizens who engage with any website that collects data, must now be warned in advance and be able to implicitly or explicitly opt-in to permit their data to be used. You can learn more about GDPR on the <a href="https://gdpr.eu">official website</a>. 
 ---
 
 {% include icon.html %}
@@ -296,17 +296,11 @@ desc: This script may be used to generate a General Data Protection Regulation (
 
   <h2>Implementation</h2>
 
-  <p>To adhere to this regulation, a notice must be included on every page of your site. The following script may be implemented on a site to achieve this goal. Which way you choose to implement the script, largely depends on the size of your site and/or how it has been templated. In most cases, implementation should not take more than 30-60 minutes per site.</p>
-
   <h3>HTML</h3>
-
-  <p>If you require HTML, add the following script before the closing <code>body</code> tag of your page or template:</p>
 
   {% highlight html %}<script id="radancy-magicbullet" data-gdpr="true" data-gdpr-client-name="[client name]" data-gdpr-policy-url="[site policy url]" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
 
   <h3>JavaScript</h3>
-
-  <p>If your site contains many templates, but leverages the same, single JavaScript file, implementing a sitewide notice may be achieved by adding the following script:</p>
 
   {% highlight javascript %}var magicBullet = document.createElement("script");
 magicBullet.setAttribute("id", "radancy-magicbullet");
@@ -348,7 +342,7 @@ document.body.appendChild(magicBullet);{% endhighlight %}
 
   <h2>Testing</h2>
 
-  <p>Before you add the notice to your site, you can preview how it is going to look in the browser by adding the JavaScript version into your development console. If you encounter any issues during this testing, then please get in touch with <a href="mailto:michael.spellacy@radancy.com">Michael Spellacy</a> for assistance.</p>
+  <p>You can preview how the notice will look by adding the JavaScript version into your development console. If you encounter any issues during this testing, please get in touch with <a href="mailto:michael.spellacy@radancy.com">Michael Spellacy</a>.</p>
 
   <img src="example.png" loading="lazy" alt="">
 
