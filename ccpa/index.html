@@ -14,32 +14,23 @@ attributes:
 
     desc: Passing this data attribute a value of "true", will initiate the CCPA script.
 
-  - name: data-ccpa-client-name
-    html: script
-    note:
-
-      - String
-      - Mandatory
-
-    desc: Passing this data attribute a string value, such as the name of the client, will include that value in any needed verbiage used within the notice and form message.
-
-  - name: data-ccpa-policy-url
-    html: script
-    note:
-
-      - String
-      - Mandatory
-
-    desc: Passing this data attribute a policy URL, will include that URL within the notice and form message. The value must be in the form of a fully qualified URL.
-
-  - name: data-ccpa-language
+  - name: data-ccpa-accept-button-text
     html: script
     note:
 
       - String
       - Optional
 
-    desc: Passing this data attribute a language code, will translate the notice and form message into the desired language. The default language is English. 
+    desc: Passing this data attribute any string value will change the text of the "Accept" button. The default text is "Accept".
+
+  - name: data-ccpa-banner-remove
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a value of "true", will prevent the banner notice from loading. Implied consent will also not be captured. Dynamically generated form messages will still be applied to all forms on the site.
 
   - name: data-ccpa-banner-top
     html: script
@@ -59,14 +50,23 @@ attributes:
 
     desc: Passing this data attribute any valid CSS color value will change the background color of the "Accept" button.
 
-  - name: data-ccpa-accept-button-text
+  - name: data-ccpa-button-color-text
     html: script
     note:
 
       - String
       - Optional
 
-    desc: Passing this data attribute any string value will change the text of the "Accept" button. The default text is "Accept".
+    desc: Passing this data attribute any valid CSS color value will change the text color of the "Accept" button.
+
+  - name: data-ccpa-client-name
+    html: script
+    note:
+
+      - String
+      - Mandatory
+
+    desc: Passing this data attribute a string value, such as the name of the client, will include that value in any needed verbiage used within the notice and form message.
 
   - name: data-ccpa-close-button-text
     html: script
@@ -77,95 +77,14 @@ attributes:
 
     desc: Passing this data attribute any string value will change the text of the "Close" button. The default text is "Close".
 
-  - name: data-ccpa-button-color-text
+  - name: data-ccpa-custom-form-message
     html: script
     note:
 
       - String
       - Optional
 
-    desc: Passing this data attribute any valid CSS color value will change the text color of the "Accept" button.
-
-  - name: data-ccpa-font-size
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute any valid CSS unit, will change the font size used within the notice.
-
-  - name: data-ccpa-notice-color
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute any valid CSS color value will change the background color of the notice.
-
-  - name: data-ccpa-notice-text-color
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute any valid CSS color value will change the text color of the notice.
-
-  - name: data-ccpa-text-align
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute any valid CSS text-align value, will change the alignment of the text within the notice. The default value is "center".
-
-  - name: data-ccpa-z-index
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute any number from 1 to 2147483647, will change the z-index stack. The default value is "10000".
-
-  - name: data-ccpa-date-expire
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute a value of "true", will allow the banner to expire after one day, instead of the default 30 days.
-
-  - name: data-ccpa-banner-remove
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute a value of "true", will prevent the banner notice from loading. Implied consent will also not be captured. Dynamically generated form messages will still be applied to all forms on the site.
-
-  - name: data-ccpa-custom-message
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute a string value will override the default message. HTML may be included.</code>
-
-  - name: data-ccpa-banner-remove
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute a value of "true", will prevent the banner notice from loading. Implied consent will also not be captured. Dynamically generated form messages will still be applied to all forms on the site.
+    desc: Passing this data attribute a string value will override the default message that is appended to the form. HTML may be included.
 
   - name: data-ccpa-custom-message
     html: script
@@ -175,6 +94,15 @@ attributes:
       - Optional
 
     desc: Passing this data attribute a string value will override the default message. HTML may be included.
+
+  - name: data-ccpa-date-expire
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a value of "true", will allow the banner to expire after <strong>one day</strong>, instead of the default 30 days.
 
   - name: data-ccpa-domain
     html: script
@@ -194,14 +122,32 @@ attributes:
 
     desc: If your site requires that consent to track and use cookies be explicitly given, then you may use this data attribute to accomplish that. Passing this data attribute a string value of "true" will override the default behavior, which is set to passive consent, an implied acceptance via the continued use of the website. The banner will now persist from page to page until the user explicitly clicks on the "Accept" button in the banner.  If explicit consent is used, it is very likely that the SEO team will need to be adjusting desired tracking behaviors in this scenario, so be sure to remind your DPM of this task.
 
-  - name: data-ccpa-new-window
+  - name: data-ccpa-font-size
     html: script
     note:
 
       - String
       - Optional
 
-    desc: Passing this data attribute a value of "false" will disable the privacy policy link from opening in a new window. The default behavior is for all notice links to open in a new window, which is best practice. These visual cues will not appear when new windows are disabled.
+    desc: Passing this data attribute any valid CSS unit, will change the font size used within the notice.
+
+  - name: data-ccpa-form-bypas
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: If you need to override the default behavior of placing the form message over the submit button, then you may include the following data attribute and value. Removing the default behavior means that you will need to manually insert the message into the desired position within the form. To do this, place the following markup wherever you would like the message to appear. 
+
+  - name: data-ccpa-form-msg-exception
+    html: .data-form
+    note:
+
+      - String
+      - Optional
+
+    desc: Used to exclude the default form message on desired form.
 
   - name: data-ccpa-ga-custom-category
     html: script
@@ -221,32 +167,68 @@ attributes:
 
     desc: Passing this data attribute a custom value will override the value of <code>data-custom-label</code>, which currently defaults to "CCPA Accept Button".
 
-  - name: data-ccpa-custom-form-message
+  - name: data-ccpa-language
     html: script
     note:
 
       - String
       - Optional
 
-    desc: Passing this data attribute a string value will override the default message that is appended to the form. HTML may be included.
+    desc: Passing this data attribute a language code, will translate the notice and form message into the desired language. The default language is English. 
 
-  - name: data-ccpa-form-msg-exception
-    html: .data-form
-    note:
-
-      - String
-      - Optional
-
-    desc: Used to exclude the default form message on desired form.
-
-  - name: data-ccpa-form-bypas
+  - name: data-ccpa-new-window
     html: script
     note:
 
       - String
       - Optional
 
-    desc: If you need to override the default behavior of placing the form message over the submit button, then you may include the following data attribute and value. Removing the default behavior means that you will need to manually insert the message into the desired position within the form. To do this, place the following markup wherever you would like the message to appear. 
+    desc: Passing this data attribute a value of "false" will disable the privacy policy link from opening in a new window. The default behavior is for all notice links to open in a new window, which is best practice. These visual cues will not appear when new windows are disabled.
+
+  - name: data-ccpa-notice-color
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any valid CSS color value will change the background color of the notice.
+
+  - name: data-ccpa-notice-text-color
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any valid CSS color value will change the text color of the notice.
+
+  - name: data-ccpa-policy-url
+    html: script
+    note:
+
+      - String
+      - Mandatory
+
+    desc: Passing this data attribute a policy URL, will include that URL within the notice and form message. The value must be in the form of a fully qualified URL.
+
+  - name: data-ccpa-text-align
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any valid CSS text-align value, will change the alignment of the text within the notice. The default value is "center".
+
+  - name: data-ccpa-z-index
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any number from 1 to 2147483647, will change the z-index stack. The default value is "10000".
 
 classes:
 
@@ -272,10 +254,6 @@ cookies:
     samesite: None
     domain: N/A
     path: /
-
-notes: 
-
-  - <b>Behavior:</b> Both cookies expire after 30 days unless <code>data-ccpa-date-expire</code> is used, in which experation is set to <strong>one day</strong>.
 
 title: "California Consumer Privacy Act (CCPA) Notice v1.7"
 desc: This script may be used to generate a CCPA notice on any Radancy hosted website. Due to privacy concerns, California residents who engage with any website that collects data, must now be warned in advance and be able to opt-in to permit their data to be used. You can learn more about CCPA on the <a href="https://caprivacy.org">official website</a>. 

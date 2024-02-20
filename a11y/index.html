@@ -2,7 +2,7 @@
 notes: 
 
   - <b>Global:</b> Issues immediately corrected by the script as soon it loads on a Career Site page.
-  - <b>Opt-in:</b> Solutions to common accessibility issues on TalentBrew. An implementation developer must opt-in to use them.
+  - <b>Opt-in:</b> Solutions to common accessibility issues on a Career Sites. An implementation developer must opt-in to use them.
   - <b>New Issues:</b> To log a new issue, please visit the <a href="https://docs.google.com/spreadsheets/d/1J61XcI_k-oxQamYPrMHDaK9TRKXZzntGq1oKZdwKFYI/edit?usp=sharing">Accessibility Patch Log (APL)</a>.
   - <b>Roadmap:</b> Create Google Form to easily submit issue to APL.
 
@@ -13,54 +13,70 @@ title: "Accessibility Patch v1.6"
 
 {% capture contentblock %}
 
-  <p>This patch addresses the following accessibility issues on Career Sites that include <a href="../">MagicBullet</a> with the <code>data-a11y</code> attribute. This is a temporary solution until many of these issues can be resolved by the product team. If there are any questions or concerns with the script, please reach out to <a href="mailto:{{ site.owner-email }}?subject={{ page.title }}">{{ site.owner-name }}</a></a></p>
+<p>This patch addresses various accessibility issues across all Career Sites. This is a temporary solution until these issues can be resolved by the product team. If there are any questions or concerns with the script, please reach out to <a href="mailto:{{ site.owner-email }}?subject={{ page.title }}">{{ site.owner-name }}</a></p>
 
-  {% for bug in site.data.a11y %}
+<h2>Implementation</h2>
 
-    {% assign issueID = bug.ID | plus: 0 %}
+<h3>HTML</h3>
 
-    <div id="issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}" class="bug {% if bug.Priority == "High" %}warning{% endif %}">
+{% highlight html %}<script id="radancy-magicbullet" data-a11y="true" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
 
-      <h2><a class="anchor" href="#issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}">{{ iconAnchor }} <span class="sr-only">Anchor (#{{ bug.ID }})</span></a> Issue #{{ bug.ID }}: {{ bug.Summary }}</h2>
+<h3>JavaScript</h3>
 
-      <dl>
-        <dt>Logged</dt>
-        <dd><time datetime="{{ bug.Time }}">{{ bug.Time | date: "%A, %B %-d, %Y %I:%M:%S %p %Z" }}</time></dd>
-        <dt>Status</dt>
-        <dd>{{ bug.Status }}</dd>
-        <dt>Priority</dt>
-        <dd>{{ bug.Priority }}</dd>
-        <dt>Product</dt>
-        <dd>{{ bug.Product }}</dd>
-        <dt>Feature</dt>
-        <dd>{{ bug.Feature }}</dd>
-        <dt>Implementation</dt>
-        <dd><a href="#notes">{{ bug.Implementation }}</a></dd>
-        {% if bug.JIRA %}
-        <dt>JIRA</dt>
-        <dd><a href="{{ bug.JIRA }}" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></dd>
-        {% endif %}
-      </dl>
+{% highlight javascript %}var magicBullet = document.createElement("script");
+magicBullet.setAttribute("id", "radancy-magicbullet");
+magicBullet.setAttribute("data-a11y", "true");
+magicBullet.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/");
+document.body.appendChild(magicBullet);{% endhighlight %}
 
-      <h3>Details</h3>
+<h2>Issue Log</h3>
 
-      {{ bug.Details }}
+{% for bug in site.data.a11y %}
 
-      <h3>Code</h3>
+  {% assign issueID = bug.ID | plus: 0 %}
 
-      {% highlight javascript %}{{ bug.Code | replace: "<", "&lt;" | replace: ">", "&gt;" }}{% endhighlight %}
+  <div id="issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}" class="bug {% if bug.Priority == "High" %}warning{% endif %}">
 
-      {% if bug.Screengrab == blank %}
+    <h2><a class="anchor" href="#issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}">{{ iconAnchor }} <span class="sr-only">Anchor (#{{ bug.ID }})</span></a> Issue #{{ bug.ID }}: {{ bug.Summary }}</h2>
 
-      <h3>Screen</h3>
-
-      <p>{{ bug.Screengrab }}</p>
-
+    <dl>
+      <dt>Logged</dt>
+      <dd><time datetime="{{ bug.Time }}">{{ bug.Time | date: "%A, %B %-d, %Y %I:%M:%S %p %Z" }}</time></dd>
+      <dt>Status</dt>
+      <dd>{{ bug.Status }}</dd>
+      <dt>Priority</dt>
+      <dd>{{ bug.Priority }}</dd>
+      <dt>Product</dt>
+      <dd>{{ bug.Product }}</dd>
+      <dt>Feature</dt>
+      <dd>{{ bug.Feature }}</dd>
+      <dt>Implementation</dt>
+      <dd><a href="#notes">{{ bug.Implementation }}</a></dd>
+      {% if bug.JIRA %}
+      <dt>JIRA</dt>
+      <dd><a href="{{ bug.JIRA }}" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></dd>
       {% endif %}
+    </dl>
 
-    </div>
+    <h3>Details</h3>
 
-  {% endfor %}
+    {{ bug.Details }}
+
+    <h3>Code</h3>
+
+    {% highlight javascript %}{{ bug.Code | replace: "<", "&lt;" | replace: ">", "&gt;" }}{% endhighlight %}
+
+    {% if bug.Screengrab == blank %}
+
+    <h3>Screen</h3>
+
+    <p>{{ bug.Screengrab }}</p>
+
+    {% endif %}
+
+  </div>
+
+{% endfor %}
 
 {% endcapture %}
 

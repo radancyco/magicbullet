@@ -14,32 +14,14 @@ attributes:
 
     desc: Passing this data attribute a value of "true", will initiate the GDPR script.
 
-  - name: data-gdpr-client-name
-    html: script
-    note:
-
-      - String
-      - Mandatory
-
-    desc: Passing this data attribute a string value, such as the name of the client, will include that value in any needed verbiage used within the notice and form message.
-
-  - name: data-gdpr-policy-url
-    html: script
-    note:
-
-      - String
-      - Mandatory
-
-    desc: Passing this data attribute a policy URL, will include that URL within the notice and form message. The value must be in the form of a fully qualified URL.
-
-  - name: data-gdpr-language
+  - name: data-gdpr-banner-remove
     html: script
     note:
 
       - String
       - Optional
 
-    desc: Passing this data attribute a language code, will translate the notice and form message into the desired language. The default language is English. 
+    desc: Passing this data attribute a value of "true", will prevent the banner notice from loading. Implied consent will also not be captured. Dynamically generated form messages will still be applied to all forms on the site.
 
   - name: data-gdpr-banner-top
     html: script
@@ -59,15 +41,6 @@ attributes:
 
     desc: Passing this data attribute any valid CSS color value will change the background color of the "Accept" button.
 
-  - name: data-gdpr-button-text
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute any string value will change the text of the "Accept" button. The default text is "Accept".
-
   - name: data-gdpr-button-color-text
     html: script
     note:
@@ -77,95 +50,32 @@ attributes:
 
     desc: Passing this data attribute any valid CSS color value will change the text color of the "Accept" button.
 
-  - name: data-gdpr-font-size
+  - name: data-gdpr-button-text
     html: script
     note:
 
       - String
       - Optional
 
-    desc: Passing this data attribute any valid CSS unit, will change the font size used within the notice.
+    desc: Passing this data attribute any string value will change the text of the "Accept" button. The default text is "Accept".
 
-  - name: data-gdpr-notice-color
+  - name: data-gdpr-client-name
+    html: script
+    note:
+
+      - String
+      - Mandatory
+
+    desc: Passing this data attribute a string value, such as the name of the client, will include that value in any needed verbiage used within the notice and form message.
+
+  - name: data-gdpr-custom-form-message
     html: script
     note:
 
       - String
       - Optional
 
-    desc: Passing this data attribute any valid CSS color value will change the background color of the notice.
-
-  - name: data-gdpr-notice-text-color
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute any valid CSS color value will change the text color of the notice.
-
-  - name: data-gdpr-text-align
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute any valid CSS text-align value, will change the alignment of the text within the notice. The default value is "center".
-
-  - name: data-gdpr-z-index
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute any number from 1 to 2147483647, will change the z-index stack. The default value is "10000".
-
-  - name: data-gdpr-date-expire
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute a value of "true", will allow the banner to expire after one day, instead of the default 30 days.
-
-  - name: data-gdpr-banner-remove
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute a value of "true", will prevent the banner notice from loading. Implied consent will also not be captured. Dynamically generated form messages will still be applied to all forms on the site.
-
-  - name: data-gdpr-custom-message
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute a string value will override the default message. HTML may be included.</code>
-
-  - name: data-gdpr-date-expire
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute a value of "true", will allow the banner to expire after <strong>one day</strong>, instead of the default 30 days.
-
-  - name: data-gdpr-banner-remove
-    html: script
-    note:
-
-      - String
-      - Optional
-
-    desc: Passing this data attribute a value of "true", will prevent the banner notice from loading. Implied consent will also not be captured. Dynamically generated form messages will still be applied to all forms on the site.
+    desc: Passing this data attribute a string value will override the default message that is appended to the form. HTML may be included.
 
   - name: data-gdpr-custom-message
     html: script
@@ -175,6 +85,15 @@ attributes:
       - Optional
 
     desc: Passing this data attribute a string value will override the default message. HTML may be included.
+
+  - name: data-gdpr-date-expire
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a value of "true", will allow the banner to expire after <strong>one day</strong>, instead of the default 30 days.
 
   - name: data-gdpr-domain
     html: script
@@ -194,23 +113,32 @@ attributes:
 
     desc: If your site requires that consent to track and use cookies be explicitly given, then you may use this data attribute to accomplish that. Passing this data attribute a string value of "true" will override the default behavior, which is set to passive consent, an implied acceptance via the continued use of the website. The banner will now persist from page to page until the user explicitly clicks on the "Accept" button in the banner.  If explicit consent is used, it is very likely that the SEO team will need to be adjusting desired tracking behaviors in this scenario, so be sure to remind your DPM of this task.
 
-  - name: data-location-aware
+  - name: data-gdpr-font-size
     html: script
     note:
 
       - String
       - Optional
 
-    desc: Passing this data attribute a value of "true", will load the notice only within EU countries.
+    desc: Passing this data attribute any valid CSS unit, will change the font size used within the notice.
 
-  - name: data-gdpr-new-window
+  - name: data-gdpr-form-bypas
     html: script
     note:
 
       - String
       - Optional
 
-    desc: Passing this data attribute a value of "false" will disable the privacy policy link from opening in a new window. The default behavior is for all notice links to open in a new window, which is best practice. These visual cues will not appear when new windows are disabled.
+    desc: If you need to override the default behavior of placing the form message over the submit button, then you may include the following data attribute and value. Removing the default behavior means that you will need to manually insert the message into the desired position within the form. To do this, place the following markup wherever you would like the message to appear. 
+
+  - name: data-gdpr-form-msg-exception
+    html: .data-form
+    note:
+
+      - String
+      - Optional
+
+    desc: Used to exclude the default form message on desired form.
 
   - name: data-gdpr-ga-custom-category
     html: script
@@ -230,32 +158,77 @@ attributes:
 
     desc: Passing this data attribute a custom value will override the value of <code>data-custom-label</code>, which currently defaults to "GDPR Accept Button".
 
-  - name: data-gdpr-custom-form-message
+  - name: data-gdpr-language
     html: script
     note:
 
       - String
       - Optional
 
-    desc: Passing this data attribute a string value will override the default message that is appended to the form. HTML may be included.
+    desc: Passing this data attribute a language code, will translate the notice and form message into the desired language. The default language is English. 
 
-  - name: data-gdpr-form-msg-exception
-    html: .data-form
-    note:
-
-      - String
-      - Optional
-
-    desc: Used to exclude the default form message on desired form.
-
-  - name: data-gdpr-form-bypas
+  - name: data-gdpr-new-window
     html: script
     note:
 
       - String
       - Optional
 
-    desc: If you need to override the default behavior of placing the form message over the submit button, then you may include the following data attribute and value. Removing the default behavior means that you will need to manually insert the message into the desired position within the form. To do this, place the following markup wherever you would like the message to appear. 
+    desc: Passing this data attribute a value of "false" will disable the privacy policy link from opening in a new window. The default behavior is for all notice links to open in a new window, which is best practice. These visual cues will not appear when new windows are disabled.
+
+  - name: data-gdpr-notice-color
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any valid CSS color value will change the background color of the notice.
+
+  - name: data-gdpr-notice-text-color
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any valid CSS color value will change the text color of the notice.
+
+  - name: data-gdpr-policy-url
+    html: script
+    note:
+
+      - String
+      - Mandatory
+
+    desc: Passing this data attribute a policy URL, will include that URL within the notice and form message. The value must be in the form of a fully qualified URL.
+
+  - name: data-gdpr-text-align
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any valid CSS text-align value, will change the alignment of the text within the notice. The default value is "center".
+
+  - name: data-gdpr-z-index
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute any number from 1 to 2147483647, will change the z-index stack. The default value is "10000".
+
+  - name: data-location-aware
+    html: script
+    note:
+
+      - String
+      - Optional
+
+    desc: Passing this data attribute a value of "true", will load the notice only within EU countries.
 
 classes:
 
@@ -282,12 +255,8 @@ cookies:
     domain: N/A
     path: /
 
-notes: 
-
-  - <b>Behavior:</b> Both cookies expire after 30 days unless <code>data-gdpr-date-expire</code> is used, in which experation is set to <strong>one day</strong>.
-
 title: "General Data Protection Regulation (GDPR) Notice v1.7"
-desc: This script may be used to generate a GDPR consent notice on any Radancy hosted website. Due to privacy concerns, European Union (EU) citizens who engage with any website that collects data, must now be warned in advance and be able to implicitly or explicitly opt-in to permit their data to be used. You can learn more about GDPR on the <a href="https://gdpr.eu">official website</a>. 
+desc: This script may be used to generate a GDPR consent notice on any Radancy hosted website. Due to privacy concerns, European Union (EU) citizens who engage with any website that collects data, must now be warned in advance and be able to opt-in to permit their data to be used. You can learn more about GDPR on the <a href="https://gdpr.eu">official website</a>. 
 ---
 
 {% include icon.html %}
