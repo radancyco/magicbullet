@@ -10,7 +10,7 @@
 
 (function(){
 
-  console.log('%c MagicBullet: Accessibility Patch v1.6 in use. ', 'background: #6e00ee; color: #fff');
+  console.log("%c MagicBullet: Accessibility Patch v1.6 in use. ", "background: #6e00ee; color: #fff");
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
   var a11yBody = document.body;

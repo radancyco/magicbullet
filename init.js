@@ -9,7 +9,7 @@
 
 (function() {
 
-  console.log('%c MagicBullet v2.2 in use. ', 'background: #6e00ee; color: #fff');
+  console.log("%c MagicBullet v2.2 in use. ", "background: #6e00ee; color: #fff");
 
   // Get MagicBullet Script
 
