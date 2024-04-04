@@ -12,6 +12,39 @@
 
 {% endif %}
 
+{% if page.warning %}
+  
+<div class="warning">
+  
+  <p><strong>Warning:</strong> {{ page.warning }}</p>
+
+</div>
+
+{% endif %}
+
+{% if page.note %}
+  
+<div class="warning">
+  
+  <p><strong>Warning:</strong> {{ page.note }}</p>
+
+</div>
+
+{% endif %}
+
+{% if page.reminder %}
+  
+<div class="reminder">
+  
+  <p><strong>Reminder:</strong> {{ page.reminder }}</p>
+
+</div>
+
+{% endif %}
+
+{% assign path = component.path # used further doen the page for repo link %} 
+{% assign title = component.title # used further doen the page for repo link %} 
+
 {% if component %}
 
   <p class="component__summary">{{ component.desc }}</p>
@@ -118,6 +151,26 @@
   
       {% endif %}
 
+      {% if component.warning %}
+  
+        <div class="warning">
+          
+          <p><strong>Warning:</strong> {{ component.warning }}</p>
+
+        </div>
+  
+      {% endif %}
+
+      {% if component.reminder %}
+  
+      <div class="warning">
+        
+        <p><strong>Reminder:</strong> {{ component.reminder }}</p>
+
+      </div>
+
+    {% endif %}
+
       {% if component.experimental %}
   
       <div class="experimental">
@@ -134,7 +187,7 @@
           <li><button class="btn-copy-link" data-code="{{ page.url | absolute_url }}#{{ component.id }}">{{ iconCheck }}{{ iconCopyURL }} Copy link to example</button></li>
           <li><form action="https://codepen.io/pen/define" id="{{ component.id }}-codepen" method="POST" target="_blank"><button class="btn-edit-codepen">{{ iconCodePen }} Edit on CodePen</button></form></li>
           <li><a class="btn-new-window" href="{{ component.id }}" target="_blank">{{ iconNewWindow }} Open in new window</a></li>
-          <li><a class="btn-repository" href="{{ site.repo }}/blob/main/{{ page.folder }}/">{{ iconGit }} Repository</a></li>
+          <li><a class="btn-repository" href="{{ site.repo }}/blob/main/{{ path }}/">{{ iconGit }} Repository</a></li>
           <li><button class="btn-view-code">{{ iconCode }} View Code</button></li>
         </ul>
 
@@ -144,7 +197,7 @@
 
       <div class="content-view-code">
 
-        <div class="tablist">
+        <div class="tablist" data-fixed-height>
 
           <ul class="tablist__list">
             <li><a class="tablist__tab" href="#html-{{counter}}">{{ iconHTML }} HTML</a></li>
@@ -250,7 +303,7 @@
   
         var obj = {
           
-          title: "{{ page.title }} {% if component.name %}: {{ component.name }} {% endif %}",
+          title: "{{ title }} {% if component.name %}: {{ component.name }} {% endif %}",
           html: {{ html | jsonify }},
           css_external: "https://radancy.dev/css/init.css",
           css_pre_processor: "scss",
