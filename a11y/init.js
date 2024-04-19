@@ -738,7 +738,7 @@
   
       a11yObserver.disconnect();
   
-    }, 1000); // Adjust the timeout period as needed
+    }, 800); // Adjust the timeout period as needed
   
   });
   
