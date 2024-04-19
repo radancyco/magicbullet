@@ -698,3 +698,55 @@
   }, 1000);
 
 })();
+
+(function(){
+
+  document.addEventListener("DOMContentLoaded", function() {
+
+    var ajaxRequests = 0;
+
+    function checkAjaxComplete() {
+
+      if (ajaxRequests === 0) {
+
+        // All AJAX requests have completed
+
+        // Put your code here that needs to execute after everything has loaded
+
+        console.log("All resources loaded including AJAX requests");
+
+      }
+
+    }
+
+    // Increment ajaxRequests when an AJAX request starts
+
+    document.addEventListener("ajaxStart", function() {
+
+      ajaxRequests++;
+
+    });
+
+    // Decrement ajaxRequests when an AJAX request completes
+
+    document.addEventListener("ajaxStop", function() {
+
+      ajaxRequests--;
+
+      checkAjaxComplete();
+
+    });
+
+    // Check if DOMContentLoaded has already occurred
+
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+
+      // DOMContentLoaded has already happened or is happening, so check AJAX completion now
+
+      checkAjaxComplete();
+
+    }
+
+});
+
+})();
