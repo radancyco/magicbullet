@@ -701,45 +701,21 @@
 
 
 document.addEventListener("DOMContentLoaded", function() {
+  // Get the element whose content you want to monitor
+  var target = document.body;
 
-  var observer = new MutationObserver(function(mutationsList) {
-
-    console.log("Mutation observed");
-
-    // Check if there are any mutations happening
-
-    for(var mutation of mutationsList) {
-
-      if (mutation.type === 'childList' || mutation.type === 'subtreeModified') {
-
-        // If a mutation happens, it means something on the page changed
-
-        // There might be AJAX/fetch requests completing, so we'll wait
-
-        return;
-
-      }
-
-    }
-
-    // If no mutations occurred during the last check, it indicates all requests have finished
-
-    // Put your code here that needs to execute after everything has loaded
-
-    console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
-
-    // Disconnect the observer as we no longer need it
-
-    observer.disconnect();
-
+  // Create a new MutationObserver instance
+  var observer = new MutationObserver(function(mutations) {
+      // Run the function after content stops changing
+      console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
+      
+      // If needed, disconnect the observer once the mutations are observed
+      observer.disconnect();
   });
 
-  // Start observing changes to the entire DOM and all of its children
+  // Configure the MutationObserver to watch for changes to the child nodes of the target element
+  var config = { childList: true, subtree: true };
 
-  observer.observe(document.body, { childList: true, subtree: true });
-
+  // Start observing changes
+  observer.observe(target, config);
 });
-
-
-
-
