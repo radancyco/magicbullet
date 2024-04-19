@@ -670,7 +670,7 @@
     
       $(".g-recaptcha-response").attr("aria-label", "Captcha");
  
-    }, 500);
+    }, 3000);
 
   }
 
