@@ -699,38 +699,59 @@
 
 })();
 
-  // New A11y Observer 
 
-  document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
+  // Get the element whose content you want to monitor
+  var target = document.body;
 
-    // Create a new MutationObserver instance
-
-    var a11yObserver = new MutationObserver(function() {
-
-      // Clear the previous timeout
-
-      clearTimeout(a11yObserver.timeout);
-
-      // Set a timeout to run after NN milliseconds of no mutations
-
-      a11yObserver.timeout = setTimeout(function() {
-
-        // Run the function after content stops changing
-
-        console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
-
-        // If needed, disconnect the observer once the mutations are observed
-
-        a11yObserver.disconnect();
-
-      }, 500); // Adjust the timeout period as needed
-
-    });
-
-    // Configure the MutationObserver to watch for changes to the child nodes of the div
-
-    var config = { childList: true, subtree: true };
-
-    a11yObserver.observe(document.body, childList: true, subtree: true);
-
+  // Create a new MutationObserver instance
+  var observer = new MutationObserver(function(mutations) {
+      // Run the function after content stops changing
+      console.log("%c MagicBullet: Accessibility Patch v1.8111 in use. ", "background: #6e00ee; color: #fff");
+      
+      // If needed, disconnect the observer once the mutations are observed
+      observer.disconnect();
   });
+
+  // Configure the MutationObserver to watch for changes to the child nodes of the target element
+  var config = { childList: true, subtree: true };
+
+  // Start observing changes
+  observer.observe(target, config);
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+
+      // Create a new MutationObserver instance
+
+      var a11yObserver = new MutationObserver(function() {
+
+        // Clear the previous timeout
+
+        clearTimeout(a11yObserver.timeout);
+
+        // Set a timeout to run after NN milliseconds of no mutations
+
+        a11yObserver.timeout = setTimeout(function() {
+
+          // Run the function after content stops changing
+
+          console.log("%c MagicBullet: Accessibility Patch v1.8222 in use. ", "background: #6e00ee; color: #fff");
+
+          // If needed, disconnect the observer once the mutations are observed
+
+          a11yObserver.disconnect();
+
+        }, 500); // Adjust the timeout period as needed
+
+      });
+
+      // Configure the MutationObserver to watch for changes to the child nodes of the div
+
+      var config = { childList: true, subtree: true };
+
+      a11yObserver.observe(document.body, config);
+
+});
