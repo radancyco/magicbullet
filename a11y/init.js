@@ -666,7 +666,11 @@
 
     // CAPTCHA has no label. If folks validated their work, I would have a lot less problems. 
 
-    $(".g-recaptcha-response").attr("aria-label", "Captcha");
+    setTimeout(function(){
+    
+      $(".g-recaptcha-response").attr("aria-label", "Captcha");
+ 
+    }, 500);
 
   }
 
