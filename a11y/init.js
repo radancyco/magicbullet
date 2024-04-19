@@ -10,8 +10,6 @@
 
 (function(){
 
-  
-
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
   var a11yBody = document.body;
 
@@ -690,7 +688,7 @@
   }, 1000);
 
 
-  // Accessibility Patch Observer
+  // *** Accessibility Patch Observer ***
   
   function initA11yRepair() {
 
@@ -698,9 +696,15 @@
 
     // Data Forms 
 
-      // The CAPTCHA textarea has no accessible name. Sites team really needs to validate their work before releasing new features. 
+      // The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
 
-      document.querySelector(".g-recaptcha-response").setAttribute("aria-label", "Captcha");
+      var captchaResponse = document.querySelectorAll(".g-recaptcha-response");
+
+      captchaResponse.forEach(function(captcha){
+
+        captcha.setAttribute("aria-label", "Captcha");
+
+      });
    
       // TODO: Add future fixes here.
 
