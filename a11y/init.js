@@ -182,13 +182,6 @@
 
   });
 
-  // CAPTCHA has no label. If folks validated their work, I would have a lot less problems. 
-
-  $(".g-recaptcha-response").attr({
-
-    "aria-label":"Captcha"
-
-  });
   
   // Issue: All required fields should include aria-invalid="false" on page load
 
@@ -670,6 +663,10 @@
         $("#igdpr-button").focus();
    
      } */
+
+    // CAPTCHA has no label. If folks validated their work, I would have a lot less problems. 
+
+    $(".g-recaptcha-response").attr("aria-label", "Captcha");
 
   }
 
