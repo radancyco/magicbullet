@@ -700,53 +700,35 @@
 })();
 
 
+document.addEventListener("DOMContentLoaded", function() {
+  var fetchRequests = 0;
 
-  document.addEventListener("DOMContentLoaded", function() {
-
-    var ajaxRequests = 0;
-
-    function checkAjaxComplete() {
-
-      if (ajaxRequests === 0) {
-
-        // All AJAX requests have completed
-
-        // Put your code here that needs to execute after everything has loaded
-
-        console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
+  function checkFetchComplete() {
+      if (fetchRequests === 0) {
+          // All fetch requests have completed
+          // Put your code here that needs to execute after everything has loaded
+          console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
 
       }
+  }
 
-    }
+  // Increment fetchRequests when a fetch request starts
+  document.addEventListener("fetchStart", function() {
+      fetchRequests++;
+  });
 
-    // Increment ajaxRequests when an AJAX request starts
+  // Decrement fetchRequests when a fetch request completes
+  document.addEventListener("fetchEnd", function() {
+      fetchRequests--;
+      checkFetchComplete();
+  });
 
-    document.addEventListener("ajaxStart", function() {
-
-      ajaxRequests++;
-
-    });
-
-    // Decrement ajaxRequests when an AJAX request completes
-
-    document.addEventListener("ajaxStop", function() {
-
-      ajaxRequests--;
-
-      checkAjaxComplete();
-
-    });
-
-    // Check if DOMContentLoaded has already occurred
-
-    if (document.readyState === "complete" || document.readyState === "interactive") {
-
-      // DOMContentLoaded has already happened or is happening, so check AJAX completion now
-
-      checkAjaxComplete();
-
-    }
-
+  // Check if DOMContentLoaded has already occurred
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+      // DOMContentLoaded has already happened or is happening, so check fetch completion now
+      checkFetchComplete();
+  }
 });
+
 
 
