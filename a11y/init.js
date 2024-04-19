@@ -10,7 +10,7 @@
 
 (function(){
 
-  console.log("%c MagicBullet: Accessibility Patch v1.7 in use. ", "background: #6e00ee; color: #fff");
+  
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
   var a11yBody = document.body;
@@ -712,6 +712,8 @@
         // All AJAX requests have completed
 
         // Put your code here that needs to execute after everything has loaded
+
+        console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
 
         console.log("All resources loaded including AJAX requests");
 
