@@ -182,7 +182,14 @@
 
   });
 
-  
+  // CAPTCHA has no label. If folks validated their work, I would have a lot less problems. 
+
+  setTimeout(function(){
+    
+    $(".g-recaptcha-response").attr("aria-label", "Captcha");
+   
+  }, 3000);
+
   // Issue: All required fields should include aria-invalid="false" on page load
 
   $(".data-form .form-field.required input, .data-form .form-field.required select").attr("aria-invalid", "false");
@@ -370,7 +377,7 @@
 
     // Save Job for later
 
-    var savedJobs = document.querySelectorAll("[data-a11y-saved-button]");
+    var savedJobs = document.querySelectorAll(".js-save-job-btn");
 
     for (var i = 0; i < savedJobs.length; i++) {
 
@@ -663,14 +670,6 @@
         $("#igdpr-button").focus();
    
      } */
-
-    // CAPTCHA has no label. If folks validated their work, I would have a lot less problems. 
-
-    setTimeout(function(){
-    
-      $(".g-recaptcha-response").attr("aria-label", "Captcha");
- 
-    }, 3000);
 
   }
 
