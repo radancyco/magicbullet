@@ -701,42 +701,41 @@
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  var requestsInProgress = 0;
 
-  function checkRequestsComplete() {
-      if (requestsInProgress === 0) {
-          // All requests have completed
-          // Put your code here that needs to execute after everything has loaded
-          console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
+  var observer = new MutationObserver(function(mutationsList) {
+
+    // Check if there are any mutations happening
+
+    for(var mutation of mutationsList) {
+
+      if (mutation.type === 'childList' || mutation.type === 'subtreeModified') {
+
+        // If a mutation happens, it means something on the page changed
+
+        // There might be AJAX/fetch requests completing, so we'll wait
+
+        return;
 
       }
-  }
 
-  function trackRequestStart() {
-      requestsInProgress++;
-  }
+    }
 
-  function trackRequestEnd() {
-      requestsInProgress--;
-      checkRequestsComplete();
-  }
+    // If no mutations occurred during the last check, it indicates all requests have finished
 
-  // Listen for XMLHttpRequest (XHR) start and end events
-  document.addEventListener("ajaxStart", trackRequestStart);
-  document.addEventListener("ajaxStop", trackRequestEnd);
+    // Put your code here that needs to execute after everything has loaded
 
-  // Listen for fetch start and end events
-  document.addEventListener("fetchStart", trackRequestStart);
-  document.addEventListener("fetchEnd", trackRequestEnd);
+    console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
 
-  // Listen for other network request start and end events
-  // Add event listeners for other types of requests as needed
+    // Disconnect the observer as we no longer need it
 
-  // Check if DOMContentLoaded has already occurred
-  if (document.readyState === "complete" || document.readyState === "interactive") {
-      // DOMContentLoaded has already happened or is happening, so check request completion now
-      checkRequestsComplete();
-  }
+    observer.disconnect();
+
+  });
+
+  // Start observing changes to the entire DOM and all of its children
+
+  observer.observe(document.body, { childList: true, subtree: true });
+
 });
 
 
