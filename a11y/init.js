@@ -707,7 +707,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Create a new MutationObserver instance
   var observer = new MutationObserver(function(mutations) {
       // Run the function after content stops changing
-      console.log("%c MagicBullet: Accessibility Patch v1.8111 in use. ", "background: #6e00ee; color: #fff");
+      console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
       
       // If needed, disconnect the observer once the mutations are observed
       observer.disconnect();
@@ -722,7 +722,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
+
 
       // Create a new MutationObserver instance
 
@@ -738,7 +738,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
           // Run the function after content stops changing
 
-          console.log("%c MagicBullet: Accessibility Patch v1.8222 in use. ", "background: #6e00ee; color: #fff");
+          console.log("%c MagicBullet: Accessibility Patch v1.888888888888 in use. ", "background: #6e00ee; color: #fff");
 
           // If needed, disconnect the observer once the mutations are observed
 
@@ -754,4 +754,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
       a11yObserver.observe(document.body, config);
 
-});
+
+
