@@ -703,7 +703,7 @@
 
     // Create a new MutationObserver instance
 
-    var a11yObserver = new MutationObserver(function() {
+    var a11yObserver = new MutationObserver(function(mutation) {
 
       // Clear the previous timeout
 
@@ -729,7 +729,7 @@
 
     var config = { childList: true, subtree: true };
 
-    a11yObserver.observe(document.body, config);
+    a11yObserver.observe(document.body, childList: true, subtree: true);
 
   });
 
