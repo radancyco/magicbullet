@@ -607,10 +607,6 @@
 
     }
 
-    // Issue: Pagination in Search Results should really have a label so it can be differentiated between other navs on page.
-
-    $(".pagination").attr("aria-label", "Pagination");
-
     // Issue: Older versions of slick that do not inlcude the accessibility flag, have several issues. We will fry to fix many of them here
     // but recommend upgrading to AccessibleSlick.
 
@@ -696,13 +692,25 @@
 
     // Data Forms 
 
-      // The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
+      // A11Y0020: The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
 
       var captchaResponse = document.querySelectorAll(".g-recaptcha-response");
 
       captchaResponse.forEach(function(captcha){
 
         captcha.setAttribute("aria-label", "Captcha");
+
+      });
+
+    // Search Results 
+
+      // A11Y0019: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
+
+      var paginationNav = document.querySelectorAll(".pagination");
+
+      paginationNav.forEach(function(nav){
+
+        nav.setAttribute("aria-label", "Pagination");
 
       });
    
