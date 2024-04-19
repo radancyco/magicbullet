@@ -715,8 +715,6 @@
 
         console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
 
-        console.log("All resources loaded including AJAX requests");
-
       }
 
     }
