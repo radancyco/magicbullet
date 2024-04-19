@@ -701,34 +701,44 @@
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  var fetchRequests = 0;
+  var requestsInProgress = 0;
 
-  function checkFetchComplete() {
-      if (fetchRequests === 0) {
-          // All fetch requests have completed
+  function checkRequestsComplete() {
+      if (requestsInProgress === 0) {
+          // All requests have completed
           // Put your code here that needs to execute after everything has loaded
           console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
 
       }
   }
 
-  // Increment fetchRequests when a fetch request starts
-  document.addEventListener("fetchStart", function() {
-      fetchRequests++;
-  });
+  function trackRequestStart() {
+      requestsInProgress++;
+  }
 
-  // Decrement fetchRequests when a fetch request completes
-  document.addEventListener("fetchEnd", function() {
-      fetchRequests--;
-      checkFetchComplete();
-  });
+  function trackRequestEnd() {
+      requestsInProgress--;
+      checkRequestsComplete();
+  }
+
+  // Listen for XMLHttpRequest (XHR) start and end events
+  document.addEventListener("ajaxStart", trackRequestStart);
+  document.addEventListener("ajaxStop", trackRequestEnd);
+
+  // Listen for fetch start and end events
+  document.addEventListener("fetchStart", trackRequestStart);
+  document.addEventListener("fetchEnd", trackRequestEnd);
+
+  // Listen for other network request start and end events
+  // Add event listeners for other types of requests as needed
 
   // Check if DOMContentLoaded has already occurred
   if (document.readyState === "complete" || document.readyState === "interactive") {
-      // DOMContentLoaded has already happened or is happening, so check fetch completion now
-      checkFetchComplete();
+      // DOMContentLoaded has already happened or is happening, so check request completion now
+      checkRequestsComplete();
   }
 });
+
 
 
 
