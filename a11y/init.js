@@ -699,7 +699,7 @@
 
   // New A11y Observer 
 
-  document.addEventListener("DOMContentLoaded", function() {
+
 
     // Create a new MutationObserver instance
 
@@ -731,6 +731,6 @@
 
     a11yObserver.observe(document.body, childList: true, subtree: true);
 
-  });
+
 
 })();
