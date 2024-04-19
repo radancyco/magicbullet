@@ -697,13 +697,15 @@
 
   }, 1000);
 
+})();
+
   // New A11y Observer 
 
-
+  document.addEventListener("DOMContentLoaded", function() {
 
     // Create a new MutationObserver instance
 
-    var a11yObserver = new MutationObserver(function(mutation) {
+    var a11yObserver = new MutationObserver(function() {
 
       // Clear the previous timeout
 
@@ -731,6 +733,4 @@
 
     a11yObserver.observe(document.body, childList: true, subtree: true);
 
-
-
-})();
+  });
