@@ -662,14 +662,6 @@
         $("#igdpr-button").focus();
    
      } */
-     
-    // CAPTCHA has no label. If folks validated their work, I would have a lot less problems. 
-
-    setTimeout(function(){
-    
-      $(".g-recaptcha-response").attr("aria-label", "Captcha");
-   
-    }, 1000);
 
   }
 
@@ -702,9 +694,15 @@
   
   function initA11yRepair() {
 
-    console.log("%c MagicBullet: Accessibility Patch v1.888888888888 in use. ", "background: #6e00ee; color: #fff");
+    console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
 
-    // TODO: Add future fixes here.
+    // Data Forms 
+
+      // The CAPTCHA textarea has no accessible name. Sites team really needs to validate their work before releasing new features. 
+
+      document.querySelector(".g-recaptcha-response").setAttribute("aria-label", "Captcha");
+   
+      // TODO: Add future fixes here.
 
   }
 
@@ -728,7 +726,7 @@
   
       a11yObserver.disconnect();
   
-    }, 800); // Adjust the timeout period as needed
+    }, 1000); // Adjust the timeout period as needed
   
   });
   
