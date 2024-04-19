@@ -719,3 +719,38 @@ document.addEventListener("DOMContentLoaded", function() {
   // Start observing changes
   observer.observe(target, config);
 });
+
+
+
+      // Get the element whose content you want to monitor
+
+      var target = document.body;
+
+      // Create a new MutationObserver instance
+
+      var observer = new MutationObserver(function(mutation) {
+
+        // Clear the previous timeout
+
+        clearTimeout(observer.timeout);
+
+        // Set a timeout to run after NN milliseconds of no mutations
+
+        observer.timeout = setTimeout(function() {
+
+          // Run the function after content stops changing
+
+          console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
+
+        }, 500); // Adjust the timeout period as needed
+
+      });
+
+      // Configure the MutationObserver to watch for changes to the child nodes of the div
+
+      var config = { childList: true, subtree: true };
+
+      observer.observe(target, config);
+
+
+
