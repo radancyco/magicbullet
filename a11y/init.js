@@ -704,6 +704,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
   var observer = new MutationObserver(function(mutationsList) {
 
+    console.log("Mutation observed");
+
     // Check if there are any mutations happening
 
     for(var mutation of mutationsList) {
