@@ -364,10 +364,6 @@
 
   function miscA11yFixes() {
 
-    // https://radancy.dev/magicbullet/a11y/#issue-0003
-
-    $("img:not([alt])").attr("alt", "");
-
     // A11y Form Fixes
 
     // Issue: Remove aria-required from p element (it should not exist on this element) and various other elements.
@@ -523,38 +519,6 @@
 
     $("meta[content*='user-scalable=no']").remove();
 
-    // Issue: Various Altru Fixes
-
-    $(".altru-content").each(function() {
-
-	     var videoTitle = $(this).find(".altru-question-text").text();
-
-	     $(this).find(".altru-video-player__video").attr("aria-label", videoTitle + " (Video)");
-
-     });
-
-     // Issue: Altru: Remove aria-label from <time> element. No proper role on <time>, so why inclkude a label?
-
-     $(".altru-video-overlay time").removeAttr("aria-label");
-
-     // Issue: Altru: Duplicate ID
-
-     $("g[id='Artboard'], polygon[id='Star']").removeAttr("id");
-
-     // Olivia Chatbot
-
-     $("#toggle-olivia").attr("aria-label", "Chat with our recruiting assistant");
-
-     // If cooke banner present, place focus on it. 
-
-    // Removed following because causing issues with cookies. See https://jira.tmp.com/browse/UDS-5793 
-
-     /* if($("#igdpr-button").length){
-
-        $("#igdpr-button").focus();
-   
-     } */
-
   }
 
   $(document).ajaxStop(function() {
@@ -585,6 +549,7 @@
 
       // aria-pressed not working with type attribute on it, which makes sense.
       // TODO: See if still an issue in VO, too.
+      // TODO: Add language support.
 
       btn.removeAttribute("type");
       btn.setAttribute("role", "button"); // iOS, NVDA bug, state not reading back so need to implicitly call role. Do not remove until support better.
@@ -624,9 +589,22 @@
 
     console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
 
+    // Global Issues
+
+      // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0003
+
+      var missingAltAttributes = document.querySelectorAll("img:not([alt])");
+
+      missingAltAttributes.forEach(function(img){
+
+        img.setAttribute("alt", "");
+
+      });
+
     // Data Forms 
 
       // A11Y0020: The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
+      // TODO: Add language support.
 
       var captchaResponse = document.querySelectorAll(".g-recaptcha-response");
 
@@ -671,6 +649,7 @@
       saveJobButton();
 
       // A11Y0019: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
+      // TODO: Add language support.
 
       var paginationNav = document.querySelectorAll(".pagination");
 
@@ -690,7 +669,6 @@
         page.removeAttribute("href");
 
       });
-
 
       // TODO: Add future fixes here.
 
