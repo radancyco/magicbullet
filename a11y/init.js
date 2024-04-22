@@ -221,46 +221,6 @@
 
   });
 
-  // Issue: Focus is lost when "Filtered by" button is clicked
-
-  function setFilterButtonFocus() {
-
-    $(".filter-button").on("click", function() {
-
-      var selectedButtonIndex = $(".filter-button").index(this);
-
-      setTimeout(function(){
-
-        var remainingButtonIndex = $(".filter-button").length;
-
-        // console.log(selectedButtonIndex)
-
-        if(remainingButtonIndex) {
-
-          if(selectedButtonIndex >= remainingButtonIndex) {
-
-            $(".filter-button").last().focus();
-
-          } else {
-
-            $(".filter-button").eq(selectedButtonIndex).focus();
-
-          }
-
-        } else {
-
-          $("#search-results-list ul a:first, #search-results-list table a:first").focus();
-
-        }
-
-      }, 1000);
-
-    });
-
-  }
-
-  setFilterButtonFocus(); // Initial Page Load
-
 
   function miscA11yFixes() {
 
@@ -419,8 +379,6 @@
 
   $(document).ajaxStop(function() {
 
-    setFilterButtonFocus();
-
     miscA11yFixes();
 
   });
@@ -524,13 +482,13 @@
 
             this.setAttribute("aria-pressed", "false");
 
-        } else {
+          } else {
 
-          this.setAttribute("aria-pressed", "true");
+            this.setAttribute("aria-pressed", "true");
 
-        }
+          }
 
-      });
+        });
 
     });
 
@@ -541,6 +499,7 @@
         // The filters section has incorrect ARIA on it. Remove aria-hidden and aria-expanded.
         // Move aria-labelledby from ul to section wrapper, added region role.
         // Make remove buttons more contextually friendly to AT.
+        // Adjust focus when button with focus is removed.
         // TODO: Add language support to buttons.
         // TODO: Regarding aria-labelledby on section wrapper, see if contextual support good enough here. 
         // If it is, then may be able to remove aria-labelledby and region role. See https://www.w3.org/WAI/WCAG22/Techniques/html/H81
@@ -573,9 +532,41 @@
         btnSearchFilter.forEach(function(btn){
       
           btn.setAttribute("aria-label", "Remove " + btn.textContent + " filter");
-      
+
+          // Focus is lost when button is removed from DOM.
+
+          btn.addEventListener("click", function() {
+
+            var selectedButtonIndex = Array.from(document.querySelectorAll(".filter-button")).indexOf(this);
+
+            setTimeout(function() {
+
+                var remainingButtonIndex = document.querySelectorAll(".filter-button").length;
+
+                // console.log(selectedButtonIndex)
+
+                if (remainingButtonIndex) {
+
+                    if (selectedButtonIndex >= remainingButtonIndex) {
+
+                        document.querySelectorAll(".filter-button")[remainingButtonIndex - 1].focus();
+
+                    } else {
+
+                        document.querySelectorAll(".filter-button")[selectedButtonIndex].focus();
+                    }
+
+                } else {
+
+                    document.querySelector("#search-results-list ul a:first-child").focus();
+                }
+
+            }, 1000);
+  
+          });
+
         });
-      
+
       });
 
       // A11Y0019: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
