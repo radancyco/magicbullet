@@ -542,7 +542,7 @@
             var selectedButtonIndex = Array.from(btnSearchFilter).indexOf(this);
             var remainingButtonIndex = btnSearchFilter.length;
 
-            console.log("selected index" + selectedButtonIndex + " remaining button index" + remainingButtonIndex);
+            console.log("selected index: " + selectedButtonIndex + " remaining button index: " + remainingButtonIndex);
 
             if (remainingButtonIndex) {
 
