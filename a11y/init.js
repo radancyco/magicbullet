@@ -554,7 +554,7 @@
 
             } else {
 
-              this.closest("#search-results-list ul a:first-child").focus();
+              document.querySelector("#search-results-list ul a:first-child").focus();
                 
             }
 
