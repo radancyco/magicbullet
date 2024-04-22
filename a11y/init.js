@@ -433,50 +433,6 @@
 
   }, 1000);
 
-  // *** Accessibility Patch: Functions ***
-
-  function saveJobButton() {
-
-    var btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
-
-    btnSaveJobs.forEach(function(btn){
-
-      // aria-pressed not working with type attribute on it, which makes sense.
-      // TODO: See if still an issue in VO, too.
-      // TODO: Add language support.
-
-      btn.removeAttribute("type");
-      btn.setAttribute("role", "button"); // iOS, NVDA bug, state not reading back so need to implicitly call role. Do not remove until support better.
-      btn.setAttribute("aria-label", "Save Job");
-
-      if(btn.dataset.jobSaved === "true") {
-
-        btn.setAttribute("aria-pressed", "true");
-
-      } else {
-
-        btn.setAttribute("aria-pressed", "false");
-
-      }
-
-      btn.addEventListener("click", function() {
-
-        if(this.dataset.jobSaved === "true") {
-
-          this.setAttribute("aria-pressed", "false");
-
-        } else {
-
-          this.setAttribute("aria-pressed", "true");
-
-        }
-
-      });
-
-    });
-
-  }
-
   // *** Accessibility Patch: Observer ***
   
   function initA11yRepair() {
@@ -540,36 +496,81 @@
 
       // A11Y0018: Custom "Save Job" button functionality
 
-      saveJobButton();
+      var btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
+
+      btnSaveJobs.forEach(function(btn){
+
+        // aria-pressed not working with type attribute on it, which makes sense.
+        // TODO: See if still an issue in VO, too.
+        // TODO: Add language support.
+
+        btn.removeAttribute("type");
+        btn.setAttribute("role", "button"); // iOS, NVDA bug, state not reading back so need to implicitly call role. Do not remove until support better.
+        btn.setAttribute("aria-label", "Save Job");
+
+        if(btn.dataset.jobSaved === "true") {
+
+          btn.setAttribute("aria-pressed", "true");
+
+        } else {
+
+          btn.setAttribute("aria-pressed", "false");
+
+        }
+
+        btn.addEventListener("click", function() {
+
+          if(this.dataset.jobSaved === "true") {
+
+            this.setAttribute("aria-pressed", "false");
+
+        } else {
+
+          this.setAttribute("aria-pressed", "true");
+
+        }
+
+      });
+
+    });
 
     // Search Results: Applied Filters
 
-      // A11Y00XX: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing. Moving aria-labelledby, adding region role.
+      // A11Y00XX: 
+      
+        // The filters section has incorrect ARIA on it. Remove aria-hidden and aria-expanded.
+        // Move aria-labelledby from ul to section wrapper, added region role.
+        // Make remove buttons more contextually friendly to AT.
+        // TODO: Add language support to buttons.
+        // TODO: Regarding aria-labelledby on section wrapper, see if contextual support good enough here. 
+        // If it is, then may be able to remove aria-labelledby and region role. See https://www.w3.org/WAI/WCAG22/Techniques/html/H81
 
       var appliedFilters = document.querySelectorAll(".search-results-options");
 
       appliedFilters.forEach(function(section){
+
+        // Remove aria-labeledby from UL.
+
+        var appliedFiltersList = section.querySelector("ul[aria-labelledby]");
+
+        appliedFiltersList.removeAttribute("aria-labelledby");
+
+        // Remove/Add ARIA to parent section warpper (.search-results-option)
       
         section.removeAttribute("aria-hidden");
         section.removeAttribute("aria-expanded");
         section.setAttribute("aria-labelledby", "applied-filters-label");
         section.setAttribute("role", "region");
 
-        var appliedFiltersList = section.querySelector("ul[aria-labelledby]");
+        // Add ARIA label to each button that is not disabled.
 
-        appliedFiltersList.removeAttribute("aria-labelledby");
+        var btnSearchFilter = section.querySelectorAll(".filter-button:not([disabled])");
+
+        btnSearchFilter.forEach(function(btn){
       
-      });
-
-      // A11Y00XX: Filter Buttons require more context for AT Users.
-      // TODO: Add language support
-      // TODO: Investiage to see if context is applicapble here. See  
-
-      var btnSearchFilter = document.querySelectorAll("button.filter-button");
-
-      btnSearchFilter.forEach(function(btn){
+          btn.setAttribute("aria-label", "Remove " + btn.textContent + " filter");
       
-        btn.setAttribute("aria-label", "Remove " + btn.textContent + " filter");
+        });
       
       });
 
