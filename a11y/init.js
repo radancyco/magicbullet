@@ -542,6 +542,8 @@
             var selectedButtonIndex = Array.from(btnSearchFilter).indexOf(this);
             var remainingButtonIndex = btnSearchFilter.length;
 
+            console.log(selectedButtonIndex);
+
             if (remainingButtonIndex) {
 
               if (selectedButtonIndex >= remainingButtonIndex) {
