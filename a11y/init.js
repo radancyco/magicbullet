@@ -734,10 +734,6 @@
   
       initA11yRepair();
   
-      // If needed, disconnect the observer once the mutations are observed
-  
-      a11yObserver.disconnect();
-  
     }, 800); // Adjust the timeout period as needed
   
   });
