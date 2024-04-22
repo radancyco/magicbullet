@@ -537,29 +537,27 @@
 
           btn.addEventListener("click", function() {
 
-            var selectedButtonIndex = Array.from(document.querySelectorAll(".filter-button")).indexOf(this);
+            var selectedButtonIndex = Array.from(btn).indexOf(this);
+            var remainingButtonIndex = btn.length;
 
-                var remainingButtonIndex = document.querySelectorAll(".filter-button").length;
+            if (remainingButtonIndex) {
 
-                // console.log(selectedButtonIndex)
+              if (selectedButtonIndex >= remainingButtonIndex) {
 
-                if (remainingButtonIndex) {
+                btn[remainingButtonIndex - 1].focus();
 
-                    if (selectedButtonIndex >= remainingButtonIndex) {
+              } else {
 
-                        document.querySelectorAll(".filter-button")[remainingButtonIndex - 1].focus();
+                btn[selectedButtonIndex].focus();
+              
+              }
 
-                    } else {
+            } else {
 
-                        document.querySelectorAll(".filter-button")[selectedButtonIndex].focus();
-                    }
+              document.querySelector("#search-results-list ul a:first-child").focus();
+                
+            }
 
-                } else {
-
-                    document.querySelector("#search-results-list ul a:first-child").focus();
-                }
-
-  
           });
 
         });
