@@ -312,15 +312,7 @@
 
   }
 
-  // Issue: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
-  function fixDisabledButton() {
-
-    $(".pagination-paging .disabled").removeAttr("aria-hidden href");
-
-  }
-
-  fixDisabledButton(); // Initial Page Load
 
   // Issue: The search navigation is often style not to look like a form and submit button is removed
   // So we need to strip this functionality and simply show text.
@@ -649,8 +641,6 @@
 
     noFormPagination();
 
-    fixDisabledButton();
-
     saveJobButton();
 
     setFilterButtonFocus();
@@ -697,7 +687,6 @@
       searchForm.forEach(function(form){
 
         form.setAttribute("role", "search");
-        form.setAttribute("data-text", "hello");
 
       });
 
@@ -712,7 +701,19 @@
         nav.setAttribute("aria-label", "Pagination");
 
       });
-   
+
+      // A11Y0020: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
+
+      var paginationPage = document.querySelectorAll(".pagination-paging.disabled");
+
+      paginationPage.forEach(function(page){
+
+        page.removeAttribute("aria-hidden");
+        page.removeAttribute("href");
+
+      });
+
+
       // TODO: Add future fixes here.
 
   }

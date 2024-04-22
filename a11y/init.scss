@@ -73,3 +73,16 @@ opacity: 1;
 ::-webkit-input-placeholder {
 color: #767676;
 }
+
+// New Functionality
+
+// A11Y0020: Search Results pagination disabled button can be tabbed to (this is bad). By default, the disabled button should no longer be shown.
+
+.pagination-paging {
+
+    &.disabled {
+    display: none;
+    }
+
+}
+
