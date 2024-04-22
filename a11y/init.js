@@ -44,7 +44,6 @@
 
   });
 
-
   // https://radancy.dev/magicbullet/a11y/#issue-0006
 
   $(".social-share-items a").append(" <span class='wai'>(Opens in new tab)</span>");
@@ -309,55 +308,6 @@
 
   }
 
-  // Issue: The "Save Jobs" button has accessibility issues.
-
-  function saveJobButton() {
-
-    // Save Job for later
-
-    var savedJobs = document.querySelectorAll(".js-save-job-btn");
-
-    for (var i = 0; i < savedJobs.length; i++) {
-
-      // aria-pressed not working with type attribute on it, which makes sense.
-      // TODO: See if still an issue in VO, too.
-
-      savedJobs[i].removeAttribute("type");
-
-      savedJobs[i].setAttribute("role", "button"); // iOS, NVDA bug, state not reading back so need to implicitly call role. Do not remove until support better.
-
-      savedJobs[i].setAttribute("aria-label", "Save Job");
-
-      if(savedJobs[i].dataset.jobSaved === "true") {
-
-        savedJobs[i].setAttribute("aria-pressed", "true");
-
-      } else {
-
-        savedJobs[i].setAttribute("aria-pressed", "false");
-
-      }
-
-      savedJobs[i].addEventListener("click", function() {
-
-        if(this.dataset.jobSaved === "true") {
-
-          this.setAttribute("aria-pressed", "false");
-
-        } else {
-
-          this.setAttribute("aria-pressed", "true");
-
-        }
-
-      });
-
-    }
-
-  }
-
-  saveJobButton(); // Initial Page Load
-
   // Issue: Focus is lost when "Filtered by" button is clicked
 
   function setFilterButtonFocus() {
@@ -609,8 +559,6 @@
 
   $(document).ajaxStop(function() {
 
-    saveJobButton();
-
     setFilterButtonFocus();
 
     fixFilterButton();
@@ -627,8 +575,50 @@
 
   }, 1000);
 
+  // *** Accessibility Patch: Functions ***
 
-  // *** Accessibility Patch Observer ***
+  function saveJobButton() {
+
+    var btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
+
+    btnSaveJobs.forEach(function(btn){
+
+      // aria-pressed not working with type attribute on it, which makes sense.
+      // TODO: See if still an issue in VO, too.
+
+      btn.removeAttribute("type");
+      btn.setAttribute("role", "button"); // iOS, NVDA bug, state not reading back so need to implicitly call role. Do not remove until support better.
+      btn.setAttribute("aria-label", "Save Job");
+
+      if(btn.dataset.jobSaved === "true") {
+
+        btn.setAttribute("aria-pressed", "true");
+
+      } else {
+
+        btn.setAttribute("aria-pressed", "false");
+
+      }
+
+      btn.addEventListener("click", function() {
+
+        if(this.dataset.jobSaved === "true") {
+
+          this.setAttribute("aria-pressed", "false");
+
+        } else {
+
+          this.setAttribute("aria-pressed", "true");
+
+        }
+
+      });
+
+    });
+
+  }
+
+  // *** Accessibility Patch: Observer ***
   
   function initA11yRepair() {
 
@@ -674,7 +664,11 @@
 
       });
 
-    // Search Results 
+    // Search Results & Job Description
+
+      // A11Y0018: Custom "Save Job" button functionality
+
+      saveJobButton();
 
       // A11Y0019: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
 
@@ -722,7 +716,7 @@
   
   });
   
-  // Configure the MutationObserver to watch for changes to the child nodes of the div
+  // Configure the MutationObserver to watch for changes to the child nodes of the body
   
   var config = { childList: true, subtree: true };
   
