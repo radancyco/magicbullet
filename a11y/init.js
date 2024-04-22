@@ -539,8 +539,6 @@
 
             var selectedButtonIndex = Array.from(document.querySelectorAll(".filter-button")).indexOf(this);
 
-            setTimeout(function() {
-
                 var remainingButtonIndex = document.querySelectorAll(".filter-button").length;
 
                 // console.log(selectedButtonIndex)
@@ -561,7 +559,6 @@
                     document.querySelector("#search-results-list ul a:first-child").focus();
                 }
 
-            }, 1000);
   
           });
 
