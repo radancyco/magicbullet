@@ -609,7 +609,7 @@
   
       initA11yRepair();
   
-    }, 800); // Adjust the timeout period as needed
+    }, 1000); // Adjust the timeout period as needed
   
   });
   
