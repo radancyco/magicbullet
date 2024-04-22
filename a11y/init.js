@@ -704,7 +704,7 @@
 
       // A11Y0020: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
-      var paginationPage = document.querySelectorAll(".pagination-paging.disabled");
+      var paginationPage = document.querySelectorAll(".pagination-paging .disabled");
 
       paginationPage.forEach(function(page){
 
