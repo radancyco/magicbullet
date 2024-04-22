@@ -537,24 +537,26 @@
 
           btn.addEventListener("click", function() {
 
-            var selectedButtonIndex = Array.from(document.querySelectorAll(".filter-button")).indexOf(this);
-            var remainingButtonIndex = document.querySelectorAll(".filter-button").length;
+            var btnSearchFilter = document.querySelectorAll(".filter-button:not([disabled])");
+            var firstJobListing = document.querySelector("#search-results-list ul a:first-child");
+            var selectedButtonIndex = Array.from(btnSearchFilter).indexOf(this);
+            var remainingButtonIndex = btnSearchFilter.length;
 
             if (remainingButtonIndex) {
 
               if (selectedButtonIndex >= remainingButtonIndex) {
 
-                document.querySelectorAll(".filter-button")[remainingButtonIndex - 1].focus();
+                btnSearchFilter[remainingButtonIndex - 1].focus();
 
               } else {
 
-                document.querySelectorAll(".filter-button")[selectedButtonIndex].focus();
+                btnSearchFilter[selectedButtonIndex].focus();
               
               }
 
             } else {
 
-              document.querySelector("#search-results-list ul a:first-child").focus();
+              firstJobListing.focus();
                 
             }
 
