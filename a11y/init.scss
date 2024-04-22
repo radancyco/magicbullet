@@ -76,7 +76,7 @@ color: #767676;
 
 // New Functionality
 
-// A11Y0020: Search Results pagination disabled button can be tabbed to (this is bad). By default, the disabled button should no longer be shown.
+// A11Y0020: In addition to removing aria-hidden and href from disabled pagination buttons, it has been decided they should not be accessible to user at all by default. Do not override.
 
 .pagination-paging {
 
