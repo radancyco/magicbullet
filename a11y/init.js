@@ -551,9 +551,13 @@
 
         // Remove aria-labeledby from UL.
 
-        var appliedFiltersList = section.querySelector("ul[aria-labelledby]");
+        var appliedFiltersList = section.querySelectorAll("ul[aria-labelledby]");
 
-        appliedFiltersList.removeAttribute("aria-labelledby");
+        appliedFiltersList.forEach(function(list){
+
+          list.removeAttribute("aria-labelledby");
+
+        });
 
         // Remove/Add ARIA to parent section warpper (.search-results-option)
       
