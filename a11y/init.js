@@ -26,11 +26,11 @@
 
   // Global Issues
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0001
+  // https://radancy.dev/magicbullet/a11y/#issue-0001
 
   $(".expandable-parent").attr("aria-expanded", "false").next().removeAttr("aria-expanded");
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0002
+  // https://radancy.dev/magicbullet/a11y/#issue-0002
 
   $(".expandable-parent").on("click", function() {
 
@@ -44,25 +44,21 @@
 
   });
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0004
-
-  $(".search-form, .advanced-search-form").attr("role", "search");
-
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0005
+  // https://radancy.dev/magicbullet/a11y/#issue-0005
 
   $(".job-map-nearby a").removeAttr("target");
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0006
+  // https://radancy.dev/magicbullet/a11y/#issue-0006
 
   $(".social-share-items a").append(" <span class='wai'>(Opens in new tab)</span>");
 
   // Job Description Garbage
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0007
+  // https://radancy.dev/magicbullet/a11y/#issue-0007
 
   $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").removeAttr("tabindex");
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0008
+  // https://radancy.dev/magicbullet/a11y/#issue-0008
 
   $(".ats-description table").attr("role", "presentation");
 
@@ -72,7 +68,7 @@
 
   // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0009
+  // https://radancy.dev/magicbullet/a11y/#issue-0009
 
   $("input[type=checkbox]").removeAttr("autocomplete");
 
@@ -335,16 +331,6 @@
 
     var pageStatus = pageStatusText.trim();
 
-    // While we are in here, let's indicate to screen readers what page they are on - cool!
-
-    // Level Access suggest removing this. https://docs.google.com/spreadsheets/d/18Ua04NT6ecf8EBEwn_2HcDW0lJ0E_mLNXnD9uNp-A3c/edit#gid=1370565666&range=141:141
-
-    // if (pageStatus !== "undefined"){
-
-      // $("#search-results").attr("aria-label", pageStatus);
-
-    // }
-
     if($(".pagination-no-form").length) {
 
       if(!$(".pagination-page-status").length) {
@@ -466,7 +452,7 @@
 
   function miscA11yFixes() {
 
-    // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0003
+    // https://radancy.dev/magicbullet/a11y/#issue-0003
 
     $("img:not([alt])").attr("alt", "");
 
@@ -699,6 +685,19 @@
       captchaResponse.forEach(function(captcha){
 
         captcha.setAttribute("aria-label", "Captcha");
+
+      });
+
+    // Search Forms 
+
+      // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0004
+
+      var searchForm = document.querySelectorAll(".search-form, .advanced-search-form");
+
+      searchForm.forEach(function(form){
+
+        form.setAttribute("role", "search");
+        form.setAttribute("data-text", "hello");
 
       });
 
