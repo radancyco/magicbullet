@@ -527,9 +527,13 @@
 
         // Remove disabled button 
 
-        var btnSearchFilterDisabled = section.querySelectorAll(".filter-button[disabled]");
+        var btnSearchFilterDisabled = section.querySelector(".filter-button[disabled]");
 
-        btnSearchFilterDisabled.remove();
+        if(btnSearchFilterDisabled) {
+
+          btnSearchFilterDisabled.remove();
+
+        }
 
         // Add ARIA label to each button that is not disabled.
 
