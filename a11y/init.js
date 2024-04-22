@@ -646,12 +646,12 @@
 
       });
 
-    // Location 
+    // Job Location Map
 
       // A11Y0005: https://radancy.dev/magicbullet/a11y/#issue-0005
       // TODO: These would be better served as buttons, not links. Including role="button" here for now, but we need to add tab key support eventually.
-
-      $(".job-map-nearby a").removeAttr("target");
+      // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames.
+      // TODO: Include Wegmans functionality to skip over Google Map.
 
       var mapButton = document.querySelectorAll(".job-map-nearby a");
 
