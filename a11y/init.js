@@ -537,18 +537,18 @@
 
           btn.addEventListener("click", function() {
 
-            var selectedButtonIndex = Array.from(btn).indexOf(this);
-            var remainingButtonIndex = btn.length;
+            var selectedButtonIndex = Array.from(document.querySelectorAll(".filter-button")).indexOf(this);
+            var remainingButtonIndex = document.querySelectorAll(".filter-button").length;
 
             if (remainingButtonIndex) {
 
               if (selectedButtonIndex >= remainingButtonIndex) {
 
-                btn[remainingButtonIndex - 1].focus();
+                document.querySelectorAll(".filter-button")[remainingButtonIndex - 1].focus();
 
               } else {
 
-                btn[selectedButtonIndex].focus();
+                document.querySelectorAll(".filter-button")[selectedButtonIndex].focus();
               
               }
 
