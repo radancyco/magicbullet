@@ -503,6 +503,7 @@
         // TODO: Add language support to buttons.
         // TODO: Regarding aria-labelledby on section wrapper, see if contextual support good enough here. 
         // If it is, then may be able to remove aria-labelledby and region role. See https://www.w3.org/WAI/WCAG22/Techniques/html/H81
+        // BUG: When disabled filter button is present and last filter button is pressed, focus is placed on checkbox in filter section.
 
       var appliedFilters = document.querySelectorAll(".search-results-options");
 
@@ -525,16 +526,6 @@
         section.setAttribute("aria-labelledby", "applied-filters-label");
         section.setAttribute("role", "region");
 
-        // Remove disabled button 
-
-        var btnSearchFilterDisabled = section.querySelector(".filter-button[disabled]");
-
-        if(btnSearchFilterDisabled) {
-
-          btnSearchFilterDisabled.remove();
-
-        }
-
         // Add ARIA label to each button that is not disabled.
 
         var btnSearchFilter = section.querySelectorAll(".filter-button:not([disabled])");
@@ -551,8 +542,6 @@
             var firstJobListing = document.querySelector("#search-results-list ul a:first-child");
             var selectedButtonIndex = Array.from(btnSearchFilter).indexOf(this);
             var remainingButtonIndex = btnSearchFilter.length;
-
-            console.log("selected index: " + selectedButtonIndex + " remaining button index: " + remainingButtonIndex);
 
             if (remainingButtonIndex) {
 
