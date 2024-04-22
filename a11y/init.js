@@ -364,10 +364,6 @@
 
     $(".goog-te-spinner").append("<title>Spinner</title>");
 
-    // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
-
-    $("#applied-filters").removeAttr("aria-hidden aria-expanded");
-
     // Issue: Remove role="status" from h1 and h2 elements
 
     $(".search-results h1, .search-results h2").removeAttr("role");
@@ -530,16 +526,6 @@
 
     // Search Forms 
 
-      // A11Y00XX: Issue: Filter Buttons require more context for AT Users.
-
-      var btnSearchFilter = document.querySelectorAll("button.filter-button");
-
-      btnSearchFilter.forEach(function(btn){
-
-        btn.setAttribute("aria-label", "Remove " + btn.textContent + " filterrrrrrrrrrrrrr");
-
-      });
-
       // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0004
 
       var searchForm = document.querySelectorAll(".search-form, .advanced-search-form");
@@ -555,6 +541,37 @@
       // A11Y0018: Custom "Save Job" button functionality
 
       saveJobButton();
+
+    // Search Results: Applied Filters
+
+      // A11Y00XX: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing. Moving aria-labelledby, adding region role.
+
+      var appliedFilters = document.querySelectorAll(".search-results-options");
+
+      appliedFilters.forEach(function(section){
+      
+        section.removeAttribute("aria-hidden");
+        section.removeAttribute("aria-expanded");
+        section.setAttribute("aria-labelledby", "applied-filters-label");
+        section.setAttribute("role", "region");
+
+        var appliedFiltersList = section.querySelector("ul[aria-labelledby]");
+
+        appliedFiltersList.removeAttribute("aria-labelledby");
+      
+      });
+
+      // A11Y00XX: Filter Buttons require more context for AT Users.
+      // TODO: Add language support
+      // TODO: Investiage to see if context is applicapble here. See  
+
+      var btnSearchFilter = document.querySelectorAll("button.filter-button");
+
+      btnSearchFilter.forEach(function(btn){
+      
+        btn.setAttribute("aria-label", "Remove " + btn.textContent + " filter");
+      
+      });
 
       // A11Y0019: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
       // TODO: Add language support.
