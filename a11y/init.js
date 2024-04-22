@@ -525,6 +525,12 @@
         section.setAttribute("aria-labelledby", "applied-filters-label");
         section.setAttribute("role", "region");
 
+        // Remove disabled button 
+
+        var btnSearchFilterDisabled = section.querySelectorAll(".filter-button[disabled]");
+
+        btnSearchFilterDisabled.remove();
+
         // Add ARIA label to each button that is not disabled.
 
         var btnSearchFilter = section.querySelectorAll(".filter-button:not([disabled])");
@@ -552,7 +558,7 @@
 
               } else {
 
-              //   btnSearchFilter[selectedButtonIndex].focus();
+                btnSearchFilter[selectedButtonIndex].focus();
               
               }
 
