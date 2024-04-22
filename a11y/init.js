@@ -552,7 +552,7 @@
 
               } else {
 
-                btnSearchFilter[selectedButtonIndex].focus();
+              //   btnSearchFilter[selectedButtonIndex].focus();
               
               }
 
