@@ -44,9 +44,6 @@
 
   });
 
-  // https://radancy.dev/magicbullet/a11y/#issue-0005
-
-  $(".job-map-nearby a").removeAttr("target");
 
   // https://radancy.dev/magicbullet/a11y/#issue-0006
 
@@ -311,33 +308,6 @@
     });
 
   }
-
-
-
-  // Issue: The search navigation is often style not to look like a form and submit button is removed
-  // So we need to strip this functionality and simply show text.
-
-  function noFormPagination() {
-
-    var pageStatusText = $(".pagination-current-label span").text() + " " + $(".pagination-current").val() + " " + $(".pagination-total-pages").text();
-
-    var pageStatus = pageStatusText.trim();
-
-    if($(".pagination-no-form").length) {
-
-      if(!$(".pagination-page-status").length) {
-
-        $(".pagination-page-count").append("<p class='pagination-page-status' tabindex='0'>" + pageStatus + "</p>");
-
-        $(".pagination-no-form").remove();
-
-      }
-
-    }
-
-  }
-
-  noFormPagination(); // Initial Page Load
 
   // Issue: The "Save Jobs" button has accessibility issues.
 
@@ -639,8 +609,6 @@
 
   $(document).ajaxStop(function() {
 
-    noFormPagination();
-
     saveJobButton();
 
     setFilterButtonFocus();
@@ -675,6 +643,22 @@
       captchaResponse.forEach(function(captcha){
 
         captcha.setAttribute("aria-label", "Captcha");
+
+      });
+
+    // Location 
+
+      // A11Y0005: https://radancy.dev/magicbullet/a11y/#issue-0005
+      // TODO: These would be better served as buttons, not links. Including role="button" here for now, but we need to add tab key support eventually.
+
+      $(".job-map-nearby a").removeAttr("target");
+
+      var mapButton = document.querySelectorAll(".job-map-nearby a");
+
+      mapButton.forEach(function(btn){
+
+        btn.setAttribute("role", "button");
+        btn.removeAttribute("target");
 
       });
 
