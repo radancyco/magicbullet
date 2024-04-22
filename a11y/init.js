@@ -540,27 +540,23 @@
             var selectedButtonIndex = Array.from(btn).indexOf(this);
             var remainingButtonIndex = btn.length;
 
-            setTimeout(function(){
+            if (remainingButtonIndex) {
 
-              if (remainingButtonIndex) {
+              if (selectedButtonIndex >= remainingButtonIndex) {
 
-                if (selectedButtonIndex >= remainingButtonIndex) {
-
-                  btn[remainingButtonIndex - 1].focus();
-
-                } else {
-
-                  btn[selectedButtonIndex].focus();
-              
-                }
+                btn[remainingButtonIndex - 1].focus();
 
               } else {
 
-                document.querySelector("#search-results-list ul a:first-child").focus();
-                
+                btn[selectedButtonIndex].focus();
+              
               }
 
-            }, 1000);
+            } else {
+
+              document.querySelector("#search-results-list ul a:first-child").focus();
+                
+            }
 
           });
 
