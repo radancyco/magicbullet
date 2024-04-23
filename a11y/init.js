@@ -102,7 +102,7 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
   dataForms.forEach(function(form) {
 
-    // Issue: Clutter, remove empty instruction-text spans
+    // Issue: Clutter, remove empty instruction-text spans, sometimes these add extra spacing.
 
     var instructionText = form.querySelectorAll(".instruction-text");
 
@@ -116,7 +116,23 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
     });
 
-    // Issue: Remove aria-required from various elements.
+    // Issue. Removing CSS asterisk because it reads out to assistive tech (AT), including as span with aria-hidden so that it is not picked up by AT.
+
+    var labelRequired = form.querySelectorAll(".form-field.required label");
+
+    labelRequired.forEach(function(label) {
+
+      var span = document.createElement('span');
+  
+      span.classList.add("ico-required-indicator");
+      span.setAttribute('aria-hidden', 'true');
+      span.textContent = '*';
+  
+      label.appendChild(span);
+
+    });
+
+    // Issue: Remove aria-required from various elements. This attribute is sometimes flagged and just the required attribue is not recommended.
 
     var ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
 
@@ -126,7 +142,7 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
     });
 
-    // Required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
+    // Issue: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
 
     var requiredXHTML = form.querySelectorAll("*[required='required']");
 
@@ -144,17 +160,6 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
     addJobAlertLabel.forEach(function(element) {
 
       element.setAttribute("aria-label", "Add Job Alert");
-
-    });
-
-    // Issue: "Sign Up" button should be more explicit.
-    // Add Language support.
-  
-    var signUpButton = form.querySelectorAll(".form-field.submit button");
-
-    signUpButton.forEach(function(element) {
-  
-      element.setAttribute("aria-label", "Sign Up for Job Alerts");
 
     });
 
@@ -191,7 +196,7 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
     });
 
-    // Issue: The file upload remove button is a link with an href hash...can't have that, so let's change it....
+    // Issue: The file upload remove button is a link with an href hash. This is awful, so let's remedy it by replacing it.
 
     var resumeInput = form.querySelectorAll(".form-field input[name='Resume']");
 
@@ -244,7 +249,34 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
     
     });
 
-    // Form Submit
+    // Issue "Keyword Selected list requires a heading"
+    // TODO: Add language support.
+
+    var keySelected = form.querySelectorAll('.keyword-selected');
+
+    keySelected.forEach(function(selected, index) {
+  
+      var selectedRegion = document.createElement("div");
+      selectedRegion.setAttribute("role", "region");
+      selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
+      
+      selected.parentNode.insertBefore(selectedRegion, selected);
+      selectedRegion.appendChild(selected);
+
+    });
+
+    // Issue: "Sign Up" button should be more explicit.
+    // Add Language support.
+  
+    var signUpButton = form.querySelectorAll(".form-field.submit button");
+
+    signUpButton.forEach(function(element) {
+  
+      element.setAttribute("aria-label", "Sign Up for Job Alerts");
+
+    });
+
+    // Form Submission Events
 
     form.addEventListener('submit', function(event) {
 
@@ -252,7 +284,7 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
       event.preventDefault();
 
-      // Get the aria-describedby attribute from the first keyword-category element
+      // Issue: Get the aria-describedby attribute from the first keyword-category element
 
       var ariaDescribedByCategory = form.querySelector('.keyword-category');
 
@@ -292,27 +324,13 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
     });
 
+
+
+
+
+
   });
 
-
-// Issue "Keyword Selected list requires a heading"
-document.querySelectorAll('.data-form .keyword-selected').forEach(function(selected, index) {
-  selected.setAttribute('aria-labelledby', 'selected-keywords-' + (index + 1));
-  var div = document.createElement('div');
-  div.id = 'selected-keywords-' + (index + 1);
-  div.textContent = 'Selected Job Alerts';
-  div.hidden = true;
-  selected.parentElement.insertBefore(div, selected);
-});
-
-// Issue. Removing CSS asterisk, including as span with aria-hidden.
-document.querySelectorAll('.data-form .form-field.required label').forEach(function(label) {
-  var span = document.createElement('span');
-  span.className = 'ico-required-indicator';
-  span.setAttribute('aria-hidden', 'true');
-  span.textContent = '*';
-  label.appendChild(span);
-});
 
 // Issue: Include More Friendly Autocompletes
 // First Name
