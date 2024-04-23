@@ -210,23 +210,34 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
     });
 
-      // Get all input and select elements inside elements with class "data-form"
-var dataFormElement = form.querySelectorAll('input, select');
+    // Issue: The input-validation-error class is removed when leaving a field, but aria-invalid still remains set to true.
+    // This is a workaround to set aria-invalid to false when focus leaves filed.
 
-// Add blur event listener to each element
-dataFormElement.forEach(function(element) {
-    element.addEventListener('blur', function() {
+    var dataFormElement = form.querySelectorAll('input, select');
 
-        setTimeout(function() {
-            // Check if the element has class "input-validation-error"
-            if (element.classList.contains('input-validation-error')) {
-              element.setAttribute('aria-invalid', 'true');
-            } else {
-              element.setAttribute('aria-invalid', 'false');
-            }
-        }, 250);
+    // Add blur event listener to each element
+
+    dataFormElement.forEach(function(element) {
+
+      element.addEventListener("blur", function() {
+
+    
+
+          if (element.classList.contains("input-validation-error")) {
+    
+            element.setAttribute("aria-invalid", "true");
+    
+          } else {
+    
+            element.setAttribute("aria-invalid", "false");
+    
+          }
+    
+
+    
+      });
+    
     });
-});
 
   });
 
