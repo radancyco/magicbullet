@@ -302,7 +302,7 @@ function initA11yRepair() {
 
       if (element.textContent.trim() === "") {
 
-      //   element.parentNode.removeChild(element);
+        element.parentNode.removeChild(element);
 
       }
 
