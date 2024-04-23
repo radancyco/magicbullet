@@ -210,7 +210,23 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
     });
 
+      // Get all input and select elements inside elements with class "data-form"
+var dataFormElement = form.querySelectorAll('input, select');
 
+// Add blur event listener to each element
+dataFormElement.forEach(function(element) {
+    element.addEventListener('blur', function() {
+
+        setTimeout(function() {
+            // Check if the element has class "input-validation-error"
+            if (element.classList.contains('input-validation-error')) {
+              element.setAttribute('aria-invalid', 'true');
+            } else {
+              element.setAttribute('aria-invalid', 'false');
+            }
+        }, 250);
+    });
+});
 
   });
 
