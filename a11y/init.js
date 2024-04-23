@@ -8,7 +8,7 @@
 
 */
 
-function loadAnimationToggle(url, callback) {
+function loadA11yPatch(url, callback) {
 
   "use strict";
 
