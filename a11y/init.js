@@ -249,12 +249,12 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
     
     });
 
-    // Issue "Keyword Selected list requires a heading"
+    // Issue: "Keyword Selected list requires a heading"
     // TODO: Add language support.
 
     var keySelected = form.querySelectorAll('.keyword-selected');
 
-    keySelected.forEach(function(selected, index) {
+    keySelected.forEach(function(selected) {
   
       var selectedRegion = document.createElement("div");
       selectedRegion.setAttribute("role", "region");
