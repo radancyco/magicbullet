@@ -499,7 +499,7 @@
         // The filters section has incorrect ARIA on it. Remove aria-hidden and aria-expanded.
         // Move aria-labelledby from ul to section wrapper, added region role.
         // Make remove buttons more contextually friendly to AT.
-        // Adjust focus when button with focus is removed.
+        // Adjust focus when button with focus is removed. Note: This is now handled by the product. See search.js. Open ticket. See https://wegmans-refresh2.runmytests.com/en/search-jobs?fl=6252001&glat=40.5751&glon=-75.51963 
         // TODO: Add language support to buttons.
         // TODO: Regarding aria-labelledby on section wrapper, see if contextual support good enough here. 
         // If it is, then may be able to remove aria-labelledby and region role. See https://www.w3.org/WAI/WCAG22/Techniques/html/H81
