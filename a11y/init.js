@@ -12,6 +12,12 @@ function loadA11yPatch(url, callback) {
 
   "use strict";
 
+  var a11yBody = document.body;
+
+  // Add A11y hook for implementation team. May come in handy.
+
+  a11yBody.classList.add("magic-bullet-a11y");
+
   // Install Language Pack.
 
   var componentLanguagePack = document.createElement("script");
@@ -64,6 +70,8 @@ function loadA11yPatch(url, callback) {
 function initA11yRepair() {
 
   console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
+
+  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 
   // Global Issues
 
@@ -420,11 +428,7 @@ function initA11yRepair() {
 
 loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
 
-  var a11yBody = document.body;
 
-  // Add A11y hook for implementation team. May come in handy.
-
-  a11yBody.classList.add("magic-bullet-a11y");
 
   // *** Accessibility Patch: Static ***
   
