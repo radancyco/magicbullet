@@ -374,11 +374,13 @@ function initA11yRepair() {
 
   // First, get the text...
 
-  var ResumeRemoveTxt = $(".form-field input[name='Resume']").next(".file-remove").text();
+  // ***** REMOVING FOR NOW BECAUSE IT IS CAUSING MUTATION OBSERVER TO KEEP FIRING ******* 
+
+  //var ResumeRemoveTxt = $(".form-field input[name='Resume']").next(".file-remove").text();
 
   // Now replace with a button
 
-  $(".form-field input[name='Resume']").next(".file-remove").replaceWith("<button class='file-remove' style='display:none;'>" + ResumeRemoveTxt + "</button>");
+  //$(".form-field input[name='Resume']").next(".file-remove").replaceWith("<button class='file-remove' style='display:none;'>" + ResumeRemoveTxt + "</button>");
 
   // Issue: Remove role="status" from h1 and h2 elements
 
