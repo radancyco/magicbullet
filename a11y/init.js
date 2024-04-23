@@ -388,53 +388,57 @@ elements.forEach(function(element) {
 
       // Job Description: Garbage Removal
 
-      var atsDescription = document.querySelector(".ats-description");
+      var atsDescription = document.querySelectorAll(".ats-description");
 
-      // Issue-0007: Remove tabindex attribute from elements within .ats-description that have tabindex attribute not equal to '0' or starting with '-'
+      atsDescription.forEach(function(desc) {
 
-      atsDescription.querySelectorAll("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").forEach(function(element) {
-    
-        element.removeAttribute("tabindex");
+        // Issue-0007: Remove tabindex attribute from elements within .ats-description that have tabindex attribute not equal to '0' or starting with '-'
+
+        desc.querySelectorAll("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").forEach(function(tabindex) {
+      
+          tabindex.removeAttribute("tabindex");
+
+        });
+
+        // Issue-0008: Add role="presentation" to tables within .ats-description
+
+        desc.querySelectorAll("table").forEach(function(table) {
+      
+          table.setAttribute("role", "presentation");
+
+        });
+
+        // Remove useless attributes from all elements within .ats-description
+
+        desc.querySelectorAll("*").forEach(function(element) {
+      
+          element.removeAttribute("face");
+          element.removeAttribute("size");
+          element.removeAttribute("title");
+          element.removeAttribute("id");
+
+        });
+
+      // Remove <font> element and unwrap its contents within .ats-description
+
+      desc.querySelectorAll("font").forEach(function(font) {
+      
+        var parent = font.parentNode;
+      
+        while (font.firstChild) {
+      
+          parent.insertBefore(font.firstChild, font);
+      
+        }
+      
+        parent.removeChild(font);
 
       });
 
-      // Issue-0008: Add role="presentation" to tables within .ats-description
-
-      atsDescription.querySelectorAll("table").forEach(function(table) {
-    
-        table.setAttribute("role", "presentation");
-
-      });
-
-      // Remove useless attributes from all elements within .ats-description
-
-      atsDescription.querySelectorAll("*").forEach(function(element) {
-    
-        element.removeAttribute("face");
-        element.removeAttribute("size");
-        element.removeAttribute("title");
-        element.removeAttribute("id");
-
-      });
-
-    // Remove <font> element and unwrap its contents within .ats-description
-
-    atsDescription.querySelectorAll("font").forEach(function(font) {
-    
-      var parent = font.parentNode;
-    
-      while (font.firstChild) {
-    
-        parent.insertBefore(font.firstChild, font);
-    
-      }
-    
-      parent.removeChild(font);
 
     });
 
-
-     // A11y Form Fixes
+    // A11y Form Fixes
 
     // Issue: Remove aria-required from p element (it should not exist on this element) and various other elements.
 
