@@ -398,7 +398,7 @@ function initA11yRepair() {
       button.style.display = "none";
       button.textContent = resumeRemoveTxt;
   
-      fileRemove.parentNode.replaceChild(button, fileRemove);
+     //  fileRemove.parentNode.replaceChild(button, fileRemove);
 
     });
 
