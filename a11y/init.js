@@ -8,62 +8,185 @@
 
 */
 
-function loadA11yPatch(url, callback) {
+loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
 
-  "use strict";
-
-  var a11yBody = document.body;
-
-  // Add A11y hook for implementation team. May come in handy.
-
-  a11yBody.classList.add("magic-bullet-a11y");
-
-  // Install Language Pack.
-
-  var componentLanguagePack = document.createElement("script");
-
-  componentLanguagePack.setAttribute("src", url);
-  componentLanguagePack.setAttribute("id", "component-library-language-pack");
-  componentLanguagePack.onreadystatechange = callback;
-  componentLanguagePack.onload = callback;
-
-  // Only load one language pack per page.
-
-  var getComponentLanguagePack = document.getElementById("component-library-language-pack");
-
-  if(getComponentLanguagePack === null) {
-
-    document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
-
-  }
-
-  // Create a new MutationObserver instance
-
-  var a11yObserver = new MutationObserver(function() {
-
-    // Clear the previous timeout
+  // *** Accessibility Patch: Static ***
   
-    clearTimeout(a11yObserver.timeout);
+  // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
+
+  var expandableParent = document.querySelectorAll(".expandable-parent")
+
+  expandableParent.forEach(function(expand) {
+
+    expand.setAttribute("aria-expanded", "false");
   
-    // Set a timeout to run after NN milliseconds of no mutations
+    if (expand.nextElementSibling) {
   
-    a11yObserver.timeout = setTimeout(function() {
+      expand.nextElementSibling.removeAttribute("aria-expanded");
   
-      // Run the function after content stops changing
-  
-      initA11yRepair();
-  
-    }, 800); // Adjust the timeout period as needed
-  
+    }
+
+});
+
+// https://radancy.dev/magicbullet/a11y/#issue-0002
+document.querySelectorAll('.expandable-parent').forEach(function(element) {
+  element.addEventListener('click', function() {
+      var ariaExpanded = this.getAttribute('aria-expanded');
+      this.setAttribute('aria-expanded', ariaExpanded === 'true' ? 'false' : 'true');
+      if (this.nextElementSibling) {
+          this.nextElementSibling.removeAttribute('aria-expanded');
+      }
   });
-  
-  // Configure the MutationObserver to watch for changes to the child nodes of the body
-  
-  var config = { childList: true, subtree: true };
-  
-  a11yObserver.observe(document.body, config);
+});
 
-}
+// https://radancy.dev/magicbullet/a11y/#issue-0006
+document.querySelectorAll('.social-share-items a').forEach(function(anchor) {
+  anchor.insertAdjacentHTML('beforeend', ' <span class="wai">(Opens in new tab)</span>');
+});
+
+// https://radancy.dev/magicbullet/a11y/#issue-0009
+document.querySelectorAll('input[type="checkbox"]').forEach(function(input) {
+  input.removeAttribute('autocomplete');
+});
+
+// Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
+document.querySelectorAll('.search-location-error').forEach(function(error, i) {
+  error.id = 'search-error-' + (i + 1);
+  error.style.outline = '0 !important';
+});
+
+document.querySelectorAll('.search-location').forEach(function(location, i) {
+  location.setAttribute('aria-describedby', 'search-error-' + (i + 1));
+  location.setAttribute('aria-invalid', 'false');
+});
+
+document.querySelectorAll('.search-form button').forEach(function(button) {
+  button.addEventListener('click', function() {
+      document.querySelectorAll('.search-location-error').forEach(function(error) {
+          error.removeAttribute('tabindex');
+      });
+      setTimeout(function() {
+          var locationErrorVisible = document.querySelector('.search-location-error').style.display !== 'none';
+          document.querySelectorAll('.search-location').forEach(function(location) {
+              location.setAttribute('aria-invalid', locationErrorVisible ? 'true' : 'false');
+              if (locationErrorVisible) {
+                  location.focus();
+              }
+          });
+      }, 100);
+  });
+});
+
+document.querySelectorAll('.search-location').forEach(function(location) {
+  location.addEventListener('change', function() {
+      var locationErrorVisible = document.querySelector('.search-location-error').style.display !== 'none';
+      this.setAttribute('aria-invalid', locationErrorVisible ? 'true' : 'false');
+      if (locationErrorVisible) {
+          this.focus();
+      }
+  });
+});
+
+// Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
+document.querySelectorAll('.search-form .job-search-legend, .advanced-search-form .job-search-legend').forEach(function(legend, i) {
+  legend.id = 'job-search-legend-' + (i + 1);
+  legend.parentElement.setAttribute('aria-labelledby', 'job-search-legend-' + (i + 1));
+});
+
+// Issue "Keyword Selected list requires a heading"
+document.querySelectorAll('.data-form .keyword-selected').forEach(function(selected, index) {
+  selected.setAttribute('aria-labelledby', 'selected-keywords-' + (index + 1));
+  var div = document.createElement('div');
+  div.id = 'selected-keywords-' + (index + 1);
+  div.textContent = 'Selected Job Alerts';
+  div.hidden = true;
+  selected.parentElement.insertBefore(div, selected);
+});
+
+// Issue. Removing CSS asterisk, including as span with aria-hidden.
+document.querySelectorAll('.data-form .form-field.required label').forEach(function(label) {
+  var span = document.createElement('span');
+  span.className = 'ico-required-indicator';
+  span.setAttribute('aria-hidden', 'true');
+  span.textContent = '*';
+  label.appendChild(span);
+});
+
+// Issue: Include More Friendly Autocompletes
+// First Name
+document.querySelectorAll('input[name="FirstName"]').forEach(function(input) {
+  input.setAttribute('autocomplete', 'given-name');
+});
+
+// Last Name
+document.querySelectorAll('input[name="LastName"]').forEach(function(input) {
+  input.setAttribute('autocomplete', 'family-name');
+});
+
+// Email
+document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) {
+  input.setAttribute('type', 'email');
+  input.setAttribute('autocomplete', 'email');
+});
+
+// Issue: All required fields should include aria-invalid="false" on page load
+document.querySelectorAll('.data-form .form-field.required input, .data-form .form-field.required select').forEach(function(input) {
+  input.setAttribute('aria-invalid', 'false');
+});
+
+
+// Get all elements with class "data-form"
+var forms = document.querySelectorAll('.data-form');
+
+// Add submit event listener to each form
+forms.forEach(function(form) {
+    form.addEventListener('submit', function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        setTimeout(function() {
+            // Get the aria-describedby attribute from the first keyword-category element
+            var ariaDescribedByCategory = form.querySelector('.keyword-category').getAttribute('aria-describedby');
+
+            // Set aria-describedby attribute for keyword-location elements
+            var keywordLocationElements = form.querySelectorAll('.keyword-location');
+            keywordLocationElements.forEach(function(element) {
+                element.setAttribute('aria-describedby', ariaDescribedByCategory);
+            });
+
+            // Set aria-invalid attribute for input and select elements
+            var formInputs = form.querySelectorAll('input, select');
+            formInputs.forEach(function(input) {
+                if (input.classList.contains('input-validation-error')) {
+                    input.setAttribute('aria-invalid', 'true');
+                } else {
+                    input.setAttribute('aria-invalid', 'false');
+                }
+            });
+        }, 100);
+    });
+});
+
+  // Get all input and select elements inside elements with class "data-form"
+var elements = document.querySelectorAll('.data-form input, .data-form select');
+
+// Add blur event listener to each element
+elements.forEach(function(element) {
+    element.addEventListener('blur', function() {
+
+        setTimeout(function() {
+            // Check if the element has class "input-validation-error"
+            if (this.classList.contains('input-validation-error')) {
+              this.setAttribute('aria-invalid', 'true');
+            } else {
+              this.setAttribute('aria-invalid', 'false');
+            }
+        }, 250);
+    });
+});
+
+
+});
 
 // *** Accessibility Patch: Observer ***
   
@@ -443,194 +566,65 @@ function initA11yRepair() {
 
   $("input[aria-describedby='cookieDescriptionIdAttr']").removeAttr("aria-describedby");
 
-
-
-
   // TODO: Add future fixes here.
 
 }
 
-loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
 
+function loadA11yPatch(url, callback) {
 
+  var a11yBody = document.body;
 
-  // *** Accessibility Patch: Static ***
+  // Add A11y hook for implementation team. May come in handy.
+
+  a11yBody.classList.add("magicbullet-a11y");
+
+  // Install Language Pack.
+
+  var componentLanguagePack = document.createElement("script");
+
+  componentLanguagePack.setAttribute("src", url);
+  componentLanguagePack.setAttribute("id", "component-library-language-pack");
+  componentLanguagePack.onreadystatechange = callback;
+  componentLanguagePack.onload = callback;
+
+  // Only load one language pack per page.
+
+  var getComponentLanguagePack = document.getElementById("component-library-language-pack");
+
+  if(getComponentLanguagePack === null) {
+
+    document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
+
+  }
+
+  // Create a new MutationObserver instance
+
+  var a11yObserver = new MutationObserver(function() {
+
+    // Clear the previous timeout
   
-  // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
-
-  var expandableParent = document.querySelectorAll(".expandable-parent")
-
-  expandableParent.forEach(function(expand) {
-
-    expand.setAttribute("aria-expanded", "false");
+    clearTimeout(a11yObserver.timeout);
   
-    if (expand.nextElementSibling) {
+    // Set a timeout to run after NN milliseconds of no mutations
   
-      expand.nextElementSibling.removeAttribute("aria-expanded");
+    a11yObserver.timeout = setTimeout(function() {
   
-    }
-
-});
-
-// https://radancy.dev/magicbullet/a11y/#issue-0002
-document.querySelectorAll('.expandable-parent').forEach(function(element) {
-  element.addEventListener('click', function() {
-      var ariaExpanded = this.getAttribute('aria-expanded');
-      this.setAttribute('aria-expanded', ariaExpanded === 'true' ? 'false' : 'true');
-      if (this.nextElementSibling) {
-          this.nextElementSibling.removeAttribute('aria-expanded');
-      }
+      // Run the function after content stops changing
+  
+      initA11yRepair();
+  
+    }, 800); // Adjust the timeout period as needed
+  
   });
-});
+  
+  // Configure the MutationObserver to watch for changes to the child nodes of the body
+  
+  var config = { childList: true, subtree: true };
+  
+  a11yObserver.observe(document.body, config);
 
-// https://radancy.dev/magicbullet/a11y/#issue-0006
-document.querySelectorAll('.social-share-items a').forEach(function(anchor) {
-  anchor.insertAdjacentHTML('beforeend', ' <span class="wai">(Opens in new tab)</span>');
-});
-
-// https://radancy.dev/magicbullet/a11y/#issue-0009
-document.querySelectorAll('input[type="checkbox"]').forEach(function(input) {
-  input.removeAttribute('autocomplete');
-});
-
-// Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
-document.querySelectorAll('.search-location-error').forEach(function(error, i) {
-  error.id = 'search-error-' + (i + 1);
-  error.style.outline = '0 !important';
-});
-
-document.querySelectorAll('.search-location').forEach(function(location, i) {
-  location.setAttribute('aria-describedby', 'search-error-' + (i + 1));
-  location.setAttribute('aria-invalid', 'false');
-});
-
-document.querySelectorAll('.search-form button').forEach(function(button) {
-  button.addEventListener('click', function() {
-      document.querySelectorAll('.search-location-error').forEach(function(error) {
-          error.removeAttribute('tabindex');
-      });
-      setTimeout(function() {
-          var locationErrorVisible = document.querySelector('.search-location-error').style.display !== 'none';
-          document.querySelectorAll('.search-location').forEach(function(location) {
-              location.setAttribute('aria-invalid', locationErrorVisible ? 'true' : 'false');
-              if (locationErrorVisible) {
-                  location.focus();
-              }
-          });
-      }, 100);
-  });
-});
-
-document.querySelectorAll('.search-location').forEach(function(location) {
-  location.addEventListener('change', function() {
-      var locationErrorVisible = document.querySelector('.search-location-error').style.display !== 'none';
-      this.setAttribute('aria-invalid', locationErrorVisible ? 'true' : 'false');
-      if (locationErrorVisible) {
-          this.focus();
-      }
-  });
-});
-
-// Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
-document.querySelectorAll('.search-form .job-search-legend, .advanced-search-form .job-search-legend').forEach(function(legend, i) {
-  legend.id = 'job-search-legend-' + (i + 1);
-  legend.parentElement.setAttribute('aria-labelledby', 'job-search-legend-' + (i + 1));
-});
-
-// Issue "Keyword Selected list requires a heading"
-document.querySelectorAll('.data-form .keyword-selected').forEach(function(selected, index) {
-  selected.setAttribute('aria-labelledby', 'selected-keywords-' + (index + 1));
-  var div = document.createElement('div');
-  div.id = 'selected-keywords-' + (index + 1);
-  div.textContent = 'Selected Job Alerts';
-  div.hidden = true;
-  selected.parentElement.insertBefore(div, selected);
-});
-
-// Issue. Removing CSS asterisk, including as span with aria-hidden.
-document.querySelectorAll('.data-form .form-field.required label').forEach(function(label) {
-  var span = document.createElement('span');
-  span.className = 'ico-required-indicator';
-  span.setAttribute('aria-hidden', 'true');
-  span.textContent = '*';
-  label.appendChild(span);
-});
-
-// Issue: Include More Friendly Autocompletes
-// First Name
-document.querySelectorAll('input[name="FirstName"]').forEach(function(input) {
-  input.setAttribute('autocomplete', 'given-name');
-});
-
-// Last Name
-document.querySelectorAll('input[name="LastName"]').forEach(function(input) {
-  input.setAttribute('autocomplete', 'family-name');
-});
-
-// Email
-document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) {
-  input.setAttribute('type', 'email');
-  input.setAttribute('autocomplete', 'email');
-});
-
-// Issue: All required fields should include aria-invalid="false" on page load
-document.querySelectorAll('.data-form .form-field.required input, .data-form .form-field.required select').forEach(function(input) {
-  input.setAttribute('aria-invalid', 'false');
-});
-
-
-// Get all elements with class "data-form"
-var forms = document.querySelectorAll('.data-form');
-
-// Add submit event listener to each form
-forms.forEach(function(form) {
-    form.addEventListener('submit', function(event) {
-        // Prevent the default form submission behavior
-        event.preventDefault();
-
-        setTimeout(function() {
-            // Get the aria-describedby attribute from the first keyword-category element
-            var ariaDescribedByCategory = form.querySelector('.keyword-category').getAttribute('aria-describedby');
-
-            // Set aria-describedby attribute for keyword-location elements
-            var keywordLocationElements = form.querySelectorAll('.keyword-location');
-            keywordLocationElements.forEach(function(element) {
-                element.setAttribute('aria-describedby', ariaDescribedByCategory);
-            });
-
-            // Set aria-invalid attribute for input and select elements
-            var formInputs = form.querySelectorAll('input, select');
-            formInputs.forEach(function(input) {
-                if (input.classList.contains('input-validation-error')) {
-                    input.setAttribute('aria-invalid', 'true');
-                } else {
-                    input.setAttribute('aria-invalid', 'false');
-                }
-            });
-        }, 100);
-    });
-});
-
-  // Get all input and select elements inside elements with class "data-form"
-var elements = document.querySelectorAll('.data-form input, .data-form select');
-
-// Add blur event listener to each element
-elements.forEach(function(element) {
-    element.addEventListener('blur', function() {
-
-        setTimeout(function() {
-            // Check if the element has class "input-validation-error"
-            if (this.classList.contains('input-validation-error')) {
-              this.setAttribute('aria-invalid', 'true');
-            } else {
-              this.setAttribute('aria-invalid', 'false');
-            }
-        }, 250);
-    });
-});
-
-
-});
+}
 
 
 
