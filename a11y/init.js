@@ -395,6 +395,8 @@ function initA11yRepair() {
 
   // Issue: Job Lists should really have the location appear inside of a link so that job links with same title can be more descriptive and discernable.
 
+  var a11yJobList = magicBulletScript.getAttribute("data-a11y-job-list");
+
   if(a11yJobList !== null) {
 
     $(".job-list .location, .job-list .date").each(function() {
