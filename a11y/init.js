@@ -210,8 +210,17 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
     });
 
+    // Issue: All required fields should include aria-invalid="false" on page load
+
+    var requiredFields = form.querySelectorAll(".form-field.required input, .form-field.required select");
+
+    requiredFields.forEach(function(element) {
+
+      element.setAttribute('aria-invalid', 'false');
+
+    });
+
     // Issue: The input-validation-error class is removed when leaving a field, but aria-invalid still remains set to true.
-    // This is a workaround to set aria-invalid to false when focus leaves filed.
 
     var dataFormElement = form.querySelectorAll('input, select');
 
@@ -220,8 +229,6 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
     dataFormElement.forEach(function(element) {
 
       element.addEventListener("blur", function() {
-
-    
 
           if (element.classList.contains("input-validation-error")) {
     
@@ -233,17 +240,11 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
     
           }
     
-
-    
       });
     
     });
 
   });
-
-
-
-
 
 
 // Issue "Keyword Selected list requires a heading"
@@ -280,11 +281,6 @@ document.querySelectorAll('input[name="LastName"]').forEach(function(input) {
 document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) {
   input.setAttribute('type', 'email');
   input.setAttribute('autocomplete', 'email');
-});
-
-// Issue: All required fields should include aria-invalid="false" on page load
-document.querySelectorAll('.data-form .form-field.required input, .data-form .form-field.required select').forEach(function(input) {
-  input.setAttribute('aria-invalid', 'false');
 });
 
 
