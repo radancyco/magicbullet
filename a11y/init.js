@@ -8,29 +8,55 @@
 
 */
 
-(function(){
+function loadAnimationToggle(url, callback) {
 
-  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
+  "use strict";
+
+  // Install Language Pack.
+
+  var componentLanguagePack = document.createElement("script");
+
+  componentLanguagePack.setAttribute("src", url);
+  componentLanguagePack.setAttribute("id", "component-library-language-pack");
+  componentLanguagePack.onreadystatechange = callback;
+  componentLanguagePack.onload = callback;
+
+  // Only load one language pack per page.
+
+  var getComponentLanguagePack = document.getElementById("component-library-language-pack");
+
+  if(getComponentLanguagePack === null) {
+
+    document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
+
+  }
+
+}
+
+loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
+
   var a11yBody = document.body;
-
-  // Data Attributes
-
-  var a11yJobList = magicBulletScript.getAttribute("data-a11y-job-list");
 
   // Add A11y hook for implementation team. May come in handy.
 
   a11yBody.classList.add("magic-bullet-a11y");
 
-  // Career Site Accessibility Fixes
+  // *** Accessibility Patch: Static ***
+  
+  // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
 
-  // Global Issues
+  var expandableParent = document.querySelectorAll(".expandable-parent")
 
- // https://radancy.dev/magicbullet/a11y/#issue-0001
-document.querySelectorAll('.expandable-parent').forEach(function(element) {
-  element.setAttribute('aria-expanded', 'false');
-  if (element.nextElementSibling) {
-      element.nextElementSibling.removeAttribute('aria-expanded');
-  }
+  expandableParent.forEach(function(expand) {
+
+    expand.setAttribute("aria-expanded", "false");
+  
+    if (expand.nextElementSibling) {
+  
+      expand.nextElementSibling.removeAttribute("aria-expanded");
+  
+    }
+
 });
 
 // https://radancy.dev/magicbullet/a11y/#issue-0002
@@ -570,7 +596,7 @@ elements.forEach(function(element) {
   
   a11yObserver.observe(document.body, config);
 
-})();
+});
 
 
 
