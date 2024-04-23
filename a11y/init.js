@@ -47,20 +47,6 @@
 
   $(".social-share-items a").append(" <span class='wai'>(Opens in new tab)</span>");
 
-  // Job Description Garbage
-
-  // https://radancy.dev/magicbullet/a11y/#issue-0007
-
-  $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").removeAttr("tabindex");
-
-  // https://radancy.dev/magicbullet/a11y/#issue-0008
-
-  $(".ats-description table").attr("role", "presentation");
-
-  $(".ats-description *").removeAttr("face size title id"); // Remove useless attributes.
-
-  $(".ats-description font").contents().unwrap(); // Remove font element.
-
   // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
 
   // https://radancy.dev/magicbullet/a11y/#issue-0009
@@ -316,14 +302,6 @@
 
     $(".form-field input[name='Resume']").next(".file-remove").replaceWith("<button class='file-remove' style='display:none;'>" + ResumeRemoveTxt + "</button>");
 
-    // if Google Translate exists, then fix...
-
-    $(".goog-te-combo").attr("id", "goog-te-combo").before("<label class='wai' for='goog-te-combo'>Translate this page:</label>");
-
-    // Add title to spinner
-
-    $(".goog-te-spinner").append("<title>Spinner</title>");
-
     // Issue: Remove role="status" from h1 and h2 elements
 
     $(".search-results h1, .search-results h2").removeAttr("role");
@@ -357,23 +335,9 @@
 
     }
 
-    // Issue: Older versions of slick that do not inlcude the accessibility flag, have several issues. We will fry to fix many of them here
-    // but recommend upgrading to AccessibleSlick.
-
-    setTimeout(function(){
-
-      $(".slick-prev:not([aria-label])").attr("aria-label", "Previous");
-      $(".slick-next:not([aria-label])").attr("aria-label", "Next");
-
-    }, 3000);
-
     // Issue: Cookie Management Page has some aria-describedby attributes on the page that do nothing. Remove.
 
     $("input[aria-describedby='cookieDescriptionIdAttr']").removeAttr("aria-describedby");
-
-    // Issue: Some scripts drop in their owm meta viewport tags, that can be harmful to pinch and zoom. This is an effort to address that:
-
-    $("meta[content*='user-scalable=no']").remove();
 
   }
 
@@ -560,7 +524,54 @@
 
       });
 
-      // TODO: Add future fixes here.
+      // Job Description: Garbage Removal
+
+      var atsDescription = document.querySelector(".ats-description");
+
+      // Issue-0007: Remove tabindex attribute from elements within .ats-description that have tabindex attribute not equal to '0' or starting with '-'
+
+      atsDescription.querySelectorAll("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").forEach(function(element) {
+    
+        element.removeAttribute("tabindex");
+
+      });
+
+      // Issue-0008: Add role="presentation" to tables within .ats-description
+
+      atsDescription.querySelectorAll("table").forEach(function(table) {
+    
+        table.setAttribute("role", "presentation");
+
+      });
+
+      // Remove useless attributes from all elements within .ats-description
+
+      atsDescription.querySelectorAll("*").forEach(function(element) {
+    
+        element.removeAttribute("face");
+        element.removeAttribute("size");
+        element.removeAttribute("title");
+        element.removeAttribute("id");
+
+      });
+
+    // Remove <font> element and unwrap its contents within .ats-description
+
+    atsDescription.querySelectorAll("font").forEach(function(font) {
+    
+      var parent = font.parentNode;
+    
+      while (font.firstChild) {
+    
+        parent.insertBefore(font.firstChild, font);
+    
+      }
+    
+      parent.removeChild(font);
+
+    });
+
+    // TODO: Add future fixes here.
 
   }
 
