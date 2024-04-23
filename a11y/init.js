@@ -31,6 +31,32 @@ function loadA11yPatch(url, callback) {
 
   }
 
+  // Create a new MutationObserver instance
+
+  var a11yObserver = new MutationObserver(function() {
+
+    // Clear the previous timeout
+  
+    clearTimeout(a11yObserver.timeout);
+  
+    // Set a timeout to run after NN milliseconds of no mutations
+  
+    a11yObserver.timeout = setTimeout(function() {
+  
+      // Run the function after content stops changing
+  
+      initA11yRepair();
+  
+    }, 800); // Adjust the timeout period as needed
+  
+  });
+  
+  // Configure the MutationObserver to watch for changes to the child nodes of the body
+  
+  var config = { childList: true, subtree: true };
+  
+  a11yObserver.observe(document.body, config);
+
 }
 
 loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
@@ -573,32 +599,6 @@ elements.forEach(function(element) {
     // TODO: Add future fixes here.
 
   }
-
-  // Create a new MutationObserver instance
-
-  var a11yObserver = new MutationObserver(function() {
-
-    // Clear the previous timeout
-  
-    clearTimeout(a11yObserver.timeout);
-  
-    // Set a timeout to run after NN milliseconds of no mutations
-  
-    a11yObserver.timeout = setTimeout(function() {
-  
-      // Run the function after content stops changing
-  
-      initA11yRepair();
-  
-    }, 800); // Adjust the timeout period as needed
-  
-  });
-  
-  // Configure the MutationObserver to watch for changes to the child nodes of the body
-  
-  var config = { childList: true, subtree: true };
-  
-  a11yObserver.observe(document.body, config);
 
 });
 
