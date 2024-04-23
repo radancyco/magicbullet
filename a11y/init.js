@@ -244,6 +244,54 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
     
     });
 
+    // Form Submit
+
+    form.addEventListener('submit', function(event) {
+
+      // Prevent the default form submission behavior
+
+      event.preventDefault();
+
+      // Get the aria-describedby attribute from the first keyword-category element
+
+      var ariaDescribedByCategory = form.querySelector('.keyword-category');
+
+      if(ariaDescribedByCategory) {
+      
+        ariaDescribedByCategory.getAttribute('aria-describedby');
+
+        // Set aria-describedby attribute for keyword-location elements
+
+        var keywordLocationElements = form.querySelectorAll(".keyword-location");
+
+        keywordLocationElements.forEach(function(element) {
+
+          element.setAttribute("aria-describedby", ariaDescribedByCategory);
+
+        });
+
+      }
+
+      // Set aria-invalid attribute for input and select elements
+
+      var formInputs = form.querySelectorAll("input, select");
+
+      formInputs.forEach(function(input) {
+
+        if (input.classList.contains("input-validation-error")) {
+
+          input.setAttribute("aria-invalid", "true");
+
+        } else {
+
+          input.setAttribute("aria-invalid", "false");
+
+        }
+
+      });
+
+    });
+
   });
 
 
@@ -284,37 +332,6 @@ document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) 
 });
 
 
-// Get all elements with class "data-form"
-var forms = document.querySelectorAll('.data-form');
-
-// Add submit event listener to each form
-forms.forEach(function(form) {
-    form.addEventListener('submit', function(event) {
-        // Prevent the default form submission behavior
-        event.preventDefault();
-
-        setTimeout(function() {
-            // Get the aria-describedby attribute from the first keyword-category element
-            var ariaDescribedByCategory = form.querySelector('.keyword-category').getAttribute('aria-describedby');
-
-            // Set aria-describedby attribute for keyword-location elements
-            var keywordLocationElements = form.querySelectorAll('.keyword-location');
-            keywordLocationElements.forEach(function(element) {
-                element.setAttribute('aria-describedby', ariaDescribedByCategory);
-            });
-
-            // Set aria-invalid attribute for input and select elements
-            var formInputs = form.querySelectorAll('input, select');
-            formInputs.forEach(function(input) {
-                if (input.classList.contains('input-validation-error')) {
-                    input.setAttribute('aria-invalid', 'true');
-                } else {
-                    input.setAttribute('aria-invalid', 'false');
-                }
-            });
-        }, 100);
-    });
-});
 
 
 });
