@@ -28,13 +28,17 @@ function initA11yRepair() {
 
         keySelected.forEach(function(selected) {
 
-          var selectedRegion = document.createElement("div");
-          selectedRegion.classList.add("keyword-region");
-          selectedRegion.setAttribute("role", "region");
-          selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
+          if (!selected.classList.contains("keyword-region")) {
 
-          //selected.parentNode.insertBefore(selectedRegion, selected);
-          //selectedRegion.appendChild(selected);
+            var selectedRegion = document.createElement("div");
+            selectedRegion.classList.add("keyword-region");
+            selectedRegion.setAttribute("role", "region");
+            selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
+
+            selected.parentNode.insertBefore(selectedRegion, selected);
+            selectedRegion.appendChild(selected);
+
+          }
 
         });
 
