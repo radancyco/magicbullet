@@ -249,17 +249,6 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
     
     });
 
-    // Issue: "Sign Up" button should be more explicit.
-    // Add Language support.
-  
-    var signUpButton = form.querySelectorAll(".form-field.submit button");
-
-    signUpButton.forEach(function(element) {
-  
-      element.setAttribute("aria-label", "Sign Up for Job Alerts");
-
-    });
-
     // Form Submission Events
 
     form.addEventListener('submit', function(event) {
@@ -397,6 +386,17 @@ function initA11yRepair() {
 
         }
     
+      });
+
+      // Issue: "Sign Up" button should be more explicit.
+      // Add Language support.
+  
+      var signUpButton = form.querySelectorAll(".form-field.submit button");
+
+      signUpButton.forEach(function(element) {
+  
+        element.setAttribute("aria-label", "Sign Up for Job Alerts");
+
       });
 
     });
