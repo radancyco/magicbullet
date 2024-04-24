@@ -315,6 +315,8 @@ document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) 
   
 function initA11yRepair() {
 
+  a11yRepairExecuted = true;
+
   console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
@@ -361,8 +363,8 @@ function initA11yRepair() {
         span.classList.add("ico-required-indicator");
         span.setAttribute('aria-hidden', 'true');
         span.textContent = '*';
-    
-       // label.appendChild(span);
+
+        label.appendChild(span);
 
       });
 
@@ -378,8 +380,8 @@ function initA11yRepair() {
         selectedRegion.setAttribute("role", "region");
         selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
       
-        //selected.parentNode.insertBefore(selectedRegion, selected);
-       // selectedRegion.appendChild(selected);
+        selected.parentNode.insertBefore(selectedRegion, selected);
+        selectedRegion.appendChild(selected);
 
       });
 
@@ -627,6 +629,8 @@ function initA11yRepair() {
 
   // TODO: Add future fixes here.
 
+  a11yRepairExecuted = true;
+
 }
 
 
@@ -657,13 +661,13 @@ function loadA11yPatch(url, callback) {
 
   }
 
- // var a11yRepairExecuted = false;
+  var a11yRepairExecuted = false;
 
   // Create a new MutationObserver instance
 
   var a11yObserver = new MutationObserver(function() {
 
-//    if(!a11yRepairExecuted) {
+   if(!a11yRepairExecuted) {
 
       // Clear the previous timeout
   
@@ -676,12 +680,10 @@ function loadA11yPatch(url, callback) {
         // Run the function after content stops changing
   
         initA11yRepair();
-
-       // a11yRepairExecuted = true;
   
       }, 800); // Adjust the timeout period as needed
 
-//    }
+    }
   
   });
 
