@@ -676,6 +676,8 @@ function loadA11yPatch(url, callback) {
         // Run the function after content stops changing
   
         initA11yRepair();
+
+        a11yRepairExecuted = true;
   
       }, 800); // Adjust the timeout period as needed
 
