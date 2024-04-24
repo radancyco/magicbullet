@@ -13,6 +13,19 @@
 
 */
 
+/* Global Issues */
+
+// Ensure that all placeholder text is contrast friendly.
+
+::-moz-placeholder {
+color: #767676;
+opacity: 1;
+}
+    
+::-webkit-input-placeholder {
+color: #767676;
+}
+
 /* Access Link - Ensure accesslink always has higher index. */
 
 .access-link {
@@ -37,46 +50,28 @@ z-index: 2147483647 !important;
 
 }
 
-/* Issue: Remove all CSS astericks. These are being read back by AT */
-
-.form-field.required label {
-
-    &::after {
-    display: none;
-    }
-
-}
+// Data Forms
 
 .form-field {
-
-    &.required label { 
+    
+    &.required {
         
-        .ico-required-indicator {
-            
-            &[aria-hidden="true"] {
-            display: inline-block !important;
+        label {
+
+            // A11YFORM001
+
+            &::after {
+            display: none;
+            }
+
+            .ico-required-indicator {
+            display: inline-block;
+            margin-inline-start: 0.5em;
             }
 
         }
 
     }
 
-}
-
-/* Issue: Chnage color of all placeholder text to make more contrast friendly */
-
-::-moz-placeholder {
-color: #767676;
-opacity: 1;
-}
-
-::-webkit-input-placeholder {
-color: #767676;
-}
-
-// New Functionality
-
-.ico-required-indicator {
-margin-inline-start: 0.5em;
 }
 
