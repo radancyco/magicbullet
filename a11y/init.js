@@ -10,6 +10,8 @@
 
 loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
 
+console.log("%c MagicBullet: Accessibility Patch v1.9 in use. ", "background: #6e00ee; color: #fff");
+
   // *** Accessibility Patch: Static ***
   
   // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
@@ -101,11 +103,9 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
 });
 
-// *** Accessibility Patch: Observer ***
+// *** Accessibility Fixes ***
   
-function initA11yRepair() {
-
-  console.log("%c MagicBullet: Accessibility Patch v1.9 in use. ", "background: #6e00ee; color: #fff");
+function initGlobalPatch() {
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 
@@ -121,294 +121,7 @@ function initA11yRepair() {
 
     });
 
-  // Data Forms 
-
-  var dataForms = document.querySelectorAll(".data-form");
-
-    dataForms.forEach(function(form){
-
-    // Issue: Removing CSS asterisk because it reads out to assistive tech (AT), including as span with aria-hidden so that it is not picked up by AT.
-
-    var labelRequired = form.querySelectorAll(".form-field.required label");
-
-    labelRequired.forEach(function(label) {
-
-      var span = document.createElement("span");
-      span.classList.add("ico-required-indicator");
-      span.setAttribute('aria-hidden', 'true');
-      span.textContent = '*';
-
-      // See if icon we wish to append already exists.
-
-      var getRequiredIcon = label.querySelector(".ico-required-indicator");
-
-      if(getRequiredIcon === null) {
-
-        label.appendChild(span);
-
-      }
-
-    });
-
-    // Issue: "Add" button should be more explicit.
-    // TODO: Add Language support.
-
-    var addJobAlertLabel = form.querySelectorAll(".keyword-add");
-
-    addJobAlertLabel.forEach(function(element) {
-
-      element.setAttribute("aria-label", "Add Job Alert");
-
-    });
-
-    // Issue: "Keywory list requires a heading"
-    // TODO: Add language support.
-
-    var keySelected = form.querySelectorAll('.keyword-selected');
-
-    keySelected.forEach(function(selected) {
-
-      var selectedRegion = document.createElement("div");
-      selectedRegion.classList.add("keyword-region");
-      selectedRegion.setAttribute("role", "region");
-      selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
-
-      // See if region we wish to append already exists.
-
-      var getKeywordRegion = form.querySelector(".keyword-region");
-
-      if(getKeywordRegion === null) {
-
-        selected.parentNode.insertBefore(selectedRegion, selected);
-        selectedRegion.appendChild(selected);
-
-      }
-
-    });
-
-    // Issue: "Sign Up" button should be more explicit.
-    // Add Language support.
-
-    var signUpButton = form.querySelectorAll("button[type='submit']");
-
-    signUpButton.forEach(function(element) {
-
-      element.setAttribute("aria-label", "Sign Up for Job Alerts");
-
-    });
-
-    // Issue: Clutter, remove empty instruction-text spans, sometimes these add extra spacing.
-
-    var instructionText = form.querySelectorAll(".instruction-text");
-
-    instructionText.forEach(function(element) {
-
-      if (element.textContent.trim() === "") {
-
-        element.parentNode.removeChild(element);
-
-      }
-
-    });
-
-    // Issue: Remove aria-required from various elements. This attribute is sometimes flagged and just the required attribue is not recommended.
-
-    var ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
-
-    ariaRequired.forEach(function(element) {
-
-      element.removeAttribute("aria-required");
-
-    });
-
-    // Issue: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
-
-    var requiredXHTML = form.querySelectorAll("*[required='required']");
-
-    requiredXHTML.forEach(function(element) {
-
-      element.setAttribute("required", "");
-
-    });
-
-    // Issue: Include More Friendly Autocompletes
-
-    // First Name
-
-    var autoCompleteFirstName = form.querySelectorAll('input[name="FirstName"]');
-
-    autoCompleteFirstName.forEach(function(input) {
-
-      input.setAttribute("autocomplete", "given-name");
-
-    });
-
-    // Last Name
-
-    var autoCompleteLastName = form.querySelectorAll('input[name="LastName"]');
-
-    autoCompleteLastName.forEach(function(input) {
-    
-      input.setAttribute("autocomplete", "family-name");
-    
-    });
-
-    // Email Address
-
-    var autoCompleteEmailAddress = form.querySelectorAll('input[name="EmailAddress"]');
-
-    autoCompleteEmailAddress.forEach(function(input) {
-        
-      input.setAttribute("type", "email");
-      input.setAttribute("autocomplete", "email");
-        
-    });
-
-    // Issue: Remove inline style on honeypot field and use hidden attribute instead
-
-    var emailConfirmation = form.querySelectorAll(".form-field.confirm-email");
-
-    emailConfirmation.forEach(function(element) {
-
-      element.setAttribute("hidden", "");
-      element.removeAttribute ("aria-hidden");
-      element.removeAttribute("style");
-
-      // Issue: Remove aria-hidden from honeypot label and input. The parent element should hide this from all assistive tech.
-      // Note: Not CSS dependent, so fields will always be hidden.
-
-      var emailConfirmationFields = element.querySelectorAll("label, input");
-
-      emailConfirmationFields.forEach(function(item) {
-
-        item.removeAttribute ("aria-hidden");
-
-      });
-
-    });
-
-    // Issue: Remove Role from field-validation-error (it's really not needed)
-
-    var validationMsg = form.querySelectorAll(".field-validation-valid");
-
-    validationMsg.forEach(function(element) {
-
-      element.removeAttribute ("role");
-
-    });
-
-    // Issue: The file upload remove button is a link with an href hash. This is awful, so let's remedy it by replacing it.
-
-    var resumeInput = form.querySelectorAll(".form-field input[name='Resume']");
-
-    resumeInput.forEach(function(resume) {
-
-      var fileRemove = resume.nextElementSibling;
-      var resumeRemoveTxt = fileRemove.textContent.trim();
-
-      var button = document.createElement("button");
-      button.classList.add("file-remove");
-      button.style.display = "none";
-      button.textContent = resumeRemoveTxt;
-
-      fileRemove.parentNode.replaceChild(button, fileRemove);
-
-    });
-
-    // Issue: All required fields should include aria-invalid="false" on page load
-
-    var requiredFields = form.querySelectorAll(".form-field.required input, .form-field.required select");
-
-    requiredFields.forEach(function(element) {
-
-      element.setAttribute('aria-invalid', 'false');
-
-    });
-
-    // A11Y0020: The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
-    // TODO: Add language support.
-
-    var captchaResponse = form.querySelectorAll(".g-recaptcha-response");
-
-    captchaResponse.forEach(function(captcha){
-
-      captcha.setAttribute("aria-label", "Captcha");
-
-    });
-
-    // Issue: The input-validation-error class is removed when leaving a field, but aria-invalid still remains set to true.
-
-    var dataFormElement = form.querySelectorAll('input, select');
-
-    // Add blur event listener to each element
-
-    dataFormElement.forEach(function(element) {
-
-      element.addEventListener("blur", function() {
-
-        if (element.classList.contains("input-validation-error")) {
-
-          element.setAttribute("aria-invalid", "true");
-
-        } else {
-
-          element.setAttribute("aria-invalid", "false");
-
-        }
-
-      });
-
-    });
-
-    // Form Submission Events
-
-    form.addEventListener("submit", function(event) {
-
-      // Prevent the default form submission behavior
-
-      event.preventDefault();
-
-      // Issue: Get the aria-describedby attribute from the first keyword-category element
-
-      var ariaDescribedByCategory = form.querySelector('.keyword-category');
-
-      if(ariaDescribedByCategory) {
-
-        ariaDescribedByCategory.getAttribute('aria-describedby');
-
-        // Set aria-describedby attribute for keyword-location elements
-
-        var keywordLocationElements = form.querySelectorAll(".keyword-location");
-
-        keywordLocationElements.forEach(function(element) {
-
-          element.setAttribute("aria-describedby", ariaDescribedByCategory);
-
-        });
-
-      }
-
-      // Set aria-invalid attribute for input and select elements
-
-      var formInputs = form.querySelectorAll("input, select");
-
-      formInputs.forEach(function(input) {
-
-        if (input.classList.contains("input-validation-error")) {
-
-          input.setAttribute("aria-invalid", "true");
-
-        } else {
-
-          input.setAttribute("aria-invalid", "false");
-
-        }
-
-      });
-
-    });
-
-  });
+  
 
   // Job Location Map
 
@@ -643,6 +356,308 @@ function initA11yRepair() {
 
 }
 
+function initDataFormPatch() {
+
+  var dataForms = document.querySelectorAll(".data-form");
+
+  dataForms.forEach(function(form){
+
+  // A11YFORM001
+  // Removing the CSS asterisk (see init.scss) because it reads out to assistive tech (AT) when added via content proprty. 
+  // Including a span with aria-hidden so that it is not picked up by AT.
+  // Note: May need to add another, visually hidden. required messages to this in the future.
+
+  var requiredLabels = form.querySelectorAll(".form-field.required label");
+  var iconClassName = "ico-required-indicator";
+  var iconClass = "." + iconClassName;
+
+  requiredLabels.forEach(function(label) {
+
+    var span = document.createElement("span");
+    span.classList.add(iconClassName);
+    span.setAttribute("aria-hidden", "true");
+    span.textContent = "*";
+
+    // See if icon we wish to append already exists.
+
+    var getRequiredIcon = label.querySelector(iconClass);
+
+    if(getRequiredIcon === null) {
+
+      label.appendChild(span);
+
+    }
+
+  });
+
+  // A11YFORM002
+  // The "Add" button needs to be more explicit to AT.
+  // TODO: Add language support.
+
+  var addJobAlertButtons = form.querySelectorAll(".keyword-add");
+
+  addJobAlertButtons.forEach(function(button) {
+
+    button.setAttribute("aria-label", "Add Job Alert");
+
+  });
+
+  // A11YFORM003
+  // The keyword list requires a more accessible grouping to better identify it.
+  // TODO: Add language support.
+
+  var keywordSelected = form.querySelectorAll(".keyword-selected");
+  var keywordSelectedRegionClassName = "keyword-region";
+  var keywordSelectedRegionClass = "." + keywordSelectedRegionClassName;
+  var keywordSelectedRegionLabel = "Selected Job Alerts";
+
+  keywordSelected.forEach(function(selected) {
+
+    var keywordSelectedRegion = document.createElement("div");
+    keywordSelectedRegion.classList.add(keywordSelectedRegionClassName);
+    keywordSelectedRegion.setAttribute("role", "region");
+    keywordSelectedRegion.setAttribute("aria-label", keywordSelectedRegionLabel);
+
+    // See if region we wish to append already exists.
+
+    var getKeywordRegion = form.querySelector(keywordSelectedRegionClass;
+
+    if(getKeywordRegion === null) {
+
+      selected.parentNode.insertBefore(selectedRegion, selected);
+      selectedRegion.appendChild(selected);
+
+    }
+
+  });
+
+  // A11YFORM004
+  // The "Sign Up" button needs to be more explicit to AT.
+  // TODO: Add language support.
+
+  var signUpButton = form.querySelectorAll("button[type='submit']");
+
+  signUpButton.forEach(function(button) {
+
+    button.setAttribute("aria-label", "Sign Up for Job Alerts");
+
+  });
+
+  // Issue: Clutter, remove empty instruction-text spans, sometimes these add extra spacing.
+
+  var instructionText = form.querySelectorAll(".instruction-text");
+
+  instructionText.forEach(function(element) {
+
+    if (element.textContent.trim() === "") {
+
+      element.parentNode.removeChild(element);
+
+    }
+
+  });
+
+  // Issue: Remove aria-required from various elements. This attribute is sometimes flagged and just the required attribue is not recommended.
+
+  var ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
+
+  ariaRequired.forEach(function(element) {
+
+    element.removeAttribute("aria-required");
+
+  });
+
+  // Issue: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
+
+  var requiredXHTML = form.querySelectorAll("*[required='required']");
+
+  requiredXHTML.forEach(function(element) {
+
+    element.setAttribute("required", "");
+
+  });
+
+  // Issue: Include More Friendly Autocompletes
+
+  // First Name
+
+  var autoCompleteFirstName = form.querySelectorAll('input[name="FirstName"]');
+
+  autoCompleteFirstName.forEach(function(input) {
+
+    input.setAttribute("autocomplete", "given-name");
+
+  });
+
+  // Last Name
+
+  var autoCompleteLastName = form.querySelectorAll('input[name="LastName"]');
+
+  autoCompleteLastName.forEach(function(input) {
+
+    input.setAttribute("autocomplete", "family-name");
+
+  });
+
+  // Email Address
+
+  var autoCompleteEmailAddress = form.querySelectorAll('input[name="EmailAddress"]');
+
+  autoCompleteEmailAddress.forEach(function(input) {
+      
+    input.setAttribute("type", "email");
+    input.setAttribute("autocomplete", "email");
+      
+  });
+
+  // Issue: Remove inline style on honeypot field and use hidden attribute instead
+
+  var emailConfirmation = form.querySelectorAll(".form-field.confirm-email");
+
+  emailConfirmation.forEach(function(element) {
+
+    element.setAttribute("hidden", "");
+    element.removeAttribute ("aria-hidden");
+    element.removeAttribute("style");
+
+    // Issue: Remove aria-hidden from honeypot label and input. The parent element should hide this from all assistive tech.
+    // Note: Not CSS dependent, so fields will always be hidden.
+
+    var emailConfirmationFields = element.querySelectorAll("label, input");
+
+    emailConfirmationFields.forEach(function(item) {
+
+      item.removeAttribute ("aria-hidden");
+
+    });
+
+  });
+
+  // Issue: Remove Role from field-validation-error (it's really not needed)
+
+  var validationMsg = form.querySelectorAll(".field-validation-valid");
+
+  validationMsg.forEach(function(element) {
+
+    element.removeAttribute ("role");
+
+  });
+
+  // Issue: The file upload remove button is a link with an href hash. This is awful, so let's remedy it by replacing it.
+
+  var resumeInput = form.querySelectorAll(".form-field input[name='Resume']");
+
+  resumeInput.forEach(function(resume) {
+
+    var fileRemove = resume.nextElementSibling;
+    var resumeRemoveTxt = fileRemove.textContent.trim();
+
+    var button = document.createElement("button");
+    button.classList.add("file-remove");
+    button.style.display = "none";
+    button.textContent = resumeRemoveTxt;
+
+    fileRemove.parentNode.replaceChild(button, fileRemove);
+
+  });
+
+  // Issue: All required fields should include aria-invalid="false" on page load
+
+  var requiredFields = form.querySelectorAll(".form-field.required input, .form-field.required select");
+
+  requiredFields.forEach(function(element) {
+
+    element.setAttribute('aria-invalid', 'false');
+
+  });
+
+  // A11Y0020: The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
+  // TODO: Add language support.
+
+  var captchaResponse = form.querySelectorAll(".g-recaptcha-response");
+
+  captchaResponse.forEach(function(captcha){
+
+    captcha.setAttribute("aria-label", "Captcha");
+
+  });
+
+  // Issue: The input-validation-error class is removed when leaving a field, but aria-invalid still remains set to true.
+
+  var dataFormElement = form.querySelectorAll('input, select');
+
+  // Add blur event listener to each element
+
+  dataFormElement.forEach(function(element) {
+
+    element.addEventListener("blur", function() {
+
+      if (element.classList.contains("input-validation-error")) {
+
+        element.setAttribute("aria-invalid", "true");
+
+      } else {
+
+        element.setAttribute("aria-invalid", "false");
+
+      }
+
+    });
+
+  });
+
+  // Form Submission Events
+
+  form.addEventListener("submit", function(event) {
+
+    // Prevent the default form submission behavior
+
+    event.preventDefault();
+
+    // Issue: Get the aria-describedby attribute from the first keyword-category element
+
+    var ariaDescribedByCategory = form.querySelector('.keyword-category');
+
+    if(ariaDescribedByCategory) {
+
+      ariaDescribedByCategory.getAttribute('aria-describedby');
+
+      // Set aria-describedby attribute for keyword-location elements
+
+      var keywordLocationElements = form.querySelectorAll(".keyword-location");
+
+      keywordLocationElements.forEach(function(element) {
+
+        element.setAttribute("aria-describedby", ariaDescribedByCategory);
+
+      });
+
+    }
+
+    // Set aria-invalid attribute for input and select elements
+
+    var formInputs = form.querySelectorAll("input, select");
+
+    formInputs.forEach(function(input) {
+
+      if (input.classList.contains("input-validation-error")) {
+
+        input.setAttribute("aria-invalid", "true");
+
+      } else {
+
+        input.setAttribute("aria-invalid", "false");
+
+      }
+
+    });
+
+  });
+
+  });
+
+}
+
 function loadA11yPatch(url, callback) {
 
   var a11yBody = document.body;
@@ -684,7 +699,8 @@ function loadA11yPatch(url, callback) {
   
     a11yObserver.timeout = setTimeout(function() {
   
-      initA11yRepair();
+      initGlobalPatch();
+      initDataFormPatch();
 
       a11yObserver.observe(document.body, config);
   
