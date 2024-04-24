@@ -604,6 +604,18 @@ function initDataFormPatch() {
     });
 
     // A11YFORM014
+    // Removing iframe garbage
+
+    var captchaIFrames = form.querySelectorAll(".grecaptcha-badge iframe");
+
+    captchaIFrames.forEach(function(iframe){
+
+      iframe.removeAttribute("frameborder");
+      iframe.removeAttribute("scrolling");
+
+    });
+
+    // A11YFORM015
     // The "Sign Up" button needs to be more explicit to AT.
     // TODO: Add language support.
 
@@ -622,7 +634,7 @@ function initDataFormPatch() {
 
       event.preventDefault();
 
-      // A11YFORM015
+      // A11YFORM016
       // The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category.
 
       var keyWordCategory = form.querySelector(".keyword-category");
@@ -641,7 +653,7 @@ function initDataFormPatch() {
 
       }
 
-      // A11YFORM016
+      // A11YFORM017
       // Set aria-invalid attribute values based on user input.
 
       var formInputs = form.querySelectorAll("input, select");
