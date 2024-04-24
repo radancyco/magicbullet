@@ -116,22 +116,6 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
     });
 
-    // Issue. Removing CSS asterisk because it reads out to assistive tech (AT), including as span with aria-hidden so that it is not picked up by AT.
-
-    var labelRequired = form.querySelectorAll(".form-field.required label");
-
-    labelRequired.forEach(function(label) {
-
-      var span = document.createElement('span');
-  
-      span.classList.add("ico-required-indicator");
-      span.setAttribute('aria-hidden', 'true');
-      span.textContent = '*';
-  
-      label.appendChild(span);
-
-    });
-
     // Issue: Remove aria-required from various elements. This attribute is sometimes flagged and just the required attribue is not recommended.
 
     var ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
@@ -366,11 +350,26 @@ function initA11yRepair() {
 
     dataForms.forEach(function(form){
 
+      // Issue. Removing CSS asterisk because it reads out to assistive tech (AT), including as span with aria-hidden so that it is not picked up by AT.
+
+      var labelRequired = form.querySelectorAll(".form-field.required label");
+
+      labelRequired.forEach(function(label) {
+
+        var span = document.createElement('span');
+    
+        span.classList.add("ico-required-indicator");
+        span.setAttribute('aria-hidden', 'true');
+        span.textContent = '*';
+    
+        label.appendChild(span);
+
+      });
+
       // Issue: "Keyword Selected list requires a heading"
       // TODO: Add language support.
 
       var keySelected = form.querySelectorAll('.keyword-selected');
-      var keyWordRegion = form.querySelector(".keyword-region");
 
       keySelected.forEach(function(selected) {
 
@@ -378,14 +377,10 @@ function initA11yRepair() {
         selectedRegion.classList.add("keyword-region");
         selectedRegion.setAttribute("role", "region");
         selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
-
-        if(keyWordRegion === null) {
       
-          selected.parentNode.insertBefore(selectedRegion, selected);
-          selectedRegion.appendChild(selected);
+        selected.parentNode.insertBefore(selectedRegion, selected);
+        selectedRegion.appendChild(selected);
 
-        }
-    
       });
 
       // Issue: "Sign Up" button should be more explicit.
@@ -662,23 +657,29 @@ function loadA11yPatch(url, callback) {
 
   }
 
+  var a11yRepairExecuted = false;
+
   // Create a new MutationObserver instance
 
   var a11yObserver = new MutationObserver(function() {
 
-    // Clear the previous timeout
+    if(!a11yRepairExecuted) {
+
+      // Clear the previous timeout
   
-    clearTimeout(a11yObserver.timeout);
+      clearTimeout(a11yObserver.timeout);
   
-    // Set a timeout to run after NN milliseconds of no mutations
+      // Set a timeout to run after NN milliseconds of no mutations
   
-    a11yObserver.timeout = setTimeout(function() {
+      a11yObserver.timeout = setTimeout(function() {
   
-      // Run the function after content stops changing
+        // Run the function after content stops changing
   
-      initA11yRepair();
+        initA11yRepair();
   
-    }, 800); // Adjust the timeout period as needed
+      }, 800); // Adjust the timeout period as needed
+
+    }
   
   });
   
