@@ -313,11 +313,14 @@ document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) 
 
 // *** Accessibility Patch: Observer ***
 
-var a11yObserver;
+var a11yObserver = null;
   
 function initA11yRepair() {
 
-  a11yObserver.disconnect();
+  if (a11yObserver) {
+    // Disconnect the observer temporarily
+    a11yObserver.disconnect();
+}
 
   console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
 
@@ -669,6 +672,8 @@ function loadA11yPatch(url, callback) {
 
   // Create a new MutationObserver instance
 
+  if (!a11yObserver) {
+
   var a11yObserver = new MutationObserver(function() {
 
    if(!a11yRepairExecuted) {
@@ -707,5 +712,7 @@ function loadA11yPatch(url, callback) {
   // Configure the MutationObserver to watch for changes to the child nodes of the body
 
   a11yObserver.observe(document.body, { childList: true, subtree: true });
+
+}
 
 }
