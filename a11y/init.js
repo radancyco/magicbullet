@@ -362,7 +362,7 @@ function initA11yRepair() {
         span.setAttribute('aria-hidden', 'true');
         span.textContent = '*';
     
-        label.appendChild(span);
+       // label.appendChild(span);
 
       });
 
@@ -379,7 +379,7 @@ function initA11yRepair() {
         selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
       
         selected.parentNode.insertBefore(selectedRegion, selected);
-        selectedRegion.appendChild(selected);
+       // selectedRegion.appendChild(selected);
 
       });
 
@@ -689,7 +689,7 @@ function loadA11yPatch(url, callback) {
   
   // Configure the MutationObserver to watch for changes to the child nodes of the body
   
-  var config = { childList: true};
+  var config = { childList: true, subtree: true };
   
   a11yObserver.observe(document.body, config);
 
