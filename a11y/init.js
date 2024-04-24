@@ -637,7 +637,7 @@ function initDataFormPatch() {
 
       if(keywordLocation) {
 
-        keyWordCategory.setAttribute("aria-describedby", keyWordCategory);
+        keywordLocation.setAttribute("aria-describedby", keyWordCategory);
 
       }
 
