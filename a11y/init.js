@@ -363,7 +363,7 @@ function initA11yRepair() {
 
         // See if icon we wish to append already exists.
 
-        var getRequiredIcon = form.querySelector(".ico-required-indicator");
+        var getRequiredIcon = label.querySelector(".ico-required-indicator");
 
         if(getRequiredIcon === null) {
 
