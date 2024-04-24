@@ -261,7 +261,14 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
       selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
       
       selected.parentNode.insertBefore(selectedRegion, selected);
-      selectedRegion.appendChild(selected);
+
+      // Note: If something requires a timeout to wait for page to load, it might be better to add after mutation observer has initiated.
+
+      setTimeout(function() {
+  
+        selectedRegion.appendChild(selected);
+    
+      }, 800); 
 
     });
 
