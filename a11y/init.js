@@ -314,7 +314,6 @@ document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) 
 // *** Accessibility Patch: Observer ***
 
 var a11yObserver;
-var config = { childList: true, subtree: true };
   
 function initA11yRepair() {
 
@@ -633,7 +632,7 @@ function initA11yRepair() {
   // TODO: Add future fixes here.
 
    // Reconnect the observer
-   a11yObserver.observe(document.body, config);
+   a11yObserver.observe(document.body, { childList: true, subtree: true });
 }
 
 
@@ -707,6 +706,6 @@ function loadA11yPatch(url, callback) {
   
   // Configure the MutationObserver to watch for changes to the child nodes of the body
 
-  a11yObserver.observe(document.body, config);
+  a11yObserver.observe(document.body, { childList: true, subtree: true });
 
 }
