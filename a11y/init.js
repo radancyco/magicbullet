@@ -670,7 +670,9 @@ function loadA11yPatch(url, callback) {
   
       initA11yRepair();
 
-      // a11yObserver.observe(document.body, config);
+      a11yObserver.observe(document.body, config);
+
+      console.log(a11yObserver);
   
     }, 800);
   
@@ -678,6 +680,6 @@ function loadA11yPatch(url, callback) {
   
   a11yObserver.observe(document.body, config);
 
-  console.log(a11yObserver)
+  console.log(a11yObserver);
 
 }
