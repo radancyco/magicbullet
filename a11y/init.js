@@ -312,6 +312,9 @@ document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) 
 });
 
 // *** Accessibility Patch: Observer ***
+
+var a11yObserver;
+var config = { childList: true, subtree: true };
   
 function initA11yRepair() {
 
@@ -633,8 +636,7 @@ function initA11yRepair() {
    a11yObserver.observe(document.body, config);
 }
 
-var a11yObserver;
-var config = { childList: true, subtree: true };
+
 
 
 function loadA11yPatch(url, callback) {
