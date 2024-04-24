@@ -433,19 +433,21 @@ function initDataFormPatch() {
   // The "Sign Up" button needs to be more explicit to AT.
   // TODO: Add language support.
 
-  var signUpButton = form.querySelectorAll("button[type='submit']");
+  var signUpButtons = form.querySelectorAll("button[type='submit']");
+  var signUpButtonLabel = "Sign Up for Job Alerts";
 
-  signUpButton.forEach(function(button) {
+  signUpButtons.forEach(function(button) {
 
-    button.setAttribute("aria-label", "Sign Up for Job Alerts");
+    button.setAttribute("aria-label", signUpButtonLabel;
 
   });
 
-  // Issue: Clutter, remove empty instruction-text spans, sometimes these add extra spacing.
+  // A11YFORM005
+  // Clutter. Removing empty instruction-text spans as they can sometimes cause undesired spacing issues.
 
-  var instructionText = form.querySelectorAll(".instruction-text");
+  var instructionTexts = form.querySelectorAll(".instruction-text");
 
-  instructionText.forEach(function(element) {
+  instructionTexts.forEach(function(element) {
 
     if (element.textContent.trim() === "") {
 
@@ -455,7 +457,8 @@ function initDataFormPatch() {
 
   });
 
-  // Issue: Remove aria-required from various elements. This attribute is sometimes flagged and just the required attribue is not recommended.
+  // A11YFORM006
+  // Removing aria-required from various elements. This attribute is sometimes flagged in automated testing and just the required attribue is now recommended.
 
   var ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
 
@@ -465,6 +468,7 @@ function initDataFormPatch() {
 
   });
 
+  // A11YFORM007
   // Issue: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
 
   var requiredXHTML = form.querySelectorAll("*[required='required']");
@@ -475,11 +479,12 @@ function initDataFormPatch() {
 
   });
 
-  // Issue: Include More Friendly Autocompletes
+  // A11YFORM008
+  // It is customary to include more useful autocomplete attributes so that certain fields will show the contextual menu for easier input.
 
   // First Name
 
-  var autoCompleteFirstName = form.querySelectorAll('input[name="FirstName"]');
+  var autoCompleteFirstName = form.querySelectorAll("input[name='FirstName']");
 
   autoCompleteFirstName.forEach(function(input) {
 
@@ -489,7 +494,7 @@ function initDataFormPatch() {
 
   // Last Name
 
-  var autoCompleteLastName = form.querySelectorAll('input[name="LastName"]');
+  var autoCompleteLastName = form.querySelectorAll("input[name='LastName']");
 
   autoCompleteLastName.forEach(function(input) {
 
@@ -499,7 +504,7 @@ function initDataFormPatch() {
 
   // Email Address
 
-  var autoCompleteEmailAddress = form.querySelectorAll('input[name="EmailAddress"]');
+  var autoCompleteEmailAddress = form.querySelectorAll("input[name='EmailAddress']");
 
   autoCompleteEmailAddress.forEach(function(input) {
       
@@ -508,7 +513,8 @@ function initDataFormPatch() {
       
   });
 
-  // Issue: Remove inline style on honeypot field and use hidden attribute instead
+  // A11YFORM009
+  // Remove inline style on honeypot field and use hidden attribute instead.
 
   var emailConfirmation = form.querySelectorAll(".form-field.confirm-email");
 
@@ -518,8 +524,7 @@ function initDataFormPatch() {
     element.removeAttribute ("aria-hidden");
     element.removeAttribute("style");
 
-    // Issue: Remove aria-hidden from honeypot label and input. The parent element should hide this from all assistive tech.
-    // Note: Not CSS dependent, so fields will always be hidden.
+    // Remove aria-hidden from honeypot label and input. The parent element should hide this from all assistive tech without need to hide individually.
 
     var emailConfirmationFields = element.querySelectorAll("label, input");
 
@@ -531,7 +536,8 @@ function initDataFormPatch() {
 
   });
 
-  // Issue: Remove Role from field-validation-error (it's really not needed)
+  // A11YFORM010
+  // Issue: Remove "role" from field-validation-error (it's not needed).
 
   var validationMsg = form.querySelectorAll(".field-validation-valid");
 
@@ -541,21 +547,22 @@ function initDataFormPatch() {
 
   });
 
+  // A11YFORM011
   // Issue: The file upload remove button is a link with an href hash. This is awful, so let's remedy it by replacing it.
 
-  var resumeInput = form.querySelectorAll(".form-field input[name='Resume']");
+  var fileUploadButtons = form.querySelectorAll(".form-field input[name='Resume']");
 
-  resumeInput.forEach(function(resume) {
+  fileUploadButtons.forEach(function(input) {
 
-    var fileRemove = resume.nextElementSibling;
-    var resumeRemoveTxt = fileRemove.textContent.trim();
+    var fileUploadLink = input.nextElementSibling;
+    var resumeRemoveLabel = fileUploadLink.textContent.trim();
 
-    var button = document.createElement("button");
-    button.classList.add("file-remove");
-    button.style.display = "none";
-    button.textContent = resumeRemoveTxt;
+    var fileUploadButton = document.createElement("button");
+    fileUploadButton.classList.add("file-remove");
+    fileUploadButton.style.display = "none";
+    fileUploadButton.textContent = resumeRemoveLabel;
 
-    fileRemove.parentNode.replaceChild(button, fileRemove);
+    fileUploadLink.parentNode.replaceChild(fileUploadButton, fileUploadLink);
 
   });
 
