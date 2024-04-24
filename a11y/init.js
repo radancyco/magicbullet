@@ -627,6 +627,17 @@ function initDataFormPatch() {
 
     });
 
+    // A11YFORM018
+    // The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
+
+    var formMessage = form.querySelector(".form-field.form-message b");
+
+    if(formMessage) {
+
+      formMessage.setAttribute("tabindex", "-1");
+
+    }
+
     // Form submission events
 
     form.addEventListener("submit", function(event) {
@@ -671,16 +682,7 @@ function initDataFormPatch() {
 
       });
 
-      // A11YFORM018
-      // The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
 
-      var formMessage = form.querySelector(".form-field.form-message b");
-
-      if(formMessage) {
-
-        formMessage.setAttribute("tabindex", "-1");
-
-      }
 
     });
 
