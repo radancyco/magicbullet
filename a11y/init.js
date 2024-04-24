@@ -684,6 +684,8 @@ function loadA11yPatch(url, callback) {
     }
   
   });
+
+  console.log(mutations);
   
   // Configure the MutationObserver to watch for changes to the child nodes of the body
   
