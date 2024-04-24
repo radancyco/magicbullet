@@ -378,12 +378,14 @@ function initA11yRepair() {
           selectedRegion.setAttribute("role", "region");
           selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
 
-          if (!selectedRegion.classList.contains("keyword-region")) {
-      
-          selected.parentNode.insertBefore(selectedRegion, selected);
-          selectedRegion.appendChild(selected);
+          var getKeywordRegion = form.querySelector(".keyword-region");
 
-        }
+          if(getKeywordRegion === null) {
+
+            selected.parentNode.insertBefore(selectedRegion, selected);
+            selectedRegion.appendChild(selected);
+
+          }
 
       });
 
