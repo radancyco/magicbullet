@@ -558,6 +558,7 @@ function initDataFormPatch() {
     var resumeRemoveLabel = fileUploadLink.textContent.trim();
 
     var fileUploadButton = document.createElement("button");
+    fileUploadButton.setAttribute("aria-describedby", input.getAttribute("id"));
     fileUploadButton.classList.add("file-remove");
     fileUploadButton.style.display = "none";
     fileUploadButton.textContent = resumeRemoveLabel;
