@@ -315,7 +315,7 @@ document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) 
   
 function initA11yRepair() {
 
-  a11yRepairExecuted = true;
+  a11yObserver.disconnect();
 
   console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
 
@@ -629,9 +629,12 @@ function initA11yRepair() {
 
   // TODO: Add future fixes here.
 
-  a11yRepairExecuted = true;
-
+   // Reconnect the observer
+   a11yObserver.observe(document.body, config);
 }
+
+var a11yObserver;
+var config = { childList: true, subtree: true };
 
 
 function loadA11yPatch(url, callback) {
@@ -681,27 +684,27 @@ function loadA11yPatch(url, callback) {
   
         initA11yRepair();
   
-      }, 800); // Adjust the timeout period as needed
-
-    }
+        a11yRepairExecuted = true; // Mark the repair as executed
+      
+      }, 800); 
   
+    } else {
+  
+      // Reset the flag after the timeout to allow subsequent repairs
+      setTimeout(function() {
+  
+        a11yRepairExecuted = false;
+  
+      }, 800);
+  
+    }
+
   });
 
-  console.log(a11yObserver);
+ //  console.log(a11yObserver);
   
   // Configure the MutationObserver to watch for changes to the child nodes of the body
-  
-  var config = { childList: true, subtree: true };
-  
+
   a11yObserver.observe(document.body, config);
 
 }
-
-
-
-
-
-
-
-
-
