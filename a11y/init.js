@@ -360,7 +360,7 @@ function initA11yRepair() {
     
         span.classList.add("ico-required-indicator");
         span.setAttribute('aria-hidden', 'true');
-        span.textContent = '*';
+        span.textContent = ' *';
     
         label.appendChild(span);
 
