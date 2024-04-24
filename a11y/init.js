@@ -136,17 +136,6 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
     });
 
-    // Issue: "Add" button should be more explicit.
-    // TODO: Add Language support.
-
-    var addJobAlertLabel = form.querySelectorAll(".keyword-add");
-
-    addJobAlertLabel.forEach(function(element) {
-
-      element.setAttribute("aria-label", "Add Job Alert");
-
-    });
-
     // Issue: Remove inline style on honeypot field and use hidden attribute instead
 
     var emailConfirmation = form.querySelectorAll(".form-field.confirm-email");
@@ -373,7 +362,18 @@ function initA11yRepair() {
 
       });
 
-      // Issue: "Keyword Selected list requires a heading"
+      // Issue: "Add" button should be more explicit.
+      // TODO: Add Language support.
+
+      var addJobAlertLabel = form.querySelectorAll(".keyword-add");
+
+      addJobAlertLabel.forEach(function(element) {
+
+        element.setAttribute("aria-label", "Add Job Alert");
+
+      });
+
+      // Issue: "Keywory list requires a heading"
       // TODO: Add language support.
 
       var keySelected = form.querySelectorAll('.keyword-selected');
