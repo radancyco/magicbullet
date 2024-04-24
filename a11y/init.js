@@ -385,12 +385,12 @@ function initA11yRepair() {
 
       keySelected.forEach(function(selected) {
 
-        if(!keyWordRegion) {
+        var selectedRegion = document.createElement("div");
+        selectedRegion.classList.add("keyword-region");
+        selectedRegion.setAttribute("role", "region");
+        selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
 
-          var selectedRegion = document.createElement("div");
-          selectedRegion.classList.add("keyword-region");
-          selectedRegion.setAttribute("role", "region");
-          selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
+        if(keyWordRegion === null) {
       
           selected.parentNode.insertBefore(selectedRegion, selected);
           selectedRegion.appendChild(selected);
