@@ -1,3 +1,12 @@
+
+loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
+
+// Other functions
+
+console.log("test");
+
+});
+
 function initA11yRepair() {
   var a11yObserver = new MutationObserver(function(mutationsList, observer) {
       clearTimeout(a11yObserver.timeout);
