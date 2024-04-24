@@ -670,13 +670,13 @@ function loadA11yPatch(url, callback) {
   
       initA11yRepair();
 
-      a11yObserver.observe(document.body, config);
+      // a11yObserver.observe(document.body, config);
   
     }, 800);
   
   });
   
-  //a11yObserver.observe(document.body, config);
+  a11yObserver.observe(document.body, config);
 
   console.log(a11yObserver)
 
