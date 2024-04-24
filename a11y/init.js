@@ -676,7 +676,7 @@ function loadA11yPatch(url, callback) {
   
   });
   
-  a11yObserver.observe(document.body, config);
+  //a11yObserver.observe(document.body, config);
 
   console.log(a11yObserver)
 
