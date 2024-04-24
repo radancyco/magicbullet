@@ -657,13 +657,13 @@ function loadA11yPatch(url, callback) {
 
   }
 
-  var a11yRepairExecuted = false;
+ // var a11yRepairExecuted = false;
 
   // Create a new MutationObserver instance
 
   var a11yObserver = new MutationObserver(function() {
 
-    if(!a11yRepairExecuted) {
+//    if(!a11yRepairExecuted) {
 
       // Clear the previous timeout
   
@@ -677,11 +677,11 @@ function loadA11yPatch(url, callback) {
   
         initA11yRepair();
 
-        a11yRepairExecuted = true;
+       // a11yRepairExecuted = true;
   
       }, 800); // Adjust the timeout period as needed
 
-    }
+//    }
   
   });
 
@@ -689,7 +689,7 @@ function loadA11yPatch(url, callback) {
   
   // Configure the MutationObserver to watch for changes to the child nodes of the body
   
-  var config = { childList: true, subtree: true };
+  var config = { childList: true};
   
   a11yObserver.observe(document.body, config);
 
