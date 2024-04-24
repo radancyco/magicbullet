@@ -391,7 +391,7 @@ function initA11yRepair() {
       // Issue: "Sign Up" button should be more explicit.
       // Add Language support.
   
-      var signUpButton = form.querySelectorAll(".form-field.submit button");
+      var signUpButton = form.querySelectorAll("button[type='submit']");
 
       signUpButton.forEach(function(element) {
   
