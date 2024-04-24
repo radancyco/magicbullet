@@ -116,6 +116,22 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
     });
 
+    // Issue. Removing CSS asterisk because it reads out to assistive tech (AT), including as span with aria-hidden so that it is not picked up by AT.
+
+    var labelRequired = form.querySelectorAll(".form-field.required label");
+
+    labelRequired.forEach(function(label) {
+
+      var span = document.createElement('span');
+  
+      span.classList.add("ico-required-indicator");
+      span.setAttribute('aria-hidden', 'true');
+      span.textContent = '*';
+  
+      label.appendChild(span);
+
+    });
+
     // Issue: Remove aria-required from various elements. This attribute is sometimes flagged and just the required attribue is not recommended.
 
     var ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
@@ -349,22 +365,6 @@ function initA11yRepair() {
     var dataForms = document.querySelectorAll(".data-form");
 
     dataForms.forEach(function(form){
-
-      // Issue. Removing CSS asterisk because it reads out to assistive tech (AT), including as span with aria-hidden so that it is not picked up by AT.
-
-      var labelRequired = form.querySelectorAll(".form-field.required label");
-
-      labelRequired.forEach(function(label) {
-
-        var span = document.createElement('span');
-    
-        span.classList.add("ico-required-indicator");
-        span.setAttribute('aria-hidden', 'true');
-        span.textContent = '*';
-    
-        label.appendChild(span);
-
-      });
 
       // Issue: "Keyword Selected list requires a heading"
       // TODO: Add language support.
