@@ -326,7 +326,7 @@ function initA11yRepair() {
     
           // Clear the previous timeout
       
-         // clearTimeout(a11yObserver.timeout);
+          clearTimeout(a11yObserver.timeout);
       
           // Set a timeout to run after NN milliseconds of no mutations
       
