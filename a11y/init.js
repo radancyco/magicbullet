@@ -661,6 +661,9 @@ function loadA11yPatch(url, callback) {
   var config = { childList: true, subtree: true };
 
   var a11yObserver = new MutationObserver(function() {
+
+    console.log("Mutations:", mutationsList); // Log mutations
+    console.log("Observing childList mutations:", config.childList); // Log childList property of config
   
     clearTimeout(a11yObserver.timeout);
 
@@ -671,15 +674,11 @@ function loadA11yPatch(url, callback) {
       initA11yRepair();
 
       a11yObserver.observe(document.body, config);
-
-      console.log(a11yObserver);
   
     }, 800);
   
   });
   
   a11yObserver.observe(document.body, config);
-
-  console.log(a11yObserver);
 
 }
