@@ -350,8 +350,6 @@ function initA11yRepair() {
 
     dataForms.forEach(function(form){
 
-      a11yRepairExecuted = true;
-
       // Issue. Removing CSS asterisk because it reads out to assistive tech (AT), including as span with aria-hidden so that it is not picked up by AT.
 
       var labelRequired = form.querySelectorAll(".form-field.required label");
@@ -678,6 +676,8 @@ function loadA11yPatch(url, callback) {
         // Run the function after content stops changing
   
         initA11yRepair();
+
+        a11yRepairExecuted = true;
   
       }, 800); // Adjust the timeout period as needed
 
