@@ -94,15 +94,138 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 });
 
 
+// Issue: Include More Friendly Autocompletes
+// First Name
+document.querySelectorAll('input[name="FirstName"]').forEach(function(input) {
+  input.setAttribute('autocomplete', 'given-name');
+});
+
+// Last Name
+document.querySelectorAll('input[name="LastName"]').forEach(function(input) {
+  input.setAttribute('autocomplete', 'family-name');
+});
+
+// Email
+document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) {
+  input.setAttribute('type', 'email');
+  input.setAttribute('autocomplete', 'email');
+});
 
 
-  // A11y Form Fixes
 
-  var dataForms = document.querySelectorAll(".data-form");
 
-  dataForms.forEach(function(form) {
+});
 
-    // Issue: Clutter, remove empty instruction-text spans, sometimes these add extra spacing.
+// *** Accessibility Patch: Observer ***
+  
+function initA11yRepair() {
+
+  console.log("%c MagicBullet: Accessibility Patch v1.9 in use. ", "background: #6e00ee; color: #fff");
+
+  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
+
+  // Global Issues
+
+    // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0003
+
+    var missingAltAttributes = document.querySelectorAll("img:not([alt])");
+
+    missingAltAttributes.forEach(function(img){
+
+      img.setAttribute("alt", "");
+
+    });
+
+  // Data Forms 
+
+    // A11Y0020: The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
+    // TODO: Add language support.
+
+    var captchaResponse = document.querySelectorAll(".g-recaptcha-response");
+
+    captchaResponse.forEach(function(captcha){
+
+      captcha.setAttribute("aria-label", "Captcha");
+
+    });
+
+    // All Data Form things that need to fire after page loads. 
+
+    var dataForms = document.querySelectorAll(".data-form");
+
+    dataForms.forEach(function(form){
+
+      // Issue. Removing CSS asterisk because it reads out to assistive tech (AT), including as span with aria-hidden so that it is not picked up by AT.
+
+      var labelRequired = form.querySelectorAll(".form-field.required label");
+
+      labelRequired.forEach(function(label) {
+
+        var span = document.createElement("span");
+        span.classList.add("ico-required-indicator");
+        span.setAttribute('aria-hidden', 'true');
+        span.textContent = '*';
+
+        // See if icon we wish to append already exists.
+
+        var getRequiredIcon = label.querySelector(".ico-required-indicator");
+
+        if(getRequiredIcon === null) {
+
+          label.appendChild(span);
+
+        }
+
+      });
+
+      // Issue: "Add" button should be more explicit.
+      // TODO: Add Language support.
+
+      var addJobAlertLabel = form.querySelectorAll(".keyword-add");
+
+      addJobAlertLabel.forEach(function(element) {
+
+        element.setAttribute("aria-label", "Add Job Alert");
+
+      });
+
+      // Issue: "Keywory list requires a heading"
+      // TODO: Add language support.
+
+      var keySelected = form.querySelectorAll('.keyword-selected');
+
+      keySelected.forEach(function(selected) {
+
+          var selectedRegion = document.createElement("div");
+          selectedRegion.classList.add("keyword-region");
+          selectedRegion.setAttribute("role", "region");
+          selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
+
+          // See if region we wish to append already exists.
+
+          var getKeywordRegion = form.querySelector(".keyword-region");
+
+          if(getKeywordRegion === null) {
+
+            selected.parentNode.insertBefore(selectedRegion, selected);
+            selectedRegion.appendChild(selected);
+
+          }
+
+      });
+
+      // Issue: "Sign Up" button should be more explicit.
+      // Add Language support.
+  
+      var signUpButton = form.querySelectorAll("button[type='submit']");
+
+      signUpButton.forEach(function(element) {
+  
+        element.setAttribute("aria-label", "Sign Up for Job Alerts");
+
+      });
+
+          // Issue: Clutter, remove empty instruction-text spans, sometimes these add extra spacing.
 
     var instructionText = form.querySelectorAll(".instruction-text");
 
@@ -224,7 +347,7 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
     // Form Submission Events
 
-    form.addEventListener('submit', function(event) {
+    form.addEventListener("submit", function(event) {
 
       // Prevent the default form submission behavior
 
@@ -269,145 +392,6 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
       });
 
     });
-
-
-
-
-
-
-  });
-
-
-// Issue: Include More Friendly Autocompletes
-// First Name
-document.querySelectorAll('input[name="FirstName"]').forEach(function(input) {
-  input.setAttribute('autocomplete', 'given-name');
-});
-
-// Last Name
-document.querySelectorAll('input[name="LastName"]').forEach(function(input) {
-  input.setAttribute('autocomplete', 'family-name');
-});
-
-// Email
-document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) {
-  input.setAttribute('type', 'email');
-  input.setAttribute('autocomplete', 'email');
-});
-
-
-
-
-});
-
-// *** Accessibility Patch: Observer ***
-  
-function initA11yRepair() {
-
-  console.log("%c MagicBullet: Accessibility Patch v1.9 in use. ", "background: #6e00ee; color: #fff");
-
-  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
-
-  // Global Issues
-
-    // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0003
-
-    var missingAltAttributes = document.querySelectorAll("img:not([alt])");
-
-    missingAltAttributes.forEach(function(img){
-
-      img.setAttribute("alt", "");
-
-    });
-
-  // Data Forms 
-
-    // A11Y0020: The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
-    // TODO: Add language support.
-
-    var captchaResponse = document.querySelectorAll(".g-recaptcha-response");
-
-    captchaResponse.forEach(function(captcha){
-
-      captcha.setAttribute("aria-label", "Captcha");
-
-    });
-
-    // All Data Form thinsg that need to fire after page loads. 
-
-    var dataForms = document.querySelectorAll(".data-form");
-
-    dataForms.forEach(function(form){
-
-      // Issue. Removing CSS asterisk because it reads out to assistive tech (AT), including as span with aria-hidden so that it is not picked up by AT.
-
-      var labelRequired = form.querySelectorAll(".form-field.required label");
-
-      labelRequired.forEach(function(label) {
-
-        var span = document.createElement("span");
-        span.classList.add("ico-required-indicator");
-        span.setAttribute('aria-hidden', 'true');
-        span.textContent = '*';
-
-        // See if icon we wish to append already exists.
-
-        var getRequiredIcon = label.querySelector(".ico-required-indicator");
-
-        if(getRequiredIcon === null) {
-
-          label.appendChild(span);
-
-        }
-
-      });
-
-      // Issue: "Add" button should be more explicit.
-      // TODO: Add Language support.
-
-      var addJobAlertLabel = form.querySelectorAll(".keyword-add");
-
-      addJobAlertLabel.forEach(function(element) {
-
-        element.setAttribute("aria-label", "Add Job Alert");
-
-      });
-
-      // Issue: "Keywory list requires a heading"
-      // TODO: Add language support.
-
-      var keySelected = form.querySelectorAll('.keyword-selected');
-
-      keySelected.forEach(function(selected) {
-
-          var selectedRegion = document.createElement("div");
-          selectedRegion.classList.add("keyword-region");
-          selectedRegion.setAttribute("role", "region");
-          selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
-
-          // See if region we wish to append already exists.
-
-          var getKeywordRegion = form.querySelector(".keyword-region");
-
-          if(getKeywordRegion === null) {
-
-            selected.parentNode.insertBefore(selectedRegion, selected);
-            selectedRegion.appendChild(selected);
-
-          }
-
-      });
-
-      // Issue: "Sign Up" button should be more explicit.
-      // Add Language support.
-  
-      var signUpButton = form.querySelectorAll("button[type='submit']");
-
-      signUpButton.forEach(function(element) {
-  
-        element.setAttribute("aria-label", "Sign Up for Job Alerts");
-
-      });
 
     });
 
