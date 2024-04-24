@@ -385,19 +385,17 @@ function initA11yRepair() {
 
       keySelected.forEach(function(selected) {
 
-  if(keyWordRegion === null) {
+        if(!keyWordRegion) {
 
-    
-  
-        var selectedRegion = document.createElement("div");
-        selectedRegion.classList.add("keyword-region");
-        selectedRegion.setAttribute("role", "region");
-        selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
+          var selectedRegion = document.createElement("div");
+          selectedRegion.classList.add("keyword-region");
+          selectedRegion.setAttribute("role", "region");
+          selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
       
-        selected.parentNode.insertBefore(selectedRegion, selected);
-        selectedRegion.appendChild(selected);
+          selected.parentNode.insertBefore(selectedRegion, selected);
+          selectedRegion.appendChild(selected);
 
-  }
+        }
     
       });
 
