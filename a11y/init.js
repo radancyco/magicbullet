@@ -671,6 +671,17 @@ function initDataFormPatch() {
 
       });
 
+      // A11YFORM018
+      // The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
+
+      var formMessage = form.querySelector(".form-field.form-message b");
+
+      if(formMessage) {
+
+        formMessage.setAttribute("tabindex", "-1");
+
+      }
+
     });
 
   });
@@ -718,17 +729,17 @@ function loadA11yPatch(url, callback) {
   
     a11yObserver.timeout = setTimeout(function() {
 
-      console.log("%c MagicBullet: Accessibility Patch v1.9 in use. ", "background: #6e00ee; color: #fff");
+      console.log("%c MagicBullet: Accessibility Patch v1.95 in use. ", "background: #6e00ee; color: #fff");
 
       initGlobalPatch();
       initDataFormPatch();
 
-      a11yObserver.observe(document.body, config);
+      a11yObserver.observe(a11yBody, config);
   
     }, 800);
   
   });
   
-  a11yObserver.observe(document.body, config);
+  a11yObserver.observe(a11yBody, config);
 
 }
