@@ -307,8 +307,6 @@ document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) 
 });
 
 
-
-
 });
 
 // *** Accessibility Patch: Observer ***
@@ -632,6 +630,8 @@ function initA11yRepair() {
   a11yRepairExecuted = true;
 
 }
+
+
 
 
 function loadA11yPatch(url, callback) {
