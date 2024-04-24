@@ -411,7 +411,7 @@ function initDataFormPatch() {
   var keywordSelectedRegionClass = "." + keywordSelectedRegionClassName;
   var keywordSelectedRegionLabel = "Selected Job Alerts";
 
-  keywordSelected.forEach(function(selected) {
+  keywordSelected.forEach(function(region) {
 
     var keywordSelectedRegion = document.createElement("div");
     keywordSelectedRegion.classList.add(keywordSelectedRegionClassName);
@@ -424,8 +424,8 @@ function initDataFormPatch() {
 
     if(getKeywordRegion === null) {
 
-      selected.parentNode.insertBefore(selectedRegion, selected);
-      selectedRegion.appendChild(selected);
+      region.parentNode.insertBefore(keywordSelectedRegion, region);
+      keywordSelectedRegion.appendChild(region);
 
     }
 
