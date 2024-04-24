@@ -623,13 +623,13 @@ function initDataFormPatch() {
     event.preventDefault();
 
     // A11YFORM015
-    // Get the aria-describedby attribute from the keyword-category element.
+    // The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category.
 
     var keyWordCategory = form.querySelector(".keyword-category");
 
     if(keyWordCategory) {
 
-      keyWordCategory.getAttribute("aria-describedby");
+      var keyWordLocationDesc = keyWordCategory.getAttribute("aria-describedby");
 
       // Set aria-describedby attribute for keyword-location element
 
@@ -637,7 +637,7 @@ function initDataFormPatch() {
 
       if(keywordLocation) {
 
-        keywordLocation.setAttribute("aria-describedby", keyWordCategory);
+        keywordLocation.setAttribute("aria-describedby", keyWordLocationDesc);
 
       }
 
