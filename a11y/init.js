@@ -611,7 +611,6 @@ function initDataFormPatch() {
     captchaIFrames.forEach(function(iframe){
 
       iframe.removeAttribute("frameborder");
-      iframe.removeAttribute("scrolling");
 
     });
 

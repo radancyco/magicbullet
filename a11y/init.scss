@@ -74,3 +74,13 @@ z-index: 2147483647 !important;
 
 }
 
+// Captcha iframe 
+
+.grecaptcha-badge {
+    
+    iframe {
+    border: 0;
+    }
+
+}
+
