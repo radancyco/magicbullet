@@ -648,6 +648,7 @@ function initDataFormPatch() {
       var formMessageCloseLinkLabel = formMessageCloseLink.textContent.trim();
 
       var formMessageCloseButton = document.createElement("button");
+      formMessageCloseButton.setAttribute("type", "button");
       formMessageCloseButton.textContent = formMessageCloseLinkLabel;
 
       formMessageCloseLink.parentNode.replaceChild(formMessageCloseButton, formMessageCloseLink);
