@@ -660,7 +660,7 @@ function loadA11yPatch(url, callback) {
 
   var config = { childList: true, subtree: true };
 
-  var a11yObserver = new MutationObserver(function() {
+  var a11yObserver = new MutationObserver(function(mutationsList) {
 
     console.log("Mutations:", mutationsList); // Log mutations
     console.log("Observing childList mutations:", config.childList); // Log childList property of config
