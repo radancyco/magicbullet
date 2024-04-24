@@ -10,8 +10,6 @@
 
 loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
 
-console.log("%c MagicBullet: Accessibility Patch v1.9 in use. ", "background: #6e00ee; color: #fff");
-
   // *** Accessibility Patch: Static ***
   
   // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
@@ -698,7 +696,9 @@ function loadA11yPatch(url, callback) {
     a11yObserver.disconnect();
   
     a11yObserver.timeout = setTimeout(function() {
-  
+
+      console.log("%c MagicBullet: Accessibility Patch v1.9 in use. ", "background: #6e00ee; color: #fff");
+
       initGlobalPatch();
       initDataFormPatch();
 
