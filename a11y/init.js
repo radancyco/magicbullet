@@ -381,7 +381,7 @@ function initA11yRepair() {
       // TODO: Add language support.
 
       var keySelected = form.querySelectorAll('.keyword-selected');
-      var keyWordRegion = form.querySelector("keyword-region");
+      var keyWordRegion = form.querySelector(".keyword-region");
 
       keySelected.forEach(function(selected) {
 
