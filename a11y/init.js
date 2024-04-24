@@ -627,7 +627,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM018
+    // A11YFORM016
     // The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
 
     var formMessage = form.querySelector(".form-field.form-message b");
@@ -638,13 +638,29 @@ function initDataFormPatch() {
 
     }
 
+    // A11YFORM017
+    // The form message close is a link. Should be a button.
+
+    var formMessageCloseLink = form.querySelector(".form-field.form-message a");
+
+    if(formMessageCloseLink) {
+
+      var formMessageCloseLinkLabel = formMessageCloseLink.textContent.trim();
+
+      var formMessageCloseButton = document.createElement("button");
+      formMessageCloseButton.textContent = formMessageCloseLinkLabel;
+
+      formMessageCloseLink.parentNode.replaceChild(formMessageCloseButton, formMessageCloseLink);
+
+    }
+
     // Form submission events
 
     form.addEventListener("submit", function(event) {
 
       event.preventDefault();
 
-      // A11YFORM016
+      // A11YFORM018
       // The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category.
 
       var keyWordCategory = form.querySelector(".keyword-category");
@@ -663,7 +679,7 @@ function initDataFormPatch() {
 
       }
 
-      // A11YFORM017
+      // A11YFORM019
       // Set aria-invalid attribute values based on user input.
 
       var formInputs = form.querySelectorAll("input, select");
