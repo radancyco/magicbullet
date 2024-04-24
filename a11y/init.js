@@ -578,20 +578,23 @@ function initDataFormPatch() {
 
   });
 
-  // A11Y0020: The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
+  // A11YFORM013
+  // The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
   // TODO: Add language support.
 
   var captchaResponse = form.querySelectorAll(".g-recaptcha-response");
+  var captchaResponseLabel = "Captcha";
 
   captchaResponse.forEach(function(captcha){
 
-    captcha.setAttribute("aria-label", "Captcha");
+    captcha.setAttribute("aria-label", captchaResponseLabel);
 
   });
 
-  // Issue: The input-validation-error class is removed when leaving a field, but aria-invalid still remains set to true.
+  // A11YFORM014
+  // The input-validation-error class is removed when leaving a field, but aria-invalid still remains set to true.
 
-  var dataFormElement = form.querySelectorAll('input, select');
+  var dataFormElement = form.querySelectorAll("input, select");
 
   // Add blur event listener to each element
 
@@ -613,31 +616,30 @@ function initDataFormPatch() {
 
   });
 
-  // Form Submission Events
+  // Form submission events
 
   form.addEventListener("submit", function(event) {
 
-    // Prevent the default form submission behavior
-
     event.preventDefault();
 
-    // Issue: Get the aria-describedby attribute from the first keyword-category element
+    // A11YFORM015
+    // Get the aria-describedby attribute from the keyword-category element.
 
-    var ariaDescribedByCategory = form.querySelector('.keyword-category');
+    var keyWordCategory = form.querySelector(".keyword-category");
 
-    if(ariaDescribedByCategory) {
+    if(keyWordCategory) {
 
-      ariaDescribedByCategory.getAttribute('aria-describedby');
+      keyWordCategory.getAttribute("aria-describedby");
 
-      // Set aria-describedby attribute for keyword-location elements
+      // Set aria-describedby attribute for keyword-location element
 
-      var keywordLocationElements = form.querySelectorAll(".keyword-location");
+      var keywordLocation = form.querySelector(".keyword-location");
 
-      keywordLocationElements.forEach(function(element) {
+      if(keywordLocation) {
 
-        element.setAttribute("aria-describedby", ariaDescribedByCategory);
+        keyWordCategory.setAttribute("aria-describedby", keyWordCategory);
 
-      });
+      }
 
     }
 
