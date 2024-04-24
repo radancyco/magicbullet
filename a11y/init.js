@@ -438,7 +438,7 @@ function initDataFormPatch() {
 
   signUpButtons.forEach(function(button) {
 
-    button.setAttribute("aria-label", signUpButtonLabel;
+    button.setAttribute("aria-label", signUpButtonLabel);
 
   });
 
@@ -566,13 +566,14 @@ function initDataFormPatch() {
 
   });
 
-  // Issue: All required fields should include aria-invalid="false" on page load
+  // A11YFORM012
+  // All required fields should include aria-invalid="false" on page load.
 
   var requiredFields = form.querySelectorAll(".form-field.required input, .form-field.required select");
 
-  requiredFields.forEach(function(element) {
+  requiredFields.forEach(function(input) {
 
-    element.setAttribute('aria-invalid', 'false');
+    input.setAttribute("aria-invalid", "false");
 
   });
 
