@@ -378,7 +378,7 @@ function initA11yRepair() {
         selectedRegion.setAttribute("role", "region");
         selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
       
-        selected.parentNode.insertBefore(selectedRegion, selected);
+        //selected.parentNode.insertBefore(selectedRegion, selected);
        // selectedRegion.appendChild(selected);
 
       });
