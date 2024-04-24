@@ -669,13 +669,19 @@ function loadA11yPatch(url, callback) {
 
    if(!a11yRepairExecuted) {
 
-
+      // Clear the previous timeout
+  
+      clearTimeout(a11yObserver.timeout);
+  
+      // Set a timeout to run after NN milliseconds of no mutations
+  
+      a11yObserver.timeout = setTimeout(function() {
   
         // Run the function after content stops changing
   
         initA11yRepair();
   
-   
+      }, 1200); // Adjust the timeout period as needed
 
     }
   
