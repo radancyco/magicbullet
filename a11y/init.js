@@ -1,63 +1,44 @@
-
-loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
-
-// Other functions
-
-console.log("test");
-
-});
-
-// *** Accessibility Patch: Observer ***
-  
 function initA11yRepair() {
+  var a11yObserver = new MutationObserver(function(mutationsList, observer) {
+      clearTimeout(a11yObserver.timeout);
 
-  var a11yObserver = new MutationObserver(function() {
+      a11yObserver.disconnect(); // Disconnect observer before making changes
 
-    clearTimeout(a11yObserver.timeout);
+      a11yObserver.timeout = setTimeout(function() {
+          console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
 
-    a11yObserver.timeout = setTimeout(function() {
+          var dataForms = document.querySelectorAll(".data-form");
 
-      console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
+          dataForms.forEach(function(form){
+              var keySelected = form.querySelectorAll('.keyword-selected');
+              
+              keySelected.forEach(function(selected) {
+                  var selectedRegion = document.createElement("div");
+                  selectedRegion.classList.add("keyword-region");
+                  selectedRegion.setAttribute("role", "region");
+                  selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
+                  
+                  selected.parentNode.insertBefore(selectedRegion, selected);
+                  selectedRegion.appendChild(selected);
+              });
+          });
 
-      var dataForms = document.querySelectorAll(".data-form");
+          // Reconnect observer after making changes
+          var config = { childList: true, subtree: true };
+          a11yObserver.observe(document.body, config);
 
-      dataForms.forEach(function(form){
-
-        var keySelected = form.querySelectorAll('.keyword-selected');
-
-        keySelected.forEach(function(selected) {
-
-          var selectedRegion = document.createElement("div");
-          selectedRegion.classList.add("keyword-region");
-          selectedRegion.setAttribute("role", "region");
-          selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
-
-          selected.parentNode.insertBefore(selectedRegion, selected);
-          selectedRegion.appendChild(selected);
-
-        });
-
-      });
-
-    }, 800); 
-
-    a11yObserver.disconnect();
-
+      }, 800); 
   });
-          
+
   var config = { childList: true, subtree: true };
   a11yObserver.observe(document.body, config);
-
 }
 
 function loadA11yPatch(url, callback) {
-
   var a11yBody = document.body;
-
   a11yBody.classList.add("magicbullet-a11y");
 
   var componentLanguagePack = document.createElement("script");
-
   componentLanguagePack.setAttribute("src", url);
   componentLanguagePack.setAttribute("id", "component-library-language-pack");
   componentLanguagePack.onreadystatechange = callback;
@@ -66,11 +47,8 @@ function loadA11yPatch(url, callback) {
   var getComponentLanguagePack = document.getElementById("component-library-language-pack");
 
   if(getComponentLanguagePack === null) {
-
-    document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
-
+      document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
   }
-  
-  initA11yRepair();
 
+  initA11yRepair();
 }
