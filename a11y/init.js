@@ -38,9 +38,9 @@ function initA11yRepair() {
 
       });
 
-    });
+    }, 800); 
 
-  }, 800); 
+  });
           
   var config = { childList: true, subtree: true };
   a11yObserver.observe(document.body, config);
