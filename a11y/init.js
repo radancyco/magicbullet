@@ -420,7 +420,7 @@ function initDataFormPatch() {
 
     // See if region we wish to append already exists.
 
-    var getKeywordRegion = form.querySelector(keywordSelectedRegionClass;
+    var getKeywordRegion = form.querySelector(keywordSelectedRegionClass);
 
     if(getKeywordRegion === null) {
 
