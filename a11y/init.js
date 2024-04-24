@@ -356,13 +356,20 @@ function initA11yRepair() {
 
       labelRequired.forEach(function(label) {
 
-        var span = document.createElement('span');
-    
+        var span = document.createElement("span");
         span.classList.add("ico-required-indicator");
         span.setAttribute('aria-hidden', 'true');
         span.textContent = '*';
-    
-        label.appendChild(span);
+
+        // See if icon we wish to append already exists.
+
+        var getRequiredIcon = form.querySelector(".ico-required-indicator");
+
+        if(getRequiredIcon === null) {
+
+          label.appendChild(span);
+
+        }
 
       });
 
@@ -377,6 +384,8 @@ function initA11yRepair() {
           selectedRegion.classList.add("keyword-region");
           selectedRegion.setAttribute("role", "region");
           selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
+
+          // See if region we wish to append already exists.
 
           var getKeywordRegion = form.querySelector(".keyword-region");
 
