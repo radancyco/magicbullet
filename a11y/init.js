@@ -373,13 +373,17 @@ function initA11yRepair() {
 
       keySelected.forEach(function(selected) {
 
-        var selectedRegion = document.createElement("div");
-        selectedRegion.classList.add("keyword-region");
-        selectedRegion.setAttribute("role", "region");
-        selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
+        if (!selected.classList.contains("keyword-region")) {
+
+          var selectedRegion = document.createElement("div");
+          selectedRegion.classList.add("keyword-region");
+          selectedRegion.setAttribute("role", "region");
+          selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
       
-        selected.parentNode.insertBefore(selectedRegion, selected);
-        selectedRegion.appendChild(selected);
+          selected.parentNode.insertBefore(selectedRegion, selected);
+          selectedRegion.appendChild(selected);
+
+        }
 
       });
 
@@ -663,7 +667,6 @@ function loadA11yPatch(url, callback) {
   var a11yObserver = new MutationObserver(function(mutationsList) {
 
     console.log("Mutations:", mutationsList); // Log mutations
-    console.log("Observing childList mutations:", config.childList); // Log childList property of config
   
     clearTimeout(a11yObserver.timeout);
 
