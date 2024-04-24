@@ -94,22 +94,7 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 });
 
 
-// Issue: Include More Friendly Autocompletes
-// First Name
-document.querySelectorAll('input[name="FirstName"]').forEach(function(input) {
-  input.setAttribute('autocomplete', 'given-name');
-});
 
-// Last Name
-document.querySelectorAll('input[name="LastName"]').forEach(function(input) {
-  input.setAttribute('autocomplete', 'family-name');
-});
-
-// Email
-document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) {
-  input.setAttribute('type', 'email');
-  input.setAttribute('autocomplete', 'email');
-});
 
 
 
@@ -138,94 +123,81 @@ function initA11yRepair() {
 
   // Data Forms 
 
-    // A11Y0020: The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
-    // TODO: Add language support.
-
-    var captchaResponse = document.querySelectorAll(".g-recaptcha-response");
-
-    captchaResponse.forEach(function(captcha){
-
-      captcha.setAttribute("aria-label", "Captcha");
-
-    });
-
-    // All Data Form things that need to fire after page loads. 
-
-    var dataForms = document.querySelectorAll(".data-form");
+  var dataForms = document.querySelectorAll(".data-form");
 
     dataForms.forEach(function(form){
 
-      // Issue. Removing CSS asterisk because it reads out to assistive tech (AT), including as span with aria-hidden so that it is not picked up by AT.
+    // Issue: Removing CSS asterisk because it reads out to assistive tech (AT), including as span with aria-hidden so that it is not picked up by AT.
 
-      var labelRequired = form.querySelectorAll(".form-field.required label");
+    var labelRequired = form.querySelectorAll(".form-field.required label");
 
-      labelRequired.forEach(function(label) {
+    labelRequired.forEach(function(label) {
 
-        var span = document.createElement("span");
-        span.classList.add("ico-required-indicator");
-        span.setAttribute('aria-hidden', 'true');
-        span.textContent = '*';
+      var span = document.createElement("span");
+      span.classList.add("ico-required-indicator");
+      span.setAttribute('aria-hidden', 'true');
+      span.textContent = '*';
 
-        // See if icon we wish to append already exists.
+      // See if icon we wish to append already exists.
 
-        var getRequiredIcon = label.querySelector(".ico-required-indicator");
+      var getRequiredIcon = label.querySelector(".ico-required-indicator");
 
-        if(getRequiredIcon === null) {
+      if(getRequiredIcon === null) {
 
-          label.appendChild(span);
+        label.appendChild(span);
 
-        }
+      }
 
-      });
+    });
 
-      // Issue: "Add" button should be more explicit.
-      // TODO: Add Language support.
+    // Issue: "Add" button should be more explicit.
+    // TODO: Add Language support.
 
-      var addJobAlertLabel = form.querySelectorAll(".keyword-add");
+    var addJobAlertLabel = form.querySelectorAll(".keyword-add");
 
-      addJobAlertLabel.forEach(function(element) {
+    addJobAlertLabel.forEach(function(element) {
 
-        element.setAttribute("aria-label", "Add Job Alert");
+      element.setAttribute("aria-label", "Add Job Alert");
 
-      });
+    });
 
-      // Issue: "Keywory list requires a heading"
-      // TODO: Add language support.
+    // Issue: "Keywory list requires a heading"
+    // TODO: Add language support.
 
-      var keySelected = form.querySelectorAll('.keyword-selected');
+    var keySelected = form.querySelectorAll('.keyword-selected');
 
-      keySelected.forEach(function(selected) {
+    keySelected.forEach(function(selected) {
 
-          var selectedRegion = document.createElement("div");
-          selectedRegion.classList.add("keyword-region");
-          selectedRegion.setAttribute("role", "region");
-          selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
+      var selectedRegion = document.createElement("div");
+      selectedRegion.classList.add("keyword-region");
+      selectedRegion.setAttribute("role", "region");
+      selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
 
-          // See if region we wish to append already exists.
+      // See if region we wish to append already exists.
 
-          var getKeywordRegion = form.querySelector(".keyword-region");
+      var getKeywordRegion = form.querySelector(".keyword-region");
 
-          if(getKeywordRegion === null) {
+      if(getKeywordRegion === null) {
 
-            selected.parentNode.insertBefore(selectedRegion, selected);
-            selectedRegion.appendChild(selected);
+        selected.parentNode.insertBefore(selectedRegion, selected);
+        selectedRegion.appendChild(selected);
 
-          }
+      }
 
-      });
+    });
 
-      // Issue: "Sign Up" button should be more explicit.
-      // Add Language support.
-  
-      var signUpButton = form.querySelectorAll("button[type='submit']");
+    // Issue: "Sign Up" button should be more explicit.
+    // Add Language support.
 
-      signUpButton.forEach(function(element) {
-  
-        element.setAttribute("aria-label", "Sign Up for Job Alerts");
+    var signUpButton = form.querySelectorAll("button[type='submit']");
 
-      });
+    signUpButton.forEach(function(element) {
 
-          // Issue: Clutter, remove empty instruction-text spans, sometimes these add extra spacing.
+      element.setAttribute("aria-label", "Sign Up for Job Alerts");
+
+    });
+
+    // Issue: Clutter, remove empty instruction-text spans, sometimes these add extra spacing.
 
     var instructionText = form.querySelectorAll(".instruction-text");
 
@@ -254,9 +226,42 @@ function initA11yRepair() {
     var requiredXHTML = form.querySelectorAll("*[required='required']");
 
     requiredXHTML.forEach(function(element) {
-  
+
       element.setAttribute("required", "");
 
+    });
+
+    // Issue: Include More Friendly Autocompletes
+
+    // First Name
+
+    var autoCompleteFirstName = form.querySelectorAll('input[name="FirstName"]');
+
+    autoCompleteFirstName.forEach(function(input) {
+
+      input.setAttribute("autocomplete", "given-name");
+
+    });
+
+    // Last Name
+
+    var autoCompleteLastName = form.querySelectorAll('input[name="LastName"]');
+
+    autoCompleteLastName.forEach(function(input) {
+    
+      input.setAttribute("autocomplete", "family-name");
+    
+    });
+
+    // Email Address
+
+    var autoCompleteEmailAddress = form.querySelectorAll('input[name="EmailAddress"]');
+
+    autoCompleteEmailAddress.forEach(function(input) {
+        
+      input.setAttribute("type", "email");
+      input.setAttribute("autocomplete", "email");
+        
     });
 
     // Issue: Remove inline style on honeypot field and use hidden attribute instead
@@ -300,13 +305,12 @@ function initA11yRepair() {
 
       var fileRemove = resume.nextElementSibling;
       var resumeRemoveTxt = fileRemove.textContent.trim();
-  
+
       var button = document.createElement("button");
-  
       button.classList.add("file-remove");
       button.style.display = "none";
       button.textContent = resumeRemoveTxt;
-  
+
       fileRemove.parentNode.replaceChild(button, fileRemove);
 
     });
@@ -321,6 +325,17 @@ function initA11yRepair() {
 
     });
 
+    // A11Y0020: The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
+    // TODO: Add language support.
+
+    var captchaResponse = form.querySelectorAll(".g-recaptcha-response");
+
+    captchaResponse.forEach(function(captcha){
+
+      captcha.setAttribute("aria-label", "Captcha");
+
+    });
+
     // Issue: The input-validation-error class is removed when leaving a field, but aria-invalid still remains set to true.
 
     var dataFormElement = form.querySelectorAll('input, select');
@@ -331,18 +346,18 @@ function initA11yRepair() {
 
       element.addEventListener("blur", function() {
 
-          if (element.classList.contains("input-validation-error")) {
-    
-            element.setAttribute("aria-invalid", "true");
-    
-          } else {
-    
-            element.setAttribute("aria-invalid", "false");
-    
-          }
-    
+        if (element.classList.contains("input-validation-error")) {
+
+          element.setAttribute("aria-invalid", "true");
+
+        } else {
+
+          element.setAttribute("aria-invalid", "false");
+
+        }
+
       });
-    
+
     });
 
     // Form Submission Events
@@ -358,7 +373,7 @@ function initA11yRepair() {
       var ariaDescribedByCategory = form.querySelector('.keyword-category');
 
       if(ariaDescribedByCategory) {
-      
+
         ariaDescribedByCategory.getAttribute('aria-describedby');
 
         // Set aria-describedby attribute for keyword-location elements
@@ -393,7 +408,7 @@ function initA11yRepair() {
 
     });
 
-    });
+  });
 
   // Job Location Map
 
