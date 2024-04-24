@@ -380,7 +380,7 @@ function initA11yRepair() {
         span.setAttribute('aria-hidden', 'true');
         span.textContent = '*';
     
-        label.appendChild(span);
+      //  label.appendChild(span);
 
       });
 
@@ -396,8 +396,8 @@ function initA11yRepair() {
         selectedRegion.setAttribute("role", "region");
         selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
       
-        selected.parentNode.insertBefore(selectedRegion, selected);
-        selectedRegion.appendChild(selected);
+       // selected.parentNode.insertBefore(selectedRegion, selected);
+       // selectedRegion.appendChild(selected);
 
       });
 
