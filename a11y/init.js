@@ -249,29 +249,6 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
     
     });
 
-    // Issue: "Keyword Selected list requires a heading"
-    // TODO: Add language support.
-
-    var keySelected = form.querySelectorAll('.keyword-selected');
-
-    keySelected.forEach(function(selected) {
-  
-      var selectedRegion = document.createElement("div");
-      selectedRegion.setAttribute("role", "region");
-      selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
-      
-      selected.parentNode.insertBefore(selectedRegion, selected);
-
-      // Note: If something requires a timeout to wait for page to load, it might be better to add after mutation observer has initiated.
-
-      setTimeout(function() {
-  
-        selectedRegion.appendChild(selected);
-    
-      }, 2000); 
-
-    });
-
     // Issue: "Sign Up" button should be more explicit.
     // Add Language support.
   
@@ -391,6 +368,30 @@ function initA11yRepair() {
     captchaResponse.forEach(function(captcha){
 
       captcha.setAttribute("aria-label", "Captcha");
+
+    });
+
+    // All Data Form thinsg that need to fire after page loads. 
+
+    var dataForms = document.querySelectorAll(".data-form");
+
+    dataForms.forEach(function(form){
+
+      // Issue: "Keyword Selected list requires a heading"
+      // TODO: Add language support.
+
+      var keySelected = form.querySelectorAll('.keyword-selected');
+
+      keySelected.forEach(function(selected) {
+  
+        var selectedRegion = document.createElement("div");
+        selectedRegion.setAttribute("role", "region");
+        selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
+      
+        selected.parentNode.insertBefore(selectedRegion, selected);
+        selectedRegion.appendChild(selected);
+    
+      });
 
     });
 
