@@ -31,12 +31,13 @@ function initA11yRepair() {
           if (!selected.classList.contains("keyword-region")) {
 
             var selectedRegion = document.createElement("div");
-            selectedRegion.classList.add("keyword-region");
             selectedRegion.setAttribute("role", "region");
             selectedRegion.setAttribute("aria-label", "Selected Job Alerts");
 
             selected.parentNode.insertBefore(selectedRegion, selected);
             selectedRegion.appendChild(selected);
+
+            selectedRegion.classList.add("keyword-region");
 
           }
 
