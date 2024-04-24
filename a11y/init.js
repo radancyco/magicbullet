@@ -41,9 +41,9 @@ function initA11yRepair() {
 
     }, 800); 
 
-  });
+    a11yObserver.disconnect();
 
-  a11yObserver.disconnect();
+  });
           
   var config = { childList: true, subtree: true };
   a11yObserver.observe(document.body, config);
