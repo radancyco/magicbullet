@@ -315,7 +315,7 @@ document.querySelectorAll('input[name="EmailAddress"]').forEach(function(input) 
   
 function initA11yRepair() {
 
-  console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
+  console.log("%c MagicBullet: Accessibility Patch v1.9 in use. ", "background: #6e00ee; color: #fff");
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 
@@ -677,5 +677,7 @@ function loadA11yPatch(url, callback) {
   });
   
   a11yObserver.observe(document.body, config);
+
+  console.log(a11yObserver)
 
 }
