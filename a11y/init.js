@@ -268,7 +268,7 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
   
         selectedRegion.appendChild(selected);
     
-      }, 800); 
+      }, 2000); 
 
     });
 
