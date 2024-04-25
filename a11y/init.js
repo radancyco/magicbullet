@@ -8,6 +8,62 @@
 
 */
 
+function loadA11yPatch(url, callback) {
+
+  var a11yBody = document.body;
+
+  // Add A11y hook for implementation team. May come in handy.
+
+  a11yBody.classList.add("magicbullet-a11y");
+
+  // Install Language Pack.
+
+  var componentLanguagePack = document.createElement("script");
+
+  componentLanguagePack.setAttribute("src", url);
+  componentLanguagePack.setAttribute("id", "component-library-language-pack");
+  componentLanguagePack.onreadystatechange = callback;
+  componentLanguagePack.onload = callback;
+
+  // Only load one language pack per page.
+
+  var getComponentLanguagePack = document.getElementById("component-library-language-pack");
+
+  if(getComponentLanguagePack === null) {
+
+    document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
+
+  }
+
+  // Create a new MutationObserver instance
+
+  var config = { childList: true, subtree: true };
+
+  var a11yObserver = new MutationObserver(function(mutationsList) {
+
+    console.log("Mutations:", mutationsList); // Log mutations
+  
+    clearTimeout(a11yObserver.timeout);
+
+    a11yObserver.disconnect();
+  
+    a11yObserver.timeout = setTimeout(function() {
+
+      console.log("%c MagicBullet: Accessibility Patch v1.95 in use. ", "background: #6e00ee; color: #fff");
+
+      initGlobalPatch();
+      initDataFormPatch();
+
+      a11yObserver.observe(a11yBody, config);
+  
+    }, 800);
+  
+  });
+  
+  a11yObserver.observe(a11yBody, config);
+
+}
+
 loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
 
   // *** Accessibility Patch: Static ***
@@ -101,7 +157,7 @@ document.querySelectorAll('.search-form .job-search-legend, .advanced-search-for
 
 });
 
-// *** Accessibility Fixes ***
+// Accessibility Patch: Global
   
 function initGlobalPatch() {
 
@@ -354,6 +410,8 @@ function initGlobalPatch() {
 
 }
 
+// Accessibility Patch: Data Forms
+
 function initDataFormPatch() {
 
   var dataForms = document.querySelectorAll(".data-form");
@@ -591,27 +649,30 @@ function initDataFormPatch() {
     });
 
     // A11YFORM013
-    // Moving captcha so it does not interfere with tabbing order, adding an accName, and removing iframe garbage
+    // Adding an accName to textarea, removing iframe garbage, and moving captcha to end of form to address tab order. It should not exist before submit button.
 
     var captchaBadge = form.querySelector(".grecaptcha-badge");
 
     if(captchaBadge) {
 
       var captchaResponse = captchaBadge.querySelector(".g-recaptcha-response");
-      var captchaResponseLabel = "Captchaaaaa";
+      var captchaResponseLabel = "Captcha";
       var captchaIframe = captchaBadge.querySelectorAll("iframe");
 
-      //if(captchaResponse) {
+      // Add accName to textarea
 
-        captchaResponse.setAttribute("aria-label", captchaResponseLabel);
+      captchaResponse.setAttribute("aria-label", captchaResponseLabel);
 
-      //}
+      // Remove iframe junk (border: 0 now set in init.scss)
 
       captchaIframe.forEach(function(iframe){
 
         iframe.removeAttribute("frameborder");
 
       });
+
+      // Moving badge to end of form.
+      // Note: Badge appears to refresh and flash briefly on submit. Likely due to Mutation Observer reinitiating patch.
 
       form.appendChild(captchaBadge);
 
@@ -660,7 +721,7 @@ function initDataFormPatch() {
       event.preventDefault();
 
       // A11YFORM017
-      // The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category.
+      // The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
 
       var keyWordCategory = form.querySelector(".keyword-category");
 
@@ -679,7 +740,7 @@ function initDataFormPatch() {
       }
 
       // A11YFORM018
-      // Set aria-invalid attribute values based on user input.
+      // Now that we are including aria-invalis, we need to alter the values based on user input.
 
       var formInputs = form.querySelectorAll("input, select");
 
@@ -700,61 +761,5 @@ function initDataFormPatch() {
     });
 
   });
-
-}
-
-function loadA11yPatch(url, callback) {
-
-  var a11yBody = document.body;
-
-  // Add A11y hook for implementation team. May come in handy.
-
-  a11yBody.classList.add("magicbullet-a11y");
-
-  // Install Language Pack.
-
-  var componentLanguagePack = document.createElement("script");
-
-  componentLanguagePack.setAttribute("src", url);
-  componentLanguagePack.setAttribute("id", "component-library-language-pack");
-  componentLanguagePack.onreadystatechange = callback;
-  componentLanguagePack.onload = callback;
-
-  // Only load one language pack per page.
-
-  var getComponentLanguagePack = document.getElementById("component-library-language-pack");
-
-  if(getComponentLanguagePack === null) {
-
-    document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
-
-  }
-
-  // Create a new MutationObserver instance
-
-  var config = { childList: true, subtree: true };
-
-  var a11yObserver = new MutationObserver(function(mutationsList) {
-
-    console.log("Mutations:", mutationsList); // Log mutations
-  
-    clearTimeout(a11yObserver.timeout);
-
-    a11yObserver.disconnect();
-  
-    a11yObserver.timeout = setTimeout(function() {
-
-      console.log("%c MagicBullet: Accessibility Patch v1.95 in use. ", "background: #6e00ee; color: #fff");
-
-      initGlobalPatch();
-      initDataFormPatch();
-
-      a11yObserver.observe(a11yBody, config);
-  
-    }, 800);
-  
-  });
-  
-  a11yObserver.observe(a11yBody, config);
 
 }
