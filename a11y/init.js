@@ -591,28 +591,31 @@ function initDataFormPatch() {
     });
 
     // A11YFORM013
-    // The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
-    // TODO: Add language support.
+    // Moving captcha so it does not interfere with tabbing order, adding an accName, and removing iframe garbage
 
-    var captchaResponse = form.querySelector(".g-recaptcha-response");
-    var captchaResponseLabel = "Captcha";
+    var captchaBadge = form.querySelector(".grecaptcha-badge");
 
-    if(captchaResponse) {
+    if(captchaBadge) {
 
-      captchaResponse.setAttribute("aria-label", captchaResponseLabel);
+      var captchaResponse = captchaBadge.querySelector(".g-recaptcha-response");
+      var captchaResponseLabel = "Captchaaaaa";
+      var captchaIframe = captchaBadge.querySelectorAll("iframe");
+
+      if(captchaResponse) {
+
+        captchaResponse.setAttribute("aria-label", captchaResponseLabel);
+
+      }
+
+      captchaIframe.forEach(function(iframe){
+
+        iframe.removeAttribute("frameborder");
+
+      });
+
+      form.appendChild(captchaBadge);
 
     }
-
-    // A11YFORM014
-    // Removing iframe garbage
-
-    var captchaIFrames = form.querySelectorAll(".grecaptcha-badge iframe");
-
-    captchaIFrames.forEach(function(iframe){
-
-      iframe.removeAttribute("frameborder");
-
-    });
 
     // A11YFORM015
     // The "Sign Up" button needs to be more explicit to AT.
@@ -640,8 +643,7 @@ function initDataFormPatch() {
 
     // A11YFORM017
     // The form message close link should really be a button, but for now we'll simply add a role.
-    // TODO: Unbind or override current close and add support for closing when Enter or Spacebar is pressed.
-    // Ideally, it would be best if this was a button, but I can replace as it will break styling on sites it is currently used on.
+    // TODO: Unbind or override current close event and add support for closing when Enter AND Spacebar is pressed.
 
     var formMessageButton = form.querySelector(".form-field.form-message a");
 
@@ -694,8 +696,6 @@ function initDataFormPatch() {
         }
 
       });
-
-
 
     });
 
