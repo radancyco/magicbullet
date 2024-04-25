@@ -638,13 +638,26 @@ function initDataFormPatch() {
 
     }
 
+    // A11YFORM017
+    // The form message close link should really be a button, but for now we'll simply add a role.
+    // TODO: Unbind or override current close and add support for closing when Enter or Spacebar is pressed.
+    // Ideally, it would be best if this was a button, but I can replace as it will break styling on sites it is currently used on.
+
+    var formMessageButton = form.querySelector(".form-field.form-message a");
+
+    if(formMessageButton) {
+
+      formMessageButton.setAttribute("role", "button");
+
+    }
+
     // Form submission events
 
     form.addEventListener("submit", function(event) {
 
       event.preventDefault();
 
-      // A11YFORM017
+      // A11YFORM018
       // The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category.
 
       var keyWordCategory = form.querySelector(".keyword-category");
@@ -663,7 +676,7 @@ function initDataFormPatch() {
 
       }
 
-      // A11YFORM018
+      // A11YFORM019
       // Set aria-invalid attribute values based on user input.
 
       var formInputs = form.querySelectorAll("input, select");
