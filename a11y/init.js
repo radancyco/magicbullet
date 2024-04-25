@@ -56,7 +56,7 @@ function loadA11yPatch(url, callback) {
 
       a11yObserver.observe(a11yBody, config);
   
-    }, 800);
+    }, 1000);
   
   });
   
