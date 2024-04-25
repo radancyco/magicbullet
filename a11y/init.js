@@ -601,11 +601,11 @@ function initDataFormPatch() {
       var captchaResponseLabel = "Captchaaaaa";
       var captchaIframe = captchaBadge.querySelectorAll("iframe");
 
-      if(captchaResponse) {
+      //if(captchaResponse) {
 
         captchaResponse.setAttribute("aria-label", captchaResponseLabel);
 
-      }
+      //}
 
       captchaIframe.forEach(function(iframe){
 
@@ -617,7 +617,7 @@ function initDataFormPatch() {
 
     }
 
-    // A11YFORM015
+    // A11YFORM014
     // The "Sign Up" button needs to be more explicit to AT.
     // TODO: Add language support.
 
@@ -630,7 +630,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM016
+    // A11YFORM015
     // The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
 
     var formMessage = form.querySelector(".form-field.form-message b");
@@ -641,7 +641,7 @@ function initDataFormPatch() {
 
     }
 
-    // A11YFORM017
+    // A11YFORM016
     // The form message close link should really be a button, but for now we'll simply add a role.
     // TODO: Unbind or override current close event and add support for closing when Enter AND Spacebar is pressed.
 
@@ -659,7 +659,7 @@ function initDataFormPatch() {
 
       event.preventDefault();
 
-      // A11YFORM018
+      // A11YFORM017
       // The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category.
 
       var keyWordCategory = form.querySelector(".keyword-category");
@@ -678,7 +678,7 @@ function initDataFormPatch() {
 
       }
 
-      // A11YFORM019
+      // A11YFORM018
       // Set aria-invalid attribute values based on user input.
 
       var formInputs = form.querySelectorAll("input, select");
