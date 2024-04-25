@@ -594,14 +594,14 @@ function initDataFormPatch() {
     // The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
     // TODO: Add language support.
 
-    var captchaResponse = form.querySelectorAll(".g-recaptcha-response");
+    var captchaResponse = form.querySelector(".g-recaptcha-response");
     var captchaResponseLabel = "Captcha";
 
-    captchaResponse.forEach(function(captcha){
+    if(captchaResponse) {
 
-      captcha.setAttribute("aria-label", captchaResponseLabel);
+      captchaResponse.setAttribute("aria-label", captchaResponseLabel);
 
-    });
+    }
 
     // A11YFORM014
     // Removing iframe garbage
