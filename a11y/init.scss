@@ -72,18 +72,18 @@ z-index: 2147483647 !important;
 
     }
 
-}
+    // We do not need a close button on the form message. Who cares if it opened. 
 
-.form-message {
+    &.form-message {
 
-    a {
-    display: none;
+        a {
+        display: none;
+        }
+
     }
 
-    button {
-    }
-
 }
+
 
 // Captcha iframe 
 

@@ -638,30 +638,13 @@ function initDataFormPatch() {
 
     }
 
-    // A11YFORM017
-    // The form message close is a link. Should be a button.
-
-    var formMessageCloseLink = form.querySelector(".form-field.form-message a");
-
-    if(formMessageCloseLink) {
-
-      var formMessageCloseLinkLabel = formMessageCloseLink.textContent.trim();
-
-      var formMessageCloseButton = document.createElement("button");
-      formMessageCloseButton.setAttribute("type", "button");
-      formMessageCloseButton.textContent = formMessageCloseLinkLabel;
-
-      formMessageCloseLink.parentNode.replaceChild(formMessageCloseButton, formMessageCloseLink);
-
-    }
-
     // Form submission events
 
     form.addEventListener("submit", function(event) {
 
       event.preventDefault();
 
-      // A11YFORM018
+      // A11YFORM017
       // The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category.
 
       var keyWordCategory = form.querySelector(".keyword-category");
@@ -680,7 +663,7 @@ function initDataFormPatch() {
 
       }
 
-      // A11YFORM019
+      // A11YFORM018
       // Set aria-invalid attribute values based on user input.
 
       var formInputs = form.querySelectorAll("input, select");
