@@ -712,6 +712,12 @@ function initDataFormPatch() {
 
       formMessageButton.setAttribute("role", "button");
 
+      var formMessageButtonIcon = document.createElement("span");
+      formMessageButtonIcon.setAttribute("aria-hidden", "true");
+      formMessageButtonIcon.classList.add("btn-close-success-message");
+
+      formMessageButton.appendChild(formMessageButtonIcon);
+
     }
 
     // Form submission events
