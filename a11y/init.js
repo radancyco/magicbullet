@@ -8,389 +8,228 @@
 
 */
 
-(function(){
+function loadA11yPatch(url, callback) {
 
-  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
   var a11yBody = document.body;
-
-  // Data Attributes
-
-  var a11yJobList = magicBulletScript.getAttribute("data-a11y-job-list");
-  var a11ySearchDataList = magicBulletScript.getAttribute("data-a11y-search-datalist");
 
   // Add A11y hook for implementation team. May come in handy.
 
-  a11yBody.classList.add("magic-bullet-a11y");
+  a11yBody.classList.add("magicbullet-a11y");
 
-  // Career Site Accessibility Fixes
+  // Install Language Pack.
+
+  var componentLanguagePack = document.createElement("script");
+
+  componentLanguagePack.setAttribute("src", url);
+  componentLanguagePack.setAttribute("id", "component-library-language-pack");
+  componentLanguagePack.onreadystatechange = callback;
+  componentLanguagePack.onload = callback;
+
+  // Only load one language pack per page.
+
+  var getComponentLanguagePack = document.getElementById("component-library-language-pack");
+
+  if(getComponentLanguagePack === null) {
+
+    document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
+
+  }
+
+  // Create a new MutationObserver instance
+
+  var config = { childList: true, subtree: true };
+
+  var a11yObserver = new MutationObserver(function(mutationsList) {
+
+    console.log("Mutations:", mutationsList); // Log mutations
+  
+    clearTimeout(a11yObserver.timeout);
+
+    a11yObserver.disconnect();
+  
+    a11yObserver.timeout = setTimeout(function() {
+
+      console.log("%c MagicBullet: Accessibility Patch v1.95 in use. ", "background: #6e00ee; color: #fff");
+
+      initGlobalPatch();
+      initDataFormPatch();
+
+      a11yObserver.observe(a11yBody, config);
+  
+    }, 1000);
+  
+  });
+  
+  a11yObserver.observe(a11yBody, config);
+
+}
+
+loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
+
+  // *** Accessibility Patch: Static ***
+  
+  // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
+
+  var expandableParent = document.querySelectorAll(".expandable-parent")
+
+  expandableParent.forEach(function(expand) {
+
+    expand.setAttribute("aria-expanded", "false");
+  
+    if (expand.nextElementSibling) {
+  
+      expand.nextElementSibling.removeAttribute("aria-expanded");
+  
+    }
+
+});
+
+// https://radancy.dev/magicbullet/a11y/#issue-0002
+document.querySelectorAll('.expandable-parent').forEach(function(element) {
+  element.addEventListener('click', function() {
+      var ariaExpanded = this.getAttribute('aria-expanded');
+      this.setAttribute('aria-expanded', ariaExpanded === 'true' ? 'false' : 'true');
+      if (this.nextElementSibling) {
+          this.nextElementSibling.removeAttribute('aria-expanded');
+      }
+  });
+});
+
+// https://radancy.dev/magicbullet/a11y/#issue-0006
+document.querySelectorAll('.social-share-items a').forEach(function(anchor) {
+  anchor.insertAdjacentHTML('beforeend', ' <span class="wai">(Opens in new tab)</span>');
+});
+
+// https://radancy.dev/magicbullet/a11y/#issue-0009
+document.querySelectorAll('input[type="checkbox"]').forEach(function(input) {
+  input.removeAttribute('autocomplete');
+});
+
+// Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
+document.querySelectorAll('.search-location-error').forEach(function(error, i) {
+  error.id = 'search-error-' + (i + 1);
+  error.style.outline = '0 !important';
+});
+
+document.querySelectorAll('.search-location').forEach(function(location, i) {
+  location.setAttribute('aria-describedby', 'search-error-' + (i + 1));
+  location.setAttribute('aria-invalid', 'false');
+});
+
+document.querySelectorAll('.search-form button').forEach(function(button) {
+  button.addEventListener('click', function() {
+      document.querySelectorAll('.search-location-error').forEach(function(error) {
+          error.removeAttribute('tabindex');
+      });
+      setTimeout(function() {
+          var locationErrorVisible = document.querySelector('.search-location-error').style.display !== 'none';
+          document.querySelectorAll('.search-location').forEach(function(location) {
+              location.setAttribute('aria-invalid', locationErrorVisible ? 'true' : 'false');
+              if (locationErrorVisible) {
+                  location.focus();
+              }
+          });
+      }, 100);
+  });
+});
+
+document.querySelectorAll('.search-location').forEach(function(location) {
+  location.addEventListener('change', function() {
+      var locationErrorVisible = document.querySelector('.search-location-error').style.display !== 'none';
+      this.setAttribute('aria-invalid', locationErrorVisible ? 'true' : 'false');
+      if (locationErrorVisible) {
+          this.focus();
+      }
+  });
+});
+
+// Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
+document.querySelectorAll('.search-form .job-search-legend, .advanced-search-form .job-search-legend').forEach(function(legend, i) {
+  legend.id = 'job-search-legend-' + (i + 1);
+  legend.parentElement.setAttribute('aria-labelledby', 'job-search-legend-' + (i + 1));
+});
+
+
+
+
+
+
+
+});
+
+// Accessibility Patch: Global
+  
+function initGlobalPatch() {
+
+  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 
   // Global Issues
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0001
+    // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0003
 
-  $(".expandable-parent").attr("aria-expanded", "false").next().removeAttr("aria-expanded");
+    var missingAltAttributes = document.querySelectorAll("img:not([alt])");
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0002
+    missingAltAttributes.forEach(function(img){
 
-  $(".expandable-parent").on("click", function() {
-
-    $(this).attr('aria-expanded', function (i, attr) {
-
-    	return attr == 'true' ? 'false' : 'true'
+      img.setAttribute("alt", "");
 
     });
 
-    $(this).next().removeAttr("aria-expanded");
+  // Job Location Map
 
-  });
+    // A11Y0005: https://radancy.dev/magicbullet/a11y/#issue-0005
+    // TODO: These would be better served as buttons, not links. Including role="button" for now, but we need to add space bar key support eventually.
+    // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames.
+    // TODO: Include Wegmans functionality to skip over Google Map.
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0004
+    var mapButton = document.querySelectorAll(".job-map-nearby a");
 
-  $(".search-form, .advanced-search-form").attr("role", "search");
+    mapButton.forEach(function(btn){
 
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0005
-
-  $(".job-map-nearby a").removeAttr("target");
-
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0006
-
-  $(".social-share-items a").append(" <span class='wai'>(Opens in new tab)</span>");
-
-  // Job Description Garbage
-
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0007
-
-  $(".ats-description").find("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").removeAttr("tabindex");
-
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0008
-
-  $(".ats-description table").attr("role", "presentation");
-
-  $(".ats-description *").removeAttr("face size title id"); // Remove useless attributes.
-
-  $(".ats-description font").contents().unwrap(); // Remove font element.
-
-  // Remove autocomplete from checkbox inputs (needs to be handled on AjaxComplete eventually).
-
-  // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0009
-
-  $("input[type=checkbox]").removeAttr("autocomplete");
-
-  // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
-
-  // Note: Multiple Search location errors, require unique ID's
-
-  $(".search-location-error").each(function(i) {
-
-    $(this).attr({
-
-      "id": "search-error-" + (i + 1),
-      "style": "outline: 0 !important"
+      btn.setAttribute("role", "button");
+      btn.removeAttribute("target");
 
     });
 
-  });
+  // Search Forms 
 
-  // Note: Multiple Search location fields, require unique aria-describedby
+    // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0004
 
-  $(".search-location").each(function(i) {
+    var searchForm = document.querySelectorAll(".search-form, .advanced-search-form");
 
-    $(this).attr({
+    searchForm.forEach(function(form){
 
-      "aria-describedby": "search-error-" + (i + 1),
-      "aria-invalid": "false"
+      form.setAttribute("role", "search");
 
     });
 
-  });
+  // Search Results & Job Description
 
-  $(".search-form button").on("click", function(){
+    // A11Y0018: Custom "Save Job" button functionality
 
-    $(".search-location-error").removeAttr("tabindex");
+    var btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
 
-    setTimeout(function(){
-
-      if($(".search-location-error").is(":visible")){
-
-        $(".search-location").attr("aria-invalid", "true").focus();
-
-      } else {
-
-        $(".search-location").attr("aria-invalid", "false");
-
-      }
-
-    }, 100);
-
-  });
-
-  $(".search-location").on("change", function(){
-
-      if($(".search-location-error").is(":visible")){
-
-        $(this).attr("aria-invalid", "true").focus();
-
-      } else {
-
-        $(this).attr("aria-invalid", "false");
-
-      }
-
-  });
-
-  // Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
-  // Note: Currently only used on Wegmans
-
-  $(".search-form .job-search-legend, .advanced-search-form .job-search-legend").each(function(i) {
-
-    $(this).attr("id", "job-search-legend-" + (i + 1));
-    $(this).parent().attr("aria-labelledby", "job-search-legend-" + (i + 1));
-
-  });
-
-  // Issue "Keyword Selectd list requires a heading"
-
-  $(".data-form .keyword-selected").each(function( index ) {
-
-    $(this).attr("aria-labelledby", "selected-keywords-" + (index + 1) + "");
-    $("<div hidden id=selected-keywords-" + (index + 1) + ">Selected Job Alerts</div>").insertBefore($(this));
-
-  });
-
-  // Issue. Removing CSS asterick, including as span with aria-hidden.
-
-  $(".data-form .form-field.required label").append(" <span class='ico-required-indicator' aria-hidden='true'>*</span>");
-
-  // Issue: Include More Friendly Autocompletes
-
-  // First Name
-
-  $(".data-form input[name='FirstName']").attr("autocomplete", "given-name");
-
-  // Last Name
-
-  $(".data-form input[name='LastName']").attr("autocomplete", "family-name");
-
-  // Email
-
-  $(".data-form input[name='EmailAddress']").attr({
-
-    "type":"email",
-    "autocomplete": "email",
-
-  });
-
-  // Issue: All required fields should include aria-invalid="false" on page load
-
-  $(".data-form .form-field.required input, .data-form .form-field.required select").attr("aria-invalid", "false");
-
-  // Issue: We need to perform some additional form validation/manipulation after form is submitted (and on change)
-
-  $(".data-form").on("submit", function() {
-
-    setTimeout(function(){
-
-        var ariaDescribedByCategory = $(".data-form .keyword-category").attr("aria-describedby");
-
-        $(".data-form .keyword-location").attr("aria-describedby", ariaDescribedByCategory);
-
-        $(".data-form input, .data-form select").each(function() {
-
-          if($(this).hasClass("input-validation-error")) {
-
-            $(this).attr("aria-invalid", "true");
-
-          } else {
-
-            $(this).attr("aria-invalid", "false");
-
-          }
-
-        });
-
-    }, 100);
-
-  });
-
-  $(".data-form input, .data-form select").on("blur", function(){
-
-      setTimeout(function(){
-
-        if($(this).hasClass("input-validation-error")) {
-
-          $(this).attr("aria-invalid", "true");
-
-        } else {
-
-          $(this).attr("aria-invalid", "false");
-
-        }
-
-      }, 250);
-
-  });
-
-  // Issue: The Job Search custom datalist is really horrible. Now that IE11 is not supported, we should begin using datalist instead.
-
-  if(a11ySearchDataList !== null) {
-
-    a11yBody.classList.add("a11y-search-location");
-
-    var $searchLocation = $(".search-location");
-    var $mindReaderResults = $(".mindreader-results");
-
-    // Adding postal code now to satisify certain requirements, but may need to remove.
-
-    // $searchLocation.attr("autocomplete", "postal-code");
-
-    $searchLocation.attr("list", "search-location-datalist").after("<datalist id='search-location-datalist' class='search-location-datalist'></div>");
-
-    var $searchLocationDatalist = $(".search-location-datalist");
-
-    $searchLocation.on("keypress", function() {
-
-      var $htmlStr = $mindReaderResults.find("a");
-      var $cloneList = $htmlStr.clone();
-
-      // Get all links from mindreader, clone them, make a new list.
-
-      $searchLocationDatalist.html($cloneList);
-
-      var newList = $searchLocationDatalist.find("a");
-
-      // Grag each data-* from list and apply to new element (option)
-
-      newList.each(function(){
-
-        var $targetId = $(this).data("target-id");
-        var $lat = $(this).data("lat");
-        var $lon = $(this).data("lon");
-        var $lp = $(this).data("lp");
-        var $lt = $(this).data("lt");
-        var $pc = $(this).data("pc");
-        var $htmlText = $(this).text();
-        $(this).replaceWith("<option data-lat=" + $lat + " data-lon=" + $lon + " data-lp=" + $lp + " data-lt=" + $lt + " data-pc=" + $pc + ">" + $htmlText + "</option>");
-
-      });
-
-    });
-
-    $searchLocation.on("change", function() {
-
-      var val = $(this).val();
-
-      var lat = $searchLocationDatalist.find("option").filter(function() {
-
-        return this.value == val;
-
-      }).data("lat");
-
-      var lon = $searchLocationDatalist.find("option").filter(function() {
-
-        return this.value == val;
-
-      }).data("lon");
-
-      var lp = $searchLocationDatalist.find("option").filter(function() {
-
-        return this.value == val;
-
-      }).data("lp");
-
-      var lt = $searchLocationDatalist.find("option").filter(function() {
-
-        return this.value == val;
-
-      }).data("lt");
-
-      $(this).attr({
-
-        "data-lon": lon,
-        "data-lat": lat,
-        "data-lp": lp,
-        "data-lt": lt
-
-      });
-
-    });
-
-  }
-
-  // Issue: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
-
-  function fixDisabledButton() {
-
-    $(".pagination-paging .disabled").removeAttr("aria-hidden href");
-
-  }
-
-  fixDisabledButton(); // Initial Page Load
-
-  // Issue: The search navigation is often style not to look like a form and submit button is removed
-  // So we need to strip this functionality and simply show text.
-
-  function noFormPagination() {
-
-    var pageStatusText = $(".pagination-current-label span").text() + " " + $(".pagination-current").val() + " " + $(".pagination-total-pages").text();
-
-    var pageStatus = pageStatusText.trim();
-
-    // While we are in here, let's indicate to screen readers what page they are on - cool!
-
-    // Level Access suggest removing this. https://docs.google.com/spreadsheets/d/18Ua04NT6ecf8EBEwn_2HcDW0lJ0E_mLNXnD9uNp-A3c/edit#gid=1370565666&range=141:141
-
-    // if (pageStatus !== "undefined"){
-
-      // $("#search-results").attr("aria-label", pageStatus);
-
-    // }
-
-    if($(".pagination-no-form").length) {
-
-      if(!$(".pagination-page-status").length) {
-
-        $(".pagination-page-count").append("<p class='pagination-page-status' tabindex='0'>" + pageStatus + "</p>");
-
-        $(".pagination-no-form").remove();
-
-      }
-
-    }
-
-  }
-
-  noFormPagination(); // Initial Page Load
-
-  // Issue: The "Save Jobs" button has accessibility issues.
-
-  function saveJobButton() {
-
-    // Save Job for later
-
-    var savedJobs = document.querySelectorAll(".js-save-job-btn");
-
-    for (var i = 0; i < savedJobs.length; i++) {
+    btnSaveJobs.forEach(function(btn){
 
       // aria-pressed not working with type attribute on it, which makes sense.
       // TODO: See if still an issue in VO, too.
+      // TODO: Add language support.
 
-      savedJobs[i].removeAttribute("type");
+      btn.removeAttribute("type");
+      btn.setAttribute("role", "button"); // iOS, NVDA bug, state not reading back so need to implicitly call role. Do not remove until support better.
+      btn.setAttribute("aria-label", "Save Job");
 
-      savedJobs[i].setAttribute("role", "button"); // iOS, NVDA bug, state not reading back so need to implicitly call role. Do not remove until support better.
+      if(btn.dataset.jobSaved === "true") {
 
-      savedJobs[i].setAttribute("aria-label", "Save Job");
-
-      if(savedJobs[i].dataset.jobSaved === "true") {
-
-        savedJobs[i].setAttribute("aria-pressed", "true");
+        btn.setAttribute("aria-pressed", "true");
 
       } else {
 
-        savedJobs[i].setAttribute("aria-pressed", "false");
+        btn.setAttribute("aria-pressed", "false");
 
       }
 
-      savedJobs[i].addEventListener("click", function() {
+      btn.addEventListener("click", function() {
 
         if(this.dataset.jobSaved === "true") {
 
@@ -404,348 +243,527 @@
 
       });
 
-    }
+  });
 
-  }
+  // Search Results: Applied Filters
 
-  saveJobButton(); // Initial Page Load
+    // A11Y00XX: 
+    
+      // The filters section has incorrect ARIA on it. Remove aria-hidden and aria-expanded.
+      // Move aria-labelledby from ul to section wrapper, added region role.
+      // Make remove buttons more contextually friendly to AT.
+      // Adjust focus when button with focus is removed. Note: This is now handled by the product. See search.js. Open ticket. See https://wegmans-refresh2.runmytests.com/en/search-jobs?fl=6252001&glat=40.5751&glon=-75.51963 
+      // TODO: Add language support to buttons.
+      // TODO: Regarding aria-labelledby on section wrapper, see if contextual support good enough here. 
+      // If it is, then may be able to remove aria-labelledby and region role. See https://www.w3.org/WAI/WCAG22/Techniques/html/H81
+      // BUG: When disabled filter button is present and last filter button is pressed, focus is placed on checkbox in filter section.
 
-  // Issue: Focus is lost when "Filtered by" button is clicked
+    var appliedFilters = document.querySelectorAll(".search-results-options");
 
-  function setFilterButtonFocus() {
+    appliedFilters.forEach(function(section){
 
-    $(".filter-button").on("click", function() {
+      // Remove aria-labeledby from UL.
 
-      var selectedButtonIndex = $(".filter-button").index(this);
+      var appliedFiltersList = section.querySelectorAll("ul[aria-labelledby]");
 
-      setTimeout(function(){
+      appliedFiltersList.forEach(function(list){
 
-        var remainingButtonIndex = $(".filter-button").length;
+        list.removeAttribute("aria-labelledby");
 
-        // console.log(selectedButtonIndex)
+      });
 
-        if(remainingButtonIndex) {
+      // Remove/Add ARIA to parent section warpper (.search-results-option)
+    
+      section.removeAttribute("aria-hidden");
+      section.removeAttribute("aria-expanded");
+      section.setAttribute("aria-labelledby", "applied-filters-label");
+      section.setAttribute("role", "region");
 
-          if(selectedButtonIndex >= remainingButtonIndex) {
+      // Add ARIA label to each button that is not disabled.
 
-            $(".filter-button").last().focus();
+      var btnSearchFilter = section.querySelectorAll(".filter-button:not([disabled])");
 
-          } else {
+      btnSearchFilter.forEach(function(btn){
+    
+        btn.setAttribute("aria-label", "Remove " + btn.textContent + " filter");
 
-            $(".filter-button").eq(selectedButtonIndex).focus();
+      });
 
-          }
+    });
 
-        } else {
+    // A11Y0019: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
+    // TODO: Add language support.
 
-          $("#search-results-list ul a:first, #search-results-list table a:first").focus();
+    var paginationNav = document.querySelectorAll(".pagination");
 
-        }
+    paginationNav.forEach(function(nav){
 
-      }, 1000);
+      nav.setAttribute("aria-label", "Pagination");
+
+    });
+
+    // A11Y0020: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
+
+    var paginationPage = document.querySelectorAll(".pagination-paging .disabled");
+
+    paginationPage.forEach(function(page){
+
+      page.removeAttribute("aria-hidden");
+      page.removeAttribute("href");
+
+    });
+
+    // Job Description: Garbage Removal
+
+    var atsDescription = document.querySelectorAll(".ats-description");
+
+    atsDescription.forEach(function(desc) {
+
+      // Issue-0007: Remove tabindex attribute from elements within .ats-description that have tabindex attribute not equal to '0' or starting with '-'
+
+      desc.querySelectorAll("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").forEach(function(tabindex) {
+    
+        tabindex.removeAttribute("tabindex");
+
+      });
+
+      // Issue-0008: Add role="presentation" to tables within .ats-description
+
+      desc.querySelectorAll("table").forEach(function(table) {
+    
+        table.setAttribute("role", "presentation");
+
+      });
+
+      // Remove useless attributes from all elements within .ats-description
+
+      desc.querySelectorAll("*").forEach(function(element) {
+    
+        element.removeAttribute("face");
+        element.removeAttribute("size");
+        element.removeAttribute("title");
+        element.removeAttribute("id");
+
+      });
+
+    // Remove <font> element and unwrap its contents within .ats-description
+
+    desc.querySelectorAll("font").forEach(function(font) {
+    
+      var parent = font.parentNode;
+    
+      while (font.firstChild) {
+    
+        parent.insertBefore(font.firstChild, font);
+    
+      }
+    
+      parent.removeChild(font);
+
+    });
+
+
+  });
+
+  // Issue: Remove role="status" from h1 and h2 elements
+
+  $(".search-results h1, .search-results h2").removeAttr("role");
+
+  // Issue: Remove tabindex from search-filter element. Only interactive elements should receive focus.
+
+  $("#search-filters").removeAttr("tabindex", 0);
+
+  // BUG: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
+  // For now, a hacky fix...
+
+  $("#search-results").attr("tabindex", -1);
+
+  // BUG: All section elements used for personbalization, appear to have tabindex="0" on them. These should not exist.
+
+  $("section[data-module-type='Personalization']").removeAttr("tabindex");
+
+  // BUG: Sitemap pages have tabindex on certain header. Inactive elements should nto receive focus.
+
+  $(".job-location h2, .job-category h2").removeAttr("tabindex aria-expanded").removeClass("expandable-parent");
+
+  // Issue: Job Lists should really have the location appear inside of a link so that job links with same title can be more descriptive and discernable.
+
+  var a11yJobList = magicBulletScript.getAttribute("data-a11y-job-list");
+
+  if(a11yJobList !== null) {
+
+    $(".job-list .location, .job-list .date").each(function() {
+
+      $(this).appendTo($(this).prev());
 
     });
 
   }
 
-  setFilterButtonFocus(); // Initial Page Load
+  // Issue: Cookie Management Page has some aria-describedby attributes on the page that do nothing. Remove.
 
-  // Issue: Filter Buttons could be more firendly to screen readers
+  $("input[aria-describedby='cookieDescriptionIdAttr']").removeAttr("aria-describedby");
 
-  function fixFilterButton() {
+  // TODO: Add future fixes here.
 
-    $("button.filter-button").each(function() {
+}
 
-      $(this).attr("aria-label", "Remove " + $(this).text() + " filter");
+// Accessibility Patch: Data Forms
 
-    });
+function initDataFormPatch() {
 
-  }
+  var dataForms = document.querySelectorAll(".data-form");
 
-  fixFilterButton(); // Initial Page Load
+  dataForms.forEach(function(form){
 
-  function miscA11yFixes() {
+    // A11YFORM001
+    // Clutter. Removing empty instruction-text spans as they can sometimes cause undesired spacing issues.
 
-    // https://radancy.dev/tmp-magic-bullet/a11y/#issue-0003
+    var instructionTexts = form.querySelectorAll(".instruction-text");
 
-    $("img:not([alt])").attr("alt", "");
+    instructionTexts.forEach(function(element) {
 
-    // A11y Form Fixes
+      if (element.textContent.trim() === "") {
 
-    // Issue: Remove aria-required from p element (it should not exist on this element) and various other elements.
-
-    $(".data-form .form-field.required, .form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea").removeAttr("aria-required");
-
-    // Required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
-
-    $(".data-form input[required='required'], .data-form select[required='required'], .data-form textarea[required='required']").prop("required", true);
-
-    // Checkboxes missing due to reset above, so let's add them back
-
-    $("input[type='checkbox'][aria-required='true']").prop("required", true).removeAttr("aria-required");
-
-    // Issue: Remove "autocomplete" from select element.
-
-    $(".data-form select").removeAttr("autocomplete");
-
-    // Issue: Since input element is "valid", it requires no aria-describedy attribute, since there is no validation message to ever bind it to.
-
-    $(".valid").removeAttr("aria-describedby");
-
-    // Issue: Clutter, remove empty instruction-text spans
-
-    $(".instruction-text").each(function() {
-
-      if ($(this).is(":empty")){
-
-          $(this).remove();
+        element.parentNode.removeChild(element);
 
       }
 
     });
 
-    // Issue: "Add" button should be more explicit.
-    // Hack, this is only for english at the moment.
+    // A11YFORM002
+    // Removing the CSS asterisk (see init.scss) because it reads out to assistive tech (AT) when added via content proprty. 
+    // Including a span with aria-hidden so that it is not picked up by AT.
+    // Note: May need to add another, visually hidden. required messages to this in the future.
 
-    $("html[lang='en'] .data-form .keyword-add").attr("aria-label", "Add Job Alert");
+    var requiredLabels = form.querySelectorAll(".form-field.required label");
+    var iconClassName = "ico-required-indicator";
+    var iconClass = "." + iconClassName;
 
-    // Issue: "Sign Up" button should be more explicit.
-    // Hack, this is only for english at the moment.
+    requiredLabels.forEach(function(label) {
 
-    $(".data-form .form-field.submit button").attr("aria-label", "Sign Up for Job Alerts");
+      var span = document.createElement("span");
+      span.classList.add(iconClassName);
+      span.setAttribute("aria-hidden", "true");
+      span.textContent = "*";
 
-    // Issue: Clutter, remove unused elements from fields that are not required.
+      // See if icon we wish to append already exists.
 
-    /* $(".form-field:not(.required),").each(function() {
+      var getRequiredIcon = label.querySelector(iconClass);
 
-      $(this).find(".field-validation-valid").remove();
+      if(getRequiredIcon === null) {
 
-    }); */
+        label.appendChild(span);
 
-    // Issue: For some odd reason the Location and Category inout fields have an aria-label on them. These should not exist on any form fields.
-    // Note: The aria-label is also being appended with the label text AND the placeholder text!!!! Ex: aria-label="Select a Location eg: New York, Arizona..."
+      }
 
-    $(".data-form input, .data-form select").removeAttr("aria-label");
+    });
 
-    // Issue: Remove inline style on honeypot field and use hidden attribute instead
+    // A11YFORM003
+    // Removing aria-required from various elements. This attribute is sometimes flagged in automated testing and just the required attribue is now recommended.
 
-    $(".form-field.confirm-email").prop("hidden", true).removeAttr("aria-hidden style");
+    var ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
 
-    // Issue: Remove aria-hidden from honeypot label and input. The parent element should hide this from all assistive tech.
-    // Note: Not CSS dependent, so fields will always be hidden.
+    ariaRequired.forEach(function(element) {
 
-    $(".form-field.confirm-email label, .form-field.confirm-email input").removeAttr("aria-hidden");
+      element.removeAttribute("aria-required");
 
-    // Issue: Remove Role from field-validation-error (it's really not needed)
+    });
 
-    $(".field-validation-valid").removeAttr("role");
+    // A11YFORM004
+    // Issue: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
 
-    // Issue: The Job Alerts upload includes an aria-describedby with no associated ID when no Field Instructions are included.
+    var requiredXHTML = form.querySelectorAll("*[required='required']");
 
-    // TODO: Need to upodate this so it works with ajax callback.
+    requiredXHTML.forEach(function(element) {
 
-    if(!$(".form-field input[name='Resume']").prev(".instruction-text").length) {
+      element.setAttribute("required", "");
 
-      // If upload instruction text does not exist, then remove aria-describedby
+    });
 
-      $(".form-field input[name='Resume']").removeAttr("aria-describedby");
+    // A11YFORM005
+    // Issue: Remove "role" from field-validation-error (it's not needed).
+
+    var validationMsg = form.querySelectorAll(".field-validation-valid");
+
+    validationMsg.forEach(function(element) {
+
+      element.removeAttribute ("role");
+
+    });
+
+    // A11YFORM006
+    // All required fields should include aria-invalid="false" on page load.
+
+    var requiredFields = form.querySelectorAll(".form-field.required input, .form-field.required select");
+
+    requiredFields.forEach(function(input) {
+
+      input.setAttribute("aria-invalid", "false");
+
+    });
+
+    // A11YFORM007
+    // The input-validation-error class is removed when leaving a field, but aria-invalid still remains set to true.
+
+    var dataFormElement = form.querySelectorAll("input, select");
+
+    // Add blur event listener to each element
+
+    dataFormElement.forEach(function(element) {
+
+      element.addEventListener("blur", function() {
+
+        if (element.classList.contains("input-validation-error")) {
+
+          element.setAttribute("aria-invalid", "true");
+
+        } else {
+
+          element.setAttribute("aria-invalid", "false");
+
+        }
+
+      });
+
+    });
+
+    // A11YFORM008
+    // It is customary to include more useful autocomplete attributes so that certain fields will show the contextual menu for easier input.
+
+    // First Name
+
+    var autoCompleteFirstName = form.querySelectorAll("input[name='FirstName']");
+
+    autoCompleteFirstName.forEach(function(input) {
+
+      input.setAttribute("autocomplete", "given-name");
+
+    });
+
+    // Last Name
+
+    var autoCompleteLastName = form.querySelectorAll("input[name='LastName']");
+
+    autoCompleteLastName.forEach(function(input) {
+
+      input.setAttribute("autocomplete", "family-name");
+
+    });
+
+    // Email Address
+
+    var autoCompleteEmailAddress = form.querySelectorAll("input[name='EmailAddress']");
+
+    autoCompleteEmailAddress.forEach(function(input) {
+      
+      input.setAttribute("type", "email");
+      input.setAttribute("autocomplete", "email");
+      
+    });
+
+    // A11YFORM009
+    // The "Add" button needs to be more explicit to AT.
+    // TODO: Add language support.
+
+    var addJobAlertButtons = form.querySelectorAll(".keyword-add");
+
+    addJobAlertButtons.forEach(function(button) {
+
+      button.setAttribute("aria-label", "Add Job Alert");
+
+    });
+
+    // A11YFORM010
+    // The keyword list requires a more accessible grouping to better identify it.
+    // TODO: Add language support.
+
+    var keywordSelected = form.querySelectorAll(".keyword-selected");
+    var keywordSelectedRegionClassName = "keyword-region";
+    var keywordSelectedRegionClass = "." + keywordSelectedRegionClassName;
+    var keywordSelectedRegionLabel = "Selected Job Alerts";
+
+    keywordSelected.forEach(function(region) {
+
+      var keywordSelectedRegion = document.createElement("div");
+      keywordSelectedRegion.classList.add(keywordSelectedRegionClassName);
+      keywordSelectedRegion.setAttribute("role", "region");
+      keywordSelectedRegion.setAttribute("aria-label", keywordSelectedRegionLabel);
+
+      // See if region we wish to append already exists.
+
+      var getKeywordRegion = form.querySelector(keywordSelectedRegionClass);
+
+      if(getKeywordRegion === null) {
+
+        region.parentNode.insertBefore(keywordSelectedRegion, region);
+        keywordSelectedRegion.appendChild(region);
+
+      }
+
+    });
+
+    // A11YFORM011
+    // Issue: The file upload remove button is a link with an href hash. This is awful, so let's remedy it by replacing it.
+
+    var fileUploadButtons = form.querySelectorAll(".form-field input[name='Resume']");
+
+    fileUploadButtons.forEach(function(input) {
+
+      var fileUploadLink = input.nextElementSibling;
+      var resumeRemoveLabel = fileUploadLink.textContent.trim();
+
+      var fileUploadButton = document.createElement("button");
+      fileUploadButton.setAttribute("aria-describedby", input.getAttribute("id"));
+      fileUploadButton.classList.add("file-remove");
+      fileUploadButton.style.display = "none";
+      fileUploadButton.textContent = resumeRemoveLabel;
+
+      fileUploadLink.parentNode.replaceChild(fileUploadButton, fileUploadLink);
+
+    });
+
+    // A11YFORM012
+    // Remove inline style on honeypot field and use hidden attribute instead.
+
+    var emailConfirmation = form.querySelectorAll(".form-field.confirm-email");
+
+    emailConfirmation.forEach(function(element) {
+
+      element.setAttribute("hidden", "");
+      element.removeAttribute ("aria-hidden");
+      element.removeAttribute("style");
+
+      // Remove aria-hidden from honeypot label and input. The parent element should hide this from all assistive tech without need to hide individually.
+
+      var emailConfirmationFields = element.querySelectorAll("label, input");
+
+      emailConfirmationFields.forEach(function(item) {
+
+        item.removeAttribute ("aria-hidden");
+
+      });
+
+    });
+
+    // A11YFORM013
+    // Adding an accName to textarea, removing iframe garbage, and moving captcha to end of form to address tab order. It should not exist before submit button.
+
+    var captchaBadge = form.querySelector(".grecaptcha-badge");
+
+    if(captchaBadge) {
+
+      var captchaResponse = captchaBadge.querySelector(".g-recaptcha-response");
+      var captchaResponseLabel = "Captcha";
+      var captchaIframe = captchaBadge.querySelectorAll("iframe");
+
+      // Add accName to textarea
+
+      captchaResponse.setAttribute("aria-label", captchaResponseLabel);
+
+      // Remove iframe junk (border: 0 now set in init.scss)
+
+      captchaIframe.forEach(function(iframe){
+
+        iframe.removeAttribute("frameborder");
+
+      });
+
+      // Moving badge to end of form.
+      // Note: Badge appears to refresh and flash briefly on submit. Likely due to Mutation Observer reinitiating patch.
+
+      form.appendChild(captchaBadge);
 
     }
 
-    // The file upload remove button is a link with an href hash...can't have that, so let's change it....
+    // A11YFORM014
+    // The "Sign Up" button needs to be more explicit to AT.
+    // TODO: Add language support.
 
-    // First, get the text...
+    var signUpButtons = form.querySelectorAll("button[type='submit']");
+    var signUpButtonLabel = "Sign Up for Job Alerts";
 
-    var ResumeRemoveTxt = $(".form-field input[name='Resume']").next(".file-remove").text();
+    signUpButtons.forEach(function(button) {
 
-    // Now replace with a button
+      button.setAttribute("aria-label", signUpButtonLabel);
 
-    $(".form-field input[name='Resume']").next(".file-remove").replaceWith("<button class='file-remove' style='display:none;'>" + ResumeRemoveTxt + "</button>");
+    });
 
-    // if Google Translate exists, then fix...
+    // A11YFORM015
+    // The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
 
-    $(".goog-te-combo").attr("id", "goog-te-combo").before("<label class='wai' for='goog-te-combo'>Translate this page:</label>");
+    var formMessage = form.querySelector(".form-field.form-message b");
 
-    // Add title to spinner
+    if(formMessage) {
 
-    $(".goog-te-spinner").append("<title>Spinner</title>");
-
-    // Issue: Applied Filters section (Search Results) has inappropriate ARIA on it. Removing.
-
-    $("#applied-filters").removeAttr("aria-hidden aria-expanded");
-
-    // Issue: Remove role="status" from h1 and h2 elements
-
-    $(".search-results h1, .search-results h2").removeAttr("role");
-
-    // Issue: Remove tabindex from search-filter element. Only interactive elements should receive focus.
-
-    $("#search-filters").removeAttr("tabindex", 0);
-
-    // BUG: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
-    // For now, a hacky fix...
-
-    $("#search-results").attr("tabindex", -1);
-
-    // BUG: All section elements used for personbalization, appear to have tabindex="0" on them. These should not exist.
-
-    $("section[data-module-type='Personalization']").removeAttr("tabindex");
-
-    // BUG: Sitemap pages have tabindex on certain header. Inactive elements should nto receive focus.
-
-    $(".job-location h2, .job-category h2").removeAttr("tabindex aria-expanded").removeClass("expandable-parent");
-
-    // Issue: Job Lists should really have the location appear inside of a link so that job links with same title can be more descriptive and discernable.
-
-    if(a11yJobList !== null) {
-
-      $(".job-list .location, .job-list .date").each(function() {
-
-        $(this).appendTo($(this).prev());
-
-      });
+      formMessage.setAttribute("tabindex", "-1");
 
     }
 
-    // Issue: Older versions of slick that do not inlcude the accessibility flag, have several issues. We will fry to fix many of them here
-    // but recommend upgrading to AccessibleSlick.
+    // A11YFORM016
+    // The form message close link should really be a button, but for now we'll simply add a role.
+    // TODO: Unbind or override current close event and add support for closing when Enter AND Spacebar is pressed.
 
-    setTimeout(function(){
+    var formMessageButton = form.querySelector(".form-field.form-message a");
 
-      $(".slick-prev:not([aria-label])").attr("aria-label", "Previous");
-      $(".slick-next:not([aria-label])").attr("aria-label", "Next");
+    if(formMessageButton) {
 
-    }, 3000);
+      formMessageButton.setAttribute("role", "button");
 
-    // Issue: Cookie Management Page has some aria-describedby attributes on the page that do nothing. Remove.
+      var formMessageButtonIcon = document.createElement("span");
+      formMessageButtonIcon.setAttribute("aria-hidden", "true");
+      formMessageButtonIcon.classList.add("btn-close-success-message");
 
-    $("input[aria-describedby='cookieDescriptionIdAttr']").removeAttr("aria-describedby");
+      formMessageButton.appendChild(formMessageButtonIcon);
 
-    // Issue: Some scripts drop in their owm meta viewport tags, that can be harmful to pinch and zoom. This is an effort to address that:
+    }
 
-    $("meta[content*='user-scalable=no']").remove();
+    // Form submission events
 
-    // Issue: Various Altru Fixes
+    form.addEventListener("submit", function(event) {
 
-    $(".altru-content").each(function() {
+      event.preventDefault();
 
-	     var videoTitle = $(this).find(".altru-question-text").text();
+      // A11YFORM017
+      // The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
 
-	     $(this).find(".altru-video-player__video").attr("aria-label", videoTitle + " (Video)");
+      var keyWordCategory = form.querySelector(".keyword-category");
 
-     });
+      if(keyWordCategory) {
 
-     // Issue: Altru: Remove aria-label from <time> element. No proper role on <time>, so why inclkude a label?
+        var keyWordLocationDesc = keyWordCategory.getAttribute("aria-describedby");
 
-     $(".altru-video-overlay time").removeAttr("aria-label");
+        var keywordLocation = form.querySelector(".keyword-location");
 
-     // Issue: Altru: Duplicate ID
+        if(keywordLocation) {
 
-     $("g[id='Artboard'], polygon[id='Star']").removeAttr("id");
+          keywordLocation.setAttribute("aria-describedby", keyWordLocationDesc);
 
-     // Olivia Chatbot
+        }
 
-     $("#toggle-olivia").attr("aria-label", "Chat with our recruiting assistant");
+      }
 
-     // If cooke banner present, place focus on it. 
+      // A11YFORM018
+      // Now that we are including aria-invalis, we need to alter the values based on user input.
 
-    // Removed following because causing issues with cookies. See https://jira.tmp.com/browse/UDS-5793 
+      var formInputs = form.querySelectorAll("input, select");
 
-     /* if($("#igdpr-button").length){
+      formInputs.forEach(function(input) {
 
-        $("#igdpr-button").focus();
-   
-     } */
+        if (input.classList.contains("input-validation-error")) {
 
-  }
+          input.setAttribute("aria-invalid", "true");
 
-  $(document).ajaxStop(function() {
+        } else {
 
-    noFormPagination();
+          input.setAttribute("aria-invalid", "false");
 
-    fixDisabledButton();
-
-    saveJobButton();
-
-    setFilterButtonFocus();
-
-    fixFilterButton();
-
-    miscA11yFixes();
-
-  });
-
-  // Sometime we can only do things after Career Site has finished (slowly) loading it's portion of the DOM.
-
-	setTimeout(function(){
-
-    miscA11yFixes();
-
-  }, 1000);
-
-
-  // *** Accessibility Patch Observer ***
-  
-  function initA11yRepair() {
-
-    console.log("%c MagicBullet: Accessibility Patch v1.8 in use. ", "background: #6e00ee; color: #fff");
-
-    // Data Forms 
-
-      // A11Y0020: The CAPTCHA textarea has no accName. Sites team really needs to validate their work before releasing new features. 
-
-      var captchaResponse = document.querySelectorAll(".g-recaptcha-response");
-
-      captchaResponse.forEach(function(captcha){
-
-        captcha.setAttribute("aria-label", "Captcha");
+        }
 
       });
 
-    // Search Results 
+    });
 
-      // A11Y0019: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
-
-      var paginationNav = document.querySelectorAll(".pagination");
-
-      paginationNav.forEach(function(nav){
-
-        nav.setAttribute("aria-label", "Pagination");
-
-      });
-   
-      // TODO: Add future fixes here.
-
-  }
-
-  // Create a new MutationObserver instance
-
-  var a11yObserver = new MutationObserver(function() {
-
-    // Clear the previous timeout
-  
-    clearTimeout(a11yObserver.timeout);
-  
-    // Set a timeout to run after NN milliseconds of no mutations
-  
-    a11yObserver.timeout = setTimeout(function() {
-  
-      // Run the function after content stops changing
-  
-      initA11yRepair();
-  
-      // If needed, disconnect the observer once the mutations are observed
-  
-      a11yObserver.disconnect();
-  
-    }, 800); // Adjust the timeout period as needed
-  
   });
-  
-  // Configure the MutationObserver to watch for changes to the child nodes of the div
-  
-  var config = { childList: true, subtree: true };
-  
-  a11yObserver.observe(document.body, config);
 
-})();
+}
