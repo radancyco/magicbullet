@@ -744,7 +744,7 @@ function initDataFormPatch() {
       }
 
       // A11YFORM018
-      // Now that we are including aria-invalis, we need to alter the values based on user input.
+      // Now that we are including aria-invalid, we need to alter the values based on user input.
 
       var formInputs = form.querySelectorAll("input, select");
 
