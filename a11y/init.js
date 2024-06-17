@@ -12,6 +12,8 @@ function loadA11yPatch(url, callback) {
 
   var a11yBody = document.body;
 
+  var targetNode = document.getElementById("content");
+
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 
   // Add A11y hook for implementation team. May come in handy.
@@ -56,15 +58,15 @@ function loadA11yPatch(url, callback) {
       initGlobalPatch();
       initDataFormPatch();
 
-      a11yObserver.observe(a11yBody, config); 
+      a11yObserver.observe(targetNode, config); 
 
       // TODO: Only load observer with certain components on page, as these fixes only impace specifc components. 
   
     }, 1000);
   
   });
-  
-  a11yObserver.observe(a11yBody, config);
+
+  a11yObserver.observe(targetNode, config);
 
 }
 
