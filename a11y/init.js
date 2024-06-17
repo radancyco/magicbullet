@@ -212,13 +212,9 @@ function initGlobalPatch() {
 
           this.setAttribute("aria-expanded", "false");
 
-          console.log("false");
-
         } else {
 
           this.setAttribute("aria-expanded", "true");
-
-          console.log("true");
 
         }
 
