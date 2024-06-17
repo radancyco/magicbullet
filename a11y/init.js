@@ -210,11 +210,11 @@ function initGlobalPatch() {
 
         if(this.getAttribute("aria-expanded") === "true") {
 
-          this.setAttribute("aria-expanded", "true");
+          this.setAttribute("aria-expanded", "false");
 
         } else {
 
-          this.setAttribute("aria-expanded", "false");
+          this.setAttribute("aria-expanded", "true");
 
         }
 
