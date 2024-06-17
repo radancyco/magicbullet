@@ -253,19 +253,51 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
     // BUG: Sitemap pages have tabindex on certain header. Inactive elements should nto receive focus.
 
-    $(".job-location h2, .job-category h2").removeAttr("tabindex aria-expanded").removeClass("expandable-parent");
+    var sitemapHeadings = document.querySelectorAll(".job-location h2, .job-category h2");
+
+    sitemapHeadings.forEach(function(heading) {
+
+      heading.removeAttribute("tabindex");
+      heading.removeAttribute("aria-expanded");
+      heading.classList.remove("expandable-parent");
+
+    });
 
     // Issue: Job Lists should really have the location appear inside of a link so that job links with same title can be more descriptive and discernable.
 
-    $(".job-list .location, .job-list .date").each(function() {
-  
-      $(this).appendTo($(this).prev());
-  
+    var jobListElements = document.querySelectorAll(".job-list .location, .job-list .date");
+
+    jobListElements.forEach(function(element) {
+
+      var previousElement = element.previousElementSibling;
+    
+      if (previousElement) {
+    
+        previousElement.appendChild(element);
+    
+      }
+
     });
   
     // Issue: Cookie Management Page has some aria-describedby attributes on the page that do nothing. Remove.
-  
-    $("input[aria-describedby='cookieDescriptionIdAttr']").removeAttr("aria-describedby");
+
+    var cookieDescriptionIdAttr = document.querySelectorAll("input[aria-describedby='cookieDescriptionIdAttr']");
+
+    cookieDescriptionIdAttr.forEach(function(input) {
+
+      input.removeAttribute("aria-describedby");
+
+    });
+
+  // BUG: All section elements used for personbalization, appear to have tabindex="0" on them. These should not exist.
+
+  var personalizationModule = document.querySelectorAll("section[data-module-type='Personalization']");
+
+  personalizationModule.forEach(function(module){
+
+    module.removeAttribute("tabindex");
+
+  });
   
     // TODO: Add future fixes here.
 
@@ -485,17 +517,9 @@ function initGlobalPatch() {
 
   }
 
-  // BUG: All section elements used for personbalization, appear to have tabindex="0" on them. These should not exist.
 
-  var personalizationModule = document.querySelectorAll("section[data-module-type='Personalization']");
 
-  personalizationModule.forEach(function(module){
 
-    module.removeAttribute("tabindex");
-
-  });
-
-  
 
 }
 
