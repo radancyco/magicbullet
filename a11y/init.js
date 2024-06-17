@@ -194,14 +194,6 @@ function initGlobalPatch() {
     
       }
 
-      // See if element is already open, set aria-expanded state to true if it is.
-
-      if(expand.nextElementSibling.classList.contains("expandable-childlist-open")) {
-
-        expand.setAttribute("aria-expanded", "true");
-
-      }
-
       // New toggle functionality for newly added aria-expanded attribute.
 
       expand.addEventListener("click", function() {
@@ -219,6 +211,14 @@ function initGlobalPatch() {
         }
 
       });
+
+      // See if element is already open, set aria-expanded state to true if it is.
+
+      if(expand.nextElementSibling.classList.contains("expandable-childlist-open")) {
+
+        expand.setAttribute("aria-expanded", "true");
+      
+      }
 
     });
 
