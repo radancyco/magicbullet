@@ -198,21 +198,21 @@ function initGlobalPatch() {
 
       button.addEventListener("click", function() {
 
-        if(this.getAttribute("aria-expanded") === "false") {
+        if(button.getAttribute("aria-expanded") === "false") {
 
-          this.setAttribute("aria-expanded", "true");
+          button.setAttribute("aria-expanded", "true");
 
         } else {
 
-          this.setAttribute("aria-expanded", "false");
+          button.setAttribute("aria-expanded", "false");
 
         }
 
         // Always remove aria-expanded being added to adjacent, non-interactive element, by TB Core.
 
-        if (this.nextElementSibling) {
+        if (button.nextElementSibling) {
 
-          this.nextElementSibling.removeAttribute("aria-expanded");
+          button.nextElementSibling.removeAttribute("aria-expanded");
 
         }
 
