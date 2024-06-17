@@ -54,7 +54,9 @@ function loadA11yPatch(url, callback) {
       initGlobalPatch();
       initDataFormPatch();
 
-      a11yObserver.observe(a11yBody, config);
+      a11yObserver.observe(a11yBody, config); 
+
+      // TODO: Only load observer with certain components on page, as these fixes only impace specifc components. 
   
     }, 1000);
   
@@ -69,12 +71,17 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   // *** Accessibility Patch: Static ***
   
   // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
+  // A11Y0002: https://radancy.dev/magicbullet/a11y/#issue-0002
 
-  var expandableParent = document.querySelectorAll(".expandable-parent")
+  var expandableParent = document.querySelectorAll(".expandable-parent");
 
   expandableParent.forEach(function(expand) {
 
+    // Set attribute on corrent element.
+
     expand.setAttribute("aria-expanded", "false");
+
+    // Remove aria-expanded from adjacent, non-interactive element.
   
     if (expand.nextElementSibling) {
   
@@ -82,78 +89,122 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   
     }
 
-});
+    // New toggle functionality for newly added aria-expanded attribute.
 
-// https://radancy.dev/magicbullet/a11y/#issue-0002
-document.querySelectorAll('.expandable-parent').forEach(function(element) {
-  element.addEventListener('click', function() {
-      var ariaExpanded = this.getAttribute('aria-expanded');
-      this.setAttribute('aria-expanded', ariaExpanded === 'true' ? 'false' : 'true');
+    expand.addEventListener("click", function() {
+
+      var ariaExpanded = this.getAttribute("aria-expanded");
+
+      this.setAttribute("aria-expanded", ariaExpanded === "true" ? "false" : "true");
+
+      console.log("toggling working");
+
+      // Always remove aria-expanded being added to adjacent, non-interactive element, by TB Core.
+
       if (this.nextElementSibling) {
-          this.nextElementSibling.removeAttribute('aria-expanded');
+
+        this.nextElementSibling.removeAttribute("aria-expanded");
+
       }
+
+    });
+
   });
-});
 
-// https://radancy.dev/magicbullet/a11y/#issue-0006
-document.querySelectorAll('.social-share-items a').forEach(function(anchor) {
-  anchor.insertAdjacentHTML('beforeend', ' <span class="wai">(Opens in new tab)</span>');
-});
 
-// https://radancy.dev/magicbullet/a11y/#issue-0009
-document.querySelectorAll('input[type="checkbox"]').forEach(function(input) {
-  input.removeAttribute('autocomplete');
-});
+  // https://radancy.dev/magicbullet/a11y/#issue-0006
 
-// Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
-document.querySelectorAll('.search-location-error').forEach(function(error, i) {
-  error.id = 'search-error-' + (i + 1);
-  error.style.outline = '0 !important';
-});
+  document.querySelectorAll('.social-share-items a').forEach(function(anchor) {
 
-document.querySelectorAll('.search-location').forEach(function(location, i) {
-  location.setAttribute('aria-describedby', 'search-error-' + (i + 1));
-  location.setAttribute('aria-invalid', 'false');
-});
+    anchor.insertAdjacentHTML('beforeend', ' <span class="wai">(Opens in new tab)</span>');
 
-document.querySelectorAll('.search-form button').forEach(function(button) {
-  button.addEventListener('click', function() {
+  });
+
+  // https://radancy.dev/magicbullet/a11y/#issue-0009
+
+  document.querySelectorAll('input[type="checkbox"]').forEach(function(input) {
+
+    input.removeAttribute('autocomplete');
+
+  });
+
+  // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
+
+  document.querySelectorAll('.search-location-error').forEach(function(error, i) {
+
+    error.id = 'search-error-' + (i + 1);
+
+    error.style.outline = '0 !important';
+
+  });
+
+  document.querySelectorAll('.search-location').forEach(function(location, i) {
+
+    location.setAttribute('aria-describedby', 'search-error-' + (i + 1));
+
+    location.setAttribute('aria-invalid', 'false');
+
+  });
+
+  document.querySelectorAll('.search-form button').forEach(function(button) {
+
+    button.addEventListener('click', function() {
+
       document.querySelectorAll('.search-location-error').forEach(function(error) {
-          error.removeAttribute('tabindex');
+
+        error.removeAttribute('tabindex');
+
       });
+
       setTimeout(function() {
-          var locationErrorVisible = document.querySelector('.search-location-error').style.display !== 'none';
-          document.querySelectorAll('.search-location').forEach(function(location) {
-              location.setAttribute('aria-invalid', locationErrorVisible ? 'true' : 'false');
-              if (locationErrorVisible) {
-                  location.focus();
-              }
-          });
+
+        var locationErrorVisible = document.querySelector('.search-location-error').style.display !== 'none';
+
+        document.querySelectorAll('.search-location').forEach(function(location) {
+
+          location.setAttribute('aria-invalid', locationErrorVisible ? 'true' : 'false');
+
+          if (locationErrorVisible) {
+
+            location.focus();
+
+          }
+
+        });
+
       }, 100);
-  });
-});
 
-document.querySelectorAll('.search-location').forEach(function(location) {
-  location.addEventListener('change', function() {
+    });
+
+  });
+
+  document.querySelectorAll('.search-location').forEach(function(location) {
+
+    location.addEventListener('change', function() {
+
       var locationErrorVisible = document.querySelector('.search-location-error').style.display !== 'none';
+
       this.setAttribute('aria-invalid', locationErrorVisible ? 'true' : 'false');
+
       if (locationErrorVisible) {
-          this.focus();
+
+        this.focus();
+
       }
+
+    });
+
   });
-});
 
-// Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
-document.querySelectorAll('.search-form .job-search-legend, .advanced-search-form .job-search-legend').forEach(function(legend, i) {
-  legend.id = 'job-search-legend-' + (i + 1);
-  legend.parentElement.setAttribute('aria-labelledby', 'job-search-legend-' + (i + 1));
-});
+  // Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
 
+  document.querySelectorAll('.search-form .job-search-legend, .advanced-search-form .job-search-legend').forEach(function(legend, i) {
 
+    legend.id = 'job-search-legend-' + (i + 1);
 
+    legend.parentElement.setAttribute('aria-labelledby', 'job-search-legend-' + (i + 1));
 
-
-
+  });
 
 });
 
