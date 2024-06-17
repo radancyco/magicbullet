@@ -208,11 +208,11 @@ function initGlobalPatch() {
 
       button.addEventListener("click", function() {
 
-        if(this.getAttribute("aria-expanded") === "false") {
+        if(button.getAttribute("aria-expanded") === "true") {
 
           this.setAttribute("aria-expanded", "true");
 
-        } else if(this.getAttribute("aria-expanded") === "false") {
+        } else {
 
           this.setAttribute("aria-expanded", "false");
 
