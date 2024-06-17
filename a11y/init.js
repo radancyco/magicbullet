@@ -12,6 +12,8 @@ function loadA11yPatch(url, callback) {
 
   var a11yBody = document.body;
 
+  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
+
   // Add A11y hook for implementation team. May come in handy.
 
   a11yBody.classList.add("magicbullet-a11y");
@@ -164,19 +166,121 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   });
 
+
+  // Job Location Map
+
+    // A11Y0005: https://radancy.dev/magicbullet/a11y/#issue-0005
+    // TODO: These would be better served as buttons, not links. Including role="button" for now, but we need to add space bar key support eventually.
+    // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames.
+    // TODO: Include Wegmans functionality to skip over Google Map.
+
+    var mapButton = document.querySelectorAll(".job-map-nearby a");
+
+    mapButton.forEach(function(btn){
+
+      btn.setAttribute("role", "button");
+      btn.removeAttribute("target");
+
+    });
+
+
+     // Search Forms 
+
+    // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0004
+
+    var searchForm = document.querySelectorAll(".search-form, .advanced-search-form");
+
+    searchForm.forEach(function(form){
+
+      form.setAttribute("role", "search");
+
+    });
+
+
+    // Job Description: Garbage Removal
+
+    var atsDescription = document.querySelectorAll(".ats-description");
+
+    atsDescription.forEach(function(desc) {
+    
+      // Issue-0007: Remove tabindex attribute from elements within .ats-description that have tabindex attribute not equal to '0' or starting with '-'
+    
+      desc.querySelectorAll("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").forEach(function(tabindex) {
+        
+        tabindex.removeAttribute("tabindex");
+    
+      });
+    
+      // Issue-0008: Add role="presentation" to tables within .ats-description
+    
+      desc.querySelectorAll("table").forEach(function(table) {
+        
+        table.setAttribute("role", "presentation");
+    
+      });
+    
+      // Remove useless attributes from all elements within .ats-description
+    
+      desc.querySelectorAll("*").forEach(function(element) {
+        
+        element.removeAttribute("face");
+        element.removeAttribute("size");
+        element.removeAttribute("title");
+        element.removeAttribute("id");
+    
+      });
+    
+      // Remove <font> element and unwrap its contents within .ats-description
+    
+      desc.querySelectorAll("font").forEach(function(font) {
+        
+        var parent = font.parentNode;
+        
+        while (font.firstChild) {
+        
+          parent.insertBefore(font.firstChild, font);
+        
+        }
+        
+        parent.removeChild(font);
+    
+      });
+    
+    
+    });
+
+    // Sitemap
+
+    // BUG: Sitemap pages have tabindex on certain header. Inactive elements should nto receive focus.
+
+    $(".job-location h2, .job-category h2").removeAttr("tabindex aria-expanded").removeClass("expandable-parent");
+
+    // Issue: Job Lists should really have the location appear inside of a link so that job links with same title can be more descriptive and discernable.
+
+    $(".job-list .location, .job-list .date").each(function() {
+  
+      $(this).appendTo($(this).prev());
+  
+    });
+  
+    // Issue: Cookie Management Page has some aria-describedby attributes on the page that do nothing. Remove.
+  
+    $("input[aria-describedby='cookieDescriptionIdAttr']").removeAttr("aria-describedby");
+  
+    // TODO: Add future fixes here.
+
+
 });
 
 // Accessibility Patch: Global
   
 function initGlobalPatch() {
 
-  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
-
   // Global Issues
 
     // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
     // A11Y0002: https://radancy.dev/magicbullet/a11y/#issue-0002
-    // Note: Currently, this functionaly being overwritten can be found in the Seach Filters, though it may arrpar elsewhere. 
+    // Note: Currently, this functionaly being overwritten can be found in the Seach Filters, though it may appear elsewhere. 
 
     var expandableParentBtn = document.querySelectorAll(".expandable-parent");
 
@@ -237,34 +341,6 @@ function initGlobalPatch() {
     missingAltAttributes.forEach(function(img){
 
       img.setAttribute("alt", "");
-
-    });
-
-  // Job Location Map
-
-    // A11Y0005: https://radancy.dev/magicbullet/a11y/#issue-0005
-    // TODO: These would be better served as buttons, not links. Including role="button" for now, but we need to add space bar key support eventually.
-    // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames.
-    // TODO: Include Wegmans functionality to skip over Google Map.
-
-    var mapButton = document.querySelectorAll(".job-map-nearby a");
-
-    mapButton.forEach(function(btn){
-
-      btn.setAttribute("role", "button");
-      btn.removeAttribute("target");
-
-    });
-
-  // Search Forms 
-
-    // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0004
-
-    var searchForm = document.querySelectorAll(".search-form, .advanced-search-form");
-
-    searchForm.forEach(function(form){
-
-      form.setAttribute("role", "search");
 
     });
 
@@ -378,98 +454,48 @@ function initGlobalPatch() {
 
     });
 
-    // Job Description: Garbage Removal
+  // Issue: Search Results: Remove role="status" from h1 and h2 elements
 
-    var atsDescription = document.querySelectorAll(".ats-description");
+  var searchResultsHeadings = document.querySelectorAll(".search-results h1, .search-results h2");
 
-    atsDescription.forEach(function(desc) {
+  searchResultsHeadings.forEach(function(heading){
 
-      // Issue-0007: Remove tabindex attribute from elements within .ats-description that have tabindex attribute not equal to '0' or starting with '-'
-
-      desc.querySelectorAll("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").forEach(function(tabindex) {
-    
-        tabindex.removeAttribute("tabindex");
-
-      });
-
-      // Issue-0008: Add role="presentation" to tables within .ats-description
-
-      desc.querySelectorAll("table").forEach(function(table) {
-    
-        table.setAttribute("role", "presentation");
-
-      });
-
-      // Remove useless attributes from all elements within .ats-description
-
-      desc.querySelectorAll("*").forEach(function(element) {
-    
-        element.removeAttribute("face");
-        element.removeAttribute("size");
-        element.removeAttribute("title");
-        element.removeAttribute("id");
-
-      });
-
-    // Remove <font> element and unwrap its contents within .ats-description
-
-    desc.querySelectorAll("font").forEach(function(font) {
-    
-      var parent = font.parentNode;
-    
-      while (font.firstChild) {
-    
-        parent.insertBefore(font.firstChild, font);
-    
-      }
-    
-      parent.removeChild(font);
-
-    });
-
+    heading.removeAttribute("role");
 
   });
 
-  // Issue: Remove role="status" from h1 and h2 elements
+  // Issue: Search Filters: Remove tabindex from search-filter element. Only interactive elements should receive focus.
 
-  $(".search-results h1, .search-results h2").removeAttr("role");
+  var searchResultsFilter = document.getElementById("search-filters");
 
-  // Issue: Remove tabindex from search-filter element. Only interactive elements should receive focus.
+  if(searchResultsFilter) {
 
-  $("#search-filters").removeAttr("tabindex", 0);
+    searchResultsFilter.removeAttribute("tabindex");
+
+  }
 
   // BUG: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
   // For now, a hacky fix...
 
-  $("#search-results").attr("tabindex", -1);
+  var searchResults = document.getElementById("search-results");
 
-  // BUG: All section elements used for personbalization, appear to have tabindex="0" on them. These should not exist.
+  if(searchResults) {
 
-  $("section[data-module-type='Personalization']").removeAttr("tabindex");
-
-  // BUG: Sitemap pages have tabindex on certain header. Inactive elements should nto receive focus.
-
-  $(".job-location h2, .job-category h2").removeAttr("tabindex aria-expanded").removeClass("expandable-parent");
-
-  // Issue: Job Lists should really have the location appear inside of a link so that job links with same title can be more descriptive and discernable.
-
-  var a11yJobList = magicBulletScript.getAttribute("data-a11y-job-list");
-
-  if(a11yJobList !== null) {
-
-    $(".job-list .location, .job-list .date").each(function() {
-
-      $(this).appendTo($(this).prev());
-
-    });
+    searchResults.setAttribute("tabindex", "-2");
 
   }
 
-  // Issue: Cookie Management Page has some aria-describedby attributes on the page that do nothing. Remove.
+  // BUG: All section elements used for personbalization, appear to have tabindex="0" on them. These should not exist.
 
-  $("input[aria-describedby='cookieDescriptionIdAttr']").removeAttr("aria-describedby");
+  var personalizationModule = document.querySelectorAll("section[data-module-type='Personalization']");
 
-  // TODO: Add future fixes here.
+  personalizationModule.forEach(function(module){
+
+    module.removeAttribute("tabindex");
+
+  });
+
+  
 
 }
 
