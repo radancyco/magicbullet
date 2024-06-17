@@ -178,28 +178,35 @@ function initGlobalPatch() {
     // A11Y0002: https://radancy.dev/magicbullet/a11y/#issue-0002
     // Note: Currently, this functionaly being overwritten can be found in the Seach Filters, though it may arrpar elsewhere. 
 
-    var expandableParent = document.querySelectorAll(".expandable-parent");
+    var expandableParentBtn = document.querySelectorAll(".expandable-parent");
 
-    expandableParent.forEach(function(expand) {
+    expandableParentBtn.forEach(function(button) {
 
       // Set attribute on corrent element.
 
-      expand.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-expanded", "false");
 
       // Remove aria-expanded from adjacent, non-interactive element.
     
-      if (expand.nextElementSibling) {
+      if (button.nextElementSibling) {
     
-        expand.nextElementSibling.removeAttribute("aria-expanded");
+        button.nextElementSibling.removeAttribute("aria-expanded");
     
       }
 
       // New toggle functionality for newly added aria-expanded attribute.
 
-      expand.addEventListener("click", function() {
+      button.addEventListener("click", function() {
 
-        var isExpanded = this.getAttribute("aria-expanded") === "true";
-        this.setAttribute("aria-expanded", !isExpanded);
+        if(this.getAttribute("aria-expanded") === "true") {
+
+          this.setAttribute("aria-expanded", "false");
+
+        } else {
+
+          this.setAttribute("aria-expanded", "true");
+
+        }
 
         // Always remove aria-expanded being added to adjacent, non-interactive element, by TB Core.
 
