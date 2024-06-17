@@ -70,61 +70,19 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   // *** Accessibility Patch: Static ***
   
-  // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
-  // A11Y0002: https://radancy.dev/magicbullet/a11y/#issue-0002
+  // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0006
 
-  var expandableParent = document.querySelectorAll(".expandable-parent");
+  document.querySelectorAll(".social-share-items a").forEach(function(anchor) {
 
-  expandableParent.forEach(function(expand) {
-
-    // Set attribute on corrent element.
-
-    expand.setAttribute("aria-expanded", "false");
-
-    // Remove aria-expanded from adjacent, non-interactive element.
-  
-    if (expand.nextElementSibling) {
-  
-      expand.nextElementSibling.removeAttribute("aria-expanded");
-  
-    }
-
-    // New toggle functionality for newly added aria-expanded attribute.
-
-    expand.addEventListener("click", function() {
-
-      var ariaExpanded = this.getAttribute("aria-expanded");
-
-      this.setAttribute("aria-expanded", ariaExpanded === "true" ? "false" : "true");
-
-      console.log("toggling working");
-
-      // Always remove aria-expanded being added to adjacent, non-interactive element, by TB Core.
-
-      if (this.nextElementSibling) {
-
-        this.nextElementSibling.removeAttribute("aria-expanded");
-
-      }
-
-    });
+    anchor.insertAdjacentHTML("beforeend", " <span class='wai visually-hidden'>(Opens in new tab)</span>");
 
   });
 
+  // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0009 (HTML CLEANUP)
 
-  // https://radancy.dev/magicbullet/a11y/#issue-0006
+  document.querySelectorAll("input[type='checkbox']").forEach(function(input) {
 
-  document.querySelectorAll('.social-share-items a').forEach(function(anchor) {
-
-    anchor.insertAdjacentHTML('beforeend', ' <span class="wai">(Opens in new tab)</span>');
-
-  });
-
-  // https://radancy.dev/magicbullet/a11y/#issue-0009
-
-  document.querySelectorAll('input[type="checkbox"]').forEach(function(input) {
-
-    input.removeAttribute('autocomplete');
+    input.removeAttribute("autocomplete");
 
   });
 
@@ -215,6 +173,46 @@ function initGlobalPatch() {
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 
   // Global Issues
+
+    // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
+    // A11Y0002: https://radancy.dev/magicbullet/a11y/#issue-0002
+    // Note: Currently, this functionaly being overwritten can be found in the Seach Filters, though it may arrpar elsewhere. 
+
+    var expandableParent = document.querySelectorAll(".expandable-parent");
+
+    expandableParent.forEach(function(expand) {
+
+      // Set attribute on corrent element.
+
+      expand.setAttribute("aria-expanded", "false");
+
+      // Remove aria-expanded from adjacent, non-interactive element.
+    
+      if (expand.nextElementSibling) {
+    
+        expand.nextElementSibling.removeAttribute("aria-expanded");
+    
+      }
+
+      // New toggle functionality for newly added aria-expanded attribute.
+
+      expand.addEventListener("click", function() {
+
+        var ariaExpanded = this.getAttribute("aria-expanded");
+
+        this.setAttribute("aria-expanded", ariaExpanded === "true" ? "false" : "true");
+
+        // Always remove aria-expanded being added to adjacent, non-interactive element, by TB Core.
+
+        if (this.nextElementSibling) {
+
+          this.nextElementSibling.removeAttribute("aria-expanded");
+
+        }
+
+      });
+
+    });
 
     // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0003
 
