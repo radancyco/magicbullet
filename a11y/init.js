@@ -198,9 +198,8 @@ function initGlobalPatch() {
 
       expand.addEventListener("click", function() {
 
-        var ariaExpanded = this.getAttribute("aria-expanded");
-
-        this.setAttribute("aria-expanded", ariaExpanded === "true" ? "false" : "true");
+        var isExpanded = this.getAttribute("aria-expanded") === "true";
+        this.setAttribute("aria-expanded", !isExpanded);
 
         // Always remove aria-expanded being added to adjacent, non-interactive element, by TB Core.
 
