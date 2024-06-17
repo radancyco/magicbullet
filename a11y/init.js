@@ -72,7 +72,8 @@ function loadA11yPatch(url, callback) {
 
 loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
 
-  // *** Accessibility Patch: Static ***
+  // Accessibility Patch: Static
+  // These are issues that only occur once per page load. They are not dynamic or triggered by any any ajax requests, etc. 
   
   // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0006
 
@@ -82,13 +83,6 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   });
 
-  // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0009 (HTML CLEANUP)
-
-  document.querySelectorAll("input[type='checkbox']").forEach(function(input) {
-
-    input.removeAttribute("autocomplete");
-
-  });
 
   // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
 
@@ -311,6 +305,14 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 function initGlobalPatch() {
 
   // Global Issues
+
+    // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0009 (HTML CLEANUP)
+
+    document.querySelectorAll("input[type='checkbox']").forEach(function(input) {
+
+      input.removeAttribute("autocomplete");
+
+    });
 
     // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
     // A11Y0002: https://radancy.dev/magicbullet/a11y/#issue-0002
@@ -825,11 +827,13 @@ function initDataFormPatch() {
 
     if(formMessageButton) {
 
+      formMessageButton.classList.add("data-form__close");
+
       formMessageButton.setAttribute("role", "button");
 
       var formMessageButtonIcon = document.createElement("span");
       formMessageButtonIcon.setAttribute("aria-hidden", "true");
-      formMessageButtonIcon.classList.add("btn-close-success-message");
+      formMessageButtonIcon.classList.add("data-form__closeicon");
 
       formMessageButton.appendChild(formMessageButtonIcon);
 

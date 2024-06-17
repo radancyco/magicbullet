@@ -123,3 +123,40 @@ visibility: hidden;
     }
 
 }
+
+.data-form {
+
+
+    &__close {
+    
+        &::after {
+        display: none;
+        }
+
+    }
+
+    &__closeicon {
+
+        &::after {
+        border-radius: 10px;
+        color: #444;
+        content: "+";
+        display: inline-block;
+        font: normal 24px / .65em Arial, sans-serif;
+        margin: -2px 0 0 10px;
+        opacity: .5;
+        padding: 4px;
+        position: absolute;
+        right: 4px;
+        text-indent: 0;
+        text-shadow: none;
+        text-transform: lowercase;
+        top: 0;
+        transform: rotate(45deg);
+        }
+
+    }
+
+
+}
+

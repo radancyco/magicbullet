@@ -1,0 +1,13 @@
+/*!
+
+  Radancy MagicBullet: Accessibility Patch
+
+  Contributor(s):
+  Michael "Spell" Spellacy
+
+  Dependencies: Sass
+
+  Instructions: 
+  sass --watch .:. --style compressed
+
+*/::-moz-placeholder{color:#767676;opacity:1}::-webkit-input-placeholder{color:#767676}h1:empty,h2:empty,h3:empty,h4:empty,h5:empty,h6:empty,label:empty{display:none}.access-link{z-index:2147483647 !important}.a11y-search-location .mindreader-results,.a11y-search-location .mindreader-status,.a11y-search-location .display-typeahead{display:none !important}.a11y-search-location .search-location{z-index:0 !important}.form-field.required label::after{display:none}.form-field.required label .ico-required-indicator{display:inline-block;margin-inline-start:.5em}@keyframes revealBadge{from{opacity:0;visibility:hidden}to{opacity:1;visibility:visible}}.grecaptcha-badge{animation-delay:500ms;animation-duration:1s;animation-fill-mode:forwards;animation-name:revealBadge;opacity:0;visibility:hidden}.grecaptcha-badge iframe{border:0}.data-form__close::after{display:none}.data-form__closeicon::after{border-radius:10px;color:#444;content:"+";display:inline-block;font:normal 24px/.65em Arial,sans-serif;margin:-2px 0 0 10px;opacity:.5;padding:4px;position:absolute;right:4px;text-indent:0;text-shadow:none;text-transform:lowercase;top:0;transform:rotate(45deg)}/*# sourceMappingURL=init.css.map */
