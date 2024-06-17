@@ -186,7 +186,7 @@ function initGlobalPatch() {
 
       // See if element is already open, set aria-expanded state to true if it is.
 
-      if(button.nextElementSibling.classList.contains("expandable-childlist-open")) {
+      if(button.classList.contains("expandable-child-open")) {
 
         button.setAttribute("aria-expanded", "true");
     
@@ -208,7 +208,7 @@ function initGlobalPatch() {
 
       button.addEventListener("click", function() {
 
-        if(button.getAttribute("aria-expanded") === "true") {
+        if(this.getAttribute("aria-expanded") === "true") {
 
           this.setAttribute("aria-expanded", "true");
 
