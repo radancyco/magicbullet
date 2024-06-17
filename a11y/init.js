@@ -184,7 +184,17 @@ function initGlobalPatch() {
 
       // Set attribute on corrent element.
 
-      button.setAttribute("aria-expanded", "false");
+      // See if element is already open, set aria-expanded state to true if it is.
+
+      if(button.nextElementSibling.classList.contains("expandable-childlist-open")) {
+
+        button.setAttribute("aria-expanded", "true");
+    
+      } else {
+
+        button.setAttribute("aria-expanded", "false");
+
+      }
 
       // Remove aria-expanded from adjacent, non-interactive element.
     
@@ -198,27 +208,25 @@ function initGlobalPatch() {
 
       button.addEventListener("click", function() {
 
-        if(button.getAttribute("aria-expanded") === "false") {
+        if(this.getAttribute("aria-expanded") === "false") {
 
-          button.setAttribute("aria-expanded", "true");
+          this.setAttribute("aria-expanded", "true");
 
-        } else {
+        } else if(this.getAttribute("aria-expanded") === "false") {
 
-          button.setAttribute("aria-expanded", "false");
+          this.setAttribute("aria-expanded", "false");
 
         }
 
         // Always remove aria-expanded being added to adjacent, non-interactive element, by TB Core.
 
-        if (button.nextElementSibling) {
+        if (this.nextElementSibling) {
 
-          button.nextElementSibling.removeAttribute("aria-expanded");
+          this.nextElementSibling.removeAttribute("aria-expanded");
 
         }
 
       });
-
-
 
     });
 
