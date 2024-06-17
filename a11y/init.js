@@ -285,7 +285,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
     cookieDescriptionIdAttr.forEach(function(input) {
 
-      input.removeAttribute("aria-describedby");
+      input.removeAttribute("aria-describedby"); 
 
     });
 
