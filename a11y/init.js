@@ -90,6 +90,9 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   var searchFormLocationError = document.querySelectorAll(".search-location-error");
 
+  console.log(searchFormLocationError);
+  console.log("static script firing");
+
   searchFormLocationError.forEach(function(error, i) {
 
     error.id = "search-error-" + (i + 1);
