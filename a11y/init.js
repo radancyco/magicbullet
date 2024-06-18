@@ -8,6 +8,68 @@
 
 */
 
+function loadA11yPatch(url, callback) {
+
+  var a11yBody = document.body;
+
+  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
+
+  // Add A11y hook for implementation team. May come in handy.
+
+  a11yBody.classList.add("magicbullet-a11y");
+
+  // Install Language Pack.
+
+  var componentLanguagePack = document.createElement("script");
+
+  componentLanguagePack.setAttribute("src", url);
+  componentLanguagePack.setAttribute("id", "component-library-language-pack");
+  componentLanguagePack.onreadystatechange = callback;
+  componentLanguagePack.onload = callback;
+
+  // Only load one language pack per page.
+
+  var getComponentLanguagePack = document.getElementById("component-library-language-pack");
+
+  if(!getComponentLanguagePack) {
+
+    document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
+
+  }
+
+  // Create a new MutationObserver instance
+
+  var targetNode = a11yBody;
+
+  // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
+
+  var config = { childList: true, subtree: true };
+
+  var a11yObserver = new MutationObserver(function(mutationsList) {
+
+    console.log("Mutations:", mutationsList); // Log mutations
+  
+    clearTimeout(a11yObserver.timeout);
+
+    a11yObserver.disconnect();
+  
+    a11yObserver.timeout = setTimeout(function() {
+
+      console.log("%c MagicBullet: Accessibility Patch v1.96 in use. ", "background: #6e00ee; color: #fff");
+
+      initGlobalPatch();
+      initDataFormPatch();
+
+      a11yObserver.observe(targetNode, config); 
+  
+    }, 1000);
+  
+  });
+
+  a11yObserver.observe(targetNode, config);
+
+}
+
 loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
 
   // Accessibility Patch: Static
@@ -247,68 +309,6 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
 
 });
-
-function loadA11yPatch(url, callback) {
-
-  var a11yBody = document.body;
-
-  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
-
-  // Add A11y hook for implementation team. May come in handy.
-
-  a11yBody.classList.add("magicbullet-a11y");
-
-  // Install Language Pack.
-
-  var componentLanguagePack = document.createElement("script");
-
-  componentLanguagePack.setAttribute("src", url);
-  componentLanguagePack.setAttribute("id", "component-library-language-pack");
-  componentLanguagePack.onreadystatechange = callback;
-  componentLanguagePack.onload = callback;
-
-  // Only load one language pack per page.
-
-  var getComponentLanguagePack = document.getElementById("component-library-language-pack");
-
-  if(getComponentLanguagePack === null) {
-
-    document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
-
-  }
-
-  // Create a new MutationObserver instance
-
-  var targetNode = a11yBody;
-
-  // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
-
-  var config = { childList: true, subtree: true };
-
-  var a11yObserver = new MutationObserver(function(mutationsList) {
-
-    console.log("Mutations:", mutationsList); // Log mutations
-  
-    clearTimeout(a11yObserver.timeout);
-
-    a11yObserver.disconnect();
-  
-    a11yObserver.timeout = setTimeout(function() {
-
-      console.log("%c MagicBullet: Accessibility Patch v1.96 in use. ", "background: #6e00ee; color: #fff");
-
-      initGlobalPatch();
-      initDataFormPatch();
-
-      a11yObserver.observe(targetNode, config); 
-  
-    }, 1000);
-  
-  });
-
-  a11yObserver.observe(targetNode, config);
-
-}
 
 // Accessibility Patch: Global
   
