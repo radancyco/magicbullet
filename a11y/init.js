@@ -18,21 +18,22 @@ function loadA11yPatch(url, callback) {
 
   a11yBody.classList.add("magicbullet-a11y");
 
-  // Install Language Pack.
-
-  var componentLanguagePack = document.createElement("script");
-
-  componentLanguagePack.setAttribute("src", url);
-  componentLanguagePack.setAttribute("id", "component-library-language-pack");
-  componentLanguagePack.onreadystatechange = callback;
-  componentLanguagePack.onload = callback;
-
-  // Only load one language pack per page.
-
   var getComponentLanguagePack = document.getElementById("component-library-language-pack");
 
-  if(!getComponentLanguagePack) {
+  if (getComponentLanguagePack) {
 
+    callback();
+
+  } else {
+
+    // Install Language Pack.
+
+    var componentLanguagePack = document.createElement("script");
+
+    componentLanguagePack.setAttribute("src", url);
+    componentLanguagePack.setAttribute("id", "component-library-language-pack");
+    componentLanguagePack.onreadystatechange = callback;
+    componentLanguagePack.onload = callback;
     document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
 
   }
