@@ -34,6 +34,7 @@ function loadA11yPatch(url, callback) {
     componentLanguagePack.setAttribute("id", "component-library-language-pack");
     componentLanguagePack.onreadystatechange = callback;
     componentLanguagePack.onload = callback;
+
     document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
 
   }
@@ -91,9 +92,6 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   var searchFormLocationError = document.querySelectorAll(".search-location-error");
 
-  console.log(searchFormLocationError);
-  console.log("static script firing");
-
   searchFormLocationError.forEach(function(error, i) {
 
     error.id = "search-error-" + (i + 1);
@@ -125,11 +123,11 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
       setTimeout(function() {
 
-        var locationErrorVisible = document.querySelector(".search-location-error").style.display !== 'none';
+        var locationErrorVisible = document.querySelector(".search-location-error").style.display !== "none";
 
         document.querySelectorAll(".search-location").forEach(function(location) {
 
-          location.setAttribute("aria-invalid", locationErrorVisible ? 'true' : 'false');
+          location.setAttribute("aria-invalid", locationErrorVisible ? "true" : "false");
 
           if (locationErrorVisible) {
 
@@ -139,7 +137,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
         });
 
-      }, 100);
+      }, 300);
 
     });
 
