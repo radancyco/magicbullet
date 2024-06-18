@@ -12,8 +12,6 @@ function loadA11yPatch(url, callback) {
 
   var a11yBody = document.body;
 
-  var targetNode = document.getElementById("content");
-
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 
   // Add A11y hook for implementation team. May come in handy.
@@ -41,6 +39,10 @@ function loadA11yPatch(url, callback) {
 
   // Create a new MutationObserver instance
 
+  var targetNode = document.getElementById("content"); 
+
+  // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
+
   var config = { childList: true, subtree: true };
 
   var a11yObserver = new MutationObserver(function(mutationsList) {
@@ -53,14 +55,12 @@ function loadA11yPatch(url, callback) {
   
     a11yObserver.timeout = setTimeout(function() {
 
-      console.log("%c MagicBullet: Accessibility Patch v1.95 in use. ", "background: #6e00ee; color: #fff");
+      console.log("%c MagicBullet: Accessibility Patch v1.96 in use. ", "background: #6e00ee; color: #fff");
 
       initGlobalPatch();
       initDataFormPatch();
 
       a11yObserver.observe(targetNode, config); 
-
-      // TODO: Only load observer with certain components on page, as these fixes only impace specifc components. 
   
     }, 1000);
   
@@ -73,52 +73,59 @@ function loadA11yPatch(url, callback) {
 loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
 
   // Accessibility Patch: Static
-  // These are issues that only occur once per page load. They are not dynamic or triggered by any any ajax requests, etc. 
+  // These are issues that only occur once per page load. They are not dynamic or triggered by any ajax requests, etc. 
   
   // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0006
+  // TODO: Add language support.
 
-  document.querySelectorAll(".social-share-items a").forEach(function(anchor) {
+  var socialShareLinks = document.querySelectorAll(".social-share-items a");
 
-    anchor.insertAdjacentHTML("beforeend", " <span class='wai visually-hidden'>(Opens in new tab)</span>");
+  socialShareLinks.forEach(function(link) {
+
+    link.insertAdjacentHTML("beforeend", " <span class='wai visually-hidden'>(Opens in new tab)</span>");
 
   });
-
 
   // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
 
-  document.querySelectorAll('.search-location-error').forEach(function(error, i) {
+  var searchFormLocationError = document.querySelectorAll(".search-location-error");
 
-    error.id = 'search-error-' + (i + 1);
+  searchFormLocationError.forEach(function(error, i) {
 
-    error.style.outline = '0 !important';
+    error.id = "search-error-" + (i + 1);
 
-  });
-
-  document.querySelectorAll('.search-location').forEach(function(location, i) {
-
-    location.setAttribute('aria-describedby', 'search-error-' + (i + 1));
-
-    location.setAttribute('aria-invalid', 'false');
+    error.style.outline = "0 !important"; // TODO: Add this to init.scss
 
   });
 
-  document.querySelectorAll('.search-form button').forEach(function(button) {
+  var searchFormLocationInput = document.querySelectorAll(".search-location");
 
-    button.addEventListener('click', function() {
+  searchFormLocationInput.forEach(function(input, i) {
 
-      document.querySelectorAll('.search-location-error').forEach(function(error) {
+    input.setAttribute("aria-describedby", "search-error-" + (i + 1));
+    input.setAttribute("aria-invalid", "false");
 
-        error.removeAttribute('tabindex');
+  });
+
+  var searchFormSubmit
+
+  searchFormSubmit.forEach(function(submit) {
+
+    submit.addEventListener("click", function() {
+
+      document.querySelectorAll(".search-location-error").forEach(function(error) {
+
+        error.removeAttribute("tabindex");
 
       });
 
       setTimeout(function() {
 
-        var locationErrorVisible = document.querySelector('.search-location-error').style.display !== 'none';
+        var locationErrorVisible = document.querySelector(".search-location-error").style.display !== 'none';
 
-        document.querySelectorAll('.search-location').forEach(function(location) {
+        document.querySelectorAll(".search-location").forEach(function(location) {
 
-          location.setAttribute('aria-invalid', locationErrorVisible ? 'true' : 'false');
+          location.setAttribute("aria-invalid", locationErrorVisible ? 'true' : 'false');
 
           if (locationErrorVisible) {
 
