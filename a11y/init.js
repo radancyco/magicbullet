@@ -39,7 +39,7 @@ function loadA11yPatch(url, callback) {
 
   // Create a new MutationObserver instance
 
-  var targetNode = document.getElementById("content"); 
+  var targetNode = a11yBody;
 
   // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
 
