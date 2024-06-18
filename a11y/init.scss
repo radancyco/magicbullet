@@ -129,7 +129,7 @@ visibility: hidden;
     &__close {
     
         &::after {
-        display: none;
+        display: none !important;
         }
 
     }
@@ -140,7 +140,7 @@ visibility: hidden;
         border-radius: 10px;
         color: #444;
         content: "+";
-        display: inline-block;
+        display: inline-block !important;
         font: normal 24px / .65em Arial, sans-serif;
         margin: -2px 0 0 10px;
         opacity: .5;
