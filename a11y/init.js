@@ -40,7 +40,7 @@ function loadA11yPatch(url, callback) {
 
   // Create a new MutationObserver instance
 
-  var targetNode = a11yBody;
+  var targetNode = document.getElementById("content");
 
   // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
 
@@ -111,7 +111,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   });
 
-  var searchFormSubmit
+  var searchFormSubmit = document.querySelectorAll(".search-form button");
 
   searchFormSubmit.forEach(function(submit) {
 
