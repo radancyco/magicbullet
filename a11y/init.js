@@ -104,33 +104,18 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
       // Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
       // Note: This is an additon. a div with the class job-search-legend needs to be added. 
 
-      var searchFormLegend = form.querySelectorAll(".search-form .job-search-legend");
-
-      searchFormLegend.forEach(function(legend) {
-
-        legend.setAttribute("id", "job-search-legend-" + formID);
-        legend.parentElement.setAttribute("aria-labelledby", "job-search-legend-" + formID);
-
-      });
+      var searchFormLegend = form.querySelector(".search-form .job-search-legend");
+      searchFormLegend.setAttribute("id", "job-search-legend-" + formID);
+      searchFormLegend.closest("search-form-fields").setAttribute("aria-labelledby", "job-search-legend-" + formID);
 
       // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
 
-      var searchFormLocationInput = form.querySelectorAll(".search-location");
+      var searchFormLocationInput = form.querySelector(".search-location");
+      searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
+      searchFormLocationInput.setAttribute("aria-invalid", "false");
 
-      searchFormLocationInput.forEach(function(input) {
-
-        input.setAttribute("aria-describedby", "search-error-" + formID);
-        input.setAttribute("aria-invalid", "false");
-
-      });
-
-      var searchFormLocationError = form.querySelectorAll(".search-location-error");
-
-      searchFormLocationError.forEach(function(error) {
-
-        error.setAttribute("id", "search-error-" + formID);
-
-      });
+      var searchFormLocationError = form.querySelector(".search-location-error");
+      searchFormLocationError.setAttribute("id", "search-error-" + formID);
 
   });
 
