@@ -74,14 +74,10 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   
   a11yObserver.observe(targetNode, config);
 
-  // Accessibility Patch: Static
-  // These are issues that only occur once per page load. They are not dynamic or triggered by any ajax requests, etc. 
+  // Accessibility Patch: Global (Static)
+  // Note: These are issues that only occur once per page load. They are not dynamic or triggered by any ajax requests, etc. 
 
-  
   // Search Forms 
-
-  // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0004
-  // TODO: Add language support
 
   var searchForm = document.querySelectorAll(".search-form");
 
@@ -163,7 +159,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
     // Submit Buttom Override
 
-    // we do not need tabindex on the current error
+   
 
     searchFormSubmit.addEventListener("click", function() {
 
@@ -176,6 +172,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
     // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0006
   // This loads on job description and ajd pages mostly
   // TODO: Add language support.
+  // Social Share Module
 
   var socialShareLinks = document.querySelectorAll(".social-share-items a");
 
@@ -287,7 +284,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
     });
   
-    // Issue: Cookie Management Page has some aria-describedby attributes on the page that do nothing. Remove.
+    // Issue: Cookie Management Page has some aria-describedby attributes on the page that do nothing.
 
     var cookieDescriptionIdAttr = document.querySelectorAll("input[aria-describedby='cookieDescriptionIdAttr']");
 
@@ -297,17 +294,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
     });
 
-  // BUG: All section elements used for personbalization, appear to have tabindex="0" on them. These should not exist.
-  // This may no longer be needed.
 
-  var personalizationModule = document.querySelectorAll("section[data-module-type='Personalization']");
-
-  personalizationModule.forEach(function(module){
-
-    module.removeAttribute("tabindex");
-
-  });
-  
     // TODO: Add future fixes here.
 
 
@@ -526,7 +513,7 @@ function initGlobalPatch() {
 
   if(searchResults) {
 
-    searchResults.setAttribute("tabindex", "-1");
+  //   searchResults.setAttribute("tabindex", "-1");
 
   }
 
