@@ -502,7 +502,7 @@ function initGlobalPatch() {
 
   if(searchResultsFilter) {
 
-    searchResultsFilter.removeAttribute("tabindex");
+   // searchResultsFilter.removeAttribute("tabindex");
 
   }
 
@@ -513,7 +513,7 @@ function initGlobalPatch() {
 
   if(searchResults) {
 
-  //   searchResults.setAttribute("tabindex", "-1");
+    searchResults.setAttribute("tabindex", "-1");
 
   }
 
