@@ -150,9 +150,10 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
       setTimeout(function() {
 
         searchFormLocationError.removeAttribute("tabindex");
-        searchFormLocationError.getAttribute("aria-hidden");
 
-          if(searchFormLocationError === "false") {
+        var errorState = searchFormLocationError.getAttribute("aria-hidden");
+
+          if(errorState === "false") {
 
             searchFormLocationInput.setAttribute("aria-invalid", "true");
             searchFormLocationInput.focus();
@@ -169,7 +170,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   });
 
-  document.querySelectorAll('.search-location').forEach(function(location) {
+ /*  document.querySelectorAll('.search-location').forEach(function(location) {
 
     location.addEventListener('change', function() {
 
@@ -185,7 +186,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
     });
 
-  });
+  }); */
 
  
 
