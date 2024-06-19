@@ -104,12 +104,17 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
       // Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
       // Note: This is an additon. a div with the class job-search-legend needs to be added. 
 
-      var searchFormLegend = form.querySelector(".search-form .job-search-legend");
+      var searchFormLegend = form.querySelector(".job-search-legend");
 
       if(searchFormLegend) {
 
         searchFormLegend.setAttribute("id", "job-search-legend-" + formID);
-        searchFormLegend.closest("search-form-fields").setAttribute("aria-labelledby", "job-search-legend-" + formID);
+        searchFormLegend.closest(".search-form-fields").setAttribute("aria-labelledby", "job-search-legend-" + formID);
+
+      } else {
+
+
+        form.clos
 
       }
 
