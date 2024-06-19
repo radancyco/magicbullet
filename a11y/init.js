@@ -76,6 +76,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   // Accessibility Patch: Static
   // These are issues that only occur once per page load. They are not dynamic or triggered by any ajax requests, etc. 
+
   
   // Search Forms 
 
@@ -318,6 +319,8 @@ function initGlobalPatch() {
 
   // Global Issues
 
+  // These are issue that could be static, but could also occur on ajax load, etc. 
+
     // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0009 (HTML CLEANUP)
 
     var inputCheckBox = document.querySelectorAll("input[type='checkbox']");
@@ -504,15 +507,7 @@ function initGlobalPatch() {
 
     });
 
-  // Issue: Search Results: Remove role="status" from h1 and h2 elements
 
-  var searchResultsHeadings = document.querySelectorAll(".search-results h1, .search-results h2");
-
-  searchResultsHeadings.forEach(function(heading){
-
-    heading.removeAttribute("role");
-
-  });
 
   // Issue: Search Filters: Remove tabindex from search-filter element. Only interactive elements should receive focus.
 
@@ -531,7 +526,7 @@ function initGlobalPatch() {
 
   if(searchResults) {
 
-    searchResults.setAttribute("tabindex", "-2");
+    searchResults.setAttribute("tabindex", "-1");
 
   }
 
