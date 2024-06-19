@@ -10,10 +10,6 @@
 
 function loadA11yPatch(url, callback) {
 
-  // Add A11y hook for implementation team. May come in handy.
-
-  a11yBody.classList.add("magicbullet-a11y");
-
   var getComponentLanguagePack = document.getElementById("component-library-language-pack");
 
   if (getComponentLanguagePack) {
@@ -35,7 +31,6 @@ function loadA11yPatch(url, callback) {
 
   }
 
-
 }
 
 loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
@@ -44,37 +39,40 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 
+  // Add A11y hook for implementation team. May come in handy.
 
-    // Create a new MutationObserver instance
+  a11yBody.classList.add("magicbullet-a11y");
 
-    var targetNode = document.getElementById("content");
+  // Create a new MutationObserver instance
 
-    // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
+  var targetNode = document.getElementById("content");
+
+  // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
   
-    var config = { childList: true, subtree: true };
+  var config = { childList: true, subtree: true };
   
-    var a11yObserver = new MutationObserver(function(mutationsList) {
+  var a11yObserver = new MutationObserver(function(mutationsList) {
   
-      console.log("Mutations:", mutationsList); // Log mutations
+    console.log("Mutations:", mutationsList); // Log mutations
     
-      clearTimeout(a11yObserver.timeout);
+    clearTimeout(a11yObserver.timeout);
   
-      a11yObserver.disconnect();
+    a11yObserver.disconnect();
     
-      a11yObserver.timeout = setTimeout(function() {
+    a11yObserver.timeout = setTimeout(function() {
   
-        console.log("%c MagicBullet: Accessibility Patch v1.96 in use. ", "background: #6e00ee; color: #fff");
+      console.log("%c MagicBullet: Accessibility Patch v1.96 in use. ", "background: #6e00ee; color: #fff");
   
-        initGlobalPatch();
-        initDataFormPatch();
+      initGlobalPatch();
+      initDataFormPatch();
   
-        a11yObserver.observe(targetNode, config); 
+      a11yObserver.observe(targetNode, config); 
     
-      }, 1000);
+    }, 1000);
     
-    });
+  });
   
-    a11yObserver.observe(targetNode, config);
+  a11yObserver.observe(targetNode, config);
 
   // Accessibility Patch: Static
   // These are issues that only occur once per page load. They are not dynamic or triggered by any ajax requests, etc. 
