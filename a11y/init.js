@@ -481,45 +481,20 @@ function initGlobalPatch() {
 
       nav.setAttribute("aria-label", "Pagination");
 
+      // A11Y0020: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
+
+      var paginationPage = nav.querySelectorAll(".pagination-paging .disabled");
+
+      paginationPage.forEach(function(page){
+
+        page.removeAttribute("aria-hidden");
+        page.removeAttribute("href");
+
+      });
+
     });
 
-    // A11Y0020: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
-
-    var paginationPage = document.querySelectorAll(".pagination-paging .disabled");
-
-    paginationPage.forEach(function(page){
-
-      page.removeAttribute("aria-hidden");
-      page.removeAttribute("href");
-
-    });
-
-
-
-  // Issue: Search Filters: Remove tabindex from search-filter element. Only interactive elements should receive focus.
-
-  var searchResultsFilter = document.getElementById("search-filters");
-
-  if(searchResultsFilter) {
-
-   // searchResultsFilter.removeAttribute("tabindex");
-
-  }
-
-  // BUG: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
-  // For now, a hacky fix...
-
-  var searchResults = document.getElementById("search-results");
-
-  if(searchResults) {
-
-    searchResults.setAttribute("tabindex", "-1");
-
-  }
-
-
-
-
+   
 
 }
 
