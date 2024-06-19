@@ -105,17 +105,32 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
       // Note: This is an additon. a div with the class job-search-legend needs to be added. 
 
       var searchFormLegend = form.querySelector(".search-form .job-search-legend");
-      searchFormLegend.setAttribute("id", "job-search-legend-" + formID);
-      searchFormLegend.closest("search-form-fields").setAttribute("aria-labelledby", "job-search-legend-" + formID);
+
+      if(searchFormLegend) {
+
+        searchFormLegend.setAttribute("id", "job-search-legend-" + formID);
+        searchFormLegend.closest("search-form-fields").setAttribute("aria-labelledby", "job-search-legend-" + formID);
+
+      }
 
       // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
 
       var searchFormLocationInput = form.querySelector(".search-location");
-      searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
-      searchFormLocationInput.setAttribute("aria-invalid", "false");
+
+      if(searchFormLocationInput) {
+
+        searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
+        searchFormLocationInput.setAttribute("aria-invalid", "false");
+
+      }
 
       var searchFormLocationError = form.querySelector(".search-location-error");
-      searchFormLocationError.setAttribute("id", "search-error-" + formID);
+
+      if(searchFormLocationError) {
+
+        searchFormLocationError.setAttribute("id", "search-error-" + formID);
+
+      }
 
   });
 
