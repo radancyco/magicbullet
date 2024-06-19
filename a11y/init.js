@@ -77,18 +77,6 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   // Accessibility Patch: Static
   // These are issues that only occur once per page load. They are not dynamic or triggered by any ajax requests, etc. 
   
-  // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0006
-  // This loads on job description and ajd pages mostly
-  // TODO: Add language support.
-
-  var socialShareLinks = document.querySelectorAll(".social-share-items a");
-
-  socialShareLinks.forEach(function(link) {
-
-    link.insertAdjacentHTML("beforeend", " <span class='wai visually-hidden'>(Opens in new tab)</span>");
-
-  });
-
   // Search Forms 
 
   // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0004
@@ -110,6 +98,31 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
     var searchFormLocationInput = form.querySelector(".search-location");
     var searchFormLocationError = form.querySelector(".search-location-error");
     var searchFormSubmit = form.querySelector("button");
+
+    // Shared Function(s)
+
+    function accessibleValidation() {
+
+      setTimeout(function() {
+
+        searchFormLocationError.removeAttribute("tabindex");
+
+        var ariaHiddenHook = searchFormLocationError.getAttribute("aria-hidden");
+
+          if(ariaHiddenHook === "false") {
+
+            searchFormLocationInput.setAttribute("aria-invalid", "true");
+            searchFormLocationInput.focus();
+
+          } else { 
+
+            searchFormLocationInput.setAttribute("aria-invalid", "false");
+
+          }
+
+      }, 100);
+
+    }
 
     // Field grouping. 
 
@@ -157,28 +170,17 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
     });
 
-    function accessibleValidation() {
+  });
 
-      setTimeout(function() {
+    // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0006
+  // This loads on job description and ajd pages mostly
+  // TODO: Add language support.
 
-        searchFormLocationError.removeAttribute("tabindex");
+  var socialShareLinks = document.querySelectorAll(".social-share-items a");
 
-        var ariaHiddenHook = searchFormLocationError.getAttribute("aria-hidden");
+  socialShareLinks.forEach(function(link) {
 
-          if(ariaHiddenHook === "false") {
-
-            searchFormLocationInput.setAttribute("aria-invalid", "true");
-            searchFormLocationInput.focus();
-
-          } else { 
-
-            searchFormLocationInput.setAttribute("aria-invalid", "false");
-
-          }
-
-      }, 100);
-
-    }
+    link.append(" <span class='wai visually-hidden'>(Opens in new tab)</span>");
 
   });
 
