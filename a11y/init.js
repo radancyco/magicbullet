@@ -152,7 +152,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
         searchFormLocationError.removeAttribute("tabindex");
         searchFormLocationError.getAttribute("aria-hidden");
 
-          if(searchFormLocationError === "true") {
+          if(searchFormLocationError === "false") {
 
             searchFormLocationInput.setAttribute("aria-invalid", "true");
             searchFormLocationInput.focus();
