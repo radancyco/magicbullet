@@ -41,6 +41,10 @@ a[href="#search-results-list"], a[href="#search-filters"] {
 display: none;
 }
 
+.pagination-paging a.disabled {
+visibility: hidden; // cant use display none because it can break layout, this works nicely tho.
+}
+
 /* Access Link - Ensure accesslink always has higher index. */
 
 .access-link {
