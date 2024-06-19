@@ -35,9 +35,9 @@ function loadA11yPatch(url, callback) {
 
 loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
 
-  var a11yBody = document.body;
-
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
+
+  var a11yBody = document.body;
 
   // Add A11y hook for implementation team. May come in handy.
 
@@ -61,7 +61,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
     
     a11yObserver.timeout = setTimeout(function() {
   
-      console.log("%c MagicBullet: Accessibility Patch v1.96 in use. ", "background: #6e00ee; color: #fff");
+      console.log("%c MagicBullet: Accessibility Patch v1.97 in use. ", "background: #6e00ee; color: #fff");
   
       initGlobalPatch();
       initDataFormPatch();
@@ -78,6 +78,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   // These are issues that only occur once per page load. They are not dynamic or triggered by any ajax requests, etc. 
   
   // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0006
+  // This loads on job description and ajd pages mostly
   // TODO: Add language support.
 
   var socialShareLinks = document.querySelectorAll(".social-share-items a");
@@ -88,26 +89,41 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   });
 
-  // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
+   // Search Forms 
 
-  var searchFormLocationError = document.querySelectorAll(".search-location-error");
+    // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0004
 
-  searchFormLocationError.forEach(function(error, i) {
+    var searchForm = document.querySelectorAll(".search-form");
 
-    error.id = "search-error-" + (i + 1);
+    searchForm.forEach(function(form, i){
 
-    error.style.outline = "0 !important"; // TODO: Add this to init.scss
+      var formID = (i + 1);
+
+      form.setAttribute("role", "search");
+
+      var searchFormLocationInput = form.querySelectorAll(".search-location");
+
+      searchFormLocationInput.forEach(function(input) {
+
+        input.setAttribute("aria-describedby", "search-error-" + formID);
+        input.setAttribute("aria-invalid", "false");
+
+      });
+
+      // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
+
+      var searchFormLocationError = form.querySelectorAll(".search-location-error");
+
+      searchFormLocationError.forEach(function(error) {
+
+        error.setAttribute("search-error-" + formID);
+        error.style.outline = "0 !important"; // TODO: Add this to init.scss
+
+      });
 
   });
 
-  var searchFormLocationInput = document.querySelectorAll(".search-location");
-
-  searchFormLocationInput.forEach(function(input, i) {
-
-    input.setAttribute("aria-describedby", "search-error-" + (i + 1));
-    input.setAttribute("aria-invalid", "false");
-
-  });
+  
 
   var searchFormSubmit = document.querySelectorAll(".search-form button");
 
@@ -162,8 +178,11 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   });
 
   // Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
+  // Note: This is an additon. a div with the class job-search-legend needs to be added. 
 
-  document.querySelectorAll('.search-form .job-search-legend, .advanced-search-form .job-search-legend').forEach(function(legend, i) {
+  var searchFormLegend = document.querySelectorAll(".search-form .job-search-legend");
+
+  searchFormLegend.forEach(function(legend, i) {
 
     legend.id = 'job-search-legend-' + (i + 1);
 
@@ -189,17 +208,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
     });
 
 
-     // Search Forms 
-
-    // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0004
-
-    var searchForm = document.querySelectorAll(".search-form, .advanced-search-form");
-
-    searchForm.forEach(function(form){
-
-      form.setAttribute("role", "search");
-
-    });
+    
 
 
     // Job Description: Garbage Removal
@@ -295,6 +304,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
     });
 
   // BUG: All section elements used for personbalization, appear to have tabindex="0" on them. These should not exist.
+  // This may no longer be needed.
 
   var personalizationModule = document.querySelectorAll("section[data-module-type='Personalization']");
 
@@ -317,7 +327,9 @@ function initGlobalPatch() {
 
     // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0009 (HTML CLEANUP)
 
-    document.querySelectorAll("input[type='checkbox']").forEach(function(input) {
+    var inputCheckBox = document.querySelectorAll("input[type='checkbox']");
+
+    inputCheckBox.forEach(function(input) {
 
       input.removeAttribute("autocomplete");
 
