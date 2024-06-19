@@ -108,13 +108,14 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
       if(searchFormLegend) {
 
-        searchFormLegend.setAttribute("id", "job-search-legend-" + formID);
         searchFormLegend.closest(".search-form-fields").setAttribute("aria-labelledby", "job-search-legend-" + formID);
+        searchFormLegend.setAttribute("id", "job-search-legend-" + formID);
+        searchFormLegend.closest(".search-form-fields").setAttribute("role", "group");
 
       } else {
 
 
-        form.clos
+      
 
       }
 
