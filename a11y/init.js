@@ -475,24 +475,36 @@ function initGlobalPatch() {
     // A11Y0019: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
     // TODO: Add language support.
 
-    var paginationNav = document.querySelectorAll(".pagination");
+    var pagination = document.querySelectorAll(".pagination");
 
-    paginationNav.forEach(function(nav){
+    pagination.forEach(function(page){
 
-      nav.setAttribute("aria-label", "Pagination");
+      page.setAttribute("aria-label", "Pagination");
 
       // A11Y0020: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
-      var paginationPage = nav.querySelectorAll(".pagination-paging .disabled");
+      var paging = nav.querySelectorAll(".pagination-paging .disabled");
 
-      paginationPage.forEach(function(page){
+      paging.forEach(function(link){
 
-        page.removeAttribute("aria-hidden");
-        page.removeAttribute("href");
+        link.removeAttribute("aria-hidden");
+        link.removeAttribute("href");
 
       });
 
     });
+
+
+  // BUG: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
+  // For now, a hacky fix...
+
+  var searchResults = document.getElementById("search-results");
+
+  if(searchResults) {
+
+    searchResults.setAttribute("tabindex", "-1");
+
+  }
 
    
 
