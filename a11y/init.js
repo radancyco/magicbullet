@@ -133,6 +133,12 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
       searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
       searchFormLocationInput.setAttribute("aria-invalid", "false");
 
+      searchFormLocationInput.addEventListener("change", function() {
+
+        accessibleValidation();
+  
+      });
+
     }
 
     if(searchFormLocationError) {
@@ -147,13 +153,19 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
     searchFormSubmit.addEventListener("click", function() {
 
+      accessibleValidation();
+
+    });
+
+    function accessibleValidation() {
+
       setTimeout(function() {
 
         searchFormLocationError.removeAttribute("tabindex");
 
-        var errorState = searchFormLocationError.getAttribute("aria-hidden");
+        var ariaHiddenHook = searchFormLocationError.getAttribute("aria-hidden");
 
-          if(errorState === "false") {
+          if(ariaHiddenHook === "false") {
 
             searchFormLocationInput.setAttribute("aria-invalid", "true");
             searchFormLocationInput.focus();
@@ -166,30 +178,9 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
       }, 100);
 
-    });
+    }
 
   });
-
- /*  document.querySelectorAll('.search-location').forEach(function(location) {
-
-    location.addEventListener('change', function() {
-
-      var locationErrorVisible = document.querySelector('.search-location-error').style.display !== 'none';
-
-      this.setAttribute('aria-invalid', locationErrorVisible ? 'true' : 'false');
-
-      if (locationErrorVisible) {
-
-        this.focus();
-
-      }
-
-    });
-
-  }); */
-
- 
-
 
   // Job Location Map
 
