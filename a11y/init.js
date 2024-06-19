@@ -92,6 +92,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
    // Search Forms 
 
     // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0004
+    // TODO: Add language support
 
     var searchForm = document.querySelectorAll(".search-form");
 
@@ -106,6 +107,11 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
       var searchFormLegend = form.querySelector(".job-search-legend");
       var searchFormFields = form.querySelector(".search-form-fields");
+      var searchFormLocationInput = form.querySelector(".search-location");
+      var searchFormLocationError = form.querySelector(".search-location-error");
+      var searchFormSubmit = form.querySelectorAll("button");
+
+      // Field grouping. 
 
       searchFormFields.setAttribute("role", "group");
 
@@ -122,8 +128,6 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
       // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
 
-      var searchFormLocationInput = form.querySelector(".search-location");
-
       if(searchFormLocationInput) {
 
         searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
@@ -131,51 +135,40 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
       }
 
-      var searchFormLocationError = form.querySelector(".search-location-error");
-
       if(searchFormLocationError) {
 
         searchFormLocationError.setAttribute("id", "search-error-" + formID);
 
       }
 
-  });
+      // Submit Buttom Override
 
-  
+      // we do not need tabindex on the current error
 
-  var searchFormSubmit = document.querySelectorAll(".search-form button");
-
-  searchFormSubmit.forEach(function(submit) {
-
-    submit.addEventListener("click", function() {
-
-      document.querySelectorAll(".search-location-error").forEach(function(error) {
-
-        error.removeAttribute("tabindex");
-
-      });
+      searchFormLocationError.removeAttribute("tabindex");
 
       setTimeout(function() {
 
-        var locationErrorVisible = document.querySelector(".search-location-error").style.display !== "none";
+        var locationErrorVisible = searchFormLocationError.style.display !== "none";
 
-        document.querySelectorAll(".search-location").forEach(function(location) {
+        searchFormLocationInput.setAttribute("aria-invalid", locationErrorVisible ? "true" : "false");
 
-          location.setAttribute("aria-invalid", locationErrorVisible ? "true" : "false");
+        if (locationErrorVisible) {
 
-          if (locationErrorVisible) {
+          searchFormLocationInput.focus();
 
-            location.focus();
-
-          }
-
-        });
+        }
 
       }, 300);
 
     });
 
+
   });
+
+  
+
+  
 
   document.querySelectorAll('.search-location').forEach(function(location) {
 
