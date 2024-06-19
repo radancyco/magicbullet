@@ -180,7 +180,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   socialShareLinks.forEach(function(link) {
 
-    link.append(" <span class='wai visually-hidden'>(Opens in new tab)</span>");
+    link.insertAdjacentHTML("beforeend", " <span class='wai visually-hidden'>(Opens in new tab)</span>");
 
   });
 
