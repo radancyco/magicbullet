@@ -117,7 +117,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
       searchFormLocationError.forEach(function(error) {
 
         error.setAttribute("id", "search-error-" + formID);
-        error.style.outline = "0 !important"; // TODO: Add this to init.scss
+        error.style.setProperty("outline", "0", "important"); // TODO: Add this to init.scss
 
       });
 
