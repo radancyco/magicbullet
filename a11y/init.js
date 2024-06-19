@@ -89,89 +89,85 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   });
 
-   // Search Forms 
+  // Search Forms 
 
-    // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0004
-    // TODO: Add language support
+  // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0004
+  // TODO: Add language support
 
-    var searchForm = document.querySelectorAll(".search-form");
+  var searchForm = document.querySelectorAll(".search-form");
 
-    searchForm.forEach(function(form, i){
+  searchForm.forEach(function(form, i){
 
-      var formID = (i + 1);
+    var formID = (i + 1);
 
-      form.setAttribute("role", "search");
+    form.setAttribute("role", "search");
 
-      // Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
-      // Note: This is an additon. a div with the class job-search-legend needs to be added. 
+    // Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
+    // Note: This is an additon. a div with the class job-search-legend needs to be added. 
 
-      var searchFormLegend = form.querySelector(".job-search-legend");
-      var searchFormFields = form.querySelector(".search-form-fields");
-      var searchFormLocationInput = form.querySelector(".search-location");
-      var searchFormLocationError = form.querySelector(".search-location-error");
-      var searchFormSubmit = form.querySelectorAll("button");
+    var searchFormLegend = form.querySelector(".job-search-legend");
+    var searchFormFields = form.querySelector(".search-form-fields");
+    var searchFormLocationInput = form.querySelector(".search-location");
+    var searchFormLocationError = form.querySelector(".search-location-error");
+    var searchFormSubmit = form.querySelector("button");
 
-      // Field grouping. 
+    // Field grouping. 
 
-      searchFormFields.setAttribute("role", "group");
+    searchFormFields.setAttribute("role", "group");
 
-      if(searchFormLegend) {
+    if(searchFormLegend) {
 
-        searchFormFields.setAttribute("aria-labelledby", "job-search-legend-" + formID);
-        searchFormLegend.setAttribute("id", "job-search-legend-" + formID);
+      searchFormFields.setAttribute("aria-labelledby", "job-search-legend-" + formID);
+      searchFormLegend.setAttribute("id", "job-search-legend-" + formID);
 
-      } else {
+    } else {
 
-        searchFormFields.setAttribute("aria-label", "Search Jobs");
+      searchFormFields.setAttribute("aria-label", "Search Jobs");
 
-      }
+    }
 
-      // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
+    // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
 
-      if(searchFormLocationInput) {
+    if(searchFormLocationInput) {
 
-        searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
-        searchFormLocationInput.setAttribute("aria-invalid", "false");
+      searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
+      searchFormLocationInput.setAttribute("aria-invalid", "false");
 
-      }
+    }
 
-      if(searchFormLocationError) {
+    if(searchFormLocationError) {
 
-        searchFormLocationError.setAttribute("id", "search-error-" + formID);
+      searchFormLocationError.setAttribute("id", "search-error-" + formID);
 
-      }
+    }
 
-      // Submit Buttom Override
+    // Submit Buttom Override
 
-      // we do not need tabindex on the current error
+    // we do not need tabindex on the current error
 
-      searchFormSubmit.addEventListener("click", function() {
+    searchFormSubmit.addEventListener("click", function() {
 
-        setTimeout(function() {
+      setTimeout(function() {
 
-          searchFormLocationError.removeAttribute("tabindex");
-          searchFormLocationError.getAttribute("aria-hidden");
+        searchFormLocationError.removeAttribute("tabindex");
+        searchFormLocationError.getAttribute("aria-hidden");
 
-            if(searchFormLocationError === "true") {
+          if(searchFormLocationError === "true") {
 
-              searchFormLocationInput.setAttribute("aria-invalid", "true");
-              searchFormLocationInput.focus();
+            searchFormLocationInput.setAttribute("aria-invalid", "true");
+            searchFormLocationInput.focus();
 
-            } else { 
+          } else { 
 
-              searchFormLocationInput.setAttribute("aria-invalid", "false");
+            searchFormLocationInput.setAttribute("aria-invalid", "false");
 
-            }
+          }
 
-        }, 100);
+      }, 100);
 
-      });
+    });
 
   });
-
-  
-
-  
 
   document.querySelectorAll('.search-location').forEach(function(location) {
 
