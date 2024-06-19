@@ -105,7 +105,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
       // Note: This is an additon. a div with the class job-search-legend needs to be added. 
 
       var searchFormLegend = form.querySelector(".job-search-legend");
-      var searchFormFields = form.closest(".search-form-fields");
+      var searchFormFields = form.querySelector(".search-form-fields");
 
       searchFormFields.setAttribute("role", "group");
 
