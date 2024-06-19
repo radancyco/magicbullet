@@ -295,50 +295,9 @@ function initGlobalPatch() {
 
     });
 
-  // Search Results & Job Description
-
-    // A11Y0018: Custom "Save Job" button functionality
-
-    var btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
-
-    btnSaveJobs.forEach(function(btn){
-
-      // aria-pressed not working with type attribute on it, which makes sense.
-      // TODO: See if still an issue in VO, too.
-      // TODO: Add language support.
-
-      btn.removeAttribute("type");
-      btn.setAttribute("role", "button"); // iOS, NVDA bug, state not reading back so need to implicitly call role. Do not remove until support better.
-      btn.setAttribute("aria-label", "Save Job");
-
-      if(btn.dataset.jobSaved === "true") {
-
-        btn.setAttribute("aria-pressed", "true");
-
-      } else {
-
-        btn.setAttribute("aria-pressed", "false");
-
-      }
-
-      btn.addEventListener("click", function() {
-
-        if(this.dataset.jobSaved === "true") {
-
-          this.setAttribute("aria-pressed", "false");
-
-        } else {
-
-          this.setAttribute("aria-pressed", "true");
-
-        }
-
-      });
-
-  });
-
+  
   fixAppliedFilters();
-
+  fixSaveJobButton();
   fixSearchPagination();
 
   // BUG: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
@@ -376,6 +335,7 @@ function fixAppliedFilters() {
     var appliedFiltersList = filter.querySelectorAll("ul[aria-labelledby]");
     var btnSearchFilter = filter.querySelectorAll(".filter-button:not([disabled])");
 
+    // A11YAF001
     // Remove aria-labeledby from UL.
 
     appliedFiltersList.forEach(function(list){
@@ -384,13 +344,15 @@ function fixAppliedFilters() {
 
     });
 
-    // Remove/Add ARIA to parent section warpper (.search-results-option)
+    // A11YAF002
+    // Remove aria-hidden and aria-expanded and add aria-describedby and role to parent element (.search-results-option)
   
     filter.removeAttribute("aria-hidden");
     filter.removeAttribute("aria-expanded");
     filter.setAttribute("aria-labelledby", "applied-filters-label");
     filter.setAttribute("role", "region");
 
+    // A11YAF003
     // Add ARIA label to each button that is not disabled.
 
     btnSearchFilter.forEach(function(btn){
@@ -740,6 +702,55 @@ function fixDataForm() {
         }
 
       });
+
+    });
+
+  });
+
+}
+
+// Accessibility Patch: Save Job Button
+
+function fixSaveJobButton() {
+
+  var btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
+
+  btnSaveJobs.forEach(function(btn){
+
+    // A11YSAVEJOB001
+    // Custom label needed to override the text toggle that delivery often adds (or removes). Text changes should never be used to convery state.
+    // Adding aria-pressed, which will properly convey state. 
+    // Other housecleaning.
+    // TODO: Add language support.
+
+    btn.setAttribute("aria-label", "Save Job");
+
+    // iOS, NVDA bug, state not reading back so need to implicitly call role. Do not remove until support better.
+
+    btn.removeAttribute("type");
+    btn.setAttribute("role", "button");
+  
+    if(btn.dataset.jobSaved === "true") {
+
+      btn.setAttribute("aria-pressed", "true");
+
+    } else {
+
+      btn.setAttribute("aria-pressed", "false");
+
+    }
+
+    btn.addEventListener("click", function() {
+
+      if(this.dataset.jobSaved === "true") {
+
+        this.setAttribute("aria-pressed", "false");
+
+      } else {
+
+        this.setAttribute("aria-pressed", "true");
+
+      }
 
     });
 
