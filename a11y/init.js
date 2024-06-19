@@ -145,25 +145,26 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
       // we do not need tabindex on the current error
 
-      searchFormLocationError.removeAttribute("tabindex");
+      searchFormSubmit.addEventListener("click", function() {
 
-      setTimeout(function() {
+        searchFormLocationError.removeAttribute("tabindex");
 
-        var locationErrorVisible = searchFormLocationError.style.display !== "none";
+        setTimeout(function() {
 
-        searchFormLocationInput.setAttribute("aria-invalid", locationErrorVisible ? "true" : "false");
+          var locationErrorVisible = searchFormLocationError.style.display !== "none";
 
-        if (locationErrorVisible) {
+          searchFormLocationInput.setAttribute("aria-invalid", locationErrorVisible ? "true" : "false");
 
-          searchFormLocationInput.focus();
+          if (locationErrorVisible) {
 
-        }
+            searchFormLocationInput.focus();
 
-      }, 300);
+          }
 
-    });
+        }, 300);
 
-
+      });
+      
   });
 
   
