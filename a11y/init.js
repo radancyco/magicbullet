@@ -64,7 +64,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
       console.log("%c MagicBullet: Accessibility Patch v1.97 in use. ", "background: #6e00ee; color: #fff");
   
       initGlobalPatch();
-      initDataFormPatch();
+      fixDataForm();
   
       a11yObserver.observe(targetNode, config); 
     
@@ -77,97 +77,8 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   // Accessibility Patch: Global (Static)
   // Note: These are issues that only occur once per page load. They are not dynamic or triggered by any ajax requests, etc. 
 
-  // Search Forms 
 
-  var searchForm = document.querySelectorAll(".search-form");
-
-  searchForm.forEach(function(form, i){
-
-    var formID = (i + 1);
-
-    form.setAttribute("role", "search");
-
-    // Issue: Add unique ID to Search Form "legend" and aria-labelledby in parent group.
-    // Note: This is an additon. a div with the class job-search-legend needs to be added. 
-
-    var searchFormLegend = form.querySelector(".job-search-legend");
-    var searchFormFields = form.querySelector(".search-form-fields");
-    var searchFormLocationInput = form.querySelector(".search-location");
-    var searchFormLocationError = form.querySelector(".search-location-error");
-    var searchFormSubmit = form.querySelector("button");
-
-    // Shared Function(s)
-
-    function accessibleValidation() {
-
-      setTimeout(function() {
-
-        searchFormLocationError.removeAttribute("tabindex");
-
-        var ariaHiddenHook = searchFormLocationError.getAttribute("aria-hidden");
-
-          if(ariaHiddenHook === "false") {
-
-            searchFormLocationInput.setAttribute("aria-invalid", "true");
-            searchFormLocationInput.focus();
-
-          } else { 
-
-            searchFormLocationInput.setAttribute("aria-invalid", "false");
-
-          }
-
-      }, 100);
-
-    }
-
-    // Field grouping. 
-
-    searchFormFields.setAttribute("role", "group");
-
-    if(searchFormLegend) {
-
-      searchFormFields.setAttribute("aria-labelledby", "job-search-legend-" + formID);
-      searchFormLegend.setAttribute("id", "job-search-legend-" + formID);
-
-    } else {
-
-      searchFormFields.setAttribute("aria-label", "Search Jobs");
-
-    }
-
-    // Issue: All Search forms appear to have issue with validation message not being read back and focus not being applied to focus field.
-
-    if(searchFormLocationInput) {
-
-      searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
-      searchFormLocationInput.setAttribute("aria-invalid", "false");
-
-      searchFormLocationInput.addEventListener("change", function() {
-
-        accessibleValidation();
-  
-      });
-
-    }
-
-    if(searchFormLocationError) {
-
-      searchFormLocationError.setAttribute("id", "search-error-" + formID);
-
-    }
-
-    // Submit Buttom Override
-
-   
-
-    searchFormSubmit.addEventListener("click", function() {
-
-      accessibleValidation();
-
-    });
-
-  });
+  fixSearchForm();
 
     // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0006
   // This loads on job description and ajd pages mostly
@@ -510,15 +421,130 @@ function initGlobalPatch() {
 
 }
 
-// Accessibility Patch: Data Forms
+// Accessibility Patch: Search Form
 
-function initDataFormPatch() {
+function fixSearchForm() {
+
+  var searchForm = document.querySelectorAll(".search-form");
+
+  searchForm.forEach(function(form, i){
+
+    var formID = (i + 1);
+    var searchFormLegend = form.querySelector(".job-search-legend");
+    var searchFormFields = form.querySelector(".search-form-fields");
+    var searchFormLocationInput = form.querySelector(".search-location");
+    var searchFormLocationPin = form.queruSelector(".location-pin");
+    var searchFormLocationError = form.querySelector(".search-location-error");
+    var searchFormSubmit = form.querySelector("button");
+
+    // Shared Function(s)
+
+    function accessibleValidation() {
+
+      setTimeout(function() {
+
+        searchFormLocationError.removeAttribute("tabindex");
+
+        var ariaHiddenHook = searchFormLocationError.getAttribute("aria-hidden");
+
+          if(ariaHiddenHook === "false") {
+
+            searchFormLocationInput.setAttribute("aria-invalid", "true");
+            searchFormLocationInput.focus();
+
+          } else { 
+
+            searchFormLocationInput.setAttribute("aria-invalid", "false");
+
+          }
+
+      }, 100);
+
+    }
+
+    // A11YSEARCH0001
+    // Our primary search form should include a distinct role so that it can aid in helping assistive technology users navigate the page.
+
+    form.setAttribute("role", "search");
+
+    // A11YSEARCH0002
+    // Our primary search form should provide a better group description for the fields at hand. This can be achived by adding a div with a class of "job-search-legend" (a heading should not be used) and the following script will take care of adding any needed associations.
+
+    searchFormFields.setAttribute("role", "group");
+
+    if(searchFormLegend) {
+
+      // Think of this as a fieldset and legend element.
+
+      searchFormFields.setAttribute("aria-labelledby", "job-search-legend-" + formID);
+      searchFormLegend.setAttribute("id", "job-search-legend-" + formID);
+
+    } else {
+
+      // If the class (.job-search-legend) is not present then simply add a label of "Search Jobs" to the div wrapping the form elements (.search-form-fields)
+
+      searchFormFields.setAttribute("aria-label", "Search Jobs");
+
+    }
+
+    // A11YSEARCH0003
+    // The way in which the validation is currently handled requires improvement to aid those using assisitve tehcnology. Here we need to include aria-invalid and aria-describedby to the locations field and apply custom validation as well, so that keyboard users do not need to tab backwards to return to the locations field, which is initiating the error.
+
+    if(searchFormLocationInput) {
+
+      // Add aria-describedby and aria-invalid to the locations field.
+
+      searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
+      searchFormLocationInput.setAttribute("aria-invalid", "false");
+
+      // Validate the locations field when change is made to it.
+
+      searchFormLocationInput.addEventListener("change", function() {
+
+        accessibleValidation();
+  
+      });
+
+    }
+
+    // Apply a unique ID to the error message. This is what locations field will read when focus is brought back to it, thanks to aria-describedby.
+
+    if(searchFormLocationError) {
+
+      searchFormLocationError.setAttribute("id", "search-error-" + formID);
+
+    }
+
+    // When search button is pressed, fire off custom validation. 
+
+    searchFormSubmit.addEventListener("click", function() {
+
+      accessibleValidation();
+
+    });
+
+    // A11YSEARCH0004
+    // Remove aria-hidden from the location pin. Often this is visually displayed, but aria-hidden is still present.
+
+    if(searchFormLocationPin) {
+
+      searchFormLocationPin.removeAttribute("aria-hidden");
+
+    }
+
+  });
+
+}
+
+// Accessibility Patch: Data Form
+
+function fixDataForm() {
 
   var dataForms = document.querySelectorAll(".data-form");
 
   dataForms.forEach(function(form){
 
-    // A11YFORM001
+    // A11YDATAFORM001
     // Clutter. Removing empty instruction-text spans as they can sometimes cause undesired spacing issues.
 
     var instructionTexts = form.querySelectorAll(".instruction-text");
@@ -533,7 +559,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM002
+    // A11YDATAFORM002
     // Removing the CSS asterisk (see init.scss) because it reads out to assistive tech (AT) when added via content proprty. 
     // Including a span with aria-hidden so that it is not picked up by AT.
     // Note: May need to add another, visually hidden. required messages to this in the future.
@@ -561,7 +587,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM003
+    // A11YDATAFORM003
     // Removing aria-required from various elements. This attribute is sometimes flagged in automated testing and just the required attribue is now recommended.
 
     var ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
@@ -572,7 +598,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM004
+    // A11YDATAFORM004
     // Issue: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
 
     var requiredXHTML = form.querySelectorAll("*[required='required']");
@@ -583,7 +609,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM005
+    // A11YDATAFORM005
     // Issue: Remove "role" from field-validation-error (it's not needed).
 
     var validationMsg = form.querySelectorAll(".field-validation-valid");
@@ -594,7 +620,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM006
+    // A11YDATAFORM006
     // All required fields should include aria-invalid="false" on page load.
 
     var requiredFields = form.querySelectorAll(".form-field.required input, .form-field.required select");
@@ -605,7 +631,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM007
+    // A11YDATAFORM007
     // The input-validation-error class is removed when leaving a field, but aria-invalid still remains set to true.
 
     var dataFormElement = form.querySelectorAll("input, select");
@@ -630,7 +656,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM008
+    // A11YDATAFORM008
     // It is customary to include more useful autocomplete attributes so that certain fields will show the contextual menu for easier input.
 
     // First Name
@@ -664,7 +690,7 @@ function initDataFormPatch() {
       
     });
 
-    // A11YFORM009
+    // A11YDATAFORM009
     // The "Add" button needs to be more explicit to AT.
     // TODO: Add language support.
 
@@ -676,7 +702,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM010
+    // A11YDATAFORM010
     // The keyword list requires a more accessible grouping to better identify it.
     // TODO: Add language support.
 
@@ -705,7 +731,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM011
+    // A11YDATAFORM011
     // Issue: The file upload remove button is a link with an href hash. This is awful, so let's remedy it by replacing it.
 
     var fileUploadButtons = form.querySelectorAll(".form-field input[name='Resume']");
@@ -725,7 +751,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM012
+    // A11YDATAFORM012
     // Remove inline style on honeypot field and use hidden attribute instead.
 
     var emailConfirmation = form.querySelectorAll(".form-field.confirm-email");
@@ -748,7 +774,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM013
+    // A11YDATAFORM013
     // Adding an accName to textarea, removing iframe garbage, and moving captcha to end of form to address tab order. It should not exist before submit button.
 
     var captchaBadge = form.querySelector(".grecaptcha-badge");
@@ -778,7 +804,7 @@ function initDataFormPatch() {
 
     }
 
-    // A11YFORM014
+    // A11YDATAFORM014
     // The "Sign Up" button needs to be more explicit to AT.
     // TODO: Add language support.
 
@@ -791,7 +817,7 @@ function initDataFormPatch() {
 
     });
 
-    // A11YFORM015
+    // A11YDATAFORM015
     // The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
 
     var formMessage = form.querySelector(".form-field.form-message b");
@@ -802,7 +828,7 @@ function initDataFormPatch() {
 
     }
 
-    // A11YFORM016
+    // A11YDATAFORM016
     // The form message close link should really be a button, but for now we'll simply add a role.
     // TODO: Unbind or override current close event and add support for closing when Enter AND Spacebar is pressed.
 
@@ -828,7 +854,7 @@ function initDataFormPatch() {
 
       event.preventDefault();
 
-      // A11YFORM017
+      // A11YDATAFORM017
       // The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
 
       var keyWordCategory = form.querySelector(".keyword-category");
@@ -847,7 +873,7 @@ function initDataFormPatch() {
 
       }
 
-      // A11YFORM018
+      // A11YDATAFORM018
       // Now that we are including aria-invalid, we need to alter the values based on user input.
 
       var formInputs = form.querySelectorAll("input, select");
