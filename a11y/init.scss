@@ -35,6 +35,12 @@ h1, h2, h3, h4, h5, h6, label {
 
 }
 
+/* Things we no longer need and can hide */
+
+a[href="#search-results-list"], a[href="#search-filters"] {
+display: none;
+}
+
 /* Access Link - Ensure accesslink always has higher index. */
 
 .access-link {
@@ -157,6 +163,7 @@ visibility: hidden;
 
 
 }
+
 
 
 // Search Forms 
