@@ -147,24 +147,26 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
       searchFormSubmit.addEventListener("click", function() {
 
-        searchFormLocationError.removeAttribute("tabindex");
-
         setTimeout(function() {
 
-          var locationErrorVisible = searchFormLocationError.style.display !== "none";
+          searchFormLocationError.removeAttribute("tabindex");
+          searchFormLocationError.getAttribute("aria-hidden");
 
-          searchFormLocationInput.setAttribute("aria-invalid", locationErrorVisible ? "true" : "false");
+            if(searchFormLocationError === "true") {
 
-          if (locationErrorVisible) {
+              searchFormLocationInput.setAttribute("aria-invalid", "true");
+              searchFormLocationInput.focus();
 
-            searchFormLocationInput.focus();
+            } else { 
 
-          }
+              searchFormLocationInput.setAttribute("aria-invalid", "false");
 
-        }, 300);
+            }
+
+        }, 100);
 
       });
-      
+
   });
 
   
