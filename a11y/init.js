@@ -337,51 +337,7 @@ function initGlobalPatch() {
 
   });
 
-  // Search Results: Applied Filters
-
-    // A11Y00XX: 
-    
-      // The filters section has incorrect ARIA on it. Remove aria-hidden and aria-expanded.
-      // Move aria-labelledby from ul to section wrapper, added region role.
-      // Make remove buttons more contextually friendly to AT.
-      // Adjust focus when button with focus is removed. Note: This is now handled by the product. See search.js. Open ticket. See https://wegmans-refresh2.runmytests.com/en/search-jobs?fl=6252001&glat=40.5751&glon=-75.51963 
-      // TODO: Add language support to buttons.
-      // TODO: Regarding aria-labelledby on section wrapper, see if contextual support good enough here. 
-      // If it is, then may be able to remove aria-labelledby and region role. See https://www.w3.org/WAI/WCAG22/Techniques/html/H81
-      // BUG: When disabled filter button is present and last filter button is pressed, focus is placed on checkbox in filter section.
-
-    var appliedFilters = document.querySelectorAll(".search-results-options");
-
-    appliedFilters.forEach(function(section){
-
-      // Remove aria-labeledby from UL.
-
-      var appliedFiltersList = section.querySelectorAll("ul[aria-labelledby]");
-
-      appliedFiltersList.forEach(function(list){
-
-        list.removeAttribute("aria-labelledby");
-
-      });
-
-      // Remove/Add ARIA to parent section warpper (.search-results-option)
-    
-      section.removeAttribute("aria-hidden");
-      section.removeAttribute("aria-expanded");
-      section.setAttribute("aria-labelledby", "applied-filters-label");
-      section.setAttribute("role", "region");
-
-      // Add ARIA label to each button that is not disabled.
-
-      var btnSearchFilter = section.querySelectorAll(".filter-button:not([disabled])");
-
-      btnSearchFilter.forEach(function(btn){
-    
-        btn.setAttribute("aria-label", "Remove " + btn.textContent + " filter");
-
-      });
-
-    });
+  fixAppliedFilters();
 
     // A11Y0019: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
     // TODO: Add language support.
@@ -433,7 +389,7 @@ function fixSearchForm() {
     var searchFormLegend = form.querySelector(".job-search-legend");
     var searchFormFields = form.querySelector(".search-form-fields");
     var searchFormLocationInput = form.querySelector(".search-location");
-    var searchFormLocationPin = form.queruSelector(".location-pin");
+    var searchFormLocationPin = form.querySelector(".location-pin");
     var searchFormLocationError = form.querySelector(".search-location-error");
     var searchFormSubmit = form.querySelector("button");
 
@@ -533,6 +489,58 @@ function fixSearchForm() {
     }
 
   });
+
+}
+
+// Accessibility Patch: Applied Filters
+
+function fixAppliedFilters() {
+
+// Search Results: Applied Filters
+
+    // A11YAPPLIEDFILTERSXX: 
+    
+      // The filters section has incorrect ARIA on it. Remove aria-hidden and aria-expanded.
+      // Move aria-labelledby from ul to section wrapper, added region role.
+      // Make remove buttons more contextually friendly to AT.
+      // Adjust focus when button with focus is removed. Note: This is now handled by the product. See search.js. Open ticket. See https://wegmans-refresh2.runmytests.com/en/search-jobs?fl=6252001&glat=40.5751&glon=-75.51963 
+      // TODO: Add language support to buttons.
+      // TODO: Regarding aria-labelledby on section wrapper, see if contextual support good enough here. 
+      // If it is, then may be able to remove aria-labelledby and region role. See https://www.w3.org/WAI/WCAG22/Techniques/html/H81
+      // BUG: When disabled filter button is present and last filter button is pressed, focus is placed on checkbox in filter section.
+
+      var appliedFilters = document.querySelectorAll(".search-results-options");
+
+      appliedFilters.forEach(function(section){
+  
+        // Remove aria-labeledby from UL.
+  
+        var appliedFiltersList = section.querySelectorAll("ul[aria-labelledby]");
+  
+        appliedFiltersList.forEach(function(list){
+  
+          list.removeAttribute("aria-labelledby");
+  
+        });
+  
+        // Remove/Add ARIA to parent section warpper (.search-results-option)
+      
+        section.removeAttribute("aria-hidden");
+        section.removeAttribute("aria-expanded");
+        section.setAttribute("aria-labelledby", "applied-filters-label");
+        section.setAttribute("role", "region");
+  
+        // Add ARIA label to each button that is not disabled.
+  
+        var btnSearchFilter = section.querySelectorAll(".filter-button:not([disabled])");
+  
+        btnSearchFilter.forEach(function(btn){
+      
+          btn.setAttribute("aria-label", "Remove " + btn.textContent + " filter");
+  
+        });
+  
+      });
 
 }
 
