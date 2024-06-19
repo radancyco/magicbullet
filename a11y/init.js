@@ -477,15 +477,15 @@ function initGlobalPatch() {
 
     var pagination = document.querySelectorAll(".pagination");
 
-    pagination.forEach(function(page){
+    pagination.forEach(function(pgn){
 
-      page.setAttribute("aria-label", "Pagination");
+      pgn.setAttribute("aria-label", "Pagination");
 
       // A11Y0020: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
-      var paging = nav.querySelectorAll(".pagination-paging .disabled");
+      var controls = pgn.querySelectorAll(".pagination-paging .disabled");
 
-      paging.forEach(function(link){
+      controls.forEach(function(link){
 
         link.removeAttribute("aria-hidden");
         link.removeAttribute("href");
