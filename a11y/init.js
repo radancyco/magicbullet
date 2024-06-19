@@ -339,28 +339,7 @@ function initGlobalPatch() {
 
   fixAppliedFilters();
 
-    // A11Y0019: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
-    // TODO: Add language support.
-
-    var pagination = document.querySelectorAll(".pagination");
-
-    pagination.forEach(function(pgn){
-
-      pgn.setAttribute("aria-label", "Pagination");
-
-      // A11Y0020: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
-
-      var controls = pgn.querySelectorAll(".pagination-paging .disabled");
-
-      controls.forEach(function(link){
-
-        link.removeAttribute("aria-hidden");
-        link.removeAttribute("href");
-
-      });
-
-    });
-
+  fixSearchPagination();
 
   // BUG: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
   // For now, a hacky fix...
@@ -373,7 +352,398 @@ function initGlobalPatch() {
 
   }
 
-   
+}
+
+// Accessibility Patch: Applied Filters
+
+function fixAppliedFilters() {
+
+  // A11YAF001
+    
+  // The filters section has incorrect ARIA on it. Remove aria-hidden and aria-expanded.
+  // Move aria-labelledby from ul to section wrapper, added region role.
+  // Make remove buttons more contextually friendly to AT.
+  // Adjust focus when button with focus is removed. Note: This is now handled by the product. See search.js. Open ticket. See https://wegmans-refresh2.runmytests.com/en/search-jobs?fl=6252001&glat=40.5751&glon=-75.51963 
+  // TODO: Add language support to buttons.
+  // TODO: Regarding aria-labelledby on section wrapper, see if contextual support good enough here. 
+  // If it is, then may be able to remove aria-labelledby and region role. See https://www.w3.org/WAI/WCAG22/Techniques/html/H81
+  // BUG: When disabled filter button is present and last filter button is pressed, focus is placed on checkbox in filter section.
+
+  var appliedFilters = document.querySelectorAll(".search-results-options");
+
+  appliedFilters.forEach(function(filter){
+
+    var appliedFiltersList = filter.querySelectorAll("ul[aria-labelledby]");
+    var btnSearchFilter = filter.querySelectorAll(".filter-button:not([disabled])");
+
+    // Remove aria-labeledby from UL.
+
+    appliedFiltersList.forEach(function(list){
+
+      list.removeAttribute("aria-labelledby");
+
+    });
+
+    // Remove/Add ARIA to parent section warpper (.search-results-option)
+  
+    filter.removeAttribute("aria-hidden");
+    filter.removeAttribute("aria-expanded");
+    filter.setAttribute("aria-labelledby", "applied-filters-label");
+    filter.setAttribute("role", "region");
+
+    // Add ARIA label to each button that is not disabled.
+
+    btnSearchFilter.forEach(function(btn){
+  
+      btn.setAttribute("aria-label", "Remove " + btn.textContent + " filter");
+
+    });
+
+  });
+
+}
+
+// Accessibility Patch: Data Form
+
+function fixDataForm() {
+
+  var dataForms = document.querySelectorAll(".data-form");
+
+  dataForms.forEach(function(form){
+
+    var instructionTexts = form.querySelectorAll(".instruction-text");
+    var requiredLabels = form.querySelectorAll(".form-field.required label");
+    var ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
+    var requiredXHTML = form.querySelectorAll("*[required='required']");
+    var validationMsg = form.querySelectorAll(".field-validation-valid");
+    var requiredFields = form.querySelectorAll(".form-field.required input, .form-field.required select");
+    var dataFormElement = form.querySelectorAll("input, select");
+    var autoCompleteFirstName = form.querySelectorAll("input[name='FirstName']");
+    var autoCompleteLastName = form.querySelectorAll("input[name='LastName']");
+    var autoCompleteEmailAddress = form.querySelectorAll("input[name='EmailAddress']");
+    var addJobAlertButtons = form.querySelectorAll(".keyword-add");
+    var keywordSelected = form.querySelectorAll(".keyword-selected");
+    var getKeywordRegion = form.querySelector(keywordSelectedRegionClass);
+    var fileUploadButtons = form.querySelectorAll(".form-field input[name='Resume']");
+    var emailConfirmation = form.querySelectorAll(".form-field.confirm-email");
+    var captchaBadge = form.querySelector(".grecaptcha-badge");
+    var signUpButtons = form.querySelectorAll("button[type='submit']");
+    var formMessage = form.querySelector(".form-field.form-message b");
+    var formMessageButton = form.querySelector(".form-field.form-message a");
+    var keyWordCategory = form.querySelector(".keyword-category");
+    var formInputs = form.querySelectorAll("input, select");
+
+    // A11YFORM001
+    // Clutter. Removing empty instruction-text spans as they can sometimes cause undesired spacing issues.
+
+    instructionTexts.forEach(function(element) {
+
+      if (element.textContent.trim() === "") {
+
+        element.parentNode.removeChild(element);
+
+      }
+
+    });
+
+    // A11YFORM002
+    // Removing the CSS asterisk (see init.scss) because it reads out to assistive tech (AT) when added via content proprty. 
+    // Including a span with aria-hidden so that it is not picked up by AT.
+    // Note: May need to add another, visually hidden. required messages to this in the future.
+
+    var iconClassName = "ico-required-indicator";
+    var iconClass = "." + iconClassName;
+
+    requiredLabels.forEach(function(label) {
+
+      var span = document.createElement("span");
+      span.classList.add(iconClassName);
+      span.setAttribute("aria-hidden", "true");
+      span.textContent = "*";
+
+      // See if icon we wish to append already exists.
+
+      var getRequiredIcon = label.querySelector(iconClass);
+
+      if(getRequiredIcon === null) {
+
+        label.appendChild(span);
+
+      }
+
+    });
+
+    // A11YFORM003
+    // Removing aria-required from various elements. This attribute is sometimes flagged in automated testing and just the required attribue is now recommended.
+
+    ariaRequired.forEach(function(element) {
+
+      element.removeAttribute("aria-required");
+
+    });
+
+    // A11YFORM004
+    // Issue: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
+
+    requiredXHTML.forEach(function(element) {
+
+      element.setAttribute("required", "");
+
+    });
+
+    // A11YFORM005
+    // Issue: Remove "role" from field-validation-error (it's not needed).
+
+    validationMsg.forEach(function(element) {
+
+      element.removeAttribute ("role");
+
+    });
+
+    // A11YFORM006
+    // All required fields should include aria-invalid="false" on page load.
+
+    requiredFields.forEach(function(input) {
+
+      input.setAttribute("aria-invalid", "false");
+
+    });
+
+    // A11YFORM007
+    // The input-validation-error class is removed when leaving a field, but aria-invalid still remains set to true.
+
+    // Add blur event listener to each element
+
+    dataFormElement.forEach(function(element) {
+
+      element.addEventListener("blur", function() {
+
+        if (element.classList.contains("input-validation-error")) {
+
+          element.setAttribute("aria-invalid", "true");
+
+        } else {
+
+          element.setAttribute("aria-invalid", "false");
+
+        }
+
+      });
+
+    });
+
+    // A11YFORM008
+    // It is customary to include more useful autocomplete attributes so that certain fields will show the contextual menu for easier input.
+
+    // First Name
+
+    autoCompleteFirstName.forEach(function(input) {
+
+      input.setAttribute("autocomplete", "given-name");
+
+    });
+
+    // Last Name
+
+    autoCompleteLastName.forEach(function(input) {
+
+      input.setAttribute("autocomplete", "family-name");
+
+    });
+
+    // Email Address
+
+    autoCompleteEmailAddress.forEach(function(input) {
+      
+      input.setAttribute("type", "email");
+      input.setAttribute("autocomplete", "email");
+      
+    });
+
+    // A11YFORM009
+    // The "Add" button needs to be more explicit to AT.
+    // TODO: Add language support.
+
+    addJobAlertButtons.forEach(function(button) {
+
+      button.setAttribute("aria-label", "Add Job Alert");
+
+    });
+
+    // A11YFORM010
+    // The keyword list requires a more accessible grouping to better identify it.
+    // TODO: Add language support.
+
+    var keywordSelectedRegionClassName = "keyword-region";
+    var keywordSelectedRegionClass = "." + keywordSelectedRegionClassName;
+    var keywordSelectedRegionLabel = "Selected Job Alerts";
+
+    keywordSelected.forEach(function(region) {
+
+      var keywordSelectedRegion = document.createElement("div");
+      keywordSelectedRegion.classList.add(keywordSelectedRegionClassName);
+      keywordSelectedRegion.setAttribute("role", "region");
+      keywordSelectedRegion.setAttribute("aria-label", keywordSelectedRegionLabel);
+
+      // See if region we wish to append already exists.
+
+      if(getKeywordRegion === null) {
+
+        region.parentNode.insertBefore(keywordSelectedRegion, region);
+        keywordSelectedRegion.appendChild(region);
+
+      }
+
+    });
+
+    // A11YFORM011
+    // Issue: The file upload remove button is a link with an href hash. This is awful, so let's remedy it by replacing it.
+
+    fileUploadButtons.forEach(function(input) {
+
+      var fileUploadLink = input.nextElementSibling;
+      var resumeRemoveLabel = fileUploadLink.textContent.trim();
+
+      var fileUploadButton = document.createElement("button");
+      fileUploadButton.setAttribute("aria-describedby", input.getAttribute("id"));
+      fileUploadButton.classList.add("file-remove");
+      fileUploadButton.style.display = "none";
+      fileUploadButton.textContent = resumeRemoveLabel;
+
+      fileUploadLink.parentNode.replaceChild(fileUploadButton, fileUploadLink);
+
+    });
+
+    // A11YFORM012
+    // Remove inline style on honeypot field and use hidden attribute instead.
+
+    emailConfirmation.forEach(function(element) {
+
+      element.setAttribute("hidden", "");
+      element.removeAttribute ("aria-hidden");
+      element.removeAttribute("style");
+
+      // Remove aria-hidden from honeypot label and input. The parent element should hide this from all assistive tech without need to hide individually.
+
+      var emailConfirmationFields = element.querySelectorAll("label, input");
+
+      emailConfirmationFields.forEach(function(item) {
+
+        item.removeAttribute ("aria-hidden");
+
+      });
+
+    });
+
+    // A11YFORM013
+    // Adding an accName to textarea, removing iframe garbage, and moving captcha to end of form to address tab order. It should not exist before submit button.
+
+    if(captchaBadge) {
+
+      var captchaResponse = captchaBadge.querySelector(".g-recaptcha-response");
+      var captchaResponseLabel = "Captcha";
+      var captchaIframe = captchaBadge.querySelectorAll("iframe");
+
+      // Add accName to textarea
+
+      captchaResponse.setAttribute("aria-label", captchaResponseLabel);
+
+      // Remove iframe junk (border: 0 now set in init.scss)
+
+      captchaIframe.forEach(function(iframe){
+
+        iframe.removeAttribute("frameborder");
+
+      });
+
+      // Moving badge to end of form.
+      // Note: Badge appears to refresh and flash briefly on submit. Likely due to Mutation Observer reinitiating patch.
+
+      form.appendChild(captchaBadge);
+
+    }
+
+    // A11YFORM014
+    // The "Sign Up" button needs to be more explicit to AT.
+    // TODO: Add language support.
+
+    var signUpButtonLabel = "Sign Up for Job Alerts";
+
+    signUpButtons.forEach(function(button) {
+
+      button.setAttribute("aria-label", signUpButtonLabel);
+
+    });
+
+    // A11YFORM015
+    // The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
+
+    if(formMessage) {
+
+      formMessage.setAttribute("tabindex", "-1");
+
+    }
+
+    // A11YFORM016
+    // The form message close link should really be a button, but for now we'll simply add a role.
+    // TODO: Unbind or override current close event and add support for closing when Enter AND Spacebar is pressed.
+
+    if(formMessageButton) {
+
+      formMessageButton.classList.add("data-form__close");
+      formMessageButton.setAttribute("role", "button");
+
+      var formMessageButtonIcon = document.createElement("span");
+      formMessageButtonIcon.setAttribute("aria-hidden", "true");
+      formMessageButtonIcon.classList.add("data-form__closeicon");
+
+      formMessageButton.appendChild(formMessageButtonIcon);
+
+    }
+
+    // Form submission events
+
+    form.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      // A11YFORM017
+      // The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
+
+      if(keyWordCategory) {
+
+        var keyWordLocationDesc = keyWordCategory.getAttribute("aria-describedby");
+
+        var keywordLocation = form.querySelector(".keyword-location");
+
+        if(keywordLocation) {
+
+          keywordLocation.setAttribute("aria-describedby", keyWordLocationDesc);
+
+        }
+
+      }
+
+      // A11YFORM018
+      // Now that we are including aria-invalid, we need to alter the values based on user input.
+
+      formInputs.forEach(function(input) {
+
+        if (input.classList.contains("input-validation-error")) {
+
+          input.setAttribute("aria-invalid", "true");
+
+        } else {
+
+          input.setAttribute("aria-invalid", "false");
+
+        }
+
+      });
+
+    });
+
+  });
 
 }
 
@@ -418,12 +788,12 @@ function fixSearchForm() {
 
     }
 
-    // A11YSEARCH0001
+    // A11YSEARCH001
     // Our primary search form should include a distinct role so that it can aid in helping assistive technology users navigate the page.
 
     form.setAttribute("role", "search");
 
-    // A11YSEARCH0002
+    // A11YSEARCH002
     // Our primary search form should provide a better group description for the fields at hand. This can be achived by adding a div with a class of "job-search-legend" (a heading should not be used) and the following script will take care of adding any needed associations.
 
     searchFormFields.setAttribute("role", "group");
@@ -443,7 +813,7 @@ function fixSearchForm() {
 
     }
 
-    // A11YSEARCH0003
+    // A11YSEARCH003
     // The way in which the validation is currently handled requires improvement to aid those using assisitve tehcnology. Here we need to include aria-invalid and aria-describedby to the locations field and apply custom validation as well, so that keyboard users do not need to tab backwards to return to the locations field, which is initiating the error.
 
     if(searchFormLocationInput) {
@@ -479,7 +849,7 @@ function fixSearchForm() {
 
     });
 
-    // A11YSEARCH0004
+    // A11YSEARCH004
     // Remove aria-hidden from the location pin. Often this is visually displayed, but aria-hidden is still present.
 
     if(searchFormLocationPin) {
@@ -492,413 +862,29 @@ function fixSearchForm() {
 
 }
 
-// Accessibility Patch: Applied Filters
+// Accessibility Patch: Search Results Pagination
 
-function fixAppliedFilters() {
+function fixSearchPagination() {
 
-// Search Results: Applied Filters
+  var pagination = document.querySelectorAll(".pagination");
 
-    // A11YAPPLIEDFILTERSXX: 
-    
-      // The filters section has incorrect ARIA on it. Remove aria-hidden and aria-expanded.
-      // Move aria-labelledby from ul to section wrapper, added region role.
-      // Make remove buttons more contextually friendly to AT.
-      // Adjust focus when button with focus is removed. Note: This is now handled by the product. See search.js. Open ticket. See https://wegmans-refresh2.runmytests.com/en/search-jobs?fl=6252001&glat=40.5751&glon=-75.51963 
-      // TODO: Add language support to buttons.
-      // TODO: Regarding aria-labelledby on section wrapper, see if contextual support good enough here. 
-      // If it is, then may be able to remove aria-labelledby and region role. See https://www.w3.org/WAI/WCAG22/Techniques/html/H81
-      // BUG: When disabled filter button is present and last filter button is pressed, focus is placed on checkbox in filter section.
+  pagination.forEach(function(pgn){
 
-      var appliedFilters = document.querySelectorAll(".search-results-options");
+    // A11YPAGE001    
+    // Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
+    // Add language support.
 
-      appliedFilters.forEach(function(section){
-  
-        // Remove aria-labeledby from UL.
-  
-        var appliedFiltersList = section.querySelectorAll("ul[aria-labelledby]");
-  
-        appliedFiltersList.forEach(function(list){
-  
-          list.removeAttribute("aria-labelledby");
-  
-        });
-  
-        // Remove/Add ARIA to parent section warpper (.search-results-option)
-      
-        section.removeAttribute("aria-hidden");
-        section.removeAttribute("aria-expanded");
-        section.setAttribute("aria-labelledby", "applied-filters-label");
-        section.setAttribute("role", "region");
-  
-        // Add ARIA label to each button that is not disabled.
-  
-        var btnSearchFilter = section.querySelectorAll(".filter-button:not([disabled])");
-  
-        btnSearchFilter.forEach(function(btn){
-      
-          btn.setAttribute("aria-label", "Remove " + btn.textContent + " filter");
-  
-        });
-  
-      });
+    pgn.setAttribute("aria-label", "Pagination");
 
-}
+    // A11YPAGE002
+    // Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we reove that, too!
 
-// Accessibility Patch: Data Form
+    var controls = pgn.querySelectorAll(".pagination-paging .disabled");
 
-function fixDataForm() {
+    controls.forEach(function(link){
 
-  var dataForms = document.querySelectorAll(".data-form");
-
-  dataForms.forEach(function(form){
-
-    // A11YDATAFORM001
-    // Clutter. Removing empty instruction-text spans as they can sometimes cause undesired spacing issues.
-
-    var instructionTexts = form.querySelectorAll(".instruction-text");
-
-    instructionTexts.forEach(function(element) {
-
-      if (element.textContent.trim() === "") {
-
-        element.parentNode.removeChild(element);
-
-      }
-
-    });
-
-    // A11YDATAFORM002
-    // Removing the CSS asterisk (see init.scss) because it reads out to assistive tech (AT) when added via content proprty. 
-    // Including a span with aria-hidden so that it is not picked up by AT.
-    // Note: May need to add another, visually hidden. required messages to this in the future.
-
-    var requiredLabels = form.querySelectorAll(".form-field.required label");
-    var iconClassName = "ico-required-indicator";
-    var iconClass = "." + iconClassName;
-
-    requiredLabels.forEach(function(label) {
-
-      var span = document.createElement("span");
-      span.classList.add(iconClassName);
-      span.setAttribute("aria-hidden", "true");
-      span.textContent = "*";
-
-      // See if icon we wish to append already exists.
-
-      var getRequiredIcon = label.querySelector(iconClass);
-
-      if(getRequiredIcon === null) {
-
-        label.appendChild(span);
-
-      }
-
-    });
-
-    // A11YDATAFORM003
-    // Removing aria-required from various elements. This attribute is sometimes flagged in automated testing and just the required attribue is now recommended.
-
-    var ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
-
-    ariaRequired.forEach(function(element) {
-
-      element.removeAttribute("aria-required");
-
-    });
-
-    // A11YDATAFORM004
-    // Issue: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
-
-    var requiredXHTML = form.querySelectorAll("*[required='required']");
-
-    requiredXHTML.forEach(function(element) {
-
-      element.setAttribute("required", "");
-
-    });
-
-    // A11YDATAFORM005
-    // Issue: Remove "role" from field-validation-error (it's not needed).
-
-    var validationMsg = form.querySelectorAll(".field-validation-valid");
-
-    validationMsg.forEach(function(element) {
-
-      element.removeAttribute ("role");
-
-    });
-
-    // A11YDATAFORM006
-    // All required fields should include aria-invalid="false" on page load.
-
-    var requiredFields = form.querySelectorAll(".form-field.required input, .form-field.required select");
-
-    requiredFields.forEach(function(input) {
-
-      input.setAttribute("aria-invalid", "false");
-
-    });
-
-    // A11YDATAFORM007
-    // The input-validation-error class is removed when leaving a field, but aria-invalid still remains set to true.
-
-    var dataFormElement = form.querySelectorAll("input, select");
-
-    // Add blur event listener to each element
-
-    dataFormElement.forEach(function(element) {
-
-      element.addEventListener("blur", function() {
-
-        if (element.classList.contains("input-validation-error")) {
-
-          element.setAttribute("aria-invalid", "true");
-
-        } else {
-
-          element.setAttribute("aria-invalid", "false");
-
-        }
-
-      });
-
-    });
-
-    // A11YDATAFORM008
-    // It is customary to include more useful autocomplete attributes so that certain fields will show the contextual menu for easier input.
-
-    // First Name
-
-    var autoCompleteFirstName = form.querySelectorAll("input[name='FirstName']");
-
-    autoCompleteFirstName.forEach(function(input) {
-
-      input.setAttribute("autocomplete", "given-name");
-
-    });
-
-    // Last Name
-
-    var autoCompleteLastName = form.querySelectorAll("input[name='LastName']");
-
-    autoCompleteLastName.forEach(function(input) {
-
-      input.setAttribute("autocomplete", "family-name");
-
-    });
-
-    // Email Address
-
-    var autoCompleteEmailAddress = form.querySelectorAll("input[name='EmailAddress']");
-
-    autoCompleteEmailAddress.forEach(function(input) {
-      
-      input.setAttribute("type", "email");
-      input.setAttribute("autocomplete", "email");
-      
-    });
-
-    // A11YDATAFORM009
-    // The "Add" button needs to be more explicit to AT.
-    // TODO: Add language support.
-
-    var addJobAlertButtons = form.querySelectorAll(".keyword-add");
-
-    addJobAlertButtons.forEach(function(button) {
-
-      button.setAttribute("aria-label", "Add Job Alert");
-
-    });
-
-    // A11YDATAFORM010
-    // The keyword list requires a more accessible grouping to better identify it.
-    // TODO: Add language support.
-
-    var keywordSelected = form.querySelectorAll(".keyword-selected");
-    var keywordSelectedRegionClassName = "keyword-region";
-    var keywordSelectedRegionClass = "." + keywordSelectedRegionClassName;
-    var keywordSelectedRegionLabel = "Selected Job Alerts";
-
-    keywordSelected.forEach(function(region) {
-
-      var keywordSelectedRegion = document.createElement("div");
-      keywordSelectedRegion.classList.add(keywordSelectedRegionClassName);
-      keywordSelectedRegion.setAttribute("role", "region");
-      keywordSelectedRegion.setAttribute("aria-label", keywordSelectedRegionLabel);
-
-      // See if region we wish to append already exists.
-
-      var getKeywordRegion = form.querySelector(keywordSelectedRegionClass);
-
-      if(getKeywordRegion === null) {
-
-        region.parentNode.insertBefore(keywordSelectedRegion, region);
-        keywordSelectedRegion.appendChild(region);
-
-      }
-
-    });
-
-    // A11YDATAFORM011
-    // Issue: The file upload remove button is a link with an href hash. This is awful, so let's remedy it by replacing it.
-
-    var fileUploadButtons = form.querySelectorAll(".form-field input[name='Resume']");
-
-    fileUploadButtons.forEach(function(input) {
-
-      var fileUploadLink = input.nextElementSibling;
-      var resumeRemoveLabel = fileUploadLink.textContent.trim();
-
-      var fileUploadButton = document.createElement("button");
-      fileUploadButton.setAttribute("aria-describedby", input.getAttribute("id"));
-      fileUploadButton.classList.add("file-remove");
-      fileUploadButton.style.display = "none";
-      fileUploadButton.textContent = resumeRemoveLabel;
-
-      fileUploadLink.parentNode.replaceChild(fileUploadButton, fileUploadLink);
-
-    });
-
-    // A11YDATAFORM012
-    // Remove inline style on honeypot field and use hidden attribute instead.
-
-    var emailConfirmation = form.querySelectorAll(".form-field.confirm-email");
-
-    emailConfirmation.forEach(function(element) {
-
-      element.setAttribute("hidden", "");
-      element.removeAttribute ("aria-hidden");
-      element.removeAttribute("style");
-
-      // Remove aria-hidden from honeypot label and input. The parent element should hide this from all assistive tech without need to hide individually.
-
-      var emailConfirmationFields = element.querySelectorAll("label, input");
-
-      emailConfirmationFields.forEach(function(item) {
-
-        item.removeAttribute ("aria-hidden");
-
-      });
-
-    });
-
-    // A11YDATAFORM013
-    // Adding an accName to textarea, removing iframe garbage, and moving captcha to end of form to address tab order. It should not exist before submit button.
-
-    var captchaBadge = form.querySelector(".grecaptcha-badge");
-
-    if(captchaBadge) {
-
-      var captchaResponse = captchaBadge.querySelector(".g-recaptcha-response");
-      var captchaResponseLabel = "Captcha";
-      var captchaIframe = captchaBadge.querySelectorAll("iframe");
-
-      // Add accName to textarea
-
-      captchaResponse.setAttribute("aria-label", captchaResponseLabel);
-
-      // Remove iframe junk (border: 0 now set in init.scss)
-
-      captchaIframe.forEach(function(iframe){
-
-        iframe.removeAttribute("frameborder");
-
-      });
-
-      // Moving badge to end of form.
-      // Note: Badge appears to refresh and flash briefly on submit. Likely due to Mutation Observer reinitiating patch.
-
-      form.appendChild(captchaBadge);
-
-    }
-
-    // A11YDATAFORM014
-    // The "Sign Up" button needs to be more explicit to AT.
-    // TODO: Add language support.
-
-    var signUpButtons = form.querySelectorAll("button[type='submit']");
-    var signUpButtonLabel = "Sign Up for Job Alerts";
-
-    signUpButtons.forEach(function(button) {
-
-      button.setAttribute("aria-label", signUpButtonLabel);
-
-    });
-
-    // A11YDATAFORM015
-    // The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
-
-    var formMessage = form.querySelector(".form-field.form-message b");
-
-    if(formMessage) {
-
-      formMessage.setAttribute("tabindex", "-1");
-
-    }
-
-    // A11YDATAFORM016
-    // The form message close link should really be a button, but for now we'll simply add a role.
-    // TODO: Unbind or override current close event and add support for closing when Enter AND Spacebar is pressed.
-
-    var formMessageButton = form.querySelector(".form-field.form-message a");
-
-    if(formMessageButton) {
-
-      formMessageButton.classList.add("data-form__close");
-
-      formMessageButton.setAttribute("role", "button");
-
-      var formMessageButtonIcon = document.createElement("span");
-      formMessageButtonIcon.setAttribute("aria-hidden", "true");
-      formMessageButtonIcon.classList.add("data-form__closeicon");
-
-      formMessageButton.appendChild(formMessageButtonIcon);
-
-    }
-
-    // Form submission events
-
-    form.addEventListener("submit", function(event) {
-
-      event.preventDefault();
-
-      // A11YDATAFORM017
-      // The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
-
-      var keyWordCategory = form.querySelector(".keyword-category");
-
-      if(keyWordCategory) {
-
-        var keyWordLocationDesc = keyWordCategory.getAttribute("aria-describedby");
-
-        var keywordLocation = form.querySelector(".keyword-location");
-
-        if(keywordLocation) {
-
-          keywordLocation.setAttribute("aria-describedby", keyWordLocationDesc);
-
-        }
-
-      }
-
-      // A11YDATAFORM018
-      // Now that we are including aria-invalid, we need to alter the values based on user input.
-
-      var formInputs = form.querySelectorAll("input, select");
-
-      formInputs.forEach(function(input) {
-
-        if (input.classList.contains("input-validation-error")) {
-
-          input.setAttribute("aria-invalid", "true");
-
-        } else {
-
-          input.setAttribute("aria-invalid", "false");
-
-        }
-
-      });
+      link.removeAttribute("aria-hidden");
+      link.removeAttribute("href");
 
     });
 
