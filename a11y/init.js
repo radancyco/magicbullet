@@ -61,10 +61,9 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
     
     a11yObserver.timeout = setTimeout(function() {
   
-      console.log("%c MagicBullet: Accessibility Patch v1.97 in use. ", "background: #6e00ee; color: #fff");
+      console.log("%c MagicBullet: Accessibility Patch v1.98 in use. ", "background: #6e00ee; color: #fff");
   
-      initGlobalPatch();
-      fixDataForm();
+      initDynamicPatch();
   
       a11yObserver.observe(targetNode, config); 
     
@@ -74,248 +73,139 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   
   a11yObserver.observe(targetNode, config);
 
-  // Accessibility Patch: Global (Static)
-  // Note: These are issues that only occur once per page load. They are not dynamic or triggered by any ajax requests, etc. 
-
-
-  fixSearchForm();
-
-    // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0006
-  // This loads on job description and ajd pages mostly
-  // TODO: Add language support.
-  // Social Share Module
-
-  var socialShareLinks = document.querySelectorAll(".social-share-items a");
-
-  socialShareLinks.forEach(function(link) {
-
-    link.insertAdjacentHTML("beforeend", " <span class='wai visually-hidden'>(Opens in new tab)</span>");
-
-  });
-
-  // Job Location Map
-
-    // A11Y0005: https://radancy.dev/magicbullet/a11y/#issue-0005
-    // TODO: These would be better served as buttons, not links. Including role="button" for now, but we need to add space bar key support eventually.
-    // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames.
-    // TODO: Include Wegmans functionality to skip over Google Map.
-
-    var mapButton = document.querySelectorAll(".job-map-nearby a");
-
-    mapButton.forEach(function(btn){
-
-      btn.setAttribute("role", "button");
-      btn.removeAttribute("target");
-
-    });
-
-
-    
-
-
-    // Job Description: Garbage Removal
-
-    var atsDescription = document.querySelectorAll(".ats-description");
-
-    atsDescription.forEach(function(desc) {
-    
-      // Issue-0007: Remove tabindex attribute from elements within .ats-description that have tabindex attribute not equal to '0' or starting with '-'
-    
-      desc.querySelectorAll("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").forEach(function(tabindex) {
-        
-        tabindex.removeAttribute("tabindex");
-    
-      });
-    
-      // Issue-0008: Add role="presentation" to tables within .ats-description
-    
-      desc.querySelectorAll("table").forEach(function(table) {
-        
-        table.setAttribute("role", "presentation");
-    
-      });
-    
-      // Remove useless attributes from all elements within .ats-description
-    
-      desc.querySelectorAll("*").forEach(function(element) {
-        
-        element.removeAttribute("face");
-        element.removeAttribute("size");
-        element.removeAttribute("title");
-        element.removeAttribute("id");
-    
-      });
-    
-      // Remove <font> element and unwrap its contents within .ats-description
-    
-      desc.querySelectorAll("font").forEach(function(font) {
-        
-        var parent = font.parentNode;
-        
-        while (font.firstChild) {
-        
-          parent.insertBefore(font.firstChild, font);
-        
-        }
-        
-        parent.removeChild(font);
-    
-      });
-    
-    
-    });
-
-    // Sitemap
-
-    // BUG: Sitemap pages have tabindex on certain header. Inactive elements should nto receive focus.
-
-    var sitemapHeadings = document.querySelectorAll(".job-location h2, .job-category h2");
-
-    sitemapHeadings.forEach(function(heading) {
-
-      heading.removeAttribute("tabindex");
-      heading.removeAttribute("aria-expanded");
-      heading.classList.remove("expandable-parent");
-
-    });
-
-    // Issue: Job Lists should really have the location appear inside of a link so that job links with same title can be more descriptive and discernable.
-
-    var jobListElements = document.querySelectorAll(".job-list .location, .job-list .date");
-
-    jobListElements.forEach(function(element) {
-
-      var previousElement = element.previousElementSibling;
-    
-      if (previousElement) {
-    
-        previousElement.appendChild(element);
-    
-      }
-
-    });
-  
-    // Issue: Cookie Management Page has some aria-describedby attributes on the page that do nothing.
-
-    var cookieDescriptionIdAttr = document.querySelectorAll("input[aria-describedby='cookieDescriptionIdAttr']");
-
-    cookieDescriptionIdAttr.forEach(function(input) {
-
-      input.removeAttribute("aria-describedby"); 
-
-    });
-
-
-    // TODO: Add future fixes here.
-
+  initStaticPatch();
 
 });
 
-// Accessibility Patch: Global
+// Accessibility Patch: Dynamic
+// Desc: These fixes address issues that occur both on page load and during dynamic DOM changes. 
+// For instance, a script might add a new node to the DOM or refresh content on the page. When this happens, each fix must be reapplied.
   
-function initGlobalPatch() {
+function initDynamicPatch() {
 
-  // Global Issues
-
-  // These are issue that could be static, but could also occur on ajax load, etc. 
-
-    // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0009 (HTML CLEANUP)
-
-    var inputCheckBox = document.querySelectorAll("input[type='checkbox']");
-
-    inputCheckBox.forEach(function(input) {
-
-      input.removeAttribute("autocomplete");
-
-    });
-
-    // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
-    // A11Y0002: https://radancy.dev/magicbullet/a11y/#issue-0002
-    // Note: Currently, this functionaly being overwritten can be found in the Seach Filters, though it may appear elsewhere. 
-
-    var expandableParentBtn = document.querySelectorAll(".expandable-parent");
-
-    expandableParentBtn.forEach(function(button) {
-
-      // Set attribute on corrent element.
-
-      // See if element is already open, set aria-expanded state to true if it is.
-
-      if(button.classList.contains("expandable-child-open")) {
-
-        button.setAttribute("aria-expanded", "true");
-    
-      } else {
-
-        button.setAttribute("aria-expanded", "false");
-
-      }
-
-      // Remove aria-expanded from adjacent, non-interactive element.
-    
-      if (button.nextElementSibling) {
-    
-        button.nextElementSibling.removeAttribute("aria-expanded");
-    
-      }
-
-      // New toggle functionality for newly added aria-expanded attribute.
-
-      button.addEventListener("click", function() {
-
-        if(this.getAttribute("aria-expanded") === "true") {
-
-          this.setAttribute("aria-expanded", "false");
-
-        } else {
-
-          this.setAttribute("aria-expanded", "true");
-
-        }
-
-        // Always remove aria-expanded being added to adjacent, non-interactive element, by TB Core.
-
-        if (this.nextElementSibling) {
-
-          this.nextElementSibling.removeAttribute("aria-expanded");
-
-        }
-
-      });
-
-    });
-
-    // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0003
-
-    var missingAltAttributes = document.querySelectorAll("img:not([alt])");
-
-    missingAltAttributes.forEach(function(img){
-
-      img.setAttribute("alt", "");
-
-    });
-
-  
-  fixAppliedFilters();
+  fixAltAttribute();
+  fixDataForm();
+  fixAppDisclosure();
+  fixAppliedFilter();
+  fixInputElements();
   fixSaveJobButton();
+  fixSearchResults();
   fixSearchPagination();
-
-  // BUG: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
-  // For now, a hacky fix...
-
-  var searchResults = document.getElementById("search-results");
-
-  if(searchResults) {
-
-    searchResults.setAttribute("tabindex", "-1");
-
-  }
 
 }
 
-// Accessibility Patch: Applied Filters
+// Accessibility Patch: Static
+// Desc: These fixes address issues that occur on page load only.
 
-function fixAppliedFilters() {
+function initStaticPatch() {
+
+  fixCookieManagement();
+  fixJobDescription();
+  fixJobList();
+  fixJobLocation(); 
+  fixSearchForm();
+  fixSitemap();
+  fixSocialShare();
+
+}
+
+// Accessibility Patch: Alt Attribute
+
+function fixAltAttribute() {
+
+  // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0003
+
+  var missingAltAttribute = document.querySelectorAll("img:not([alt])");
+
+  missingAltAttribute.forEach(function(img){
+
+    img.setAttribute("alt", "");
+
+  });
+
+}
+
+// Accessibility Patch: Application Disclosure
+
+function fixAppDisclosure() {
+
+  // A11Y0001: https://radancy.dev/magicbullet/a11y/#issue-0001
+  // A11Y0002: https://radancy.dev/magicbullet/a11y/#issue-0002
+  // Note: Currently, this functionaly being overwritten can be found in the Seach Filters, though it may appear elsewhere. 
+
+  var expandableParentBtn = document.querySelectorAll(".expandable-parent");
+
+  expandableParentBtn.forEach(function(button) {
+
+    // Set attribute on corrent element.
+
+    // See if element is already open, set aria-expanded state to true if it is.
+
+    if(button.classList.contains("expandable-child-open")) {
+
+      button.setAttribute("aria-expanded", "true");
+  
+    } else {
+
+      button.setAttribute("aria-expanded", "false");
+
+    }
+
+    // Remove aria-expanded from adjacent, non-interactive element.
+  
+    if (button.nextElementSibling) {
+  
+      button.nextElementSibling.removeAttribute("aria-expanded");
+  
+    }
+
+    // New toggle functionality for newly added aria-expanded attribute.
+
+    button.addEventListener("click", function() {
+
+      if(this.getAttribute("aria-expanded") === "true") {
+
+        this.setAttribute("aria-expanded", "false");
+
+      } else {
+
+        this.setAttribute("aria-expanded", "true");
+
+      }
+
+      // Always remove aria-expanded being added to adjacent, non-interactive element, by TB Core.
+
+      if (this.nextElementSibling) {
+
+        this.nextElementSibling.removeAttribute("aria-expanded");
+
+      }
+
+    });
+
+  });
+
+}
+
+// Accessibility Patch: Cookie Management
+
+function fixCookieManagement() {
+
+  // Issue: Cookie Management Page has some aria-describedby attributes on the page that do nothing.
+
+  var cookieDescriptionIdAttr = document.querySelectorAll("input[aria-describedby='cookieDescriptionIdAttr']");
+
+  cookieDescriptionIdAttr.forEach(function(input) {
+
+    input.removeAttribute("aria-describedby"); 
+
+  });
+
+}
+
+// Accessibility Patch: Applied Filter
+
+function fixAppliedFilter() {
 
   // A11YAF001
     
@@ -360,6 +250,22 @@ function fixAppliedFilters() {
       btn.setAttribute("aria-label", "Remove " + btn.textContent + " filter");
 
     });
+
+  });
+
+}
+
+// Accessibility Patch: Input Elements
+
+function fixInputElements() {
+
+  // A11Y0004: https://radancy.dev/magicbullet/a11y/#issue-0009 (HTML CLEANUP)
+
+  var inputCheckBox = document.querySelectorAll("input[type='checkbox']");
+
+  inputCheckBox.forEach(function(input) {
+
+    input.removeAttribute("autocomplete");
 
   });
 
@@ -709,6 +615,107 @@ function fixDataForm() {
 
 }
 
+// Accessibility Patch: Job Description
+
+function fixJobDescription() {
+
+  // Job Description: Garbage Removal
+
+  var atsDescription = document.querySelectorAll(".ats-description");
+
+  atsDescription.forEach(function(desc) {
+
+    // Issue-0007: Remove tabindex attribute from elements within .ats-description that have tabindex attribute not equal to '0' or starting with '-'
+
+    desc.querySelectorAll("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").forEach(function(tabindex) {
+  
+      tabindex.removeAttribute("tabindex");
+
+    });
+
+    // Issue-0008: Add role="presentation" to tables within .ats-description
+
+    desc.querySelectorAll("table").forEach(function(table) {
+  
+      table.setAttribute("role", "presentation");
+
+    });
+
+    // Remove useless attributes from all elements within .ats-description
+
+    desc.querySelectorAll("*").forEach(function(element) {
+  
+      element.removeAttribute("face");
+      element.removeAttribute("size");
+      element.removeAttribute("title");
+      element.removeAttribute("id");
+
+    });
+
+    // Remove <font> element and unwrap its contents within .ats-description
+
+    desc.querySelectorAll("font").forEach(function(font) {
+  
+      var parent = font.parentNode;
+  
+      while (font.firstChild) {
+  
+        parent.insertBefore(font.firstChild, font);
+  
+      }
+  
+      parent.removeChild(font);
+
+    });
+
+  });
+
+}
+
+// Accessibility Patch: Job List
+
+function fixJobList() {
+
+  // Issue: Job Lists should really have the location appear inside of a link so that job links with same title can be more descriptive and discernable.
+
+  var jobListElements = document.querySelectorAll(".job-list .location, .job-list .date");
+
+  jobListElements.forEach(function(element) {
+
+    var previousElement = element.previousElementSibling;
+  
+    if (previousElement) {
+  
+      previousElement.appendChild(element);
+  
+    }
+
+  });
+
+}
+
+// Accessibility Patch: Job Location
+
+function fixJobLocation() {
+
+  // Job Location Map
+
+  // A11Y0005: https://radancy.dev/magicbullet/a11y/#issue-0005
+  // TODO: These would be better served as buttons, not links. Including role="button" for now, but we need to add space bar key support eventually.
+  // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames.
+  // TODO: Include Wegmans functionality to skip over Google Map.
+
+  var mapButton = document.querySelectorAll(".job-map-nearby a");
+
+  mapButton.forEach(function(btn){
+
+    btn.setAttribute("role", "button");
+    btn.removeAttribute("target");
+
+  });
+
+}
+
 // Accessibility Patch: Save Job Button
 
 function fixSaveJobButton() {
@@ -873,6 +880,23 @@ function fixSearchForm() {
 
 }
 
+// Accessibility Patch: Search Results
+
+function fixSearchResults() {
+
+  // BUG: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
+  // For now, a hacky fix...
+
+  var searchResults = document.getElementById("search-results");
+
+  if(searchResults) {
+
+    searchResults.setAttribute("tabindex", "-1");
+
+  }
+
+}
+
 // Accessibility Patch: Search Results Pagination
 
 function fixSearchPagination() {
@@ -898,6 +922,45 @@ function fixSearchPagination() {
       link.removeAttribute("href");
 
     });
+
+  });
+
+}
+
+// Accessibility Patch: Sitemap
+
+function fixSitemap() {
+
+  // Sitemap
+
+  // BUG: Sitemap pages have tabindex on certain header. Inactive elements should nto receive focus.
+
+  var sitemapHeadings = document.querySelectorAll(".job-location h2, .job-category h2");
+
+  sitemapHeadings.forEach(function(heading) {
+
+    heading.removeAttribute("tabindex");
+    heading.removeAttribute("aria-expanded");
+    heading.classList.remove("expandable-parent");
+
+  });
+
+}
+
+// Accessibility Patch: Social Share
+
+function fixSocialShare() {
+
+  // A11Y0003: https://radancy.dev/magicbullet/a11y/#issue-0006
+  // This loads on job description and ajd pages mostly
+  // TODO: Add language support.
+  // Social Share Module
+
+  var socialShareLinks = document.querySelectorAll(".social-share-items a");
+
+  socialShareLinks.forEach(function(link) {
+
+    link.insertAdjacentHTML("beforeend", " <span class='wai visually-hidden'>(Opens in new tab)</span>");
 
   });
 
