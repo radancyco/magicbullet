@@ -52,8 +52,10 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   var config = { childList: true, subtree: true };
   
   var a11yObserver = new MutationObserver(function(mutationsList) {
+
+    // Log mutations
   
-    console.log("Mutations:", mutationsList); // Log mutations
+    // console.log("Mutations:", mutationsList);
     
     clearTimeout(a11yObserver.timeout);
   
