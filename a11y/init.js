@@ -91,6 +91,7 @@ function initDynamicPatch() {
   fixIframeElement();
   fixInputElements();
   fixSaveJobButton();
+  fixSearchFilters();
   fixSearchResults();
   fixSearchPagination();
 
@@ -851,6 +852,24 @@ function fixSearchForm() {
     }
 
   });
+
+}
+
+// Accessibility Patch: Search Filters
+
+function fixSearchFilters() {
+
+  var searchFilters = document.getElementById("search-filters");
+
+  if(searchFilters) {
+
+    // Fix: Add role and accName to Search Filter section. 
+    // TODO: Add langauge support.
+
+    searchFilters.setAttribute("role", "region");
+    searchFilters.setAttribute("aria-label", "Search Filter");
+
+  }
 
 }
 
