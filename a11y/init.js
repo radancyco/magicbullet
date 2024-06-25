@@ -876,9 +876,8 @@ function fixSearchFilters() {
     sectionElement.forEach(function(section, i){
 
       var sectionID = (i + 1);
-      var sectionName = "filter-" + sectionID;
+      var sectionName = "filter-button-" + sectionID;
       var sectionButton = section.querySelector(".expandable-parent");
-      var sectionList = section.querySelector(".search-filter-list")
 
       section.setAttribute("role", "group");
       section.setAttribute("aria-labelledby", sectionName);
