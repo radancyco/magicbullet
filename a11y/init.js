@@ -115,6 +115,8 @@ function initStaticPatch() {
 
 function fixAltAttribute() {
 
+  // Fix: Look for images on page that do not contain an alt attribute and add one dynamically.
+
   var missingAltAttribute = document.querySelectorAll("img:not([alt])");
 
   missingAltAttribute.forEach(function(img){
@@ -136,7 +138,7 @@ function fixAppliedFilter() {
     var appliedFiltersList = filter.querySelectorAll("ul[aria-labelledby]");
     var btnSearchFilter = filter.querySelectorAll(".filter-button:not([disabled])");
 
-    // Issue: Remove aria-labeledby from UL.
+    // Fix: Remove aria-labeledby from UL
 
     appliedFiltersList.forEach(function(list){
 
@@ -144,7 +146,7 @@ function fixAppliedFilter() {
 
     });
 
-    // Issue: Remove aria-hidden and aria-expanded and add aria-describedby and role to parent element (.search-results-option)
+    // Fix: Remove aria-hidden and aria-expanded and add aria-describedby and role to parent element (.search-results-option)
     // TODO: Regarding aria-labelledby on section wrapper, see if contextual support good enough here. 
     // If it is, then we may be able to remove aria-labelledby and region role entirely. See https://www.w3.org/WAI/WCAG22/Techniques/html/H81
   
@@ -153,7 +155,7 @@ function fixAppliedFilter() {
     filter.setAttribute("aria-labelledby", "applied-filters-label");
     filter.setAttribute("role", "region");
 
-    // Add aria-label to each button that is not disabled. Include a better label that helps identify the functionality of the button.
+    // Fix: Add aria-label to each button that is not disabled. Include a better label that helps identify the functionality of the button.
     // TODO: Add langauge suppoprt.
     // BUG: When disabled filter button is present and last filter button is pressed, focus is placed on checkbox in filter section.
 
@@ -171,7 +173,7 @@ function fixAppliedFilter() {
 
 function fixCookieManagement() {
 
-  // Issue: Cookie Management Page has some aria-describedby attributes on inputs that do not point to a relevant ID.
+  // Fix: Remove aria-describedby="cookieDescriptionIdAttr" from each input element.
 
   var cookieDescriptionIdAttr = document.querySelectorAll("input[aria-describedby='cookieDescriptionIdAttr']");
 
@@ -213,7 +215,7 @@ function fixDataForm() {
     var keyWordCategory = form.querySelector(".keyword-category");
     var formInputs = form.querySelectorAll("input, select");
 
-    // Clean-up: Removing empty instruction-text spans as they can sometimes cause undesired spacing issues.
+    // Clean-up: Remove empty instruction-text spans as they can sometimes cause undesired spacing issues.
 
     instructionTexts.forEach(function(element) {
 
@@ -225,7 +227,7 @@ function fixDataForm() {
     
     });
     
-    // Clean-up: Removing aria-required from various elements. This attribute is sometimes flagged in automated testing and just the required attribute is now recommended.
+    // Clean-up: Remove aria-required from various elements. This attribute is sometimes flagged in automated testing and just the boolean required attribute is now recommended.
     
     ariaRequired.forEach(function(element) {
     
@@ -241,7 +243,7 @@ function fixDataForm() {
     
     });
 
-    // Issue: Remove the CSS asterisk (see init.scss) because it reads out to assistive tech (AT) when added via content property and include a span with aria-hidden on it so that it is not picked up by AT. New asterisk applied via CSS.
+    // Fix: Remove the CSS asterisk (see init.scss) because it reads out to assistive tech (AT) when added via content property and include a span with aria-hidden on it so that it is not picked up by AT. New asterisk applied via CSS.
 
     var iconClassName = "ico-required-indicator";
     var iconClass = "." + iconClassName;
@@ -265,7 +267,7 @@ function fixDataForm() {
 
     });
 
-    // Issue: Remove "role" from field-validation-error (it's not needed).
+    // Fix: Remove "role" from field-validation-error (it's not needed).
 
     validationMsg.forEach(function(element) {
 
@@ -273,7 +275,7 @@ function fixDataForm() {
 
     });
 
-    // Issue: All required fields should include aria-invalid="false" on page load.
+    // Fix: All required fields should include aria-invalid="false" on page load.
 
     requiredFields.forEach(function(input) {
 
@@ -281,7 +283,7 @@ function fixDataForm() {
 
     });
 
-    // Issue: The input-validation-error class is removed when leaving a field, but aria-invalid remains set to true.
+    // Fix: The input-validation-error class is removed when leaving a field, but aria-invalid remains set to true, so we address this by listening for blur event.
 
     // Add blur event listener to each element
 
@@ -303,7 +305,7 @@ function fixDataForm() {
 
     });
 
-    // Issue: It is customary to include more useful autocomplete attributes so that certain fields will show the contextual menu for easier input.
+    // Fix: It is customary to include more useful autocomplete attributes so that certain fields will show the contextual menu for easier input. Adding autocompletes for First Name, Family Name, and Email. For email we are also changing the type from "text" to "email"
 
     // First Name
 
@@ -330,7 +332,7 @@ function fixDataForm() {
       
     });
 
-    // Issue: The "Add" button needs to be more explicit to AT.
+    // Fix: The "Add" button needs to be more explicit to AT so include "Add Job Alert"
     // TODO: Add language support.
 
     addJobAlertButtons.forEach(function(button) {
@@ -339,7 +341,7 @@ function fixDataForm() {
 
     });
 
-    // Issue: The keyword list requires a more accessible grouping to better identify it.
+    // Fix: The keyword list requires a more accessible grouping to better identify it; adding proper role and accName, etc.
     // TODO: Add language support.
 
     var keywordSelectedRegionClassName = "keyword-region";
@@ -364,7 +366,7 @@ function fixDataForm() {
 
     });
 
-    // Issue: The file upload remove button is a link with an href hash. This is awful, so let's remedy it by replacing it.
+    // Fix: The file upload remove button is a link with an href hash. This is awful, so let's remedy it by replacing it with a button.
 
     fileUploadButtons.forEach(function(input) {
 
@@ -381,7 +383,7 @@ function fixDataForm() {
 
     });
 
-    // Issue: Remove inline style on honeypot field and use hidden attribute instead.
+    // Fix: Remove inline style on honeypot field and use hidden attribute instead.
 
     emailConfirmation.forEach(function(element) {
 
@@ -401,7 +403,7 @@ function fixDataForm() {
 
     });
 
-    // Issue: Adding an accName to textarea, removing iframe garbage, and moving captcha to end of form to address tab order. It should not exist before submit button.
+    // Fix: Adding an accName to textarea, removing iframe garbage, and moving captcha to end of form to address tab order. It should not exist before submit button.
 
     if(captchaBadge) {
 
@@ -428,7 +430,7 @@ function fixDataForm() {
 
     }
 
-    // Issue: The "Sign Up" button needs to be more explicit to AT.
+    // Fix: The "Sign Up" button needs to be more explicit to AT.
     // TODO: Add language support.
 
     var signUpButtonLabel = "Sign Up for Job Alerts";
@@ -439,7 +441,7 @@ function fixDataForm() {
 
     });
 
-    // Issue: The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
+    // Fix: The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
 
     if(formMessage) {
 
@@ -447,7 +449,7 @@ function fixDataForm() {
 
     }
 
-    // Issue: The form message close link should really be a button, but for now we'll simply add a role.
+    // Fix: The form message close link should really be a button, but for now we'll simply add a role.
     // TODO: Unbind or override current close event and add support for closing when Enter AND Spacebar is pressed.
 
     if(formMessageButton) {
@@ -469,7 +471,7 @@ function fixDataForm() {
 
       event.preventDefault();
 
-      // Issue: The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
+      // Fix: The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
 
       if(keyWordCategory) {
 
@@ -485,7 +487,7 @@ function fixDataForm() {
 
       }
 
-      // Issue: Now that we are including aria-invalid, we need to alter the values based on user input.
+      // Fix: Now that we are including aria-invalid, we need to alter the values based on user input.
 
       formInputs.forEach(function(input) {
 
@@ -515,7 +517,7 @@ function fixGlobalDisclosure() {
 
   expandableParentBtn.forEach(function(button) {
 
-    // Issue: See if element is already open, set aria-expanded state to true if it is.
+    // Fix: See if element is already open, set aria-expanded state to true if it is.
 
     if(button.classList.contains("expandable-child-open")) {
 
@@ -527,7 +529,7 @@ function fixGlobalDisclosure() {
 
     }
 
-    // Issue: Remove aria-expanded from adjacent, non-interactive element.
+    // Fix: Remove aria-expanded from adjacent, non-interactive element.
   
     if (button.nextElementSibling) {
   
@@ -535,7 +537,7 @@ function fixGlobalDisclosure() {
   
     }
 
-    // Issue: New toggle functionality for newly added aria-expanded attribute.
+    // Fix: New toggle functionality for newly added aria-expanded attribute.
 
     button.addEventListener("click", function() {
 
@@ -549,7 +551,7 @@ function fixGlobalDisclosure() {
 
       }
 
-      // Always remove aria-expanded being added to adjacent, non-interactive element, by CS Core.
+      // Fix: Remove aria-expanded being added to adjacent, non-interactive element, by CS Core.
 
       if (this.nextElementSibling) {
 
@@ -567,7 +569,7 @@ function fixGlobalDisclosure() {
 
 function fixIframeElement() {
 
-  // Issue: YouTube: Missing Title
+  // Fix: Find YouTube embeds that may be missing the title attribute and add a generic one.
 
   var missingTitleAttribute = document.querySelectorAll("iframe[src*='https://www.youtube.com/']:not([title]");
 
@@ -583,7 +585,7 @@ function fixIframeElement() {
 
 function fixInputElements() {
 
-  // Issue: Input elements with type of "checkbox" should not contain autocomplete as it is not a text or select field.
+  // Fix: Input elements with type of "checkbox" should not contain autocomplete as it is not a text or select field, so we need to remove.
 
   var inputCheckBox = document.querySelectorAll("input[type='checkbox']");
 
@@ -603,7 +605,7 @@ function fixJobDescription() {
 
   atsDescription.forEach(function(desc) {
 
-    // Issue: Remove tabindex attribute from elements within .ats-description that have tabindex attribute not equal to "0" or starting with "-""
+    // Fix: Remove tabindex attribute from elements within .ats-description that have tabindex attribute not equal to "0" or starting with "-""
 
     desc.querySelectorAll("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").forEach(function(tabindex) {
   
@@ -611,7 +613,7 @@ function fixJobDescription() {
 
     });
 
-    // Issue: Add role="presentation" to tables within .ats-description
+    // Fix: Add role="presentation" to tables within .ats-description
 
     desc.querySelectorAll("table").forEach(function(table) {
   
@@ -619,7 +621,7 @@ function fixJobDescription() {
 
     });
 
-    // Issue: Remove useless attributes from all elements within .ats-description
+    // Fix: Remove useless attributes from all elements within .ats-description
 
     desc.querySelectorAll("*").forEach(function(element) {
   
@@ -630,7 +632,7 @@ function fixJobDescription() {
 
     });
 
-    // Issue: Remove <font> element and unwrap its contents within .ats-description
+    // Fix: Remove <font> element and unwrap its contents within .ats-description
 
     desc.querySelectorAll("font").forEach(function(font) {
   
@@ -654,7 +656,7 @@ function fixJobDescription() {
 
 function fixJobList() {
 
-  // Issue: Job Lists should really have the location appear inside of a link so that job links with same title can be more descriptive and discernable.
+  // Fix: Move location in into Job List link.
 
   var jobListElements = document.querySelectorAll(".job-list .location, .job-list .date");
 
@@ -676,8 +678,8 @@ function fixJobList() {
 
 function fixJobLocation() {
 
-  // Issue: These would be better served as buttons, not links. Including role="button" for now, but we need to add spacebar key support eventually.
-  // Issue: Links should never open in new windows without an exceptional reason.
+  // Fix: Job map links should really be buttons, not links. Including role="button" for now, but we need to add spacebar key support eventually.
+  // Fix: Links should never open in new windows without an exceptional reason, so removing target attribute.
 
   var mapButton = document.querySelectorAll(".job-map-nearby a");
 
@@ -701,17 +703,17 @@ function fixSaveJobButton() {
 
   btnSaveJobs.forEach(function(btn){
 
-    // Issue: Custom label needed to override the text toggle that delivery often adds (or removes). Text changes should never be used to convey state.
+    // Fix: Custom label needed to override the text toggle that delivery often adds (or removes). Text changes should never be used to convey state.
     // TODO: Add language support.
 
     btn.setAttribute("aria-label", "Save Job");
 
-    // iOS, NVDA bug, state not reading back so need to implicitly call role. Do not remove until support better.
+    // Fix: iOS, NVDA bug, state not reading back so need to implicitly add a role of "button" and remove type attribute. Do not remove until support better.
 
     btn.removeAttribute("type");
     btn.setAttribute("role", "button");
 
-    // Issue: aria-pressed required, which will properly convey state of the button.
+    // Fix: aria-pressed required, which will properly convey state of the button.
   
     if(btn.dataset.jobSaved === "true") {
 
@@ -782,12 +784,12 @@ function fixSearchForm() {
 
     }
 
-    // Issue: Our primary search form should include a distinct role so that it can aid in helping assistive technology users navigate the page.
+    // Fix: Our primary search form should include a distinct role so that it can aid in helping assistive technology users navigate the page, so adding role="search"
 
     form.setAttribute("role", "search");
 
-    // Issue: Our primary search form should provide a better group description for the fields at hand. This can be achieved by adding a div with a class of "job-search-legend" (a heading should not be used) and the following script will take care of adding any needed associations.
-
+    // Fix: Our primary search form should provide a better group description for the fields at hand. This can be achieved by adding a div with a class of "job-search-legend" (a heading should not be used) and the following script will take care of adding any needed associations by either adding aria-describedby or aria-label, with appropriate IDs.
+    
     searchFormFields.setAttribute("role", "group");
 
     if(searchFormLegend) {
@@ -805,7 +807,7 @@ function fixSearchForm() {
 
     }
 
-    // Issue: The way in which the validation is currently handled requires improvement to aid those using assistive technology and keyboard. Here we need to include aria-invalid and aria-describedby to the locations field and apply custom validation as well, so that keyboard users do not need to tab backwards to return to the locations field, which is initiating the error.
+    // Fix: The way in which the validation is currently handled requires improvement to aid those using assistive technology and keyboard. Here we need to include aria-invalid and aria-describedby to the locations field and apply custom validation as well, so that keyboard users do not need to tab backwards to return to the locations field, which is initiating the error.
 
     if(searchFormLocationInput) {
 
@@ -824,7 +826,7 @@ function fixSearchForm() {
 
     }
 
-    // Issue: Apply a unique ID to the error message. This is what locations field will read when focus is brought back to it, thanks to aria-describedby.
+    // Fix: Apply a unique ID to the error message. This is what locations field will read when focus is brought back to it, thanks to aria-describedby.
 
     if(searchFormLocationError) {
 
@@ -832,7 +834,7 @@ function fixSearchForm() {
 
     }
 
-    // Issue: When search button is pressed, fire off custom validation. 
+    // Fix: When search button is pressed, fire off custom validation. 
 
     searchFormSubmit.addEventListener("click", function() {
 
@@ -840,7 +842,7 @@ function fixSearchForm() {
 
     });
 
-    // Issue: Remove aria-hidden from the location pin. Often this is visually displayed, but aria-hidden is still present.
+    // Fix: Remove aria-hidden from the location pin. Often this is visually displayed, but aria-hidden is still present.
 
     if(searchFormLocationPin) {
 
@@ -856,7 +858,7 @@ function fixSearchForm() {
 
 function fixSearchResults() {
 
-  // Issue: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus. For now...
+  // Fix: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
   // TODO: This may not be needed. Look into further.
 
   var searchResults = document.getElementById("search-results");
@@ -877,12 +879,12 @@ function fixSearchPagination() {
 
   pagination.forEach(function(pgn){
 
-    // Issue: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
+    // Fix: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
     // TODO: Add language support.
 
     pgn.setAttribute("aria-label", "Pagination");
 
-    // Issue: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we remove that, too!
+    // Fix: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we remove that, too!
 
     var controls = pgn.querySelectorAll(".pagination-paging .disabled");
 
@@ -901,7 +903,7 @@ function fixSearchPagination() {
 
 function fixSitemap() {
 
-  // Issue: Sitemap pages have tabindexs on certain header. Inactive elements should NEVER receive focus. These issues pertain to modules such as Job Location and Job Category, which are almost always found on the Sitemap page.
+  // Fix: Remove `tabindex`, `aria-expanded`, and `.expandable-parent` from `.job-location h2` and `.job-category h2`.
   // TODO: Investigate possibly removing this. Tabindex may have been addressed by product. 
 
   var sitemapHeadings = document.querySelectorAll(".job-location h2, .job-category h2");
@@ -920,7 +922,8 @@ function fixSitemap() {
 
 function fixSocialShare() {
 
-  // Issue: The social media share links found on most job description pages, tend to open in new windows, so we need to include helper text to indicate as such to assisitve technology users. 
+  // Fix: Append the following element and helper text, `<span class="wai visually-hidden">(Opens in new tab)</span>`, to each `.social-share-items a` element.
+
   // TODO: Add language support.
 
   var socialShareLinks = document.querySelectorAll(".social-share-items a");
