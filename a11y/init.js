@@ -106,7 +106,7 @@ function initStaticPatch() {
   fixJobDescription();
   fixJobList();
   fixJobLocation(); 
-  fixSearchForm();
+  // fixSearchForm();
   fixSitemap();
   fixSocialShare();
 
@@ -780,8 +780,6 @@ function fixSearchForm() {
             searchFormLocationInput.setAttribute("aria-invalid", "false");
 
           }
-
-          console.log("dfdfdf");
 
       }, 100);
 
