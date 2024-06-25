@@ -869,6 +869,24 @@ function fixSearchFilters() {
     searchFilters.setAttribute("role", "region");
     searchFilters.setAttribute("aria-label", "Search Filter");
 
+    // Fix: Each section element (`.expandable`) should contain a role of "group" as well as an accName. We will need to add an ID to each button for aria-labelledby.
+
+    var sectionElement = searchFilters.querySelectorAll(".expandable");
+
+    sectionElement.forEach(function(section, i){
+
+      var sectionID = (i + 1);
+      var sectionName = "filter-" + sectionID;
+      var sectionButton = section.querySelector(".expandable-parent");
+      var sectionList = section.querySelector(".search-filter-list")
+
+      section.setAttribute("role", "group");
+      section.setAttribute("aria-labelledby", sectionName);
+
+      sectionButton.setAttribute("id", sectionName);
+
+    });
+
   }
 
 }
