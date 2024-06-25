@@ -781,6 +781,8 @@ function fixSearchForm() {
 
           }
 
+          console.log("dfdfdf");
+
       }, 100);
 
     }
