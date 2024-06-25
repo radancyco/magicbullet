@@ -1,12 +1,12 @@
 ---
 notes: 
 
-  - <b>Global:</b> Issues immediately corrected by the script as soon it loads on a Career Site page.
-  - <b>Opt-in:</b> Solutions to common accessibility issues on a Career Sites. An implementation developer must opt-in to use them.
+  - <b>Static:</b> Issues immediately corrected by the script as soon it loads on any Career Site page.
+  - <b>Dynamic:</b> Issues that immediatly corrected by the script as soon as the page loads and when DOM is updated. For example, by an Ajax change.
   - <b>New Issues:</b> To log a new issue, please visit the <a href="https://docs.google.com/spreadsheets/d/1J61XcI_k-oxQamYPrMHDaK9TRKXZzntGq1oKZdwKFYI/edit?usp=sharing">Accessibility Patch Log (APL)</a>.
   - <b>Roadmap:</b> Create Google Form to easily submit issue to APL.
 
-title: "Accessibility Patch v1.8"
+title: "Accessibility Patch v2.0"
 ---
 
 {% include icon.html %}
@@ -19,33 +19,25 @@ title: "Accessibility Patch v1.8"
 
 <h3>HTML</h3>
 
-{% highlight html %}<script id="radancy-magicbullet" defer data-a11y="true" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
+{% highlight html %}<script id="radancy-magicbullet" data-a11y="true" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
 
 <div class="note">
           
-  <p><strong>Note:</strong> Be sure to always place the accessibility patch at the bottom of your template or within system settings.</p>
+  <p><strong>Note:</strong> Be sure to always place the accessibility patch at the bottom of your template or within system settings. No other scripts, including tracking, should be placed after it.</p>
 
 </div>
 
 <h2>Issue Log</h3>
 
-<div class="warning">
-          
-  <p><strong>Warning:</strong> This log may be out of date, but will be updated soon as we continute to modify and clean up the accessibility patch.</p>
-  
-</div>
-
 {% for bug in site.data.a11y %}
 
   {% assign issueID = bug.ID | plus: 0 %}
 
-  <div id="issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}" class="bug {% if bug.Priority == "High" %}warning{% endif %}">
+  <div id="{{ bug.ID }}" class="bug {% if bug.Priority == "High" %}warning{% endif %}">
 
-    <h2><a class="anchor" href="#issue-{% if issueID > 9 %}00{% else %}000{% endif %}{{ bug.ID }}">{{ iconAnchor }} <span class="sr-only">Anchor (#{{ bug.ID }})</span></a> Issue #{{ bug.ID }}: {{ bug.Summary }}</h2>
+    <h2><a class="anchor" href="#{{ bug.ID }}">{{ iconAnchor }} <span class="sr-only">Anchor ({{ bug.ID }})</span></a> {{ bug.Summary }}</h2>
 
     <dl>
-      <dt>Logged</dt>
-      <dd><time datetime="{{ bug.Time }}">{{ bug.Time | date: "%A, %B %-d, %Y %I:%M:%S %p %Z" }}</time></dd>
       <dt>Status</dt>
       <dd>{{ bug.Status }}</dd>
       <dt>Priority</dt>
@@ -54,11 +46,21 @@ title: "Accessibility Patch v1.8"
       <dd>{{ bug.Product }}</dd>
       <dt>Feature</dt>
       <dd>{{ bug.Feature }}</dd>
-      <dt>Implementation</dt>
-      <dd><a href="#notes">{{ bug.Implementation }}</a></dd>
+      {% if bug.Function %}
+      <dt>Associated Function</dt>
+      <dd>{{ bug.Function }}</dd>
+      {% endif %}
       {% if bug.JIRA %}
       <dt>JIRA</dt>
       <dd><a href="{{ bug.JIRA }}" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></dd>
+      {% endif %}
+      {% if bug.Language != "NA" %}
+      <dt>Language Support</dt>
+      <dd>{{ bug.Language }}</dd>
+      {% endif %}
+      {% if bug.Screengrab %}
+      <dt>Screengrab</dt>
+      <dd><a href="{{ bug.Screengrab }}" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></dd>
       {% endif %}
     </dl>
 
@@ -66,21 +68,13 @@ title: "Accessibility Patch v1.8"
 
     {{ bug.Details }}
 
-    <h3>Code</h3>
-
-    {% highlight javascript %}{{ bug.Code | replace: "<", "&lt;" | replace: ">", "&gt;" }}{% endhighlight %}
-
-    {% if bug.Screengrab == blank %}
-
-    <h3>Screen</h3>
-
-    <p>{{ bug.Screengrab }}</p>
-
-    {% endif %}
-
   </div>
 
 {% endfor %}
+
+<h2>JavaScript</h2>
+
+{% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
 
 {% endcapture %}
 
