@@ -106,7 +106,7 @@ function initStaticPatch() {
   fixJobDescription();
   fixJobList();
   fixJobLocation(); 
-  // fixSearchForm();
+  fixSearchForm();
   fixSitemap();
   fixSocialShare();
 
