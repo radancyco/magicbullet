@@ -793,6 +793,10 @@ function fixSearchForm() {
     
     searchFormFields.setAttribute("role", "group");
 
+    // Fix: Remove aria-expanded from .search-form-fields. 
+
+    searchFormFields.removeAttribute("aria-expanded");
+
     if(searchFormLegend) {
 
       // Think of this as a fieldset and legend element.
