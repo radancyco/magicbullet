@@ -603,7 +603,7 @@ function fixInputElements() {
 
 function fixMindReader() {
 
-  // Fix: Add role of listbox to Mindreader UL 
+  // Fix: Add role of listbox to each UL 
 
   var mindReader = document.querySelectorAll(".mindreader-results");
 
@@ -611,6 +611,15 @@ function fixMindReader() {
 
     list.setAttribute("role", "listbox");
 
+    // Fix: Add role of option to each LI
+
+    var option = list.querySelectorAll("li");
+
+    option.forEach(function(item) {
+
+      item.setAttribute("role", "option");
+
+    });
 
   });
 
