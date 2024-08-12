@@ -505,16 +505,6 @@ function fixDataForm() {
 
           keywordLocation.setAttribute("aria-describedby", keyWordLocationDesc);
 
-          // Add mindreader ID to aria-controls: 
-
-          keywordLocation.addEventListener("input", function() {
-
-            var mindReaderID = document.querySelector(".mindreader-results").getAttribute("id");
-
-            keywordLocation.setAttribute("aria-controls", mindReaderID);
-
-          });
-
         }
 
       }
@@ -632,6 +622,38 @@ function fixInputElements() {
 // Accessibility Patch: Mindreader Dropdown
 
 function fixMindReader() {
+
+  // Add hidden instructions to DOM
+
+  // do tomorrow
+
+  // Add proper ARIA to each combobox input.
+
+  var comboBoxInput = document.querySelectorAll(".search-location, .keyword-location");
+
+  comboBoxInput.forEach(function(input, e) {
+
+    // Add needed ARIA attributes. 
+
+    input.setAttribute("aria-autocomplete", "list");
+    input.setAttribute("aria-haspopup", "listbox");
+    input.setAttribute("aria-expanded", "false");
+    input.setAttribute("autocomplete", "off");
+
+    // aria-describedby="combobox-instructions" may need to dynamaically add this
+ 
+
+    // Add mindreader ID to aria-controls. This value needs to be dynamic (hopefully it is not an issue to have it come in after typing)
+
+    input.addEventListener("input", function() {
+
+      var mindReaderID = document.querySelector(".mindreader-results").getAttribute("id");
+
+      input.setAttribute("aria-controls", mindReaderID);
+
+    });
+
+  });
 
   // Fix: Add role of listbox to each UL 
 
@@ -878,20 +900,8 @@ function fixSearchForm() {
 
       // Add aria-describedby and aria-invalid to the locations field. 
 
-      searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
+      searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID + ", combobox-instructions");
       searchFormLocationInput.setAttribute("aria-invalid", "false");
-
-      // Add mindreader ID to aria-describedby if need be: 
-
-      var currentDescribedBy = searchFormLocationInput.getAttribute("aria-describedby");
-
-      searchFormLocationInput.addEventListener("input", function() {
-
-        var mindReaderID = document.querySelector(".mindreader-results").getAttribute("id");
-
-        this.setAttribute("aria-controls", mindReaderID);
-
-      });
 
       // Validate the locations field when change is made to it.
 
