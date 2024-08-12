@@ -81,21 +81,21 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   // MindReader Observers 
 
-  var mindReaderNode = document.querySelectorAll(".mindreader-status, .typeahead");
+  var mindReaderNodes = document.querySelectorAll(".mindreader-status, .typeahead");
 
-  mindReaderNode.forEach(function(node){
+  function callback(mutationList, mindReaderObserver) {
+ 
+    fixMindReader();
 
-    function callback(mutationList, mindReaderObserver) {
+  }
 
-      fixMindReader();
+  mindReaderNodes.forEach(function(node) {
   
-    }
+    var mindReaderObserver = new MutationObserver(callback);
+    
+    mindReaderObserver.observe(node, config);
 
   });
-
-  var mindReaderObserver = new MutationObserver(callback);
-
-  mindReaderObserver.observe(mindReaderNode, config);
 
 });
 
