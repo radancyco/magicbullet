@@ -629,6 +629,8 @@ function fixMindReader() {
 
   mindReader.forEach(function(list, e) {
 
+    // Fix: Add ARIA attributes to each lists input element. 
+
     var listCount = e + 1;
 
     list.setAttribute("role", "listbox");
@@ -636,12 +638,9 @@ function fixMindReader() {
 
     var option = list.querySelectorAll("li");
 
-      option.forEach(function(item, i) {
-
-        var itemCount = i + 1;
+      option.forEach(function(item) {
 
         item.setAttribute("role", "option");
-        item.setAttribute("id", "combobox-item-" + listCount + "-" + itemCount);
 
     });
 
@@ -867,10 +866,25 @@ function fixSearchForm() {
 
     if(searchFormLocationInput) {
 
-      // Add aria-describedby and aria-invalid to the locations field.
+      // Add aria-describedby and aria-invalid to the locations field. 
 
       searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
       searchFormLocationInput.setAttribute("aria-invalid", "false");
+
+      // Add mindreader ID to aria-describedby if need be: 
+
+
+// Step 2: Get the current value of aria-describedby
+var currentDescribedBy = searchFormLocationInput.getAttribute("aria-describedby");
+
+// Step 3: Append the new value (assuming the new value is 'newValue')
+var newValue = "combobox-1";
+let updatedDescribedBy = currentDescribedBy ? currentDescribedBy + ' ' + newValue : newValue;
+
+// Step 4: Set the updated value back to aria-describedby
+searchFormLocationInput.setAttribute('aria-describedby', updatedDescribedBy);
+
+
 
       // Validate the locations field when change is made to it.
 
