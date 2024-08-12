@@ -632,7 +632,7 @@ function fixMindReaderInput() {
 
     input.setAttribute("aria-autocomplete", "list");
     input.setAttribute("aria-haspopup", "listbox");
-    input.setAttribute("aria-expanded", "false");
+    // input.setAttribute("aria-expanded", "false"); // Throwing validation error
     input.setAttribute("autocomplete", "off");
 
     // aria-describedby="combobox-instructions" may need to dynamaically add this
