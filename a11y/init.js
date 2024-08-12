@@ -613,13 +613,17 @@ function fixMindReader() {
 
     // Fix: Add role of option to each LI
 
-    var option = list.querySelectorAll("li");
+    setTimeout(function(){
 
-    option.forEach(function(item) {
+      var option = list.querySelectorAll("li");
 
-      item.setAttribute("role", "option");
+      option.forEach(function(item) {
 
-    });
+        item.setAttribute("role", "option");
+
+      });
+
+    }, 100);
 
   });
 
