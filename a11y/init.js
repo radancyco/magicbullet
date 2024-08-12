@@ -627,9 +627,12 @@ function fixMindReader() {
 
   var mindReader = document.querySelectorAll(".mindreader-results, .typeahead");
 
-  mindReader.forEach(function(list) {
+  mindReader.forEach(function(list, e) {
+
+    var count = e + 1;
 
     list.setAttribute("role", "listbox");
+    list.setAttribute("id", "combobox-" + count);
 
     var option = list.querySelectorAll("li");
 
