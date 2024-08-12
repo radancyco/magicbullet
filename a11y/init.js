@@ -505,19 +505,15 @@ function fixDataForm() {
 
           keywordLocation.setAttribute("aria-describedby", keyWordLocationDesc);
 
-          // Add mindreader ID to aria-describedby if need be: 
-
-          var currentDescribedBy = searchFormLocationInput.getAttribute("aria-describedby");
+          // Add mindreader ID to aria-controls: 
 
           keywordLocation.addEventListener("input", function() {
 
-          var newValue = document.querySelector(".mindreader-results").getAttribute("id");
+            var mindReaderID = document.querySelector(".mindreader-results").getAttribute("id");
 
-          var updatedDescribedBy = currentDescribedBy ? currentDescribedBy + " " + newValue : newValue;
+            keywordLocation.setAttribute("aria-controls", mindReaderID);
 
-          keywordLocation.setAttribute("aria-describedby", updatedDescribedBy);
-
-      });
+          });
 
         }
 
@@ -891,11 +887,9 @@ function fixSearchForm() {
 
       searchFormLocationInput.addEventListener("input", function() {
 
-        var newValue = document.querySelector(".mindreader-results").getAttribute("id");
+        var mindReaderID = document.querySelector(".mindreader-results").getAttribute("id");
 
-        var updatedDescribedBy = currentDescribedBy ? currentDescribedBy + " " + newValue : newValue;
-
-        this.setAttribute("aria-describedby", updatedDescribedBy);
+        this.setAttribute("aria-controls", mindReaderID);
 
       });
 
