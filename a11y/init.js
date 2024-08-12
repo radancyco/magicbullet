@@ -111,6 +111,7 @@ function initDynamicPatch() {
   fixGlobalDisclosure();
   fixIframeElement();
   fixInputElements();
+  fixMindReaderInput();
   fixSaveJobButton();
   fixSearchFilters();
   fixSearchResults();
@@ -619,15 +620,9 @@ function fixInputElements() {
 
 }
 
-// Accessibility Patch: Mindreader Dropdown
+// Accessibility Patch: Mindreader Combobox
 
-function fixMindReader() {
-
-  // Add hidden instructions to DOM
-
-  // do tomorrow
-
-  // Add proper ARIA to each combobox input.
+function fixMindReaderInput() {
 
   var comboBoxInput = document.querySelectorAll(".search-location, .keyword-location");
 
@@ -641,7 +636,24 @@ function fixMindReader() {
     input.setAttribute("autocomplete", "off");
 
     // aria-describedby="combobox-instructions" may need to dynamaically add this
- 
+
+  });
+
+}
+
+// Accessibility Patch: Mindreader Dropdown
+
+function fixMindReader() {
+
+  // Add hidden instructions to DOM
+
+  // do tomorrow
+
+  // Add proper ARIA to each combobox input.
+
+  var comboBoxInput = document.querySelectorAll(".search-location, .keyword-location");
+
+  comboBoxInput.forEach(function(input, e) {
 
     // Add mindreader ID to aria-controls. This value needs to be dynamic (hopefully it is not an issue to have it come in after typing)
 
