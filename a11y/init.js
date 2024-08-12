@@ -81,7 +81,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   // MindReader Observers 
 
-  var mindReaderNode = document.querySelectorAll(".mindreader-status, .typeahead");
+  var mindReaderNode = document.querySelectorAll(".mindreader-status, #wrapper-sel-city");
 
   mindReaderNode.forEach(function(node){
 
