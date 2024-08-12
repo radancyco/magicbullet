@@ -90,6 +90,7 @@ function initDynamicPatch() {
   fixGlobalDisclosure();
   fixIframeElement();
   fixInputElements();
+  fixMindReader();
   fixSaveJobButton();
   fixSearchFilters();
   fixSearchResults();
@@ -593,6 +594,23 @@ function fixInputElements() {
   inputCheckBox.forEach(function(input) {
 
     input.removeAttribute("autocomplete");
+
+  });
+
+}
+
+// Accessibility Patch: Mindreader Dropdown
+
+function fixMindReader() {
+
+  // Fix: Add role of listbox to Mindreader UL 
+
+  var mindReader = document.querySelectorAll(".mindreader-results");
+
+  mindReader.forEach(function(list) {
+
+    list.setAttribute("role", "listbox");
+
 
   });
 
