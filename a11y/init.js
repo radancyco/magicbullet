@@ -79,9 +79,9 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   initStaticPatch();
 
-  // MindReader Observer 
+  // MindReader Observers 
 
-  var mindReaderNode = document.querySelector(".mindreader-status, .wrapper-sel-city");
+  var mindReaderNode = document.querySelector(".mindreader-status, #wrapper-sel-city");
 
   function callback(mutationList, mindReaderObserver) {
 
