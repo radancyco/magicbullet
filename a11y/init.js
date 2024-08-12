@@ -76,6 +76,20 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   initStaticPatch();
 
+  // MindReader Observer 
+
+  var mindReaderNode = document.querySelector(".mindreader-status");
+
+  function callback(mutationList, mindReaderObserver) {
+
+    fixMindReader();
+
+  }
+
+  var mindReaderObserver = new MutationObserver(callback);
+
+  mindReaderObserver.observe(mindReaderNode, config);
+
 });
 
 // Accessibility Patch: Dynamic
@@ -90,7 +104,6 @@ function initDynamicPatch() {
   fixGlobalDisclosure();
   fixIframeElement();
   fixInputElements();
-  fixMindReader();
   fixSaveJobButton();
   fixSearchFilters();
   fixSearchResults();
@@ -611,19 +624,13 @@ function fixMindReader() {
 
     list.setAttribute("role", "listbox");
 
-    // Fix: Add role of option to each LI
-
-    setTimeout(function(){
-
-      var option = list.querySelectorAll("li");
+    var option = list.querySelectorAll("li");
 
       option.forEach(function(item) {
 
         item.setAttribute("role", "option");
 
-      });
-
-    }, 100);
+    });
 
   });
 
