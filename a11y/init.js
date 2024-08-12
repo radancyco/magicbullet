@@ -505,6 +505,20 @@ function fixDataForm() {
 
           keywordLocation.setAttribute("aria-describedby", keyWordLocationDesc);
 
+          // Add mindreader ID to aria-describedby if need be: 
+
+          var currentDescribedBy = searchFormLocationInput.getAttribute("aria-describedby");
+
+          keywordLocation.addEventListener("input", function() {
+
+          var newValue = document.querySelector(".mindreader-results").getAttribute("id");
+
+          var updatedDescribedBy = currentDescribedBy ? currentDescribedBy + " " + newValue : newValue;
+
+          keywordLocation.setAttribute("aria-describedby", updatedDescribedBy);
+
+      });
+
         }
 
       }
@@ -634,7 +648,7 @@ function fixMindReader() {
     var listCount = e + 1;
 
     list.setAttribute("role", "listbox");
-    // list.setAttribute("id", "combobox-" + listCount);
+    // list.setAttribute("id", "combobox-" + listCount); // may still need this for jobs map page
 
     var option = list.querySelectorAll("li");
 
@@ -873,26 +887,17 @@ function fixSearchForm() {
 
       // Add mindreader ID to aria-describedby if need be: 
 
+      var currentDescribedBy = searchFormLocationInput.getAttribute("aria-describedby");
 
-// Step 2: Get the current value of aria-describedby
-var currentDescribedBy = searchFormLocationInput.getAttribute("aria-describedby");
+      searchFormLocationInput.addEventListener("input", function() {
 
-// Step 3: Append the new value (assuming the new value is 'newValue')
-var newValue = "combobox-1";
-let updatedDescribedBy = currentDescribedBy ? currentDescribedBy + ' ' + newValue : newValue;
+        var newValue = document.querySelector(".mindreader-results").getAttribute("id");
 
-// Step 4: Set the updated value back to aria-describedby
-searchFormLocationInput.setAttribute('aria-describedby', updatedDescribedBy);
+        var updatedDescribedBy = currentDescribedBy ? currentDescribedBy + " " + newValue : newValue;
 
-searchFormLocationInput.addEventListener("input", function() {
+        this.setAttribute("aria-describedby", updatedDescribedBy);
 
-  var mindReader = document.querySelector(".mindreader-results").getAttribute("id");
-
-  console.log(mindReader);
-
-});
-
-
+      });
 
       // Validate the locations field when change is made to it.
 
