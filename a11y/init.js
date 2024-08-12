@@ -884,6 +884,14 @@ let updatedDescribedBy = currentDescribedBy ? currentDescribedBy + ' ' + newValu
 // Step 4: Set the updated value back to aria-describedby
 searchFormLocationInput.setAttribute('aria-describedby', updatedDescribedBy);
 
+searchFormLocationInput.addEventListener("input", function() {
+
+  var mindReader = document.querySelector(".mindreader-results").getAttribute("id");
+
+  console.log(mindReader);
+
+});
+
 
 
       // Validate the locations field when change is made to it.
