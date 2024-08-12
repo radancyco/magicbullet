@@ -91,11 +91,11 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   
     }
 
-    var mindReaderObserver = new MutationObserver(callback);
-
-    mindReaderObserver.observe(mindReaderNode, config);
-
   });
+
+  var mindReaderObserver = new MutationObserver(callback);
+
+  mindReaderObserver.observe(mindReaderNode, config);
 
 });
 
