@@ -629,16 +629,19 @@ function fixMindReader() {
 
   mindReader.forEach(function(list, e) {
 
-    var count = e + 1;
+    var listCount = e + 1;
 
     list.setAttribute("role", "listbox");
-    list.setAttribute("id", "combobox-" + count);
+    list.setAttribute("id", "combobox-" + listCount);
 
     var option = list.querySelectorAll("li");
 
-      option.forEach(function(item) {
+      option.forEach(function(item, i) {
+
+        var itemCount = i = 1;
 
         item.setAttribute("role", "option");
+        item.setAttribute("id", "combobox-item-" + listCount + "-" + itemCount);
 
     });
 
