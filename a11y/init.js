@@ -634,7 +634,7 @@ function fixMindReader() {
     var listCount = e + 1;
 
     list.setAttribute("role", "listbox");
-    list.setAttribute("id", "combobox-" + listCount);
+    // list.setAttribute("id", "combobox-" + listCount);
 
     var option = list.querySelectorAll("li");
 
