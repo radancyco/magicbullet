@@ -621,7 +621,7 @@ function fixMindReader() {
 
   // Fix: Add role of listbox to each UL 
 
-  var mindReader = document.querySelectorAll(".mindreader-results");
+  var mindReader = document.querySelectorAll(".mindreader-results, .typeahead");
 
   mindReader.forEach(function(list) {
 
