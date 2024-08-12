@@ -638,7 +638,7 @@ function fixMindReader() {
 
       option.forEach(function(item, i) {
 
-        var itemCount = i = 1;
+        var itemCount = i + 1;
 
         item.setAttribute("role", "option");
         item.setAttribute("id", "combobox-item-" + listCount + "-" + itemCount);
