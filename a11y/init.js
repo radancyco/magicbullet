@@ -670,7 +670,7 @@ function fixMindReader() {
 
       mindReader.forEach(function(list) {
     
-        var items = list.querySelectorAll('a');
+        var items = list.querySelectorAll('li');
         var selectedIndex = -1;  // No item is selected initially
     
         document.addEventListener('keydown', function (event) {
