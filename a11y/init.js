@@ -685,7 +685,7 @@ function fixMindReader() {
 
     var option = list.querySelectorAll("li");
 
-      option.forEach(function(item. i) {
+      option.forEach(function(item, i) {
 
         var itemCount = i + 1;
 
