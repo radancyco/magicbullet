@@ -635,7 +635,7 @@ function fixMindReaderInput() {
     input.setAttribute("aria-expanded", "false");
     input.setAttribute("autocomplete", "off");
     input.setAttribute("role", "combobox");
-    input.setAttribute("aria-controls", input.getAttribute("data-keyword-list"));
+    input.setAttribute("aria-controls", input.getAttribute("id") + "-mindreader");
 
     // aria-describedby="combobox-instructions" may need to dynamaically add this
 
