@@ -632,8 +632,10 @@ function fixMindReaderInput() {
 
     input.setAttribute("aria-autocomplete", "list");
     input.setAttribute("aria-haspopup", "listbox");
-    // input.setAttribute("aria-expanded", "false"); // Throwing validation error
+    input.setAttribute("aria-expanded", "false");
     input.setAttribute("autocomplete", "off");
+    input.setAttribute("role", "combobox");
+    input.setAttribute("aria-controls", input.getAttribute("data-keyword-list"));
 
     // aria-describedby="combobox-instructions" may need to dynamaically add this
 
@@ -659,9 +661,9 @@ function fixMindReader() {
 
     input.addEventListener("input", function() {
 
-      var mindReaderID = document.querySelector(".mindreader-results").getAttribute("id");
+      // var mindReaderID = document.querySelector(".mindreader-results").getAttribute("id");
 
-      input.setAttribute("aria-controls", mindReaderID);
+      // input.setAttribute("aria-controls", mindReaderID);
 
     });
 
