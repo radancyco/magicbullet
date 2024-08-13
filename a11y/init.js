@@ -665,7 +665,7 @@ function fixMindReader() {
 
       // input.setAttribute("aria-controls", mindReaderID);
 
-      var mindReaderID = input.getAttribute("id") + "-mindreader";
+      var mindReaderID = document.getAttribute("id") + "-mindreader";
 
       var mindReader = document.getElementById(mindReaderID);
 
