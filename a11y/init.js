@@ -108,7 +108,7 @@ function initDynamicPatch() {
   fixAltAttribute();
   fixAppliedFilter();
   fixDataForm();
-  fixGlobalDisclosure();
+  // fixGlobalDisclosure();
   fixIframeElement();
   fixInputElements();
   fixMindReaderInput();
@@ -124,7 +124,13 @@ function initDynamicPatch() {
 
 function initStaticPatch() {
 
-
+  fixCookieManagement();
+  fixJobDescription();
+  fixJobList();
+  fixJobLocation(); 
+  fixSearchForm();
+  fixSitemap();
+  fixSocialShare();
 
 }
 
