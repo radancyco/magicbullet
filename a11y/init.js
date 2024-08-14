@@ -114,13 +114,7 @@ function initDynamicPatch() {
 
 function initStaticPatch() {
 
-  fixCookieManagement();
-  fixJobDescription();
-  fixJobList();
-  fixJobLocation(); 
-  fixSearchForm();
-  fixSitemap();
-  fixSocialShare();
+
 
 }
 
