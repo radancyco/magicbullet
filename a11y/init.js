@@ -85,7 +85,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   function callback(mutationList, mindReaderObserver) {
  
-  //  fixMindReaderList();
+    fixMindReaderList();
 
   }
 
@@ -108,12 +108,12 @@ function initDynamicPatch() {
   fixAltAttribute();
   fixAppliedFilter();
   fixDataForm();
-  fixGlobalDisclosure();
+  // fixGlobalDisclosure();
   fixIframeElement();
   fixInputElements();
- // fixMindReaderInput();
+  fixMindReaderInput();
   fixSaveJobButton();
-  // fixSearchFilters();
+  fixSearchFilters();
   fixSearchResults();
   fixSearchPagination();
 
@@ -544,11 +544,11 @@ function fixGlobalDisclosure() {
 
     if(button.classList.contains("expandable-child-open")) {
 
-   //   button.setAttribute("aria-expanded", "true");
+      button.setAttribute("aria-expanded", "true");
   
     } else {
 
-  //    button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-expanded", "false");
 
     }
 
@@ -556,7 +556,7 @@ function fixGlobalDisclosure() {
   
     if (button.nextElementSibling) {
   
-  //    button.nextElementSibling.removeAttribute("aria-expanded");
+      button.nextElementSibling.removeAttribute("aria-expanded");
   
     }
 
@@ -566,11 +566,11 @@ function fixGlobalDisclosure() {
 
       if(this.getAttribute("aria-expanded") === "true") {
 
-     //   this.setAttribute("aria-expanded", "false");
+        this.setAttribute("aria-expanded", "false");
 
       } else {
 
-     //   this.setAttribute("aria-expanded", "true");
+        this.setAttribute("aria-expanded", "true");
 
       }
 
@@ -578,7 +578,7 @@ function fixGlobalDisclosure() {
 
       if (this.nextElementSibling) {
 
- //       this.nextElementSibling.removeAttribute("aria-expanded");
+        this.nextElementSibling.removeAttribute("aria-expanded");
 
       }
 
