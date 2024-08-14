@@ -1024,16 +1024,16 @@ function fixSearchFilters() {
 
       var sectionID = (i + 1);
       var sectionName = "filter-button-" + sectionID;
-     // var sectionButton = section.querySelector(".expandable-parent");
+      var sectionButton = section.querySelector(".expandable-parent");
 
       section.setAttribute("role", "group");
       section.setAttribute("aria-labelledby", sectionName);
 
-    //  if(sectionButton) {
+      if(sectionButton) {
 
-      //  sectionButton.setAttribute("id", sectionName);
+        sectionButton.setAttribute("id", sectionName);
 
-   //   }
+      }
 
     });
 
