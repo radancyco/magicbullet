@@ -729,7 +729,11 @@ function fixMindReaderList() {
 
     input.addEventListener("input", function() {
 
-      initMindreaderList();
+      if (input.value) {
+
+        initMindreaderList();
+
+      }
       
     });
 
