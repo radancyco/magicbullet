@@ -544,11 +544,11 @@ function fixGlobalDisclosure() {
 
     if(button.classList.contains("expandable-child-open")) {
 
-      button.setAttribute("aria-expanded", "true");
+   //   button.setAttribute("aria-expanded", "true");
   
     } else {
 
-      button.setAttribute("aria-expanded", "false");
+  //    button.setAttribute("aria-expanded", "false");
 
     }
 
@@ -556,7 +556,7 @@ function fixGlobalDisclosure() {
   
     if (button.nextElementSibling) {
   
-      button.nextElementSibling.removeAttribute("aria-expanded");
+  //    button.nextElementSibling.removeAttribute("aria-expanded");
   
     }
 
