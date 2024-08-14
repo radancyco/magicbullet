@@ -1024,12 +1024,12 @@ function fixSearchFilters() {
 
       var sectionID = (i + 1);
       var sectionName = "filter-button-" + sectionID;
+      var sectionButton = section.querySelectorAll(".expandable-parent"); 
+      
+      // For some weird reason, querySelector, which should work, is not working so using querySelectorAll instead. 
 
       section.setAttribute("role", "group");
       section.setAttribute("aria-labelledby", sectionName);
-
-      var sectionButton = section.querySelector(".expandable-parent");
-
       sectionButton.setAttribute("id", sectionName);
 
     });
