@@ -557,6 +557,7 @@ function fixGlobalDisclosure() {
     if (button.nextElementSibling) {
   
       button.nextElementSibling.removeAttribute("aria-expanded");
+      button.nextElementSibling.removeAttribute("aria-hidden");
   
     }
 
@@ -1020,7 +1021,7 @@ function fixSearchFilters() {
 
     var sectionElement = searchFilters.querySelectorAll(".expandable");
 
-    sectionElement.forEach(function(section, i){
+    sectionElement.forEach(function(section){
 
       var sectionButtonID = section.querySelector(".expandable-parent").getAttribute("id");
 
