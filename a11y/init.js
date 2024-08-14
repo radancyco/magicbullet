@@ -85,7 +85,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   function callback(mutationList, mindReaderObserver) {
  
-    fixMindReaderList();
+  //  fixMindReaderList();
 
   }
 
@@ -111,7 +111,7 @@ function initDynamicPatch() {
   fixGlobalDisclosure();
   fixIframeElement();
   fixInputElements();
-  fixMindReaderInput();
+ // fixMindReaderInput();
   fixSaveJobButton();
   fixSearchFilters();
   fixSearchResults();
