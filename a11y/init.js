@@ -1022,13 +1022,10 @@ function fixSearchFilters() {
 
     sectionElement.forEach(function(section, i){
 
-      var sectionID = (i + 1);
-      var sectionName = "filter-button-" + sectionID;
-      var sectionButton = section.querySelectorAll("button");
+      var sectionButtonID = section.querySelector(".expandable-parent").getAttribute("id");
 
       section.setAttribute("role", "group");
-      section.setAttribute("aria-labelledby", sectionName);
-      sectionButton.setAttribute("id", sectionName);
+      section.setAttribute("aria-labelledby", sectionButtonID);
 
     });
 
