@@ -79,6 +79,24 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   initStaticPatch();
 
+  // MindReader Observers 
+
+  var mindReaderNodes = document.querySelectorAll(".mindreader-status, #wrapper-sel-city");
+
+  function callback(mutationList, mindReaderObserver) {
+ 
+    fixMindReaderList();
+
+  }
+
+  mindReaderNodes.forEach(function(node) {
+  
+    var mindReaderObserver = new MutationObserver(callback);
+    
+    mindReaderObserver.observe(node, config);
+
+  });
+
 });
 
 // Accessibility Patch: Dynamic
@@ -93,6 +111,7 @@ function initDynamicPatch() {
   fixGlobalDisclosure();
   fixIframeElement();
   fixInputElements();
+  fixMindReaderInput();
   fixSaveJobButton();
   fixSearchFilters();
   fixSearchResults();
@@ -108,9 +127,7 @@ function initStaticPatch() {
   fixCookieManagement();
   fixJobDescription();
   fixJobList();
-  fixJobLocation();
-  fixMindReaderInput();
-  fixMindReaderList(); 
+  fixJobLocation(); 
   fixSearchForm();
   fixSitemap();
   fixSocialShare();
