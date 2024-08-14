@@ -556,7 +556,7 @@ function fixGlobalDisclosure() {
   
     if (button.nextElementSibling) {
   
-      // button.nextElementSibling.removeAttribute("aria-expanded");
+      button.nextElementSibling.removeAttribute("aria-expanded");
   
     }
 

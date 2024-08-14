@@ -180,3 +180,14 @@ visibility: hidden;
     }
 
 }
+
+// Since we are removing aria-expanded from various, non-interactive elements, we need to make it is not impacting ajax functionalit that may look them and keep component open.
+// Fortunately, we can use the open class to our advantage. 
+
+.search-filter-list {
+    
+    .expandable-childlist-open {
+    display: block;
+    }
+
+}
