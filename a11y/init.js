@@ -670,35 +670,21 @@ function fixMindReader() {
       var mindReader = document.getElementById(mindReaderID);
 
 
-    
-        var items = mindReader.querySelectorAll('li');
-        var selectedIndex = -1;  // No item is selected initially
-    
-        document.addEventListener('keydown', function (event) {
-            if (event.key === 'ArrowDown') {
-                if (selectedIndex < items.length - 1) {
-                    if (selectedIndex >= 0) {
-                        items[selectedIndex].classList.remove('selected');
-                    }
-                    selectedIndex++;
-                    items[selectedIndex].classList.add('selected');
-                }
-            } else if (event.key === 'ArrowUp') {
-                if (selectedIndex > 0) {
-                    items[selectedIndex].classList.remove('selected');
-                    selectedIndex--;
-                    items[selectedIndex].classList.add('selected');
-                }
-            }
-    
-            // Log the selected item (you can use this for your own logic)
-            if (selectedIndex >= 0) {
-                console.log('Selected Item:', items[selectedIndex].textContent);
-            }
-        });
-    
 
-
+        var items = mindReader.querySelectorAll("a");
+    
+        function checkActiveClass() {
+            items.forEach(function(item, index) {
+                if (item.classList.contains("active")) {
+                    console.log(item.textContent);
+                }
+            });
+        }
+    
+        // Listen for both keydown and keyup events
+        document.addEventListener('keydown', checkActiveClass);
+        document.addEventListener('keyup', checkActiveClass);
+  
 
     });
 
