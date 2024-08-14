@@ -630,14 +630,12 @@ function fixMindReaderInput() {
 
     // Fix: Prep Comboboxes with proper ARIA
 
-    var mindReaderID = input.getAttribute("id") + "-mindreader";
-
     input.setAttribute("aria-autocomplete", "list");
     input.setAttribute("aria-haspopup", "listbox");
     input.setAttribute("aria-expanded", "false");
     input.setAttribute("autocomplete", "off");
     input.setAttribute("role", "combobox");
-    input.setAttribute("aria-controls", mindReaderID);
+    input.setAttribute("aria-controls", input.getAttribute("id") + "-mindreader");
 
     // aria-describedby="combobox-instructions" may need to dynamaically add this
 
