@@ -645,72 +645,6 @@ function fixMindReaderInput() {
 
 }
 
-// Accessibility Path: Initiate Mindreader List
-
-function initMindreaderList() {
-
-  // Fix: When combobox is opened, the input needs to indicate it is opened and remove last active descendent.
-
-  if (input.classList.contains("mindreader-results-open")) {
-
-    input.setAttribute("aria-expanded", "true");
-
-  } else { 
-
-    input.setAttribute("aria-expanded", "false");
-    input.removeAttribute("aria-activedescendant");
-
-  }
-
-  // Fix: When list item is accessed in combobox, it needs to exibit certain behavios.
-
-  function checkActiveClass() {
-
-    // Get ID of associated comboxbox list.
-
-    var mindReaderID = input.getAttribute("id") + "-mindreader";
-
-    var mindReader = document.getElementById(mindReaderID);
-
-    // Get all items in combobox list.
-
-    var items = mindReader.querySelectorAll("a");
-
-    // On keydown or keyup check to see which is active and send that information to combobox input element.
-
-    items.forEach(function(item) {
-
-      if (item.classList.contains("active")) {
-
-        // Get li ID.
-
-        var listID = item.parentElement.getAttribute("id");
-
-        // Get ID of staus message div.
-
-        var mindReaderStatus = document.getElementById(input.getAttribute("id") + "-mindreader-status");
-
-        // The screen reader is announcing selected items twice due to selection being passed to status message, so let's set it to nothing when slected.
-
-        mindReaderStatus.textContent = "";
-
-        // Pass selected ID to aria-activedescendent.
-
-        input.setAttribute("aria-activedescendant", listID);
-
-      } 
-
-    });
-
-  }
-
-  // Listen for both keydown and keyup events
-
-  document.addEventListener("keydown", checkActiveClass);
-  document.addEventListener("keyup", checkActiveClass);
-
-}
-
 // Accessibility Patch: Mindreader List
 
 function fixMindReaderList() {
@@ -721,20 +655,68 @@ function fixMindReaderList() {
 
   comboBoxInput.forEach(function(input) {
 
-    if (input.value) {
-  
-      initMindreaderList();
-  
-    }
+    input.addEventListener("focus", function() {
 
-    input.addEventListener("input", function() {
+      // Fix: When combobox is opened, the input needs to indicate it is opened and remove last active descendent.
 
-      if (input.value) {
+      if (input.classList.contains("mindreader-results-open")) {
 
-        initMindreaderList();
+        input.setAttribute("aria-expanded", "true");
+
+      } else { 
+
+        input.setAttribute("aria-expanded", "false");
+        input.removeAttribute("aria-activedescendant");
 
       }
-      
+
+      // Fix: When list item is accessed in combobox, it needs to exibit certain behavios.
+    
+      function checkActiveClass() {
+
+        // Get ID of associated comboxbox list.
+
+        var mindReaderID = input.getAttribute("id") + "-mindreader";
+
+        var mindReader = document.getElementById(mindReaderID);
+
+        // Get all items in combobox list.
+    
+        var items = mindReader.querySelectorAll("a");
+
+        // On keydown or keyup check to see which is active and send that information to combobox input element.
+
+        items.forEach(function(item) {
+
+          if (item.classList.contains("active")) {
+
+            // Get li ID.
+
+            var listID = item.parentElement.getAttribute("id");
+
+            // Get ID of staus message div.
+
+            var mindReaderStatus = document.getElementById(input.getAttribute("id") + "-mindreader-status");
+
+            // The screen reader is announcing selected items twice due to selection being passed to status message, so let's set it to nothing when slected.
+
+            mindReaderStatus.textContent = "";
+
+            // Pass selected ID to aria-activedescendent.
+
+            input.setAttribute("aria-activedescendant", listID);
+
+          } 
+
+        });
+
+      }
+    
+      // Listen for both keydown and keyup events
+    
+      document.addEventListener("keydown", checkActiveClass);
+      document.addEventListener("keyup", checkActiveClass);
+  
     });
 
   });
