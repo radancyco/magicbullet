@@ -647,48 +647,7 @@ function fixMindReaderInput() {
 
 function fixMindReader() {
 
-  // Add hidden instructions to DOM
 
-  // do tomorrow
-
-  // Add proper ARIA to each combobox input.
-
-  var comboBoxInput = document.querySelectorAll(".search-location, .keyword-location");
-
-  comboBoxInput.forEach(function(input, e) {
-
-    // Add mindreader ID to aria-controls. This value needs to be dynamic (hopefully it is not an issue to have it come in after typing)
-
-    input.addEventListener("input", function() {
-
-      // var mindReaderID = document.querySelector(".mindreader-results").getAttribute("id");
-
-      // input.setAttribute("aria-controls", mindReaderID);
-
-      var mindReaderID = input.getAttribute("id") + "-mindreader";
-
-      var mindReader = document.getElementById(mindReaderID);
-
-
-
-        var items = mindReader.querySelectorAll("a");
-    
-        function checkActiveClass() {
-            items.forEach(function(item, index) {
-                if (item.classList.contains("active")) {
-                    console.log(item.textContent);
-                }
-            });
-        }
-    
-        // Listen for both keydown and keyup events
-        document.addEventListener('keydown', checkActiveClass);
-        document.addEventListener('keyup', checkActiveClass);
-  
-
-    });
-
-  });
 
 
   // Fix: Add role of listbox to each UL 
