@@ -1029,7 +1029,11 @@ function fixSearchFilters() {
       section.setAttribute("role", "group");
       section.setAttribute("aria-labelledby", sectionName);
 
-      sectionButton.setAttribute("id", sectionName);
+      if(sectionButton) {
+
+        sectionButton.setAttribute("id", sectionName);
+
+      }
 
     });
 
