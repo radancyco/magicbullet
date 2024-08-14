@@ -95,8 +95,6 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
     
     mindReaderObserver.observe(node, config);
 
-    fixMindReaderList();
-
   });
 
 });
@@ -639,22 +637,6 @@ function fixMindReaderInput() {
     input.setAttribute("role", "combobox");
     input.setAttribute("aria-controls", input.getAttribute("id") + "-mindreader");
 
-    // aria-describedby="combobox-instructions" may need to dynamaically add this
-
-  });
-
-}
-
-// Accessibility Patch: Mindreader List
-
-function fixMindReaderList() {
-
-  // Add proper ARIA to each combobox input.
-
-  var comboBoxInput = document.querySelectorAll(".search-location, .keyword-location");
-
-  comboBoxInput.forEach(function(input) {
-
     input.addEventListener("focus", function() {
 
       // Fix: When combobox is opened, the input needs to indicate it is opened and remove last active descendent.
@@ -719,7 +701,14 @@ function fixMindReaderList() {
   
     });
 
+
   });
+
+}
+
+// Accessibility Patch: Mindreader List
+
+function fixMindReaderList() {
 
   // Fix: Add role of listbox to each UL 
 
