@@ -1024,12 +1024,12 @@ function fixSearchFilters() {
 
       var sectionID = (i + 1);
       var sectionName = "filter-button-" + sectionID;
-      var sectionButton = section.querySelector(".expandable-parent");
-
-      console.log(sectionButton);
 
       section.setAttribute("role", "group");
       section.setAttribute("aria-labelledby", sectionName);
+
+      var sectionButton = section.querySelector(".expandable-parent");
+
       sectionButton.setAttribute("id", sectionName);
 
     });
