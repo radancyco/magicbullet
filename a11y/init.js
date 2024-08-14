@@ -85,7 +85,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   function callback(mutationList, mindReaderObserver) {
  
-    fixMindReader();
+    fixMindReaderList();
 
   }
 
@@ -643,9 +643,9 @@ function fixMindReaderInput() {
 
 }
 
-// Accessibility Patch: Mindreader Dropdown
+// Accessibility Patch: Mindreader List
 
-function fixMindReader() {
+function fixMindReaderList() {
 
   // Add proper ARIA to each combobox input.
 
