@@ -95,8 +95,6 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
     
     mindReaderObserver.observe(node, config);
 
-    fixMindReaderList();
-
   });
 
 });
@@ -639,9 +637,72 @@ function fixMindReaderInput() {
     input.setAttribute("role", "combobox");
     input.setAttribute("aria-controls", input.getAttribute("id") + "-mindreader");
 
+    input.addEventListener("focus", function() {
+
+      // Fix: When combobox is opened, the input needs to indicate it is opened and remove last active descendent.
+
+      if (input.classList.contains("mindreader-results-open")) {
+
+        input.setAttribute("aria-expanded", "true");
+
+      } else { 
+
+        input.setAttribute("aria-expanded", "false");
+        input.removeAttribute("aria-activedescendant");
+
+      }
+
+      // Fix: When list item is accessed in combobox, it needs to exibit certain behavios.
+    
+      function checkActiveClass() {
+
+        // Get ID of associated comboxbox list.
+
+        var mindReaderID = input.getAttribute("id") + "-mindreader";
+
+        var mindReader = document.getElementById(mindReaderID);
+
+        // Get all items in combobox list.
+    
+        var items = mindReader.querySelectorAll("a");
+
+        // On keydown or keyup check to see which is active and send that information to combobox input element.
+
+        items.forEach(function(item) {
+
+          if (item.classList.contains("active")) {
+
+            // Get li ID.
+
+            var listID = item.parentElement.getAttribute("id");
+
+            // Get ID of staus message div.
+
+            var mindReaderStatus = document.getElementById(input.getAttribute("id") + "-mindreader-status");
+
+            // The screen reader is announcing selected items twice due to selection being passed to status message, so let's set it to nothing when slected.
+
+            mindReaderStatus.textContent = "";
+
+            // Pass selected ID to aria-activedescendent.
+
+            input.setAttribute("aria-activedescendant", listID);
+
+          } 
+
+        });
+
+      }
+    
+      // Listen for both keydown and keyup events
+    
+      document.addEventListener("keydown", checkActiveClass);
+      document.addEventListener("keyup", checkActiveClass);
+  
+    });
+
 
   });
-
 
 }
 
