@@ -105,17 +105,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   
 function initDynamicPatch() {
 
-  fixAltAttribute();
-  fixAppliedFilter();
-  fixDataForm();
-  // fixGlobalDisclosure();
-  fixIframeElement();
-  fixInputElements();
-  fixMindReaderInput();
-  fixSaveJobButton();
-  fixSearchFilters();
-  fixSearchResults();
-  fixSearchPagination();
+
 
 }
 
