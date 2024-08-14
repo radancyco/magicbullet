@@ -108,7 +108,7 @@ function initDynamicPatch() {
   fixAltAttribute();
   fixAppliedFilter();
   fixDataForm();
-  // fixGlobalDisclosure();
+  fixGlobalDisclosure();
   fixIframeElement();
   fixInputElements();
   fixMindReaderInput();
