@@ -1004,7 +1004,23 @@ function fixSearchForm() {
 
 function fixSearchFilters() {
 
-console.log("eep");
+  var searchFilters = document.getElementById("search-filters");
+
+  if(searchFilters) {
+
+    // Fix: Add role and accName to Search Filter section. 
+    // TODO: Add langauge support.
+    
+    searchFilters.setAttribute("role", "region");
+    searchFilters.setAttribute("aria-label", "Search Filter");
+
+    // TODO: It would be great if we could use aria-labelledby instead of aria-label as accName for region so that we would not requre custom translation, but heading has no distinct class to leverage. Look into adding unique ID to h2 instead maybe?
+
+    // Fix: Each section element (`.expandable`) should contain a role of "group" as well as an accName. We will need to add an ID to each button for aria-labelledby.
+
+console.log("eep op orp ahh ahh");
+
+  }
 
 }
 
