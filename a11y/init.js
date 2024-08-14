@@ -78,6 +78,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   a11yObserver.observe(targetNode, config);
 
   initStaticPatch();
+  fixMindReaderList();
 
   // MindReader Observers 
 
