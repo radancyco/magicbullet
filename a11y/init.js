@@ -1026,14 +1026,11 @@ function fixSearchFilters() {
       var sectionName = "filter-button-" + sectionID;
       var sectionButton = section.querySelector(".expandable-parent");
 
+      console.log(sectionButton);
+
       section.setAttribute("role", "group");
       section.setAttribute("aria-labelledby", sectionName);
-
-      if(sectionButton) {
-
-        sectionButton.setAttribute("id", sectionName);
-
-      }
+      sectionButton.setAttribute("id", sectionName);
 
     });
 
