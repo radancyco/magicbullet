@@ -566,11 +566,11 @@ function fixGlobalDisclosure() {
 
       if(this.getAttribute("aria-expanded") === "true") {
 
-        this.setAttribute("aria-expanded", "false");
+     //   this.setAttribute("aria-expanded", "false");
 
       } else {
 
-        this.setAttribute("aria-expanded", "true");
+     //   this.setAttribute("aria-expanded", "true");
 
       }
 
@@ -578,7 +578,7 @@ function fixGlobalDisclosure() {
 
       if (this.nextElementSibling) {
 
-        this.nextElementSibling.removeAttribute("aria-expanded");
+ //       this.nextElementSibling.removeAttribute("aria-expanded");
 
       }
 
