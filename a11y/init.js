@@ -1031,7 +1031,7 @@ function fixSearchFilters() {
 
       if(sectionButton) {
 
-        sectionButton.setAttribute("id", sectionName);
+    //    sectionButton.setAttribute("id", sectionName);
 
       }
 
