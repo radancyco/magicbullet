@@ -960,7 +960,7 @@ function fixSearchForm() {
 
       // Add aria-describedby and aria-invalid to the locations field. 
 
-      searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID + " combobox-instructions");
+      searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
       searchFormLocationInput.setAttribute("aria-invalid", "false");
 
       // Validate the locations field when change is made to it.
