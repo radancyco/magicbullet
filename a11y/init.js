@@ -78,6 +78,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   a11yObserver.observe(targetNode, config);
 
   initStaticPatch();
+  initStaticPatch();
 
   // MindReader Observers 
 
@@ -117,8 +118,6 @@ function initDynamicPatch() {
   fixSearchResults();
   fixSearchPagination();
 
-  console.log("Dynaimc Fixes");
-
 }
 
 // Accessibility Patch: Static
@@ -134,8 +133,6 @@ function initStaticPatch() {
   fixSearchForm();
   fixSitemap();
   fixSocialShare();
-
-  console.log("Static Fixes");
 
 }
 
