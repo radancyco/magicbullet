@@ -124,6 +124,7 @@ function initDynamicPatch() {
 
 function initStaticPatch() {
 
+  fixAdvancedSearchForm();
   fixCookieManagement();
   fixJobDescription();
   fixJobList();
@@ -131,6 +132,23 @@ function initStaticPatch() {
   fixSearchForm();
   fixSitemap();
   fixSocialShare();
+
+}
+
+// Accessibility Patch: Advanced Search Form 
+
+function fixAdvancedSearchForm() {
+
+  var searchForm = document.querySelectorAll(".advanced-search-form");
+
+  searchForm.forEach(function(form, i){
+
+    var formID = (i + 1); // Not used (yet).
+    var searchFormFields = form.querySelector(".advanced-search-form-fields");
+
+    // Fix: Remove aria-expanded from .advanced-search-form-fields. 
+
+    searchFormFields.removeAttribute("aria-expanded");
 
 }
 
