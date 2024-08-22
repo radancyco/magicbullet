@@ -47,7 +47,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   // Note: Instead of having an observer to watch _everything_ in main (#content), consider setting up multiple observers per component.
   // This might be better and less prone to creating interference on site. Similar to MindReaders seperate observer.
 
-  var targetNode = document.getElementById("content");
+  var targetNode = document.getElementById("page");
 
   // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
   
@@ -77,7 +77,6 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   
   a11yObserver.observe(targetNode, config);
 
-  initStaticPatch();
   initStaticPatch();
 
   // MindReader Observers 
