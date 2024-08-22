@@ -150,6 +150,8 @@ function fixAdvancedSearchForm() {
 
     searchFormFields.removeAttribute("aria-expanded");
 
+  });
+
 }
 
 // Accessibility Patch: Alt Attribute (Utility)
