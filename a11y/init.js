@@ -147,7 +147,7 @@ function fixAdvancedSearchForm() {
     var formID = (i + 1); // Not used (yet).
     var searchFormFields = form.querySelector(".advanced-search-form-fields");
 
-    // Fix: Remove aria-expanded from .advanced-search-form-fields. 
+    // Fix: Remove aria-expanded from .advanced-search-form-fields.
 
     searchFormFields.removeAttribute("aria-expanded");
 
@@ -218,6 +218,7 @@ function fixAppliedFilter() {
 function fixCookieManagement() {
 
   // Fix: Remove aria-describedby="cookieDescriptionIdAttr" from each input element.
+  // Note: To fix, have product add @ to input aria-describedby. See https://app.screencast.com/9dzk8ozq864Pc (Thanks Paul!)
 
   var cookieDescriptionIdAttr = document.querySelectorAll("input[aria-describedby='cookieDescriptionIdAttr']");
 
@@ -466,11 +467,6 @@ function fixDataForm() {
         iframe.removeAttribute("frameborder");
 
       });
-
-      // Moving badge to end of form.
-      // Note: Badge appears to refresh and flash briefly on submit. Likely due to Mutation Observer reinitiating patch.
-
-      form.appendChild(captchaBadge);
 
     }
 
