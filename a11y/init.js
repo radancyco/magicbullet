@@ -117,6 +117,8 @@ function initDynamicPatch() {
   fixSearchResults();
   fixSearchPagination();
 
+  console.log("Dynaimc Fixes");
+
 }
 
 // Accessibility Patch: Static
@@ -132,6 +134,8 @@ function initStaticPatch() {
   fixSearchForm();
   fixSitemap();
   fixSocialShare();
+
+  console.log("Static Fixes");
 
 }
 
