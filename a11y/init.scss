@@ -65,8 +65,17 @@ z-index: 2147483647 !important;
 
 .mindreader-results {
 
-    .active {
-    background-color: #ccc;
+    // Fix: Always set each autocomplete link to block, so that we can...
+
+    a {
+    display: block;
+
+        // ... highlight the background, which is not always done. 
+
+        &.active {
+        background-color: #eee;
+        }
+
     }
 
 }
