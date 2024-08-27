@@ -64,11 +64,13 @@ z-index: 2147483647 !important;
 // Mindreader 
 
 .mindreader-results {
+padding: 0;
 
     // Fix: Always set each autocomplete link to block, so that we can...
 
     a {
     display: block;
+    padding: .5em 1em;
 
         // ... highlight the background, which is not always done. 
 
