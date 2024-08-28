@@ -160,12 +160,16 @@ function fixAdvancedSearchForm() {
 function fixAltAttribute() {
 
   // Fix: Look for images on page that do not contain an alt attribute and add one dynamically.
+  // Fix: Alt text with spaces in them are not ideal and even get picked up by certain linters as an issue. 
 
-  var missingAltAttribute = document.querySelectorAll("img:not([alt])");
+  var allImages = document.querySelectorAll("img");
 
-  missingAltAttribute.forEach(function(img){
+  allImages.forEach(function(img){
 
-    img.setAttribute("alt", "");
+    if (!img.hasAttribute("alt") || img.getAttribute("alt").trim() === "") {
+
+      img.setAttribute("alt", "");
+    }
 
   });
 
