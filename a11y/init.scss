@@ -125,30 +125,11 @@ padding: 0;
 
 }
 
-// Captcha Badge
+// removing frameborder
 
-@keyframes revealBadge {
-
-    from {
-    opacity: 0;
-    visibility: hidden;
-    }
-
-    to {
-    opacity: 1;
-    visibility: visible;
-    }
-
-}
 
 .grecaptcha-badge {
-animation-delay: 500ms;
-animation-duration: 1s;
-animation-fill-mode: forwards;
-animation-name: revealBadge;
-opacity: 0;
-visibility: hidden;
-    
+
     iframe {
     border: 0;
     }
