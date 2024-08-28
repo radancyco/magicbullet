@@ -472,11 +472,6 @@ function fixDataForm() {
 
       });
 
-      // Moving badge to end of form.
-      // Note: Badge appears to refresh and flash briefly on submit. Likely due to Mutation Observer reinitiating patch.
-
-      form.appendChild(captchaBadge);
-
     }
 
     // Fix: The "Sign Up" button needs to be more explicit to AT.
