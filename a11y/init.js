@@ -147,9 +147,13 @@ function fixAdvancedSearchForm() {
     var formID = (i + 1); // Not used (yet).
     var searchFormFields = form.querySelector(".advanced-search-form-fields");
 
-    // Fix: Remove aria-expanded from .advanced-search-form-fields.
+    if(searchFormFields) {
 
-    searchFormFields.removeAttribute("aria-expanded");
+      // Fix: Remove aria-expanded from .advanced-search-form-fields.
+
+      searchFormFields.removeAttribute("aria-expanded");
+
+    }
 
   });
 
@@ -953,13 +957,17 @@ function fixSearchForm() {
 
     form.setAttribute("role", "search");
 
-    // Fix: Our primary search form should provide a better group description for the fields at hand. This can be achieved by adding a div with a class of "job-search-legend" (a heading should not be used) and the following script will take care of adding any needed associations by either adding aria-describedby or aria-label, with appropriate IDs.
+    if(searchFormFields) {
+
+      // Fix: Our primary search form should provide a better group description for the fields at hand. This can be achieved by adding a div with a class of "job-search-legend" (a heading should not be used) and the following script will take care of adding any needed associations by either adding aria-describedby or aria-label, with appropriate IDs.
     
-    searchFormFields.setAttribute("role", "group");
+      searchFormFields.setAttribute("role", "group");
 
-    // Fix: Remove aria-expanded from .search-form-fields. 
+      // Fix: Remove aria-expanded from .search-form-fields. 
 
-    searchFormFields.removeAttribute("aria-expanded");
+      searchFormFields.removeAttribute("aria-expanded");
+
+    }
 
     if(searchFormLegend) {
 
