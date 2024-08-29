@@ -254,7 +254,6 @@ function fixDataForm() {
     var autoCompleteEmailAddress = form.querySelectorAll("input[name='EmailAddress']");
     var addJobAlertButtons = form.querySelectorAll(".keyword-add");
     var keywordSelected = form.querySelectorAll(".keyword-selected");
-    var getKeywordRegion = form.querySelector(keywordSelectedRegionClass);
     var fileUploadButtons = form.querySelectorAll(".form-field input[name='Resume']");
     var emailConfirmation = form.querySelectorAll(".form-field.confirm-email");
     var captchaBadge = form.querySelector(".grecaptcha-badge");
@@ -405,6 +404,8 @@ function fixDataForm() {
       keywordSelectedRegion.setAttribute("aria-label", keywordSelectedRegionLabel);
 
       // See if region we wish to append already exists.
+
+      var getKeywordRegion = form.querySelector(keywordSelectedRegionClass);
 
       if(getKeywordRegion === null) {
 
