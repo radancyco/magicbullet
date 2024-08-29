@@ -65,8 +65,6 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
     
     a11yObserver.timeout = setTimeout(function() {
   
-      console.log("%c MagicBullet: Accessibility Patch v2.0 in use. ", "background: #6e00ee; color: #fff");
-  
       initDynamicPatch();
   
       a11yObserver.observe(targetNode, config); 
@@ -105,6 +103,8 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 // For instance, a script might add a new node to the DOM or refresh content on the page. When this happens, each fix will be reapplied to DOM.
   
 function initDynamicPatch() {
+
+  console.log("%c MagicBullet: Accessibility Patch v2.0 in use. ", "background: #6e00ee; color: #fff");
 
   fixAltAttribute();
   fixAppliedFilter();
