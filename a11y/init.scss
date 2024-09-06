@@ -168,6 +168,16 @@ margin: 0 auto 1em;
 
     }
 
+    // legends do not require an asterick
+
+    legend {
+
+        &::after {
+        display: none;
+        }
+
+    }
+
 
 }
 
