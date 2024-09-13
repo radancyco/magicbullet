@@ -213,7 +213,7 @@ display: none;
 
 // The comboxbox on the Job Map page is severaly broken for accessibility. An easier way to address this issue is to always have the <select> present. 
 
-#sel-city {
+#sel-city, label[for="sel-city"] {
 display: block !important;
 
     option:first-child {
@@ -222,6 +222,6 @@ display: block !important;
 
 }
 
-.combobox-container {
+label[for="sel-cityundefined"], .combobox-container {
 display: none !important;
 }
