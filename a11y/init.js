@@ -664,7 +664,7 @@ function fixMindReaderInput() {
     input.setAttribute("role", "combobox");
     input.setAttribute("aria-controls", input.getAttribute("id") + "-mindreader");
 
-    input.addEventListener("change", function() {
+    input.addEventListener("keyup", function() {
 
       // Fix: When combobox is opened, the input needs to indicate it is opened and remove last active descendent.
 
