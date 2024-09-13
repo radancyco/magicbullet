@@ -203,3 +203,9 @@ padding: 0;
     }
 
 }
+
+// The typeahead text sometimes interferes with the text being typed, making things illegible. Removing for now as I do not it is absolutely necessary to include. The dropdown should be sufficient. 
+
+.display-typeahead {
+display: none;
+}
