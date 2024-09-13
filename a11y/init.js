@@ -679,7 +679,7 @@ function fixMindReaderInput() {
 
       }
 
-      // Fix: When list item is accessed in combobox, it needs to exibit certain behavios.
+      // Fix: When list item is accessed in combobox, it needs to exibit certain behaviors.
     
       function checkActiveClass() {
 
