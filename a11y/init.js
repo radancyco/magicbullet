@@ -736,7 +736,7 @@ function fixMindReaderInput() {
 
     // Add event listener for when focus leaves the input field (focusout) using traditional function
     input.addEventListener('focusout', function() {
-      input.classList.remove("mindreader-results-open");  // Remove the class when clicking outside
+
       updateInput();  // Update aria-expanded to false
   });
 
