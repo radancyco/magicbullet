@@ -666,12 +666,9 @@ function fixMindReaderInput() {
 
 
 
-    
-  
-
     function updateInput() {
       if (input.classList.contains("mindreader-results-open")) {
-          inputField.setAttribute("aria-expanded", "true");
+          input.setAttribute("aria-expanded", "true");
       } else {
           input.setAttribute("aria-expanded", "false");
           input.removeAttribute("aria-activedescendant");
@@ -679,11 +676,29 @@ function fixMindReaderInput() {
   }
 
 
-    input.addEventListener("input", function() {
 
-      // Fix: When combobox is opened, the input needs to indicate it is opened and remove last active descendent.
+// Use MutationObserver to detect class changes
+const inputObserver = new MutationObserver(function(mutationsList) {
+    mutationsList.forEach(function(mutation) {
+        if (mutation.attributeName === 'class') {
+          updateInput();  // Call the function when class changes
+        }
+    });
+});
 
-     updateInput();
+// Start observing the input field for attribute changes (e.g., class changes)
+inputObserver.observe(input, { attributes: true });
+
+
+
+
+    
+  
+
+
+
+
+    input.addEventListener("change", function() {
 
       // Fix: When list item is accessed in combobox, it needs to exibit certain behaviors.
     
