@@ -664,20 +664,26 @@ function fixMindReaderInput() {
     input.setAttribute("role", "combobox");
     input.setAttribute("aria-controls", input.getAttribute("id") + "-mindreader");
 
+
+
+    
+  
+
+    function updateInput() {
+      if (input.classList.contains("mindreader-results-open")) {
+          inputField.setAttribute("aria-expanded", "true");
+      } else {
+          inputField.setAttribute("aria-expanded", "false");
+          input.removeAttribute("aria-activedescendant");
+      }
+  }
+
+
     input.addEventListener("input", function() {
 
       // Fix: When combobox is opened, the input needs to indicate it is opened and remove last active descendent.
 
-      if (input.classList.contains("mindreader-results-open")) {
-
-        input.setAttribute("aria-expanded", "true");
-
-      } else { 
-
-        input.setAttribute("aria-expanded", "false");
-        input.removeAttribute("aria-activedescendant");
-
-      }
+     updateInput();
 
       // Fix: When list item is accessed in combobox, it needs to exibit certain behaviors.
     
@@ -727,6 +733,12 @@ function fixMindReaderInput() {
       document.addEventListener("keyup", checkActiveClass);
   
     });
+
+    // Add event listener for when focus leaves the input field (focusout) using traditional function
+    input.addEventListener('focusout', function() {
+      input.classList.remove("mindreader-results-open");  // Remove the class when clicking outside
+      updateInput();  // Update aria-expanded to false
+  });
 
 
   });
