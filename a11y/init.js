@@ -743,8 +743,7 @@ function fixMindReaderInput() {
 
     // Listen for both keydown and keyup events
     
-    document.addEventListener("keydown", checkActiveClass);
-    
+    document.addEventListener("keydown", checkActiveClass); 
     document.addEventListener("keyup", checkActiveClass);
 
   });

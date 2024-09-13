@@ -215,6 +215,11 @@ display: none;
 
 #sel-city {
 display: block !important;
+
+    option:first-child {
+    display: none;
+    }
+
 }
 
 .combobox-container {
