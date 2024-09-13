@@ -764,8 +764,10 @@ function fixMindReaderList() {
     // Fix: Add ARIA attributes to each lists input element. 
 
     var listCount = e + 1;
+    var listID = list.getAttribute("id");
 
     list.setAttribute("role", "listbox");
+    list.setAttribute("aria-labelledby", listID.replace("-mindreader", "-label"));
     
     // list.setAttribute("id", "combobox-" + listCount);
 
