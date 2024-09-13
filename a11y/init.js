@@ -737,7 +737,6 @@ function fixMindReaderInput() {
         if (mutation.attributeName === "class") {
 
           checkInput();
-          checkActiveClass();
 
         }
 
@@ -751,9 +750,14 @@ function fixMindReaderInput() {
 
     input.addEventListener('focusout', function() {
 
-      updateInput();  // Update aria-expanded to false
+      checkInput();  // Update aria-expanded to false
     
     });
+
+    // Listen for both keydown and keyup events
+  
+    document.addEventListener("keydown", checkActiveClass);
+    document.addEventListener("keyup", checkActiveClass);
 
   });
 
