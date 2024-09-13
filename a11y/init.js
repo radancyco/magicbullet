@@ -665,96 +665,95 @@ function fixMindReaderInput() {
     input.setAttribute("aria-controls", input.getAttribute("id") + "-mindreader");
 
 
+    // Fix: Update input as needed based on class present.
 
-    function updateInput() {
+    function checkInput() {
+
       if (input.classList.contains("mindreader-results-open")) {
-          input.setAttribute("aria-expanded", "true");
+      
+        input.setAttribute("aria-expanded", "true");
+      
       } else {
-          input.setAttribute("aria-expanded", "false");
+      
+        input.setAttribute("aria-expanded", "false");
+
           input.removeAttribute("aria-activedescendant");
-      }
-  }
-
-
-
-// Use MutationObserver to detect class changes
-const inputObserver = new MutationObserver(function(mutationsList) {
-    mutationsList.forEach(function(mutation) {
-        if (mutation.attributeName === 'class') {
-          updateInput();  // Call the function when class changes
+      
         }
-    });
-});
-
-// Start observing the input field for attribute changes (e.g., class changes)
-inputObserver.observe(input, { attributes: true });
-
-
-
-
-    
   
+    }
 
+    function checkActiveClass() {
 
+      // Get ID of associated comboxbox list.
 
+      var mindReaderID = input.getAttribute("id") + "-mindreader";
 
-    input.addEventListener("change", function() {
+      var mindReader = document.getElementById(mindReaderID);
 
-      // Fix: When list item is accessed in combobox, it needs to exibit certain behaviors.
-    
-      function checkActiveClass() {
-
-        // Get ID of associated comboxbox list.
-
-        var mindReaderID = input.getAttribute("id") + "-mindreader";
-
-        var mindReader = document.getElementById(mindReaderID);
-
-        // Get all items in combobox list.
-    
-        var items = mindReader.querySelectorAll("a");
-
-        // On keydown or keyup check to see which is active and send that information to combobox input element.
-
-        items.forEach(function(item) {
-
-          if (item.classList.contains("active")) {
-
-            // Get li ID.
-
-            var listID = item.parentElement.getAttribute("id");
-
-            // Get ID of staus message div.
-
-            var mindReaderStatus = document.getElementById(input.getAttribute("id") + "-mindreader-status");
-
-            // The screen reader is announcing selected items twice due to selection being passed to status message, so let's set it to nothing when slected.
-
-            mindReaderStatus.textContent = "";
-
-            // Pass selected ID to aria-activedescendent.
-
-            input.setAttribute("aria-activedescendant", listID);
-
-          } 
-
-        });
-
-      }
-    
-      // Listen for both keydown and keyup events
-    
-      document.addEventListener("keydown", checkActiveClass);
-      document.addEventListener("keyup", checkActiveClass);
+      // Get all items in combobox list.
   
+      var items = mindReader.querySelectorAll("a");
+
+      // On keydown or keyup check to see which is active and send that information to combobox input element.
+
+      items.forEach(function(item) {
+
+        if (item.classList.contains("active")) {
+
+          // Get li ID.
+
+          var listID = item.parentElement.getAttribute("id");
+
+          // Get ID of staus message div.
+
+          var mindReaderStatus = document.getElementById(input.getAttribute("id") + "-mindreader-status");
+
+          // The screen reader is announcing selected items twice due to selection being passed to status message, so let's set it to nothing when slected.
+
+          mindReaderStatus.textContent = "";
+
+          // Pass selected ID to aria-activedescendent.
+
+          input.setAttribute("aria-activedescendant", listID);
+
+        } 
+
+      });
+
+    }
+
+    // Fix: When list item is accessed in combobox, it needs to exibit certain behaviors.
+    // Fix: Due to other scripts toggling the class, mindreader-results-open, we are ruuning into a timing issue. 
+    // So instead of using an eventListner, let's use a MutationObserver instead. 
+    // Note: This solution may be good to use elswhere. 
+
+    const inputObserver = new MutationObserver(function(mutationsList) {
+
+      mutationsList.forEach(function(mutation) {
+
+        // Watch changes to class attribute.
+
+        if (mutation.attributeName === "class") {
+
+          checkInput();
+          checkActiveClass();
+
+        }
+
+      });
+
     });
+
+    inputObserver.observe(input, { attributes: true });
 
     // Add event listener for when focus leaves the input field (focusout) using traditional function
+
     input.addEventListener('focusout', function() {
 
       updateInput();  // Update aria-expanded to false
-  });
-
+    
+    });
 
   });
 
