@@ -673,7 +673,7 @@ function fixMindReaderInput() {
       if (input.classList.contains("mindreader-results-open")) {
           inputField.setAttribute("aria-expanded", "true");
       } else {
-          inputField.setAttribute("aria-expanded", "false");
+          input.setAttribute("aria-expanded", "false");
           input.removeAttribute("aria-activedescendant");
       }
   }
