@@ -209,3 +209,14 @@ padding: 0;
 .display-typeahead {
 display: none;
 }
+
+
+// The comboxbox on the Job Map page is severaly broken for accessibility. An easier way to address this issue is to always have the <select> present. 
+
+#sel-city {
+display: block !important;
+}
+
+.combobox-container {
+display: none !important;
+}
