@@ -671,6 +671,10 @@ function fixMindReaderInput() {
     input.setAttribute("role", "combobox");
     input.setAttribute("aria-controls", mindReaderID);
 
+    // Fix: Set Unique ID on label
+
+    input.previousElementSibling.setAttribute("id", inputId + "-label");
+
     // Fix: Update input as needed based on class presence
     
     function checkInput() {
