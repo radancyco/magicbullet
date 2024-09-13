@@ -755,30 +755,36 @@ function fixMindReaderInput() {
 
 function fixMindReaderList() {
 
-  // Fix: Add role of listbox to each UL 
+  // Fix: Add role of listbox to each UL
 
-  var mindReader = document.querySelectorAll(".mindreader-results, .typeahead");
+  var mindReaderLists = document.querySelectorAll(".mindreader-results, .typeahead");
 
-  mindReader.forEach(function(list, e) {
+  mindReaderLists.forEach(function(list, index) {
 
-    // Fix: Add ARIA attributes to each lists input element. 
+    // Precompute list attributes
 
-    var listCount = e + 1;
     var listID = list.getAttribute("id");
+    var ariaLabelledBy = listID.replace("-mindreader", "-label");
+
+    // Add ARIA attributes to each list
 
     list.setAttribute("role", "listbox");
-    list.setAttribute("aria-labelledby", listID.replace("-mindreader", "-label"));
-    
-    // list.setAttribute("id", "combobox-" + listCount);
+    list.setAttribute("aria-labelledby", ariaLabelledBy);
 
-    var option = list.querySelectorAll("li");
+    // Process each list item
 
-      option.forEach(function(item, i) {
+    var items = list.querySelectorAll("li");
 
-        var itemCount = i + 1;
+    items.forEach(function(item, itemIndex) {
 
-        item.setAttribute("role", "option");
-        item.setAttribute("id", "combobox-item-" + listCount + "-" + itemCount);
+      // Generate unique IDs for options
+
+      var optionID = "combobox-item-" + (index + 1) + "-" + (itemIndex + 1);
+
+      // Add role and ID to each item
+
+      item.setAttribute("role", "option");
+      item.setAttribute("id", optionID);
 
     });
 
