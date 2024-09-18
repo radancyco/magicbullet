@@ -658,9 +658,14 @@ function fixMindReaderInput() {
     // Precompute IDs and frequently used elements
     
     var inputId = input.getAttribute("id");
+    var label = document.querySelector("label[for=" + inputId + "]");
     var mindReaderID = inputId + "-mindreader";
     var mindReader = document.getElementById(mindReaderID);
     var mindReaderStatus = document.getElementById(inputId + "-mindreader-status");
+
+    // Fix: Set unique ID on label (consider moving this fixSearchForm as it might be useful there.)
+
+    label.setAttribute("id", inputId + "-label");
 
     // Fix: Prep Comboboxes with proper ARIA
     
@@ -670,10 +675,6 @@ function fixMindReaderInput() {
     input.setAttribute("autocomplete", "off");
     input.setAttribute("role", "combobox");
     input.setAttribute("aria-controls", mindReaderID);
-
-    // Fix: Set Unique ID on label
-
-    input.previousElementSibling.setAttribute("id", inputId + "-label");
 
     // Fix: Update input as needed based on class presence
     
