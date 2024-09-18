@@ -658,7 +658,7 @@ function fixMindReaderInput() {
     // Precompute IDs and frequently used elements
     
     var inputId = input.getAttribute("id");
-    var label = document.querySelector("label[for=" + inputId + "]");
+    var label = document.querySelector('label[for="${inputId}"]');
     var mindReaderID = inputId + "-mindreader";
     var mindReader = document.getElementById(mindReaderID);
     var mindReaderStatus = document.getElementById(inputId + "-mindreader-status");
