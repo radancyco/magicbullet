@@ -680,7 +680,11 @@ function fixMindReaderInput() {
 
     // Fix: Set unique ID on label
 
-    label.setAttribute("id", inputId + "-label");
+    if(label) {
+
+      label.setAttribute("id", inputId + "-label");
+
+    }
 
     // Fix: Prep Comboboxes with proper ARIA
     
