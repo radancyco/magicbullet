@@ -113,6 +113,7 @@ function initDynamicPatch() {
   fixIframeElement();
   fixInputElements();
   fixMindReaderInput();
+  fixNewWindows()
   fixSaveJobButton();
   fixSearchFilters();
   fixSearchResults();
@@ -887,6 +888,22 @@ function fixJobLocation() {
 
   // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames.
   // TODO: Include Wegmans functionality to skip over Google Map.
+
+}
+
+// Accessibility Patch: Remove New Windows
+
+function fixNewWindows() {
+
+  // Fix: Not all links should open in a new window, nor are they required too for SEO purposes (the usual justification given). This is an effort to alleviate this issue and remove target="_blank" where it is not required. 
+
+  var targetLinks = document.querySelectorAll("footer a:not([href$='.pdf'])");
+
+  targetLinks.forEach(function(link){
+
+    link.removeAttribute("target");
+
+  });
 
 }
 
