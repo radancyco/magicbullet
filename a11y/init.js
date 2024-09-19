@@ -303,6 +303,20 @@ function fixDataForm() {
 
     requiredLabels.forEach(function(label) {
 
+      // Fix: Remove textNodes that are inline astericks, instead of using a pseudo-element. 
+
+      var labelTextNode = label.childNodes[0]; 
+
+      if (labelTextNode && labelTextNode.nodeType === Node.TEXT_NODE) {
+
+        var cleanedText = labelTextNode.nodeValue.trim().replace("*", "");
+
+        // Update the text node without the asterisk
+
+        labelTextNode.nodeValue = cleanedText;
+
+      }
+
       var span = document.createElement("span");
       span.classList.add(iconClassName);
       span.setAttribute("aria-hidden", "true");
@@ -664,7 +678,7 @@ function fixMindReaderInput() {
     var mindReader = document.getElementById(mindReaderID);
     var mindReaderStatus = document.getElementById(inputId + "-mindreader-status");
 
-    // Fix: Set unique ID on label (consider moving this fixSearchForm as it might be useful there.)
+    // Fix: Set unique ID on label
 
     label.setAttribute("id", inputId + "-label");
 
