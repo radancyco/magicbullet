@@ -714,10 +714,11 @@ function fixMindReaderInput() {
     // Function to check the active class in combobox list
     
     function checkActiveClass() {
-
-      console.log(mindReader);
     
-      var activeItem = mindReader.querySelector("a.active");
+      var activeItem = mindReader.querySelector("a.active"); 
+      
+      // BUG: See https://kpmg.runmytests.eu, Dropdown works initially, but on second try, does not apper to work correctly. Throwing folling, can't find mindReader ID. 
+      // Uncaught TypeError: Cannot read properties of null (reading 'querySelector') at HTMLDocument.checkActiveClass (init.js:720:35)
     
       if (activeItem) {
     
