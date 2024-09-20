@@ -717,7 +717,7 @@ function fixMindReaderInput() {
     
       var activeItem = mindReader.querySelector("a.active");
     
-      if (mindReader) {
+      if (activeItem) {
     
         // Get li ID
     
