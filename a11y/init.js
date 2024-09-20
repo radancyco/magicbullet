@@ -714,6 +714,8 @@ function fixMindReaderInput() {
     // Function to check the active class in combobox list
     
     function checkActiveClass() {
+
+      console.log(mindReader);
     
       var activeItem = mindReader.querySelector("a.active");
     
