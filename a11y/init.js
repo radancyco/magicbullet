@@ -178,6 +178,16 @@ function fixAltAttribute() {
 
   });
 
+  // Fix: While we are here, we may as well remove the alt attribute mistakenly placed on the source element of the image module. 
+
+  var allSource = document.querySelectorAll("source");
+
+  allSource.forEach(function(source){
+
+    source.removeAttribute("alt");
+ 
+  });
+
 }
 
 // Accessibility Patch: Applied Filter
