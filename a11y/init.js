@@ -917,6 +917,27 @@ function fixJobLocation() {
 
   });
 
+  // Fix: Google Form Related Fixes on Job Location Pages
+
+  var mapFormContainer = document.querySelectorAll(".job-map-directions");
+  var mapInputs = mapFormContainer.querySelectorAll("input, select");
+
+  // Clean-up: Remove aria-required from various elements. This attribute is sometimes flagged in automated testing and just the boolean required attribute is now recommended.
+    
+  mapInputs.forEach(function(element) {
+    
+    element.removeAttribute("aria-required");
+  
+  });
+  
+  // Clean-up: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
+  
+  mapInputs.forEach(function(element) {
+  
+    element.setAttribute("required", "");
+  
+  });
+
   // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames.
   // TODO: Include Wegmans functionality to skip over Google Map.
 
