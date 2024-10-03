@@ -919,7 +919,7 @@ function fixJobLocation() {
 
   // Fix: Google Form Related Fixes on Job Location Pages
 
-  var mapFormInputs = document.querySelectorAll(".job-map-directions input, .job-map-directions select");
+  var mapFormInputs = document.querySelectorAll(".job-map-directions input");
 
   // Clean-up: Remove aria-required from various elements. This attribute is sometimes flagged in automated testing and just the boolean required attribute is now recommended.
   // Clean-up: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
