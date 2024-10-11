@@ -131,6 +131,7 @@ function initStaticPatch() {
   fixJobDescription();
   fixJobList();
   fixJobLocation(); 
+  fixJobMap();
   fixSearchForm();
   fixSitemap();
   fixSocialShare();
@@ -933,6 +934,19 @@ function fixJobLocation() {
 
   // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames.
   // TODO: Include Wegmans functionality to skip over Google Map.
+
+}
+
+function fixJobMap() {
+
+  var jobMapInputs = document.querySelector("#sel-state, #tbx-zip")
+  var jobMapCityWrapper = document.querySelector(".wrapper-sel-city");
+
+  if (jobMapInputs && jobMapCityWrapper) {
+
+    jobMapCityWrapper.setAttribute("hidden", "")l
+
+  }
 
 }
 
