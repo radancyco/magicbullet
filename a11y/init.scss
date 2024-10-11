@@ -215,6 +215,11 @@ display: none;
 
 #wrapper-sel-city {
 height: auto;
+
+    &[hidden] {
+    display: none !important;
+    }
+
 }
 
 #sel-city, label[for="sel-city"] {

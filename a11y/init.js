@@ -949,7 +949,6 @@ function fixJobMap() {
     // Since the select is blank on page load, it should not be shown until action taken in either the state or zip dropdowns. 
 
     jobMapCityWrapper.setAttribute("hidden", "");
-    jobMapCityWrapper.removeAttribute("style");
 
     jobMapInputs.addEventListener("change", function() {
 
