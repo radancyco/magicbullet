@@ -937,6 +937,8 @@ function fixJobLocation() {
 
 }
 
+// Accessibility Patch: Job Map
+
 function fixJobMap() {
 
   var jobMapInputs = document.querySelector("#sel-state, #tbx-zip")
@@ -944,7 +946,13 @@ function fixJobMap() {
 
   if (jobMapInputs && jobMapCityWrapper) {
 
-    jobMapCityWrapper.setAttribute("hidden", "")l
+    jobMapCityWrapper.setAttribute("hidden", "");
+
+    jobMapInputs.addEventListener("change", function() {
+
+      jobMapCityWrapper.removeAttribute("hidden");
+
+    });
 
   }
 
