@@ -942,7 +942,7 @@ function fixJobLocation() {
 function fixJobMap() {
 
   var jobMapInputs = document.querySelector("#sel-state, #tbx-zip")
-  var jobMapCityWrapper = document.querySelector(".wrapper-sel-city");
+  var jobMapCityWrapper = document.querySelector("#wrapper-sel-city");
 
   if (jobMapInputs && jobMapCityWrapper) {
 
