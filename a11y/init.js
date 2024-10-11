@@ -681,6 +681,7 @@ function fixMindReaderInput() {
 
   comboBoxInput.forEach(function(input) {
 
+
     // Precompute IDs and frequently used elements
     
     var inputId = input.getAttribute("id");
@@ -688,6 +689,15 @@ function fixMindReaderInput() {
     var mindReaderID = inputId + "-mindreader";
     var mindReader = document.getElementById(mindReaderID);
     var mindReaderStatus = document.getElementById(inputId + "-mindreader-status");
+
+    // Set Autocomplete Description 
+
+    var autoCompleteMessage = document.createElement("span");
+    autoCompleteMessage.setAttribute("id", "autocomplete-message=" + inputId);
+    autoCompleteMessage.setAttribute("hidden", "");
+    autoCompleteMessage.textContent = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
+
+    input.appendChild(autoCompleteMessage);
 
     // Fix: Set unique ID on label
 
