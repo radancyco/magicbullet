@@ -721,6 +721,20 @@ function fixMindReaderInput() {
     input.setAttribute("role", "combobox");
     input.setAttribute("aria-controls", mindReaderID);
 
+    var currentDescribedBy = input.getAttribute("aria-describedby");
+
+    var newDescriptionId = "autocomplete-message-" + inputId;
+
+    if (currentDescribedBy) {
+
+      input.setAttribute("aria-describedby", currentDescribedBy + " " + newDescriptionId);
+    
+    } else {
+      
+      input.setAttribute("aria-describedby", newDescriptionId);
+    
+    }
+
     // Fix: Update input as needed based on class presence
     
     function checkInput() {
