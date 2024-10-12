@@ -697,7 +697,9 @@ function fixMindReaderInput() {
     autoCompleteMessage.setAttribute("hidden", "");
     autoCompleteMessage.textContent = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
 
-    if (autoCompleteMessage) {
+    var autoCompleteMessageID = document.getElementById("autocomplete-message-" + inputId)
+    
+    if (autoCompleteMessageID) {
 
       input.parentNode.appendChild(autoCompleteMessage);
 
