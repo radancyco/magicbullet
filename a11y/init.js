@@ -692,13 +692,14 @@ function fixMindReaderInput() {
 
     // Set Autocomplete Description 
 
-    var autoCompleteMessage = document.createElement("span");
-    autoCompleteMessage.setAttribute("id", "autocomplete-message-" + inputId);
-    autoCompleteMessage.setAttribute("hidden", "");
-    autoCompleteMessage.textContent = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
-    
-    if (input) {
+    var autoCompleteID = document.getElementById("autocomplete-message-" + inputId);
 
+    if (!autoCompleteID) {
+
+      var autoCompleteMessage = document.createElement("span");
+      autoCompleteMessage.setAttribute("id", "autocomplete-message-" + inputId);
+      autoCompleteMessage.setAttribute("hidden", "");
+      autoCompleteMessage.textContent = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
       input.parentNode.appendChild(autoCompleteMessage);
 
     }
