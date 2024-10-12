@@ -727,7 +727,11 @@ function fixMindReaderInput() {
 
     if (currentDescribedBy) {
 
-      input.setAttribute("aria-describedby", currentDescribedBy + " " + newDescriptionId);
+      if (!currentDescribedBy.includes(newDescriptionId)) {
+
+        input.setAttribute("aria-describedby", currentDescribedBy + " " + newDescriptionId);
+
+      }
     
     } else {
       
