@@ -693,11 +693,15 @@ function fixMindReaderInput() {
     // Set Autocomplete Description 
 
     var autoCompleteMessage = document.createElement("span");
-    autoCompleteMessage.setAttribute("id", "autocomplete-message=" + inputId);
+    autoCompleteMessage.setAttribute("id", "autocomplete-message-" + inputId);
     autoCompleteMessage.setAttribute("hidden", "");
     autoCompleteMessage.textContent = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
 
-    input.appendChild(autoCompleteMessage);
+    if (autoCompleteMessage) {
+
+      input.parentNode.appendChild(autoCompleteMessage);
+
+    }
 
     // Fix: Set unique ID on label
 
