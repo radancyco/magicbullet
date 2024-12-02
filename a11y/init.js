@@ -662,17 +662,9 @@ function fixGlobalDisclosure() {
 
     button.addEventListener("click", function() {
 
-      if(this.getAttribute("aria-expanded") === "true") {
+      this.setAttribute("aria-expanded", isExpanded ? "false" : "true");
 
-        this.setAttribute("aria-expanded", "false");
-
-      } else {
-
-        this.setAttribute("aria-expanded", "true");
-
-      }
-
-      // Fix: Remove aria-expanded being added to adjacent, non-interactive element, by CS Core.
+      // Fix: Remove aria-expanded, aria-hidden being added to adjacent, non-interactive element, by CS Core.
 
       if (this.nextElementSibling) {
 
