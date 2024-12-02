@@ -637,17 +637,7 @@ function fixGlobalDisclosure() {
 
   expandableParentBtn.forEach(function(button) {
 
-    // Fix: See if element is already open, set aria-expanded state to true if it is.
 
-    if(button.classList.contains("expandable-child-open")) {
-
-      button.setAttribute("aria-expanded", "true");
-  
-    } else {
-
-      button.setAttribute("aria-expanded", "false");
-
-    }
 
     // Fix: Remove aria-expanded from adjacent, non-interactive element.
   
