@@ -109,7 +109,6 @@ function initDynamicPatch() {
   fixAltAttribute();
   fixAppliedFilter();
   fixDataForm();
-  fixGlobalDisclosure();
   fixIframeElement();
   fixInputElements();
   fixMindReaderInput();
@@ -128,6 +127,7 @@ function initStaticPatch() {
 
   fixAdvancedSearchForm();
   fixCookieManagement();
+  fixGlobalDisclosure();
   fixJobDescription();
   fixJobList();
   fixJobLocation(); 
@@ -665,8 +665,6 @@ function fixGlobalDisclosure() {
       var isExpanded = this.getAttribute("aria-expanded") === "true";
 
       this.setAttribute("aria-expanded", isExpanded ? "false" : "true");
-
-      console.log(isExpanded);
 
       // Fix: Remove aria-expanded, aria-hidden being added to adjacent, non-interactive element, by CS Core.
 
