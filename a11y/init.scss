@@ -92,33 +92,37 @@ padding: 0;
 
 // Data Forms
 
-.form-field {
+.data-form {
+
+    .form-field {
     
-    &.required {
+        &.required {
         
-        label {
+            label {
 
-            // A11YFORM001
+                // A11YFORM001
 
-            &::after {
-            display: none;
-            }
+                &::after {
+                display: none;
+                }
 
-            .ico-required-indicator {
-            display: inline-block;
-            margin-inline-start: 0.5em;
+                .ico-required-indicator {
+                display: inline-block;
+                margin-inline-start: 0.5em;
+                }
+
             }
 
         }
 
-    }
+        // We do not need a close button on the form message. Who cares if it opened. 
 
-    // We do not need a close button on the form message. Who cares if it opened. 
+        &.form-message {
 
-    &.form-message {
+            a {
+            // display: none;
+            }
 
-        a {
-        // display: none;
         }
 
     }
