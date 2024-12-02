@@ -268,6 +268,9 @@ function fixDataForm() {
     var autoCompleteFirstName = form.querySelectorAll("input[name='FirstName']");
     var autoCompleteLastName = form.querySelectorAll("input[name='LastName']");
     var autoCompleteEmailAddress = form.querySelectorAll("input[name='EmailAddress']");
+    var autoCompletePhoneNumber = form.querySelectorAll("input[name='MobilePhone']");
+    var autoCompleteZipCode = form.querySelectorAll("input[name='PostalCode']");
+    var autoCompleteStateProvince = form.querySelectorAll("input[name='Custom-92392']"); // Targeing custom filed; need better way to handle this, probably product side fix eventually.
     var addJobAlertButtons = form.querySelectorAll(".keyword-add");
     var keywordSelected = form.querySelectorAll(".keyword-selected");
     var fileUploadButtons = form.querySelectorAll(".form-field input[name='Resume']");
@@ -408,6 +411,30 @@ function fixDataForm() {
       input.setAttribute("type", "email");
       input.setAttribute("autocomplete", "email");
       
+    });
+
+    // Phone Number
+
+    autoCompletePhoneNumber.forEach(function(input) {
+      
+      input.setAttribute("autocomplete", "tel");
+      
+    });
+
+    // Zip Code
+
+    autoCompleteZipCode.forEach(function(input) {
+      
+        input.setAttribute("autocomplete", "postal-code");
+          
+    });
+
+    // State/Province
+
+    autoCompleteStateProvince.forEach(function(input) {
+      
+      input.setAttribute("autocomplete", "address-level1");
+            
     });
 
     // Fix: The "Add" button needs to be more explicit to AT so include "Add Job Alert"
