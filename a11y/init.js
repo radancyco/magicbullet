@@ -1250,6 +1250,16 @@ function fixSearchFilters() {
 
     });
 
+    // Fix: Always remove aria-hidden from section list
+
+    var searchList = searchFilters.querySelectorAll(".search-filter-list");
+
+    searchList.forEach(function(list){
+
+      list.removeAttribute("aria-hidden");
+
+    });
+
   }
 
 }
