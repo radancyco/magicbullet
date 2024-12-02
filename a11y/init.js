@@ -666,6 +666,8 @@ function fixGlobalDisclosure() {
 
       this.setAttribute("aria-expanded", isExpanded ? "false" : "true");
 
+      console.log(isExpanded);
+
       // Fix: Remove aria-expanded, aria-hidden being added to adjacent, non-interactive element, by CS Core.
 
       if (this.nextElementSibling) {
