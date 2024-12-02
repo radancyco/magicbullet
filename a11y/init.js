@@ -270,7 +270,7 @@ function fixDataForm() {
     var autoCompleteEmailAddress = form.querySelectorAll("input[name='EmailAddress']");
     var autoCompletePhoneNumber = form.querySelectorAll("input[name='MobilePhone']");
     var autoCompleteZipCode = form.querySelectorAll("input[name='PostalCode']");
-    var autoCompleteStateProvince = form.querySelectorAll("input[name='Custom-92392']"); // Targeing custom filed; need better way to handle this, probably product side fix eventually.
+    var autoCompleteStateProvince = form.querySelectorAll("select[name='Custom-92392']"); // Targeing custom filed; need better way to handle this, probably product side fix eventually.
     var addJobAlertButtons = form.querySelectorAll(".keyword-add");
     var keywordSelected = form.querySelectorAll(".keyword-selected");
     var fileUploadButtons = form.querySelectorAll(".form-field input[name='Resume']");
