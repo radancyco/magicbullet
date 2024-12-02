@@ -267,6 +267,8 @@ function fixDataForm() {
     var dataFormElement = form.querySelectorAll("input, select");
     var autoCompleteFirstName = form.querySelectorAll("input[name='FirstName']");
     var autoCompleteLastName = form.querySelectorAll("input[name='LastName']");
+    var autoCompleteAddress = form.querySelectorAll("input[name='StreetAddress']");
+    var autoCompleteCity = form.querySelectorAll("input[name='City']");
     var autoCompleteEmailAddress = form.querySelectorAll("input[name='EmailAddress']");
     var autoCompletePhoneNumber = form.querySelectorAll("input[name='MobilePhone']");
     var autoCompleteZipCode = form.querySelectorAll("input[name='PostalCode']");
@@ -434,6 +436,22 @@ function fixDataForm() {
     autoCompleteStateProvince.forEach(function(input) {
       
       input.setAttribute("autocomplete", "address-level1");
+            
+    });
+
+    // Street Address
+
+    autoCompleteAddress.forEach(function(input) {
+      
+      input.setAttribute("autocomplete", "street-address");
+                
+    });
+
+    // City
+
+    autoCompleteCity.forEach(function(input) {
+      
+      input.setAttribute("autocomplete", "address-level2");
             
     });
 
