@@ -595,8 +595,6 @@ function fixDataForm() {
 
     form.addEventListener("submit", function(event) {
 
-      alert("test");
-
       event.preventDefault();
 
       // Fix: The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
@@ -617,19 +615,13 @@ function fixDataForm() {
 
       // Fix: Now that we are including aria-invalid, we need to alter the values based on user input.
 
-      console.log("hello");
-
       formInputs.forEach(function(input) {
 
         if (input.classList.contains("input-validation-error")) {
 
-          console.log("true");
-
           input.setAttribute("aria-invalid", "true");
 
         } else {
-
-          console.log("false");
 
           input.setAttribute("aria-invalid", "false");
 
