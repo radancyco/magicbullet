@@ -76,7 +76,8 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   a11yObserver.observe(targetNode, config);
 
   initStaticPatch();
- // initDynamicPatch(); 
+  
+  // initDynamicPatch(); Causing issue with functions like fixGlobalDisclosure. The onclick event firing twice when button pressed. Need to look into further. 
 
   // MindReader Observers 
 
@@ -662,11 +663,9 @@ function fixGlobalDisclosure() {
 
     button.addEventListener("click", function() {
 
-      //var isExpanded = this.getAttribute("aria-expanded") === "true";
+      var isExpanded = this.getAttribute("aria-expanded") === "true";
 
-     // this.setAttribute("aria-expanded", isExpanded ? "false" : "true");
-
-     console.log(this);
+      this.setAttribute("aria-expanded", isExpanded ? "false" : "true");
 
       // Fix: Remove aria-expanded, aria-hidden being added to adjacent, non-interactive element, by CS Core.
 
