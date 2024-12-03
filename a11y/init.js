@@ -617,19 +617,19 @@ function fixDataForm() {
 
       formInputs.forEach(function(input) {
 
-        setTimeout(function() {
+        if (input.classList.contains("input-validation-error")) {
 
-          if (input.classList.contains("input-validation-error")) {
+          console.log("true");
 
-            input.setAttribute("aria-invalid", "true");
+          input.setAttribute("aria-invalid", "true");
 
-          } else {
+        } else {
 
-            input.setAttribute("aria-invalid", "false");
+          console.log("false");
 
-          }
+          input.setAttribute("aria-invalid", "false");
 
-        }, 100);
+        }
 
       });
 
