@@ -621,15 +621,15 @@ function fixDataForm() {
 
           if (input.classList.contains("input-validation-error")) {
 
-           // input.setAttribute("aria-invalid", "true");
+            input.setAttribute("aria-invalid", "true");
 
           } else {
 
-          //  input.setAttribute("aria-invalid", "false");
+            input.setAttribute("aria-invalid", "false");
 
           }
 
-        }, 500);
+        }, 1000);
 
       });
 
