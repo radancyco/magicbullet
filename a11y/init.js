@@ -625,7 +625,7 @@ function fixDataForm() {
 
           } else {
 
-            input.setAttribute("aria-invalid", "false");
+           // input.setAttribute("aria-invalid", "false");
 
           }
 
