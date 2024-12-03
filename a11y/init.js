@@ -595,6 +595,8 @@ function fixDataForm() {
 
     form.addEventListener("submit", function(event) {
 
+      console.log("hello");
+
       event.preventDefault();
 
       // Fix: The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
