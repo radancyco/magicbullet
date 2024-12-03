@@ -364,7 +364,15 @@ function fixDataForm() {
 
     requiredFields.forEach(function(input) {
 
-      input.setAttribute("aria-invalid", "false");
+      if (input.classList.contains("input-validation-error")) {
+
+        input.setAttribute("aria-invalid", "true");
+
+      } else {
+
+        input.setAttribute("aria-invalid", "false");
+
+      }
 
     });
 
@@ -376,19 +384,15 @@ function fixDataForm() {
 
       element.addEventListener("blur", function() {
 
-        setTimeout(function() {
-
           if (element.classList.contains("input-validation-error")) {
 
-            // element.setAttribute("aria-invalid", "true");
+            element.setAttribute("aria-invalid", "true");
 
           } else {
 
-            //  element.setAttribute("aria-invalid", "false");
+            element.setAttribute("aria-invalid", "false");
 
           }
-
-        }, 100);
 
       });
 
@@ -617,19 +621,15 @@ function fixDataForm() {
 
       formInputs.forEach(function(input) {
 
-        setTimeout(function() {
+        if (input.classList.contains("input-validation-error")) {
 
-          if (input.classList.contains("input-validation-error")) {
+          input.setAttribute("aria-invalid", "true");
 
-            input.setAttribute("aria-invalid", "true");
+        } else {
 
-          } else {
+          input.setAttribute("aria-invalid", "false");
 
-            input.setAttribute("aria-invalid", "false");
-
-          }
-
-        }, 1000);
+        }
 
       });
 
