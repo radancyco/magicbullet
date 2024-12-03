@@ -378,11 +378,11 @@ function fixDataForm() {
 
         if (element.classList.contains("input-validation-error")) {
 
-          element.setAttribute("aria-invalid", "true");
+         // element.setAttribute("aria-invalid", "true");
 
         } else {
 
-          element.setAttribute("aria-invalid", "false");
+        //  element.setAttribute("aria-invalid", "false");
 
         }
 
@@ -1136,7 +1136,7 @@ function fixSearchForm() {
 
           }
 
-      }, 200);
+      }, 100);
 
     }
 
