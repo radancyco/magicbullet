@@ -617,22 +617,6 @@ function fixDataForm() {
 
       }
 
-      // Fix: Now that we are including aria-invalid, we need to alter the values based on user input.
-
-      formInputs.forEach(function(input) {
-
-        if (input.classList.contains("input-validation-error")) {
-
-          input.setAttribute("aria-invalid", "true");
-
-        } else {
-
-          input.setAttribute("aria-invalid", "false");
-
-        }
-
-      });
-
     });
 
   });
