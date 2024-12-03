@@ -127,6 +127,7 @@ function initDynamicPatch() {
 
 function initStaticPatch() {
 
+  fixAltAttribute();
   fixAdvancedSearchForm();
   fixCookieManagement();
   fixJobDescription();
