@@ -615,6 +615,8 @@ function fixDataForm() {
 
       // Fix: Now that we are including aria-invalid, we need to alter the values based on user input.
 
+      console.log("hello");
+
       formInputs.forEach(function(input) {
 
         if (input.classList.contains("input-validation-error")) {
