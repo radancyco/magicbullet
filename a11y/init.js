@@ -1136,7 +1136,7 @@ function fixSearchForm() {
 
           }
 
-      }, 100);
+      }, 200);
 
     }
 
