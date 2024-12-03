@@ -595,7 +595,7 @@ function fixDataForm() {
 
     form.addEventListener("submit", function(event) {
 
-      console.log("hello");
+      alert("test");
 
       event.preventDefault();
 
