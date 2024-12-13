@@ -67,20 +67,8 @@ accordion: true
 {% capture contentblock %}
 
     <h2>Implementation</h2>
-
-    <h3>HTML</h3>
     
     {% highlight html %}<script id="radancy-magicbullet" data-a11y="true" data-alert="true" data-alert-covid src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
-
-    <h3>JavaScript</h3>
-  
-    {% highlight javascript %}var magicBullet = document.createElement("script");
-magicBullet.setAttribute("id", "radancy-magicbullet");
-magicBullet.setAttribute("data-gdpr", "true");
-magicBullet.setAttribute("data-gdpr-client-name", "Radancy");
-magicBullet.setAttribute("data-gdpr-policy-url", "https://radancy.com/privacy/");
-magicBullet.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/");
-document.body.appendChild(magicBullet);{% endhighlight %}
 
 {% endcapture %}
 
