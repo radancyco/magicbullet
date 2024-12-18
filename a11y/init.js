@@ -114,7 +114,7 @@ function initDynamicPatch() {
   fixIframeElement();
   fixInputElements();
   fixMindReaderInput();
-  fixNewWindows()
+  // fixNewWindows();
   fixSaveJobButton();
   fixSearchFilters();
   fixSearchResults();
