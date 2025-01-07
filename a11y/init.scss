@@ -17,12 +17,12 @@
 // Ensure that all placeholder text is contrast friendly.
 
 ::-moz-placeholder {
-color: #767676;
+color: #767676 !important;
 opacity: 1;
 }
     
 ::-webkit-input-placeholder {
-color: #767676;
+color: #767676 !important;
 }
 
 /* Hide Empty Elements */
@@ -111,6 +111,19 @@ padding: 0;
                 margin-inline-start: 0.5em;
                 }
 
+            }
+
+        }
+
+        // Confirm Email
+        
+
+        &.confirm-email {
+
+            // Make sure hidden attribute can never be overwritten by dev. 
+
+            &[hidden] {
+            display: none !important;
             }
 
         }
