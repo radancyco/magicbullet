@@ -843,9 +843,26 @@ function fixMindReaderInput() {
 
     // Listen for both keydown and keyup events
     
-    document.addEventListener("change", checkActiveClass); 
 
 
+
+    document.addEventListener("keydown", function (event) {
+      
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+
+        checkActiveClass(); // Call the function directly
+
+      }
+    });
+    
+    document.addEventListener("keyup", function (event) {
+
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+
+        checkActiveClass(); // Call the function directly
+      }
+
+    });
 
 
   });
