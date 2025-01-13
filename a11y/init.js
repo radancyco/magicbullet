@@ -9,8 +9,6 @@
 
 (function() {
 
-  "use strict";
-
   function loadLanguagePack(url, callback) {
 
     // Install Language Pack.
