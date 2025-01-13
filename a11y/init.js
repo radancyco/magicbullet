@@ -794,7 +794,7 @@ function fixMindReaderInput() {
     
     function checkActiveClass() {
 
-      console.log(mindReader);
+      console.log(mindReader.id);
     
       var activeItem = mindReader.querySelector("a.active"); 
 
