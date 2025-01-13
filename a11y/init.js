@@ -845,13 +845,13 @@ function fixMindReaderInput() {
 
     document.addEventListener("keydown", function() {
 
-      setTimeout(checkActiveClass, 500);
+      setTimeout(checkActiveClass, 300);
 
     });
-    
+
     document.addEventListener("keyup", function() {
 
-      setTimeout(checkActiveClass, 500);
+      setTimeout(checkActiveClass, 300);
 
     });
 
