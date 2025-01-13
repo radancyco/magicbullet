@@ -723,6 +723,8 @@ function fixMindReaderInput() {
     var mindReader = document.getElementById(mindReaderID);
     var mindReaderStatus = document.getElementById(inputId + "-mindreader-status");
 
+    console.log(inputId);
+
     // Set Autocomplete Description 
 
     var autoCompleteID = document.getElementById("autocomplete-message-" + inputId);
