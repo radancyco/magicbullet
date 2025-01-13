@@ -7,7 +7,7 @@
 
 */
 
-(function() {
+
 
   function loadLanguagePack(url, callback) {
 
@@ -1334,5 +1334,3 @@
   }
 
   initA11yPatch();
-
-})();
