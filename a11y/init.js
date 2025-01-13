@@ -723,8 +723,6 @@ function fixMindReaderInput() {
     var mindReader = document.getElementById(mindReaderID);
     var mindReaderStatus = document.getElementById(inputId + "-mindreader-status");
 
-    console.log(inputId);
-
     // Set Autocomplete Description 
 
     var autoCompleteID = document.getElementById("autocomplete-message-" + inputId);
@@ -793,12 +791,8 @@ function fixMindReaderInput() {
     // Function to check the active class in combobox list
     
     function checkActiveClass() {
-
-      console.log(mindReader.id);
     
       var activeItem = mindReader.querySelector("a.active"); 
-
-      
       
       // BUG: See https://kpmg.runmytests.eu, Dropdown works initially, but on second try, does not apper to work correctly. Throwing folling, can't find mindReader ID. 
       // Uncaught TypeError: Cannot read properties of null (reading 'querySelector') at HTMLDocument.checkActiveClass (init.js:720:35)
@@ -847,10 +841,19 @@ function fixMindReaderInput() {
     
     });
 
-    // Listen for both keydown and keyup events
+    // Listen for both keydown and keyup events (need to add a dely due to some weird performance issues)
+
+    document.addEventListener("keydown", function() {
+
+      setTimeout(checkActiveClass, 500);
+
+    });
     
-    document.addEventListener("keydown", checkActiveClass); 
-    document.addEventListener("keyup", checkActiveClass);
+    document.addEventListener("keyup", function() {
+
+      setTimeout(checkActiveClass, 500);
+
+    });
 
   });
 
