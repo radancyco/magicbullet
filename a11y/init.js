@@ -841,19 +841,12 @@ function fixMindReaderInput() {
     
     });
 
-    // Listen for both keydown and keyup events (need to add a dely due to some weird performance issues)
+    // Listen for both keydown and keyup events
+    
+    document.addEventListener("change", checkActiveClass); 
 
-    document.addEventListener("keydown", function() {
 
-      setTimeout(checkActiveClass, 500);
 
-    });
-
-    document.addEventListener("keyup", function() {
-
-      setTimeout(checkActiveClass, 500);
-
-    });
 
   });
 
