@@ -1320,6 +1320,10 @@ function fixSocialShare() {
     span.textContent = "(Opens in new tab or window)";
     link.append(span);
 
+    // Nice to have - we don't really need rel attribute anymore. 
+
+    link.removeAttribute("rel");
+
   });
 
 }
