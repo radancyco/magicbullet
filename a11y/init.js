@@ -34,6 +34,8 @@ function loadA11yPatch(url, callback) {
 
 loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
 
+  console.log("%c MagicBullet: Accessibility Patch v2.0 in use. ", "background: #6e00ee; color: #fff");
+
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 
   var a11yBody = document.body;
@@ -47,7 +49,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   // Note: Instead of having an observer to watch _everything_ in main (#content), consider setting up multiple observers per component.
   // This might be better and less prone to creating interference on site. Similar to MindReaders seperate observer.
 
-  var targetNode = document.getElementById("content");
+  var targetNode = document.querySelector("#content");
 
   // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
   
@@ -77,7 +79,8 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   initStaticPatch();
   
-  // initDynamicPatch(); Causing issue with functions like fixGlobalDisclosure. The onclick event firing twice when button pressed. Need to look into further. 
+  // initDynamicPatch(); Causing issue with functions like fixGlobalDisclosure. The onclick event firing twice when button pressed. 
+  // Need to look into further. Might require revising the functions themselves.
 
   // MindReader Observers 
 
@@ -105,7 +108,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   
 function initDynamicPatch() {
 
-  console.log("%c MagicBullet: Accessibility Patch v2.0 in use. ", "background: #6e00ee; color: #fff");
+  console.log("MagicBullet: Accessibility Patch - Dynamic");
 
   fixAltAttribute();
   fixAppliedFilter();
@@ -125,6 +128,13 @@ function initDynamicPatch() {
 // Desc: These fixes address issues that occur on page load only.
 
 function initStaticPatch() {
+
+  console.log("MagicBullet: Accessibility Patch - Static");
+
+  // 1/4/25: Moving dynamic function here as well because they do not run on pages that have no DOM updates on page load. 
+  // May need to revist but let's see how it works. 
+  
+  initDynamicPatch();
 
   fixAdvancedSearchForm();
   fixCookieManagement();
