@@ -79,8 +79,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   initStaticPatch();
   
-  // initDynamicPatch(); Causing issue with functions like fixGlobalDisclosure. The onclick event firing twice when button pressed. 
-  // Need to look into further. Might require revising the functions themselves.
+  initDynamicPatch(); 
 
   // MindReader Observers 
 
@@ -130,11 +129,6 @@ function initDynamicPatch() {
 function initStaticPatch() {
 
   console.log("MagicBullet: Accessibility Patch - Static");
-
-  // 1/4/25: Moving dynamic function here as well because they do not run on pages that have no DOM updates on page load. 
-  // May need to revist but let's see how it works. 
-  
-  initDynamicPatch();
 
   fixAdvancedSearchForm();
   fixCookieManagement();
