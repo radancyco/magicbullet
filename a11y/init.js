@@ -49,11 +49,9 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   var targetNode = document.getElementById("content");
 
-  // targetNode.classList.add("test");
-
   // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
   
-  var config = { attributes: true, childList: true, subtree: true };
+  var config = { childList: true, subtree: true };
   
   var a11yObserver = new MutationObserver(function(mutationsList) {
 
