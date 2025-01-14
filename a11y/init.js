@@ -643,7 +643,7 @@ function fixGlobalDisclosure() {
 
     if(button.classList.contains("expandable-child-open")) {
 
-  //    button.setAttribute("aria-expanded", "true");
+      button.setAttribute("aria-expanded", "true");
   
     } else {
 
@@ -664,7 +664,7 @@ function fixGlobalDisclosure() {
 
     button.addEventListener("click", function() {
 
-      var isExpanded = this.getAttribute("aria-expanded") === "true";
+      var isExpanded = this.getAttribute("aria-expanded");
 
       this.setAttribute("aria-expanded", isExpanded ? "false" : "true");
 
