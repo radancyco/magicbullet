@@ -107,7 +107,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   
 function initDynamicPatch() {
 
-  console.log("MagicBullet: Accessibility Patch (Dynamic)");
+  console.log("%c MagicBullet: Accessibility Patch (Dynamic) ", "background: #228B22; color: #fff");
 
   fixAltAttribute();
   fixAppliedFilter();
@@ -128,7 +128,7 @@ function initDynamicPatch() {
 
 function initStaticPatch() {
 
-  console.log("MagicBullet: Accessibility Patch (Static)");
+  console.log("%c MagicBullet: Accessibility Patch (Static) ", "background: #228B22; color: #fff");
 
   fixAdvancedSearchForm();
   fixCookieManagement();
@@ -1307,7 +1307,7 @@ function fixSitemap() {
 
 function fixSocialShare() {
 
-  // Fix: Append the following element and helper text, `<span class="wai visually-hidden">(Opens in new tab)</span>`, to each `.social-share-items a` element.
+  // Fix: Append the following element and helper text, `<span class="wai visually-hidden">(Opens in new tab or window)</span>`, to each `.social-share-items a` element.
 
   // TODO: Add language support.
 
@@ -1320,9 +1320,7 @@ function fixSocialShare() {
     span.textContent = "(Opens in new tab or window)";
     link.append(span);
 
-    // Nice to have - we don't really need rel attribute anymore. 
-
-    link.removeAttribute("rel");
+    // NICE TO HAVE: We don't really need the rel attribute anymore. Ask prodcut to eventually remove it.
 
   });
 
