@@ -107,7 +107,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   
 function initDynamicPatch() {
 
-  console.log("%c MagicBullet: Accessibility Patch (Dynamic Loaded \u2714) ", "background: #228B22; color: #fff");
+  console.log("%c MagicBullet Accessibility Patch: Dynamic Loaded \u2714 ", "background: #228B22; color: #fff");
 
   fixAltAttribute();
   fixAppliedFilter();
@@ -128,7 +128,7 @@ function initDynamicPatch() {
 
 function initStaticPatch() {
 
-  console.log("%c MagicBullet: Accessibility Patch (Static Loaded \u2714) ", "background: #228B22; color: #fff");
+  console.log("%c MagicBullet Accessibility Patch: Static Loaded \u2714 ", "background: #228B22; color: #fff");
 
   fixAdvancedSearchForm();
   fixCookieManagement();
