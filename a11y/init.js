@@ -647,7 +647,7 @@ function fixGlobalDisclosure() {
   
     } else {
 
- //     button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-expanded", "false");
 
     }
 
@@ -664,17 +664,9 @@ function fixGlobalDisclosure() {
 
     button.addEventListener("click", function() {
 
-      var isExpanded = this.getAttribute("aria-expanded");
+      var isExpanded = this.getAttribute("aria-expanded") === "true";
 
-      if(isExpanded === "true") {
-
-        this.setAttribute("aria-expanded", "false");
-
-      } else {
-
-        this.setAttribute("aria-expanded", "true");
-
-      }
+      this.setAttribute("aria-expanded", isExpanded ? "false" : "true");
 
       // Fix: Remove aria-expanded, aria-hidden being added to adjacent, non-interactive element, by CS Core.
 
