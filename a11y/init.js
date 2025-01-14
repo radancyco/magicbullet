@@ -662,19 +662,19 @@ function fixGlobalDisclosure() {
 
     // Fix: New toggle functionality for newly added aria-expanded attribute.
 
-    button.addEventListener("click", function() {
+    button.addEventListener("click", function(btn) {
 
       setTimeout(function(){
 
-        var isExpanded = this.getAttribute("aria-expanded");
+        var isExpanded = btn.getAttribute("aria-expanded");
 
         if(isExpanded === "true") {
 
-          this.setAttribute("aria-expanded", "false");
+          btn.setAttribute("aria-expanded", "false");
 
         } else {
 
-          this.setAttribute("aria-expanded", "true");
+          btn.setAttribute("aria-expanded", "true");
 
         }
 
@@ -682,10 +682,10 @@ function fixGlobalDisclosure() {
 
       // Fix: Remove aria-expanded, aria-hidden being added to adjacent, non-interactive element, by CS Core.
 
-      if (this.nextElementSibling) {
+      if (btn.nextElementSibling) {
 
-        this.nextElementSibling.removeAttribute("aria-expanded");
-        this.nextElementSibling.removeAttribute("aria-hidden");
+        btn.nextElementSibling.removeAttribute("aria-expanded");
+        btn.nextElementSibling.removeAttribute("aria-hidden");
 
       }
 
