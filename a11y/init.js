@@ -643,11 +643,11 @@ function fixGlobalDisclosure() {
 
     if(button.classList.contains("expandable-child-open")) {
 
-      button.setAttribute("aria-expanded", "true");
+  //    button.setAttribute("aria-expanded", "true");
   
     } else {
 
-      button.setAttribute("aria-expanded", "false");
+ //     button.setAttribute("aria-expanded", "false");
 
     }
 
@@ -662,30 +662,26 @@ function fixGlobalDisclosure() {
 
     // Fix: New toggle functionality for newly added aria-expanded attribute.
 
-    button.addEventListener("click", function(btn) {
+    button.addEventListener("click", function() {
 
-      setTimeout(function(){
+      var isExpanded = this.getAttribute("aria-expanded");
 
-        var isExpanded = btn.getAttribute("aria-expanded");
+      if(isExpanded === "true") {
 
-        if(isExpanded === "true") {
+        this.setAttribute("aria-expanded", "false");
 
-          btn.setAttribute("aria-expanded", "false");
+      } else {
 
-        } else {
+        this.setAttribute("aria-expanded", "true");
 
-          btn.setAttribute("aria-expanded", "true");
-
-        }
-
-      }, 1000);
+      }
 
       // Fix: Remove aria-expanded, aria-hidden being added to adjacent, non-interactive element, by CS Core.
 
-      if (btn.nextElementSibling) {
+      if (this.nextElementSibling) {
 
-        btn.nextElementSibling.removeAttribute("aria-expanded");
-        btn.nextElementSibling.removeAttribute("aria-hidden");
+        this.nextElementSibling.removeAttribute("aria-expanded");
+        this.nextElementSibling.removeAttribute("aria-hidden");
 
       }
 
