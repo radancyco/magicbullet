@@ -678,7 +678,7 @@ function fixGlobalDisclosure() {
 
         }
 
-      }, 500);
+      }, 1000);
 
       // Fix: Remove aria-expanded, aria-hidden being added to adjacent, non-interactive element, by CS Core.
 
