@@ -107,7 +107,7 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   
 function initDynamicPatch() {
 
-  console.log("MagicBullet: Accessibility Patch - Dynamic");
+  console.log("MagicBullet: Accessibility Patch (Dynamic)");
 
   fixAltAttribute();
   fixAppliedFilter();
@@ -128,7 +128,7 @@ function initDynamicPatch() {
 
 function initStaticPatch() {
 
-  console.log("MagicBullet: Accessibility Patch - Static");
+  console.log("MagicBullet: Accessibility Patch (Static)");
 
   fixAdvancedSearchForm();
   fixCookieManagement();
@@ -1315,7 +1315,10 @@ function fixSocialShare() {
 
   socialShareLinks.forEach(function(link) {
 
-    link.insertAdjacentHTML("beforeend", " <span class='wai visually-hidden'>(Opens in new tab)</span>");
+    var span = document.createElement("span");
+    span.classList.add("wai", "visually-hidden");
+    span.textContent = "(Opens in new tab or window)";
+    link.append(span);
 
   });
 
