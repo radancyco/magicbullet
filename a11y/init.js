@@ -664,9 +664,9 @@ function fixGlobalDisclosure() {
 
     button.addEventListener("click", function() {
 
-      var isExpanded = this.getAttribute("aria-expanded");
+      setTimeout(function(){
 
-      setTimeout(function () {
+        var isExpanded = this.getAttribute("aria-expanded");
 
         if(isExpanded === "true") {
 
@@ -678,7 +678,7 @@ function fixGlobalDisclosure() {
 
         }
 
-      }, 300);
+      }, 500);
 
       // Fix: Remove aria-expanded, aria-hidden being added to adjacent, non-interactive element, by CS Core.
 
