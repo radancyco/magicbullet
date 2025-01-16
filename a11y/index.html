@@ -33,7 +33,7 @@ accordion: true
 
   {% assign issueID = bug.ID | plus: 0 %}
 
-  <div id="{{ bug.ID }}" class="bug {% if bug.Priority == "High" %}warning{% endif %}">
+  <div id="{{ bug.ID }}" class="issue {% if bug.Priority == "High" %}warning{% endif %}">
 
     <h2>{{ bug.Summary }} <a class="anchor" href="#{{ bug.ID }}">{{ iconAnchor }} <span class="sr-only">Anchor ({{ bug.ID }})</span></a></h2>
 
