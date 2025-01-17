@@ -10,10 +10,13 @@ notes:
 roadmap: 
 
   - label: Feature
-    content: Create Google Form to easily submit issue to APL.
+    content: Create Google Form to easily submit issue to APL. (Low)
 
   - label: Feature
-    content: Add language support to several fixes.
+    content: Add language support to several fixes. (High)
+
+  - label: Feature
+    content: Open the majority of these issues into JIRA in 2025! (High)
 
 title: "Accessibility Patch v2.0"
 accordion: true
@@ -25,7 +28,7 @@ accordion: true
 
 <p>This patch addresses various accessibility issues across all Career Sites. This is a temporary solution until these issues can be resolved by the product team. If there are any questions or concerns with the script, please reach out to <a href="mailto:{{ site.owner-email }}?subject={{ page.title }}">{{ site.owner-name }}</a></p>
 
-<h2>Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 
 {% highlight html %}<script id="radancy-magicbullet" data-a11y="true" src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
 
@@ -35,108 +38,122 @@ accordion: true
 
 </div>
 
-<h2>Issue Log</h3>
+<h2 id="issue-log">Issue Log</h3>
 
 {% for bug in site.data.a11y %}
 
   {% assign issueID = bug.ID | plus: 0 %}
 
-  <div id="{{ bug.ID }}" class="issue {% if bug.Priority == "High" %}warning{% endif %}">
+  <div id="{{ bug.ID }}" class="{% if bug.Priority == "High" %}warning{%else%}issue{% endif %}">
 
     <h2>{{ bug.Summary }} <a class="anchor" href="#{{ bug.ID }}">{{ iconAnchor }} <span class="sr-only">Anchor ({{ bug.ID }})</span></a></h2>
 
     <dl>
-      
+        
       <div>
-      
+        
         <dt>Priority</dt>
         <dd>{{ bug.Priority }}</dd>
 
       </div>
 
       <div>
-      
+        
         <dt>Product</dt>
         <dd>{{ bug.Product }}</dd>
 
       </div>
 
       <div>
-      
+        
         <dt>Associated Module</dt>
         <dd>{{ bug.Module }}</dd>
 
       </div>
 
       {% if bug.Function %}
-      
-      <div>
-      
-        <dt>Associated Function</dt>
-        <dd>{{ bug.Function }}</dd>
+        
+        <div>
+        
+          <dt>Associated Function</dt>
+          <dd>{{ bug.Function }}</dd>
 
-      </div>
+        </div>
 
       {% endif %}
-      
+        
       {% if bug.JIRA %}
 
-      <div>
-      
-        <dt>JIRA</dt>
-        <dd><a href="{{ bug.JIRA }}" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></dd>
+        <div>
+        
+          <dt>JIRA</dt>
+          <dd><a href="{{ bug.JIRA }}" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></dd>
 
-      </div>
+        </div>
 
       {% endif %}
-      
+        
       {% if bug.Language != "NA" %}
 
-      <div>
-      
-        <dt>Language Support</dt>
-        <dd>{{ bug.Language }}</dd>
+        <div>
+        
+          <dt>Language Support</dt>
+          <dd>{{ bug.Language }}</dd>
 
-      </div>
+        </div>
 
       {% endif %}
-      
+        
       {% if bug.Screengrab %}
 
+        <div>
+        
+          <dt>Screengrab</dt>
+          <dd><a href="{{ bug.Screengrab }}" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></dd>
+
+        </div>
+
+      {% endif %}
+
+      {% if bug.Overview %}
+
       <div>
       
-        <dt>Screengrab</dt>
-        <dd><a href="{{ bug.Screengrab }}" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></dd>
+        <dt>Description</dt>
+        <dd>{{ bug.Overview | markdownify }}</dd>
 
       </div>
 
-      {% endif %}
+    {% endif %}
 
     </dl>
 
-    <h3>Overview</h3>
-
-    {{ bug.Overview | markdownify }}
-
     {% if bug.Fixes %}
 
-    <details>
+      <details>
 
-      <summary>Fixes</summary>
+        <summary>Fixes</summary>
 
-      {{ bug.Fixes | markdownify }}
-      
-    </details>
-      
+        {{ bug.Fixes | markdownify }}
+        
+      </details>
+        
     {% endif %}
 
   </div>
 
 {% endfor %}
 
-<h2>JavaScript</h2>
+<div class="accordion local-override">
 
-{% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
+  <button class="accordion__toggle" id="javascript">JavaScript</button>
+
+  <div class="accordion__panel">
+
+    {% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
+  </div>
+
+</div>
 
 {% endcapture %}
 

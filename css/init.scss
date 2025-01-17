@@ -1,0 +1,43 @@
+---
+---
+
+/*!
+
+  MagicBullet
+  Author: Michael "Spell" Spellacy
+
+*/
+
+@import url("https://use.fontawesome.com/releases/v5.6.3/css/all.css");
+
+.issue {
+
+    h3 {
+    font-size: calc(24rem / 16);
+    }
+
+    p {
+    margin-block: 1em 0;
+    }
+
+}
+
+.accordion {
+
+    &.local-override {
+
+        margin-block-start: 1em;
+
+    }
+
+    &__panel {
+
+        .local-override & {
+
+            padding: 0;
+
+        }
+    
+    }
+
+}
