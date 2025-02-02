@@ -7,6 +7,13 @@
 
 */
 
+/* TODO
+
+1. Add new fix for keyword autocomplete. See https://dwhite-rds.runmytests.com/documentation#section-auto-complete 
+   Similar was implemented on Intuit some time ago. Will probably not use, except for refrence. See https://tbadmin.radancy.net/sassjs/updatejavascript/27595/27595/70305
+
+*/ 
+
 function loadA11yPatch(url, callback) {
 
   var getComponentLanguagePack = document.getElementById("component-library-language-pack");
@@ -280,13 +287,11 @@ function fixDataForm() {
     var addJobAlertButtons = form.querySelectorAll(".keyword-add");
     var keywordSelected = form.querySelectorAll(".keyword-selected");
     var fileUploadButtons = form.querySelectorAll(".form-field input[name='Resume']");
-    var emailConfirmation = form.querySelectorAll(".form-field.confirm-email");
     var captchaBadge = form.querySelector(".grecaptcha-badge");
     var signUpButtons = form.querySelectorAll("button[type='submit']");
     var formMessage = form.querySelector(".form-field.form-message b");
     var formMessageButton = form.querySelector(".form-field.form-message a");
     var keyWordCategory = form.querySelector(".keyword-category");
-    var formInputs = form.querySelectorAll("input, select");
 
     // Clean-up: Remove empty instruction-text spans as they can sometimes cause undesired spacing issues.
 
@@ -520,26 +525,6 @@ function fixDataForm() {
 
     });
 
-    // Fix: Remove inline style on honeypot field and use hidden attribute instead.
-
-    emailConfirmation.forEach(function(element) {
-
-      element.setAttribute("hidden", "");
-      element.removeAttribute ("aria-hidden");
-      element.removeAttribute("style");
-
-      // Clean-up: Remove aria-hidden from honeypot label and input. The parent element should hide this from all assistive tech without need to hide individually.
-
-      var emailConfirmationFields = element.querySelectorAll("label, input");
-
-      emailConfirmationFields.forEach(function(item) {
-
-        item.removeAttribute ("aria-hidden");
-
-      });
-
-    });
-
     // Fix: Adding an accName to textarea, removing iframe garbage, and moving captcha to end of form to address tab order. It should not exist before submit button.
 
     if(captchaBadge) {
@@ -651,6 +636,11 @@ function fixGlobalDisclosure() {
   
       button.nextElementSibling.removeAttribute("aria-expanded");
       button.nextElementSibling.removeAttribute("aria-hidden");
+
+      // TODO: Instead of targeting nextElementSibling, go to parent element and querySelector(".search-filter-list"). 
+      // Then we can move the aria-labelledby and role on the section element down to it's own div below the button. 
+      // Great Clips brought this up recently and it is good point. See https://hub.accessible360.com/issues/454261/edit#comment-801093 
+      // See note.txt
   
     }
 
@@ -986,14 +976,13 @@ function fixJobList() {
 function fixJobLocation() {
 
   // Fix: Job map links should really be buttons, not links. Including role="button" for now, but we need to add spacebar key support eventually.
-  // Fix: Links should never open in new windows without an exceptional reason, so removing target attribute.
+  // BaseGST: Unfortunately, the team cannot change these to buttons in GST, so this will need to be a product request.
 
   var mapButton = document.querySelectorAll(".job-map-nearby a");
 
   mapButton.forEach(function(btn){
 
     btn.setAttribute("role", "button");
-    btn.removeAttribute("target");
 
   });
 
@@ -1003,6 +992,7 @@ function fixJobLocation() {
 
   // Clean-up: Remove aria-required from various elements. This attribute is sometimes flagged in automated testing and just the boolean required attribute is now recommended.
   // Clean-up: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
+  // Base GST: This issue has been addressed and can eventually be removed.
  
   mapFormInputs.forEach(function(element) {
     
@@ -1017,6 +1007,7 @@ function fixJobLocation() {
 }
 
 // Accessibility Patch: Job Map
+// Wxample: https://greatclips-refresh-1.runmytests.com/jobs-map 
 
 function fixJobMap() {
 

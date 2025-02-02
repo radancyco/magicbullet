@@ -780,6 +780,41 @@
 
 {%- endif %}
 
+{%- if page.changelog %} 
+
+  <h2 id="changelog">Changelog</h2>
+
+  <p>Keep up to date on major changes to this component.</p>
+
+  <div class="accordion" data-disable-anchor>
+
+    <button class="accordion__toggle">Updates</button>
+
+    <div class="accordion__panel">
+
+      <ul class="notes" role="list">
+
+        {% assign sortChangelog = page.changelog %}
+
+        {% for log in sortChangelog %}
+
+          <li class="notes__item">
+        
+            <span class="notes__label notes__label--{{ log.label | downcase }}">{{ log.label }}:</span>
+            <span class="notes__content">{{ log.content }}</span>
+      
+          </li>
+
+        {% endfor %}
+
+      </ul>
+
+    </div>
+
+  </div>
+
+{%- endif %}
+
 <div class="reminder">
 
   <h2 id="issues">Report Issues</h2>

@@ -123,29 +123,6 @@ padding: 0;
 
         }
 
-        // Confirm Email
-        
-
-        &.confirm-email {
-
-            // Make sure hidden attribute can never be overwritten by dev. 
-
-            &[hidden] {
-            display: none !important;
-            }
-
-        }
-
-        // We do not need a close button on the form message. Who cares if it opened. 
-
-        &.form-message {
-
-            a {
-            // display: none;
-            }
-
-        }
-
     }
 
 }

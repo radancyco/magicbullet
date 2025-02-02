@@ -1,0 +1,34 @@
+For the Search Filter. 
+
+Instead of doing this: 
+
+<section role="group" aria-labelledby="button-id">
+
+    <button id="button-id" ...>
+
+    <ul class="search-filter-list">
+        <li><input type="checkbox" ...></li>
+        ...
+    </ul>
+
+</section>
+
+Do this:
+
+<section>
+
+    <button id="button-id" ...>
+
+    <div role="group" aria-labelledby="button-id">
+
+        <ul class="search-filter-list">
+            <li><input type="checkbox" ...></li>
+            ...
+        </ul>
+
+    </div>
+
+</section>
+
+This will prevent button from being read aloud.
+May not be able to write a script to handle this on all sites using magicbullet but can do dor individual sites. 
