@@ -189,7 +189,7 @@ padding: 0;
 .search-form {
 
 
-    .search-location-error {
+    .search-location-error, .search-form__location-error {
     outline: 0;
     }
 
@@ -198,7 +198,7 @@ padding: 0;
 // Since we are removing aria-expanded from various, non-interactive elements, we need to make it is not impacting ajax functionalit that may look them and keep component open.
 // Fortunately, we can use the open class to our advantage. 
 
-.search-filter-list {
+.search-filter-list, .search-filters__list {
     
     &.expandable-childlist-open {
     display: block;

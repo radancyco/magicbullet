@@ -228,7 +228,7 @@ function fixAppliedFilter() {
     filter.removeAttribute("aria-hidden");
     filter.removeAttribute("aria-expanded");
     filter.setAttribute("aria-labelledby", "applied-filters-label");
-    filter.setAttribute("role", "region");
+    filter.setAttribute("role", "group");
 
     // Fix: Add aria-label to each button that is not disabled. Include a better label that helps identify the functionality of the button.
     // TODO: Add langauge suppoprt.
@@ -1088,11 +1088,11 @@ function fixSearchForm() {
 
     var formID = (i + 1);
     var searchFormLegend = form.querySelector(".job-search-legend");
-    var searchFormFields = form.querySelector(".search-form-fields");
+    var searchFormFields = form.querySelector(".search-form-fields, .search-form__fields");
     var searchFormLocationInput = form.querySelector(".search-location");
     var searchFormLocationPin = form.querySelector(".location-pin");
-    var searchFormLocationError = form.querySelector(".search-location-error");
-    var searchFormSubmit = form.querySelector("button");
+    var searchFormLocationError = form.querySelector(".search-location-error, .search-form__location-error");
+    var searchFormSubmit = form.querySelector("button, .search-form__search-btn");
 
     // Shared Function(s)
 
