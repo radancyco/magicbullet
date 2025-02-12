@@ -140,7 +140,7 @@ function initStaticPatch() {
   fixAdvancedSearchForm();
   fixCookieManagement();
   fixJobDescription();
-  fixJobList();
+  // fixJobList();
   fixJobLocation(); 
   fixJobMap();
   fixSearchForm();
@@ -951,9 +951,12 @@ function fixJobDescription() {
 
 // Accessibility Patch: Job List
 
-function fixJobList() {
+ // Fix: Move location in into Job List link.
 
-  // Fix: Move location in into Job List link.
+/* function fixJobList() {
+
+  Removing for now. Paul brought interesting issue to my attention where job lists have multiple labels, in addition to location, so placing
+  an element in previous element is causing issues. Revisit the markup of this component with the Base GST amd Site Admin team. 
 
   var jobListElements = document.querySelectorAll(".job-list .location, .job-list .date");
 
@@ -969,7 +972,7 @@ function fixJobList() {
 
   });
 
-}
+} /*
 
 // Accessibility Patch: Job Location
 
