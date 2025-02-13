@@ -972,7 +972,7 @@ function fixJobDescription() {
 
   });
 
-} /*
+} */
 
 // Accessibility Patch: Job Location
 
