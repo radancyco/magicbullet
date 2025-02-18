@@ -1274,6 +1274,16 @@ function fixSearchPagination() {
 
     });
 
+    // Fix: Remove superflous content hidden with label.
+
+    var labelInstructions = pgn.querySelector(".pagination-current-label b");
+
+    if(labelInstructions) {
+
+      labelInstructions.remove();
+
+    }
+
   });
 
 }
