@@ -85,6 +85,7 @@ padding: 0;
         &.active {
         background-color: #eee;
         outline: 1px #000 solid;
+        outline-offset: -4px;
         }
 
     }
