@@ -1149,7 +1149,11 @@ function fixSearchForm() {
 
       // If the class (.job-search-legend) is not present then simply add a label of "Search Jobs" to the div wrapping the form elements (.search-form-fields)
 
-      searchFormFields.setAttribute("aria-label", "Search Jobs");
+      if(searchFormFields) {
+      
+        searchFormFields.setAttribute("aria-label", "Search Jobs");
+
+      }
 
     }
 
