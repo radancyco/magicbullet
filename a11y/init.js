@@ -334,7 +334,7 @@ function fixDataForm() {
 
       if (labelTextNode && labelTextNode.nodeType === Node.TEXT_NODE) {
 
-        // var cleanedText = labelTextNode.nodeValue.trim().replace("*", ""); // Removing trim as it it causing some layout issues.
+        // var cleanedText = labelTextNode.nodeValue.trim().replace("*", ""); // Removing trim as it it causing some layout issues. labels with link in them, like privacy policy, were being trimmed, cauing pacing issues.
 
         var cleanedText = labelTextNode.nodeValue.replace("*", "");
 
