@@ -334,7 +334,7 @@ function fixDataForm() {
 
       if (labelTextNode && labelTextNode.nodeType === Node.TEXT_NODE) {
 
-        var cleanedText = labelTextNode.nodeValue.trim().replace("*", "");
+        var cleanedText = labelTextNode.nodeValue.trim().replace("*", " ");
 
         // Update the text node without the asterisk
 
