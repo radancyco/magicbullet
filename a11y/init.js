@@ -1222,6 +1222,16 @@ function fixSearchFilters() {
 
     // TODO: It would be great if we could use aria-labelledby instead of aria-label as accName for region so that we would not requre custom translation, but heading has no distinct class to leverage. Look into adding unique ID to h2 instead maybe?
 
+    // Fix (New): The keyword error has aria-expanded on it. See https://axeauditor.dequecloud.com/api/v1/file/a0b5d962-b7ba-11ef-8a96-f734a030c6d5
+
+    var keyWordTagError = searchFilters.querySelector(".keyword-tag-error");
+
+    if (keyWordTagError) {
+    
+      keyWordTagError.removeAttribute("aria-expanded");
+    
+    }
+    
     // Fix: Each section element (`.expandable`) should contain a role of "group" as well as an accName. We will need to add an ID to each button for aria-labelledby.
 
     var sectionElement = searchFilters.querySelectorAll(".expandable");
