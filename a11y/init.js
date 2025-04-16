@@ -777,14 +777,15 @@ function fixMindReaderInput() {
     
     function checkInput() {
     
-      var isResultsOpen = input.classList.contains("mindreader-results-open");
-    
-      input.setAttribute("aria-expanded", isResultsOpen ? "true" : "false");
-    
-      if (!isResultsOpen) {
-    
+      if (input.classList.contains("mindreader-results-open")) {
+       
+        input.setAttribute("aria-expanded", "true");
+      
+      } else {
+      
+        input.setAttribute("aria-expanded", "false");
         input.removeAttribute("aria-activedescendant");
-    
+      
       }
     
     }
