@@ -831,6 +831,26 @@ function fixMindReaderInput() {
     
     });
 
+    // Add event listener for when focus leaves the input field (focusout)
+    
+    input.addEventListener("focusout", function() {
+    
+      checkInput();  // Update aria-expanded to false
+    
+    });
+
+    // Add event listener for when Escape key is pressed
+
+    input.addEventListener("keydown", function(event) {
+  
+      if (event.key === "Escape") {
+    
+        checkInput();  // Update aria-expanded to false
+
+      }
+
+    });
+
     // Listen for both keydown and keyup events
 
     document.addEventListener("keydown", checkActiveClass); 
