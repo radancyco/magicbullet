@@ -793,6 +793,8 @@ function fixMindReaderInput() {
     
     }
 
+    checkInput();
+
     // Function to check the active class in combobox list
     
     function checkActiveClass() {
