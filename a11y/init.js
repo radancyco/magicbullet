@@ -779,17 +779,18 @@ function fixMindReaderInput() {
     
       setTimeout(function() {
 
-        var isResultsOpen = input.classList.contains("mindreader-results-open");
+        if(input.classList.contains("mindreader-results-open")) {
 
-        input.setAttribute("aria-expanded", isResultsOpen ? "true" : "false");
+          input.setAttribute("aria-expanded", "true");
+      
+        } else {
     
-        if (!isResultsOpen) {
-    
+          input.setAttribute("aria-expanded", "false");
           input.removeAttribute("aria-activedescendant");
     
         }
 
-      }, 500);
+      }, 100);
     
     }
 
