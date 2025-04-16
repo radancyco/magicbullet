@@ -777,20 +777,16 @@ function fixMindReaderInput() {
     
     function checkInput() {
     
-      setTimeout(function() {
+      if(input.classList.contains("mindreader-results-open")) {
 
-        if(input.classList.contains("mindreader-results-open")) {
-
-          input.setAttribute("aria-expanded", "true");
+        input.setAttribute("aria-expanded", "true");
       
-        } else {
+      } else {
     
-          input.setAttribute("aria-expanded", "false");
-          input.removeAttribute("aria-activedescendant");
+        input.setAttribute("aria-expanded", "false");
+        input.removeAttribute("aria-activedescendant");
     
-        }
-
-      }, 100);
+      }
     
     }
 
