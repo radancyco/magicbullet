@@ -829,7 +829,7 @@ function fixMindReaderInput() {
     
         if (mutation.attributeName === "class") {
     
-          checkInput(); // Check class and update aria-expanded
+        //  checkInput(); // Check class and update aria-expanded
     
         }
     
