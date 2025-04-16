@@ -777,16 +777,19 @@ function fixMindReaderInput() {
     
     function checkInput() {
     
-      if (input.classList.contains("mindreader-results-open")) {
-       
-        input.setAttribute("aria-expanded", "true");
-      
-      } else {
-      
-        input.setAttribute("aria-expanded", "false");
-        input.removeAttribute("aria-activedescendant");
-      
-      }
+      setTimeout(function() {
+
+        var isResultsOpen = input.classList.contains("mindreader-results-open");
+
+        input.setAttribute("aria-expanded", isResultsOpen ? "true" : "false");
+    
+        if (!isResultsOpen) {
+    
+          input.removeAttribute("aria-activedescendant");
+    
+        }
+
+      }, 500);
     
     }
 
@@ -821,29 +824,11 @@ function fixMindReaderInput() {
     
     }
 
-    // Fix: Use MutationObserver to watch class changes for timing issues
-    
-    const inputObserver = new MutationObserver(function(mutationsList) {
-    
-      mutationsList.forEach(function(mutation) {
-    
-        if (mutation.attributeName === "class") {
-    
-          checkInput(); // Check class and update aria-expanded
-    
-        }
-    
-      });
-    
-    });
-
-    inputObserver.observe(input, { attributes: true });
-
     // Add event listener for when focus leaves the input field (focusout)
     
     input.addEventListener("focusout", function() {
     
-      // checkInput();  // Update aria-expanded to false
+      checkInput();  // Update aria-expanded to false
     
     });
 
