@@ -50,10 +50,19 @@ attributes:
     html: script
     note:
 
-      - URL
+      - String
       - Mandatory
 
     desc: Accepts value of <code>https://services.tmpwebeng.com/magicbullet/</code>.
+
+  - name: type
+    html: script
+    note:
+
+      - String
+      - Mandatory
+
+    desc: Accepts value of <code>module</code> which will be leveraged in the future. Currently has no impact excpet that scripts with this type will automatically be deferred, which is equivelent to adding the <code>defer</code> attribute.</code>.
 
 notes: 
 
@@ -69,7 +78,7 @@ accordion: true
 
     <h2>Implementation</h2>
     
-    {% highlight html %}<script id="radancy-magicbullet" data-a11y="true" data-alert="true" data-alert-covid src="https://services.tmpwebeng.com/magicbullet/"></script>{% endhighlight %}
+    {% highlight html %}<script id="radancy-magicbullet" data-a11y data-alert src="https://services.tmpwebeng.com/magicbullet/" type="module"></script>{% endhighlight %}
 
 {% endcapture %}
 
