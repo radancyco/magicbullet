@@ -45,9 +45,13 @@ h1, h2, h3, h4, h5, h6, label {
 
 /* Things we no longer need and can hide */
 
+/* 
+
+removing for now will remove these links with javascript eventually. thx
+
 a[href="#search-results-list"], a[href="#search-filters"] {
 display: none;
-}
+} *
 
 .pagination-paging a.disabled {
 visibility: hidden; // cant use display none because it can break layout, this works nicely tho.

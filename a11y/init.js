@@ -715,7 +715,6 @@ function fixMindReaderInput() {
 
   comboBoxInput.forEach(function(input) {
 
-
     // Precompute IDs and frequently used elements
     
     var inputId = input.getAttribute("id");
