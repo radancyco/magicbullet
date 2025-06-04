@@ -54,7 +54,7 @@
   hostName = hostName.substring(hostName.indexOf(".") + 1);
 
   var localPaths = localHost === "localhost";
-  var testPaths = hostName === "runmytests.com" || hostName === "runmytests.eu" || hostName === "talentbrew.com" || hostName === "tmpqa.com" || hostName === "webaim.com";
+  var testPaths = hostName === "runmytests.com" || hostName === "runmytests.eu" || hostName === "talentbrew.com" || hostName === "tmpqa.com";
 
   // Check to see if both the GDPR and CCPA attributes exist together.
 
