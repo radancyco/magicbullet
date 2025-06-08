@@ -905,6 +905,8 @@ function fixMindReaderList() {
 
 function fixHeader() {
 
+  // Fix: See if nav in header is missing an accName. Note: Might be issue for a header with two navs. 
+
   var headerNavigation = document.querySelector("header nav");
 
   if(headerNavigation) {
@@ -1275,6 +1277,16 @@ function fixSearchFilters() {
 // Accessibility Patch: Search Results
 
 function fixSearchResults() {
+
+  // Fix: Remove skip links from search results page. These are no longer needed. 
+
+  var searchResultsSkip = document.querySelectorAll(".access-link[href='#search-results-list', .access-link[href='#search-filters']");
+
+  searchResultsSkip.forEach(function(link){
+
+    link.remove();
+
+  });
 
   // Fix: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
   // TODO: This may not be needed. Look into further.
