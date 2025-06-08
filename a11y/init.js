@@ -139,6 +139,7 @@ function initStaticPatch() {
 
   fixAdvancedSearchForm();
   fixCookieManagement();
+  fixHeader();
   fixJobDescription();
   // fixJobList();
   fixJobLocation(); 
@@ -897,6 +898,24 @@ function fixMindReaderList() {
     });
 
   });
+
+}
+
+// Accessibility Patch: Header (Utility) - Fixes common issues in header. 
+
+function fixHeader() {
+
+  var headerNavigation = document.querySelector("header nav");
+
+  if(headerNavigation) {
+
+    if (!headerNavigation.hasAttribute("aria-label")) {
+
+      headerNavigation.setAttribute("aria-label", "Main");
+
+    }
+
+  }
 
 }
 
