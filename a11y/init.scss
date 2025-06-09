@@ -25,17 +25,9 @@ opacity: 1;
 color: currentColor;
 }
 
-/* Universal Focus Outline */
-
-:focus-visible {
-// box-shadow: 0 0 0 .25rem white;
-// outline: .375rem double black;
-// border-radius: .125rem;
-}
-
 /* Hide Empty Elements */
 
-h1, h2, h3, h4, h5, h6, label {
+h1, h2, h3, h4, h5, h6, label, a, button {
 
     &:empty {
     display: none;
