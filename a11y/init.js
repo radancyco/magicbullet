@@ -1228,8 +1228,9 @@ function fixSearchForm() {
     });
 
     // Fix: Remove aria-hidden from the location pin. Often this is visually displayed, but aria-hidden is still present.
+    // We need to check the visability of the elmn before removing aria-hidden so it does not render on screen if featrue not activated in admin. 
 
-    if(searchFormLocationPin) {
+    if(searchFormLocationPin && window.getComputedStyle(searchFormLocationPin).display !== "none") {
 
       searchFormLocationPin.removeAttribute("aria-hidden");
 
