@@ -241,13 +241,16 @@ display: contents;
 
 
 // AJD "Back to Navigation" Links
-// Issue: WAVE is reporting contrast issue due to opacity: 0 on the hyperlinks. To override, we set opacity to 1 or auto and hide the link using clip. 
+// Issue: WAVE is reporting contrast issue due to opacity: 0 on the hyperlinks. To override, we set opacity to 1 or auto and hide the link using clip. Allso ensuring good contrast.
 
 .inPageNav__back-link, .back-to-ajd-nav__a {
-opacity: 1;
+background-color: #666;
 clip: rect(0, 0, 0, 0);
+color: #fff;
+opacity: 1;
 
     &:focus {
+    background-color: inherit;
     clip: auto;
     }
 
