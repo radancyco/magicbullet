@@ -238,3 +238,17 @@ display: none !important;
 .keyword-region { 
 display: contents;
 }
+
+
+// AJD "Back to Navigation" Links
+// Issue: WAVE is reporting contrast issue due to opacity: 0 on the hyperlinks. To override, we set opacity to 1 or auto and hide the link using clip. 
+
+.inPageNav__back-link, .back-to-ajd-nav__a {
+opacity: 1;
+clip: rect(0, 0, 0, 0);
+
+    &:focus {
+    clip: auto;
+    }
+
+}
