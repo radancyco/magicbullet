@@ -147,16 +147,17 @@ padding: 0;
     }
 
     &__closeicon {
+    display: block;
+    pointer-events: none;
 
         &::after {
         border-radius: 10px;
         color: inherit;
         content: "+";
-        display: inline-block !important;
+        display: inline-block;
         font: normal calc(24em/16) / .65em Arial, sans-serif;
         margin: -2px 0 0 10px;
         padding: 4px;
-        pointer-events: none;
         position: absolute;
         right: 4px;
         text-indent: 0;
