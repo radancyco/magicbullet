@@ -51,6 +51,21 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
 
   a11yBody.classList.add("magicbullet-a11y");
 
+  // Add global aria-live to pass messages to when needed.
+
+  let globalA11yMessage = document.querySelector("#magicbullet-message");
+
+  if(!globalA11yMessage) {
+
+    let a11yMessage = document.createElement("div");
+  
+    a11yMessage.classList.add("magicbullet-visually-hidden");
+    a11yMessage.setAttribute("id", "magicbullet-message");
+    a11yMessage.setAttribute("aria-live", "polite");
+    a11yBody.append(a11yMessage);
+
+  }
+
   // Create a new MutationObserver instance
 
   // Note: Instead of having an observer to watch _everything_ in main (#content), consider setting up multiple observers per component.
@@ -137,6 +152,7 @@ function initStaticPatch() {
 
   console.log("%c MagicBullet Accessibility Patch: Static Loaded \u2714 ", "background: #228B22; color: #fff");
 
+  fixA11y();
   fixAdvancedSearchForm();
   fixCookieManagement();
   fixHeader();
@@ -147,6 +163,16 @@ function initStaticPatch() {
   fixSearchForm();
   fixSitemap();
   fixSocialShare();
+
+}
+
+// Accessibility Patch: Fix A11y
+// Description: This is a global function that addresses sitewide accessibility.
+
+function fixA11y() {
+
+
+
 
 }
 
