@@ -1345,7 +1345,7 @@ function fixSearchResults() {
     // Recalculate count each time the DOM changes
 
     const searchResultCount = document.querySelectorAll("#search-results-list ul li").length;
-    searchMessage.textContent = searchResultCount + " job results are now available";
+    searchMessage.textContent = searchResultCount + " job results are now available"; // TODO: Firing for content results too so may need to refine message. 
 
   });
 
