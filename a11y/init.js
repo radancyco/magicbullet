@@ -1334,6 +1334,27 @@ function fixSearchResults() {
 
   }
 
+  // Fix: Let user know how many results are now present on page, after an update: 
+  // TODO: This appears to work well with filters, but not working with pagination. 
+
+  const searchResultsContainer = document.querySelector("#search #content");
+  const searchMessage = document.querySelector("#magicbullet-message");
+
+  const searchResultsObserver = new MutationObserver(() => {
+
+    // Recalculate count each time the DOM changes
+
+    const searchResultCount = document.querySelectorAll("#search-results-list ul li").length;
+    searchMessage.textContent = searchResultCount + " job results are now available";
+
+  });
+
+  if (searchResultsContainer) {
+  
+    searchResultsObserver.observe(searchResultsContainer, {childList: true, subtree: true});
+
+  }
+
 }
 
 // Accessibility Patch: Search Results Pagination
