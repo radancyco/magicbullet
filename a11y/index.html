@@ -48,20 +48,18 @@ accordion: true
 
   <ol>
     <li><strong>Ensure only one instance of MagicBullet loads per page.</strong> Multiple MagicBullet scripts can prevent associated features, like the Accessibility Patch, from running.</li>
-    <li>Older MagicBullet versions suggested loading via the DOM. If a conflict occurs, check whether the script is created dynamically. If it exists in your JavaScript, you can likely remove it. It may look like this: 
+    <li>MagicBullet can also be initiated via the DOM to support conditional loading. If a conflict occurs, check whether the script is created dynamically. If it exists in your JavaScript, you may be able to remove it and copy the attributes over to the inline version or add the <code>data-a11y</code> attribute here instead. It may look like this: 
 
 <p>{% highlight javascript %}var magicBullet = document.createElement("script");
-magicBullet.setAttribute("id", "tmp-magic-bullet");
+magicBullet.setAttribute("id", "radancy-magicbullet");
 magicBullet.setAttribute("data-gdpr", "false");
-magicBullet.setAttribute("data-gdpr-client-name", "Sony Pictures");
-magicBullet.setAttribute("data-gdpr-policy-url", "https://tbcdn.talentbrew.com/company/22978/v1_0/docs/spe-jobs-privacy-policy-update-for-crpa-dec-21-22.pdf");
+magicBullet.setAttribute("data-gdpr-client-name", "Acme Inc.");
+magicBullet.setAttribute("data-gdpr-policy-url", "https://acme.com/privacy-policy.html");
 magicBullet.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/");
 document.body.appendChild(magicBullet);{%endhighlight%}</p>
 
-      <p><strong>Note:</strong> If the script is required, then simply transfer the needed attributes into your inline script.</p>
-
     </li>
-    <li>Razor commenting isn't supported in <strong>Settings</strong>. If an older version of MagicBullet exists there, use HTML comments to remove it.</li>
+    <li>Razor commenting does not appear to be supported in <strong>Settings</strong>. If an older version of MagicBullet exists there, use HTML comments to remove it.</li>
   </ol>
 
 </section>
