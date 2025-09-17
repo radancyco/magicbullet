@@ -48,7 +48,7 @@ accordion: true
 
   <ol>
     <li><strong>Ensure only one instance of MagicBullet loads per page.</strong> Multiple MagicBullet scripts can prevent associated features, like the Accessibility Patch, from running.</li>
-    <li>MagicBullet can also be initiated via the DOM to support conditional loading. If a conflict occurs, check whether the script is created dynamically. If it exists in your JavaScript, you may be able to remove it and copy the attributes over to the inline version or add the <code>data-a11y</code> attribute here instead. It may look like this: 
+    <li>MagicBullet can also be initiated via the DOM to support conditional loading (usually of data attributes). If a conflict occurs, check whether the script is created dynamically. If it exists in your JavaScript, you may be able to remove it and copy the attributes over to the inline version or add the <code>data-a11y</code> attribute here instead. It may look like this: 
 
 <p>{% highlight javascript %}var magicBullet = document.createElement("script");
 magicBullet.setAttribute("id", "radancy-magicbullet");
