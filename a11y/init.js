@@ -1402,9 +1402,13 @@ function fixSearchPagination() {
 
         var searchResultsLink = searchResults.querySelector("a");
 
-        searchResultsLink.focus(); // Place focus on first link.
+        setTimeout(function() {
 
-        console.log(document.activeElement);
+          searchResultsLink.focus(); // Place focus on first link.
+
+          console.log(document.activeElement);
+
+        }, 100);
 
       }
 
