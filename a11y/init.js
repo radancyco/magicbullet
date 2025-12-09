@@ -1329,9 +1329,9 @@ function fixSearchResults() {
 
   if(searchResults) {
 
-    // searchResults.setAttribute("tabindex", "-1");
+    // 12/9/2005: Removed tabindex="-1" and instead placing focus first link. This may be an issues when content search is enabled. 
 
-    // TODO: 12/9/2005: Consider moving focus to first link in search results list. 
+    searchResults.querySelector("a").focus();
 
   }
 
