@@ -1391,6 +1391,22 @@ function fixSearchPagination() {
 
     }
 
+    // When Pagination Button is pressed, send a loding message to ARIA live. 
+
+    var paginationBtn = pgn.querySelector(".pagination-page-jump");
+
+    paginationBtn.addEventListener("click", function() {
+
+      var ariaMsg = document.querySelector("#magicbullet-message");
+
+      if (ariaMsg) {
+
+        ariaMsg.textContent = "Loading...";
+
+      }
+
+    });
+
   });
 
 }
