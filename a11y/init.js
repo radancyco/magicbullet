@@ -1400,9 +1400,9 @@ function fixSearchPagination() {
 
         // 12/9/2005: Removed tabindex="-1" from search results wrapper and instead placing focus on link. This may be an issues when content search is enabled. 
 
-        var searchResultsLink = searchResults.querySelector("a");
-
         setTimeout(function() {
+
+          var searchResultsLink = searchResults.querySelector("a");
 
           searchResultsLink.focus(); // Place focus on first link.
 
