@@ -1404,6 +1404,8 @@ function fixSearchPagination() {
 
         searchResultsLink.focus(); // Place focus on first link.
 
+        console.log(document.activeElement);
+
       }
 
     });
