@@ -1380,11 +1380,11 @@ function fixSearchPagination() {
 
     }
 
-    // When Pagination Button is pressed, send a loding message to ARIA live. 
+    // Fix: When Pagination buttons are pressed, send a loding message to ARIA live. 
 
-    var paginationBtn = pgn.querySelector(".pagination-page-jump");
+    var paginationBtns = pgn.querySelector(".pagination-page-jump, .pagination .prev, .pagination .next");
 
-    paginationBtn.addEventListener("click", function() {
+    paginationBtns.addEventListener("click", function() {
 
       var ariaMsg = document.querySelector("#magicbullet-message");
 
@@ -1394,7 +1394,8 @@ function fixSearchPagination() {
 
       }
       
-      // 12/9/2005: Removed tabindex="-1" from search results wrapper and instead placing focus on link. This may be an issues when content search is enabled. 
+      // Issue: Removed tabindex="-1" from search-results section wrapper wrapper. Now placing focus on first link in search results. 
+      // Note: Appear to need a timeout here, to give results 
 
       setTimeout(function() {
 
@@ -1404,13 +1405,13 @@ function fixSearchPagination() {
 
           var searchResultsLink = searchResults.querySelector("a");
 
-          searchResultsLink.focus(); // Place focus on first link.
+          searchResultsLink.focus();
 
           console.log(document.activeElement);
 
         }
 
-      }, 500);
+      }, 100);
 
     });
 
