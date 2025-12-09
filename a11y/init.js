@@ -1324,13 +1324,14 @@ function fixSearchResults() {
   });
 
   // Fix: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
-  // TODO: This may not be needed. Look into further.
 
   var searchResults = document.getElementById("search-results");
 
   if(searchResults) {
 
-    searchResults.setAttribute("tabindex", "-1");
+    // searchResults.setAttribute("tabindex", "-1");
+
+    // TODO: 12/9/2005: Consider moving focus to first link in search results list. 
 
   }
 
@@ -1338,14 +1339,14 @@ function fixSearchResults() {
   // TODO: This appears to work well with filters, but not working with pagination. 
 
   const searchResultsContainer = document.querySelector("#search #content");
-  const searchMessage = document.querySelector("#magicbullet-message");
+  const ariaMsg = document.querySelector("#magicbullet-message");
 
   const searchResultsObserver = new MutationObserver(() => {
 
     // Recalculate count each time the DOM changes
 
     const searchResultCount = document.querySelectorAll("#search-results-list ul li").length;
-    searchMessage.textContent = searchResultCount + " job results are now available"; // TODO: Firing for content results too so may need to refine message. 
+    ariaMsg.textContent = searchResultCount + " results are now available.";
 
   });
 
