@@ -1323,18 +1323,6 @@ function fixSearchResults() {
 
   });
 
-  // Fix: When tabindex 0 was removed, visible focus is now lost. Product team should be applying tabindex -1 in addition to focus.
-
-  var searchResults = document.getElementById("search-results");
-
-  if(searchResults) {
-
-    // 12/9/2005: Removed tabindex="-1" and instead placing focus first link. This may be an issues when content search is enabled. 
-
-    searchResults.querySelector("a").focus();
-
-  }
-
   // Fix: Let user know how many results are now present on page, after an update: 
   // TODO: This appears to work well with filters, but not working with pagination. 
 
@@ -1403,6 +1391,16 @@ function fixSearchPagination() {
       if (ariaMsg) {
 
         ariaMsg.textContent = "Loading...";
+
+      }
+
+      var searchResults = document.getElementById("search-results");
+
+      if(searchResults) {
+
+        // 12/9/2005: Removed tabindex="-1" and instead placing focus first link. This may be an issues when content search is enabled. 
+
+        searchResults.querySelector("a").focus();
 
       }
 
