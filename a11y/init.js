@@ -1408,7 +1408,7 @@ function fixSearchPagination() {
 
           console.log(document.activeElement);
 
-        }, 100);
+        }, 500);
 
       }
 
