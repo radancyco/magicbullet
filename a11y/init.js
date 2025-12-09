@@ -1350,6 +1350,46 @@ function fixSearchResults() {
 
 function fixSearchPagination() {
 
+  const searchResults = document.querySelector("#search-results");
+
+  if (searchResults) {
+
+    // Disconnect previous observer if it exists on this element
+
+    if (searchResults._observer) {
+
+      searchResults._observer.disconnect();
+
+    }
+
+    const observer = new MutationObserver((mutations) => {
+
+      mutations.forEach((mutation) => {
+
+        if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+
+          const link = searchResults.querySelector("a");
+
+          if (link) {
+
+            link.focus();
+
+          }
+
+        }
+
+      });
+
+    });
+
+    observer.observe(searchResults, { childList: true, subtree: true });
+
+    // Store observer on the element to reuse later
+
+    searchResults._observer = observer;
+
+  }
+
   const pagination = document.querySelectorAll(".pagination");
 
   pagination.forEach((pgn) => {
@@ -1377,7 +1417,7 @@ function fixSearchPagination() {
     if (labelInstructions) {
 
       labelInstructions.remove();
-    
+
     }
 
     // Fix: When Pagination buttons are pressed, send a loding message to ARIA live. 
@@ -1391,39 +1431,15 @@ function fixSearchPagination() {
       if (ariaMsg) {
 
         ariaMsg.textContent = "Loading...";
-  
+
       }
-      
-      // Issue: Removed tabindex="-1" from search-results section wrapper wrapper. Now placing focus on first link in search results. 
-      // Note: Appear to need a timeout here, to give results 
-
-      setTimeout(() => {
-
-        const searchResults = document.querySelector("#search-results");
-
-        if (searchResults) {
-
-          const searchResultsLink = searchResults.querySelector("a");
-
-          // Always check for null before calling focus()
-
-          if (searchResultsLink) {
-
-            searchResultsLink.focus();
-      
-          }
-
-          console.log(document.activeElement);
-
-        }
-
-      }, 500);
 
     });
 
   });
 
 }
+
 
 // Accessibility Patch: Sitemap
 
