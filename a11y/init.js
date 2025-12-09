@@ -1394,13 +1394,15 @@ function fixSearchPagination() {
 
       }
 
-      var searchResults = document.getElementById("search-results");
+      var searchResults = document.querySelector("#search-results");
 
       if(searchResults) {
 
-        // 12/9/2005: Removed tabindex="-1" and instead placing focus first link. This may be an issues when content search is enabled. 
+        // 12/9/2005: Removed tabindex="-1" from search results wrapper and instead placing focus on link. This may be an issues when content search is enabled. 
 
-        searchResults.querySelector("a").focus();
+        var searchResultsLink = searchResults.querySelector("a");
+
+        searchResultsLink.focus(); // Place focus on first link.
 
       }
 
