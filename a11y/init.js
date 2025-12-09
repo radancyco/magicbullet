@@ -1350,9 +1350,9 @@ function fixSearchResults() {
 
 function fixSearchPagination() {
 
-  var pagination = document.querySelectorAll(".pagination");
+  const pagination = document.querySelectorAll(".pagination");
 
-  pagination.forEach(function(pgn){
+  pagination.forEach((pgn) => {
 
     // Fix: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
     // TODO: Add language support.
@@ -1361,9 +1361,9 @@ function fixSearchPagination() {
 
     // Fix: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we remove that, too!
 
-    var controls = pgn.querySelectorAll(".pagination-paging .disabled");
+    const controls = pgn.querySelectorAll(".pagination-paging .disabled");
 
-    controls.forEach(function(link){
+    controls.forEach((link) => {
 
       link.removeAttribute("aria-hidden");
       link.removeAttribute("href");
@@ -1372,40 +1372,46 @@ function fixSearchPagination() {
 
     // Fix: Remove superflous content hidden with label.
 
-    var labelInstructions = pgn.querySelector(".pagination-current-label b");
+    const labelInstructions = pgn.querySelector(".pagination-current-label b");
 
-    if(labelInstructions) {
+    if (labelInstructions) {
 
       labelInstructions.remove();
-
+    
     }
 
     // Fix: When Pagination buttons are pressed, send a loding message to ARIA live. 
 
-    var paginationBtns = pgn.querySelector(".pagination-page-jump, .pagination .prev, .pagination .next");
+    const paginationBtn = pgn.querySelector(".pagination-page-jump, .pagination .prev, .pagination .next");
 
-    paginationBtns.addEventListener("click", function() {
+    paginationBtn.addEventListener("click", () => {
 
-      var ariaMsg = document.querySelector("#magicbullet-message");
+      const ariaMsg = document.querySelector("#magicbullet-message");
 
       if (ariaMsg) {
 
         ariaMsg.textContent = "Loading...";
-
+  
       }
       
       // Issue: Removed tabindex="-1" from search-results section wrapper wrapper. Now placing focus on first link in search results. 
       // Note: Appear to need a timeout here, to give results 
 
-      setTimeout(function() {
+      setTimeout(() => {
 
-        var searchResults = document.querySelector("#search-results");
+        const searchResults = document.querySelector("#search-results");
 
-        if(searchResults) {
+        if (searchResults) {
 
-          var searchResultsLink = searchResults.querySelector("a");
+          const searchResultsLink = searchResults.querySelector("a");
 
-          searchResultsLink.focus();
+          // Always check for null before calling focus()
+
+          if (searchResultsLink) {
+
+            searchResultsLink.focus();
+      
+          }
 
           console.log(document.activeElement);
 
