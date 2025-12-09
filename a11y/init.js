@@ -1411,7 +1411,7 @@ function fixSearchPagination() {
 
         }
 
-      }, 100);
+      }, 500);
 
     });
 
