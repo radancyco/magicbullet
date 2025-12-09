@@ -1393,14 +1393,14 @@ function fixSearchPagination() {
         ariaMsg.textContent = "Loading...";
 
       }
+      
+      // 12/9/2005: Removed tabindex="-1" from search results wrapper and instead placing focus on link. This may be an issues when content search is enabled. 
 
-      var searchResults = document.querySelector("#search-results");
+      setTimeout(function() {
 
-      if(searchResults) {
+        var searchResults = document.querySelector("#search-results");
 
-        // 12/9/2005: Removed tabindex="-1" from search results wrapper and instead placing focus on link. This may be an issues when content search is enabled. 
-
-        setTimeout(function() {
+        if(searchResults) {
 
           var searchResultsLink = searchResults.querySelector("a");
 
@@ -1408,9 +1408,9 @@ function fixSearchPagination() {
 
           console.log(document.activeElement);
 
-        }, 500);
+        }
 
-      }
+      }, 500);
 
     });
 
