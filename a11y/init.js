@@ -1386,6 +1386,8 @@ function fixSearchPagination() {
 
     paginationBtn.addEventListener("click", () => {
 
+      console.log("button pressed");
+
   const ariaMsg = document.querySelector("#magicbullet-message");
 
   if (ariaMsg) {
