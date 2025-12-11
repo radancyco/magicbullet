@@ -1382,7 +1382,7 @@ function fixSearchPagination() {
 
      if (paginationBtnDisabled) {
 
-      link.setAttribute("tabindex", "-1");
+      paginationBtnDisabled.setAttribute("tabindex", "-1");
 
       // Note: Ideally, it would be best to remove this element entirely, but this can break layout, so removing href is next best solution. 
 
