@@ -1388,7 +1388,6 @@ function fixSearchPagination() {
       paginationBtnDisabled.removeAttribute("rel");
       paginationBtnDisabled.textContent = "";
 
-
       // Note: Ideally, it would be best to remove this element entirely with CSS, but this can break layout, so removing href is next best solution. 
 
     }
