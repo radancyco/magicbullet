@@ -1407,7 +1407,7 @@ const observer = new MutationObserver(() => {
 
   if (firstLink) {
     firstLink.focus();
-    console.log("Focused:", firstLink);
+    console.log(document.activeElement);
 
     observer.disconnect();
   }
