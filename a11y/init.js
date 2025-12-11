@@ -1393,7 +1393,7 @@ function fixSearchPagination() {
   }
 
   const searchResults = document.querySelector("#search-results");
-if (!searchResults) return;
+//if (!searchResults) return;
 
 // Observe the PARENT because #search-results may be replaced
 const parent = searchResults.parentNode;
@@ -1401,16 +1401,16 @@ const parent = searchResults.parentNode;
 const observer = new MutationObserver(() => {
 
   const updatedResults = document.querySelector("#search-results");
-  if (!updatedResults) return;
+  //if (!updatedResults) return;
 
   const firstLink = updatedResults.querySelector("a");
 
-  if (firstLink) {
+  //if (firstLink) {
     firstLink.focus();
     console.log(document.activeElement);
 
     observer.disconnect();
-  }
+  //}
 
 });
 
