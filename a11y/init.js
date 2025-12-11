@@ -1320,25 +1320,15 @@ function fixSearchFilters() {
 
     refinedSearchSubmit.addEventListener("click", function() {
 
-      const refinedSearchChanges = new MutationObserver(() => {
+      setTimeout(function() {
 
-        if (refinedSearchError.getAttribute("aria-hidden") === "false") {
+        if (refinedSearchError.getAttribute("aria-hidden") === "true") {
 
           refinedSearchInput.focus();
-          refinedSearchChanges.disconnect();
 
         }
 
-      });
-
-      // Watch for ANY child changes under the parent. We need to do this because #search-results is replaced instead of it's contents being replaced. 
-
-      refinedSearchChanges.observe(refinedSearch, { 
-
-        childList: true, 
-        subtree: true 
-
-      });
+      }, 100);
 
     });
 
