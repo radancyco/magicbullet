@@ -1382,37 +1382,45 @@ function fixSearchPagination() {
 
     // Fix: When Pagination buttons are pressed, send a loding message to ARIA live. 
 
-    const paginationBtn = pgn.querySelector(".pagination-page-jump, .prev, .next");
+    const paginationBtns = pgn.querySelectorAll(".pagination-page-jump, .prev, .next");
 
-    paginationBtn.addEventListener("click", () => {
+    paginationBtns.forEach((btn) => {
 
-      console.log("button pressed");
+      btn.addEventListener("click", () => {
 
-  const ariaMsg = document.querySelector("#magicbullet-message");
+        console.log("button pressed");
 
-  if (ariaMsg) {
-    ariaMsg.textContent = "Loading...";
-  }
+        const ariaMsg = document.querySelector("#magicbullet-message");
 
-  const searchResults = document.querySelector("#search-results");
-//if (!searchResults) return;
+        if (ariaMsg) {
+    
+          ariaMsg.textContent = "Loading...";
+  
+        }
 
-// Observe the PARENT because #search-results may be replaced
-const parent = searchResults.parentNode;
+        const searchResults = document.querySelector("#search-results");
 
-const observer = new MutationObserver(() => {
+        //if (!searchResults) return;
 
-  const updatedResults = document.querySelector("#search-results");
-  //if (!updatedResults) return;
+      const observer = new MutationObserver(() => {
 
-  const firstLink = updatedResults.querySelector("a");
+      const updatedResults = document.querySelector("#search-results");
+  
+      //if (!updatedResults) return;
 
-  //if (firstLink) {
-    firstLink.focus();
-    console.log(document.activeElement);
+      const firstLink = updatedResults.querySelector("a");
 
-    observer.disconnect();
-  //}
+      //if (firstLink) {
+      
+      firstLink.focus();
+      
+      console.log(document.activeElement);
+
+      observer.disconnect();
+  
+      //}
+
+    });
 
 });
 
@@ -1422,7 +1430,8 @@ observer.observe(parent, {
   subtree: true
 });
 
-});
+    
+    });
 
 
   });
