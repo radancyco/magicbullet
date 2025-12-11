@@ -1350,11 +1350,11 @@ function fixSearchResults() {
 
 function fixSearchPagination() {
 
-  // There can be multiple pagination components on a page, thou it is common to only see one, typically at the bottom of search results. 
+  // There can be multiple pagination components on a page, tho it is common to only see one, typically at the bottom of all search results. 
   
   // Fix: Remove title attributes from all "pagination-view-more" buttons. These are often redundant and read back twice to assistive technology. I recall asking product team to remove. 
   
-  const viewMoreBtns = document.querySelectorAll(".pagination-view-more");
+  const viewMoreBtns = document.querySelectorAll("#search results .pagination-view-more");
 
   viewMoreBtns.forEach((btn) => {
 
@@ -1362,27 +1362,33 @@ function fixSearchPagination() {
 
   });
 
-  const pagination = document.querySelectorAll(".pagination");
+  const searchResultsPagination = document.querySelectorAll("#search-results .pagination");
 
-  pagination.forEach((pgn) => {
+  searchResultsPagination.forEach((pgn) => {
 
-    // Fix: Pagination(s) in Search Results should really have an accName so it can be differentiated between other nav elements that may exist on page.
-    // TODO: Add language support.
+    // Fix: Pagination(s) in Search Results should must have an accName so that they can be distinct amoung other navigational landmarks.
 
-    pgn.setAttribute("aria-label", "Pagination");
+    if (!pbn.hasAttribute("aria-label")) {
 
-    // Fix: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we simply remove href. When removed, aria-hidden is not really needed, so we remove that, too!
+      pgn.setAttribute("aria-label", "Pagination");
 
-    const controls = pgn.querySelectorAll(".pagination-paging .disabled");
+      // TODO: Add language support for "Pagination"
 
-    controls.forEach((link) => {
+    }
 
-      link.removeAttribute("aria-hidden");
-      link.removeAttribute("href");
+    // Fix: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we can simply add tabindex of -1 to allow keyboard users to skip over it. The element apepars to include aria-hidden, which is also needed to hide from AT users. 
 
-    });
+    const paginationBtnDisabled = pgn.querySelector(".disabled");
 
-    // Fix: Remove superflous content hidden with label.
+     if (paginationBtnDisabled) {
+
+      link.setAttribute("tabindex", "-1");
+
+      // Note: Ideally, it would be best to remove this element entirely, but this can break layout, so removing href is next best solution. 
+
+    }
+
+    // Fix: Remove superflous content hidden with label. This lable appears to be present to provide instructions to AT users, which is not really needed. 
 
     const labelInstructions = pgn.querySelector(".pagination-current-label b");
 
