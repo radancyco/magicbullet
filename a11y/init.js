@@ -1320,7 +1320,7 @@ function fixSearchFilters() {
 
     refinedSearchSubmit.addEventListener("click", function() {
 
-      if (refinedSearchError.getAttribute("aria-hidden") === "true") {
+      if (refinedSearchError.getAttribute("aria-hidden") === "false") {
 
         refinedSearchInput.focus();
 
