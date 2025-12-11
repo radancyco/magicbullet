@@ -1392,7 +1392,7 @@ function fixSearchPagination() {
     ariaMsg.textContent = "Loading...";
   }
 
-  const searchResults = document.querySelector("#search-results");
+  const searchResults = document.querySelector("#search #content");
   if (!searchResults) return;
 
   // Watch for DOM updates in #search-results
