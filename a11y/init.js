@@ -1424,7 +1424,7 @@ function fixSearchPagination() {
   
       //}
 
-    });
+   
 
 });
 
@@ -1433,6 +1433,8 @@ observer.observe(parent, {
   childList: true,
   subtree: true
 });
+
+ });
 
     
     });
