@@ -1364,13 +1364,13 @@ function fixSearchPagination() {
 
   const searchResultsPagination = document.querySelectorAll("#search-results .pagination");
 
-  searchResultsPagination.forEach((pgn) => {
+  searchResultsPagination.forEach((pagination) => {
 
     // Fix: Pagination(s) in Search Results should must have an accName so that they can be distinct amoung other navigational landmarks.
 
-    if (!pbn.hasAttribute("aria-label")) {
+    if (!pagination.hasAttribute("aria-label")) {
 
-      pgn.setAttribute("aria-label", "Pagination");
+      pagination.setAttribute("aria-label", "Pagination");
 
       // TODO: Add language support for "Pagination"
 
@@ -1378,7 +1378,7 @@ function fixSearchPagination() {
 
     // Fix: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we can simply add tabindex of -1 to allow keyboard users to skip over it. The element apepars to include aria-hidden, which is also needed to hide from AT users. 
 
-    const paginationBtnDisabled = pgn.querySelector(".disabled");
+    const paginationBtnDisabled = pagination.querySelector(".disabled");
 
      if (paginationBtnDisabled) {
 
@@ -1390,7 +1390,7 @@ function fixSearchPagination() {
 
     // Fix: Remove superflous content hidden with label. This lable appears to be present to provide instructions to AT users, which is not really needed. 
 
-    const labelInstructions = pgn.querySelector(".pagination-current-label b");
+    const labelInstructions = pagination.querySelector(".pagination-current-label b");
 
     if (labelInstructions) {
 
@@ -1400,7 +1400,7 @@ function fixSearchPagination() {
 
     // Fix: When Pagination buttons are pressed, send a loding message to ARIA live. 
 
-    const paginationBtns = pgn.querySelectorAll(".pagination-page-jump, .prev, .next");
+    const paginationBtns = pagination.querySelectorAll(".pagination-page-jump, .prev, .next");
 
     paginationBtns.forEach((btn) => {
 
