@@ -1426,19 +1426,18 @@ function fixSearchPagination() {
 
         const parent = searchResults.parentNode;
 
-        const observer = new MutationObserver(() => {
+        const searchResultsNavigation = new MutationObserver(() => {
 
-          const updatedResults = document.querySelector("#search-results");
-          const firstLink = updatedResults.querySelector("a");
+          const getFirstLink = document.querySelector("#search-results a");
 
-          firstLink.focus();
-          observer.disconnect();
+          getFirstLink.focus();
+          searchResultsNavigation.disconnect();
 
         });
 
         // Watch for ANY child changes under the parent. We need to do this because #search-results is replaced instead of it's contents being replaced. 
 
-        observer.observe(parent, { 
+        searchResultsNavigation.observe(parent, { 
 
           childList: true, 
           subtree: true 
