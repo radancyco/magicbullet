@@ -1315,8 +1315,18 @@ function fixSearchFilters() {
     const refinedSearchError = refinedSearch.querySelector(".keyword-tag-error");
     const refinedSearchSubmit = refinedSearch.querySelector("#add-keyword");
 
-    refinedSearchError.setAttribute("id", "keyword-error-mesg");
+    refinedSearchError.setAttribute("id", "keyword-error-msg");
     refinedSearchInput.setAttribute("aria-describedby", "keyword-error-msg");
+
+    refinedSearchSubmit.addEventListener("click", function() {
+
+      if (refinedSearchError.getAttribute("aria-hidden") === "true") {
+
+        refinedSearchInput.focus();
+
+      }
+
+    });
 
   }
 
