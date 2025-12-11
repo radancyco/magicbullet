@@ -1408,43 +1408,61 @@ function fixSearchPagination() {
 
     // Fix: When Pagination buttons are pressed, send a loding message to ARIA live. 
 
-    const paginationBtns = pagination.querySelectorAll(".pagination-page-jump, .prev, .next");
+    const handlePaginationEvent = () => {
+
+      const ariaMsg = document.querySelector("#magicbullet-message");
+
+      if (ariaMsg) {
+
+        ariaMsg.textContent = "Loading...";
+
+      }
+
+      // Observe the PARENT because #search-results may be replaced
+
+      const parent = searchResults.parentNode;
+
+      const searchResultsNavigation = new MutationObserver(() => {
+
+        const getFirstLink = document.querySelector("#search-results a");
+
+        getFirstLink.focus();
+        searchResultsNavigation.disconnect();
+
+      });
+
+      // Watch for ANY child changes under the parent. We need to do this because #search-results is replaced instead of it's contents being replaced. 
+
+      searchResultsNavigation.observe(parent, { 
+
+        childList: true, 
+        subtree: true 
+
+      });
+
+    }
+
+    const paginationBtns = pagination.querySelectorAll(".pagination-current, .pagination-page-jump, .prev, .next");
 
     paginationBtns.forEach((btn) => {
 
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", handlePaginationEvent);
 
-        const ariaMsg = document.querySelector("#magicbullet-message");
+      // Input fields (".pagination-current") get Enter key support
 
-        if (ariaMsg) {
-    
-          ariaMsg.textContent = "Loading...";
-  
-        }
-
-        // Observe the PARENT because #search-results may be replaced
-
-        const parent = searchResults.parentNode;
-
-        const searchResultsNavigation = new MutationObserver(() => {
-
-          const getFirstLink = document.querySelector("#search-results a");
-
-          getFirstLink.focus();
-          searchResultsNavigation.disconnect();
-
+      if (btn.matches(".pagination-current")) {
+        
+        btn.addEventListener("keydown", (event) => {
+          
+          if (event.key === "Enter") {
+          
+            handlePaginationEvent();
+          
+          }
+        
         });
-
-        // Watch for ANY child changes under the parent. We need to do this because #search-results is replaced instead of it's contents being replaced. 
-
-        searchResultsNavigation.observe(parent, { 
-
-          childList: true, 
-          subtree: true 
-
-        });
-
-      });
+      
+      }
 
     });
 
