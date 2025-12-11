@@ -1376,7 +1376,8 @@ function fixSearchPagination() {
 
     }
 
-    // Fix: Search Results pagination disabled button can be tabbed to (this is bad). To address this (along with console error being produced when focus is placed on an element with aria-hidden), we simply remove the href. 
+    // Fix: Search Results pagination disabled button can be tabbed to (this is bad). To address this (along with console error being produced when focus is 
+    // placed on an element with aria-hidden), we simply remove the href. Also removing rel and text as well.
 
     const paginationBtnDisabled = pagination.querySelector(".disabled");
 
@@ -1385,6 +1386,7 @@ function fixSearchPagination() {
       paginationBtnDisabled.removeAttribute("aria-hidden");
       paginationBtnDisabled.removeAttribute("href");
       paginationBtnDisabled.removeAttribute("rel");
+      paginationBtnDisabled.textContent = "";
 
 
       // Note: Ideally, it would be best to remove this element entirely with CSS, but this can break layout, so removing href is next best solution. 
