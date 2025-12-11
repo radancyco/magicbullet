@@ -1402,6 +1402,10 @@ function fixSearchPagination() {
 
         //if (!searchResults) return;
 
+      // Observe the PARENT because #search-results may be replaced
+
+      const parent = searchResults.parentNode;
+
       const observer = new MutationObserver(() => {
 
       const updatedResults = document.querySelector("#search-results");
