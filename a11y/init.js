@@ -1331,14 +1331,14 @@ function fixSearchFilters() {
 
       });
 
-    });
+      // Watch for ANY child changes under the parent. We need to do this because #search-results is replaced instead of it's contents being replaced. 
 
-    // Watch for ANY child changes under the parent. We need to do this because #search-results is replaced instead of it's contents being replaced. 
+      refinedSearchChanges.observe(refinedSearch, { 
 
-    refinedSearchChanges.observe(refinedSearch, { 
+        childList: true, 
+        subtree: true 
 
-      childList: true, 
-      subtree: true 
+      });
 
     });
 
