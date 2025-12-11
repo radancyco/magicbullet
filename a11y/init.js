@@ -172,8 +172,6 @@ function initStaticPatch() {
 function fixA11y() {
 
 
-
-
 }
 
 // Accessibility Patch: Advanced Search Form 
@@ -1270,9 +1268,9 @@ function fixSearchForm() {
 
 function fixSearchFilters() {
 
-  var searchFilters = document.getElementById("search-filters");
+  const searchFilters = document.querySelector("#search-filters");
 
-  if(searchFilters) {
+  if (searchFilters) {
 
     // Fix: Add role and accName to Search Filter section. 
     // TODO: Add langauge support.
@@ -1284,7 +1282,7 @@ function fixSearchFilters() {
 
     // Fix (New): The keyword error has aria-expanded on it. See https://axeauditor.dequecloud.com/api/v1/file/a0b5d962-b7ba-11ef-8a96-f734a030c6d5
 
-    var keyWordTagError = searchFilters.querySelector(".keyword-tag-error");
+    const keyWordTagError = searchFilters.querySelector(".keyword-tag-error");
 
     if (keyWordTagError) {
     
@@ -1294,16 +1292,31 @@ function fixSearchFilters() {
     
     // Fix: Each section element (`.expandable`) should contain a role of "group" as well as an accName. We will need to add an ID to each button for aria-labelledby.
 
-    var sectionElement = searchFilters.querySelectorAll(".expandable");
+    const sectionElement = searchFilters.querySelectorAll(".expandable");
 
-    sectionElement.forEach(function(section){
+    sectionElement.forEach((section) => {
 
-      var sectionButtonID = section.querySelector(".expandable-parent").getAttribute("id");
+      const sectionButtonID = section.querySelector(".expandable-parent").getAttribute("id");
 
       section.setAttribute("role", "group");
       section.setAttribute("aria-labelledby", sectionButtonID);
 
     });
+
+  }
+
+  const refinedSearch = document.querySelector("#refined-search");
+
+  // Fix: Add aria-describedby to input and unique ID to error message. 
+
+  if (refinedSearch) {
+
+    const refinedSearchInput = refinedSearch.querySelector("#keyword-tag");
+    const refinedSearchError = refinedSearch.querySelector(".keyword-tag-error");
+    const refinedSearchSubmit = refinedSearch.querySelector("#add-keyword");
+
+    refinedSearchError.setAttribute("id", "keyword-error-mesg");
+    refinedSearchInput.setAttribute("aria-describedby", "keyword-error-msg");
 
   }
 
