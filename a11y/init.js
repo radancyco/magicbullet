@@ -1376,15 +1376,16 @@ function fixSearchPagination() {
 
     }
 
-    // Fix: Search Results pagination disabled button can be tabbed to (this is bad). To address this, we can simply add tabindex of -1 to allow keyboard users to skip over it. The element apepars to include aria-hidden, which is also needed to hide from AT users. 
+    // Fix: Search Results pagination disabled button can be tabbed to (this is bad). To address this (along with console error being produced when focus is placed on an element with aria-hidden), we simply remove the href. 
 
     const paginationBtnDisabled = pagination.querySelector(".disabled");
 
      if (paginationBtnDisabled) {
 
-      paginationBtnDisabled.setAttribute("tabindex", "-1");
+      paginationBtnDisabled.removeAttribute("href");
+      paginationBtnDisabled.removeAttribute("aria-hidden");
 
-      // Note: Ideally, it would be best to remove this element entirely, but this can break layout, so removing href is next best solution. 
+      // Note: Ideally, it would be best to remove this element entirely with CSS, but this can break layout, so removing href is next best solution. 
 
     }
 
