@@ -1350,6 +1350,18 @@ function fixSearchResults() {
 
 function fixSearchPagination() {
 
+  // There can be multiple pagination components on a page, thou it is common to only see one, typically at the bottom of search results. 
+  
+  // Fix: Remove title attributes from all "pagination-view-more" buttons. These are often redundant and read back twice to assistive technology. I recall asking product team to remove. 
+  
+  const viewMoreBtns = document.querySelectorAll(".pagination-view-more");
+
+  viewMoreBtns.forEach((btn) => {
+
+    btn.removeAttribute("title");
+
+  });
+
   const pagination = document.querySelectorAll(".pagination");
 
   pagination.forEach((pgn) => {
