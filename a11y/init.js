@@ -1428,7 +1428,7 @@ function fixSearchPagination() {
 
         const observer = new MutationObserver(() => {
 
-          const updatedResults = searchResults;
+          const updatedResults = document.querySelector("#search-results");
           const firstLink = updatedResults.querySelector("a");
 
           firstLink.focus();
