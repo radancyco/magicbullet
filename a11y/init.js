@@ -1350,11 +1350,15 @@ function fixSearchResults() {
 
 function fixSearchPagination() {
 
+  const searchResults = document.querySelector("#search-results");
+
+  if (!searchResults) return;
+
   // There can be multiple pagination components on a page, tho it is common to only see one, typically at the bottom of all search results. 
   
   // Fix: Remove title attributes from all "pagination-view-more" buttons. These are often redundant and read back twice to assistive technology. I recall asking product team to remove. 
   
-  const viewMoreBtns = document.querySelectorAll("#search results .pagination-view-more");
+  const viewMoreBtns = searchResults.querySelectorAll(".pagination-view-more");
 
   viewMoreBtns.forEach((btn) => {
 
@@ -1362,7 +1366,7 @@ function fixSearchPagination() {
 
   });
 
-  const searchResultsPagination = document.querySelectorAll("#search-results .pagination");
+  const searchResultsPagination = searchResults.querySelectorAll(".pagination");
 
   searchResultsPagination.forEach((pagination) => {
 
@@ -1404,13 +1408,11 @@ function fixSearchPagination() {
 
     // Fix: When Pagination buttons are pressed, send a loding message to ARIA live. 
 
-    const paginationBtns = pagination.querySelectorAll(".pagination-page-jump, .prev, .next");
+    const paginationBtns = pagination.querySelectorAll(".pagination-current, .pagination-page-jump, .prev, .next");
 
     paginationBtns.forEach((btn) => {
 
       btn.addEventListener("click", () => {
-
-        console.log("button pressed");
 
         const ariaMsg = document.querySelector("#magicbullet-message");
 
@@ -1420,47 +1422,32 @@ function fixSearchPagination() {
   
         }
 
-        const searchResults = document.querySelector("#search-results");
+        // Observe the PARENT because #search-results may be replaced
 
-        //if (!searchResults) return;
+        const parent = searchResults.parentNode;
 
-      // Observe the PARENT because #search-results may be replaced
+        const observer = new MutationObserver(() => {
 
-      const parent = searchResults.parentNode;
+          const updatedResults = searchResults;
+          const firstLink = updatedResults.querySelector("a");
 
-      const observer = new MutationObserver(() => {
+          firstLink.focus();
+          observer.disconnect();
 
-      const updatedResults = document.querySelector("#search-results");
-  
-      //if (!updatedResults) return;
+        });
 
-      const firstLink = updatedResults.querySelector("a");
+        // Watch for ANY child changes under the parent. We need to do this because #search-results is replaced instead of it's contents being replaced. 
 
-      //if (firstLink) {
-      
-      firstLink.focus();
-      
-      console.log(document.activeElement);
+        observer.observe(parent, { 
 
-      observer.disconnect();
-  
-      //}
+          childList: true, 
+          subtree: true 
 
-   
+        });
 
-});
+      });
 
-// Watch for ANY child changes under the parent (replacement, updates, etc.)
-observer.observe(parent, {
-  childList: true,
-  subtree: true
-});
-
- });
-
-    
     });
-
 
   });
 
