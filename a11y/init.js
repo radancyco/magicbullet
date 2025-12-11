@@ -1406,15 +1406,15 @@ function fixSearchPagination() {
     
     }
 
-    // Fix: When Pagination buttons are pressed, send a loding message to ARIA live. 
+    // Fix: When Pagination buttons are pressed, send a loding message to global ARIA live. 
 
-    const handlePaginationEvent = () => {
+    const paginationEvents = () => {
 
       const ariaMsg = document.querySelector("#magicbullet-message");
 
       if (ariaMsg) {
 
-        ariaMsg.textContent = "Loading...";
+        ariaMsg.textContent = "Loading New Results";
 
       }
 
@@ -1446,7 +1446,7 @@ function fixSearchPagination() {
 
     paginationBtns.forEach((btn) => {
 
-      btn.addEventListener("click", handlePaginationEvent);
+      btn.addEventListener("click", paginationEvents);
 
       // Input fields (".pagination-current") get Enter key support
 
@@ -1456,7 +1456,7 @@ function fixSearchPagination() {
           
           if (event.key === "Enter") {
           
-            handlePaginationEvent();
+            paginationEvents();
           
           }
         
