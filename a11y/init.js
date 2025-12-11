@@ -1350,46 +1350,6 @@ function fixSearchResults() {
 
 function fixSearchPagination() {
 
-  const searchResults = document.querySelector("#search-results");
-
-  if (searchResults) {
-
-    // Disconnect previous observer if it exists on this element
-
-    if (searchResults._observer) {
-
-      searchResults._observer.disconnect();
-
-    }
-
-    const observer = new MutationObserver((mutations) => {
-
-      mutations.forEach((mutation) => {
-
-        if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
-
-          const link = searchResults.querySelector("a");
-
-          if (link) {
-
-            link.focus();
-
-          }
-
-        }
-
-      });
-
-    });
-
-    observer.observe(searchResults, { childList: true, subtree: true });
-
-    // Store observer on the element to reuse later
-
-    searchResults._observer = observer;
-
-  }
-
   const pagination = document.querySelectorAll(".pagination");
 
   pagination.forEach((pgn) => {
@@ -1417,7 +1377,7 @@ function fixSearchPagination() {
     if (labelInstructions) {
 
       labelInstructions.remove();
-
+    
     }
 
     // Fix: When Pagination buttons are pressed, send a loding message to ARIA live. 
@@ -1426,20 +1386,41 @@ function fixSearchPagination() {
 
     paginationBtn.addEventListener("click", () => {
 
-      const ariaMsg = document.querySelector("#magicbullet-message");
+  const ariaMsg = document.querySelector("#magicbullet-message");
 
-      if (ariaMsg) {
+  if (ariaMsg) {
+    ariaMsg.textContent = "Loading...";
+  }
 
-        ariaMsg.textContent = "Loading...";
+  const searchResults = document.querySelector("#search-results");
+  if (!searchResults) return;
 
-      }
+  // Watch for DOM updates in #search-results
+  const observer = new MutationObserver(() => {
 
-    });
+    const searchResultsLink = searchResults.querySelector("a");
+
+    if (searchResultsLink) {
+      searchResultsLink.focus();
+      console.log("Focused:", searchResultsLink);
+
+      observer.disconnect(); // Stop watching
+    }
+
+  });
+
+  // Observe only child additions/removals inside the results container
+  observer.observe(searchResults, {
+    childList: true,
+    subtree: true
+  });
+
+});
+
 
   });
 
 }
-
 
 // Accessibility Patch: Sitemap
 
