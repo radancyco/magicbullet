@@ -1382,8 +1382,10 @@ function fixSearchPagination() {
 
      if (paginationBtnDisabled) {
 
-      paginationBtnDisabled.removeAttribute("href");
       paginationBtnDisabled.removeAttribute("aria-hidden");
+      paginationBtnDisabled.removeAttribute("href");
+      paginationBtnDisabled.removeAttribute("rel");
+
 
       // Note: Ideally, it would be best to remove this element entirely with CSS, but this can break layout, so removing href is next best solution. 
 
