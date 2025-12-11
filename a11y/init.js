@@ -1328,7 +1328,7 @@ function fixSearchFilters() {
 
         }
 
-      }, 100);
+      }, 300);
 
     });
 
