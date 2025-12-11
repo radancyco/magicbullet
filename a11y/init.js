@@ -1382,7 +1382,7 @@ function fixSearchPagination() {
 
     // Fix: When Pagination buttons are pressed, send a loding message to ARIA live. 
 
-    const paginationBtn = pgn.querySelector(".pagination-page-jump, .pagination .prev, .pagination .next");
+    const paginationBtn = pgn.querySelector(".pagination-page-jump");
 
     paginationBtn.addEventListener("click", () => {
 
