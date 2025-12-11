@@ -1408,7 +1408,7 @@ function fixSearchPagination() {
 
     // Fix: When Pagination buttons are pressed, send a loding message to ARIA live. 
 
-    const paginationBtns = pagination.querySelectorAll(".pagination-current, .pagination-page-jump, .prev, .next");
+    const paginationBtns = pagination.querySelectorAll(".pagination-page-jump, .prev, .next");
 
     paginationBtns.forEach((btn) => {
 
