@@ -1319,7 +1319,7 @@ function fixSearchFilters() {
 
       refinedSearchSubmit.addEventListener("click", function() {
 
-        setTimeout(function() {
+        const refinedSearchChanges = new MutationObserver(() => {
 
           if (keyWordTagError.getAttribute("aria-hidden") === "false") {
 
@@ -1335,7 +1335,16 @@ function fixSearchFilters() {
 
           }
 
-        }, 500);
+        });
+
+        // Watch for ANY child changes under the parent. We need to do this because #search-results is replaced instead of it's contents being replaced. 
+
+        refinedSearchChanges.observe(refinedSearch, { 
+
+          childList: true, 
+          subtree: true 
+
+        });
 
       });
 
