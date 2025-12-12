@@ -1325,11 +1325,11 @@ function fixSearchFilters() {
 
        const refinedSearchObserver = new MutationObserver(() => {
 
-          if (keyWordTagError.getAttribute("aria-hidden") === "false") {
+       //   if (keyWordTagError.getAttribute("aria-hidden") === "false") {
 
-            refinedSearchInput.focus();
+       //     refinedSearchInput.focus();
 
-          } else {
+        //  } else {
 
            const keyWordValue = refinedSearchInput.value;
 
@@ -1341,7 +1341,7 @@ function fixSearchFilters() {
 
      if (appliedFilters) {
 
-            // keyWordTagError.setAttribute("aria-hidden", "false");
+            keyWordTagError.setAttribute("aria-hidden", "false");
             keyWordTagError.classList.add("success");
             keyWordTagError.textContent = keyWordValue + " added to list.";
 
@@ -1352,7 +1352,7 @@ function fixSearchFilters() {
 
          //   }, 300);
 
-          }
+        //  }
   
        refinedSearchObserver.disconnect();
 
