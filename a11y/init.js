@@ -1331,11 +1331,11 @@ function fixSearchFilters() {
 
             refinedSearchSubmit.focus();
 
-            console.log("leroyyyyyyyyjenkins!")
+            console.log("leroyyyyyyyyjenkins!");
 
           }
 
-        }, 300);
+        }, 500);
 
       });
 
