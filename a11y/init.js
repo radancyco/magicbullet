@@ -1323,7 +1323,7 @@ function fixSearchFilters() {
 
          console.log(keyWordValue);
 
-        const refinedSearchChanges = new MutationObserver(() => {
+       // const refinedSearchChanges = new MutationObserver(() => {
 
           if (keyWordTagError.getAttribute("aria-hidden") === "false") {
 
@@ -1333,7 +1333,7 @@ function fixSearchFilters() {
 
            
 
-                  setTimeout(function() {
+             //     setTimeout(function() {
 
             
 
@@ -1341,20 +1341,20 @@ function fixSearchFilters() {
             keyWordTagError.classList.add("success");
             keyWordTagError.textContent = keyWordValue + " added to list."
 
-            }, 300);
+         //   }, 300);
 
           }
   
-          refinedSearchChanges.disconnect();
+       //   refinedSearchChanges.disconnect();
 
-        }); 
+       // }); 
 
-        refinedSearchChanges.observe(refinedSearch, { 
+       // refinedSearchChanges.observe(refinedSearch, { 
 
-          childList: true, 
-          subtree: true 
+        //  childList: true, 
+        //  subtree: true 
 
-        });
+      //  });
 
       });
 
