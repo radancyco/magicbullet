@@ -18,10 +18,10 @@
   // If disabled, bail out immediately
 
   if (magicBulletDisabled) {
-    
-    console.warn("MagicBullet disabled via URL parameter.");
+
+    console.log("%c MagicBullet disabled via URL parameter. ", "background: #FFA500; color: #000");
     return;
-  
+
   }
 
   console.log("%c MagicBullet v2.2 in use. ", "background: #6e00ee; color: #fff");
