@@ -1323,7 +1323,9 @@ function fixSearchFilters() {
 
          console.log(keyWordValue);
 
-       // const refinedSearchChanges = new MutationObserver(() => {
+         const parent = searchFilters.parentNode;
+
+       const refinedSearchChanges = new MutationObserver(() => {
 
           if (keyWordTagError.getAttribute("aria-hidden") === "false") {
 
@@ -1347,16 +1349,16 @@ function fixSearchFilters() {
 
           }
   
-       //   refinedSearchChanges.disconnect();
+       refinedSearchChanges.disconnect();
 
        // }); 
 
-       // refinedSearchChanges.observe(refinedSearch, { 
+       refinedSearchChanges.observe(parent, { 
 
-        //  childList: true, 
-        //  subtree: true 
+        childList: true, 
+        subtree: true 
 
-      //  });
+      });
 
       });
 
