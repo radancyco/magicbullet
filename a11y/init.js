@@ -1321,6 +1321,8 @@ function fixSearchFilters() {
 
          const keyWordValue = refinedSearchInput.value;
 
+         console.log(keyWordValue);
+
         const refinedSearchChanges = new MutationObserver(() => {
 
           if (keyWordTagError.getAttribute("aria-hidden") === "false") {
@@ -1333,7 +1335,7 @@ function fixSearchFilters() {
 
                   setTimeout(function() {
 
-            console.log(keyWordValue);
+            
 
             keyWordTagError.setAttribute("aria-hidden", "false");
             keyWordTagError.classList.add("success");
