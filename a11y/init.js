@@ -1325,7 +1325,7 @@ function fixSearchFilters() {
 
          const parent = searchFilters.parentNode;
 
-       const refinedSearchChanges = new MutationObserver(() => {
+       const refinedSearchObserver = new MutationObserver(() => {
 
           if (keyWordTagError.getAttribute("aria-hidden") === "false") {
 
@@ -1349,11 +1349,11 @@ function fixSearchFilters() {
 
           }
   
-       refinedSearchChanges.disconnect();
+       refinedSearchObserver.disconnect();
 
-       // }); 
+       }); 
 
-       refinedSearchChanges.observe(parent, { 
+       refinedSearchObserver.observe(parent, { 
 
         childList: true, 
         subtree: true 
