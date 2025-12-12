@@ -1319,11 +1319,12 @@ function fixSearchFilters() {
 
       refinedSearchSubmit.addEventListener("click", function() {
 
+
          
 
-         const parent = searchFilters.parentNode;
+     //    const parent = searchFilters.parentNode;
 
-       const refinedSearchObserver = new MutationObserver(() => {
+    //   const refinedSearchObserver = new MutationObserver(() => {
 
        //   if (keyWordTagError.getAttribute("aria-hidden") === "false") {
 
@@ -1341,10 +1342,9 @@ function fixSearchFilters() {
 
      if (appliedFilters) {
 
-            keyWordTagError.setAttribute("aria-hidden", "false");
-            keyWordTagError.classList.add("success");
-            keyWordTagError.textContent = keyWordValue + " added to list.";
-
+        // keyWordTagError.setAttribute("aria-hidden", "false");
+        keyWordTagError.classList.add("success");
+        keyWordTagError.textContent = keyWordValue + " added to list.";
 
      }
 
@@ -1354,16 +1354,16 @@ function fixSearchFilters() {
 
         //  }
   
-       refinedSearchObserver.disconnect();
+   //    refinedSearchObserver.disconnect();
 
-       }); 
+   //    }); 
 
-       refinedSearchObserver.observe(parent, { 
+  //     refinedSearchObserver.observe(parent, { 
 
-        childList: true, 
-        subtree: true 
+      //  childList: true, 
+    //    subtree: true 
 
-      });
+   //   });
 
       });
 
