@@ -1325,7 +1325,14 @@ function fixSearchFilters() {
 
             refinedSearchInput.focus();
 
-          } 
+          } else {
+
+            const keyWordValue = refinedSearchInput.value;
+
+            keyWordTagError.classList.add("success");
+            keyWordTagError.textContent = keyWordValue + " added to list."
+
+          }
   
           refinedSearchChanges.disconnect();
 
