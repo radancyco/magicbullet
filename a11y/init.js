@@ -1325,6 +1325,8 @@ function fixSearchFilters() {
 
             refinedSearchInput.focus();
 
+            console.log("hello, i'm not hidden");
+
           }
 
         }, 300);
