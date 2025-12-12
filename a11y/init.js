@@ -1322,9 +1322,9 @@ function fixSearchFilters() {
 
          
 
-     //    const parent = searchFilters.parentNode;
+         const parent = searchFilters.parentNode;
 
-    //   const refinedSearchObserver = new MutationObserver(() => {
+       const refinedSearchObserver = new MutationObserver(() => {
 
        //   if (keyWordTagError.getAttribute("aria-hidden") === "false") {
 
@@ -1354,16 +1354,16 @@ function fixSearchFilters() {
 
         //  }
   
-   //    refinedSearchObserver.disconnect();
+       refinedSearchObserver.disconnect();
 
-   //    }); 
+       }); 
 
-  //     refinedSearchObserver.observe(parent, { 
+       refinedSearchObserver.observe(parent, { 
 
-      //  childList: true, 
-    //    subtree: true 
+        childList: true, 
+       subtree: true 
 
-   //   });
+     });
 
       });
 
