@@ -1333,7 +1333,7 @@ function fixSearchFilters() {
 
             console.log(keyWordValue);
 
-            keyWordTagError.setAttribute("aria-hidden", "true");
+            keyWordTagError.setAttribute("aria-hidden", "false");
             keyWordTagError.classList.add("success");
             keyWordTagError.textContent = keyWordValue + " added to list."
 
