@@ -9,6 +9,21 @@
 
 (function() {
 
+  // Allow disabling MagicBullet via URL parameter
+
+  const params = new URLSearchParams(window.location.search);
+
+  const magicBulletDisabled = params.get("magicbullet") === "false"
+
+  // If disabled, bail out immediately
+
+  if (magicBulletDisabled) {
+    
+    console.warn("MagicBullet disabled via URL parameter.");
+    return;
+  
+  }
+
   console.log("%c MagicBullet v2.2 in use. ", "background: #6e00ee; color: #fff");
 
   // Get MagicBullet Script
