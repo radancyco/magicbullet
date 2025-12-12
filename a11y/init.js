@@ -1319,6 +1319,8 @@ function fixSearchFilters() {
 
       refinedSearchSubmit.addEventListener("click", function() {
 
+         const keyWordValue = refinedSearchInput.value;
+
         const refinedSearchChanges = new MutationObserver(() => {
 
           if (keyWordTagError.getAttribute("aria-hidden") === "false") {
@@ -1327,7 +1329,7 @@ function fixSearchFilters() {
 
           } else {
 
-            const keyWordValue = refinedSearchInput.value;
+           
 
                   setTimeout(function() {
 
@@ -1337,7 +1339,7 @@ function fixSearchFilters() {
             keyWordTagError.classList.add("success");
             keyWordTagError.textContent = keyWordValue + " added to list."
 
-            }, 100);
+            }, 300);
 
           }
   
