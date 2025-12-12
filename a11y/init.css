@@ -5,9 +5,260 @@
   Contributor(s):
   Michael "Spell" Spellacy
 
-  Dependencies: Sass
+*/
 
-  Instructions: 
-  sass --watch .:. --style compressed
+/* Global Issues */
 
-*/::-moz-placeholder{color:curretColor;opacity:1}::-webkit-input-placeholder{color:currentColor}h1:empty,h2:empty,h3:empty,h4:empty,h5:empty,h6:empty,label:empty,a:empty{display:none}.access-link{z-index:2147483647 !important}.a11y-search-location .mindreader-results,.a11y-search-location .mindreader-status,.a11y-search-location .display-typeahead{display:none !important}.mindreader-results{padding:0}.mindreader-results a{display:block;padding:.5em 1em}.mindreader-results a.active{background-color:#eee;outline:1px #000 solid;outline-offset:-4px}.a11y-search-location .search-location{z-index:0 !important}.data-form .form-field.required label::after{display:none}.data-form .form-field.required label .ico-required-indicator{display:inline-block;margin-inline-start:.5em}.grecaptcha-badge iframe{border:0}.data-form__close::after{display:none !important}.data-form__closeicon{display:block;pointer-events:none}.data-form__closeicon::after{border-radius:10px;color:inherit;content:"+";display:inline-block;font:normal 1.5em/.65em Arial,sans-serif;margin:-2px 0 0 10px;padding:4px;position:absolute;right:4px;text-indent:0;text-shadow:none;text-transform:lowercase;top:0;transform:rotate(45deg)}.data-form legend::after{display:none}.search-form .search-location-error,.search-form .search-form__location-error{outline:0}.search-filter-list.expandable-childlist-open,.search-filters__list.expandable-childlist-open{display:block}.display-typeahead{display:none}#wrapper-sel-city{height:auto}#wrapper-sel-city[hidden]{display:none !important}#sel-city,label[for=sel-city]{display:block !important}#sel-city option:first-child,label[for=sel-city] option:first-child{display:none}label[for=sel-cityundefined],.combobox-container{display:none !important}.keyword-region{display:contents}.inPageNav__back-link,.back-to-ajd-nav__a{background-color:#666;clip:rect(0, 0, 0, 0);color:#fff;opacity:1}.inPageNav__back-link:focus,.back-to-ajd-nav__a:focus{background-color:#666;clip:auto}.magicbullet-visually-hidden:not(:focus):not(:active){clip:rect(0 0 0 0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}/*# sourceMappingURL=init.css.map */
+/* Global ARIA Live */
+
+.magicbullet-visually-hidden:not(:focus):not(:active) {
+clip: rect(0 0 0 0); 
+clip-path: inset(50%);
+height: 1px;
+overflow: hidden;
+position: absolute;
+white-space: nowrap; 
+width: 1px;
+}
+
+/* Ensure that all placeholder text is contrast friendly. */
+
+::-moz-placeholder {
+color: curretColor;
+opacity: 1;
+}
+    
+::-webkit-input-placeholder {
+color: currentColor;
+}
+
+/* Hide Empty Elements */
+
+h1, h2, h3, h4, h5, h6, label, a {
+
+    &:empty {
+    display: none;
+    }
+
+}
+
+/* Access Link - Ensure accesslink always has _highest_ index. */
+
+.access-link {
+z-index: 2147483647 !important;
+}
+
+/* Search Location Datalist */
+
+.a11y-search-location {
+
+    .mindreader-results, .mindreader-status, .display-typeahead {
+    display: none !important;
+    }
+
+}
+
+/* Mindreader */
+
+.mindreader-results {
+padding: 0;
+
+  /* Fix: Always set each autocomplete link to block, so that we can... */
+
+  a {
+  display: block;
+  padding: .5em 1em;
+
+    /* ... highlight the background, which is not always done. */ 
+
+    &.active {
+    background-color: #eee;
+    outline: 1px #000 solid;
+    outline-offset: -4px;
+    }
+
+  }
+
+}
+
+.a11y-search-location { 
+
+  .search-location {
+  z-index: 0 !important;
+  }
+
+}
+
+/*  Data Forms */
+
+.data-form {
+
+  .form-field {
+    
+    &.required {
+        
+      label {
+
+        /* A11YFORM001 */
+
+        &::after {
+        display: none;
+        }
+
+        .ico-required-indicator {
+        display: inline-block;
+        margin-inline-start: 0.5em;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+/* removing frameborder */
+
+.grecaptcha-badge {
+
+  iframe {
+  border: 0;
+  }
+
+}
+
+.data-form {
+
+  .data-form__close {
+    
+    &::after {
+    display: none !important;
+    }
+
+  }
+
+  .data-form__closeicon {
+  display: block;
+  pointer-events: none;
+
+    &::after {
+    border-radius: 10px;
+    color: inherit;
+    content: "+";
+    display: inline-block;
+    font: normal calc(24em/16) / .65em Arial, sans-serif;
+    margin: -2px 0 0 10px;
+    padding: 4px;
+    position: absolute;
+    right: 4px;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: lowercase;
+    top: 0;
+    transform: rotate(45deg);
+    } 
+
+  }
+
+  /* legends do not require an asterick */
+
+  legend {
+
+    &::after {
+    display: none;
+    }
+
+  }
+
+}
+
+/* Search Forms */
+
+.search-form {
+
+  .search-location-error, .search-form__location-error {
+  outline: 0;
+  }
+
+}
+
+/* 
+
+  Since we are removing aria-expanded from various, non-interactive elements, we need to make it is not impacting ajax functionalit that may look them and keep component open.
+  Fortunately, we can use the open class to our advantage. 
+
+*/
+
+.search-filter-list, .search-filters__list {
+    
+  &.expandable-childlist-open {
+  display: block;
+  }
+
+}
+
+/* On mobile, when the search filter is open, the entire page can be accidentialy refreshed when scrolling. This is aggrivating, causing user to have open the filers again. */
+
+#search-filters {
+
+  &.open {
+  overflow-behavior: none;
+  scrollbar-color: gray transparent;
+  }
+
+}
+
+/* The typeahead text sometimes interferes with the text being typed, making things illegible. Removing for now as I do not it is absolutely necessary to include. The dropdown should be sufficient. */
+
+.display-typeahead {
+display: none;
+}
+
+/* The comboxbox on the Job Map page is severaly broken for accessibility. An easier way to address this issue is to always have the <select> present. */
+
+#wrapper-sel-city {
+height: auto;
+
+  &[hidden] {
+  display: none !important;
+  }
+
+}
+
+#sel-city, label[for="sel-city"] {
+display: block !important;
+
+  option:first-child {
+  display: none;
+  }
+
+}
+
+label[for="sel-cityundefined"], .combobox-container {
+display: none !important;
+}
+
+.keyword-region { 
+display: contents;
+}
+
+/*
+
+AJD "Back to Navigation" Links
+Issue: WAVE is reporting contrast issue due to opacity: 0 on the hyperlinks. To override, we set opacity to 1 or auto and hide the link using clip. Allso ensuring good contrast.
+
+*/
+
+.inPageNav__back-link, .back-to-ajd-nav__a {
+background-color: #666;
+clip: rect(0, 0, 0, 0);
+color: #fff;
+opacity: 1;
+
+  &:focus {
+  background-color: #666;
+  clip: auto;
+  }
+
+}
