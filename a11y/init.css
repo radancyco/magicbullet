@@ -116,20 +116,6 @@ padding: 0;
 
   }
 
-}
-
-/* removing frameborder */
-
-.grecaptcha-badge {
-
-  iframe {
-  border: 0;
-  }
-
-}
-
-.data-form {
-
   .data-form__close {
     
     &::after {
@@ -173,7 +159,17 @@ padding: 0;
 
 }
 
-/* Search Forms */
+/* removing frameborder */
+
+.grecaptcha-badge {
+
+  iframe {
+  border: 0;
+  }
+
+}
+
+/* Search Form: Basic */
 
 .search-form {
 
