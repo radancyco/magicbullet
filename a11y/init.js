@@ -1335,11 +1335,13 @@ function fixSearchFilters() {
 
              //     setTimeout(function() {
 
-            
+            if(keyWordValue !== "") {
 
             keyWordTagError.setAttribute("aria-hidden", "false");
             keyWordTagError.classList.add("success");
-            keyWordTagError.textContent = keyWordValue + " added to list."
+            keyWordTagError.textContent = keyWordValue + " added to list.";
+
+            }
 
          //   }, 300);
 
