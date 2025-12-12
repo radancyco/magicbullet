@@ -1335,6 +1335,8 @@ function fixSearchFilters() {
 
           }
 
+          refinedSearchChanges.disconnect();
+
         });
 
         // Watch for ANY child changes under the parent. We need to do this because #search-results is replaced instead of it's contents being replaced. 
