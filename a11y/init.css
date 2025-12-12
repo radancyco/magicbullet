@@ -194,13 +194,17 @@ padding: 0;
 
 }
 
-/* On mobile, when the search filter is open, the entire page can be accidentialy refreshed when scrolling. This is aggrivating, causing user to have open the filers again. */
+/* 
+
+  On mobile, when the search filter is open, the entire page can be accidentialy refreshed when scrolling. This is aggrivating, causing user to have open the filers again. 
+  Also adding default color to scrollbar as default often not discernable
+
+*/
 
 #search-filters {
 
   &.open {
-  overflow-behavior: none;
-  scrollbar-color: gray transparent;
+  overscroll-behavior: none;
   }
 
 }
