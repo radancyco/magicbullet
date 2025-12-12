@@ -1319,9 +1319,7 @@ function fixSearchFilters() {
 
       refinedSearchSubmit.addEventListener("click", function() {
 
-         const keyWordValue = refinedSearchInput.value;
-
-         console.log(keyWordValue);
+         
 
          const parent = searchFilters.parentNode;
 
@@ -1333,7 +1331,9 @@ function fixSearchFilters() {
 
           } else {
 
-           
+           const keyWordValue = refinedSearchInput.value;
+
+         console.log(keyWordValue);
 
              //     setTimeout(function() {
 
