@@ -1338,15 +1338,15 @@ function fixSearchFilters() {
 
              //     setTimeout(function() {
 
-     const appliedFilters = document.querySelector("#applied-filters");
+   //  const appliedFilters = document.querySelector("#applied-filters");
 
-     if (appliedFilters) {
+    // if (appliedFilters) {
 
         // keyWordTagError.setAttribute("aria-hidden", "false");
         keyWordTagError.classList.add("success");
         keyWordTagError.textContent = keyWordValue + " added to list.";
 
-     }
+   //  }
 
 
 
