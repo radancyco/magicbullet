@@ -1329,11 +1329,15 @@ function fixSearchFilters() {
 
             const keyWordValue = refinedSearchInput.value;
 
+                  setTimeout(function() {
+
             console.log(keyWordValue);
 
             keyWordTagError.setAttribute("aria-hidden", "true");
             keyWordTagError.classList.add("success");
             keyWordTagError.textContent = keyWordValue + " added to list."
+
+            }, 100);
 
           }
   
