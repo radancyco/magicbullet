@@ -1319,17 +1319,17 @@ function fixSearchFilters() {
 
       refinedSearchSubmit.addEventListener("click", function() {
 
-        setTimeout(function() {
+        if (keyWordTagError.getAttribute("aria-hidden") === "false") {
 
-          if (keyWordTagError.getAttribute("aria-hidden") === "false") {
+          refinedSearchInput.focus();
 
-            refinedSearchInput.focus();
+          console.log("hello, i'm not hidden 2");
 
-            console.log("hello, i'm not hidden");
+        } else { 
 
-          }
+          console.log("hello, i'm AM hidden 2");
 
-        }, 300);
+        }
 
       });
 
