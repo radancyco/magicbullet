@@ -1325,21 +1325,11 @@ function fixSearchFilters() {
 
             refinedSearchInput.focus();
 
-            console.log("hello, i'm not hidden");
-
-          } else { 
-
-            refinedSearchSubmit.focus();
-
-            console.log("leroyyyyyyyyjenkins!");
-
-          }
-
+          } 
+  
           refinedSearchChanges.disconnect();
 
-        });
-
-        // Watch for ANY child changes under the parent. We need to do this because #search-results is replaced instead of it's contents being replaced. 
+        }); 
 
         refinedSearchChanges.observe(refinedSearch, { 
 
