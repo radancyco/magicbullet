@@ -1302,10 +1302,7 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-      const refineSearchObserver = new MutationObserver(() => {
-
-
-        // Let's run sme other tests
+      // Let's run sme other tests
 
         if(keywordError.length) {
 
@@ -1320,6 +1317,11 @@ function fixSearchFilters() {
         }
 
         console.log(keywordError);
+
+      const refineSearchObserver = new MutationObserver(() => {
+
+
+        
 
         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
