@@ -1306,16 +1306,16 @@ function fixSearchFilters() {
 
         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
-        if (keyWordVisibility === "false") {
+        // Fix: Conflict with pagination found. We need to see if first element does not have focus first. 
 
-          // do stuff here
+        const searchResultsHasFocus = document.querySelector("#search-results a");
 
-          // Fix: Conflict with pagination found. We need to see if first element does not have focus first. 
+        if (document.activeElement !== searchResultsHasFocus) {
 
-          const searchResultsHasFocus = document.querySelector("#search-results a");
-
-          if (document.activeElement !== searchResultsHasFocus) {
-
+          if (keyWordVisibility === "false") {
+          
+            // do stuff here
+          
             keyWordInput.focus();
 
           }
