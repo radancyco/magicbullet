@@ -1300,28 +1300,23 @@ function fixSearchFilters() {
     const keywordSubmit = refinedSearch.querySelector("#add-keyword");
     const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
-    // keywordError.setAttribute("aria-hidden", "true");
-
-    
-const keyWordVisibility = keywordError.getAttribute("aria-hidden");
-
-   
-
     keywordSubmit.addEventListener("click", function() {
 
-      
-       console.log(keyWordVisibility);
 
       const refineSearchObserver = new MutationObserver(() => {
           
-        if (keyWordVisibility === "false") {
+        var ariaHiddenHook = keywordError.getAttribute("aria-hidden");
 
-           // do stuff here
-          
-          keyWordInput.focus();
-     refineSearchObserver.disconnect();
+          if(ariaHiddenHook === "false") {
 
-        }
+            keywordError.setAttribute("aria-hidden", "false");
+            keyWordInput.focus();
+
+          } else { 
+
+            keywordError.setAttribute("aria-hidden", "true")
+
+          }
 
        
       });
