@@ -1302,32 +1302,34 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-       const keyWordVisibility = keywordError.getAttribute("aria-hidden");
-
       const refineSearchObserver = new MutationObserver(() => {
 
-        // Just testing this: 
+
+        // Let's run sme other tests
+
+        if(keywordError.length) {
+
+          console.log("the element exists");
+
+        } else { 
+
+          console.log("the element does not exist yet");
+
+        }
 
         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
-       
+        console.log(keyWordVisibility);
 
-        setTimeout(function() {
+        if (keyWordVisibility === "false") {
 
-           console.log(keyWordVisibility);
+          keyWordInput.focus();
 
-          if (keyWordVisibility === "false") {
+        } else { 
 
-            keyWordInput.focus();
+          console.log("it must be true");
 
-          } else { 
-
-            console.log("it must be true");
-
-
-          }
-
-        }, 500);
+        }
 
         refineSearchObserver.disconnect();
 
