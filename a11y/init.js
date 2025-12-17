@@ -1306,6 +1306,22 @@ function fixSearchFilters() {
 
       console.log(keywordValue);
 
+if ([...document.querySelectorAll("#applied-filters .filter-button")].some((button) => keywordValue === button.textContent.trim().toLowerCase())) {
+
+
+ console.log("we got a match");
+
+
+} else { 
+
+  console.log("we do not have a match");
+
+}
+
+
+
+
+
       const refineSearchObserver = new MutationObserver(() => {
 
 
