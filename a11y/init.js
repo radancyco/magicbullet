@@ -1310,7 +1310,7 @@ function fixSearchFilters() {
 
         if (keyWordVisibility === "false") {
 
-          console.log("refined search exists");
+          //console.log("refined search exists");
 
           keyWordInput.focus();
 
