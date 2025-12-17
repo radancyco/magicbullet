@@ -1304,6 +1304,16 @@ function fixSearchFilters() {
 
       const refineSearchObserver = new MutationObserver(() => {
 
+
+
+                // Just testing this: 
+
+      const keywordValue = keyWordInput?.value.trim().toLowerCase();
+
+      console.log(keywordValue);
+
+
+
         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
         console.log(keyWordVisibility);
@@ -1312,19 +1322,7 @@ function fixSearchFilters() {
 
           keyWordInput.focus();
 
-        } else { 
-
-
-        }
-
-
-        // Just testing this: 
-
-      const keywordValue = keyWordInput?.value.trim().toLowerCase();
-
-      if (!keywordValue) return;
-
-      console.log(keywordValue);
+        } 
 
         refineSearchObserver.disconnect();
 
