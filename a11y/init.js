@@ -1314,6 +1314,12 @@ function fixSearchFilters() {
 
         }
 
+        if (keyWordVisibility === "true") {
+
+          console.log("hello")
+
+        }
+
         refineSearchObserver.disconnect();
 
       });
