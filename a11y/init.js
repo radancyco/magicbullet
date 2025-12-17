@@ -1310,9 +1310,14 @@ function fixSearchFilters() {
 
         if (keyWordVisibility === "false") {
 
-          //console.log("refined search exists");
-
           keyWordInput.focus();
+
+        } else {
+
+          // we should assume success keyword added. 
+
+          this.focus();
+
 
         }
 
