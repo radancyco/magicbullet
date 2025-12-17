@@ -1304,6 +1304,8 @@ function fixSearchFilters() {
 
       const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
+      console.log(keyWordVisibility);
+
       if (keyWordVisibility === "false") {
 
         console.log("refined search exists");
