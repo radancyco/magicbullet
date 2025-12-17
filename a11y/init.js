@@ -1295,56 +1295,54 @@ function fixSearchFilters() {
 
     // Refined Search
 
+    if (window.__magicBulletKeywordPatchApplied) return;
+window.__magicBulletKeywordPatchApplied = true;
+
+
 
 // Test 
 
 
-const keywordInput = document.querySelector("#keyword-tag");
+// Refined Search – Keyword Add Accessibility Override
+
+if (!window.__magicBulletKeywordPatchApplied) {
+
+  window.__magicBulletKeywordPatchApplied = true;
+
+  const keywordInput = document.querySelector("#keyword-tag");
   const addButton = document.querySelector("#add-keyword");
   const messageEl = document.querySelector(".keyword-tag-error");
   const container = document.querySelector("#refined-search");
 
-  if (!keywordInput || !addButton || !messageEl || !container) return;
+  if (!keywordInput || !addButton || !messageEl || !container) {
+    return; // ← SAFE here because we're inside the guard, not the parent fix
+  }
 
-  // Ensure message is hidden by default
   messageEl.setAttribute("aria-hidden", "true");
 
-  /**
-   * Capture keyword BEFORE core script clears input
-   */
-  addButton.addEventListener("click", () => {
+  // Capture keyword before Radancy clears it
+  addButton.addEventListener("click", function () {
     const value = keywordInput.value.trim();
     if (value) {
       keywordInput.dataset.lastKeyword = value;
     }
   });
 
-  /**
-   * Central state reconciliation
-   * Runs AFTER core AJAX logic mutates the DOM
-   */
-  const reconcileState = () => {
-    const isButtonDisabled = addButton.hasAttribute("disabled");
-    const inputIsEmpty = keywordInput.value.trim() === "";
+  const reconcileState = function () {
+
+    const isDisabled = addButton.hasAttribute("disabled");
+    const inputEmpty = keywordInput.value.trim() === "";
     const lastKeyword = keywordInput.dataset.lastKeyword;
 
-    /**
-     * CASE 1: Unknown keyword
-     * → Button disabled
-     * → Move focus back to input
-     */
-    if (isButtonDisabled && !inputIsEmpty) {
+    // Unknown keyword → button disabled → restore focus to input
+    if (isDisabled && !inputEmpty) {
       keywordInput.focus();
       return;
     }
 
-    /**
-     * CASE 2: Successful keyword add
-     * → Input cleared
-     * → Keep focus on Add
-     * → Show success message
-     */
-    if (!isButtonDisabled && inputIsEmpty && lastKeyword) {
+    // Successful add → input cleared → keep focus on Add
+    if (!isDisabled && inputEmpty && lastKeyword) {
+
       messageEl.textContent = `"${lastKeyword}" has been successfully added.`;
       messageEl.classList.add("success");
       messageEl.setAttribute("aria-hidden", "false");
@@ -1354,17 +1352,14 @@ const keywordInput = document.querySelector("#keyword-tag");
     }
   };
 
-  /**
-   * Observe DOM + attribute mutations caused by core script
-   */
+  // Observe ONLY what matters
   const observer = new MutationObserver(reconcileState);
 
-  observer.observe(container, {
-    childList: true,
-    subtree: true,
+  observer.observe(addButton, {
     attributes: true,
     attributeFilter: ["disabled"]
   });
+}
 
 
 
