@@ -1307,7 +1307,7 @@ function fixSearchFilters() {
 
       // Observe the PARENT because #search-results may be replaced
 
-      const searchResults = document.querySelector("#search-results").parentNode;
+      const searchResults = document.querySelector("#search-filters").parentNode;
 
       const refineSearch = new MutationObserver(() => {
 
