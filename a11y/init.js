@@ -1293,81 +1293,15 @@ function fixSearchFilters() {
 
     });
 
-    
+    // Refined Search
 
+    const refinedSearch = searchFilters.querySelector("#refined-search");
 
+    if (refinedSearch) {
 
+      console.log("refined search exists");
 
-// Refined Search – Keyword Add Accessibility Override
-
-const keywordInput = document.querySelector("#keyword-tag");
-const addButton = document.querySelector("#add-keyword");
-const messageEl = document.querySelector(".keyword-tag-error");
-const container = document.querySelector("#refined-search");
-
-// Elements not ready yet — allow retry on next dynamic pass
-if (!keywordInput || !addButton || !messageEl || !container) {
-  return;
-}
-
-// Guard AFTER successful detection
-if (window.__magicBulletKeywordPatchApplied) return;
-window.__magicBulletKeywordPatchApplied = true;
-
-messageEl.setAttribute("aria-hidden", "true");
-
-addButton.addEventListener("click", function () {
-  const value = keywordInput.value.trim();
-  if (value) {
-    keywordInput.dataset.lastKeyword = value;
-    console.log("MagicBullet: captured keyword =", value);
-  }
-});
-
-const reconcileState = function () {
-
-  const isDisabled = addButton.hasAttribute("disabled");
-  const inputEmpty = keywordInput.value.trim() === "";
-  const lastKeyword = keywordInput.dataset.lastKeyword;
-
-  console.log("MagicBullet: reconcile", {
-    isDisabled,
-    inputEmpty,
-    lastKeyword
-  });
-
-  if (isDisabled && !inputEmpty) {
-    keywordInput.focus();
-    return;
-  }
-
-  if (!isDisabled && inputEmpty && lastKeyword) {
-
-    messageEl.textContent = `"${lastKeyword}" has been successfully added.`;
-    messageEl.classList.add("success");
-    messageEl.setAttribute("aria-hidden", "false");
-
-    addButton.focus();
-    delete keywordInput.dataset.lastKeyword;
-  }
-};
-
-const observer = new MutationObserver(reconcileState);
-
-observer.observe(addButton, {
-  attributes: true,
-  attributeFilter: ["disabled"]
-});
-
-console.log("MagicBullet: Keyword patch initialized");
-
-
-
-
-
-
-
-
+    }
 
   }
 
