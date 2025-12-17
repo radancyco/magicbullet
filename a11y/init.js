@@ -1315,7 +1315,11 @@ function fixSearchFilters() {
 
           console.log("the element does not exist yet");
 
+         
+
         }
+
+        console.log(keywordError);
 
         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
