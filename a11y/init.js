@@ -1293,17 +1293,12 @@ function fixSearchFilters() {
 
     });
 
-    // Refined Search
-
-    if (window.__magicBulletKeywordPatchApplied) return;
-window.__magicBulletKeywordPatchApplied = true;
+    
 
 
 
-// Test 
 
-
-// Refined Search – Keyword Add Accessibility Override
+    // Refined Search – Keyword Add Accessibility Override
 
 if (!window.__magicBulletKeywordPatchApplied) {
 
@@ -1314,8 +1309,10 @@ if (!window.__magicBulletKeywordPatchApplied) {
   const messageEl = document.querySelector(".keyword-tag-error");
   const container = document.querySelector("#refined-search");
 
+  // Bail safely without killing fixSearchFilters
   if (!keywordInput || !addButton || !messageEl || !container) {
-    return; // ← SAFE here because we're inside the guard, not the parent fix
+    console.log("MagicBullet: Keyword elements not ready yet");
+    return;
   }
 
   messageEl.setAttribute("aria-hidden", "true");
@@ -1325,6 +1322,7 @@ if (!window.__magicBulletKeywordPatchApplied) {
     const value = keywordInput.value.trim();
     if (value) {
       keywordInput.dataset.lastKeyword = value;
+      console.log("MagicBullet: captured keyword =", value);
     }
   });
 
@@ -1334,13 +1332,19 @@ if (!window.__magicBulletKeywordPatchApplied) {
     const inputEmpty = keywordInput.value.trim() === "";
     const lastKeyword = keywordInput.dataset.lastKeyword;
 
-    // Unknown keyword → button disabled → restore focus to input
+    console.log("MagicBullet: reconcile", {
+      isDisabled,
+      inputEmpty,
+      lastKeyword
+    });
+
+    // Unknown keyword → move focus to input
     if (isDisabled && !inputEmpty) {
       keywordInput.focus();
       return;
     }
 
-    // Successful add → input cleared → keep focus on Add
+    // Successful add → keep focus on Add
     if (!isDisabled && inputEmpty && lastKeyword) {
 
       messageEl.textContent = `"${lastKeyword}" has been successfully added.`;
@@ -1352,14 +1356,16 @@ if (!window.__magicBulletKeywordPatchApplied) {
     }
   };
 
-  // Observe ONLY what matters
   const observer = new MutationObserver(reconcileState);
 
   observer.observe(addButton, {
     attributes: true,
     attributeFilter: ["disabled"]
   });
+
+  console.log("MagicBullet: Keyword patch initialized");
 }
+
 
 
 
