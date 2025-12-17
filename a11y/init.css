@@ -262,3 +262,17 @@ opacity: 1;
   }
 
 }
+
+/* Refine Keyword */
+
+#refined-search {
+
+  #add-keyword[disabled] {
+  background-color: #ccc;
+  border-color: #ccc;
+  color: #666;
+  cursor: default;
+  pointer-events: none;
+  }
+
+}
