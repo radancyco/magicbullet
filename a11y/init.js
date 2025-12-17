@@ -1302,23 +1302,22 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-
       const refineSearchObserver = new MutationObserver(() => {
-          
-        var ariaHiddenHook = keywordError.getAttribute("aria-hidden");
 
-          if(ariaHiddenHook === "false") {
+        const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
-            keywordError.setAttribute("aria-hidden", "false");
-            keyWordInput.focus();
+        console.log(keyWordVisibility);
 
-          } else { 
+        if (keyWordVisibility === "false") {
 
-            keywordError.setAttribute("aria-hidden", "true")
+          console.log("refined search exists");
 
-          }
+          keyWordInput.focus();
 
-       
+        }
+
+        refineSearchObserver.disconnect();
+
       });
 
       // Watch for ANY child changes in filters 
@@ -1455,7 +1454,6 @@ function fixSearchPagination() {
         const getFirstLink = document.querySelector("#search-results a");
 
         getFirstLink.focus();
-
         searchResultsNavigation.disconnect();
 
       });
