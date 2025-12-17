@@ -139,9 +139,9 @@ function initDynamicPatch() {
   fixInputElements();
   fixMindReaderInput();
   fixSaveJobButton();
-  fixSearchFilters();
   fixSearchResults();
   fixSearchPagination();
+  fixSearchFilters();
 
 }
 
