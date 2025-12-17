@@ -1300,7 +1300,7 @@ function fixSearchFilters() {
     const keywordSubmit = refinedSearch.querySelector("#add-keyword");
     const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
-    keywordError.setAttribute("aria-hidden", "true");
+    // keywordError.setAttribute("aria-hidden", "true");
 
     
 
