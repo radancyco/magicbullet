@@ -1302,7 +1302,17 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-      const keyWordVisibility = keywordError.getAttribute("aria-hidden");
+     
+
+
+      // Observe the PARENT because #search-results may be replaced
+
+      const searchResults = document.querySelector("#search-results").parentNode;
+
+      const refineSearch = new MutationObserver(() => {
+
+
+         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
       console.log(keyWordVisibility);
 
@@ -1310,9 +1320,27 @@ function fixSearchFilters() {
 
         console.log("refined search exists");
 
-       // keyWordInput.focus();
+        // keyWordInput.focus();
 
       }
+
+        
+        refineSearch.disconnect();
+
+      });
+
+      // Watch for ANY child changes under the parent. We need to do this because #search-results is replaced instead of it's contents being replaced. 
+
+      refineSearch.observe(searchResults, { 
+
+        childList: true, 
+        subtree: true 
+
+      });
+
+
+
+
 
     });
 
