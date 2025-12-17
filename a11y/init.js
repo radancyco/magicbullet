@@ -1310,15 +1310,11 @@ function fixSearchFilters() {
 
         const searchResultsHasFocus = document.querySelector("#search-results a");
 
-        if (document.activeElement !== searchResultsHasFocus) {
-
-          if (keyWordVisibility === "false") {
+        if (document.activeElement !== searchResultsHasFocus && keyWordVisibility === "false") {
           
             // do stuff here
           
             keyWordInput.focus();
-
-          }
 
         }
 
