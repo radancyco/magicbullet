@@ -1315,12 +1315,11 @@ function fixSearchFilters() {
            // do stuff here
           
           keyWordInput.focus();
-          
+     refineSearchObserver.disconnect();
 
         }
 
-        refineSearchObserver.disconnect();
-
+       
       });
 
       // Watch for ANY child changes in filters 
