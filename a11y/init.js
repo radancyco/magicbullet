@@ -1310,7 +1310,7 @@ function fixSearchFilters() {
 
         console.log("refined search exists");
 
-        keyWordInput.focus();
+       // keyWordInput.focus();
 
       }
 
