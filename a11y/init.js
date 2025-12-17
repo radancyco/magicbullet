@@ -1312,7 +1312,7 @@ function fixSearchFilters() {
 
           keyWordInput.focus();
 
-        } else {
+        } else if (keyWordVisibility === "true") {
 
           // we should assume success keyword added. 
 
