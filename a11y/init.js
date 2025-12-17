@@ -1302,7 +1302,15 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-      const keywordValue = keyWordInput?.value.trim().toLowerCase();
+
+
+
+
+
+
+      const refineSearchObserver = new MutationObserver(() => {
+
+              const keywordValue = keyWordInput?.value.trim().toLowerCase();
 
       console.log(keywordValue);
 
@@ -1317,12 +1325,6 @@ if ([...document.querySelectorAll("#applied-filters .filter-button")].some((butt
   console.log("we do not have a match");
 
 }
-
-
-
-
-
-      const refineSearchObserver = new MutationObserver(() => {
 
 
 
