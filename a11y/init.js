@@ -1304,17 +1304,21 @@ function fixSearchFilters() {
 
 
 
+ const keywordValue = keyWordInput?.value.trim().toLowerCase();
 
+      console.log(keywordValue);
 
 
 
       const refineSearchObserver = new MutationObserver(() => {
 
-              const keywordValue = keyWordInput?.value.trim().toLowerCase();
+             
 
-      console.log(keywordValue);
 
-if ([...document.querySelectorAll("#applied-filters .filter-button")].some((button) => keywordValue === button.textContent.trim().toLowerCase())) {
+
+setTimeout(function() {
+
+        if ([...document.querySelectorAll("#applied-filters .filter-button")].some((button) => keywordValue === button.textContent.trim().toLowerCase())) {
 
 
  console.log("we got a match");
@@ -1325,6 +1329,11 @@ if ([...document.querySelectorAll("#applied-filters .filter-button")].some((butt
   console.log("we do not have a match");
 
 }
+
+      }, 500);
+
+
+
 
 
 
