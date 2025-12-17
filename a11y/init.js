@@ -139,9 +139,9 @@ function initDynamicPatch() {
   fixInputElements();
   fixMindReaderInput();
   fixSaveJobButton();
+  fixSearchFilters();
   fixSearchResults();
   fixSearchPagination();
-  fixSearchFilters();
 
 }
 
@@ -1300,11 +1300,11 @@ function fixSearchFilters() {
     const keywordSubmit = refinedSearch.querySelector("#add-keyword");
     const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
+    const keyWordVisibility = keywordError.getAttribute("aria-hidden");
+
     keywordSubmit.addEventListener("click", function() {
 
       const refineSearchObserver = new MutationObserver(() => {
-
-        const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
         // Fix: Conflict with pagination found. We need to see if first element does not have focus first. 
 
