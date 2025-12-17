@@ -1302,15 +1302,17 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
+      const keywordValue = keyWordInput?.value.trim().toLowerCase();
+
+      console.log(keywordValue);
+
       const refineSearchObserver = new MutationObserver(() => {
 
 
 
                 // Just testing this: 
 
-      const keywordValue = keyWordInput?.value.trim().toLowerCase();
-
-      console.log(keywordValue);
+      
 
 
 
