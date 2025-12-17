@@ -1307,20 +1307,12 @@ function fixSearchFilters() {
     keywordSubmit.addEventListener("click", function() {
 
       const refineSearchObserver = new MutationObserver(() => {
-
-        // Fix: Conflict with pagination found. We need to see if first element does not have focus first. 
-
-        const searchResultsHasFocus = document.querySelector("#search-results a");
-
-        if (document.activeElement !== searchResultsHasFocus) {
           
-          if (keyWordVisibility === "false") {
+        if (keyWordVisibility === "false") {
           
-            // do stuff here
+          // do stuff here
           
-            keyWordInput.focus();
-
-          }
+          keyWordInput.focus();
 
         }
 
@@ -1463,15 +1455,14 @@ function fixSearchPagination() {
 
         // Seeing a conflict with the refine keyword form which also manages focus, so we need to set aria-hidden to true on the keyword error so that focus does not fire. 
 
-        const keyWordError = document.querySelector(".keyword-tag-error");
+        const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
-        if (keyWordError) {
+        if (keyWordVisibility === "true") {
 
-          keyWordError.setAttribute("aria-hidden", "true");
+          getFirstLink.focus();
 
         }
 
-        getFirstLink.focus();
         searchResultsNavigation.disconnect();
 
       });
