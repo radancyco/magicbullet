@@ -1308,9 +1308,11 @@ function fixSearchFilters() {
 
         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
-        console.log(keyWordVisibility);
+       
 
         setTimeout(function() {
+
+           console.log(keyWordVisibility);
 
           if (keyWordVisibility === "false") {
 
