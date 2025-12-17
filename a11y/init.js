@@ -1312,15 +1312,6 @@ function fixSearchFilters() {
 
           keyWordInput.focus();
 
-        } else if (keyWordVisibility === "true") {
-
-          // we should assume success keyword added.
-          
-          console.log("okay, its true")
-
-          this.focus();
-
-
         }
 
         refineSearchObserver.disconnect();
