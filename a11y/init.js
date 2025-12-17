@@ -1463,7 +1463,7 @@ function fixSearchPagination() {
 
         if (keyWordError) {
 
-          keyWordError.setAttribute("aria-hidden", "false");
+          keyWordError.setAttribute("aria-hidden", "true");
 
         }
 
