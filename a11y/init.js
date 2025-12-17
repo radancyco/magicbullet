@@ -1296,6 +1296,81 @@ function fixSearchFilters() {
     // Refined Search
 
 
+// Test 
+
+
+const keywordInput = document.querySelector("#keyword-tag");
+  const addButton = document.querySelector("#add-keyword");
+  const messageEl = document.querySelector(".keyword-tag-error");
+  const container = document.querySelector("#refined-search");
+
+  if (!keywordInput || !addButton || !messageEl || !container) return;
+
+  // Ensure message is hidden by default
+  messageEl.setAttribute("aria-hidden", "true");
+
+  /**
+   * Capture keyword BEFORE core script clears input
+   */
+  addButton.addEventListener("click", () => {
+    const value = keywordInput.value.trim();
+    if (value) {
+      keywordInput.dataset.lastKeyword = value;
+    }
+  });
+
+  /**
+   * Central state reconciliation
+   * Runs AFTER core AJAX logic mutates the DOM
+   */
+  const reconcileState = () => {
+    const isButtonDisabled = addButton.hasAttribute("disabled");
+    const inputIsEmpty = keywordInput.value.trim() === "";
+    const lastKeyword = keywordInput.dataset.lastKeyword;
+
+    /**
+     * CASE 1: Unknown keyword
+     * → Button disabled
+     * → Move focus back to input
+     */
+    if (isButtonDisabled && !inputIsEmpty) {
+      keywordInput.focus();
+      return;
+    }
+
+    /**
+     * CASE 2: Successful keyword add
+     * → Input cleared
+     * → Keep focus on Add
+     * → Show success message
+     */
+    if (!isButtonDisabled && inputIsEmpty && lastKeyword) {
+      messageEl.textContent = `"${lastKeyword}" has been successfully added.`;
+      messageEl.classList.add("success");
+      messageEl.setAttribute("aria-hidden", "false");
+
+      addButton.focus();
+      delete keywordInput.dataset.lastKeyword;
+    }
+  };
+
+  /**
+   * Observe DOM + attribute mutations caused by core script
+   */
+  const observer = new MutationObserver(reconcileState);
+
+  observer.observe(container, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["disabled"]
+  });
+
+
+
+
+
+
 
   }
 
