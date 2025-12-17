@@ -1300,13 +1300,13 @@ function fixSearchFilters() {
     const keywordSubmit = refinedSearch.querySelector("#add-keyword");
     const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
+    keywordError.setAttribute("aria-hidden", "true");
+
     const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
     console.log(keyWordVisibility);
 
     keywordSubmit.addEventListener("click", function() {
-
-      keywordError.setAttribute("aria-hidden", "true");
 
       const refineSearchObserver = new MutationObserver(() => {
           
