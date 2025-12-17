@@ -1314,7 +1314,7 @@ function fixSearchFilters() {
 
         }
 
-        if (keyWordVisibility === "true") {
+        if (keyWordVisibility === null) {
 
           console.log("hello")
 
