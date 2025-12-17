@@ -1295,79 +1295,7 @@ function fixSearchFilters() {
 
     // Refined Search
 
-    const refinedSearch = searchFilters.querySelector("#refined-search");
 
-    if (refinedSearch) {
-
-      // Fix: The keyword error has aria-expanded on it. See https://axeauditor.dequecloud.com/api/v1/file/a0b5d962-b7ba-11ef-8a96-f734a030c6d5
-
-      const keyWordTagError = refinedSearch.querySelector(".keyword-tag-error");
-
-      if (keyWordTagError) {
-    
-        keyWordTagError.removeAttribute("aria-expanded");
-    
-      }
-
-      // Fix: Add aria-describedby to input and unique ID to error message. 
-
-      const refinedSearchInput = refinedSearch.querySelector("#keyword-tag");
-      const refinedSearchSubmit = refinedSearch.querySelector("#add-keyword");
-
-      keyWordTagError.setAttribute("id", "keyword-error-msg");
-      refinedSearchInput.setAttribute("aria-describedby", "keyword-error-msg");
-
-      refinedSearchSubmit.addEventListener("click", function() {
-
-
-         
-
-         const parent = searchFilters.parentNode;
-
-       const refinedSearchObserver = new MutationObserver(() => {
-
-       //   if (keyWordTagError.getAttribute("aria-hidden") === "false") {
-
-       //     refinedSearchInput.focus();
-
-        //  } else {
-
-           const keyWordValue = refinedSearchInput.value;
-
-         console.log(keyWordValue);
-
-             //     setTimeout(function() {
-
-   //  const appliedFilters = document.querySelector("#applied-filters");
-
-    // if (appliedFilters) {
-
-        // keyWordTagError.setAttribute("aria-hidden", "false");
-        keyWordTagError.classList.add("success");
-        keyWordTagError.textContent = keyWordValue + " added to list.";
-
-   //  }
-
-
-
-         //   }, 300);
-
-        //  }
-  
-       refinedSearchObserver.disconnect();
-
-       }); 
-
-       refinedSearchObserver.observe(parent, { 
-
-        childList: true, 
-       subtree: true 
-
-     });
-
-      });
-
-    }
 
   }
 
