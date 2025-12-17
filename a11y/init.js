@@ -1298,73 +1298,69 @@ function fixSearchFilters() {
 
 
 
-    // Refined Search – Keyword Add Accessibility Override
+// Refined Search – Keyword Add Accessibility Override
 
-if (!window.__magicBulletKeywordPatchApplied) {
+const keywordInput = document.querySelector("#keyword-tag");
+const addButton = document.querySelector("#add-keyword");
+const messageEl = document.querySelector(".keyword-tag-error");
+const container = document.querySelector("#refined-search");
 
-  window.__magicBulletKeywordPatchApplied = true;
+// Elements not ready yet — allow retry on next dynamic pass
+if (!keywordInput || !addButton || !messageEl || !container) {
+  return;
+}
 
-  const keywordInput = document.querySelector("#keyword-tag");
-  const addButton = document.querySelector("#add-keyword");
-  const messageEl = document.querySelector(".keyword-tag-error");
-  const container = document.querySelector("#refined-search");
+// Guard AFTER successful detection
+if (window.__magicBulletKeywordPatchApplied) return;
+window.__magicBulletKeywordPatchApplied = true;
 
-  // Bail safely without killing fixSearchFilters
-  if (!keywordInput || !addButton || !messageEl || !container) {
-    console.log("MagicBullet: Keyword elements not ready yet");
+messageEl.setAttribute("aria-hidden", "true");
+
+addButton.addEventListener("click", function () {
+  const value = keywordInput.value.trim();
+  if (value) {
+    keywordInput.dataset.lastKeyword = value;
+    console.log("MagicBullet: captured keyword =", value);
+  }
+});
+
+const reconcileState = function () {
+
+  const isDisabled = addButton.hasAttribute("disabled");
+  const inputEmpty = keywordInput.value.trim() === "";
+  const lastKeyword = keywordInput.dataset.lastKeyword;
+
+  console.log("MagicBullet: reconcile", {
+    isDisabled,
+    inputEmpty,
+    lastKeyword
+  });
+
+  if (isDisabled && !inputEmpty) {
+    keywordInput.focus();
     return;
   }
 
-  messageEl.setAttribute("aria-hidden", "true");
+  if (!isDisabled && inputEmpty && lastKeyword) {
 
-  // Capture keyword before Radancy clears it
-  addButton.addEventListener("click", function () {
-    const value = keywordInput.value.trim();
-    if (value) {
-      keywordInput.dataset.lastKeyword = value;
-      console.log("MagicBullet: captured keyword =", value);
-    }
-  });
+    messageEl.textContent = `"${lastKeyword}" has been successfully added.`;
+    messageEl.classList.add("success");
+    messageEl.setAttribute("aria-hidden", "false");
 
-  const reconcileState = function () {
+    addButton.focus();
+    delete keywordInput.dataset.lastKeyword;
+  }
+};
 
-    const isDisabled = addButton.hasAttribute("disabled");
-    const inputEmpty = keywordInput.value.trim() === "";
-    const lastKeyword = keywordInput.dataset.lastKeyword;
+const observer = new MutationObserver(reconcileState);
 
-    console.log("MagicBullet: reconcile", {
-      isDisabled,
-      inputEmpty,
-      lastKeyword
-    });
+observer.observe(addButton, {
+  attributes: true,
+  attributeFilter: ["disabled"]
+});
 
-    // Unknown keyword → move focus to input
-    if (isDisabled && !inputEmpty) {
-      keywordInput.focus();
-      return;
-    }
+console.log("MagicBullet: Keyword patch initialized");
 
-    // Successful add → keep focus on Add
-    if (!isDisabled && inputEmpty && lastKeyword) {
-
-      messageEl.textContent = `"${lastKeyword}" has been successfully added.`;
-      messageEl.classList.add("success");
-      messageEl.setAttribute("aria-hidden", "false");
-
-      addButton.focus();
-      delete keywordInput.dataset.lastKeyword;
-    }
-  };
-
-  const observer = new MutationObserver(reconcileState);
-
-  observer.observe(addButton, {
-    attributes: true,
-    attributeFilter: ["disabled"]
-  });
-
-  console.log("MagicBullet: Keyword patch initialized");
-}
 
 
 
