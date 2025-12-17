@@ -1302,9 +1302,15 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-      console.log("refined search exists");
+      const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
-      keyWordInput.focus();
+      if (keyWordVisibility === "false") {
+
+        console.log("refined search exists");
+
+        keyWordInput.focus();
+
+      }
 
     });
 
