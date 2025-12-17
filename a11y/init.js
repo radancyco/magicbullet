@@ -1312,13 +1312,19 @@ function fixSearchFilters() {
 
           keyWordInput.focus();
 
-        }
+        } else { 
 
-        if (keyWordVisibility === null) {
-
-          console.log("hello")
 
         }
+
+
+        // Just testing this: 
+
+      const keywordValue = keyWordInput?.value.trim().toLowerCase();
+
+      if (!keywordValue) return;
+
+      console.log(keywordValue);
 
         refineSearchObserver.disconnect();
 
