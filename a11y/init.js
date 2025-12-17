@@ -1306,15 +1306,9 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-      const refineSearchObserver = new MutationObserver(() => {
+      const refineSearchObserver = new MutationObserver(() => {=
           
-        if (keyWordVisibility === "false") {
-          
-          // do stuff here
-          
-          keyWordInput.focus();
-
-        }
+        keyWordInput.focus();
 
         refineSearchObserver.disconnect();
 
