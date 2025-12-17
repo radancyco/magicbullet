@@ -1306,14 +1306,7 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-       if (keyWordVisibility === "false") {
-
-        // do stuff here
-          
-        keyWordInput.focus();
-          
-
-      }
+      keywordError.setAttribute("aria-hidden", "true");
 
       const refineSearchObserver = new MutationObserver(() => {
           
