@@ -1302,56 +1302,28 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-
-
- const keywordValue = keyWordInput?.value.trim().toLowerCase();
-
-      console.log(keywordValue);
-
-
-
       const refineSearchObserver = new MutationObserver(() => {
 
-             
-
-
-
-setTimeout(function() {
-
-        if ([...document.querySelectorAll("#applied-filters .filter-button")].some((button) => keywordValue === button.textContent.trim().toLowerCase())) {
-
-
- console.log("we got a match");
-
-
-} else { 
-
-  console.log("we do not have a match");
-
-}
-
-      }, 500);
-
-
-
-
-
-
-                // Just testing this: 
-
-      
-
-
+        // Just testing this: 
 
         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
         console.log(keyWordVisibility);
 
-        if (keyWordVisibility === "false") {
+        setTimeout(function() {
 
-          keyWordInput.focus();
+          if (keyWordVisibility === "false") {
 
-        } 
+            keyWordInput.focus();
+
+          } else { 
+
+            console.log("it must be true");
+
+
+          }
+
+        }, 500);
 
         refineSearchObserver.disconnect();
 
