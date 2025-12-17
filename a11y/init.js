@@ -1310,7 +1310,15 @@ function fixSearchFilters() {
 
           // do stuff here
 
-          keyWordInput.focus();
+          // Fix: Conflict with pagination found. We need to see if first element does not have focus first. 
+
+          const searchResultsHasFocus = document.querySelector("#search-results a");
+
+          if (document.activeElement !== searchResultsHasFocus) {
+
+            keyWordInput.focus();
+
+          }
 
         }
 
