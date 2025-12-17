@@ -1457,6 +1457,16 @@ function fixSearchPagination() {
 
         const getFirstLink = document.querySelector("#search-results a");
 
+        // Seeing a conflict with the refine keyword form which also manages focus, so we need to set aria-hidden to true on the keyword error so that focus does not fire. 
+
+        const keyWordError = document.querySelector(".keyword-tag-error");
+
+        if (keyWordError) {
+
+          keyWordError.setAttribute("aria-hidden", "false");
+
+        }
+
         getFirstLink.focus();
         searchResultsNavigation.disconnect();
 
