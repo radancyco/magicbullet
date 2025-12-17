@@ -1302,6 +1302,8 @@ function fixSearchFilters() {
 
     const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
+    console.log(keyWordVisibility);
+
     keywordSubmit.addEventListener("click", function() {
 
       const refineSearchObserver = new MutationObserver(() => {
