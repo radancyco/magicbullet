@@ -1302,11 +1302,9 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-       const keyWordVisibility = keywordError.getAttribute("aria-hidden");
-
       const refineSearchObserver = new MutationObserver(() => {
 
-       
+        const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
         console.log(keyWordVisibility);
 
@@ -1316,7 +1314,9 @@ function fixSearchFilters() {
 
         } else if (keyWordVisibility === "true") {
 
-          // we should assume success keyword added. 
+          // we should assume success keyword added.
+          
+          console.log("okay, its true")
 
           this.focus();
 
