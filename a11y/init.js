@@ -1310,13 +1310,15 @@ function fixSearchFilters() {
 
       const keyWordValue = keyWordInput.value.trim();
 
-    if (keyWordValue !== null) {
+   
+
+      const refineSearchObserver = new MutationObserver(() => {
+
+         if (keyWordValue !== null) {
 
       keywordError.textContent = keyWordValue + " has been added."
 
     }
-
-      const refineSearchObserver = new MutationObserver(() => {
 
         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
