@@ -1128,12 +1128,14 @@ function fixSaveJobButton() {
       const jobId = this.dataset.jobId;
       const relatedSaveBtns = document.querySelectorAll(`.js-save-job-btn[data-job-id="${jobId}"]`);
 
-  relatedSaveBtns.forEach((saveBtn) => {
-    saveBtn.setAttribute("aria-pressed", pressedState);
+      // The reason we target data-job-id is in event two or more buttons exist on the page for the same job. Job detail pages often have more than one. 
+      // This works well wether we only need to target one button or multiple ones. 
 
-  });
+      relatedSaveBtns.forEach((saveBtn) => {
+    
+        saveBtn.setAttribute("aria-pressed", pressedState);
 
-
+      });
 
     });
 
