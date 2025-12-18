@@ -1125,27 +1125,19 @@ function fixSaveJobButton() {
     btn.addEventListener("click", function() {
 
       const pressedState = this.dataset.jobSaved === "true" ? "false" : "true";
-      const jobDescription = document.querySelector(".job-description");
+ 
 
       // Special case: job-details page with multiple save buttons
 
-      if(jobDescription) {
 
-        const scopedSaveBtns = jobDescription.querySelectorAll(".js-save-job-btn");
 
-        scopedSaveBtns.forEach((saveBtn) => {
 
-          saveBtn.setAttribute("aria-pressed", pressedState);
-
-        });
-
-      } else {
 
         // Default behavior (existing)
 
         this.setAttribute("aria-pressed", pressedState);
 
-      }
+
 
     });
 
