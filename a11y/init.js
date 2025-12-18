@@ -1159,11 +1159,11 @@ if (recentlyViewedEl) {
     }
 
     if (link) {
-      if (isActive) {
-        link.setAttribute("aria-label", "Hello World");
-      } else {
-        link.removeAttribute("aria-label");
-      }
+      if (!isActive) {
+  link.setAttribute("aria-label", "Hello World");
+} else {
+  link.removeAttribute("aria-label");
+}
     }
   };
 
