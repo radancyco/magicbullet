@@ -1297,10 +1297,10 @@ function fixSearchFilters() {
 
     const refinedSearch = searchFilters.querySelector("#refined-search");
     const keyWordInput = refinedSearch.querySelector("#keyword-tag");
-
+    const keywordSubmit = refinedSearch.querySelector("#add-keyword");
     
 
-
+    keywordSubmit.addEventListener("click", function() {
 
 
 
@@ -1308,8 +1308,6 @@ function fixSearchFilters() {
 
 
         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
-
-        
 
         console.log(keyWordVisibility);
 
@@ -1323,7 +1321,7 @@ function fixSearchFilters() {
 
         }
 
-        refineSearchObserver.disconnect();
+         refineSearchObserver.disconnect();
 
       });
 
@@ -1336,6 +1334,7 @@ function fixSearchFilters() {
 
       });
 
+    });
 
 
   }
