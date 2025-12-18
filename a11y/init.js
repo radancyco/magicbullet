@@ -1097,8 +1097,6 @@ function fixJobMap() {
 function fixSaveJobButton() {
 
   const btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
-  const isJobDetails = document.querySelector(".job-description");
-  const hasMultipleSaveBtns = btnSaveJobs.length > 1;
 
   btnSaveJobs.forEach((btn) => {
 
@@ -1127,12 +1125,15 @@ function fixSaveJobButton() {
     btn.addEventListener("click", function() {
 
       const pressedState = this.dataset.jobSaved === "true" ? "false" : "true";
+      const jobDescription = document.querySelector(".job-description");
 
       // Special case: job-details page with multiple save buttons
 
-      if(isJobDetails && hasMultipleSaveBtns) {
+      if(jobDescription) {
 
-        btnSaveJobs.forEach((saveBtn) => {
+        const scopedSaveBtns = jobDescription.querySelectorAll(".js-save-job-btn");
+
+        scopedSaveBtns.forEach((saveBtn) => {
 
           saveBtn.setAttribute("aria-pressed", pressedState);
 
