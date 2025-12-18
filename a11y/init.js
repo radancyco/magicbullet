@@ -1304,6 +1304,8 @@ function fixSearchFilters() {
     keywordError.removeAttribute("aria-expanded");
     keywordError.removeAttribute("style");
 
+    keywordError.textContent = keyWordInput.value.trim() + "has been added."
+
     keywordSubmit.addEventListener("click", function() {
 
       const refineSearchObserver = new MutationObserver(() => {
@@ -1314,6 +1316,7 @@ function fixSearchFilters() {
 
         if (keyWordVisibility === "false") {
 
+          keywordError.textContent = "";
           keyWordInput.focus();
 
         } 
