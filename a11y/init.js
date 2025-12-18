@@ -1097,7 +1097,7 @@ function fixJobMap() {
 function fixSaveJobButton() {
 
   const btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
-  const isJobDetails = a11yBody && a11yBody === "job";
+  const isJobDetails = document.querySelector(".job-description");
   const hasMultipleSaveBtns = btnSaveJobs.length > 1;
 
   btnSaveJobs.forEach((btn) => {
@@ -1112,7 +1112,7 @@ function fixSaveJobButton() {
     btn.removeAttribute("type");
     btn.setAttribute("role", "button");
 
-    // Fix: aria-pressed required, which will properly convey state of the button.
+    // Fix: aria-pressed required, which will properly convey state of the button. Load correct state based on data-job-saved attr.
 
     if(btn.dataset.jobSaved === "true") {
 
