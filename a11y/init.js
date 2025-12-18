@@ -1308,6 +1308,10 @@ function fixSearchFilters() {
 
       const refineSearchObserver = new MutationObserver(() => {
 
+        const keywordError = refinedSearch.querySelector(".keyword-tag-error");
+
+      console.log(keywordError);
+
         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
         
