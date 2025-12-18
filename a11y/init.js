@@ -1155,7 +1155,7 @@ function fixSaveJobButton() {
         }
       }
     }
-  }, 10); // 10ms is usually enough for other scripts to update
+  }, 300); // 10ms is usually enough for other scripts to update
 
 
     });
