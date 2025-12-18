@@ -1304,11 +1304,13 @@ function fixSearchFilters() {
 
       const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
+      console.log(keywordError);
+
       const refineSearchObserver = new MutationObserver(() => {
 
         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
-        console.log(keywordError);
+        
 
         console.log(keyWordVisibility);
 
