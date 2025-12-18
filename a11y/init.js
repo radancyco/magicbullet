@@ -1298,9 +1298,11 @@ function fixSearchFilters() {
     const refinedSearch = searchFilters.querySelector("#refined-search");
     const keyWordInput = refinedSearch.querySelector("#keyword-tag");
     const keywordSubmit = refinedSearch.querySelector("#add-keyword");
-    const keywordError = document.querySelector(".keyword-tag-error");
+    
 
     keywordSubmit.addEventListener("click", function() {
+
+      const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
       // Let's run sme other tests
 
