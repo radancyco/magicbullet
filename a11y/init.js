@@ -1124,18 +1124,17 @@ function fixSaveJobButton() {
 
 btn.addEventListener("click", function() {
 
-  // Determine next pressed state based on current aria-pressed
-  const isPressed = this.getAttribute("aria-pressed") === "true";
-  const pressedState = isPressed ? "false" : "true";
+  // Determine next pressed state based on dataset (source of truth)
+  const pressedState = this.dataset.jobSaved === "true" ? "false" : "true";
 
   const jobId = this.dataset.jobId;
 
-  // Update all buttons with the same job ID
+  // Update all buttons with the same job ID (including the clicked button)
   const relatedSaveBtns = document.querySelectorAll(`.js-save-job-btn[data-job-id="${jobId}"]`);
 
   relatedSaveBtns.forEach((saveBtn) => {
     saveBtn.setAttribute("aria-pressed", pressedState);
-    saveBtn.dataset.jobSaved = pressedState; // keep dataset in sync
+
   });
 
 });
