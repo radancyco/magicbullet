@@ -1301,6 +1301,8 @@ function fixSearchFilters() {
     const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
     keywordError.setAttribute("id", "keyword-error-msg");
+    keywordError.removeAttribute("aria-expanded");
+    keywordError.removeAttribute("style");
 
     keywordSubmit.addEventListener("click", function() {
 
@@ -1314,11 +1316,7 @@ function fixSearchFilters() {
 
           keyWordInput.focus();
 
-        } else { 
-
-          console.log("it must be true");
-
-        }
+        } 
 
         refineSearchObserver.disconnect();
 
