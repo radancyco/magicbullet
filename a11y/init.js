@@ -1096,11 +1096,11 @@ function fixJobMap() {
 
 function fixSaveJobButton() {
 
-  var btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
-  var isJobDetails = document.body && document.body.id === "job";
-  var hasMultipleSaveButtons = btnSaveJobs.length > 1;
+  const btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
+  const isJobDetails = a11yBody && a11yBody === "job";
+  const hasMultipleSaveBtns = btnSaveJobs.length > 1;
 
-  btnSaveJobs.forEach(function(btn){
+  btnSaveJobs.forEach((btn) => {
 
     // Fix: Custom label needed to override the text toggle that delivery often adds (or removes). Text changes should never be used to convey state.
     // TODO: Add language support.
@@ -1113,7 +1113,7 @@ function fixSaveJobButton() {
     btn.setAttribute("role", "button");
 
     // Fix: aria-pressed required, which will properly convey state of the button.
-  
+
     if(btn.dataset.jobSaved === "true") {
 
       btn.setAttribute("aria-pressed", "true");
@@ -1126,19 +1126,23 @@ function fixSaveJobButton() {
 
     btn.addEventListener("click", function() {
 
-      var newState = this.dataset.jobSaved === "true" ? "false" : "true";
+      const pressedState = this.dataset.jobSaved === "true" ? "false" : "true";
 
       // Special case: job-details page with multiple save buttons
-      if(isJobDetails && hasMultipleSaveButtons) {
 
-        btnSaveJobs.forEach(function(saveBtn) {
-          saveBtn.setAttribute("aria-pressed", newState);
+      if(isJobDetails && hasMultipleSaveBtns) {
+
+        btnSaveJobs.forEach((saveBtn) => {
+
+          saveBtn.setAttribute("aria-pressed", pressedState);
+
         });
 
       } else {
 
         // Default behavior (existing)
-        this.setAttribute("aria-pressed", newState);
+
+        this.setAttribute("aria-pressed", pressedState);
 
       }
 
