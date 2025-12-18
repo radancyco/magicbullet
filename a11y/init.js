@@ -1144,7 +1144,7 @@ function fixSaveJobButton() {
 
 
   // First try to find a link in parent chain
-  let link = el.closest('a[href*="saved-jobs"]');
+  let link = recentlyViewedEls.closest('a[href*="saved-jobs"]');
 
   // If not found, look inside children
   if (!link) {
