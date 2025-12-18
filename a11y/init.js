@@ -1138,14 +1138,10 @@ function fixSaveJobButton() {
 
       // Fix: In addition to updating the save job button, we also need to update the "Save Job" link, often found in the header of each site. 
 
-      //1. Check all buttons to see if any are pressed. 
-      //2. If so, append a messagt to the link
-      //3. else remove MessageChannel. 
-
       const recentlyViewedEls = document.querySelectorAll('[data-recently-viewed-jobs]');
 
 recentlyViewedEls.forEach((el) => {
-  const isActive = el.dataset.recentlyViewedJobs === "true";
+  const isActive = document.querySelectorAll(".js-save-job-btn[aria-pressed=true]")
 
   // First try to find a link in parent chain
   let link = el.closest('a[href*="saved-jobs"]');
