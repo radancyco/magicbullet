@@ -1302,30 +1302,9 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-
+      const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
       const refineSearchObserver = new MutationObserver(() => {
-
-              const keywordError = refinedSearch.querySelector(".keyword-tag-error");
-
-      // Let's run sme other tests
-
-        if(keywordError.length) {
-
-          console.log("the element exists");
-
-        } else { 
-
-          console.log("the element does not exist yet");
-
-         
-
-        }
-
-        console.log(keywordError);
-
-
-        
 
         const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
