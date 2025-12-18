@@ -1300,6 +1300,8 @@ function fixSearchFilters() {
     const keywordSubmit = refinedSearch.querySelector("#add-keyword");
     const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
+    keywordError.setAttribute("id", "keyword-error-msg");
+
     keywordSubmit.addEventListener("click", function() {
 
       const refineSearchObserver = new MutationObserver(() => {
