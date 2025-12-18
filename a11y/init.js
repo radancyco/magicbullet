@@ -1097,7 +1097,7 @@ function fixJobMap() {
 function fixSaveJobButton() {
 
   var btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
-  var isJobDetails = document.body && document.body.id === "job-details";
+  var isJobDetails = document.body && document.body.id === "job";
   var hasMultipleSaveButtons = btnSaveJobs.length > 1;
 
   btnSaveJobs.forEach(function(btn){
