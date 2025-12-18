@@ -1129,13 +1129,40 @@ function fixSaveJobButton() {
       const relatedSaveBtns = document.querySelectorAll(`.js-save-job-btn[data-job-id="${jobId}"]`);
 
       // The reason we target data-job-id is in event two or more buttons exist on the page for the same job. Job detail pages often have more than one. 
-      // This works well wether we only need to target one button or multiple ones. 
 
       relatedSaveBtns.forEach((saveBtn) => {
     
         saveBtn.setAttribute("aria-pressed", pressedState);
 
       });
+
+      // Fix: In addition to updating the save job button, we also need to update the "Save Job" link, often found in the header of each site. 
+
+      //1. Check all buttons to see if any are pressed. 
+      //2. If so, append a messagt to the link
+      //3. else remove MessageChannel. 
+
+      const recentlyViewedEls = document.querySelectorAll('[data-recently-viewed-jobs]');
+
+recentlyViewedEls.forEach((el) => {
+  const isActive = el.dataset.recentlyViewedJobs === "true";
+
+  // First try to find a link in parent chain
+  let link = el.closest('a[href*="saved-jobs"]');
+
+  // If not found, look inside children
+  if (!link) {
+    link = el.querySelector('a[href*="saved-jobs"]');
+  }
+
+  if (link) {
+    if (isActive) {
+      link.setAttribute('aria-label', 'Hello World'); // or whatever label
+    } else {
+      link.removeAttribute('aria-label');
+    }
+  }
+});
 
     });
 
