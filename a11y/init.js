@@ -1136,26 +1136,61 @@ function fixSaveJobButton() {
 
       });
 
-  setTimeout(() => {
-    const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
 
-    if (recentlyViewedEl) {
-      const isActive = recentlyViewedEl.getAttribute("data-recently-viewed-jobs") === "true";
 
-      let link = recentlyViewedEl.closest('a[href*="saved-jobs"]');
-      if (!link) {
-        link = recentlyViewedEl.querySelector('a[href*="saved-jobs"]');
-      }
 
-      if (link) {
-        if (isActive) {
-          link.setAttribute('aria-label', 'Hello World');
-        } else {
-          link.removeAttribute('aria-label');
-        }
+
+
+
+      // Fix: Update "Save Job" link when recently viewed state changes
+
+const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
+
+if (recentlyViewedEl) {
+
+  const updateAriaLabel = () => {
+    const isActive =
+      recentlyViewedEl.getAttribute("data-recently-viewed-jobs") === "true";
+
+    let link = recentlyViewedEl.closest('a[href*="saved-jobs"]');
+
+    if (!link) {
+      link = recentlyViewedEl.querySelector('a[href*="saved-jobs"]');
+    }
+
+    if (link) {
+      if (isActive) {
+        link.setAttribute("aria-label", "Hello World");
+      } else {
+        link.removeAttribute("aria-label");
       }
     }
-  }, 300); // 10ms is usually enough for other scripts to update
+  };
+
+  // Run once in case it’s already set on load
+  updateAriaLabel();
+
+  // Observe changes to the attribute (this is the key)
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (
+        mutation.type === "attributes" &&
+        mutation.attributeName === "data-recently-viewed-jobs"
+      ) {
+        updateAriaLabel();
+      }
+    });
+  });
+
+  observer.observe(recentlyViewedEl, {
+    attributes: true,
+    attributeFilter: ["data-recently-viewed-jobs"]
+  });
+}
+
+
+
+
 
 
     });
