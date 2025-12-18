@@ -1148,7 +1148,7 @@ function fixSaveJobButton() {
 
   // If not found, look inside children
   if (!link) {
-    link = el.querySelector('a[href*="saved-jobs"]');
+    link = recentlyViewedEls.querySelector('a[href*="saved-jobs"]');
   }
 
   if (link) {
