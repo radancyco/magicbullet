@@ -1092,11 +1092,13 @@ function fixJobMap() {
 
 }
 
-// Accessibility Patch: Save Job Button
+// Accessibility Patch: Save Job Button 
 
 function fixSaveJobButton() {
 
   var btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
+  var isJobDetails = document.body && document.body.id === "job-details";
+  var hasMultipleSaveButtons = btnSaveJobs.length > 1;
 
   btnSaveJobs.forEach(function(btn){
 
@@ -1124,13 +1126,19 @@ function fixSaveJobButton() {
 
     btn.addEventListener("click", function() {
 
-      if(btn.dataset.jobSaved === "true") {
+      var newState = this.dataset.jobSaved === "true" ? "false" : "true";
 
-        btn.setAttribute("aria-pressed", "false");
+      // Special case: job-details page with multiple save buttons
+      if(isJobDetails && hasMultipleSaveButtons) {
+
+        btnSaveJobs.forEach(function(saveBtn) {
+          saveBtn.setAttribute("aria-pressed", newState);
+        });
 
       } else {
 
-        btn.setAttribute("aria-pressed", "true");
+        // Default behavior (existing)
+        this.setAttribute("aria-pressed", newState);
 
       }
 
