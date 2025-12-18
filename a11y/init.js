@@ -1142,9 +1142,7 @@ function fixSaveJobButton() {
 
 
 
-      // Fix: Update "Save Job" link when recently viewed state changes
-
-const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
+      const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
 
 if (recentlyViewedEl) {
 
@@ -1153,24 +1151,23 @@ if (recentlyViewedEl) {
       recentlyViewedEl.getAttribute("data-recently-viewed-jobs") === "true";
 
     let link = recentlyViewedEl.closest('a[href*="saved-jobs"]');
-
     if (!link) {
       link = recentlyViewedEl.querySelector('a[href*="saved-jobs"]');
     }
 
-    if (link) {
-      if (!isActive) {
-  link.setAttribute("aria-label", "Hello World");
-} else {
-  link.removeAttribute("aria-label");
-}
+    if (!link) return;
+
+    if (isActive) {
+      link.setAttribute("aria-label", "Hello World");
+    } else {
+      link.removeAttribute("aria-label");
     }
   };
 
-  // Run once in case it’s already set on load
+  // Run once on load
   updateAriaLabel();
 
-  // Observe changes to the attribute (this is the key)
+  // React ONLY to attribute changes
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (
@@ -1187,6 +1184,7 @@ if (recentlyViewedEl) {
     attributeFilter: ["data-recently-viewed-jobs"]
   });
 }
+
 
 
 
