@@ -1308,12 +1308,12 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-      const keyWordValue = keyWordInput.value.trim();
+      
 
    
 
       const refineSearchObserver = new MutationObserver(() => {
-
+const keyWordValue = keyWordInput.value.trim();
          if (keyWordValue !== null) {
 
       keywordError.textContent = keyWordValue + " has been added."
