@@ -1302,7 +1302,11 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-      const keywordError = refinedSearch.querySelector(".keyword-tag-error");
+
+
+      const refineSearchObserver = new MutationObserver(() => {
+
+              const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
       // Let's run sme other tests
 
@@ -1319,8 +1323,6 @@ function fixSearchFilters() {
         }
 
         console.log(keywordError);
-
-      const refineSearchObserver = new MutationObserver(() => {
 
 
         
