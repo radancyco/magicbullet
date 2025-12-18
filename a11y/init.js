@@ -1124,13 +1124,13 @@ function fixSaveJobButton() {
 
     btn.addEventListener("click", function() {
 
-      if(this.dataset.jobSaved === "true") {
+      if(btn.dataset.jobSaved === "true") {
 
-        this.setAttribute("aria-pressed", "false");
+        btn.setAttribute("aria-pressed", "false");
 
       } else {
 
-        this.setAttribute("aria-pressed", "true");
+        btn.setAttribute("aria-pressed", "true");
 
       }
 
