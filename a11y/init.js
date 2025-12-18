@@ -1310,7 +1310,7 @@ function fixSearchFilters() {
 
       const keyWordValue = keyWordInput.value.trim();
 
-    if (keyWordValue !== null) {
+    if (keyWordValue !== null || keyWordValue !== "") {
 
       keywordError.textContent = keyWordValue + " has been added."
 
