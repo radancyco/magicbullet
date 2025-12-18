@@ -1122,27 +1122,20 @@ function fixSaveJobButton() {
 
     }
 
-btn.addEventListener("click", function() {
+    btn.addEventListener("click", function() {
 
-  // Determine next pressed state based on dataset (source of truth)
-  const pressedState = this.dataset.jobSaved === "true" ? "false" : "true";
-
-  const jobId = this.dataset.jobId;
-
-  // Update all buttons with the same job ID (including the clicked button)
-  const relatedSaveBtns = document.querySelectorAll(`.js-save-job-btn[data-job-id="${jobId}"]`);
+      const pressedState = this.dataset.jobSaved === "true" ? "false" : "true";
+      const jobId = this.dataset.jobId;
+      const relatedSaveBtns = document.querySelectorAll(`.js-save-job-btn[data-job-id="${jobId}"]`);
 
   relatedSaveBtns.forEach((saveBtn) => {
     saveBtn.setAttribute("aria-pressed", pressedState);
 
   });
 
-});
 
 
-
-
-
+    });
 
   });
 
