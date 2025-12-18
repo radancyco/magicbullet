@@ -1304,15 +1304,17 @@ function fixSearchFilters() {
     keywordError.removeAttribute("aria-expanded");
     keywordError.removeAttribute("style");
 
-    const keyWordValue = keyWordInput.value.trim();
+    
+
+    keywordSubmit.addEventListener("click", function() {
+
+      const keyWordValue = keyWordInput.value.trim();
 
     if (keyWordValue !== null) {
 
       keywordError.textContent = keyWordValue + " has been added."
 
     }
-
-    keywordSubmit.addEventListener("click", function() {
 
       const refineSearchObserver = new MutationObserver(() => {
 
