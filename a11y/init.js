@@ -1138,10 +1138,10 @@ function fixSaveJobButton() {
 
       // Fix: In addition to updating the save job button, we also need to update the "Save Job" link, often found in the header of each site. 
 
-      const recentlyViewedEls = document.querySelector('[data-recently-viewed-jobs]');
+      const recentlyViewedEls = document.querySelector(".recently-viewed-job-list").getAttribute("data-recently-viewed-jobs");
 
 
-  const isActive = recentlyViewedEls === "true";
+
 
   // First try to find a link in parent chain
   let link = el.closest('a[href*="saved-jobs"]');
@@ -1152,7 +1152,7 @@ function fixSaveJobButton() {
   }
 
   if (link) {
-    if (isActive) {
+    if (recentlyViewedEls === "true") {
       link.setAttribute('aria-label', 'Hello World'); // or whatever label
     } else {
       link.removeAttribute('aria-label');
