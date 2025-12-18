@@ -1136,28 +1136,29 @@ function fixSaveJobButton() {
 
       });
 
-      // Fix: In addition to updating the save job button, we also need to update the "Save Job" link, often found in the header of each site. 
+// Fix: In addition to updating the save job button, we also need to update the "Save Job" link, often found in the header of each site. 
 
-      const recentlyViewedEls = document.querySelector(".recently-viewed-job-list").getAttribute("data-recently-viewed-jobs");
+const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
 
-
-
+if (recentlyViewedEl) {
+  const isActive = recentlyViewedEl.getAttribute("data-recently-viewed-jobs") === "true";
 
   // First try to find a link in parent chain
-  let link = recentlyViewedEls.closest('a[href*="saved-jobs"]');
+  let link = recentlyViewedEl.closest('a[href*="saved-jobs"]');
 
   // If not found, look inside children
   if (!link) {
-    link = recentlyViewedEls.querySelector('a[href*="saved-jobs"]');
+    link = recentlyViewedEl.querySelector('a[href*="saved-jobs"]');
   }
 
   if (link) {
-    if (recentlyViewedEls === "true") {
-      link.setAttribute('aria-label', 'Hello World'); // or whatever label
+    if (isActive) {
+      link.setAttribute('aria-label', 'Hello World'); // or your dynamic label
     } else {
       link.removeAttribute('aria-label');
     }
   }
+}
 
 
     });
