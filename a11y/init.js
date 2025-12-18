@@ -1136,28 +1136,43 @@ function fixSaveJobButton() {
 
       });
 
-// Fix: In addition to updating the save job button, we also need to update the "Save Job" link, often found in the header of each site. 
-
+// Target the element with the attribute
 const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
 
 if (recentlyViewedEl) {
-  const isActive = recentlyViewedEl.getAttribute("data-recently-viewed-jobs") === "true";
 
-  // First try to find a link in parent chain
-  let link = recentlyViewedEl.closest('a[href*="saved-jobs"]');
+  // Function to update aria-label on the relevant link
+  const updateLinkAriaLabel = () => {
+    const isActive = recentlyViewedEl.getAttribute("data-recently-viewed-jobs") === "true";
 
-  // If not found, look inside children
-  if (!link) {
-    link = recentlyViewedEl.querySelector('a[href*="saved-jobs"]');
-  }
-
-  if (link) {
-    if (isActive) {
-      link.setAttribute('aria-label', 'Hello World'); // or your dynamic label
-    } else {
-      link.removeAttribute('aria-label');
+    // Look for link in parent or child
+    let link = recentlyViewedEl.closest('a[href*="saved-jobs"]');
+    if (!link) {
+      link = recentlyViewedEl.querySelector('a[href*="saved-jobs"]');
     }
-  }
+
+    if (link) {
+      if (isActive) {
+        link.setAttribute('aria-label', 'Hello World'); // or dynamic label
+      } else {
+        link.removeAttribute('aria-label');
+      }
+    }
+  };
+
+  // Run once in case attribute is already true
+  updateLinkAriaLabel();
+
+  // Observe changes to data-recently-viewed-jobs
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'data-recently-viewed-jobs') {
+        updateLinkAriaLabel();
+      }
+    }
+  });
+
+  observer.observe(recentlyViewedEl, { attributes: true });
 }
 
 
