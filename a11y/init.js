@@ -1160,7 +1160,6 @@ function fixSaveJobButton() {
 
 let labelText = link.textContent.trim().normalize('NFKC');
 
-// Match the first numeric character(s) anywhere in the string (Unicode digits included)
 const numberMatch = labelText.match(/\p{Nd}+/u);
 
 let number = null;
@@ -1168,9 +1167,8 @@ let number = null;
 if (numberMatch) {
   number = numberMatch[0];
 
-  // Remove the number from the original string
-  const numberIndex = labelText.indexOf(number);
-  labelText = (labelText.slice(0, numberIndex) + labelText.slice(numberIndex + number.length)).trim();
+  // Use a regex to remove the first occurrence of that number safely
+  labelText = labelText.replace(new RegExp(number), '').trim();
 }
 
 const savedJobsLabel = number
