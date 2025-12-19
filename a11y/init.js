@@ -1205,10 +1205,6 @@ function fixSaveJobButton() {
 
     });
 
-    // Run once on load
-  
-    updateSavedJobsLink();
-
   }
 
 }
