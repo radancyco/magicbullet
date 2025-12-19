@@ -1376,15 +1376,16 @@ function fixSearchFilters() {
 
     
 
-   // keywordSubmit.addEventListener("click", function() {
+    keywordSubmit.addEventListener("click", function() {
 
       const keyWordValue = keyWordInput.value.trim();
 
-    if (keyWordValue !== null || keyWordValue !== "") {
+      keywordError.textContent = keyWordValue + " has been added."
 
-    //   keywordError.textContent = keyWordValue + " has been added."
+    });
 
-    }
+
+    
 
       const refineSearchObserver = new MutationObserver(() => {
 
@@ -1395,7 +1396,7 @@ function fixSearchFilters() {
         if (keyWordVisibility === "false") {
 
           keywordError.textContent = "";
-          keyWordInput.focus(); 
+          keyWordInput.focus();
 
         } 
 
@@ -1412,7 +1413,7 @@ function fixSearchFilters() {
 
       });
 
-  //  });
+    
 
 
   }
