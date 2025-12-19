@@ -1158,22 +1158,24 @@ function fixSaveJobButton() {
 
     if (!link) return;
 
-   let labelText = link.textContent.trim();
+let labelText = link.textContent.trim().normalize('NFKC');
 
-// Find the first number in the string
-const numberMatch = labelText.match(/\d+/u);
+// Match the first numeric character(s) anywhere in the string (Unicode digits included)
+const numberMatch = labelText.match(/\p{Nd}+/u);
 
 let number = null;
 
 if (numberMatch) {
   number = numberMatch[0];
 
-  // Remove that number from the original string
+  // Remove the number from the original string
   const numberIndex = labelText.indexOf(number);
   labelText = (labelText.slice(0, numberIndex) + labelText.slice(numberIndex + number.length)).trim();
 }
 
-const savedJobsLabel = number? `${number} ${labelText} (View saved jobs, with numner)`: `${labelText} (View saved jobs. no number)`;
+const savedJobsLabel = number
+  ? `${number} ${labelText} (View saved jobs)`
+  : `${labelText} (View saved jobs)`;
 
 
     if (isActive) {
