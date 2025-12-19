@@ -1190,14 +1190,16 @@ function fixSaveJobButton() {
 
   };
 
-  const recentlyViewedParent = document.querySelector(recentlyViewedJobListTarget)?.parentNode;
+  const recentlyViewedParent = document.querySelector(recentlyViewedJobListTarget).parentNode;
 
   if (recentlyViewedParent) {
 
     const observer = new MutationObserver(updateSavedJobsLink);
 
     observer.observe(recentlyViewedParent, {
-
+  
+      subtree: true,
+      childList: true,
       attributes: true,
       attributeFilter: ["data-recently-viewed-jobs"]
 
