@@ -1154,7 +1154,7 @@ function fixSaveJobButton() {
 
     const isActive = recentlyViewedJobList.getAttribute("data-recently-viewed-jobs") === "true";
 
-    let link = recentlyViewedJobList.closest(savedJobsLinkSelector) || recentlyViewedJobList.querySelector(savedJobsLinkSelector);
+    let link = recentlyViewedJobList.closest(savedJobsLinkSelector) || recentlyViewedJobList.querySelector(savedJobsLinkSelector) || recentlyViewedJobList;
 
     if (!link) return;
 
@@ -1170,7 +1170,7 @@ function fixSaveJobButton() {
 
       // Use a regex to remove the first occurrence of that number safely
   
-      labelText = labelText.replace(new RegExp(number), '').trim();
+      labelText = labelText.replace(new RegExp(number), "").trim();
 
     }
 
