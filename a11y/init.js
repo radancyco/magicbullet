@@ -1158,20 +1158,25 @@ function fixSaveJobButton() {
 
     if (!link) return;
 
-    let labelText = link.textContent.trim();
+   let labelText = link.textContent.trim();
 
-// Match a number at the end of the string after letters
-const match = labelText.match(/(\p{L}.*?)\s*(\p{N}+)\s*$/u);
+// Find the first number in the string
+const numberMatch = labelText.match(/\d+/u);
 
-let savedJobsLabel;
+let number = null;
 
-if (match) {
-  // match[1] = text before the number, match[2] = the number
-  savedJobsLabel = `${match[2]} ${match[1].trim()} (View saved jobs)`;
-} else {
-  // fallback if no number found
-  savedJobsLabel = labelText + " (View saved jobs)";
+if (numberMatch) {
+  number = numberMatch[0];
+
+  // Remove that number from the original string
+  const numberIndex = labelText.indexOf(number);
+  labelText = (labelText.slice(0, numberIndex) + labelText.slice(numberIndex + number.length)).trim();
 }
+
+const savedJobsLabel = number? `${number} ${labelText} (View saved jobs)`: `${labelText} (View saved jobs)`;
+
+link.setAttribute("aria-label", savedJobsLabel);
+
 
     if (isActive) {
     
