@@ -1382,7 +1382,7 @@ function fixSearchFilters() {
 
     if (keyWordValue !== null || keyWordValue !== "") {
 
-      keywordError.textContent = keyWordValue + " has been added."
+    //   keywordError.textContent = keyWordValue + " has been added."
 
     }
 
