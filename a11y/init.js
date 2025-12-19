@@ -1166,7 +1166,7 @@ const observer = new MutationObserver(() => {
   updateSavedJobsLink();
 });
 
-observer.observe(recentlyViewedEl.parentNode, {
+observer.observe(document.querySelector(".recently-viewed-job-list").parentNode, {
   subtree: true,
   childList: true,
   attributes: true,
