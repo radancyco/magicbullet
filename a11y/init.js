@@ -1378,14 +1378,14 @@ function fixSearchFilters() {
 
     keywordSubmit.addEventListener("click", function() {
 
-      const keyWordValue = keyWordInput.value.trim();
+      const keyWordValue = keyWordInput.value;
 
       keywordError.textContent = keyWordValue + " has been added."
 
     });
 
 
-    
+
 
       const refineSearchObserver = new MutationObserver(() => {
 
@@ -1400,13 +1400,11 @@ function fixSearchFilters() {
 
         } 
 
-        refineSearchObserver.disconnect();
-
       });
 
       // Watch for ANY child changes in filters 
 
-      refineSearchObserver.observe(searchFilters, { 
+      refineSearchObserver.observe(searchFilters.parentNode, { 
 
         childList: true, 
         subtree: true 
