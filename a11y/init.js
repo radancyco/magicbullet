@@ -1143,38 +1143,38 @@ function fixSaveJobButton() {
   // Fix: Invoke a MutationObserver to watch the Saves Jobs link for changes. It add additional information to link based on whether any jobs have been saved. 
   // This additional text will better serve AT users. 
 
-  const recentlyViewedSelector = ".recently-viewed-job-list";
+  const recentlyViewedJobListTarget = ".recently-viewed-job-list";
   const savedJobsLinkSelector = 'a';
 
   const updateSavedJobsLink = () => {
 
-    const recentlyViewedEl = document.querySelector(recentlyViewedSelector);
+    const recentlyViewedJobList = document.querySelector(recentlyViewedJobListTarget);
   
-    if (!recentlyViewedEl) return;
+    if (!recentlyViewedJobList) return;
 
-    const isActive = recentlyViewedEl.getAttribute("data-recently-viewed-jobs") === "true";
+    const isActive = recentlyViewedJobList.getAttribute("data-recently-viewed-jobs") === "true";
 
-    let link = recentlyViewedEl.closest(savedJobsLinkSelector) || recentlyViewedEl.querySelector(savedJobsLinkSelector);
+    let link = recentlyViewedJobList.closest(savedJobsLinkSelector) || recentlyViewedJobList.querySelector(savedJobsLinkSelector);
 
     if (!link) return;
 
-let labelText = link.textContent.trim().normalize('NFKC');
+    let labelText = link.textContent.trim();
 
-const numberMatch = labelText.match(/\p{Nd}+/u);
+    const numberMatch = labelText.match(/\p{Nd}+/u);
 
-let number = null;
+    let number = null;
 
-if (numberMatch) {
-  number = numberMatch[0];
+    if (numberMatch) {
+  
+      number = numberMatch[0];
 
-  // Use a regex to remove the first occurrence of that number safely
-  labelText = labelText.replace(new RegExp(number), '').trim();
-}
+      // Use a regex to remove the first occurrence of that number safely
+  
+      labelText = labelText.replace(new RegExp(number), '').trim();
 
-const savedJobsLabel = number
-  ? `${number} ${labelText} (View saved jobs)`
-  : `${labelText} (View saved jobs)`;
+    }
 
+    const savedJobsLabel = number ? `${number} ${labelText} (View saved jobs)` : `${labelText} (View saved jobs)`;
 
     if (isActive) {
     
@@ -1188,7 +1188,7 @@ const savedJobsLabel = number
 
   };
 
-  const recentlyViewedParent = document.querySelector(recentlyViewedSelector)?.parentNode;
+  const recentlyViewedParent = document.querySelector(recentlyViewedJobListTarget)?.parentNode;
 
   if (recentlyViewedParent) {
 
