@@ -1136,13 +1136,9 @@ function fixSaveJobButton() {
 
       });
 
+    });
 
-
-
-
-
-
-      const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
+    const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
 
 if (recentlyViewedEl) {
 
@@ -1164,10 +1160,10 @@ if (recentlyViewedEl) {
     }
   };
 
-  // Run once on load
+  // Run once on page load
   updateAriaLabel();
 
-  // React ONLY to attribute changes
+  // Watch for the AJAX script to flip the attribute
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (
@@ -1185,13 +1181,6 @@ if (recentlyViewedEl) {
   });
 }
 
-
-
-
-
-
-
-    });
 
   });
 
