@@ -1198,6 +1198,7 @@ function fixSaveJobButton() {
 
     observer.observe(recentlyViewedParent, {
   
+      subtree: true,
       attributes: true,
       attributeFilter: ["data-recently-viewed-jobs"]
 
