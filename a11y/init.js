@@ -1173,9 +1173,7 @@ if (numberMatch) {
   labelText = (labelText.slice(0, numberIndex) + labelText.slice(numberIndex + number.length)).trim();
 }
 
-const savedJobsLabel = number? `${number} ${labelText} (View saved jobs)`: `${labelText} (View saved jobs)`;
-
-link.setAttribute("aria-label", savedJobsLabel);
+const savedJobsLabel = number? `${number} ${labelText} (View saved jobs)`: `${labelText} (View saved jobssss)`;
 
 
     if (isActive) {
