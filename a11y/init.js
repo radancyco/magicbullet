@@ -1154,7 +1154,7 @@ function fixSaveJobButton() {
 
     const isActive = recentlyViewedJobList.getAttribute("data-recently-viewed-jobs") === "true";
 
-    let link = recentlyViewedJobList.closest(savedJobsLinkSelector) || recentlyViewedJobList.querySelector(savedJobsLinkSelector) || recentlyViewedJobList;
+    let link = recentlyViewedJobList || recentlyViewedJobList.closest(savedJobsLinkSelector) || recentlyViewedJobList.querySelector(savedJobsLinkSelector);
 
     if (!link) return;
 
