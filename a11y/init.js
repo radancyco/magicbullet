@@ -1158,7 +1158,20 @@ function fixSaveJobButton() {
 
     if (!link) return;
 
-    const savedJobsLabel = link.textContent.trim() + " (View saved Jobs)";
+    let labelText = link.textContent.trim();
+
+// Match a number at the end of the string after letters
+const match = labelText.match(/(\p{L}.*?)\s*(\p{N}+)\s*$/u);
+
+let savedJobsLabel;
+
+if (match) {
+  // match[1] = text before the number, match[2] = the number
+  savedJobsLabel = `${match[2]} ${match[1].trim()} (View saved jobs)`;
+} else {
+  // fallback if no number found
+  savedJobsLabel = labelText + " (View saved jobs)";
+}
 
     if (isActive) {
     
