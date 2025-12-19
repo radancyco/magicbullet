@@ -1173,7 +1173,7 @@ if (numberMatch) {
   labelText = (labelText.slice(0, numberIndex) + labelText.slice(numberIndex + number.length)).trim();
 }
 
-const savedJobsLabel = number? `${number} ${labelText} (View saved jobs)`: `${labelText} (View saved jobssss)`;
+const savedJobsLabel = number? `${number} ${labelText} (View saved jobs, with numner)`: `${labelText} (View saved jobs. no number)`;
 
 
     if (isActive) {
