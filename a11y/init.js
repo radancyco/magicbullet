@@ -1138,55 +1138,43 @@ function fixSaveJobButton() {
 
     });
 
-    
-const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
-
-if (recentlyViewedEl) {
-
-  const updateAriaLabel = () => {
-    const isActive =
-      recentlyViewedEl.getAttribute("data-recently-viewed-jobs") === "true";
-
-    let link = recentlyViewedEl.closest('a[href*="saved-jobs"]');
-    if (!link) {
-      link = recentlyViewedEl.querySelector('a[href*="saved-jobs"]');
-    }
-
-    if (!link) return;
-
-    if (isActive) {
-      link.setAttribute("aria-label", "Hello World");
-    } else {
-      link.removeAttribute("aria-label");
-    }
-  };
-
-  // Run once on page load
-  updateAriaLabel();
-
-  // Watch for the AJAX script to flip the attribute
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (
-        mutation.type === "attributes" &&
-        mutation.attributeName === "data-recently-viewed-jobs"
-      ) {
-        updateAriaLabel();
-      }
-    });
   });
 
-  observer.observe(recentlyViewedEl.parentNode, {
-    attributes: true,
-    attributeFilter: ["data-recently-viewed-jobs"]
-  });
-}
 
+  const updateSavedJobsLink = () => {
+  const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
+  if (!recentlyViewedEl) return;
 
+  const isActive =
+    recentlyViewedEl.getAttribute("data-recently-viewed-jobs") === "true";
 
+  let link = recentlyViewedEl.closest('a[href*="saved-jobs"]');
+  if (!link) {
+    link = recentlyViewedEl.querySelector('a[href*="saved-jobs"]');
+  }
 
+  if (!link) return;
 
-  });
+  if (isActive) {
+    link.setAttribute("aria-label", "Hello World");
+  } else {
+    link.removeAttribute("aria-label");
+  }
+};
+
+const observer = new MutationObserver(() => {
+  updateSavedJobsLink();
+});
+
+observer.observe(recentlyViewedEl.parentNode, {
+  subtree: true,
+  childList: true,
+  attributes: true,
+  attributeFilter: ["data-recently-viewed-jobs"]
+});
+
+// Run once on load
+updateSavedJobsLink();
 
 }
 
