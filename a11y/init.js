@@ -1140,41 +1140,58 @@ function fixSaveJobButton() {
 
   });
 
+  // Fix: Invoke a MutationObserver to watch the Saves Jobs link for changes. It add additional information to link based on whether any jobs have been saved. 
+  // This additional text will better serve AT users. 
+
+  const recentlyViewedSelector = ".recently-viewed-job-list";
+  const savedJobsLinkSelector = 'a[href*="saved-jobs"]';
 
   const updateSavedJobsLink = () => {
-  const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
-  if (!recentlyViewedEl) return;
 
-  const isActive =
-    recentlyViewedEl.getAttribute("data-recently-viewed-jobs") === "true";
+    const recentlyViewedEl = document.querySelector(recentlyViewedSelector);
+  
+    if (!recentlyViewedEl) return;
 
-  let link = recentlyViewedEl.closest('a[href*="saved-jobs"]');
-  if (!link) {
-    link = recentlyViewedEl.querySelector('a[href*="saved-jobs"]');
+    const isActive = recentlyViewedEl.getAttribute("data-recently-viewed-jobs") === "true";
+
+    let link = recentlyViewedEl.closest(savedJobsLinkSelector) || recentlyViewedEl.querySelector(savedJobsLinkSelector);
+
+    if (!link) return;
+
+    const savedJobsLabel = link.textContent.trim() + " (View saved Jobs)";
+
+    if (isActive) {
+    
+      link.setAttribute("aria-label", savedJobsLabel);
+  
+    } else {
+  
+      link.removeAttribute("aria-label");
+  
+    }
+
+  };
+
+  const recentlyViewedParent = document.querySelector(recentlyViewedSelector)?.parentNode;
+
+  if (recentlyViewedParent) {
+
+    const observer = new MutationObserver(updateSavedJobsLink);
+
+    observer.observe(recentlyViewedParent, {
+  
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ["data-recently-viewed-jobs"]
+
+    });
+
+    // Run once on load
+  
+    updateSavedJobsLink();
+
   }
-
-  if (!link) return;
-
-  if (isActive) {
-    link.setAttribute("aria-label", "Hello World");
-  } else {
-    link.removeAttribute("aria-label");
-  }
-};
-
-const observer = new MutationObserver(() => {
-  updateSavedJobsLink();
-});
-
-observer.observe(document.querySelector(".recently-viewed-job-list").parentNode, {
-  subtree: true,
-  childList: true,
-  attributes: true,
-  attributeFilter: ["data-recently-viewed-jobs"]
-});
-
-// Run once on load
-updateSavedJobsLink();
 
 }
 
