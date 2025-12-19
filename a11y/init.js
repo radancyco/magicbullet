@@ -1176,7 +1176,7 @@ if (recentlyViewedEl) {
     });
   });
 
-  observer.observe(recentlyViewedEl, {
+  observer.observe(recentlyViewedEl.parentNode, {
     attributes: true,
     attributeFilter: ["data-recently-viewed-jobs"]
   });
