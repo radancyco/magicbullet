@@ -1404,7 +1404,7 @@ function fixSearchFilters() {
 
       // Watch for ANY child changes in filters 
 
-      refineSearchObserver.observe(searchFilters.parentNode, { 
+      refineSearchObserver.observe(searchFilters.parentNode.closest("div"), { 
 
         childList: true, 
         subtree: true 
