@@ -1158,7 +1158,7 @@ function fixSaveJobButton() {
 
     if (!link) return;
 
-let labelText = link.textContent.trim().normalize('NFKC');
+labelText = labelText.replace(/\u200B/g, '').replace(/\u00A0/g, ' ').normalize('NFKC');
 
 const numberMatch = labelText.match(/\p{Nd}+/u);
 
