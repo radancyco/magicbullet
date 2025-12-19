@@ -1144,7 +1144,7 @@ function fixSaveJobButton() {
   // This additional text will better serve AT users. 
 
   const recentlyViewedSelector = ".recently-viewed-job-list";
-  const savedJobsLinkSelector = 'a[href*="saved-jobs"]';
+  const savedJobsLinkSelector = 'a';
 
   const updateSavedJobsLink = () => {
 
@@ -1158,27 +1158,23 @@ function fixSaveJobButton() {
 
     if (!link) return;
 
-    let labelText = link.textContent.trim();
+let labelText = link.textContent.trim().normalize('NFKC');
 
-    console.log(labelText);
+const numberMatch = labelText.match(/\p{Nd}+/u);
 
-    // console.log([...labelText].map(c => c.charCodeAt(0)))
+let number = null;
 
-    const numberMatch = labelText.match(/\p{Nd}+/u);
+if (numberMatch) {
+  number = numberMatch[0];
 
-    let number = null;
+  // Use a regex to remove the first occurrence of that number safely
+  labelText = labelText.replace(new RegExp(number), '').trim();
+}
 
-    if (numberMatch) {
-  
-      number = numberMatch[0];
+const savedJobsLabel = number
+  ? `${number} ${labelText} (View saved jobs)`
+  : `${labelText} (View saved jobs)`;
 
-      // Use a regex to remove the first occurrence of that number safely
-  
-      labelText = labelText.replace(new RegExp(number), '').trim();
-
-    }
-
-    const savedJobsLabel = number ? `${number} ${labelText} (View saved jobs)` : `${labelText} (View saved jobs)`;
 
     if (isActive) {
     
