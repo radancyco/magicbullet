@@ -1143,8 +1143,10 @@ function fixSaveJobButton() {
   // Fix: Invoke a MutationObserver to watch the Saves Jobs link for changes. It add additional information to link based on whether any jobs have been saved. 
   // This additional text will better serve AT users. 
 
-  const recentlyViewedJobListTarget = ".recently-viewed-job-list";
-  const savedJobsLinkSelector = 'a';
+  // Note: Mutation Observers work better when you do not add them to click events. This is what i get for listening to AI.
+
+  const recentlyViewedJobListTarget = "[data-module-type=RecentlyViewedJobList]";
+  const savedJobsLinkSelector = "a";
 
   const updateSavedJobsLink = () => {
 
