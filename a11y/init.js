@@ -1205,6 +1205,7 @@ function fixSaveJobButton() {
 
     });
 
+
   }
 
 }
@@ -1375,7 +1376,7 @@ function fixSearchFilters() {
 
     
 
-    keywordSubmit.addEventListener("click", function() {
+   // keywordSubmit.addEventListener("click", function() {
 
       const keyWordValue = keyWordInput.value.trim();
 
@@ -1411,7 +1412,7 @@ function fixSearchFilters() {
 
       });
 
-    });
+  //  });
 
 
   }
