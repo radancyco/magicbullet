@@ -1138,7 +1138,8 @@ function fixSaveJobButton() {
 
     });
 
-    const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
+    
+const recentlyViewedEl = document.querySelector(".recently-viewed-job-list");
 
 if (recentlyViewedEl) {
 
@@ -1180,6 +1181,9 @@ if (recentlyViewedEl) {
     attributeFilter: ["data-recently-viewed-jobs"]
   });
 }
+
+
+
 
 
   });
