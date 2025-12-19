@@ -1158,28 +1158,27 @@ function fixSaveJobButton() {
 
     if (!link) return;
 
-// Normalize and trim text
-let labelText = link.textContent.trim().normalize('NFKC');
+    let labelText = link.textContent.trim();
 
-// Optional: ensure space before numbers
-labelText = labelText.replace(/(\p{L})(\p{Nd})/gu, '$1 $2');
+    console.log(labelText);
 
-// Extract first number
-const numberMatch = labelText.match(/\p{Nd}+/u);
-let number = null;
+    // console.log([...labelText].map(c => c.charCodeAt(0)))
 
-if (numberMatch) {
-  number = numberMatch[0];
+    const numberMatch = labelText.match(/\p{Nd}+/u);
 
-  // Remove first occurrence of the number from the text
-  labelText = labelText.replace(new RegExp(number), '').trim();
-}
+    let number = null;
 
-// Build final aria-label
-const savedJobsLabel = number
-  ? `${number} ${labelText} (View saved jobs)`
-  : `${labelText} (View saved jobs)`;
+    if (numberMatch) {
+  
+      number = numberMatch[0];
 
+      // Use a regex to remove the first occurrence of that number safely
+  
+      labelText = labelText.replace(new RegExp(number), '').trim();
+
+    }
+
+    const savedJobsLabel = number ? `${number} ${labelText} (View saved jobs)` : `${labelText} (View saved jobs)`;
 
     if (isActive) {
     
