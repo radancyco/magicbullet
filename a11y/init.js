@@ -1396,7 +1396,7 @@ function fixSearchFilters() {
         if (keyWordVisibility === "false") {
 
           // keywordError.textContent = "";
-          // keyWordInput.focus();
+          keyWordInput.focus();
 
         } 
 
