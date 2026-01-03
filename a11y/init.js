@@ -1370,6 +1370,8 @@ function fixSearchFilters() {
     const keywordSubmit = refinedSearch.querySelector("#add-keyword");
     const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
+    keyWordInput.setAttribute("aria-describedby", "keyword-error-msg")
+
     keywordError.setAttribute("id", "keyword-error-msg");
     keywordError.removeAttribute("aria-expanded");
     keywordError.removeAttribute("style");
