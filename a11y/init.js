@@ -1375,35 +1375,6 @@ function fixSearchFilters() {
     keywordError.removeAttribute("aria-expanded");
     keywordError.removeAttribute("style");
 
-    const keyWordVisibility = keywordError.getAttribute("aria-hidden");
-
-        if (keyWordVisibility === "false") {
-
-          keyWordInput.focus();
-
-        } 
-
-
-
-
-
-
-      const refineSearchObserver = new MutationObserver(() => {
-
-        
-
-      });
-
-      // Watch for ANY child changes in filters 
-
-      refineSearchObserver.observe(searchFilters.parentNode.closest("div"), { 
-
-        childList: true, 
-        subtree: true 
-
-      });
-
-    
 
 
   }
