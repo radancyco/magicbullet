@@ -1367,7 +1367,6 @@ function fixSearchFilters() {
 
     const refinedSearch = searchFilters.querySelector("#refined-search");
     const keyWordInput = refinedSearch.querySelector("#keyword-tag");
-    const keywordSubmit = refinedSearch.querySelector("#add-keyword");
     const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
     keyWordInput.setAttribute("aria-describedby", "keyword-error-msg")
@@ -1376,31 +1375,22 @@ function fixSearchFilters() {
     keywordError.removeAttribute("aria-expanded");
     keywordError.removeAttribute("style");
 
-    
+    const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
-    // keywordSubmit.addEventListener("click", function() {
+        if (keyWordVisibility === "false") {
 
-      const keyWordValue = keyWordInput.value;
+          keyWordInput.focus();
 
-      // keywordError.textContent = keyWordValue + " has been added."
+        } 
 
-    // });
+
 
 
 
 
       const refineSearchObserver = new MutationObserver(() => {
 
-        const keyWordVisibility = keywordError.getAttribute("aria-hidden");
-
-        console.log(keyWordVisibility);
-
-        if (keyWordVisibility === "false") {
-
-          // keywordError.textContent = "";
-          keyWordInput.focus();
-
-        } 
+        
 
       });
 
