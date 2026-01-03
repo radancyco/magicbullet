@@ -1369,13 +1369,25 @@ function fixSearchFilters() {
     const keyWordInput = refinedSearch.querySelector("#keyword-tag");
     const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
-    keyWordInput.setAttribute("aria-describedby", "keyword-error-msg")
+    // Fix: Add unique ID to error message and reference ID on input. When focus placed here, message will be read to AT. 
 
     keywordError.setAttribute("id", "keyword-error-msg");
+    keyWordInput.setAttribute("aria-describedby", "keyword-error-msg");
+
+    // Fix: Always place focus on input when error is visible
+
+    const keyWordVisibility = keywordError.getAttribute("aria-hidden");
+
+    if (keyWordVisibility === "false") {
+
+      keyWordInput.focus();
+
+    } 
+
+    // Fix: Remove junk from error message
+
     keywordError.removeAttribute("aria-expanded");
     keywordError.removeAttribute("style");
-
-
 
   }
 
