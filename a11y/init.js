@@ -41,7 +41,7 @@ function loadA11yPatch(url, callback) {
 
 loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
 
-  console.log("%c MagicBullet: Accessibility Patch v2.0 in use. ", "background: #6e00ee; color: #fff");
+  console.log("%cMagicBullet: A11y%cv2.0", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 
@@ -129,8 +129,6 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   
 function initDynamicPatch() {
 
-  console.log("%c MagicBullet: Accessibility Patch - Dynamic Scripts Loaded \u2714 ", "background: #228B22; color: #fff");
-
   fixAltAttribute();
   fixAppliedFilter();
   fixDataForm();
@@ -143,14 +141,14 @@ function initDynamicPatch() {
   fixSearchResults();
   fixSearchPagination();
 
+  console.log("%cMagicBullet: A11y%cDynamic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+
 }
 
 // Accessibility Patch: Static
 // Desc: These fixes address issues that occur on page load only.
 
 function initStaticPatch() {
-
-  console.log("%c MagicBullet: Accessibility Patch - Static Scripts Loaded \u2714 ", "background: #228B22; color: #fff");
 
   fixA11y();
   fixAdvancedSearchForm();
@@ -163,6 +161,8 @@ function initStaticPatch() {
   fixSearchForm();
   fixSitemap();
   fixSocialShare();
+
+  console.log("%cMagicBullet: A11y%cStatic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
 }
 
@@ -1380,7 +1380,7 @@ function fixSearchFilters() {
 
       const keyWordValue = keyWordInput.value;
 
-      keywordError.textContent = keyWordValue + " has been added."
+      // keywordError.textContent = keyWordValue + " has been added."
 
     });
 

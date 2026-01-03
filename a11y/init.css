@@ -9,7 +9,7 @@
 
 /* Global Issues */
 
-/* Global ARIA Live */
+/* Visually Hidde Content */
 
 .magicbullet-visually-hidden:not(:focus):not(:active) {
 clip: rect(0 0 0 0); 

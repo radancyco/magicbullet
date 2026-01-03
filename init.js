@@ -24,7 +24,7 @@
 
   }
 
-  console.log("%cMagicBullet%cv2.2", "background: #333; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+  console.log("%cMagicBullet%cv2.2", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
   // Get MagicBullet Script
 
@@ -87,7 +87,7 @@
 
         if(locationAware  === "true") {
 
-          //TB Country ID for Europe countries need to list full here
+          // TB Country ID for Europe countries need to list full here
 
           // Albania,Armenia,Austria,Belarus,Belgium,Bulgaria,Croatia,Cyprus,Czech Republic,Denmark,Finland,France,Georgia,Germany,Greece,Hungary,Iceland,Ireland,Italy,Kazakhstan,Kosovo,Latvia,Lithuania,Luxembourg,Malta,Netherlands,Norway,Poland,Portugal,Romania,Russia,Serbia,Slovakia,Slovenia,Spain,Sweden,Switzerland,Turkey,Ukraine,UK
 
@@ -157,7 +157,7 @@
 
   function postAjax(success) {
 
-    //To get Location data from Server
+    // To get Location data from Server
 
     var params = 'lat=&lon=&IsUsingGeolocation=true&HasHtml5GeoError=false&GeoType=ipambientonly';
     var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
@@ -166,7 +166,9 @@
     xhr.onreadystatechange = function() {
 
       if (xhr.readyState>3 && xhr.status==200) {
-        //Send data to call back funtion
+
+        // Send data to call back funtion
+        
         success(JSON.parse(xhr.responseText));
 
       }
