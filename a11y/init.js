@@ -1376,13 +1376,13 @@ function fixSearchFilters() {
 
     
 
-    keywordSubmit.addEventListener("click", function() {
+    // keywordSubmit.addEventListener("click", function() {
 
       const keyWordValue = keyWordInput.value;
 
       // keywordError.textContent = keyWordValue + " has been added."
 
-    });
+    // });
 
 
 
@@ -1395,8 +1395,8 @@ function fixSearchFilters() {
 
         if (keyWordVisibility === "false") {
 
-          keywordError.textContent = "";
-          keyWordInput.focus();
+          // keywordError.textContent = "";
+          // keyWordInput.focus();
 
         } 
 
