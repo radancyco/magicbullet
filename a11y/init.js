@@ -1208,6 +1208,8 @@ function fixSaveJobButton() {
 
   }
 
+  updateSavedJobsLink();
+
 }
 
 // Accessibility Patch: Search Form
