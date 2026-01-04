@@ -1413,12 +1413,16 @@ function fixSearchResults() {
   const searchResultsContainer = document.querySelector("#search-results");
   const ariaMsg = document.querySelector("#magicbullet-message");
 
+  // Note: Wondering if nesting an observer inside of a function that load based on parent observer is wise.
+  // Fundamentally, this may dictate how observers work across patch. Fine for now, but need to revisit. 
+
   const searchResultsObserver = new MutationObserver(() => {
 
     // Recalculate count each time the DOM changes
 
-    const searchResultCount = document.querySelectorAll("#search-results-list ul li").length;
-    ariaMsg.textContent = searchResultCount + " results are now available.";
+    const searchResultTotal = searchResultsContainer.dataTotalResults;
+    const searchResultCount = searchResultsContainer.querySelectorAll("#search-results-list ul li").length;
+    ariaMsg.textContent = searchResultCount + " of " + searchResultTotal + " results are now available.";
 
   });
 
