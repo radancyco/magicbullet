@@ -283,12 +283,12 @@ opacity: 1;
 /* Fix: We appear to be removing the up and down arrow on input[number] because we do not like the way it looks, but this prevents users from understanding how to use the input. The visual que is very important here. */
 
 .pagination-current {
-appearance: auto;
--moz-appearance: auto;
+appearance: auto !important;
+-moz-appearance: auto !important;
 
   &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
 
-     -webkit-appearance: auto;
+     -webkit-appearance: auto !important;
 
   }
 
