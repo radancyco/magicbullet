@@ -1410,7 +1410,7 @@ function fixSearchResults() {
   // Fix: Let user know how many results are now present on page, after an update: 
   // TODO: This appears to work well with filters, but not working with pagination. 
 
-  const searchResultsContainer = document.querySelector("#search #content");
+  const searchResultsContainer = document.querySelector("#search-results");
   const ariaMsg = document.querySelector("#magicbullet-message");
 
   const searchResultsObserver = new MutationObserver(() => {
@@ -1424,7 +1424,7 @@ function fixSearchResults() {
 
   if (searchResultsContainer) {
   
-    searchResultsObserver.observe(searchResultsContainer, {childList: true, subtree: true});
+    searchResultsObserver.observe(searchResultsContainer.parentNode, {childList: true, subtree: true});
 
   }
 
