@@ -1205,8 +1205,10 @@ function fixSaveJobButton() {
 
     });
 
-
   }
+
+  // Note: It is probably not a good idea to fire off this function after the mutation observer has run, but doing so for sake of speed to finish for Citi. Will revisit. 
+  // Considering merging this into the click event for save job button. 
 
   updateSavedJobsLink();
 
