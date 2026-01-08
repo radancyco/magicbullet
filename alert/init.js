@@ -9,7 +9,7 @@
 
 (function () {
 
-  console.log("%c MagicBullet: System Alert v1.8 in use. ", "background: #6e00ee; color: #fff");
+  console.log("%cMagicBullet: System Alert%cv1.8", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
   var alertBody = document.body;

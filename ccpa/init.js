@@ -9,7 +9,9 @@
 
 (function() {
 
-  console.log("%c Legacy: CCPA v1.7 in use. Please upgrade to product version.", "background: #ff0000; color: #fff");
+  console.groupCollapsed("%cMagicBullet: CCPA v1.7", "background: #ff0000; color: #fff; padding: 6px 10px; border-radius: 16px; font-weight: 600;");
+  console.log("%cDeprecated: %cThis feature is no longer recommended and is only supported for legacy purposes. Career sites should now be using the product version of this feature.", "font-weight: bold;", "");
+  console.groupEnd();
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
   var ccpaBody = document.body;
