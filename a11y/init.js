@@ -1190,27 +1190,31 @@ function fixSaveJobButton() {
 
   };
 
-  const recentlyViewedParent = document.querySelector(recentlyViewedJobListTarget).parentNode;
+  if(recentlyViewedJobListTarget) {
 
-  if (recentlyViewedParent) {
+    const recentlyViewedParent = document.querySelector(recentlyViewedJobListTarget).parentNode;
 
-    const observer = new MutationObserver(updateSavedJobsLink);
+    if (recentlyViewedParent) {
 
-    observer.observe(recentlyViewedParent, {
+      const observer = new MutationObserver(updateSavedJobsLink);
+
+      observer.observe(recentlyViewedParent, {
   
-      subtree: true,
-      childList: true,
-      attributes: true,
-      attributeFilter: ["data-recently-viewed-jobs"]
+        subtree: true,
+        childList: true,
+        attributes: true,
+        attributeFilter: ["data-recently-viewed-jobs"]
 
-    });
+      });
+
+    }
+
+    // Note: It is probably not a good idea to fire off this function after the mutation observer has run, but doing so for sake of speed to finish for Citi. Will revisit. 
+    // Considering merging this into the click event for save job button. 
+
+    updateSavedJobsLink();
 
   }
-
-  // Note: It is probably not a good idea to fire off this function after the mutation observer has run, but doing so for sake of speed to finish for Citi. Will revisit. 
-  // Considering merging this into the click event for save job button. 
-
-  updateSavedJobsLink();
 
 }
 
