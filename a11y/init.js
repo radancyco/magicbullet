@@ -1176,7 +1176,7 @@ function fixSaveJobButton() {
 
     }
 
-    const savedJobsLabel = number ? `${number} ${labelText} (View saved jobs)` : `${labelText} (View saved jobs)`;
+    const savedJobsLabel = number ? `${number} ${labelText} (View saved jobs)` : `${labelText} (View all)`;
 
     if (isActive) {
     
