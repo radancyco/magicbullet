@@ -1190,7 +1190,7 @@ function fixSaveJobButton() {
 
   };
 
-  const recentlyViewedParent = document.querySelector(recentlyViewedJobListTarget).parentNode;
+  const recentlyViewedParent = document.querySelector(recentlyViewedJobListTarget)?.parentNode; 
 
   if (recentlyViewedParent) {
 
