@@ -296,10 +296,13 @@ opacity: 1;
 
   .prev, .next {
 
-    &:hover {
-    color: unset;
+    .disabled {
     cursor: default;
     pointer-events: none;
+    }
+
+    &:hover {
+    color: unset;
 
       &::after, &::before {
       color: inherit;
