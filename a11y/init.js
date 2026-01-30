@@ -1369,29 +1369,34 @@ function fixSearchFilters() {
 
     // Refined Search
 
-    const refinedSearch = searchFilters?.querySelector("#refined-search");
-    const keyWordInput = refinedSearch?.querySelector("#keyword-tag");
-    const keywordError = refinedSearch?.querySelector(".keyword-tag-error");
+    const refinedSearch = searchFilters.querySelector("#refined-search");
 
-    // Fix: Add unique ID to error message and reference ID on input. When focus placed here, message will be read to AT. 
+    if (refinedSearch) {
 
-    keywordError.setAttribute("id", "keyword-error-msg");
-    keyWordInput.setAttribute("aria-describedby", "keyword-error-msg");
+      const keyWordInput = refinedSearch.querySelector("#keyword-tag");
+      const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
-    // Fix: Always place focus on input when error is visible
+      // Fix: Add unique ID to error message and reference ID on input. When focus placed here, message will be read to AT. 
 
-    const keyWordVisibility = keywordError.getAttribute("aria-hidden");
+      keywordError.setAttribute("id", "keyword-error-msg");
+      keyWordInput.setAttribute("aria-describedby", "keyword-error-msg");
 
-    if (keyWordVisibility === "false") {
+      // Fix: Always place focus on input when error is visible
 
-      keyWordInput.focus();
+      const keyWordVisibility = keywordError.getAttribute("aria-hidden");
 
-    } 
+      if (keyWordVisibility === "false") {
 
-    // Fix: Remove junk from error message
+        keyWordInput.focus();
 
-    keywordError.removeAttribute("aria-expanded");
-    keywordError.removeAttribute("style");
+      } 
+
+      // Fix: Remove junk from error message
+
+      keywordError.removeAttribute("aria-expanded");
+      keywordError.removeAttribute("style");
+
+    }
 
   }
 
