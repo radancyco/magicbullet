@@ -298,6 +298,8 @@ opacity: 1;
 
     &:hover {
     color: unset;
+    cursor: default;
+    pointer-events: none;
 
       &::after, &::before {
       color: inherit;
