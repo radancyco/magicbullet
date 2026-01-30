@@ -1484,7 +1484,6 @@ function fixSearchPagination() {
 
      if (paginationBtnDisabled) {
 
-      paginationBtnDisabled.removeAttribute("aria-hidden");
       paginationBtnDisabled.removeAttribute("href");
       paginationBtnDisabled.removeAttribute("rel");
 
