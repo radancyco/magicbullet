@@ -297,7 +297,12 @@ opacity: 1;
   .prev, .next {
 
     &:hover {
-    color: inherit;
+    color: unset;
+
+      &::after, &::before {
+      color: inherit;
+      }
+
     }
 
   }
