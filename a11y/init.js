@@ -1370,7 +1370,7 @@ function fixSearchFilters() {
     // Refined Search
 
     const refinedSearch = searchFilters.querySelector("#refined-search");
-    const keyWordInput = refinedSearch.querySelector("#keyword-tag");
+    const keyWordInput = refinedSearch?.querySelector("#keyword-tag");
     const keywordError = refinedSearch.querySelector(".keyword-tag-error");
 
     // Fix: Add unique ID to error message and reference ID on input. When focus placed here, message will be read to AT. 
