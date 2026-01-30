@@ -297,7 +297,7 @@ opacity: 1;
   .prev, .next {
 
     &.disabled {
-    color: #BBB;
+    color: #666;
     cursor: default;
     pointer-events: none;
 
