@@ -298,20 +298,10 @@ opacity: 1;
 
     &.disabled {
     color: #666;
-    cursor: default;
     pointer-events: none;
 
       &::after, &::before {
       color: inherit;
-      }
-
-      &:hover {
-      color: inherit;
-
-        &::after, &::before {
-        color: inherit;
-        }
-
       }
 
     }
