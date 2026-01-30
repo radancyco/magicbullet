@@ -300,13 +300,18 @@ opacity: 1;
     color: #BBB;
     cursor: default;
     pointer-events: none;
-    }
-
-    &:hover {
-    color: inherit;
 
       &::after, &::before {
       color: inherit;
+      }
+
+      &:hover {
+      color: inherit;
+
+        &::after, &::before {
+        color: inherit;
+        }
+
       }
 
     }
