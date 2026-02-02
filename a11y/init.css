@@ -297,13 +297,10 @@ opacity: 1;
   .prev, .next {
 
     &.disabled {
+    background-color: transparent;
+    border-color: transparent;
     color: #666;
     pointer-events: none;
-
-      &[data-has-background] {
-      background-color: transparent;
-      border-color: transparent;
-      }
 
       &::after, &::before {
       color: inherit;

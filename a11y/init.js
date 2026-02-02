@@ -1488,17 +1488,7 @@ function fixSearchPagination() {
       paginationBtnDisabled.removeAttribute("rel");
 
       // Note: Ideally, it would be best to remove this element entirely with CSS, but this can break layout, so removing href is next best solution. 
-
-    }
-
-    // Check to see if disabled button contains background-color. Note, this is not bulletproof. 
-
-    const disabledStyles = getComputedStyle(paginationBtnDisabled);
-    const hasBgColor = disabledStyles.backgroundColor;
-
-    if (hasBgColor) {
-  
-      paginationBtnDisabled.setAttribute("data-has-background", "");
+      // BUG: Select last (or first) page in input, hit Go To Page, href and rel are not being removed. 
 
     }
 
