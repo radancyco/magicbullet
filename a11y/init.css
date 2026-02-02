@@ -297,6 +297,7 @@ opacity: 1;
   .prev, .next {
 
     &.disabled {
+    background-image: none !important;
     background-color: transparent !important;
     border-color: transparent !important;
     color: #666 !important;
