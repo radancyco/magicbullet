@@ -301,8 +301,8 @@ opacity: 1;
     pointer-events: none;
 
       &[data-has-background] {
-      background-color: #ccc;
-      border-color: #ccc;
+      background-color: #eee;
+      border-color: #eee;
       }
 
       &::after, &::before {
