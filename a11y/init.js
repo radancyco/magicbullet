@@ -1494,7 +1494,7 @@ function fixSearchPagination() {
     // Check to see if disabled button contains background-color. Note, this is not bulletproof. 
 
     const disabledStyles = getComputedStyle(paginationBtnDisabled);
-    const hasBgColor = disabledStyles.backgroundColor !== "none";
+    const hasBgColor = disabledStyles.backgroundColor;
 
     if (hasBgColor) {
   
