@@ -1496,7 +1496,7 @@ function fixSearchPagination() {
     const disabledStyles = getComputedStyle(paginationBtnDisabled);
     const hasBgColor = disabledStyles.backgroundColor;
 
-    if (hasBgColor) {
+    if (hasBgColor || hasBgColor !== "transparent") {
   
       paginationBtnDisabled.setAttribute("data-has-background", "");
 
