@@ -1488,7 +1488,6 @@ function fixSearchPagination() {
       paginationBtnDisabled.removeAttribute("rel");
 
       // Note: Ideally, it would be best to remove this element entirely with CSS, but this can break layout, so removing href is next best solution. 
-      // BUG: Select last (or first) page in input, hit Go To Page, href and rel are not being removed. 
 
     }
 
