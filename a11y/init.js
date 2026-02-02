@@ -1498,7 +1498,7 @@ function fixSearchPagination() {
 
     if (hasBgColor) {
   
-      paginationBtnDisabled.setAttribute("data-has-backgrpund", "");
+      paginationBtnDisabled.setAttribute("data-has-background", "");
 
     }
 
