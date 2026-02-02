@@ -1482,12 +1482,23 @@ function fixSearchPagination() {
 
     const paginationBtnDisabled = pagination.querySelector(".disabled");
 
-     if (paginationBtnDisabled) {
+    if (paginationBtnDisabled) {
 
       paginationBtnDisabled.removeAttribute("href");
       paginationBtnDisabled.removeAttribute("rel");
 
       // Note: Ideally, it would be best to remove this element entirely with CSS, but this can break layout, so removing href is next best solution. 
+
+    }
+
+     // Check to see if disabled button contains background-color. Note, this is not bulletproof. 
+
+    const styles = getComputedStyle(paginationBtnDisabled);
+    const hasBgColor = styles.backgroundColor !== "none";
+
+    if (hasBgColor) {
+  
+      styles.setAttribute("data-has-backgrpund");
 
     }
 

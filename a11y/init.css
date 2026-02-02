@@ -300,6 +300,11 @@ opacity: 1;
     color: #666;
     pointer-events: none;
 
+      &[data-has-background] {
+      background-color: #ccc;
+      border-color: #ccc;
+      }
+
       &::after, &::before {
       color: inherit;
       }
