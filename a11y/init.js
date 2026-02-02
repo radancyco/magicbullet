@@ -1491,14 +1491,14 @@ function fixSearchPagination() {
 
     }
 
-     // Check to see if disabled button contains background-color. Note, this is not bulletproof. 
+    // Check to see if disabled button contains background-color. Note, this is not bulletproof. 
 
-    const styles = getComputedStyle(paginationBtnDisabled);
-    const hasBgColor = styles.backgroundColor !== "none";
+    const disabledStyles = getComputedStyle(paginationBtnDisabled);
+    const hasBgColor = disabledStyles.backgroundColor !== "none";
 
     if (hasBgColor) {
   
-      styles.setAttribute("data-has-backgrpund", "");
+      disabledStyles.setAttribute("data-has-backgrpund", "");
 
     }
 
