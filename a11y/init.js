@@ -1498,7 +1498,7 @@ function fixSearchPagination() {
 
     if (hasBgColor) {
   
-      styles.setAttribute("data-has-backgrpund");
+      styles.setAttribute("data-has-backgrpund", "");
 
     }
 
