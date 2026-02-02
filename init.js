@@ -62,13 +62,16 @@
 
   var hostName = location.hostname;
 
-  // Need to apply hostName to localHost var so that we can load our assets locally.
+  var hostWithPort = location.host;
 
-  var localHost = hostName;
+  // Strip subdomain for test paths
 
   hostName = hostName.substring(hostName.indexOf(".") + 1);
 
-  var localPaths = localHost === "localhost";
+  // TRUE only for localhost:4010
+
+  var localPaths = hostWithPort === "localhost:4010";
+
   var testPaths = hostName === "runmytests.com" || hostName === "runmytests.eu" || hostName === "talentbrew.com" || hostName === "tmpqa.com";
 
   // Check to see if both the GDPR and CCPA attributes exist together.
