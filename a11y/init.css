@@ -318,6 +318,7 @@ opacity: 1;
 max-inline-size: fit-content !important;
 appearance: auto !important;
 -moz-appearance: auto !important;
+width: auto !important;
 
   &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
 
