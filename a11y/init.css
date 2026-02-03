@@ -300,8 +300,8 @@ opacity: 1;
     background-color: transparent !important;
     background-image: none !important;
     border-color: transparent !important;
-    cursor: pointer; /* Probably do not need this, since href being removed */
     color: #ccc !important;
+    cursor: pointer !important; /* Probably do not need this, since href being removed */
     pointer-events: none !important;
 
       &::after, &::before {
