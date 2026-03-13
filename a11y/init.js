@@ -171,6 +171,15 @@ function initStaticPatch() {
 
 function fixA11y() {
 
+  // Add Tabindex to main for max support. 
+
+  const mainContent = document.querySelector("#content");
+
+  if (mainContent) {
+  
+    mainContent.setAttribute("tabindex", "-1");
+  
+  }
 
 }
 
