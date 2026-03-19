@@ -312,6 +312,19 @@ function fixCMS() {
 
   });
 
+  // Fix: Add accessibly hidden new window text to CMS created links that open in new windows.
+
+  const attributeTarget = document.querySelectorAll("a[target='_blank'][data-custom-category='UserCreatedContent']");
+
+  attributeTarget.forEach((el) => {
+
+    const span = document.createElement("span");
+    span.classList.add(".magicbullet-visually-hidden");
+    span.textContent = "(opens in new window)";
+    el.append(span);
+
+  });
+
 }
 
 // Accessibility Patch: Data Form
@@ -1617,7 +1630,7 @@ function fixSitemap() {
 
 function fixSocialShare() {
 
-  // Fix: Append the following element and helper text, `<span class="wai visually-hidden">(Opens in new tab or window)</span>`, to each `.social-share-items a` element.
+  // Fix: Append the following element and helper text, `<span class=".magicbullet-visually-hidden">(Opens in new tab or window)</span>`, to each `.social-share-items a` element.
 
   // TODO: Add language support.
 
@@ -1626,8 +1639,8 @@ function fixSocialShare() {
   socialShareLinks.forEach(function(link) {
 
     var span = document.createElement("span");
-    span.classList.add("wai", "visually-hidden");
-    span.textContent = "(Opens in new tab or window)";
+    span.classList.add(".magicbullet-visually-hidden");
+    span.textContent = "(opens in new window)";
     link.append(span);
 
     // NICE TO HAVE: We don't really need the rel attribute anymore. Ask prodcut to eventually remove it.
