@@ -319,7 +319,7 @@ function fixCMS() {
   attributeTarget.forEach((el) => {
 
     const span = document.createElement("span");
-    span.classList.add(".magicbullet-visually-hidden");
+    span.classList.add("magicbullet-visually-hidden");
     span.textContent = "(opens in new window)";
     el.append(span);
 
@@ -1639,7 +1639,7 @@ function fixSocialShare() {
   socialShareLinks.forEach(function(link) {
 
     var span = document.createElement("span");
-    span.classList.add(".magicbullet-visually-hidden");
+    span.classList.add("magicbullet-visually-hidden");
     span.textContent = "(opens in new window)";
     link.append(span);
 
