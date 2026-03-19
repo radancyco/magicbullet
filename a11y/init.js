@@ -300,15 +300,15 @@ function fixCookieManagement() {
 
 function fixCMS() {
 
-  // Our CMS often strips needed HTML attributes, so this fix seeks to circumvent some of those issues. 
+  // Our CMS often strips needed HTML attributes, so this fix seeks to circumvent some of those removals. 
 
-  // Fix: Lang Attributes
+  // Fix: Lang Attributes are required to address shift in langauge in screen readers/AT. 
 
-  const attributeLang = document.querySelectorAll("[data-cms-lang]");
+  const attributeLang = document.querySelectorAll("[data-cms-mb-lang]");
 
   attributeLang.forEach((el) => {
 
-    el.setAttribute("lang", el.getAttribute("data-cms-lang"));
+    el.setAttribute("lang", el.getAttribute("data-cms-mb-lang"));
 
   });
 
