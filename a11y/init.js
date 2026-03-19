@@ -153,6 +153,7 @@ function initStaticPatch() {
   fixA11y();
   fixAdvancedSearchForm();
   fixCookieManagement();
+  fixCMS();
   fixHeader();
   fixJobDescription();
   // fixJobList();
@@ -290,6 +291,24 @@ function fixCookieManagement() {
   cookieDescriptionIdAttr.forEach(function(input) {
 
     input.removeAttribute("aria-describedby"); 
+
+  });
+
+}
+
+// Accessibility: Patch: CMS Content
+
+function fixCMS() {
+
+  // Our CMS often strips needed HTML attributes, so this fix seeks to circumvent some of those issues. 
+
+  // Fix: Lang Attributes
+
+  const attributeLang = document.querySelectorAll("[data-cms-lang]");
+
+  attributeLang.forEach((el) => {
+
+    el.setAttribute("lang", el.getAttribute("data-cms-lang"));
 
   });
 
