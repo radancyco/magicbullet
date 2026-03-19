@@ -1647,7 +1647,7 @@ function fixSocialShare() {
 
   // TODO: Add language support.
 
-  var socialShareLinks = document.querySelectorAll(".social-share-items a");
+  var socialShareLinks = document.querySelectorAll(".social-share__item a[target='_blank']");
 
   socialShareLinks.forEach(function(link) {
 
