@@ -312,7 +312,7 @@ function fixCMS() {
 
   });
 
-  // Fix: Add accessibly hidden new window text to CMS created links that open in new windows.
+  // Fix: Add accessibly hidden new window text to CMS created links that open in new windows. Delivery will need to add new window icons for now. 
 
   const attributeTarget = document.querySelectorAll("a[target='_blank'][data-custom-category='UserCreatedContent']");
 
@@ -1042,6 +1042,19 @@ function fixJobDescription() {
       }
   
       parent.removeChild(font);
+
+    });
+
+    // Fix: Add hidden new window text to links that open in new windows. Delivery will need to add new window icons for now.  
+
+    const attributeTarget = desc.querySelectorAll("a[target='_blank']");
+
+    attributeTarget.forEach((el) => {
+
+      const span = document.createElement("span");
+      span.classList.add("magicbullet-visually-hidden");
+      span.textContent = "(opens in new window)";
+      el.append(span);
 
     });
 
