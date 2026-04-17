@@ -628,7 +628,7 @@ function fixDataForm() {
     // Fix: The "Sign Up" button needs to be more explicit to AT.
     // TODO: Add language support.
 
-    var signUpButtonLabel = "Sign Up for Job Alerts";
+    var signUpButtonLabel = "Submit Job Alerts";
 
     signUpButtons.forEach(function(button) {
 
@@ -1347,8 +1347,12 @@ function fixSearchForm() {
       // If the class (.job-search-legend) is not present then simply add a label of "Search Jobs" to the div wrapping the form elements (.search-form-fields)
 
       if(searchFormFields) {
+
+        if (document.documentElement.getAttribute("lang") === "en") {
       
-        searchFormFields.setAttribute("aria-label", "Search Jobs");
+          searchFormFields.setAttribute("aria-label", "Search Jobs");
+
+        }
 
       }
 
