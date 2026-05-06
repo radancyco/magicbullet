@@ -134,7 +134,7 @@ function initDynamicPatch() {
   fixDataForm();
   fixGlobalDisclosure();
   fixIframeElement();
-
+  fixInputElements();
   fixMindReaderInput();
   fixSaveJobButton();
   fixSearchFilters();
