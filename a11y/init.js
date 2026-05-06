@@ -138,8 +138,8 @@ function initDynamicPatch() {
   fixMindReaderInput();
   fixSaveJobButton();
   // fixSearchFilters();
-  fixSearchResults();
-  fixSearchPagination();
+  //fixSearchResults();
+  //fixSearchPagination();
 
   console.log("%cMagicBullet: A11y%cDynamic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
