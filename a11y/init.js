@@ -76,21 +76,21 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
   
   var config = { childList: true, subtree: true };
-
+  
   var a11yObserver = new MutationObserver(function(mutationsList) {
 
     // Log mutations
   
     // console.log("Mutations:", mutationsList);
-
+    
     clearTimeout(a11yObserver.timeout);
 
     a11yObserver.timeout = setTimeout(function() {
 
-        initDynamicPatch();
+      initDynamicPatch();
 
     }, 1000);
-
+    
   });
   
   a11yObserver.observe(targetNode, config);
@@ -189,7 +189,6 @@ function fixAdvancedSearchForm() {
 
   searchForm.forEach(function(form, i){
 
-    var formID = (i + 1); // Not used (yet).
     var searchFormFields = form.querySelector(".advanced-search-form-fields");
 
     if(searchFormFields) {
@@ -325,10 +324,14 @@ function fixCMS() {
 
   attributeTarget.forEach((el) => {
 
-    const span = document.createElement("span");
-    span.classList.add("magicbullet-visually-hidden");
-    span.textContent = " (opens in new window)";
-    el.append(span);
+    if (!el.querySelector(".magicbullet-visually-hidden")) {
+
+      const span = document.createElement("span");
+      span.classList.add("magicbullet-visually-hidden");
+      span.textContent = " (opens in new window)";
+      el.append(span);
+
+    }
 
   });
 
@@ -464,7 +467,9 @@ function fixDataForm() {
 
     dataFormElement.forEach(function(element) {
 
-      element.addEventListener("blur", function() {
+      if (!element.dataset.a11yBound) {
+
+        element.addEventListener("blur", function() {
 
           if (element.classList.contains("input-validation-error")) {
 
@@ -476,7 +481,11 @@ function fixDataForm() {
 
           }
 
-      });
+        });
+
+        element.dataset.a11yBound = "true";
+
+      }
 
     });
 
@@ -659,27 +668,33 @@ function fixDataForm() {
 
     // Form submission events
 
-    form.addEventListener("submit", function(event) {
+    if (!form.dataset.a11ySubmitBound) {
 
-      event.preventDefault();
+      form.addEventListener("submit", function(event) {
 
-      // Fix: The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
+        event.preventDefault();
 
-      if(keyWordCategory) {
+        // Fix: The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
 
-        var keyWordLocationDesc = keyWordCategory.getAttribute("aria-describedby");
+        if(keyWordCategory) {
 
-        var keywordLocation = form.querySelector(".keyword-location");
+          var keyWordLocationDesc = keyWordCategory.getAttribute("aria-describedby");
 
-        if(keywordLocation) {
+          var keywordLocation = form.querySelector(".keyword-location");
 
-          keywordLocation.setAttribute("aria-describedby", keyWordLocationDesc);
+          if(keywordLocation) {
+
+            keywordLocation.setAttribute("aria-describedby", keyWordLocationDesc);
+
+          }
 
         }
 
-      }
+      });
 
-    });
+      form.dataset.a11ySubmitBound = "true";
+
+    }
 
   });
 
@@ -721,28 +736,34 @@ function fixGlobalDisclosure() {
 
     // Fix: New toggle functionality for newly added aria-expanded attribute.
 
-    button.addEventListener("click", function() {
+    if (!button.dataset.a11yBound) {
 
-      if(this.classList.contains("expandable-child-open")) {
+      button.addEventListener("click", function() {
 
-        this.setAttribute("aria-expanded", "true");
+        if(this.classList.contains("expandable-child-open")) {
 
-      } else { 
+          this.setAttribute("aria-expanded", "true");
 
-        this.setAttribute("aria-expanded", "false");
+        } else {
 
-      }
+          this.setAttribute("aria-expanded", "false");
 
-      // Fix: Remove aria-expanded, aria-hidden being added to adjacent, non-interactive element, by CS Core.
+        }
 
-      if (this.nextElementSibling) {
+        // Fix: Remove aria-expanded, aria-hidden being added to adjacent, non-interactive element, by CS Core.
 
-        this.nextElementSibling.removeAttribute("aria-expanded");
-        this.nextElementSibling.removeAttribute("aria-hidden");
+        if (this.nextElementSibling) {
 
-      }
+          this.nextElementSibling.removeAttribute("aria-expanded");
+          this.nextElementSibling.removeAttribute("aria-hidden");
 
-    });
+        }
+
+      });
+
+      button.dataset.a11yBound = "true";
+
+    }
 
   });
 
@@ -903,38 +924,36 @@ function fixMindReaderInput() {
     
     }
 
-    // Add event listener for when focus leaves the input field (focusout)
-    
-    input.addEventListener("focusout", function() {
-    
-      checkInput();  // Update aria-expanded to false
-    
-    });
+    if (!input.dataset.a11yBound) {
 
-    // Add event listener for when focus leaves the input field (focusout)
-    
-    input.addEventListener("focusout", function() {
-    
-      checkInput();  // Update aria-expanded to false
-    
-    });
+      // Add event listener for when focus leaves the input field (focusout)
 
-    // Add event listener for when Escape key is pressed
+      input.addEventListener("focusout", function() {
 
-    input.addEventListener("keydown", function(event) {
-  
-      if (event.key === "Escape") {
-    
         checkInput();  // Update aria-expanded to false
 
-      }
+      });
 
-    });
+      // Add event listener for when Escape key is pressed
 
-    // Listen for both keydown and keyup events
+      input.addEventListener("keydown", function(event) {
 
-    document.addEventListener("keydown", checkActiveClass); 
-    document.addEventListener("keyup", checkActiveClass);
+        if (event.key === "Escape") {
+
+          checkInput();  // Update aria-expanded to false
+
+        }
+
+      });
+
+      // Listen for both keydown and keyup events
+
+      document.addEventListener("keydown", checkActiveClass);
+      document.addEventListener("keyup", checkActiveClass);
+
+      input.dataset.a11yBound = "true";
+
+    }
 
   });
 
@@ -1058,10 +1077,14 @@ function fixJobDescription() {
 
     attributeTarget.forEach((el) => {
 
-      const span = document.createElement("span");
-      span.classList.add("magicbullet-visually-hidden");
-      span.textContent = " (opens in new window)";
-      el.append(span);
+      if (!el.querySelector(".magicbullet-visually-hidden")) {
+
+        const span = document.createElement("span");
+        span.classList.add("magicbullet-visually-hidden");
+        span.textContent = " (opens in new window)";
+        el.append(span);
+
+      }
 
     });
 
@@ -1183,21 +1206,27 @@ function fixSaveJobButton() {
 
     }
 
-    btn.addEventListener("click", function() {
+    if (!btn.dataset.a11yBound) {
 
-      const pressedState = this.dataset.jobSaved === "true" ? "false" : "true";
-      const jobId = this.dataset.jobId;
-      const relatedSaveBtns = document.querySelectorAll(`.js-save-job-btn[data-job-id="${jobId}"]`);
+      btn.addEventListener("click", function() {
 
-      // The reason we target data-job-id is in event two or more buttons exist on the page for the same job. Job detail pages often have more than one. 
+        const pressedState = this.dataset.jobSaved === "true" ? "false" : "true";
+        const jobId = this.dataset.jobId;
+        const relatedSaveBtns = document.querySelectorAll(`.js-save-job-btn[data-job-id="${jobId}"]`);
 
-      relatedSaveBtns.forEach((saveBtn) => {
-    
-        saveBtn.setAttribute("aria-pressed", pressedState);
+        // The reason we target data-job-id is in event two or more buttons exist on the page for the same job. Job detail pages often have more than one.
+
+        relatedSaveBtns.forEach((saveBtn) => {
+
+          saveBtn.setAttribute("aria-pressed", pressedState);
+
+        });
 
       });
 
-    });
+      btn.dataset.a11yBound = "true";
+
+    }
 
   });
 
@@ -1289,7 +1318,7 @@ function fixSearchForm() {
     var searchFormLocationInput = form.querySelector(".search-location");
     var searchFormLocationPin = form.querySelector(".location-pin");
     var searchFormLocationError = form.querySelector(".search-location-error, .search-form__location-error");
-    var searchFormSubmit = form.querySelector("button, .search-form__search-btn");
+    var searchFormSubmits = form.querySelectorAll("button, .search-form__search-btn");
 
     // Shared Function(s)
 
@@ -1366,11 +1395,17 @@ function fixSearchForm() {
 
       // Validate the locations field when change is made to it.
 
-      searchFormLocationInput.addEventListener("change", function() {
+      if (!searchFormLocationInput.dataset.a11yBound) {
 
-        accessibleValidation();
-  
-      });
+        searchFormLocationInput.addEventListener("change", function() {
+
+          accessibleValidation();
+
+        });
+
+        searchFormLocationInput.dataset.a11yBound = "true";
+
+      }
 
     }
 
@@ -1382,11 +1417,21 @@ function fixSearchForm() {
 
     }
 
-    // Fix: When search button is pressed, fire off custom validation. 
+    // Fix: When search button is pressed, fire off custom validation.
 
-    searchFormSubmit.addEventListener("click", function() {
+    searchFormSubmits.forEach(function(submit) {
 
-      accessibleValidation();
+      if (!submit.dataset.a11yBound) {
+
+        submit.addEventListener("click", function() {
+
+          accessibleValidation();
+
+        });
+
+        submit.dataset.a11yBound = "true";
+
+      }
 
     });
 
@@ -1500,9 +1545,10 @@ function fixSearchResults() {
 
   });
 
-  if (searchResultsContainer) {
-  
+  if (searchResultsContainer && !searchResultsContainer.dataset.observerAttached) {
+
     searchResultsObserver.observe(searchResultsContainer.parentNode, {childList: true, subtree: true});
+    searchResultsContainer.dataset.observerAttached = "true";
 
   }
 
@@ -1587,7 +1633,12 @@ function fixSearchPagination() {
 
         const getFirstLink = document.querySelector("#search-results a");
 
-        getFirstLink.focus();
+        if (getFirstLink) {
+
+          getFirstLink.focus();
+
+        }
+
         searchResultsNavigation.disconnect();
 
       });
@@ -1662,10 +1713,14 @@ function fixSocialShare() {
 
   socialShareLinks.forEach(function(link) {
 
-    var span = document.createElement("span");
-    span.classList.add("magicbullet-visually-hidden");
-    span.textContent = " (opens in new window)";
-    link.append(span);
+    if (!link.querySelector(".magicbullet-visually-hidden")) {
+
+      var span = document.createElement("span");
+      span.classList.add("magicbullet-visually-hidden");
+      span.textContent = " (opens in new window)";
+      link.append(span);
+
+    }
 
     // NICE TO HAVE: We don't really need the rel attribute anymore. Ask prodcut to eventually remove it.
 
