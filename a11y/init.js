@@ -76,25 +76,21 @@ loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js
   // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
   
   var config = { childList: true, subtree: true };
-  
+
   var a11yObserver = new MutationObserver(function(mutationsList) {
 
     // Log mutations
   
     // console.log("Mutations:", mutationsList);
-    
+
     clearTimeout(a11yObserver.timeout);
-  
-    a11yObserver.disconnect();
-    
+
     a11yObserver.timeout = setTimeout(function() {
-  
-      initDynamicPatch();
-  
-      a11yObserver.observe(targetNode, config); 
-    
+
+        initDynamicPatch();
+
     }, 1000);
-    
+
   });
   
   a11yObserver.observe(targetNode, config);
@@ -758,7 +754,7 @@ function fixIframeElement() {
 
   // Fix: Find YouTube embeds that may be missing the title attribute and add a generic one.
 
-  var missingTitleYoutube = document.querySelectorAll("iframe[src*='https://www.youtube.com/']:not([title]");
+  var missingTitleYoutube = document.querySelectorAll("iframe[src*='https://www.youtube.com/']:not([title])");
 
   missingTitleYoutube.forEach(function(title){
 
@@ -766,7 +762,7 @@ function fixIframeElement() {
 
   });
 
-  var missingTitleVimeo = document.querySelectorAll("iframe[src*='https://player.vimeo.com/']:not([title]");
+  var missingTitleVimeo = document.querySelectorAll("iframe[src*='https://player.vimeo.com/']:not([title])");
 
   missingTitleVimeo.forEach(function(title){
 
