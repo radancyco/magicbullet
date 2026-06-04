@@ -1499,8 +1499,9 @@ function fixSearchResults() {
     // Recalculate count each time the DOM changes
 
     const searchResultTotal = searchResultsContainer.dataset.totalResults;
-    const searchResultCount = searchResultsContainer.querySelectorAll("#search-results-list ul li").length;
-    ariaMsg.textContent = searchResultCount + " of " + searchResultTotal + " results are now available.";
+    // const searchResultCount = searchResultsContainer.querySelectorAll("#search-results-list ul li").length;
+    // ariaMsg.textContent = searchResultCount + " of " + searchResultTotal + " results are now available.";
+    ariaMsg.textContent = searchResultTotal + " results are now available.";
 
   });
 
