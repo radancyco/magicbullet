@@ -20,6 +20,7 @@ roadmap:
 
 title: "Career Site Accessibility Patch v2.0"
 accordion: true
+tablist: true
 ---
 
 {% include icon.html %}
@@ -28,7 +29,7 @@ accordion: true
 
 <p>This patch addresses various accessibility issues across all Career Sites. This is a temporary solution until these issues can be resolved by the product team. If there are any questions or concerns with the script, please reach out to <a href="mailto:{{ site.owner-email }}?subject={{ page.title }}">{{ site.owner-name }}</a></p>
 
-<h2 id="implementation">Implementation</h2>
+<h2 id="implementation">Implementation {% include permalink.html hash="implementation" %}</h2>
 
 {% highlight html %}<script id="radancy-magicbullet" data-a11y src="https://services.tmpwebeng.com/magicbullet/" type="module"></script>{% endhighlight %}
 
@@ -42,9 +43,9 @@ accordion: true
   
 <p>If these messages are missing or you are receiving an alert in A11y Pulse, the Accessibility Patch isn't loading and you'll need to troubleshoot.</p>
 
-<section aria-labelledby="hdr-troubleshooting" class="info info--reminder" id="a11y-troubleshooting">
+<section aria-labelledby="hdr-troubleshooting" class="info info--reminder" id="troubleshooting" tabindex="-1">
 
-  <h2 id="hdr-troubleshooting" class="info__heading">Troubleshooting</h2>
+  <h2 id="hdr-troubleshooting" class="info__heading">Troubleshooting {% include permalink.html hash="troubleshooting" %}</h2>
 
   <ol>
     <li><strong>Ensure only one instance of MagicBullet loads per page.</strong> Multiple MagicBullet scripts can prevent associated features, like the Accessibility Patch, from running.</li>
@@ -65,15 +66,13 @@ document.body.appendChild(magicBullet);{%endhighlight%}</p>
 
 </section>
 
-<h2 id="issue-log">Issue Log</h3>
+<h2 id="issue-log">Issue Log {% include permalink.html hash="issue-log" %}</h2>
 
 {% for bug in site.data.a11y %}
 
-  {% assign issueID = bug.ID | plus: 0 %}
+  <div id="{{ bug.ID }}" class="{% if bug.Priority == "High" %} info info--warning{%else%}info info--note{% endif %}">
 
-  <div id="{{ bug.ID }}" class="{% if bug.Priority == "High" %}warning{%else%}issue{% endif %}">
-
-    <h2>{{ bug.Summary }} <a class="anchor" href="#{{ bug.ID }}">{{ iconAnchor }} <span class="sr-only">Anchor ({{ bug.ID }})</span></a></h2>
+    <h2 class="info__heading">{{ bug.Summary }} {% include permalink.html hash=bug.ID %}</h2>
 
     <dl>
         
@@ -114,7 +113,7 @@ document.body.appendChild(magicBullet);{%endhighlight%}</p>
         <div>
         
           <dt>JIRA</dt>
-          <dd><a href="{{ bug.JIRA }}" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></dd>
+          <dd><a href="{{ bug.JIRA }}" target="_blank">View <span class="visually-hidden">(opens in new tab)</span></a></dd>
 
         </div>
 
@@ -136,7 +135,7 @@ document.body.appendChild(magicBullet);{%endhighlight%}</p>
         <div>
         
           <dt>Screengrab</dt>
-          <dd><a href="{{ bug.Screengrab }}" target="_blank">View <span class="sr-only">(opens in new tab)</span></a></dd>
+          <dd><a href="{{ bug.Screengrab }}" target="_blank">View <span class="visually-hidden">(opens in new tab)</span></a></dd>
 
         </div>
 
@@ -171,13 +170,39 @@ document.body.appendChild(magicBullet);{%endhighlight%}</p>
 
 {% endfor %}
 
-<div class="accordion local-override" data-fixed-height>
+<div class="content-view-code">
 
-  <button class="accordion__toggle" id="javascript">JavaScript</button>
+  <div class="tablist" data-scroll data-fixed-height="">
 
-  <div class="accordion__panel">
+    <div class="tablist__container">
 
-    {% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
+        <ul class="tablist__list">  
+          <li><a class="tablist__tab" href="#javascript">{{ iconJS }} JavaScript</a></li>
+          <li><a class="tablist__tab" href="#css">{{ iconJS }} CSS</a></li>
+        </ul>
+
+    </div>
+
+    <div class="tablist__panel" id="javascript">
+
+        <div class="tablist__content">
+
+          {% highlight javascript %}{% include_relative init.js %}{% endhighlight %}
+           
+        </div>
+
+    </div>
+
+    <div class="tablist__panel" id="css">
+
+        <div class="tablist__content">
+
+          {% highlight scss %}{% include_relative init.css %}{% endhighlight %}
+           
+        </div>
+
+    </div>
+
   </div>
 
 </div>
