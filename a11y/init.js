@@ -16,7 +16,7 @@
 
 function loadA11yPatch(url, callback) {
 
-  var getComponentLanguagePack = document.getElementById("component-library-language-pack");
+  var getComponentLanguagePack = document.getElementById("magicbullet-language-pack");
 
   if (getComponentLanguagePack) {
 
@@ -29,7 +29,7 @@ function loadA11yPatch(url, callback) {
     var componentLanguagePack = document.createElement("script");
 
     componentLanguagePack.setAttribute("src", url);
-    componentLanguagePack.setAttribute("id", "component-library-language-pack");
+    componentLanguagePack.setAttribute("id", "magicbullet-language-pack");
     componentLanguagePack.onreadystatechange = callback;
     componentLanguagePack.onload = callback;
 
@@ -39,10 +39,13 @@ function loadA11yPatch(url, callback) {
 
 }
 
-loadA11yPatch("https://services.tmpwebeng.com/component-library/language-pack.js", function(){
+// loadA11yPatch("https://services.tmpwebeng.com/magicbullet/language-pack.js", function(){
+loadA11yPatch("https://radancy.dev/magicbullet/language-pack.js", function(){
 
   console.log("%cMagicBullet: A11y%cv2.0", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
+  console.log(atAudioDescriptionLabel);
+  
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 
   var a11yBody = document.body;
@@ -556,7 +559,7 @@ function fixDataForm() {
 
     addJobAlertButtons.forEach(function(button) {
 
-      button.setAttribute("aria-label", "Add Job Alert");
+      button.setAttribute("aria-label", addJobAlert);
 
     });
 
