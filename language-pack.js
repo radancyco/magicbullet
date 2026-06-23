@@ -408,7 +408,7 @@ if(currentPageLanguage === "ar") {
 
     // Save Job Button
 
-    var labelSaveJob = "Enregistrer l’offre d’emploi";
+    var labelSaveJob = "Enregistrer l'offre d’emploi";
 
     // Search Form
 
