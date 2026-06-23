@@ -434,7 +434,7 @@ function fixDataForm() {
 
       // Do a check on the input to see if attribute
 
-      if (label.nextElementSibling(dataFormElement).classList.contains("required")) {
+      if (label.nextElementSibling.classList.contains("required")) {
 
         label.textContent;
 
