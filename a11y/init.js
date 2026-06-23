@@ -270,12 +270,11 @@ function fixAppliedFilter() {
     filter.setAttribute("role", "group");
 
     // Fix: Add aria-label to each button that is not disabled. Include a better label that helps identify the functionality of the button.
-    // TODO: Add langauge suppoprt.
     // BUG: When disabled filter button is present and last filter button is pressed, focus is placed on checkbox in filter section.
 
     btnSearchFilter.forEach(function(btn){
   
-      btn.setAttribute("aria-label", "Remove " + btn.textContent + " filter");
+      btn.setAttribute("aria-label", labelRemoveFilter + " (" + btn.textContent + ")");
 
     });
 
@@ -555,20 +554,18 @@ function fixDataForm() {
     });
 
     // Fix: The "Add" button needs to be more explicit to AT so include "Add Job Alert"
-    // TODO: Add language support.
 
     addJobAlertButtons.forEach(function(button) {
 
-      button.setAttribute("aria-label", addJobAlert);
+      button.setAttribute("aria-label", labelAddJobAlert);
 
     });
 
     // Fix: The keyword list requires a more accessible grouping to better identify it; adding proper role and accName, etc.
-    // TODO: Add language support.
 
     var keywordSelectedRegionClassName = "keyword-region";
     var keywordSelectedRegionClass = "." + keywordSelectedRegionClassName;
-    var keywordSelectedRegionLabel = "Selected Job Alerts";
+    var keywordSelectedRegionLabel = labelSelectedJobAlerts;
 
     keywordSelected.forEach(function(region) {
 
@@ -612,7 +609,7 @@ function fixDataForm() {
     if(captchaBadge) {
 
       var captchaResponse = captchaBadge.querySelector(".g-recaptcha-response");
-      var captchaResponseLabel = "Captcha";
+      var captchaResponseLabel = labelCaptcha;
       var captchaIframe = captchaBadge.querySelectorAll("iframe");
 
       // Add accName to textarea
@@ -632,7 +629,7 @@ function fixDataForm() {
     // Fix: The "Sign Up" button needs to be more explicit to AT.
     // TODO: Add language support.
 
-    var signUpButtonLabel = "Submit Job Alerts";
+    var signUpButtonLabel = labelSubmitJobAlerts;
 
     signUpButtons.forEach(function(button) {
 
@@ -1000,7 +997,7 @@ function fixHeader() {
 
     if (!headerNavigation.hasAttribute("aria-label")) {
 
-      headerNavigation.setAttribute("aria-label", "Main");
+      headerNavigation.setAttribute("aria-label", labelPrimaryNavigation);
 
     }
 
@@ -1171,7 +1168,7 @@ function fixSaveJobButton() {
     // Fix: Custom label needed to override the text toggle that delivery often adds (or removes). Text changes should never be used to convey state.
     // TODO: Add language support.
 
-    btn.setAttribute("aria-label", "Save Job");
+    btn.setAttribute("aria-label", labelSaveJob);
 
     // Fix: iOS, NVDA bug, state not reading back so need to implicitly add a role of "button" and remove type attribute. Do not remove until support better.
 
@@ -1244,7 +1241,7 @@ function fixSaveJobButton() {
 
     }
 
-    const savedJobsLabel = number ? `${number} ${labelText} (View saved jobs)` : `${labelText} (View all)`;
+    const savedJobsLabel = number ? `${number} ${labelText} (${labelViewSavedJobs})` : `${labelText} (View all)`;
 
     if (isActive) {
     
@@ -1351,12 +1348,8 @@ function fixSearchForm() {
       // If the class (.job-search-legend) is not present then simply add a label of "Search Jobs" to the div wrapping the form elements (.search-form-fields)
 
       if(searchFormFields) {
-
-        if (document.documentElement.getAttribute("lang") === "en") {
       
-          searchFormFields.setAttribute("aria-label", "Search Jobs");
-
-        }
+        searchFormFields.setAttribute("aria-label", labelSearchJobs);
 
       }
 
@@ -1543,7 +1536,7 @@ function fixSearchPagination() {
 
     if (!pagination.hasAttribute("aria-label")) {
 
-      pagination.setAttribute("aria-label", "Pagination");
+      pagination.setAttribute("aria-label", labelPagination);
 
       // TODO: Add language support for "Pagination"
 
