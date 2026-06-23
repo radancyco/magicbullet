@@ -39,13 +39,13 @@ function loadA11yPatch(url, callback) {
 
 }
 
-// loadA11yPatch("https://services.tmpwebeng.com/magicbullet/language-pack.js", function(){
-loadA11yPatch("https://radancy.dev/magicbullet/language-pack.js", function(){
+var languagePackSrc = "https://radancy.dev/magicbullet/language-pack.js"
+// var languagePackSrc = "https://services.tmpwebeng.com/magicbullet/language-pack.js";
+
+loadA11yPatch(languagePackSrc, function(){
 
   console.log("%cMagicBullet: A11y%cv2.0", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
-  console.log(atAudioDescriptionLabel);
-  
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 
   var a11yBody = document.body;
@@ -431,6 +431,14 @@ function fixDataForm() {
       // See if icon we wish to append already exists.
 
       var getRequiredIcon = label.querySelector(iconClass);
+
+      // Do a check on the input to see if attribute
+
+      if (label.nextElementSibling(dataFormElement).classList.contains("required")) {
+
+        label.textContent;
+
+      }
 
       if(getRequiredIcon === null) {
 
