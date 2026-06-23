@@ -1,0 +1,1674 @@
+/*!
+
+  Radancy MagicBullet: Accessibility Patch
+
+  Contributor(s):
+  Michael "Spell" Spellacy
+
+*/
+
+/* TODO
+
+1. Add new fix for keyword autocomplete. See https://dwhite-rds.runmytests.com/documentation#section-auto-complete 
+   Similar was implemented on Intuit some time ago. Will probably not use, except for refrence. See https://tbadmin.radancy.net/sassjs/updatejavascript/27595/27595/70305
+
+*/ 
+
+function loadA11yPatch(url, callback) {
+
+  var getComponentLanguagePack = document.getElementById("magicbullet-language-pack");
+
+  if (getComponentLanguagePack) {
+
+    callback();
+
+  } else {
+
+    // Install Language Pack.
+
+    var componentLanguagePack = document.createElement("script");
+
+    componentLanguagePack.setAttribute("src", url);
+    componentLanguagePack.setAttribute("id", "magicbullet-language-pack");
+    componentLanguagePack.onreadystatechange = callback;
+    componentLanguagePack.onload = callback;
+
+    document.getElementsByTagName("head")[0].appendChild(componentLanguagePack);
+
+  }
+
+}
+
+// loadA11yPatch("https://services.tmpwebeng.com/magicbullet/language-pack.js", function(){
+loadA11yPatch("https://radancy.dev/magicbullet/language-pack.js", function(){
+
+  console.log("%cMagicBullet: A11y%cv2.0", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+
+  console.log(atAudioDescriptionLabel);
+  
+  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
+
+  var a11yBody = document.body;
+
+  // Add A11y hook for implementation team. May come in handy.
+
+  a11yBody.classList.add("magicbullet-a11y");
+
+  // Add global aria-live to pass messages to when needed.
+
+  let globalA11yMessage = document.querySelector("#magicbullet-message");
+
+  if(!globalA11yMessage) {
+
+    let a11yMessage = document.createElement("div");
+  
+    a11yMessage.classList.add("magicbullet-visually-hidden");
+    a11yMessage.setAttribute("id", "magicbullet-message");
+    a11yMessage.setAttribute("aria-live", "polite");
+    a11yBody.append(a11yMessage);
+
+  }
+
+  // Create a new MutationObserver instance
+
+  // TODO: Instead of having an observer to watch _everything_ in main (#content), consider setting up multiple observers per component.
+  // This might be better and less prone to creating interference on site. Similar to MindReaders seperate observer.
+
+  var targetNode = document.querySelector("#content");
+
+  // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
+  
+  var config = { childList: true, subtree: true };
+  
+  var a11yObserver = new MutationObserver(function(mutationsList) {
+
+    // Log mutations
+  
+    // console.log("Mutations:", mutationsList);
+    
+    clearTimeout(a11yObserver.timeout);
+  
+    a11yObserver.disconnect();
+    
+    a11yObserver.timeout = setTimeout(function() {
+  
+      initDynamicPatch();
+  
+      a11yObserver.observe(targetNode, config); 
+    
+    }, 1000);
+    
+  });
+  
+  a11yObserver.observe(targetNode, config);
+
+  initStaticPatch();
+  
+  initDynamicPatch(); 
+
+  // MindReader Observers 
+
+  var mindReaderNodes = document.querySelectorAll(".mindreader-status, #wrapper-sel-city");
+
+  function callback(mutationList, mindReaderObserver) {
+ 
+    fixMindReaderList();
+
+  }
+
+  mindReaderNodes.forEach(function(node) {
+  
+    var mindReaderObserver = new MutationObserver(callback);
+    
+    mindReaderObserver.observe(node, config);
+
+  });
+
+});
+
+// Accessibility Patch: Dynamic
+// Desc: These fixes address issues that occur both on page load and during dynamic DOM changes. 
+// For instance, a script might add a new node to the DOM or refresh content on the page. When this happens, each fix will be reapplied to DOM.
+  
+function initDynamicPatch() {
+
+  fixAltAttribute();
+  fixAppliedFilter();
+  fixDataForm();
+  fixGlobalDisclosure();
+  fixIframeElement();
+  fixInputElements();
+  fixMindReaderInput();
+  fixSaveJobButton();
+  fixSearchFilters();
+  fixSearchResults();
+  fixSearchPagination();
+
+  console.log("%cMagicBullet: A11y%cDynamic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+
+}
+
+// Accessibility Patch: Static
+// Desc: These fixes address issues that occur on page load only.
+
+function initStaticPatch() {
+
+  fixA11y();
+  fixAdvancedSearchForm();
+  fixCookieManagement();
+  fixCMS();
+  fixHeader();
+  fixJobDescription();
+  // fixJobList();
+  fixJobLocation(); 
+  fixJobMap();
+  fixSearchForm();
+  fixSitemap();
+  fixSocialShare();
+
+  console.log("%cMagicBullet: A11y%cStatic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+
+}
+
+// Accessibility Patch: Fix A11y
+// Description: This is a global function that addresses sitewide accessibility.
+
+function fixA11y() {
+
+  // Add Tabindex to main for max support. 
+
+  const mainContent = document.querySelector("#content");
+
+  if (mainContent) {
+  
+    // mainContent.setAttribute("tabindex", "-1"); removing for now because the search filters appear to break when present. 
+    // roll an eventual fix on this that removes the 
+  
+  }
+
+}
+
+// Accessibility Patch: Advanced Search Form 
+
+function fixAdvancedSearchForm() {
+
+  var searchForm = document.querySelectorAll(".advanced-search-form");
+
+  searchForm.forEach(function(form, i){
+
+    var formID = (i + 1); // Not used (yet).
+    var searchFormFields = form.querySelector(".advanced-search-form-fields");
+
+    if(searchFormFields) {
+
+      // Fix: Remove aria-expanded from .advanced-search-form-fields.
+
+      searchFormFields.removeAttribute("aria-expanded");
+
+    }
+
+  });
+
+}
+
+// Accessibility Patch: Alt Attribute (Utility)
+
+function fixAltAttribute() {
+
+  // Fix: Look for images on page that do not contain an alt attribute and add one dynamically.
+  // Fix: Alt text with spaces in them are not ideal and even get picked up by certain linters as an issue. 
+
+  var allImages = document.querySelectorAll("img");
+
+  allImages.forEach(function(img){
+
+    if (!img.hasAttribute("alt") || img.getAttribute("alt").trim() === "") {
+
+      img.setAttribute("alt", "");
+    }
+
+  });
+
+  // Fix: While we are here, we may as well remove the alt attribute mistakenly placed on the source element of the image module. 
+
+  var allSource = document.querySelectorAll("source");
+
+  allSource.forEach(function(source){
+
+    source.removeAttribute("alt");
+ 
+  });
+
+}
+
+// Accessibility Patch: Applied Filter
+
+function fixAppliedFilter() {
+
+  var appliedFilters = document.querySelectorAll(".search-results-options");
+
+  appliedFilters.forEach(function(filter){
+
+    var appliedFiltersList = filter.querySelectorAll("ul[aria-labelledby]");
+    var btnSearchFilter = filter.querySelectorAll(".filter-button:not([disabled])");
+
+    // Fix: Remove aria-labeledby from UL
+
+    appliedFiltersList.forEach(function(list){
+
+      list.removeAttribute("aria-labelledby");
+
+    });
+
+    // Fix: Remove aria-hidden and aria-expanded and add aria-describedby and role to parent element (.search-results-option)
+    // TODO: Regarding aria-labelledby on section wrapper, see if contextual support good enough here. 
+    // If it is, then we may be able to remove aria-labelledby and region role entirely. See https://www.w3.org/WAI/WCAG22/Techniques/html/H81
+  
+    filter.removeAttribute("aria-hidden");
+    filter.removeAttribute("aria-expanded");
+    filter.setAttribute("aria-labelledby", "applied-filters-label");
+    filter.setAttribute("role", "group");
+
+    // Fix: Add aria-label to each button that is not disabled. Include a better label that helps identify the functionality of the button.
+    // BUG: When disabled filter button is present and last filter button is pressed, focus is placed on checkbox in filter section.
+
+    btnSearchFilter.forEach(function(btn){
+  
+      btn.setAttribute("aria-label", labelRemoveFilter + " (" + btn.textContent + ")");
+
+    });
+
+  });
+
+}
+
+// Accessibility Patch: Cookie Management
+
+function fixCookieManagement() {
+
+  // Fix: Remove aria-describedby="cookieDescriptionIdAttr" from each input element.
+  // Note: To fix, have product add @ to input aria-describedby. See https://app.screencast.com/9dzk8ozq864Pc (Thanks Paul!)
+
+  var cookieDescriptionIdAttr = document.querySelectorAll("input[aria-describedby='cookieDescriptionIdAttr']");
+
+  cookieDescriptionIdAttr.forEach(function(input) {
+
+    input.removeAttribute("aria-describedby"); 
+
+  });
+
+}
+
+// Accessibility: Patch: CMS Content
+
+function fixCMS() {
+
+  // Our CMS often strips needed HTML attributes, so this fix seeks to circumvent some of those removals. 
+
+  // Fix: Lang Attributes are required to address shift in langauge in screen readers/AT. 
+
+  const attributeLang = document.querySelectorAll("[data-cms-mb-lang]");
+
+  attributeLang.forEach((el) => {
+
+    el.setAttribute("lang", el.getAttribute("data-cms-mb-lang"));
+
+  });
+
+  // Fix: Lang Attributes are required to address shift in langauge in screen readers/AT. 
+
+  const attributeScope = document.querySelectorAll("[data-cms-mb-scope]");
+
+  attributeScope.forEach((el) => {
+
+    el.setAttribute("scope", el.getAttribute("data-cms-mb-scope"));
+
+  });
+
+  // Fix: Add accessibly hidden new window text to CMS created links that open in new windows. Delivery will need to add new window icons for now. 
+
+  const attributeTarget = document.querySelectorAll("a[target='_blank'][data-custom-category='UserCreatedContent']");
+
+  attributeTarget.forEach((el) => {
+
+    const span = document.createElement("span");
+    span.classList.add("magicbullet-visually-hidden");
+    span.textContent = " (opens in new window)";
+    el.append(span);
+
+  });
+
+}
+
+// Accessibility Patch: Data Form
+
+function fixDataForm() {
+
+  var dataForms = document.querySelectorAll(".data-form");
+
+  dataForms.forEach(function(form){
+
+    var instructionTexts = form.querySelectorAll(".instruction-text");
+    var requiredLabels = form.querySelectorAll(".form-field.required label");
+    var ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
+    var requiredXHTML = form.querySelectorAll("*[required='required']");
+    var validationMsg = form.querySelectorAll(".field-validation-valid");
+    var requiredFields = form.querySelectorAll(".form-field.required input, .form-field.required select");
+    var dataFormElement = form.querySelectorAll("input, select");
+    var autoCompleteFirstName = form.querySelectorAll("input[name='FirstName']");
+    var autoCompleteLastName = form.querySelectorAll("input[name='LastName']");
+    var autoCompleteAddress = form.querySelectorAll("input[name='StreetAddress']");
+    var autoCompleteCity = form.querySelectorAll("input[name='City']");
+    var autoCompleteEmailAddress = form.querySelectorAll("input[name='EmailAddress']");
+    var autoCompletePhoneNumber = form.querySelectorAll("input[name='MobilePhone']");
+    var autoCompleteZipCode = form.querySelectorAll("input[name='PostalCode']");
+    var autoCompleteStateProvince = form.querySelectorAll("select[name='Custom-92392']"); // Targeing custom filed; need better way to handle this, probably product side fix eventually.
+    var addJobAlertButtons = form.querySelectorAll(".keyword-add");
+    var keywordSelected = form.querySelectorAll(".keyword-selected");
+    var fileUploadButtons = form.querySelectorAll(".form-field input[name='Resume']");
+    var captchaBadge = form.querySelector(".grecaptcha-badge");
+    var signUpButtons = form.querySelectorAll("button[type='submit']");
+    var formMessage = form.querySelector(".form-field.form-message b");
+    var formMessageButton = form.querySelector(".form-field.form-message a");
+    var keyWordCategory = form.querySelector(".keyword-category");
+
+    // Clean-up: Remove empty instruction-text spans as they can sometimes cause undesired spacing issues.
+
+    instructionTexts.forEach(function(element) {
+
+      if (element.textContent.trim() === "") {
+    
+        element.parentNode.removeChild(element);
+    
+      }
+    
+    });
+    
+    // Clean-up: Remove aria-required from various elements. This attribute is sometimes flagged in automated testing and just the boolean required attribute is now recommended.
+    
+    ariaRequired.forEach(function(element) {
+    
+      element.removeAttribute("aria-required");
+    
+    });
+    
+    // Clean-up: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
+    
+    requiredXHTML.forEach(function(element) {
+    
+      element.setAttribute("required", "");
+    
+    });
+
+    // Fix: Remove the CSS asterisk (see init.scss) because it reads out to assistive tech (AT) when added via content property and include a span with aria-hidden on it so that it is not picked up by AT. New asterisk applied via CSS.
+
+    var iconClassName = "ico-required-indicator";
+    var iconClass = "." + iconClassName;
+
+    requiredLabels.forEach(function(label) {
+
+      // Fix: Remove textNodes that are inline astericks, instead of using a pseudo-element. 
+
+      var labelTextNode = label.childNodes[0]; 
+
+      if (labelTextNode && labelTextNode.nodeType === Node.TEXT_NODE) {
+
+        // var cleanedText = labelTextNode.nodeValue.trim().replace("*", ""); // Removing trim as it it causing some layout issues. labels with link in them, like privacy policy, were being trimmed, cauing pacing issues.
+
+        var cleanedText = labelTextNode.nodeValue.replace("*", "");
+
+        // Update the text node without the asterisk
+
+        labelTextNode.nodeValue = cleanedText;
+
+      }
+
+      var span = document.createElement("span");
+      span.classList.add(iconClassName);
+      span.setAttribute("aria-hidden", "true");
+      span.textContent = "*";
+
+      // See if icon we wish to append already exists.
+
+      var getRequiredIcon = label.querySelector(iconClass);
+
+      if(getRequiredIcon === null) {
+
+        label.appendChild(span);
+
+      }
+
+    });
+
+    // Fix: Remove "role" from field-validation-error (it's not needed).
+
+    validationMsg.forEach(function(element) {
+
+      element.removeAttribute ("role");
+
+    });
+
+    // Fix: All required fields should include aria-invalid="false" on page load.
+
+    requiredFields.forEach(function(input) {
+
+      if (input.classList.contains("input-validation-error")) {
+
+        input.setAttribute("aria-invalid", "true");
+
+      } else {
+
+        input.setAttribute("aria-invalid", "false");
+
+      }
+
+    });
+
+    // Fix: The input-validation-error class is removed when leaving a field, but aria-invalid remains set to true, so we address this by listening for blur event.
+
+    // Add blur event listener to each element
+
+    dataFormElement.forEach(function(element) {
+
+      element.addEventListener("blur", function() {
+
+          if (element.classList.contains("input-validation-error")) {
+
+            element.setAttribute("aria-invalid", "true");
+
+          } else {
+
+            element.setAttribute("aria-invalid", "false");
+
+          }
+
+      });
+
+    });
+
+    // Fix: It is customary to include more useful autocomplete attributes so that certain fields will show the contextual menu for easier input. Adding autocompletes for First Name, Family Name, and Email. For email we are also changing the type from "text" to "email"
+
+    // First Name
+
+    autoCompleteFirstName.forEach(function(input) {
+
+      input.setAttribute("autocomplete", "given-name");
+
+    });
+
+    // Last Name
+
+    autoCompleteLastName.forEach(function(input) {
+
+      input.setAttribute("autocomplete", "family-name");
+
+    });
+
+    // Email Address
+
+    autoCompleteEmailAddress.forEach(function(input) {
+      
+      input.setAttribute("type", "email");
+      input.setAttribute("autocomplete", "email");
+      
+    });
+
+    // Phone Number
+
+    autoCompletePhoneNumber.forEach(function(input) {
+      
+      input.setAttribute("autocomplete", "tel");
+      
+    });
+
+    // Zip Code
+
+    autoCompleteZipCode.forEach(function(input) {
+      
+        input.setAttribute("autocomplete", "postal-code");
+          
+    });
+
+    // State/Province
+
+    autoCompleteStateProvince.forEach(function(input) {
+      
+      input.setAttribute("autocomplete", "address-level1");
+            
+    });
+
+    // Street Address
+
+    autoCompleteAddress.forEach(function(input) {
+      
+      input.setAttribute("autocomplete", "street-address");
+                
+    });
+
+    // City
+
+    autoCompleteCity.forEach(function(input) {
+      
+      input.setAttribute("autocomplete", "address-level2");
+            
+    });
+
+    // Fix: The "Add" button needs to be more explicit to AT so include "Add Job Alert"
+
+    addJobAlertButtons.forEach(function(button) {
+
+      button.setAttribute("aria-label", labelAddJobAlert);
+
+    });
+
+    // Fix: The keyword list requires a more accessible grouping to better identify it; adding proper role and accName, etc.
+
+    var keywordSelectedRegionClassName = "keyword-region";
+    var keywordSelectedRegionClass = "." + keywordSelectedRegionClassName;
+    var keywordSelectedRegionLabel = labelSelectedJobAlerts;
+
+    keywordSelected.forEach(function(region) {
+
+      var keywordSelectedRegion = document.createElement("div");
+      keywordSelectedRegion.classList.add(keywordSelectedRegionClassName);
+      keywordSelectedRegion.setAttribute("role", "region");
+      keywordSelectedRegion.setAttribute("aria-label", keywordSelectedRegionLabel);
+
+      // See if region we wish to append already exists.
+
+      var getKeywordRegion = form.querySelector(keywordSelectedRegionClass);
+
+      if(getKeywordRegion === null) {
+
+        region.parentNode.insertBefore(keywordSelectedRegion, region);
+        keywordSelectedRegion.appendChild(region);
+
+      }
+
+    });
+
+    // Fix: The file upload remove button is a link with an href hash. This is awful, so let's remedy it by replacing it with a button.
+
+    fileUploadButtons.forEach(function(input) {
+
+      var fileUploadLink = input.nextElementSibling;
+      var resumeRemoveLabel = fileUploadLink.textContent.trim();
+
+      var fileUploadButton = document.createElement("button");
+      fileUploadButton.setAttribute("aria-describedby", input.getAttribute("id"));
+      fileUploadButton.classList.add("file-remove");
+      fileUploadButton.style.display = "none";
+      fileUploadButton.textContent = resumeRemoveLabel;
+
+      fileUploadLink.parentNode.replaceChild(fileUploadButton, fileUploadLink);
+
+    });
+
+    // Fix: Adding an accName to textarea, removing iframe garbage, and moving captcha to end of form to address tab order. It should not exist before submit button.
+
+    if(captchaBadge) {
+
+      var captchaResponse = captchaBadge.querySelector(".g-recaptcha-response");
+      var captchaResponseLabel = labelCaptcha;
+      var captchaIframe = captchaBadge.querySelectorAll("iframe");
+
+      // Add accName to textarea
+
+      captchaResponse.setAttribute("aria-label", captchaResponseLabel);
+
+      // Remove iframe junk (border: 0 now set in init.scss)
+
+      captchaIframe.forEach(function(iframe){
+
+        iframe.removeAttribute("frameborder");
+
+      });
+
+    }
+
+    // Fix: The "Sign Up" button needs to be more explicit to AT.
+    // TODO: Add language support.
+
+    var signUpButtonLabel = labelSubmitJobAlerts;
+
+    signUpButtons.forEach(function(button) {
+
+      button.setAttribute("aria-label", signUpButtonLabel);
+
+    });
+
+    // Fix: The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
+
+    if(formMessage) {
+
+      formMessage.setAttribute("tabindex", "-1");
+
+    }
+
+    // Fix: The form message close link should really be a button, but for now we'll simply add a role.
+    // TODO: Unbind or override current close event and add support for closing when Enter AND Spacebar is pressed.
+
+    if(formMessageButton) {
+
+      formMessageButton.classList.add("data-form__close");
+      formMessageButton.setAttribute("role", "button");
+
+      var formMessageButtonIcon = document.createElement("span");
+      formMessageButtonIcon.setAttribute("aria-hidden", "true");
+      formMessageButtonIcon.classList.add("data-form__closeicon");
+
+      formMessageButton.appendChild(formMessageButtonIcon);
+
+    }
+
+    // Form submission events
+
+    form.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      // Fix: The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
+
+      if(keyWordCategory) {
+
+        var keyWordLocationDesc = keyWordCategory.getAttribute("aria-describedby");
+
+        var keywordLocation = form.querySelector(".keyword-location");
+
+        if(keywordLocation) {
+
+          keywordLocation.setAttribute("aria-describedby", keyWordLocationDesc);
+
+        }
+
+      }
+
+    });
+
+  });
+
+}
+
+// Accessibility Patch: Global Disclosure
+
+function fixGlobalDisclosure() {
+
+  var expandableParentBtn = document.querySelectorAll(".expandable-parent");
+
+  expandableParentBtn.forEach(function(button) {
+
+    // Fix: See if element is already open, set aria-expanded state to true if it is.
+
+    if(button.classList.contains("expandable-child-open")) {
+
+      button.setAttribute("aria-expanded", "true");
+  
+    } else {
+
+      button.setAttribute("aria-expanded", "false");
+
+    }
+
+    // Fix: Remove aria-expanded from adjacent, non-interactive element.
+  
+    if (button.nextElementSibling) {
+  
+      button.nextElementSibling.removeAttribute("aria-expanded");
+      button.nextElementSibling.removeAttribute("aria-hidden");
+
+      // TODO: Instead of targeting nextElementSibling, go to parent element and querySelector(".search-filter-list"). 
+      // Then we can move the aria-labelledby and role on the section element down to it's own div below the button. 
+      // Great Clips brought this up recently and it is good point. See https://hub.accessible360.com/issues/454261/edit#comment-801093 
+      // See note.txt
+  
+    }
+
+    // Fix: New toggle functionality for newly added aria-expanded attribute.
+
+    button.addEventListener("click", function() {
+
+      if(this.classList.contains("expandable-child-open")) {
+
+        this.setAttribute("aria-expanded", "true");
+
+      } else { 
+
+        this.setAttribute("aria-expanded", "false");
+
+      }
+
+      // Fix: Remove aria-expanded, aria-hidden being added to adjacent, non-interactive element, by CS Core.
+
+      if (this.nextElementSibling) {
+
+        this.nextElementSibling.removeAttribute("aria-expanded");
+        this.nextElementSibling.removeAttribute("aria-hidden");
+
+      }
+
+    });
+
+  });
+
+}
+
+// Accessibility Patch: Iframe Elements
+
+function fixIframeElement() {
+
+  // Fix: Find YouTube embeds that may be missing the title attribute and add a generic one.
+
+  var missingTitleYoutube = document.querySelectorAll("iframe[src*='https://www.youtube.com/']:not([title])");
+
+  missingTitleYoutube.forEach(function(title){
+
+    title.setAttribute("title", "Youtube video player");
+
+  });
+
+  var missingTitleVimeo = document.querySelectorAll("iframe[src*='https://player.vimeo.com/']:not([title])");
+
+  missingTitleVimeo.forEach(function(title){
+
+    title.setAttribute("title", "Vimeo video player");
+
+  });
+
+}
+
+// Accessibility Patch: Input Elements (Utility)
+
+function fixInputElements() {
+
+  // Fix: Input elements with type of "checkbox" should not contain autocomplete as it is not a text or select field, so we need to remove.
+
+  var inputCheckBox = document.querySelectorAll("input[type='checkbox']");
+
+  inputCheckBox.forEach(function(input) {
+
+    input.removeAttribute("autocomplete");
+
+  });
+
+}
+
+// Accessibility Patch: Mindreader Combobox
+
+function fixMindReaderInput() {
+
+  var comboBoxInput = document.querySelectorAll(".search-location, .keyword-location");
+
+  comboBoxInput.forEach(function(input) {
+
+    // Precompute IDs and frequently used elements
+    
+    var inputId = input.getAttribute("id");
+    var label = document.querySelector("label[for=" + inputId + "]");
+    var mindReaderID = inputId + "-mindreader";
+    var mindReader = document.getElementById(mindReaderID);
+    var mindReaderStatus = document.getElementById(inputId + "-mindreader-status");
+
+    // Set Autocomplete Description 
+
+    var autoCompleteID = document.getElementById("autocomplete-message-" + inputId);
+
+    if (!autoCompleteID) {
+
+      var autoCompleteMessage = document.createElement("span");
+      autoCompleteMessage.setAttribute("id", "autocomplete-message-" + inputId);
+      autoCompleteMessage.setAttribute("hidden", "");
+      autoCompleteMessage.textContent = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
+      input.parentNode.appendChild(autoCompleteMessage);
+
+    }
+
+    // Fix: Set unique ID on label
+
+    if(label) {
+
+      label.setAttribute("id", inputId + "-label");
+
+    }
+
+    // Fix: Prep Comboboxes with proper ARIA
+    
+    input.setAttribute("aria-autocomplete", "list");
+    input.setAttribute("aria-haspopup", "listbox");
+    input.setAttribute("aria-expanded", "false");
+    input.setAttribute("autocomplete", "off");
+    input.setAttribute("role", "combobox");
+    input.setAttribute("aria-controls", mindReaderID);
+
+    var currentDescribedBy = input.getAttribute("aria-describedby");
+
+    var newDescriptionId = "autocomplete-message-" + inputId;
+
+    if (currentDescribedBy) {
+
+      if (!currentDescribedBy.includes(newDescriptionId)) {
+
+        input.setAttribute("aria-describedby", currentDescribedBy + " " + newDescriptionId);
+
+      }
+    
+    } else {
+      
+      input.setAttribute("aria-describedby", newDescriptionId);
+    
+    }
+
+    // Fix: Update input as needed based on class presence
+    
+    function checkInput() {
+    
+      if(input.classList.contains("mindreader-results-open")) {
+
+        input.setAttribute("aria-expanded", "true");
+      
+      } else {
+    
+        input.setAttribute("aria-expanded", "false");
+        input.removeAttribute("aria-activedescendant");
+    
+      }
+    
+    }
+
+    checkInput();
+
+    // Function to check the active class in combobox list
+    
+    function checkActiveClass() {
+
+      if(mindReader) {
+    
+        var activeItem = mindReader.querySelector("a.active"); 
+
+        // BUG: See https://kpmg.runmytests.eu, Dropdown works initially, but on second try, does not apper to work correctly. Throwing folling, can't find mindReader ID. 
+        // Uncaught TypeError: Cannot read properties of null (reading 'querySelector') at HTMLDocument.checkActiveClass (init.js:720:35)
+
+        if (activeItem) {
+
+          // Get li ID
+
+          var listID = activeItem.parentElement.getAttribute("id");
+  
+          // Remove redundant screen reader announcements
+
+          mindReaderStatus.textContent = "";
+
+          // Pass selected ID to aria-activedescendant
+
+          input.setAttribute("aria-activedescendant", listID);
+
+        }
+
+      }
+    
+    }
+
+    // Add event listener for when focus leaves the input field (focusout)
+    
+    input.addEventListener("focusout", function() {
+    
+      checkInput();  // Update aria-expanded to false
+    
+    });
+
+    // Add event listener for when focus leaves the input field (focusout)
+    
+    input.addEventListener("focusout", function() {
+    
+      checkInput();  // Update aria-expanded to false
+    
+    });
+
+    // Add event listener for when Escape key is pressed
+
+    input.addEventListener("keydown", function(event) {
+  
+      if (event.key === "Escape") {
+    
+        checkInput();  // Update aria-expanded to false
+
+      }
+
+    });
+
+    // Listen for both keydown and keyup events
+
+    document.addEventListener("keydown", checkActiveClass); 
+    document.addEventListener("keyup", checkActiveClass);
+
+  });
+
+}
+
+// Accessibility Patch: Mindreader List
+
+function fixMindReaderList() {
+
+  // Fix: Add role of listbox to each UL
+
+  var mindReaderLists = document.querySelectorAll(".mindreader-results, .typeahead");
+
+  mindReaderLists.forEach(function(list, index) {
+
+    // Precompute list attributes
+
+    var listID = list.getAttribute("id");
+    var ariaLabelledBy = listID.replace("-mindreader", "-label");
+
+    // Add ARIA attributes to each list
+
+    list.setAttribute("role", "listbox");
+    list.setAttribute("aria-labelledby", ariaLabelledBy);
+
+    // Process each list item
+
+    var items = list.querySelectorAll("li");
+
+    items.forEach(function(item, itemIndex) {
+
+      // Generate unique IDs for options
+
+      var optionID = "combobox-item-" + (index + 1) + "-" + (itemIndex + 1);
+
+      // Add role and ID to each item
+
+      item.setAttribute("role", "option");
+      item.setAttribute("id", optionID);
+
+    });
+
+  });
+
+}
+
+// Accessibility Patch: Header (Utility) - Fixes common issues in header. 
+
+function fixHeader() {
+
+  // Fix: See if nav in header is missing an accName. Note: Might be issue for a header with two navs. 
+
+  var headerNavigation = document.querySelector("header nav");
+
+  if(headerNavigation) {
+
+    if (!headerNavigation.hasAttribute("aria-label")) {
+
+      headerNavigation.setAttribute("aria-label", labelPrimaryNavigation);
+
+    }
+
+  }
+
+}
+
+// Accessibility Patch: Job Description (Utility)
+
+function fixJobDescription() {
+
+  var atsDescription = document.querySelectorAll(".ats-description");
+
+  atsDescription.forEach(function(desc) {
+
+    // Fix: Remove tabindex attribute from elements within .ats-description that have tabindex attribute not equal to "0" or starting with "-""
+
+    desc.querySelectorAll("[tabindex]:not([tabindex='0']):not([tabindex^='-'])").forEach(function(tabindex) {
+  
+      tabindex.removeAttribute("tabindex");
+
+    });
+
+    // Fix: Add role="presentation" to tables within .ats-description
+
+    desc.querySelectorAll("table").forEach(function(table) {
+  
+      table.setAttribute("role", "presentation");
+
+    });
+
+    // Fix: Remove useless attributes from all elements within .ats-description
+
+    desc.querySelectorAll("*").forEach(function(element) {
+  
+      element.removeAttribute("face");
+      element.removeAttribute("size");
+      element.removeAttribute("title");
+      element.removeAttribute("id");
+
+    });
+
+    // Fix: Remove <font> element and unwrap its contents within .ats-description
+
+    desc.querySelectorAll("font").forEach(function(font) {
+  
+      var parent = font.parentNode;
+  
+      while (font.firstChild) {
+  
+        parent.insertBefore(font.firstChild, font);
+  
+      }
+  
+      parent.removeChild(font);
+
+    });
+
+    // Fix: Add hidden new window text to links that open in new windows. Delivery will need to add new window icons for now.  
+
+    const attributeTarget = desc.querySelectorAll("a[target='_blank']");
+
+    attributeTarget.forEach((el) => {
+
+      const span = document.createElement("span");
+      span.classList.add("magicbullet-visually-hidden");
+      span.textContent = " (opens in new window)";
+      el.append(span);
+
+    });
+
+  });
+
+}
+
+// Accessibility Patch: Job List
+
+ // Fix: Move location in into Job List link.
+
+/* function fixJobList() {
+
+  Removing for now. Paul brought interesting issue to my attention where job lists have multiple labels, in addition to location, so placing
+  an element in previous element is causing issues. Revisit the markup of this component with the Base GST amd Site Admin team. 
+
+  var jobListElements = document.querySelectorAll(".job-list .location, .job-list .date");
+
+  jobListElements.forEach(function(element) {
+
+    var previousElement = element.previousElementSibling;
+  
+    if (previousElement) {
+  
+      previousElement.appendChild(element);
+  
+    }
+
+  });
+
+} */
+
+// Accessibility Patch: Job Location
+
+function fixJobLocation() {
+
+  // Fix: Job map links should really be buttons, not links. Including role="button" for now, but we need to add spacebar key support eventually.
+  // BaseGST: Unfortunately, the team cannot change these to buttons in GST, so this will need to be a product request.
+
+  var mapButton = document.querySelectorAll(".job-map-nearby a");
+
+  mapButton.forEach(function(btn){
+
+    btn.setAttribute("role", "button");
+
+  });
+
+  // Fix: Google Form Related Fixes on Job Location Pages
+
+  var mapFormInputs = document.querySelectorAll(".job-map-directions input");
+
+  // Clean-up: Remove aria-required from various elements. This attribute is sometimes flagged in automated testing and just the boolean required attribute is now recommended.
+  // Clean-up: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
+  // Base GST: This issue has been addressed and can eventually be removed.
+ 
+  mapFormInputs.forEach(function(element) {
+    
+    element.removeAttribute("aria-required");
+    element.setAttribute("required", "");
+  
+  }); 
+
+  // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames.
+  // TODO: Include Wegmans functionality to skip over Google Map.
+
+}
+
+// Accessibility Patch: Job Map
+// Wxample: https://greatclips-refresh-1.runmytests.com/jobs-map 
+
+function fixJobMap() {
+
+  var jobMapInputs = document.querySelector("#sel-state, #tbx-zip")
+  var jobMapCityWrapper = document.querySelector("#wrapper-sel-city");
+
+  if (jobMapInputs && jobMapCityWrapper) {
+
+    // Since the select is blank on page load, it should not be shown until action taken in either the state or zip dropdowns. 
+
+    jobMapCityWrapper.setAttribute("hidden", "");
+
+    jobMapInputs.addEventListener("change", function() {
+
+      jobMapCityWrapper.removeAttribute("hidden");
+
+    });
+
+  }
+
+}
+
+// Accessibility Patch: Save Job Button 
+
+function fixSaveJobButton() {
+
+  const btnSaveJobs = document.querySelectorAll(".js-save-job-btn");
+
+  btnSaveJobs.forEach((btn) => {
+
+    // Fix: Custom label needed to override the text toggle that delivery often adds (or removes). Text changes should never be used to convey state.
+    // TODO: Add language support.
+
+    btn.setAttribute("aria-label", labelSaveJob);
+
+    // Fix: iOS, NVDA bug, state not reading back so need to implicitly add a role of "button" and remove type attribute. Do not remove until support better.
+
+    btn.removeAttribute("type");
+    btn.setAttribute("role", "button");
+
+    // Fix: aria-pressed required, which will properly convey state of the button. Load correct state based on data-job-saved attr.
+
+    if(btn.dataset.jobSaved === "true") {
+
+      btn.setAttribute("aria-pressed", "true");
+
+    } else {
+
+      btn.setAttribute("aria-pressed", "false");
+
+    }
+
+    btn.addEventListener("click", function() {
+
+      const pressedState = this.dataset.jobSaved === "true" ? "false" : "true";
+      const jobId = this.dataset.jobId;
+      const relatedSaveBtns = document.querySelectorAll(`.js-save-job-btn[data-job-id="${jobId}"]`);
+
+      // The reason we target data-job-id is in event two or more buttons exist on the page for the same job. Job detail pages often have more than one. 
+
+      relatedSaveBtns.forEach((saveBtn) => {
+    
+        saveBtn.setAttribute("aria-pressed", pressedState);
+
+      });
+
+    });
+
+  });
+
+  // Fix: Invoke a MutationObserver to watch the Saves Jobs link for changes. It add additional information to link based on whether any jobs have been saved. 
+  // This additional text will better serve AT users. 
+
+  // Note: Mutation Observers work better when you do not add them to click events. This is what I get for listening to AI.
+
+  const recentlyViewedJobListTarget = "[data-selector-name=recentlyviewedjoblist]";
+  const savedJobsLink = "a";
+
+  const updateSavedJobsLink = () => {
+
+    const recentlyViewedJobList = document.querySelector(recentlyViewedJobListTarget);
+  
+    if (!recentlyViewedJobList) return;
+
+    const isActive = recentlyViewedJobList.getAttribute("data-recently-viewed-jobs") === "true";
+
+    let link = recentlyViewedJobList.closest(savedJobsLink) || recentlyViewedJobList.querySelector(savedJobsLink);
+
+    if (!link) return;
+
+    let labelText = link.textContent.trim();
+
+    const numberMatch = labelText.match(/\p{Nd}+/u);
+
+    let number = null;
+
+    if (numberMatch) {
+  
+      number = numberMatch[0];
+
+      // Use a regex to remove the first occurrence of that number safely
+  
+      labelText = labelText.replace(new RegExp(number), "").trim();
+
+    }
+
+    const savedJobsLabel = number ? `${number} ${labelText} (${labelViewSavedJobs})` : `${labelText} (View all)`;
+
+    if (isActive) {
+    
+      link.setAttribute("aria-label", savedJobsLabel);
+  
+    } else {
+  
+      link.removeAttribute("aria-label");
+  
+    }
+
+  };
+
+  const recentlyViewedParent = document.querySelector(recentlyViewedJobListTarget)?.parentNode; 
+
+  if (recentlyViewedParent) {
+
+    const observer = new MutationObserver(updateSavedJobsLink);
+
+    observer.observe(recentlyViewedParent, {
+  
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ["data-recently-viewed-jobs"]
+
+    });
+
+  }
+
+  // Note: It is probably not a good idea to fire off this function after the mutation observer has run, but doing so for sake of speed to finish for Citi. Will revisit. 
+  // Considering merging this into the click event for save job button. 
+
+  updateSavedJobsLink();
+
+}
+
+// Accessibility Patch: Search Form
+
+function fixSearchForm() {
+
+  var searchForm = document.querySelectorAll(".search-form");
+
+  searchForm.forEach(function(form, i){
+
+    var formID = (i + 1);
+    var searchFormLegend = form.querySelector(".job-search-legend");
+    var searchFormFields = form.querySelector(".search-form-fields, .search-form__fields");
+    var searchFormLocationInput = form.querySelector(".search-location");
+    var searchFormLocationPin = form.querySelector(".location-pin");
+    var searchFormLocationError = form.querySelector(".search-location-error, .search-form__location-error");
+    var searchFormSubmit = form.querySelector("button, .search-form__search-btn");
+
+    // Shared Function(s)
+
+    function accessibleValidation() {
+
+      setTimeout(function() {
+
+        searchFormLocationError.removeAttribute("tabindex");
+
+        var ariaHiddenHook = searchFormLocationError.getAttribute("aria-hidden");
+
+          if(ariaHiddenHook === "false") {
+
+            searchFormLocationInput.setAttribute("aria-invalid", "true");
+            searchFormLocationInput.focus();
+
+          } else { 
+
+            searchFormLocationInput.setAttribute("aria-invalid", "false");
+
+          }
+
+      }, 100);
+
+    }
+
+    // Fix: Our primary search form should include a distinct role so that it can aid in helping assistive technology users navigate the page, so adding role="search"
+
+    form.setAttribute("role", "search");
+
+    if(searchFormFields) {
+
+      // Fix: Our primary search form should provide a better group description for the fields at hand. This can be achieved by adding a div with a class of "job-search-legend" (a heading should not be used) and the following script will take care of adding any needed associations by either adding aria-describedby or aria-label, with appropriate IDs.
+    
+      searchFormFields.setAttribute("role", "group");
+
+      // Fix: Remove aria-expanded from .search-form-fields. 
+
+      searchFormFields.removeAttribute("aria-expanded");
+
+    }
+
+    if(searchFormLegend) {
+
+      // Think of this as a fieldset and legend element.
+
+      searchFormFields.setAttribute("aria-labelledby", "job-search-legend-" + formID);
+      searchFormLegend.setAttribute("id", "job-search-legend-" + formID);
+
+    } else {
+
+      // If the class (.job-search-legend) is not present then simply add a label of "Search Jobs" to the div wrapping the form elements (.search-form-fields)
+
+      if(searchFormFields) {
+      
+        searchFormFields.setAttribute("aria-label", labelSearchJobs);
+
+      }
+
+    }
+
+    // Fix: The way in which the validation is currently handled requires improvement to aid those using assistive technology and keyboard. Here we need to include aria-invalid and aria-describedby to the locations field and apply custom validation as well, so that keyboard users do not need to tab backwards to return to the locations field, which is initiating the error.
+
+    if(searchFormLocationInput) {
+
+      // Add aria-describedby and aria-invalid to the locations field. 
+
+      searchFormLocationInput.setAttribute("aria-describedby", "search-error-" + formID);
+      searchFormLocationInput.setAttribute("aria-invalid", "false");
+
+      // Validate the locations field when change is made to it.
+
+      searchFormLocationInput.addEventListener("change", function() {
+
+        accessibleValidation();
+  
+      });
+
+    }
+
+    // Fix: Apply a unique ID to the error message. This is what locations field will read when focus is brought back to it, thanks to aria-describedby.
+
+    if(searchFormLocationError) {
+
+      searchFormLocationError.setAttribute("id", "search-error-" + formID);
+
+    }
+
+    // Fix: When search button is pressed, fire off custom validation. 
+
+    searchFormSubmit.addEventListener("click", function() {
+
+      accessibleValidation();
+
+    });
+
+    // Fix: Remove aria-hidden from the location pin. Often this is visually displayed, but aria-hidden is still present.
+    // We need to check the visability of the elmn before removing aria-hidden so it does not render on screen if featrue not activated in admin. 
+
+    if(searchFormLocationPin && window.getComputedStyle(searchFormLocationPin).display !== "none") {
+
+      searchFormLocationPin.removeAttribute("aria-hidden");
+
+    }
+
+  });
+
+}
+
+// Accessibility Patch: Search Filters
+
+function fixSearchFilters() {
+
+  const searchFilters = document.querySelector("#search-filters");
+
+  if (searchFilters) {
+
+    // Fix: Add role and accName to Search Filter section. 
+    // TODO: Add langauge support.
+    
+    searchFilters.setAttribute("role", "region");
+    searchFilters.setAttribute("aria-label", "Search Filter");
+
+    // TODO: It would be great if we could use aria-labelledby instead of aria-label as accName for region so that we would not requre custom translation, but heading has no distinct class to leverage. Look into adding unique ID to h2 instead maybe?
+
+    // Fix: Each section element (`.expandable`) should contain a role of "group" as well as an accName. We will need to add an ID to each button for aria-labelledby.
+
+    const sectionElement = searchFilters.querySelectorAll(".expandable");
+
+    sectionElement.forEach((section) => {
+
+      const sectionButtonID = section.querySelector(".expandable-parent").getAttribute("id");
+
+      section.setAttribute("role", "group");
+      section.setAttribute("aria-labelledby", sectionButtonID);
+
+    });
+
+    // Refined Search
+
+    const refinedSearch = searchFilters.querySelector("#refined-search");
+
+    if (refinedSearch) {
+
+      const keyWordInput = refinedSearch.querySelector("#keyword-tag");
+      const keywordError = refinedSearch.querySelector(".keyword-tag-error");
+
+      // Fix: Add unique ID to error message and reference ID on input. When focus placed here, message will be read to AT. 
+
+      keywordError.setAttribute("id", "keyword-error-msg");
+      keyWordInput.setAttribute("aria-describedby", "keyword-error-msg");
+
+      // Fix: Always place focus on input when error is visible
+
+      const keyWordVisibility = keywordError.getAttribute("aria-hidden");
+
+      if (keyWordVisibility === "false") {
+
+        keyWordInput.focus();
+
+      } 
+
+      // Fix: Remove junk from error message
+
+      keywordError.removeAttribute("aria-expanded");
+      keywordError.removeAttribute("style");
+
+    }
+
+  }
+
+}
+
+// Accessibility Patch: Search Results
+
+function fixSearchResults() {
+
+  // Fix: Remove skip links from search results page. These are no longer needed. 
+
+  var searchResultsSkip = document.querySelectorAll(".access-link[href='#search-results-list'], .access-link[href='#search-filters']");
+
+  searchResultsSkip.forEach(function(link){
+
+    link.remove();
+
+  });
+
+  // Fix: Let user know how many results are now present on page, after an update: 
+  // TODO: This appears to work well with filters, but not working with pagination. 
+
+  const searchResultsContainer = document.querySelector("#search-results");
+  const ariaMsg = document.querySelector("#magicbullet-message");
+
+  // Note: Wondering if nesting an observer inside of a function that load based on parent observer is wise.
+  // Fundamentally, this may dictate how observers work across patch. Fine for now, but need to revisit. 
+
+  const searchResultsObserver = new MutationObserver(() => {
+
+    // Recalculate count each time the DOM changes
+
+    const searchResultTotal = searchResultsContainer.dataset.totalResults;
+    const searchResultCount = searchResultsContainer.querySelectorAll("#search-results-list > ul > li").length;
+    ariaMsg.textContent = searchResultCount + " of " + searchResultTotal + " results are now available.";
+
+  });
+
+  if (searchResultsContainer) {
+  
+    searchResultsObserver.observe(searchResultsContainer.parentNode, {childList: true, subtree: true});
+
+  }
+
+}
+
+// Accessibility Patch: Search Results Pagination
+
+function fixSearchPagination() {
+
+  const searchResults = document.querySelector("#search-results");
+
+  if (!searchResults) return;
+
+  // There can be multiple pagination components on a page, tho it is common to only see one, typically at the bottom of all search results. 
+  
+  // Fix: Remove title attributes from all "pagination-view-more" buttons. These are often redundant and read back twice to assistive technology. I recall asking product team to remove. 
+  
+  const viewMoreBtns = searchResults.querySelectorAll(".pagination-view-more");
+
+  viewMoreBtns.forEach((btn) => {
+
+    btn.removeAttribute("title");
+
+  });
+
+  const searchResultsPagination = searchResults.querySelectorAll(".pagination");
+
+  searchResultsPagination.forEach((pagination) => {
+
+    // Fix: Pagination(s) in Search Results should must have an accName so that they can be distinct amoung other navigational landmarks.
+
+    if (!pagination.hasAttribute("aria-label")) {
+
+      pagination.setAttribute("aria-label", labelPagination);
+
+      // TODO: Add language support for "Pagination"
+
+    }
+
+    // Fix: Search Results pagination disabled button can be tabbed to (this is bad). To address this (along with console error being produced when focus is 
+    // placed on an element with aria-hidden), we simply remove the href. Also removing rel and text as well.
+
+    const paginationBtnDisabled = pagination.querySelector(".disabled");
+
+    if (paginationBtnDisabled) {
+
+      paginationBtnDisabled.removeAttribute("href");
+      paginationBtnDisabled.removeAttribute("rel");
+      paginationBtnDisabled.setAttribute("aria-disabled", "true");
+
+      // Note: Ideally, it would be best to remove this element entirely with CSS, but this can break layout, so removing href is next best solution. 
+
+    }
+
+    // Fix: Remove superflous content hidden with label. This lable appears to be present to provide instructions to AT users, which is not really needed. 
+
+    const labelInstructions = pagination.querySelector(".pagination-current-label b");
+
+    if (labelInstructions) {
+
+      labelInstructions.remove();
+    
+    }
+
+    // Fix: When Pagination buttons are pressed, send a loding message to global ARIA live. 
+
+    const paginationEvents = () => {
+
+      const ariaMsg = document.querySelector("#magicbullet-message");
+
+      if (ariaMsg) {
+
+        ariaMsg.textContent = "Loading New Results";
+
+      }
+
+      // Observe the PARENT because #search-results may be replaced
+
+      const parent = searchResults.parentNode;
+
+      const searchResultsNavigation = new MutationObserver(() => {
+
+        const getFirstLink = document.querySelector("#search-results a");
+
+        getFirstLink.focus();
+        searchResultsNavigation.disconnect();
+
+      });
+
+      // Watch for ANY child changes under the parent. We need to do this because #search-results is replaced instead of it's contents being replaced. 
+
+      searchResultsNavigation.observe(parent, { 
+
+        childList: true, 
+        subtree: true 
+
+      });
+
+    }
+
+    const paginationBtns = pagination.querySelectorAll(".pagination-current, .pagination-page-jump, .prev, .next");
+
+    paginationBtns.forEach((btn) => {
+
+      btn.addEventListener("click", paginationEvents);
+
+      // Input fields (".pagination-current") get Enter key support
+
+      if (btn.matches(".pagination-current")) {
+        
+        btn.addEventListener("keydown", (event) => {
+          
+          if (event.key === "Enter") {
+          
+            paginationEvents();
+          
+          }
+        
+        });
+      
+      }
+
+    });
+
+  });
+
+}
+
+// Accessibility Patch: Sitemap
+
+function fixSitemap() {
+
+  // Fix: Remove `tabindex`, `aria-expanded`, and `.expandable-parent` from `.job-location h2` and `.job-category h2`.
+  // TODO: Investigate possibly removing this. Tabindex may have been addressed by product. 
+
+  var sitemapHeadings = document.querySelectorAll(".job-location h2, .job-category h2");
+
+  sitemapHeadings.forEach(function(heading) {
+
+    heading.removeAttribute("tabindex");
+    heading.removeAttribute("aria-expanded");
+    heading.classList.remove("expandable-parent");
+
+  });
+
+}
+
+// Accessibility Patch: Social Share
+
+function fixSocialShare() {
+
+  // Fix: Append the following element and helper text, `<span class=".magicbullet-visually-hidden">(Opens in new tab or window)</span>`, to each `.social-share-items a` element.
+
+  // TODO: Add language support.
+
+  var socialShareLinks = document.querySelectorAll(".social-share__item a[target='_blank']");
+
+  socialShareLinks.forEach(function(link) {
+
+    var span = document.createElement("span");
+    span.classList.add("magicbullet-visually-hidden");
+    span.textContent = " (opens in new window)";
+    link.append(span);
+
+    // NICE TO HAVE: We don't really need the rel attribute anymore. Ask prodcut to eventually remove it.
+
+  });
+
+}
