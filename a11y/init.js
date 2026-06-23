@@ -436,7 +436,7 @@ function fixDataForm() {
 
       if (label.nextElementSibling.classList.contains("required")) {
 
-        label.textContent;
+        console.log(label.textContent);
 
       }
 
