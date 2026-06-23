@@ -403,12 +403,12 @@ if(currentPageLanguage === "ar") {
 
     // Global Header
 
-    var labelPrimaryNavigation = "Principal";
+    var labelPrimaryNavigation = "Menu principal";
     var labelViewSavedJobs = "Voir les offres d'emploi enregistrées";
 
     // Save Job Button
 
-    var labelSaveJob = "Enregistrer l'offre d’emploi";
+    var labelSaveJob = "Enregistrer pour plus tard";
 
     // Search Form
 
