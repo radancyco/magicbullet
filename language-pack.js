@@ -6,8 +6,8 @@
   Michael "Spell" Spellacy
 
   Dependencies: None
-  Description: This file provides translations for MagicBullet, a patch used across our career sites to address common accessibility issues. 
-  Warning: Removing or modifying it could have a significant impact on the accessibility and usability of our global sites, potentially affecting 
+  Description: This file provides translations for MagicBullet, a patch used across our career sites to address common accessibility issues.
+  Warning: Removing or modifying it could have a significant impact on the accessibility and usability of our global sites, potentially affecting
   users in multiple languages and regions.
 
 */
@@ -16,436 +16,1228 @@ var currentPageLanguage = document.documentElement.getAttribute("lang");
 
 if(currentPageLanguage === "ar") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-     var addJobAlert = "وصف الصوت";
-     var atVideoLabel = "خلفيات متحركة";
-     var atPauseButtonLabel = "وقفة الرسوم المتحركة";
+    var labelRemoveFilter = "قم بإزالة الفلتر";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "يغلق";
+    var labelAddJobAlert = "إضافة تنبيه وظيفة";
+    var labelSelectedJobAlerts = "تنبيهات الوظائف المختارة";
+    var labelCaptcha = "كابتشا";
+    var labelSubmitJobAlerts = "إرسال تنبيهات الوظائف";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "رئيسي";
+    var labelViewSavedJobs = "عرض الوظائف المحفوظة";
+
+    // Save Job Button
+
+    var labelSaveJob = "حفظ الوظيفة";
+
+    // Search Form
+
+    var labelSearchJobs = "ابحث عن وظائف";
+
+    // Search Filter
+
+    var labelSearchFilter = "فلتر البحث";
+
+    // Pagination
+
+    var labelPagination = "ترقيم الصفحات";
 
 } else if (currentPageLanguage === "bg") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Аудио описание";
-    var atVideoLabel = "Фонова анимация";
-    var atPauseButtonLabel = "Пауза анимация";
+    var labelRemoveFilter = "Премахване на филтъра";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "затвори";
-      
+    var labelAddJobAlert = "Добавяне на известие за работа";
+    var labelSelectedJobAlerts = "Избрани сигнали за работа";
+    var labelCaptcha = "Капча";
+    var labelSubmitJobAlerts = "Изпращане на известия за работа";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Главно";
+    var labelViewSavedJobs = "Преглед на запазените работни места";
+
+    // Save Job Button
+
+    var labelSaveJob = "Запазване на задачата";
+
+    // Search Form
+
+    var labelSearchJobs = "Търсене на работа";
+
+    // Search Filter
+
+    var labelSearchFilter = "Филтър за търсене";
+
+    // Pagination
+
+    var labelPagination = "Пагинация";
+
 } else if (currentPageLanguage === "zh-Hans") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "音频描述";
-    var atVideoLabel = "背景动画";
-    var atPauseButtonLabel = "暂停动画";
+    var labelRemoveFilter = "移除过滤器";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "关闭";
-      
+    var labelAddJobAlert = "添加职位提醒";
+    var labelSelectedJobAlerts = "精选职位提醒";
+    var labelCaptcha = "验证码";
+    var labelSubmitJobAlerts = "提交职位提醒";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "主要的";
+    var labelViewSavedJobs = "查看已保存的职位";
+
+    // Save Job Button
+
+    var labelSaveJob = "保住工作";
+
+    // Search Form
+
+    var labelSearchJobs = "搜索职位";
+
+    // Search Filter
+
+    var labelSearchFilter = "搜索筛选器";
+
+    // Pagination
+
+    var labelPagination = "分页";
+
 } else if (currentPageLanguage === "zh-Hant") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "音頻說明";
-    var atVideoLabel = "背景動畫";
-    var atPauseButtonLabel = "暫停動畫";
+    var labelRemoveFilter = "移除過濾器";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "關閉";
-      
+    var labelAddJobAlert = "新增職位提醒";
+    var labelSelectedJobAlerts = "精選職位提醒";
+    var labelCaptcha = "驗證碼";
+    var labelSubmitJobAlerts = "提交職位提醒";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "主要的";
+    var labelViewSavedJobs = "查看已保存的職位";
+
+    // Save Job Button
+
+    var labelSaveJob = "保住工作";
+
+    // Search Form
+
+    var labelSearchJobs = "搜尋職位";
+
+    // Search Filter
+
+    var labelSearchFilter = "搜尋篩選器";
+
+    // Pagination
+
+    var labelPagination = "分頁";
+
 } else if (currentPageLanguage === "hr") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Audio opis";
-    var atVideoLabel = "Pozadinska animacija";
-    var atPauseButtonLabel = "Pauza animacija";
+    var labelRemoveFilter = "Ukloni filtar";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Zatvoriti";
+    var labelAddJobAlert = "Dodaj upozorenje o poslu";
+    var labelSelectedJobAlerts = "Odabrana upozorenja o poslovima";
+    var labelCaptcha = "Kapča";
+    var labelSubmitJobAlerts = "Pošalji upozorenja o poslovima";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Glavni";
+    var labelViewSavedJobs = "Prikaži spremljene poslove";
+
+    // Save Job Button
+
+    var labelSaveJob = "Spremi posao";
+
+    // Search Form
+
+    var labelSearchJobs = "Pretraživanje poslova";
+
+    // Search Filter
+
+    var labelSearchFilter = "Filter za pretraživanje";
+
+    // Pagination
+
+    var labelPagination = "Paginacija";
 
 } else if (currentPageLanguage === "cs") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Popis zvuku";
-    var atVideoLabel = "Animace pozadí";
-    var atPauseButtonLabel = "Animace pauzy";
+    var labelRemoveFilter = "Odebrat filtr";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Blízko";
-  
+    var labelAddJobAlert = "Přidat upozornění na pracovní nabídku";
+    var labelSelectedJobAlerts = "Vybraná upozornění na pracovní nabídky";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Odeslat upozornění na pracovní nabídky";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Hlavní";
+    var labelViewSavedJobs = "Zobrazit uložené úlohy";
+
+    // Save Job Button
+
+    var labelSaveJob = "Uložit úlohu";
+
+    // Search Form
+
+    var labelSearchJobs = "Hledat pracovní nabídky";
+
+    // Search Filter
+
+    var labelSearchFilter = "Vyhledávací filtr";
+
+    // Pagination
+
+    var labelPagination = "Stránkování";
+
 } else if (currentPageLanguage === "da") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Lydbeskrivelse";
-    var atVideoLabel = "Baggrundsanimation";
-    var atPauseButtonLabel = "Pause animation";
+    var labelRemoveFilter = "Fjern filter";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Tæt";
-      
+    var labelAddJobAlert = "Tilføj jobalarm";
+    var labelSelectedJobAlerts = "Udvalgte jobalarmer";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Indsend jobalarmer";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Hoved";
+    var labelViewSavedJobs = "Se gemte job";
+
+    // Save Job Button
+
+    var labelSaveJob = "Gem job";
+
+    // Search Form
+
+    var labelSearchJobs = "Søg job";
+
+    // Search Filter
+
+    var labelSearchFilter = "Søgefilter";
+
+    // Pagination
+
+    var labelPagination = "Paginering";
+
 } else if (currentPageLanguage === "nl") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Audiobeschrijving";
-    var atVideoLabel = "Achtergrondanimatie";
-    var atPauseButtonLabel = "Pauzeer animatie";
+    var labelRemoveFilter = "Filter verwijderen";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Dichtbij";
-      
+    var labelAddJobAlert = "Vacaturemelding toevoegen";
+    var labelSelectedJobAlerts = "Geselecteerde vacaturemeldingen";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Vacaturemeldingen indienen";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Voornaamst";
+    var labelViewSavedJobs = "Bekijk opgeslagen vacatures";
+
+    // Save Job Button
+
+    var labelSaveJob = "Baan behouden";
+
+    // Search Form
+
+    var labelSearchJobs = "Vacatures zoeken";
+
+    // Search Filter
+
+    var labelSearchFilter = "Zoekfilter";
+
+    // Pagination
+
+    var labelPagination = "Paginering";
+
 } else if (currentPageLanguage === "en-GB") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Audio Description";
-    var atVideoLabel = "Background Animation";
-    var atPauseButtonLabel = "Pause Animation";
+    var labelRemoveFilter = "Remove Filter";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Close";
-      
+    var labelAddJobAlert = "Add Job Alert";
+    var labelSelectedJobAlerts = "Selected Job Alerts";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Submit Job Alerts";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Main";
+    var labelViewSavedJobs = "View Saved Jobs";
+
+    // Save Job Button
+
+    var labelSaveJob = "Save Job";
+
+    // Search Form
+
+    var labelSearchJobs = "Search Jobs";
+
+    // Search Filter
+
+    var labelSearchFilter = "Search Filter";
+
+    // Pagination
+
+    var labelPagination = "Pagination";
+
 } else if (currentPageLanguage === "et") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Helikirjeldus";
-    var atVideoLabel = "Taustaanimatsioon";
-    var atPauseButtonLabel = "Pausi animatsioon";
+    var labelRemoveFilter = "Eemalda filter";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Sule";
-      
+    var labelAddJobAlert = "Lisa tööhoiatus";
+    var labelSelectedJobAlerts = "Valitud tööpakkumiste teavitused";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Esita tööpakkumiste teavitusi";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Peamine";
+    var labelViewSavedJobs = "Kuva salvestatud töökohad";
+
+    // Save Job Button
+
+    var labelSaveJob = "Salvesta töökoht";
+
+    // Search Form
+
+    var labelSearchJobs = "Otsi töökohti";
+
+    // Search Filter
+
+    var labelSearchFilter = "Otsingufilter";
+
+    // Pagination
+
+    var labelPagination = "Lehekülgede arv";
+
 } else if (currentPageLanguage === "fi") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Äänikuvaus";
-    var atVideoLabel = "Taustaanimaatio";
-    var atPauseButtonLabel = "Tauko -animaatio";
+    var labelRemoveFilter = "Poista suodatin";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Lähellä";
+    var labelAddJobAlert = "Lisää työpaikkailmoitus";
+    var labelSelectedJobAlerts = "Valitut työpaikkailmoitukset";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Lähetä työpaikkahälytyksiä";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Pääasiallinen";
+    var labelViewSavedJobs = "Näytä tallennetut työpaikat";
+
+    // Save Job Button
+
+    var labelSaveJob = "Tallenna työ";
+
+    // Search Form
+
+    var labelSearchJobs = "Hae työpaikkoja";
+
+    // Search Filter
+
+    var labelSearchFilter = "Hakusuodatin";
+
+    // Pagination
+
+    var labelPagination = "Sivunumerointi";
 
 } else if (currentPageLanguage === "fr") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Description audio";
-    var atVideoLabel = "Animation de fond";
-    var atPauseButtonLabel = "Animation de pause";    
-    
-    // Accordion 
+    var labelRemoveFilter = "Supprimer le filtre";
 
-    var accordionCloseButtonLabel = "Fermer";
+    // Job Alert
+
+    var labelAddJobAlert = "Ajouter une alerte emploi";
+    var labelSelectedJobAlerts = "Alertes emploi sélectionnées";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Envoyer des alertes emploi";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Principal";
+    var labelViewSavedJobs = "Voir les offres d'emploi enregistrées";
+
+    // Save Job Button
+
+    var labelSaveJob = "Sauvegarder l'emploi";
+
+    // Search Form
+
+    var labelSearchJobs = "Recherche d'emplois";
+
+    // Search Filter
+
+    var labelSearchFilter = "Filtre de recherche";
+
+    // Pagination
+
+    var labelPagination = "Pagination";
 
 } else if (currentPageLanguage === "de") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Audiobeschreibung";
-    var atVideoLabel = "Hintergrundanimation";
-    var atPauseButtonLabel = "Pause Animation";
+    var labelRemoveFilter = "Filter entfernen";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Schließen";
-  
+    var labelAddJobAlert = "Jobbenachrichtigung hinzufügen";
+    var labelSelectedJobAlerts = "Ausgewählte Jobbenachrichtigungen";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Jobbenachrichtigungen einreichen";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Hauptsächlich";
+    var labelViewSavedJobs = "Gespeicherte Jobs ansehen";
+
+    // Save Job Button
+
+    var labelSaveJob = "Job retten";
+
+    // Search Form
+
+    var labelSearchJobs = "Stellenangebote suchen";
+
+    // Search Filter
+
+    var labelSearchFilter = "Suchfilter";
+
+    // Pagination
+
+    var labelPagination = "Pagination";
+
 } else if (currentPageLanguage === "he") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "תיאור שמע";
-    var atVideoLabel = "אנימציה רקע";
-    var atPauseButtonLabel = "להשהות אנימציה";
+    var labelRemoveFilter = "הסר מסנן";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "לִסְגוֹר";
+    var labelAddJobAlert = "הוסף התראת דרושים";
+    var labelSelectedJobAlerts = "התראות דרושים נבחרות";
+    var labelCaptcha = "קפטצ'ה";
+    var labelSubmitJobAlerts = "שלח התראות דרושים";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "רָאשִׁי";
+    var labelViewSavedJobs = "הצג עבודות שנשמרו";
+
+    // Save Job Button
+
+    var labelSaveJob = "שמור עבודה";
+
+    // Search Form
+
+    var labelSearchJobs = "חיפוש משרות";
+
+    // Search Filter
+
+    var labelSearchFilter = "מסנן חיפוש";
+
+    // Pagination
+
+    var labelPagination = "דִפּוּף";
 
 } else if (currentPageLanguage === "hu") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Audio leírás";
-    var atVideoLabel = "Háttér animáció";
-    var atPauseButtonLabel = "Szünet animáció";
+    var labelRemoveFilter = "Szűrő eltávolítása";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Közeli";
+    var labelAddJobAlert = "Állásértesítés hozzáadása";
+    var labelSelectedJobAlerts = "Kiválasztott állásértesítések";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Állásértesítések beküldése";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Fő";
+    var labelViewSavedJobs = "Mentett állások megtekintése";
+
+    // Save Job Button
+
+    var labelSaveJob = "Állás mentése";
+
+    // Search Form
+
+    var labelSearchJobs = "Álláskeresés";
+
+    // Search Filter
+
+    var labelSearchFilter = "Keresési szűrő";
+
+    // Pagination
+
+    var labelPagination = "Lapszámozás";
 
 } else if (currentPageLanguage === "is") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Hljóðlýsing";
-    var atVideoLabel = "Bakgrunns fjör";
-    var atPauseButtonLabel = "Hlé á fjörum";
+    var labelRemoveFilter = "Fjarlægja síu";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Loka";
+    var labelAddJobAlert = "Bæta við atvinnuviðvörun";
+    var labelSelectedJobAlerts = "Valdar atvinnuviðvaranir";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Senda inn atvinnuviðvaranir";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Aðal";
+    var labelViewSavedJobs = "Skoða vistaðar störf";
+
+    // Save Job Button
+
+    var labelSaveJob = "Vista verk";
+
+    // Search Form
+
+    var labelSearchJobs = "Leita að störfum";
+
+    // Search Filter
+
+    var labelSearchFilter = "Leitarsía";
+
+    // Pagination
+
+    var labelPagination = "Síðunúmeraskipti";
 
 } else if (currentPageLanguage === "it") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = " Descrizione audio";
-    var atVideoLabel = "Animazione di sfondo";
-    var atPauseButtonLabel = "Pausa animazione";
+    var labelRemoveFilter = "Rimuovere il filtro";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Vicino";
-  
+    var labelAddJobAlert = "Aggiungi avviso di lavoro";
+    var labelSelectedJobAlerts = "Avvisi di lavoro selezionati";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Invia avvisi di lavoro";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Principale";
+    var labelViewSavedJobs = "Visualizza i lavori salvati";
+
+    // Save Job Button
+
+    var labelSaveJob = "Salva lavoro";
+
+    // Search Form
+
+    var labelSearchJobs = "Cerca lavoro";
+
+    // Search Filter
+
+    var labelSearchFilter = "Filtro di ricerca";
+
+    // Pagination
+
+    var labelPagination = "Paginazione";
+
 } else if (currentPageLanguage === "ja") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "オーディオの説明";
-    var atVideoLabel = "背景アニメーション";
-    var atPauseButtonLabel = "アニメーションを一時停止します";
+    var labelRemoveFilter = "フィルターを削除";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "近い";
+    var labelAddJobAlert = "求人アラートを追加";
+    var labelSelectedJobAlerts = "厳選された求人情報";
+    var labelCaptcha = "キャプチャ";
+    var labelSubmitJobAlerts = "求人アラートを送信する";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "主要";
+    var labelViewSavedJobs = "保存した求人を見る";
+
+    // Save Job Button
+
+    var labelSaveJob = "ジョブを保存";
+
+    // Search Form
+
+    var labelSearchJobs = "求人検索";
+
+    // Search Filter
+
+    var labelSearchFilter = "検索フィルター";
+
+    // Pagination
+
+    var labelPagination = "ページネーション";
 
 } else if (currentPageLanguage === "ko") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "오디오 설명";
-    var atVideoLabel = "배경 애니메이션";
-    var atPauseButtonLabel = "애니메이션을 일시 중지합니다";
+    var labelRemoveFilter = "필터 제거";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "닫다";
+    var labelAddJobAlert = "채용 알림 추가";
+    var labelSelectedJobAlerts = "선택된 채용 공고 알림";
+    var labelCaptcha = "캡차";
+    var labelSubmitJobAlerts = "채용 공고 알림 신청하기";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "기본";
+    var labelViewSavedJobs = "저장된 채용 정보 보기";
+
+    // Save Job Button
+
+    var labelSaveJob = "일자리 저장";
+
+    // Search Form
+
+    var labelSearchJobs = "채용 정보 검색";
+
+    // Search Filter
+
+    var labelSearchFilter = "검색 필터";
+
+    // Pagination
+
+    var labelPagination = "쪽수 매기기";
 
 } else if (currentPageLanguage === "lv") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Audio apraksts";
-    var atVideoLabel = "Fona animācija";
-    var atPauseButtonLabel = "Pauzes animācija";
+    var labelRemoveFilter = "Noņemt filtru";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Aizvērt";
+    var labelAddJobAlert = "Pievienot darba brīdinājumu";
+    var labelSelectedJobAlerts = "Atlasītie darba brīdinājumi";
+    var labelCaptcha = "CAPTCHA";
+    var labelSubmitJobAlerts = "Iesniegt darba brīdinājumus";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Galvenais";
+    var labelViewSavedJobs = "Skatīt saglabātos darbus";
+
+    // Save Job Button
+
+    var labelSaveJob = "Saglabāt darbu";
+
+    // Search Form
+
+    var labelSearchJobs = "Meklēt darba sludinājumus";
+
+    // Search Filter
+
+    var labelSearchFilter = "Meklēšanas filtrs";
+
+    // Pagination
+
+    var labelPagination = "Lappušu numerācija";
 
 } else if (currentPageLanguage === "lt") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Garso aprašymas";
-    var atVideoLabel = "Fono animacija";
-    var atPauseButtonLabel = "Pauzės animacija";
+    var labelRemoveFilter = "Pašalinti filtrą";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Uždaryti";
- 
+    var labelAddJobAlert = "Pridėti darbo įspėjimą";
+    var labelSelectedJobAlerts = "Pasirinktų darbo skelbimų įspėjimai";
+    var labelCaptcha = '„Captcha"';
+    var labelSubmitJobAlerts = "Pateikti darbo skelbimų įspėjimus";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Pagrindinis";
+    var labelViewSavedJobs = "Peržiūrėti išsaugotus darbus";
+
+    // Save Job Button
+
+    var labelSaveJob = "Išsaugoti darbą";
+
+    // Search Form
+
+    var labelSearchJobs = "Ieškoti darbo";
+
+    // Search Filter
+
+    var labelSearchFilter = "Paieškos filtras";
+
+    // Pagination
+
+    var labelPagination = "Puslapavimas";
+
 } else if (currentPageLanguage === "ms") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Penerangan audio";
-    var atVideoLabel = "Animasi latar belakang";
-    var atPauseButtonLabel = "Jeda animasi";
+    var labelRemoveFilter = "Alih Keluar Penapis";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "tutup";
+    var labelAddJobAlert = "Tambah Amaran Pekerjaan";
+    var labelSelectedJobAlerts = "Amaran Pekerjaan Terpilih";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Hantar Makluman Pekerjaan";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Utama";
+    var labelViewSavedJobs = "Lihat Pekerjaan yang Disimpan";
+
+    // Save Job Button
+
+    var labelSaveJob = "Simpan Kerja";
+
+    // Search Form
+
+    var labelSearchJobs = "Cari Pekerjaan";
+
+    // Search Filter
+
+    var labelSearchFilter = "Penapis Carian";
+
+    // Pagination
+
+    var labelPagination = "Penomboran halaman";
 
 } else if (currentPageLanguage === "no") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Lydbeskrivelse";
-    var atVideoLabel = "Bakgrunnsanimasjon";
-    var atPauseButtonLabel = "Pause animasjon";
+    var labelRemoveFilter = "Fjern filter";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Lukke";
+    var labelAddJobAlert = "Legg til jobbvarsel";
+    var labelSelectedJobAlerts = "Utvalgte jobbvarsler";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Send inn jobbvarsler";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Hoved";
+    var labelViewSavedJobs = "Vis lagrede jobber";
+
+    // Save Job Button
+
+    var labelSaveJob = "Lagre jobb";
+
+    // Search Form
+
+    var labelSearchJobs = "Søk etter jobber";
+
+    // Search Filter
+
+    var labelSearchFilter = "Søkefilter";
+
+    // Pagination
+
+    var labelPagination = "Paginering";
 
 } else if (currentPageLanguage === "pl") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Opis dźwięku";
-    var atVideoLabel = "Animacja w tle";
-    var atPauseButtonLabel = "Animacja pauzy";
+    var labelRemoveFilter = "Usuń filtr";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Zamknąć";
+    var labelAddJobAlert = "Dodaj alert pracy";
+    var labelSelectedJobAlerts = "Wybrane alerty dotyczące ofert pracy";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Prześlij alerty o pracy";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Główny";
+    var labelViewSavedJobs = "Wyświetl zapisane oferty pracy";
+
+    // Save Job Button
+
+    var labelSaveJob = "Zapisz zadanie";
+
+    // Search Form
+
+    var labelSearchJobs = "Szukaj ofert pracy";
+
+    // Search Filter
+
+    var labelSearchFilter = "Filtr wyszukiwania";
+
+    // Pagination
+
+    var labelPagination = "Paginacja";
 
 } else if (currentPageLanguage === "pt") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Descrição do áudio";
-    var atVideoLabel = "Animação de fundo";
-    var atPauseButtonLabel = "Pausa animação";
+    var labelRemoveFilter = "Remover filtro";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Fechar";
+    var labelAddJobAlert = "Adicionar alerta de emprego";
+    var labelSelectedJobAlerts = "Alertas de emprego selecionados";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Enviar alertas de emprego";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Principal";
+    var labelViewSavedJobs = "Ver trabalhos salvos";
+
+    // Save Job Button
+
+    var labelSaveJob = "Salvar emprego";
+
+    // Search Form
+
+    var labelSearchJobs = "Procurar empregos";
+
+    // Search Filter
+
+    var labelSearchFilter = "Filtro de pesquisa";
+
+    // Pagination
+
+    var labelPagination = "Paginação";
 
 } else if (currentPageLanguage === "ro") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Descriere audio";
-    var atVideoLabel = "Animație de fundal";
-    var atPauseButtonLabel = "Pauză animație";
+    var labelRemoveFilter = "Eliminați filtrul";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Aproape";
+    var labelAddJobAlert = "Adăugați o alertă de job";
+    var labelSelectedJobAlerts = "Alerte de locuri de muncă selectate";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Trimiteți alerte de locuri de muncă";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Principal";
+    var labelViewSavedJobs = "Vizualizați locurile de muncă salvate";
+
+    // Save Job Button
+
+    var labelSaveJob = "Salvați jobul";
+
+    // Search Form
+
+    var labelSearchJobs = "Căutare locuri de muncă";
+
+    // Search Filter
+
+    var labelSearchFilter = "Filtru de căutare";
+
+    // Pagination
+
+    var labelPagination = "Paginare";
 
 } else if (currentPageLanguage === "ru") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Аудио описание";
-    var atVideoLabel = "Фоновая анимация";
-    var atPauseButtonLabel = "Пауза анимация";
+    var labelRemoveFilter = "Удалить фильтр";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Закрывать";
+    var labelAddJobAlert = "Добавить оповещение о вакансии";
+    var labelSelectedJobAlerts = "Уведомления о вакансиях";
+    var labelCaptcha = "Капча";
+    var labelSubmitJobAlerts = "Отправить уведомление о вакансиях";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Основной";
+    var labelViewSavedJobs = "Просмотреть сохраненные вакансии";
+
+    // Save Job Button
+
+    var labelSaveJob = "Сохранить вакансию";
+
+    // Search Form
+
+    var labelSearchJobs = "Поиск работы";
+
+    // Search Filter
+
+    var labelSearchFilter = "Фильтр поиска";
+
+    // Pagination
+
+    var labelPagination = "Пагинация";
 
 } else if (currentPageLanguage === "sr") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Аудио опис";
-    var atVideoLabel = "Анимација позадине";
-    var atPauseButtonLabel = "Паузирајте анимацију";
+    var labelRemoveFilter = "Уклони филтер";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Затвори";
+    var labelAddJobAlert = "Додај обавештење о послу";
+    var labelSelectedJobAlerts = "Одабрана обавештења о пословима";
+    var labelCaptcha = "Капча";
+    var labelSubmitJobAlerts = "Пошаљи обавештења о пословима";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Главни";
+    var labelViewSavedJobs = "Погледајте сачуване послове";
+
+    // Save Job Button
+
+    var labelSaveJob = "Сачувај посао";
+
+    // Search Form
+
+    var labelSearchJobs = "Претрага послова";
+
+    // Search Filter
+
+    var labelSearchFilter = "Филтер за претрагу";
+
+    // Pagination
+
+    var labelPagination = "Пагинација";
 
 } else if (currentPageLanguage === "sk") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Popis zvuku";
-    var atVideoLabel = "Animácia pozadia";
-    var atPauseButtonLabel = "Pozastavenie animácie";
+    var labelRemoveFilter = "Odstrániť filter";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Zavrieť";
+    var labelAddJobAlert = "Pridať upozornenie na pracovnú ponuku";
+    var labelSelectedJobAlerts = "Vybrané upozornenia na pracovné ponuky";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Odoslať upozornenia na pracovné ponuky";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Hlavné";
+    var labelViewSavedJobs = "Zobraziť uložené úlohy";
+
+    // Save Job Button
+
+    var labelSaveJob = "Uložiť úlohu";
+
+    // Search Form
+
+    var labelSearchJobs = "Hľadať pracovné ponuky";
+
+    // Search Filter
+
+    var labelSearchFilter = "Vyhľadávací filter";
+
+    // Pagination
+
+    var labelPagination = "Stránkovanie";
 
 } else if (currentPageLanguage === "sl") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Zvočni opis";
-    var atVideoLabel = "Animacija v ozadju";
-    var atPauseButtonLabel = "Premor animacije";
+    var labelRemoveFilter = "Odstrani filter";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Zapri";
- 
+    var labelAddJobAlert = "Dodaj opozorilo o delovnem mestu";
+    var labelSelectedJobAlerts = "Izbrana opozorila o delovnih mestih";
+    var labelCaptcha = "Kapča";
+    var labelSubmitJobAlerts = "Pošlji opozorila o delovnih mestih";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Glavni";
+    var labelViewSavedJobs = "Ogled shranjenih delovnih mest";
+
+    // Save Job Button
+
+    var labelSaveJob = "Shrani opravilo";
+
+    // Search Form
+
+    var labelSearchJobs = "Iskanje delovnih mest";
+
+    // Search Filter
+
+    var labelSearchFilter = "Iskalni filter";
+
+    // Pagination
+
+    var labelPagination = "Oštevilčenje strani";
+
 } else if (currentPageLanguage === "es") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Descripción de audio";
-    var atVideoLabel = "Animación de fondo";
-    var atPauseButtonLabel = "Animación de pausa";
+    var labelRemoveFilter = "Quitar filtro";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Cerca";
+    var labelAddJobAlert = "Agregar alerta de empleo";
+    var labelSelectedJobAlerts = "Alertas de empleo seleccionadas";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Enviar alertas de empleo";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Principal";
+    var labelViewSavedJobs = "Ver trabajos guardados";
+
+    // Save Job Button
+
+    var labelSaveJob = "Guardar empleo";
+
+    // Search Form
+
+    var labelSearchJobs = "Buscar empleos";
+
+    // Search Filter
+
+    var labelSearchFilter = "Filtro de búsqueda";
+
+    // Pagination
+
+    var labelPagination = "Paginación";
 
 } else if (currentPageLanguage === "sv") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Ljudbeskrivning";
-    var atVideoLabel = "Bakgrundsanimering";
-    var atPauseButtonLabel = "Pausanimation";
+    var labelRemoveFilter = "Ta bort filter";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Nära";
+    var labelAddJobAlert = "Lägg till jobbavisering";
+    var labelSelectedJobAlerts = "Valda jobbaviseringar";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Skicka jobbaviseringar";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Huvudsaklig";
+    var labelViewSavedJobs = "Visa sparade jobb";
+
+    // Save Job Button
+
+    var labelSaveJob = "Spara jobb";
+
+    // Search Form
+
+    var labelSearchJobs = "Sök jobb";
+
+    // Search Filter
+
+    var labelSearchFilter = "Sökfilter";
+
+    // Pagination
+
+    var labelPagination = "Paginering";
 
 } else if (currentPageLanguage === "th") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "คำอธิบายเสียง";
-    var atVideoLabel = "ภาพเคลื่อนไหวพื้นหลัง";
-    var atPauseButtonLabel = "หยุดเคลื่อนไหวชั่วคราว";
+    var labelRemoveFilter = "ลบตัวกรอง";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "ปิด";
- 
+    var labelAddJobAlert = "เพิ่มการแจ้งเตือนงาน";
+    var labelSelectedJobAlerts = "การแจ้งเตือนงานที่เลือก";
+    var labelCaptcha = "แคปชา";
+    var labelSubmitJobAlerts = "ส่งการแจ้งเตือนงาน";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "หลัก";
+    var labelViewSavedJobs = "ดูงานที่บันทึกไว้";
+
+    // Save Job Button
+
+    var labelSaveJob = "บันทึกงาน";
+
+    // Search Form
+
+    var labelSearchJobs = "ค้นหางาน";
+
+    // Search Filter
+
+    var labelSearchFilter = "ตัวกรองการค้นหา";
+
+    // Pagination
+
+    var labelPagination = "การแบ่งหน้า";
+
 } else if (currentPageLanguage === "uk") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Опис аудіо";
-    var atVideoLabel = "Фонова анімація";
-    var atPauseButtonLabel = "Призупина анімація";
+    var labelRemoveFilter = "Видалити фільтр";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Закрити";
+    var labelAddJobAlert = "Додати сповіщення про вакансію";
+    var labelSelectedJobAlerts = "Вибрані сповіщення про вакансії";
+    var labelCaptcha = "Капча";
+    var labelSubmitJobAlerts = "Надіслати сповіщення про вакансії";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Головний";
+    var labelViewSavedJobs = "Переглянути збережені вакансії";
+
+    // Save Job Button
+
+    var labelSaveJob = "Зберегти завдання";
+
+    // Search Form
+
+    var labelSearchJobs = "Пошук вакансій";
+
+    // Search Filter
+
+    var labelSearchFilter = "Фільтр пошуку";
+
+    // Pagination
+
+    var labelPagination = "Пагінація";
 
 } else if (currentPageLanguage === "vi") {
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Mô tả âm thanh";
-    var atVideoLabel = "Hoạt hình nền";
-    var atPauseButtonLabel = "Tạm dừng hoạt hình";
+    var labelRemoveFilter = "Xóa bộ lọc";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Đóng";
-  
-} else { 
+    var labelAddJobAlert = "Thêm thông báo việc làm";
+    var labelSelectedJobAlerts = "Thông báo việc làm được chọn lọc";
+    var labelCaptcha = "Mã xác nhận";
+    var labelSubmitJobAlerts = "Đăng ký nhận thông báo việc làm";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Chủ yếu";
+    var labelViewSavedJobs = "Xem các công việc đã lưu";
+
+    // Save Job Button
+
+    var labelSaveJob = "Lưu công việc";
+
+    // Search Form
+
+    var labelSearchJobs = "Tìm việc làm";
+
+    // Search Filter
+
+    var labelSearchFilter = "Bộ lọc tìm kiếm";
+
+    // Pagination
+
+    var labelPagination = "Đánh số trang";
+
+} else {
 
     // English (Default)
 
-    // Animation Toggle
+    // Remove Job Filter
 
-    var addJobAlert = "Add Job Alert";
-    var atVideoLabel = "Background Animation";
-    var atPauseButtonLabel = "Pause Animation";
+    var labelRemoveFilter = "Remove Filter";
 
-    // Accordion 
+    // Job Alert
 
-    var accordionCloseButtonLabel = "Close";
+    var labelAddJobAlert = "Add Job Alert";
+    var labelSelectedJobAlerts = "Selected Job Alerts";
+    var labelCaptcha = "Captcha";
+    var labelSubmitJobAlerts = "Submit Job Alerts";
+
+    // Global Header
+
+    var labelPrimaryNavigation = "Main";
+    var labelViewSavedJobs = "View Saved Jobs";
+
+    // Save Job Button
+
+    var labelSaveJob = "Save Job";
+
+    // Search Form
+
+    var labelSearchJobs = "Search Jobs";
+
+    // Search Filter
+
+    var labelSearchFilter = "Search Filter";
+
+    // Pagination
+
+    var labelPagination = "Pagination";
 
 }
