@@ -617,17 +617,25 @@ function fixDataForm() {
 
         firstSelect.focus();
 
-        // Add role="region" to each new .keyword-remove button. 
+      });
 
-        const newKeywordRemove = fieldset.querySelectorAll(".keyword-remove");
+      const keywordRegion = button.closest(keywordFieldsetSelector)?.querySelector(".keyword-region");
 
-        newKeywordRemove.forEach((link) => {
+      if (keywordRegion) {
 
-          link.setAttribute("role", "button");
+        const keywordRemoveObserver = new MutationObserver(() => {
+
+          keywordRegion.querySelectorAll(".keyword-remove").forEach((link) => {
+
+            link.setAttribute("role", "button");
+
+          });
 
         });
 
-      });
+        keywordRemoveObserver.observe(keywordRegion, { childList: true, subtree: true });
+
+      }
 
     });
 
