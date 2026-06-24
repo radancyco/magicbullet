@@ -601,7 +601,7 @@ function fixDataForm() {
 
     const keywordFieldsetSelector = "fieldset.form-field";
 
-    const keywordAdd = document.querySelectorAll(`${keywordFieldsetSelector} .keyword-add`);
+    const keywordAdd = form.querySelectorAll(`${keywordFieldsetSelector} .keyword-add`);
 
     keywordAdd.forEach((button) => {
 
@@ -625,7 +625,7 @@ function fixDataForm() {
     // When all keywords are removed, focus is then placed on the first keyword select element. 
     // Time will tell if this is the best place for it or if we should place it elsewhere, but it should be easy to adjust regardless.  
 
-    const keywordFieldsets = document.querySelectorAll(keywordFieldsetSelector);
+    const keywordFieldsets = form.querySelectorAll(keywordFieldsetSelector);
 
     keywordFieldsets.forEach((fieldset) => {
 
