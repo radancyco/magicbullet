@@ -434,11 +434,11 @@ function fixDataForm() {
 
       // Do a check on the input to see if attribute
 
-      //if (label.nextElementSibling.classList.contains("required")) {
+      if (label.nextElementSibling.matches("[class*='required']")) {
 
-      //  console.log(label.textContent);
+       console.log(label.textContent);
 
-     // }
+     }
 
       if(getRequiredIcon === null) {
 
