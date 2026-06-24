@@ -432,17 +432,17 @@ function fixDataForm() {
 
       var getRequiredIcon = label.querySelector(iconClass);
 
-      // Do a check on the input to see if attribute
-
-      if (label.nextElementSibling.matches("[class*='required']")) {
-
-       console.log(label.textContent);
-
-     }
-
       if(getRequiredIcon === null) {
 
-        label.appendChild(span);
+        // Fix: This check ensures that the asterisk is only added to labels that are actually require it. 
+        // Currently, the required class is applied to the fieldset itself, causing an asterisk to be added 
+        // to all labels within the keyword area section, even when the associated field is not required.
+
+        if (label.nextElementSibling.matches("[class*='required']")) {
+
+          label.appendChild(span);
+
+        }
 
       }
 
