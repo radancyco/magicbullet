@@ -434,11 +434,11 @@ function fixDataForm() {
 
       // Do a check on the input to see if attribute
 
-      if (label.nextElementSibling.classList.contains("required")) {
+      //if (label.nextElementSibling.classList.contains("required")) {
 
-        console.log(label.textContent);
+      //  console.log(label.textContent);
 
-      }
+     // }
 
       if(getRequiredIcon === null) {
 
@@ -592,6 +592,74 @@ function fixDataForm() {
         keywordSelectedRegion.appendChild(region);
 
       }
+
+    });
+
+    // Fix: The keyword add section requires better focus management.
+
+    // Issue: When adding new keywords, focus is lost after adding, so we will move focus to first keyword select.
+
+    const keywordFieldsetSelector = "fieldset.form-field";
+
+    const keywordAdd = document.querySelectorAll(`${keywordFieldsetSelector} .keyword-add`);
+
+    keywordAdd.forEach((button) => {
+
+      button.addEventListener("click", () => {
+
+        const fieldset = button.closest(keywordFieldsetSelector);
+
+        if (!fieldset) return;
+
+        const firstSelect = fieldset.querySelector(".keyword-category");
+
+        if (!firstSelect) return;
+
+        firstSelect.focus();
+
+      });
+
+    });
+
+    // Issue: When a keyword is removed, focus is lost, so we will now manage it by placing it on next available element.
+    // When all keywords are removed, focus is then placed on the first keyword select element. 
+    // Time will tell if this is the best place for it or if we should place it elsewhere, but it should be easy to adjust regardless.  
+
+    const keywordFieldsets = document.querySelectorAll(keywordFieldsetSelector);
+
+    keywordFieldsets.forEach((fieldset) => {
+
+      fieldset.addEventListener("click", (event) => {
+
+        const link = event.target.closest(".keyword-remove");
+
+        if (!link) return;
+
+        event.preventDefault();
+
+        const listItem = link.closest("li");
+
+        if (!listItem) return;
+
+        const allLinks = [...fieldset.querySelectorAll(".keyword-remove")];
+        const currentIndex = allLinks.indexOf(link);
+        const nextLink = allLinks[currentIndex + 1] || allLinks[currentIndex - 1];
+
+        listItem.remove();
+
+        if (nextLink) {
+
+          nextLink.focus();
+
+        } else {
+
+          const firstSelect = fieldset.querySelector(".keyword-category");
+
+          if (firstSelect) firstSelect.focus();
+
+        }
+
+      });
 
     });
 
