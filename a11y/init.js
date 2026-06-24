@@ -617,6 +617,16 @@ function fixDataForm() {
 
         firstSelect.focus();
 
+        // Add role="region" to each new .keyword-remove button. 
+
+        const newKeywordRemove = fieldset.querySelectorAll(".keyword-remove");
+
+        newKeywordRemove.forEach((link) => {
+
+          link.setAttribute("role", "button");
+
+        });
+
       });
 
     });
@@ -629,7 +639,9 @@ function fixDataForm() {
 
     keywordFieldsets.forEach((fieldset) => {
 
-      fieldset.addEventListener("click", (event) => {
+      const handleKeywordRemove = (event) => {
+
+        if (event.type === "keydown" && event.key !== "Enter" && event.code !== "Space") return;
 
         const link = event.target.closest(".keyword-remove");
 
@@ -659,7 +671,10 @@ function fixDataForm() {
 
         }
 
-      });
+      };
+
+      fieldset.addEventListener("click", handleKeywordRemove);
+      fieldset.addEventListener("keydown", handleKeywordRemove);
 
     });
 
