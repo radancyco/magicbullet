@@ -623,6 +623,8 @@ function fixDataForm() {
 
       if (keywordRegion) {
 
+        // We need a mutation observer here to see when link is being added, so we can add a role to it. 
+
         const keywordRemoveObserver = new MutationObserver(() => {
 
           keywordRegion.querySelectorAll(".keyword-remove").forEach((link) => {
@@ -646,6 +648,10 @@ function fixDataForm() {
     const keywordFieldsets = form.querySelectorAll(keywordFieldsetSelector);
 
     keywordFieldsets.forEach((fieldset) => {
+
+      if (fieldset.dataset.keywordRemoveInitialized) return;
+
+      fieldset.dataset.keywordRemoveInitialized = "true";
 
       const handleKeywordRemove = (event) => {
 
