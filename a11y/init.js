@@ -438,7 +438,7 @@ function fixDataForm() {
         // Currently, the required class is applied to the fieldset itself, causing an asterisk to be added 
         // to all labels within the keyword area section, even when the associated field is not required.
 
-        if (label.nextElementSibling.matches("[class*='required']") || label.parentElement.matches("[class*='required']")) {
+        if (label.nextElementSibling.matches("[class*='required']") || label.previousElementSibling.matches("[class*='required']") || label.parentElement.matches("[class*='required']")) {
 
           label.appendChild(span);
 
