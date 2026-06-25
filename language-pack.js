@@ -48,6 +48,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "ترقيم الصفحات";
 
+    // New Window
+
+    var labelNewWindow = "يفتح في نافذة جديدة";
+
 } else if (currentPageLanguage === "bg") {
 
     // Remove Job Filter
@@ -81,6 +85,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Пагинация";
+
+    // New Window
+
+    var labelNewWindow = "отваря се в нов прозорец";
 
 } else if (currentPageLanguage === "zh-Hans") {
 
@@ -116,6 +124,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "分页";
 
+    // New Window
+
+    var labelNewWindow = "在新窗口中打开";
+
 } else if (currentPageLanguage === "zh-Hant") {
 
     // Remove Job Filter
@@ -149,6 +161,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "分頁";
+
+    // New Window
+
+    var labelNewWindow = "在新視窗中開啟";
 
 } else if (currentPageLanguage === "hr") {
 
@@ -184,6 +200,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Paginacija";
 
+    // New Window
+
+    var labelNewWindow = "otvara se u novom prozoru";
+
 } else if (currentPageLanguage === "cs") {
 
     // Remove Job Filter
@@ -217,6 +237,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Stránkování";
+
+    // New Window
+
+    var labelNewWindow = "otevře se v novém okně";
 
 } else if (currentPageLanguage === "da") {
 
@@ -252,6 +276,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Paginering";
 
+    // New Window
+
+    var labelNewWindow = "åbner i et nyt vindue";
+
 } else if (currentPageLanguage === "nl") {
 
     // Remove Job Filter
@@ -285,6 +313,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Paginering";
+
+    // New Window
+
+    var labelNewWindow = "wordt in een nieuw venster geopend";
 
 } else if (currentPageLanguage === "en-GB") {
 
@@ -320,6 +352,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Pagination";
 
+    // New Window
+
+    var labelNewWindow = "opens in new window";
+
 } else if (currentPageLanguage === "et") {
 
     // Remove Job Filter
@@ -353,6 +389,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Lehekülgede arv";
+
+    // New Window
+
+    var labelNewWindow = "avaneb uues aknas";
 
 } else if (currentPageLanguage === "fi") {
 
@@ -388,6 +428,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Sivunumerointi";
 
+    // New Window
+
+    var labelNewWindow = "avautuu uuteen ikkunaan";
+
 } else if (currentPageLanguage === "fr") {
 
     // Remove Job Filter
@@ -421,6 +465,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Pagination";
+
+    // New Window
+
+    var labelNewWindow = "ouvre dans une nouvelle fenêtre";
 
 } else if (currentPageLanguage === "de") {
 
@@ -456,6 +504,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Pagination";
 
+    // New Window
+
+    var labelNewWindow = "wird in einem neuen Fenster geöffnet";
+
 } else if (currentPageLanguage === "he") {
 
     // Remove Job Filter
@@ -489,6 +541,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "דִפּוּף";
+
+    // New Window
+
+    var labelNewWindow = "נפתח בחלון חדש";
 
 } else if (currentPageLanguage === "hu") {
 
@@ -524,6 +580,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Lapszámozás";
 
+    // New Window
+
+    var labelNewWindow = "új ablakban nyílik meg";
+
 } else if (currentPageLanguage === "is") {
 
     // Remove Job Filter
@@ -557,6 +617,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Síðunúmeraskipti";
+
+    // New Window
+
+    var labelNewWindow = "opnast í nýjum glugga";
 
 } else if (currentPageLanguage === "it") {
 
@@ -592,6 +656,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Paginazione";
 
+    // New Window
+
+    var labelNewWindow = "si apre in una nuova finestra";
+
 } else if (currentPageLanguage === "ja") {
 
     // Remove Job Filter
@@ -625,6 +693,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "ページネーション";
+
+    // New Window
+
+    var labelNewWindow = "新しいウィンドウで開きます";
 
 } else if (currentPageLanguage === "ko") {
 
@@ -660,6 +732,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "쪽수 매기기";
 
+    // New Window
+
+    var labelNewWindow = "새 창에서 열립니다";
+
 } else if (currentPageLanguage === "lv") {
 
     // Remove Job Filter
@@ -693,6 +769,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Lappušu numerācija";
+
+    // New Window
+
+    var labelNewWindow = "atveras jaunā logā";
 
 } else if (currentPageLanguage === "lt") {
 
@@ -728,6 +808,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Puslapavimas";
 
+    // New Window
+
+    var labelNewWindow = "atsidaro naujame lange";
+
 } else if (currentPageLanguage === "ms") {
 
     // Remove Job Filter
@@ -761,6 +845,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Penomboran halaman";
+
+    // New Window
+
+    var labelNewWindow = "dibuka dalam tetingkap baharu";
 
 } else if (currentPageLanguage === "no") {
 
@@ -796,6 +884,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Paginering";
 
+    // New Window
+
+    var labelNewWindow = "åpnes i nytt vindu";
+
 } else if (currentPageLanguage === "pl") {
 
     // Remove Job Filter
@@ -829,6 +921,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Paginacja";
+
+    // New Window
+
+    var labelNewWindow = "otwiera się w nowym oknie";
 
 } else if (currentPageLanguage === "pt") {
 
@@ -864,6 +960,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Paginação";
 
+    // New Window
+
+    var labelNewWindow = "abre em nova janela";
+
 } else if (currentPageLanguage === "ro") {
 
     // Remove Job Filter
@@ -897,6 +997,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Paginare";
+
+    // New Window
+
+    var labelNewWindow = "se deschide într-o fereastră nouă";
 
 } else if (currentPageLanguage === "ru") {
 
@@ -932,6 +1036,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Пагинация";
 
+    // New Window
+
+    var labelNewWindow = "открывается в новом окне";
+
 } else if (currentPageLanguage === "sr") {
 
     // Remove Job Filter
@@ -965,6 +1073,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Пагинација";
+
+    // New Window
+
+    var labelNewWindow = "отвара се у новом прозору";
 
 } else if (currentPageLanguage === "sk") {
 
@@ -1000,6 +1112,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Stránkovanie";
 
+    // New Window
+
+    var labelNewWindow = "otvorí sa v novom okne";
+
 } else if (currentPageLanguage === "sl") {
 
     // Remove Job Filter
@@ -1033,6 +1149,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Oštevilčenje strani";
+
+    // New Window
+
+    var labelNewWindow = "odpre se v novem oknu";
 
 } else if (currentPageLanguage === "es") {
 
@@ -1068,6 +1188,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Paginación";
 
+    // New Window
+
+    var labelNewWindow = "Se abre en una ventana nueva";
+
 } else if (currentPageLanguage === "sv") {
 
     // Remove Job Filter
@@ -1101,6 +1225,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Paginering";
+
+    // New Window
+
+    var labelNewWindow = "öppnas i nytt fönster";
 
 } else if (currentPageLanguage === "th") {
 
@@ -1136,6 +1264,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "การแบ่งหน้า";
 
+    // New Window
+
+    var labelNewWindow = "เปิดในหน้าต่างใหม่";
+
 } else if (currentPageLanguage === "uk") {
 
     // Remove Job Filter
@@ -1170,6 +1302,10 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Пагінація";
 
+    // New Window
+
+    var labelNewWindow = "відкривається в новому вікні";
+
 } else if (currentPageLanguage === "vi") {
 
     // Remove Job Filter
@@ -1203,6 +1339,10 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Đánh số trang";
+
+    // New Window
+
+    var labelNewWindow = "(mở trong cửa sổ mới)";
 
 } else {
 
@@ -1239,5 +1379,9 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Pagination";
+
+    // New Window
+
+    var labelNewWindow = "opens in new window";
 
 }

@@ -333,7 +333,7 @@ function fixCMS() {
 
     const span = document.createElement("span");
     span.classList.add("magicbullet-visually-hidden");
-    span.textContent = " (opens in new window)";
+    span.textContent = "( " + labelNewWindow + ")";
     el.append(span);
 
   });
@@ -1169,7 +1169,7 @@ function fixJobDescription() {
 
       const span = document.createElement("span");
       span.classList.add("magicbullet-visually-hidden");
-      span.textContent = " (opens in new window)";
+      span.textContent = "( " + labelNewWindow + ")";
       el.append(span);
 
     });
@@ -1769,7 +1769,7 @@ function fixSocialShare() {
 
     var span = document.createElement("span");
     span.classList.add("magicbullet-visually-hidden");
-    span.textContent = " (opens in new window)";
+    span.textContent = labelNewWindow;
     link.append(span);
 
     // NICE TO HAVE: We don't really need the rel attribute anymore. Ask prodcut to eventually remove it.
