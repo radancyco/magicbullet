@@ -314,7 +314,7 @@ function fixCMS() {
 
   });
 
-  // Fix: Lang Attributes are required to address shift in langauge in screen readers/AT. 
+  // Fix: Tables created in CMS require scope attributes, which is beign stripped out by WYSIWYG editor. 
 
   const attributeScope = document.querySelectorAll("[data-cms-mb-scope]");
 
@@ -332,7 +332,7 @@ function fixCMS() {
 
     const span = document.createElement("span");
     span.classList.add("magicbullet-visually-hidden");
-    span.textContent = "( " + labelNewWindow + ")";
+    span.textContent = "(" + labelNewWindow + ")";
     el.append(span);
 
   });
