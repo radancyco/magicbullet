@@ -1168,7 +1168,7 @@ function fixJobDescription() {
 
       const span = document.createElement("span");
       span.classList.add("magicbullet-visually-hidden");
-      span.textContent = "( " + labelNewWindow + ")";
+      span.textContent = "(" + labelNewWindow + ")";
       el.append(span);
 
     });
