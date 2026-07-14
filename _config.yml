@@ -26,4 +26,5 @@ port: 4010
 repo: https://github.com/radancyco/magicbullet
 sass:
   style: :compressed
+segment: magicbullet
 theme-color: "#6E00EE"
