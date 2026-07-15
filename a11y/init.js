@@ -1216,10 +1216,11 @@ function fixJobLocation() {
     btn.setAttribute("role", "button");
     btn.setAttribute("aria-pressed", "false");
 
-    btn.addEventListener("click", function() {
+    btn.addEventListener("click", function(e) {
 
       mapButton.forEach(function(otherBtn) {
 
+        e.preventDefault();
         otherBtn.setAttribute("aria-pressed", otherBtn === btn ? "true" : "false");
 
       });
