@@ -1206,7 +1206,7 @@ function fixJobDescription() {
 
 function fixJobLocation() {
 
-  // Fix: Job map links should really be buttons, not links. Including role="button" for now, but we need to add spacebar key support eventually.
+  // Fix: Job map links should really be buttons, not links. Including role="button" and spacebar key support for now for aria-pressed.
   // BaseGST: Unfortunately, the team cannot change these to buttons in GST, so this will need to be a product request.
 
   var mapButton = document.querySelectorAll(".job-map-nearby a");
@@ -1214,6 +1214,28 @@ function fixJobLocation() {
   mapButton.forEach(function(btn){
 
     btn.setAttribute("role", "button");
+    btn.setAttribute("aria-pressed", "false");
+
+    btn.addEventListener("click", function() {
+
+      mapButton.forEach(function(otherBtn) {
+
+        otherBtn.setAttribute("aria-pressed", otherBtn === btn ? "true" : "false");
+
+      });
+
+    });
+
+    btn.addEventListener("keydown", function(e) {
+
+      if (e.key === " " || e.key === "Spacebar") {
+
+        e.preventDefault();
+        btn.click();
+
+      }
+
+    });
 
   });
 
