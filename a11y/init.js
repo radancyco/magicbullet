@@ -1255,6 +1255,16 @@ function fixJobLocation() {
   
   }); 
 
+  // Fix: The address label on "Get Directions" form, requires a proper autocomplete. 
+
+  var GetDirectionsAddress = document.querySelector(".job-map-directions input[name=saddr]");
+
+  if(GetDirectionsAddress) {
+
+    GetDirectionsAddress.setAttribute("autocomplete", "street-address");
+
+  }
+
   // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames.
   // TODO: Include Wegmans functionality to skip over Google Map.
 
