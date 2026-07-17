@@ -63,7 +63,7 @@ loadA11yPatch(languagePackSrc, function(){
   
     a11yMessage.classList.add("magicbullet-visually-hidden");
     a11yMessage.setAttribute("id", "magicbullet-message");
-    a11yMessage.setAttribute("aria-live", "polite");
+    a11yMessage.setAttribute("aria-live", "atomic");
     a11yBody.append(a11yMessage);
 
   }
@@ -1265,7 +1265,7 @@ function fixJobLocation() {
 
   }
 
-  // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames.
+  // TODO: The "Search Nearby" and "Get Directions" sections should be regions with accNames. Maybe?
   // TODO: Include Wegmans functionality to skip over Google Map.
 
 }
