@@ -1635,6 +1635,18 @@ function fixSearchResults() {
 
   searchResultsParent.dataset.a11yResultsObserverBound = "1";
 
+  // Fix: The observer fires on any mutation nearby, including incidental DOM settling right after page load,
+  // not just real filter/pagination updates. Track the last known result state and only announce when it
+  // actually changes, so that noise doesn't trigger a false announcement.
+
+  const getResultState = function(container) {
+
+    return container.dataset.totalResults + ":" + container.querySelectorAll("#search-results-list > ul > li").length;
+
+  };
+
+  let lastAnnouncedState = getResultState(searchResultsContainer);
+
   const searchResultsObserver = new MutationObserver(() => {
 
     // Fix: Re-query both elements fresh each time, rather than relying on references captured at setup time,
@@ -1645,17 +1657,21 @@ function fixSearchResults() {
 
     if (!ariaMsg || !currentContainer) return;
 
-    ariaMsg.textContent = "";
-
     clearTimeout(searchResultsObserver.timeout);
 
     searchResultsObserver.timeout = setTimeout(function() {
+
+      const newState = getResultState(currentContainer);
+
+      if (newState === lastAnnouncedState) return;
+
+      lastAnnouncedState = newState;
 
       const searchResultTotal = currentContainer.dataset.totalResults;
       const searchResultCount = currentContainer.querySelectorAll("#search-results-list > ul > li").length;
       ariaMsg.textContent = searchResultCount + " of " + searchResultTotal + " results are now available.";
 
-    }, 2000);
+    }, 1000);
 
   });
 
