@@ -141,6 +141,7 @@ function initDynamicPatch() {
   fixSaveJobButton();
   fixSearchFilters();
   fixSearchResults();
+  fixSearchSort();
   fixSearchPagination();
 
   console.log("%cMagicBullet: A11y%cDynamic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
@@ -1676,6 +1677,38 @@ function fixSearchResults() {
   });
 
   searchResultsObserver.observe(searchResultsParent, {childList: true, subtree: true});
+
+}
+
+// Accessibility Patch: Search Results Sort
+// Desc: Sorting reorders existing results without changing the count, so fixSearchResults' change detection
+// won't catch it. Announce the new sort order directly off the select's change event instead.
+
+function fixSearchSort() {
+
+  const sortSelect = document.querySelector('select[data-search-results-sort-enhanced="true"]');
+
+  if (!sortSelect || sortSelect.dataset.a11ySortBound === "1") return;
+
+  sortSelect.dataset.a11ySortBound = "1";
+
+  sortSelect.addEventListener("change", function() {
+
+    const ariaMsg = document.querySelector("#magicbullet-message");
+
+    if (!ariaMsg) return;
+
+    const selectedLabel = sortSelect.options[sortSelect.selectedIndex].text;
+
+    // Wait for the reorder to actually finish rendering before announcing.
+
+    setTimeout(function() {
+
+      ariaMsg.textContent = "Results sorted by " + selectedLabel + ".";
+
+    }, 1000);
+
+  });
 
 }
 
