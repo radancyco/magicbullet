@@ -41,7 +41,7 @@ function loadA11yPatch(url, callback) {
 
 // var languagePackSrc = "https://services.tmpwebeng.com/magicbullet/language-pack.js";
 
-var languagePack = "https://radancy.dev/magicbullet/language-pack.js";
+var languagePackSrc = "https://radancy.dev/magicbullet/language-pack.js";
 
 loadA11yPatch(languagePackSrc, function(){
 
