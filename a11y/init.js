@@ -1618,37 +1618,48 @@ function fixSearchResults() {
 
   });
 
-  // Fix: Let user know how many results are now present on page, after an update: 
-  // TODO: This appears to work well with filters, but not working with pagination. 
+  // Fix: Let user know how many results are now present on page, after an update:
 
   const searchResultsContainer = document.querySelector("#search-results");
-  const ariaMsg = document.querySelector("#magicbullet-message");
 
-  // Note: Wondering if nesting an observer inside of a function that load based on parent observer is wise.
-  // Fundamentally, this may dictate how observers work across patch. Fine for now, but need to revisit. 
+  if (!searchResultsContainer) return;
+
+  // Note: #search-results itself may be replaced wholesale on update, so we observe and flag the parent, which persists.
+  // Fix: initDynamicPatch() re-runs this function on every DOM mutation. Guarding here prevents a new observer
+  // from stacking up on top of previous ones each time, which was causing the aria message to be set multiple
+  // times by multiple stale observers racing each other.
+
+  const searchResultsParent = searchResultsContainer.parentNode;
+
+  if (searchResultsParent.dataset.a11yResultsObserverBound === "1") return;
+
+  searchResultsParent.dataset.a11yResultsObserverBound = "1";
 
   const searchResultsObserver = new MutationObserver(() => {
 
-    // Recalculate count each time the DOM changes
+    // Fix: Re-query both elements fresh each time, rather than relying on references captured at setup time,
+    // in case #search-results was replaced since this observer was created.
+
+    const ariaMsg = document.querySelector("#magicbullet-message");
+    const currentContainer = document.querySelector("#search-results");
+
+    if (!ariaMsg || !currentContainer) return;
 
     ariaMsg.textContent = "";
 
-    setTimeout(function() {
+    clearTimeout(searchResultsObserver.timeout);
 
-      const searchResultTotal = searchResultsContainer.dataset.totalResults;
-      const searchResultCount = searchResultsContainer.querySelectorAll("#search-results-list > ul > li").length;
+    searchResultsObserver.timeout = setTimeout(function() {
+
+      const searchResultTotal = currentContainer.dataset.totalResults;
+      const searchResultCount = currentContainer.querySelectorAll("#search-results-list > ul > li").length;
       ariaMsg.textContent = searchResultCount + " of " + searchResultTotal + " results are now available.";
 
     }, 2000);
 
-
   });
 
-  if (searchResultsContainer) {
-  
-    searchResultsObserver.observe(searchResultsContainer.parentNode, {childList: true, subtree: true});
-
-  }
+  searchResultsObserver.observe(searchResultsParent, {childList: true, subtree: true});
 
 }
 
