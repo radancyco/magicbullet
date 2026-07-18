@@ -1639,7 +1639,7 @@ function fixSearchResults() {
       const searchResultCount = searchResultsContainer.querySelectorAll("#search-results-list > ul > li").length;
       ariaMsg.textContent = searchResultCount + " of " + searchResultTotal + " results are now available.";
 
-    }, 1000);
+    }, 2000);
 
 
   });
