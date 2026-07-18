@@ -1631,9 +1631,14 @@ function fixSearchResults() {
 
     // Recalculate count each time the DOM changes
 
-    const searchResultTotal = searchResultsContainer.dataset.totalResults;
-    const searchResultCount = searchResultsContainer.querySelectorAll("#search-results-list > ul > li").length;
-    ariaMsg.textContent = searchResultCount + " of " + searchResultTotal + " results are now available.";
+    setTimeout(function() {
+
+      const searchResultTotal = searchResultsContainer.dataset.totalResults;
+      const searchResultCount = searchResultsContainer.querySelectorAll("#search-results-list > ul > li").length;
+      ariaMsg.textContent = searchResultCount + " of " + searchResultTotal + " results are now available.";
+
+    }, 1000);
+
 
   });
 
