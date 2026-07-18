@@ -63,7 +63,7 @@ loadA11yPatch(languagePackSrc, function(){
   
     a11yMessage.classList.add("magicbullet-visually-hidden");
     a11yMessage.setAttribute("id", "magicbullet-message");
-    a11yMessage.setAttribute("aria-live", "atomic");
+    a11yMessage.setAttribute("aria-live", "polite");
     a11yBody.append(a11yMessage);
 
   }
@@ -1718,7 +1718,7 @@ function fixSearchPagination() {
 
       // Observe the PARENT because #search-results may be replaced
 
-      const parent = searchResults.parentNode;
+      const parent = searchResults.parentElement;
 
       const searchResultsNavigation = new MutationObserver(() => {
 
