@@ -48,6 +48,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "ترقيم الصفحات";
 
+    // Search Results
+
+    var labelResultsAvailable = "{count} من أصل {total} نتائج متاحة الآن.";
+    var labelResultsSorted = "النتائج مرتبة حسب {label}";
+
     // New Window
 
     var labelNewWindow = "يفتح في نافذة جديدة";
@@ -85,6 +90,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Пагинация";
+
+    // Search Results
+
+    var labelResultsAvailable = "Вече са налични {count} от {total} резултата.";
+    var labelResultsSorted = "Резултати, сортирани по {label}";
 
     // New Window
 
@@ -124,6 +134,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "分页";
 
+    // Search Results
+
+    var labelResultsAvailable = "现在共有 {count} 条结果，总计 {total} 条结果。";
+    var labelResultsSorted = "按 {label} 排序的结果";
+
     // New Window
 
     var labelNewWindow = "在新窗口中打开";
@@ -161,6 +176,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "分頁";
+
+    // Search Results
+
+    var labelResultsAvailable = "現在共有 {count} 項結果，總計 {total} 條結果。";
+    var labelResultsSorted = "按 {label} 排序的結果";
 
     // New Window
 
@@ -200,6 +220,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Paginacija";
 
+    // Search Results
+
+    var labelResultsAvailable = "Sada je dostupno {count} od {total} rezultata.";
+    var labelResultsSorted = "Rezultati sortirani po {label}";
+
     // New Window
 
     var labelNewWindow = "otvara se u novom prozoru";
@@ -237,6 +262,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Stránkování";
+
+    // Search Results
+
+    var labelResultsAvailable = "Nyní je k dispozici {count} z {total} výsledků.";
+    var labelResultsSorted = "Výsledky seřazené podle {label}";
 
     // New Window
 
@@ -276,6 +306,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Paginering";
 
+    // Search Results
+
+    var labelResultsAvailable = "{count} af {total} resultater er nu tilgængelige.";
+    var labelResultsSorted = "Resultater sorteret efter {label}";
+
     // New Window
 
     var labelNewWindow = "åbner i et nyt vindue";
@@ -313,6 +348,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Paginering";
+
+    // Search Results
+
+    var labelResultsAvailable = "{count} van {total} resultaten zijn nu beschikbaar.";
+    var labelResultsSorted = "Resultaten gesorteerd op {label}";
 
     // New Window
 
@@ -352,6 +392,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Pagination";
 
+    // Search Results
+
+    var labelResultsAvailable = "{count} of {total} results are now available.";
+    var labelResultsSorted = "Results sorted by {label}.";
+
     // New Window
 
     var labelNewWindow = "opens in new window";
@@ -389,6 +434,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Lehekülgede arv";
+
+    // Search Results
+
+    var labelResultsAvailable = "{count} tulemust {total} tulemusest on nüüd saadaval.";
+    var labelResultsSorted = "Tulemused sorteeritud sildi {label} järgi";
 
     // New Window
 
@@ -428,6 +478,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Sivunumerointi";
 
+    // Search Results
+
+    var labelResultsAvailable = "{count} / {total} tulosta on nyt saatavilla.";
+    var labelResultsSorted = "Tulokset lajiteltu {label} -perusteella";
+
     // New Window
 
     var labelNewWindow = "avautuu uuteen ikkunaan";
@@ -465,6 +520,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Pagination";
+
+    // Search Results
+
+    var labelResultsAvailable = "{count} des {total} résultats sont maintenant disponibles.";
+    var labelResultsSorted = "Résultats triés par {label}";
 
     // New Window
 
@@ -504,6 +564,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Pagination";
 
+    // Search Results
+
+    var labelResultsAvailable = "Es sind nun {count} von {total} Ergebnissen verfügbar.";
+    var labelResultsSorted = "Ergebnisse sortiert nach {label}";
+
     // New Window
 
     var labelNewWindow = "wird in einem neuen Fenster geöffnet";
@@ -541,6 +606,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "דִפּוּף";
+
+    // Search Results
+
+    var labelResultsAvailable = "{count} מתוך {total} תוצאות זמינות כעת.";
+    var labelResultsSorted = "תוצאות ממוינות לפי {label}";
 
     // New Window
 
@@ -580,6 +650,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Lapszámozás";
 
+    // Search Results
+
+    var labelResultsAvailable = "{count} / {total} találat most elérhető.";
+    var labelResultsSorted = "Eredmények rendezve {label} szerint";
+
     // New Window
 
     var labelNewWindow = "új ablakban nyílik meg";
@@ -617,6 +692,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Síðunúmeraskipti";
+
+    // Search Results
+
+    var labelResultsAvailable = "{count} af {total} niðurstöðum eru nú tiltækar.";
+    var labelResultsSorted = "Niðurstöður raðaðar eftir {label}";
 
     // New Window
 
@@ -656,6 +736,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Paginazione";
 
+    // Search Results
+
+    var labelResultsAvailable = "{count} di {total} risultati sono ora disponibili.";
+    var labelResultsSorted = "Risultati ordinati per {label}";
+
     // New Window
 
     var labelNewWindow = "si apre in una nuova finestra";
@@ -693,6 +778,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "ページネーション";
+
+    // Search Results
+
+    var labelResultsAvailable = "{total}件中{count}件の結果が表示されました。";
+    var labelResultsSorted = "結果は{label}でソートされています。";
 
     // New Window
 
@@ -732,6 +822,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "쪽수 매기기";
 
+    // Search Results
+
+    var labelResultsAvailable = "{total}개의 결과 중 {count}개의 결과가 나왔습니다.";
+    var labelResultsSorted = "{label} 기준으로 정렬된 결과";
+
     // New Window
 
     var labelNewWindow = "새 창에서 열립니다";
@@ -769,6 +864,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Lappušu numerācija";
+
+    // Search Results
+
+    var labelResultsAvailable = "Tagad ir pieejami {count} no {total} rezultātiem.";
+    var labelResultsSorted = "Rezultāti sakārtoti pēc {label}";
 
     // New Window
 
@@ -808,6 +908,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Puslapavimas";
 
+    // Search Results
+
+    var labelResultsAvailable = "{count} iš {total} rezultatų jau pasiekiami.";
+    var labelResultsSorted = "Rezultatai surūšiuoti pagal {label}";
+
     // New Window
 
     var labelNewWindow = "atsidaro naujame lange";
@@ -845,6 +950,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Penomboran halaman";
+
+    // Search Results
+
+    var labelResultsAvailable = "{count} daripada {total} keputusan kini tersedia.";
+    var labelResultsSorted = "Keputusan disusun mengikut {label}";
 
     // New Window
 
@@ -884,6 +994,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Paginering";
 
+    // Search Results
+
+    var labelResultsAvailable = "{count} av {total} resultater er nå tilgjengelige.";
+    var labelResultsSorted = "Resultater sortert etter {label}";
+
     // New Window
 
     var labelNewWindow = "åpnes i nytt vindu";
@@ -921,6 +1036,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Paginacja";
+
+    // Search Results
+
+    var labelResultsAvailable = "{count} z {total} wyników jest teraz dostępnych.";
+    var labelResultsSorted = "Wyniki posortowane według {label}";
 
     // New Window
 
@@ -960,6 +1080,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Paginação";
 
+    // Search Results
+
+    var labelResultsAvailable = "{count} de {total} resultados já estão disponíveis.";
+    var labelResultsSorted = "Resultados ordenados por {label}";
+
     // New Window
 
     var labelNewWindow = "abre em nova janela";
@@ -997,6 +1122,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Paginare";
+
+    // Search Results
+
+    var labelResultsAvailable = "{count} din {total} rezultate sunt acum disponibile.";
+    var labelResultsSorted = "Rezultate sortate după {label}";
 
     // New Window
 
@@ -1036,6 +1166,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Пагинация";
 
+    // Search Results
+
+    var labelResultsAvailable = "Теперь доступно {count} из {total} результатов.";
+    var labelResultsSorted = "Результаты отсортированы по {label}";
+
     // New Window
 
     var labelNewWindow = "открывается в новом окне";
@@ -1073,6 +1208,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Пагинација";
+
+    // Search Results
+
+    var labelResultsAvailable = "Сада је доступно {count} од {total} резултата.";
+    var labelResultsSorted = "Резултати сортирани по {label}";
 
     // New Window
 
@@ -1112,6 +1252,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Stránkovanie";
 
+    // Search Results
+
+    var labelResultsAvailable = "K dispozícii je {count} z {total} výsledkov.";
+    var labelResultsSorted = "Výsledky zoradené podľa {label}";
+
     // New Window
 
     var labelNewWindow = "otvorí sa v novom okne";
@@ -1149,6 +1294,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Oštevilčenje strani";
+
+    // Search Results
+
+    var labelResultsAvailable = "Na voljo je {count} od {total} rezultatov.";
+    var labelResultsSorted = "Rezultati razvrščeni po {label}";
 
     // New Window
 
@@ -1188,6 +1338,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Paginación";
 
+    // Search Results
+
+    var labelResultsAvailable = "Ya están disponibles {count} de {total} resultados.";
+    var labelResultsSorted = "Resultados ordenados por {label}";
+
     // New Window
 
     var labelNewWindow = "Se abre en una ventana nueva";
@@ -1225,6 +1380,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Paginering";
+
+    // Search Results
+
+    var labelResultsAvailable = "{count} av {total} resultat är nu tillgängliga.";
+    var labelResultsSorted = "Resultat sorterade efter {label}";
 
     // New Window
 
@@ -1264,6 +1424,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "การแบ่งหน้า";
 
+    // Search Results
+
+    var labelResultsAvailable = "ขณะนี้มีผลลัพธ์ {count} จากทั้งหมด {total} รายการให้ดูแล้ว";
+    var labelResultsSorted = "ผลลัพธ์เรียงลำดับตาม {label}";
+
     // New Window
 
     var labelNewWindow = "เปิดในหน้าต่างใหม่";
@@ -1302,6 +1467,11 @@ if(currentPageLanguage === "ar") {
 
     var labelPagination = "Пагінація";
 
+    // Search Results
+
+    var labelResultsAvailable = "Доступно {count} з {total} результатів.";
+    var labelResultsSorted = "Результати відсортовано за {label}";
+
     // New Window
 
     var labelNewWindow = "відкривається в новому вікні";
@@ -1339,6 +1509,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Đánh số trang";
+
+    // Search Results
+
+    var labelResultsAvailable = "Hiện đã có {count} trong tổng số {total} kết quả.";
+    var labelResultsSorted = "Kết quả được sắp xếp theo {label}";
 
     // New Window
 
@@ -1379,6 +1554,11 @@ if(currentPageLanguage === "ar") {
     // Pagination
 
     var labelPagination = "Pagination";
+
+    // Search Results
+
+    var labelResultsAvailable = "{count} of {total} results are now available.";
+    var labelResultsSorted = "Results sorted by {label}.";
 
     // New Window
 

@@ -39,7 +39,9 @@ function loadA11yPatch(url, callback) {
 
 }
 
-var languagePackSrc = "https://services.tmpwebeng.com/magicbullet/language-pack.js";
+// var languagePackSrc = "https://services.tmpwebeng.com/magicbullet/language-pack.js";
+
+var languagePack = "https://radancy.dev/magicbullet/language-pack.js";
 
 loadA11yPatch(languagePackSrc, function(){
 
@@ -125,10 +127,25 @@ loadA11yPatch(languagePackSrc, function(){
 
 });
 
+// Accessibility Patch: Message Formatting (Utility)
+// Desc: Substitutes {token} placeholders in a language-pack string with the given values. Keeping the full
+// sentence as one translatable template (rather than concatenating translated fragments) lets each language
+// reorder or rephrase around the variable parts as needed, instead of being locked into English word order.
+
+function formatMessage(template, values) {
+
+  return template.replace(/\{(\w+)\}/g, function(match, key) {
+
+    return Object.prototype.hasOwnProperty.call(values, key) ? values[key] : match;
+
+  });
+
+}
+
 // Accessibility Patch: Dynamic
-// Desc: These fixes address issues that occur both on page load and during dynamic DOM changes. 
+// Desc: These fixes address issues that occur both on page load and during dynamic DOM changes.
 // For instance, a script might add a new node to the DOM or refresh content on the page. When this happens, each fix will be reapplied to DOM.
-  
+
 function initDynamicPatch() {
 
   fixAltAttribute();
@@ -1670,7 +1687,7 @@ function fixSearchResults() {
 
       const searchResultTotal = currentContainer.dataset.totalResults;
       const searchResultCount = currentContainer.querySelectorAll("#search-results-list > ul > li").length;
-      ariaMsg.textContent = searchResultCount + " of " + searchResultTotal + " results are now available.";
+      ariaMsg.textContent = formatMessage(labelResultsAvailable, { count: searchResultCount, total: searchResultTotal });
 
     }, 1000);
 
@@ -1704,7 +1721,7 @@ function fixSearchSort() {
 
     setTimeout(function() {
 
-      ariaMsg.textContent = "Results sorted by " + selectedLabel + ".";
+      ariaMsg.textContent = formatMessage(labelResultsSorted, { label: selectedLabel });
 
     }, 1000);
 
