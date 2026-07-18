@@ -1631,6 +1631,8 @@ function fixSearchResults() {
 
     // Recalculate count each time the DOM changes
 
+    ariaMsg.textContent = "";
+
     setTimeout(function() {
 
       const searchResultTotal = searchResultsContainer.dataset.totalResults;
