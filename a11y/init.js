@@ -750,14 +750,15 @@ function fixDataForm() {
 
     // Fix: The "Sign Up" button needs to be more explicit to AT.
     // TODO: Add language support.
+    // UPDATE: Removing this functionality as it is causing too many accessibility issues with visible text not being in sync with visual label. eg. <button aria-label = "Sign-up for Job Alerts">Join Community</button>. Better to let dev deal with this on a case-by-case basis. 
 
-    var signUpButtonLabel = labelSubmitJobAlerts;
+    // var signUpButtonLabel = labelSubmitJobAlerts;
 
-    signUpButtons.forEach(function(button) {
+    // signUpButtons.forEach(function(button) {
 
-      button.setAttribute("aria-label", signUpButtonLabel);
+      // button.setAttribute("aria-label", signUpButtonLabel);
 
-    });
+    // });
 
     // Fix: The form message has an inline tabindex="0" on it. This is not ideal as messages that receive focus should only do so temporarily and not when user tabs back to it.
 
