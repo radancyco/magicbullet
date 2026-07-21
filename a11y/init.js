@@ -1681,6 +1681,12 @@ function fixSearchResults() {
 
   let lastAnnouncedState = getResultState(searchResultsContainer);
 
+  // Fix: The mutations right after binding are just the page settling on initial load, not a real
+  // filter/sort/pagination update, so the "loading" message shouldn't fire for them. Stay in this
+  // initial state until the first debounce burst quiets down, then allow the loading message from then on.
+
+  let isInitialSettle = true;
+
   const searchResultsObserver = new MutationObserver(() => {
 
     // Fix: Re-query both elements fresh each time, rather than relying on references captured at setup time,
@@ -1695,7 +1701,7 @@ function fixSearchResults() {
     // during the debounce below. Only announce it on the first mutation of a burst (i.e. no debounce
     // already pending), so it isn't re-announced on every incidental mutation while the DOM settles.
 
-    if (!searchResultsObserver.timeout) {
+    if (!isInitialSettle && !searchResultsObserver.timeout) {
 
       ariaMsg.textContent = "Loading new results.";
 
@@ -1706,6 +1712,7 @@ function fixSearchResults() {
     searchResultsObserver.timeout = setTimeout(function() {
 
       searchResultsObserver.timeout = null;
+      isInitialSettle = false;
 
       const newState = getResultState(currentContainer);
 
