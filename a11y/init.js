@@ -1563,6 +1563,16 @@ function fixSearchForm() {
 
 function fixSearchFilters() {
 
+  // TODO: After an ajax filter update, the site rebuilds the whole filter list and refocuses the checkbox
+  // by matching id, but it's a brand-new DOM node. Screen readers treat that as a fresh focus target and
+  // re-announce its full role/name/state, on top of the state change the user already heard from their own
+  // click. Not fixable from this patch since focus events aren't cancelable and the node is already destroyed
+  // by the time we run — needs the filter widget to patch its ajax response into the existing DOM instead of
+  // replacing it, so the focused checkbox's node identity (and focus) is preserved across the refresh.
+  // In short, ask the Sites Team why we need to reload filters at all and not just the content that is changing,
+  // so thaat focus is never removed and repplied in filters.  
+  // This is a long standing issue with the site, likely there from the very beginning. 
+
   const searchFilters = document.querySelector("#search-filters");
 
   if (searchFilters) {
