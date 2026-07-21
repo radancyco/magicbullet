@@ -1691,7 +1691,7 @@ function fixSearchResults() {
 
       lastAnnouncedState = newState;
 
-      const searchResultTotal = currentContainer.dataset.totalResults;
+      const searchResultTotal = currentContainer.dataset.totalJobResults;
       const searchResultCount = currentContainer.querySelectorAll("#search-results-list a[data-job-id]").length;
       ariaMsg.textContent = formatMessage(labelResultsAvailable, { count: searchResultCount, total: searchResultTotal });
 
