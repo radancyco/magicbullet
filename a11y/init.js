@@ -388,6 +388,7 @@ function fixDataForm() {
     var formMessage = form.querySelector(".form-field.form-message b");
     var formMessageButton = form.querySelector(".form-field.form-message a");
     var keyWordCategory = form.querySelector(".keyword-category");
+    var addJobAlertFieldset = form.querySelector("fieldset");
 
     // Clean-up: Remove empty instruction-text spans as they can sometimes cause undesired spacing issues.
 
@@ -462,6 +463,18 @@ function fixDataForm() {
         }
 
       }
+
+      addJobAlertButtons.addEventListener("click", () => {
+
+        var getAriaRequiredSpan = addJobAlertFieldset.querySelectorAll(".ico-required-indicator");
+
+        getAriaRequiredSpan.forEach(function(element) {
+
+          element.remove();
+
+        });
+
+      });
 
     });
 
