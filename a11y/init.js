@@ -1658,9 +1658,14 @@ function fixSearchResults() {
   // not just real filter/pagination updates. Track the last known result state and only announce when it
   // actually changes, so that noise doesn't trigger a false announcement.
 
+  // Fix: Templates vary the markup around results (list, table, extra header rows, etc.), so counting
+  // "#search-results-list > ul > li" breaks whenever a site's markup doesn't match that exact shape
+  // (e.g. a header row ul sitting alongside the results ul). Each job link reliably carries
+  // data-job-id regardless of the surrounding markup, so count those instead.
+
   const getResultState = function(container) {
 
-    return container.dataset.totalResults + ":" + container.querySelectorAll("#search-results-list > ul > li").length;
+    return container.dataset.totalResults + ":" + container.querySelectorAll("#search-results-list a[data-job-id]").length;
 
   };
 
@@ -1687,7 +1692,7 @@ function fixSearchResults() {
       lastAnnouncedState = newState;
 
       const searchResultTotal = currentContainer.dataset.totalResults;
-      const searchResultCount = currentContainer.querySelectorAll("#search-results-list > ul > li").length;
+      const searchResultCount = currentContainer.querySelectorAll("#search-results-list a[data-job-id]").length;
       ariaMsg.textContent = formatMessage(labelResultsAvailable, { count: searchResultCount, total: searchResultTotal });
 
     }, 1000);
