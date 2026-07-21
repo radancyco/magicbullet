@@ -1816,17 +1816,10 @@ function fixSearchPagination() {
     
     }
 
-    // Fix: When Pagination buttons are pressed, send a loding message to global ARIA live. 
-
     const paginationEvents = () => {
 
-      const ariaMsg = document.querySelector("#magicbullet-message");
-
-      if (ariaMsg) {
-
-        ariaMsg.textContent = "Loading New Results";
-
-      }
+      // Fix: The "loading" announcement is now handled by fixSearchResults' mutation observer, which fires
+      // on any search-results change (pagination included), so a separate message here would just double it up.
 
       // Observe the PARENT because #search-results may be replaced
 
