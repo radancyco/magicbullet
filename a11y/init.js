@@ -1691,9 +1691,21 @@ function fixSearchResults() {
 
     if (!ariaMsg || !currentContainer) return;
 
+    // Fix: Give screen reader users immediate feedback that an update is underway, rather than silence
+    // during the debounce below. Only announce it on the first mutation of a burst (i.e. no debounce
+    // already pending), so it isn't re-announced on every incidental mutation while the DOM settles.
+
+    if (!searchResultsObserver.timeout) {
+
+      ariaMsg.textContent = "Loading new results.";
+
+    }
+
     clearTimeout(searchResultsObserver.timeout);
 
     searchResultsObserver.timeout = setTimeout(function() {
+
+      searchResultsObserver.timeout = null;
 
       const newState = getResultState(currentContainer);
 
