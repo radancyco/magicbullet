@@ -466,9 +466,9 @@ function fixDataForm() {
 
       // Fix: Remove asterick whenever "Add" keyowrd button is pressed. 
 
-      addJobAlertButtons.forEach(function(button) {
-        
-        button.addEventListener("click", () => {
+      keywordSelected.forEach(function(region) {
+
+        if (region.querySelector("li")) {
 
           var getAriaRequiredSpan = addJobAlertFieldset.querySelectorAll(".ico-required-indicator");
 
@@ -478,7 +478,7 @@ function fixDataForm() {
 
           });
 
-        });
+        }
 
       });
 
