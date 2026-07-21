@@ -464,7 +464,7 @@ function fixDataForm() {
 
       }
 
-      // Fix: Remove asterick whenever "Add" keyowrd button is pressed. 
+      // Fix: Remove asterick from Job Category and Location whenever "Add" keyowrd button is pressed. 
 
       keywordSelected.forEach(function(region) {
 
