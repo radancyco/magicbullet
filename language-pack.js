@@ -50,6 +50,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "جارٍ تحميل نتائج جديدة.";
     var labelResultsAvailable = "{count} من أصل {total} نتائج متاحة الآن.";
     var labelResultsSorted = "النتائج مرتبة حسب {label}";
 
@@ -93,6 +94,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Зареждане на нови резултати.";
     var labelResultsAvailable = "Вече са налични {count} от {total} резултата.";
     var labelResultsSorted = "Резултати, сортирани по {label}";
 
@@ -136,6 +138,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "正在加载新结果。";
     var labelResultsAvailable = "现在共有 {count} 条结果，总计 {total} 条结果。";
     var labelResultsSorted = "按 {label} 排序的结果";
 
@@ -179,6 +182,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "正在載入新結果。";
     var labelResultsAvailable = "現在共有 {count} 項結果，總計 {total} 條結果。";
     var labelResultsSorted = "按 {label} 排序的結果";
 
@@ -222,6 +226,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Učitavanje novih rezultata.";
     var labelResultsAvailable = "Sada je dostupno {count} od {total} rezultata.";
     var labelResultsSorted = "Rezultati sortirani po {label}";
 
@@ -265,6 +270,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Načítání nových výsledků.";
     var labelResultsAvailable = "Nyní je k dispozici {count} z {total} výsledků.";
     var labelResultsSorted = "Výsledky seřazené podle {label}";
 
@@ -308,6 +314,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Indlæser nye resultater.";
     var labelResultsAvailable = "{count} af {total} resultater er nu tilgængelige.";
     var labelResultsSorted = "Resultater sorteret efter {label}";
 
@@ -351,6 +358,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Nieuwe resultaten worden geladen.";
     var labelResultsAvailable = "{count} van {total} resultaten zijn nu beschikbaar.";
     var labelResultsSorted = "Resultaten gesorteerd op {label}";
 
@@ -394,6 +402,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Loading new results.";
     var labelResultsAvailable = "{count} of {total} results are now available.";
     var labelResultsSorted = "Results sorted by {label}.";
 
@@ -437,6 +446,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Uute tulemuste laadimine.";
     var labelResultsAvailable = "{count} tulemust {total} tulemusest on nüüd saadaval.";
     var labelResultsSorted = "Tulemused sorteeritud sildi {label} järgi";
 
@@ -480,6 +490,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Ladataan uusia tuloksia.";
     var labelResultsAvailable = "{count} / {total} tulosta on nyt saatavilla.";
     var labelResultsSorted = "Tulokset lajiteltu {label} -perusteella";
 
@@ -523,6 +534,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Chargement des nouveaux résultats.";
     var labelResultsAvailable = "{count} des {total} résultats sont maintenant disponibles.";
     var labelResultsSorted = "Résultats triés par {label}";
 
@@ -566,6 +578,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Neue Ergebnisse werden geladen.";
     var labelResultsAvailable = "Es sind nun {count} von {total} Ergebnissen verfügbar.";
     var labelResultsSorted = "Ergebnisse sortiert nach {label}";
 
@@ -609,6 +622,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "טוען תוצאות חדשות.";
     var labelResultsAvailable = "{count} מתוך {total} תוצאות זמינות כעת.";
     var labelResultsSorted = "תוצאות ממוינות לפי {label}";
 
@@ -652,6 +666,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Új találatok betöltése.";
     var labelResultsAvailable = "{count} / {total} találat most elérhető.";
     var labelResultsSorted = "Eredmények rendezve {label} szerint";
 
@@ -695,6 +710,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Hleður inn nýjum niðurstöðum.";
     var labelResultsAvailable = "{count} af {total} niðurstöðum eru nú tiltækar.";
     var labelResultsSorted = "Niðurstöður raðaðar eftir {label}";
 
@@ -738,6 +754,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Caricamento dei nuovi risultati.";
     var labelResultsAvailable = "{count} di {total} risultati sono ora disponibili.";
     var labelResultsSorted = "Risultati ordinati per {label}";
 
@@ -781,6 +798,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "新しい結果を読み込んでいます。";
     var labelResultsAvailable = "{total}件中{count}件の結果が表示されました。";
     var labelResultsSorted = "結果は{label}でソートされています。";
 
@@ -824,6 +842,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "새로운 검색 결과를 불러오는 중입니다.";
     var labelResultsAvailable = "{total}개의 결과 중 {count}개의 결과가 나왔습니다.";
     var labelResultsSorted = "{label} 기준으로 정렬된 결과";
 
@@ -867,6 +886,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Notiek jaunu rezultātu ielāde.";
     var labelResultsAvailable = "Tagad ir pieejami {count} no {total} rezultātiem.";
     var labelResultsSorted = "Rezultāti sakārtoti pēc {label}";
 
@@ -910,6 +930,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Įkeliami nauji rezultatai.";
     var labelResultsAvailable = "{count} iš {total} rezultatų jau pasiekiami.";
     var labelResultsSorted = "Rezultatai surūšiuoti pagal {label}";
 
@@ -953,6 +974,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Memuatkan hasil baharu.";
     var labelResultsAvailable = "{count} daripada {total} keputusan kini tersedia.";
     var labelResultsSorted = "Keputusan disusun mengikut {label}";
 
@@ -996,6 +1018,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Laster inn nye resultater.";
     var labelResultsAvailable = "{count} av {total} resultater er nå tilgjengelige.";
     var labelResultsSorted = "Resultater sortert etter {label}";
 
@@ -1039,6 +1062,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Ładowanie nowych wyników.";
     var labelResultsAvailable = "{count} z {total} wyników jest teraz dostępnych.";
     var labelResultsSorted = "Wyniki posortowane według {label}";
 
@@ -1082,6 +1106,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Carregando novos resultados.";
     var labelResultsAvailable = "{count} de {total} resultados já estão disponíveis.";
     var labelResultsSorted = "Resultados ordenados por {label}";
 
@@ -1125,6 +1150,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Se încarcă rezultatele noi.";
     var labelResultsAvailable = "{count} din {total} rezultate sunt acum disponibile.";
     var labelResultsSorted = "Rezultate sortate după {label}";
 
@@ -1168,6 +1194,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Загрузка новых результатов.";
     var labelResultsAvailable = "Теперь доступно {count} из {total} результатов.";
     var labelResultsSorted = "Результаты отсортированы по {label}";
 
@@ -1211,6 +1238,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Учитавање нових резултата.";
     var labelResultsAvailable = "Сада је доступно {count} од {total} резултата.";
     var labelResultsSorted = "Резултати сортирани по {label}";
 
@@ -1254,6 +1282,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Načítavajú sa nové výsledky.";
     var labelResultsAvailable = "K dispozícii je {count} z {total} výsledkov.";
     var labelResultsSorted = "Výsledky zoradené podľa {label}";
 
@@ -1297,6 +1326,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Nalaganje novih rezultatov.";
     var labelResultsAvailable = "Na voljo je {count} od {total} rezultatov.";
     var labelResultsSorted = "Rezultati razvrščeni po {label}";
 
@@ -1340,6 +1370,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Cargando nuevos resultados.";
     var labelResultsAvailable = "Ya están disponibles {count} de {total} resultados.";
     var labelResultsSorted = "Resultados ordenados por {label}";
 
@@ -1383,6 +1414,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Laddar nya resultat.";
     var labelResultsAvailable = "{count} av {total} resultat är nu tillgängliga.";
     var labelResultsSorted = "Resultat sorterade efter {label}";
 
@@ -1426,6 +1458,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "กำลังโหลดผลลัพธ์ใหม่";
     var labelResultsAvailable = "ขณะนี้มีผลลัพธ์ {count} จากทั้งหมด {total} รายการให้ดูแล้ว";
     var labelResultsSorted = "ผลลัพธ์เรียงลำดับตาม {label}";
 
@@ -1469,6 +1502,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Завантаження нових результатів.";
     var labelResultsAvailable = "Доступно {count} з {total} результатів.";
     var labelResultsSorted = "Результати відсортовано за {label}";
 
@@ -1512,6 +1546,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Đang tải kết quả mới.";
     var labelResultsAvailable = "Hiện đã có {count} trong tổng số {total} kết quả.";
     var labelResultsSorted = "Kết quả được sắp xếp theo {label}";
 
@@ -1557,6 +1592,7 @@ if(currentPageLanguage === "ar") {
 
     // Search Results
 
+    var labelLoadingMsg = "Loading new results.";
     var labelResultsAvailable = "{count} of {total} results are now available.";
     var labelResultsSorted = "Results sorted by {label}.";
 

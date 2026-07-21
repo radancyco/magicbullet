@@ -1722,7 +1722,7 @@ function fixSearchResults() {
 
     if (!isInitialSettle && !searchResultsObserver.timeout) {
 
-      ariaMsg.textContent = "Loading new results.";
+      ariaMsg.textContent = labelLoadingMsg;
 
     }
 
