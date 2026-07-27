@@ -58,6 +58,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "يفتح في نافذة جديدة";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "ستظهر روابط الوظائف المطابقة أدناه أثناء الكتابة.";
+    var labelSearchKeywordFoundMsg = "تم العثور على {count} من روابط الوظائف المطابقة.";
+    var labelSearchKeywordNotFoundMsg = "لم يتم العثور على روابط وظائف مطابقة.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "عند توفر نتائج الإكمال التلقائي، استخدم أسهم الأعلى والأسفل للمراجعة، ثم اضغط على زر الإدخال للاختيار. لمستخدمي الأجهزة التي تعمل باللمس، استكشفوا عبر اللمس أو باستخدام إيماءات التمرير.";
 } else if (currentPageLanguage === "bg") {
 
     // Remove Job Filter
@@ -102,6 +111,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "отваря се в нов прозорец";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Съответстващи връзки за работа ще се показват по-долу, докато пишете.";
+    var labelSearchKeywordFoundMsg = "Намерени са {count} съответстващи връзки за работа.";
+    var labelSearchKeywordNotFoundMsg = "Няма намерени съответстващи връзки за работа.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Когато са налични резултати от автоматично довършване, използвайте стрелките нагоре и надолу за преглед и Enter за избор. Потребителите на устройства с докосване могат да изследват чрез докосване или с плъзгане.";
 } else if (currentPageLanguage === "zh-Hans") {
 
     // Remove Job Filter
@@ -146,6 +164,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "在新窗口中打开";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "输入内容时，下方将显示匹配的职位链接。";
+    var labelSearchKeywordFoundMsg = "找到 {count} 个匹配的职位链接。";
+    var labelSearchKeywordNotFoundMsg = "未找到匹配的职位链接。";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "当有自动完成结果时，请使用上下箭头键查看，然后按回车键选择。触控设备用户，请使用触控或滑动操作进行浏览。";
 } else if (currentPageLanguage === "zh-Hant") {
 
     // Remove Job Filter
@@ -190,6 +217,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "在新視窗中開啟";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "輸入內容時，下方將顯示相符的職位連結。";
+    var labelSearchKeywordFoundMsg = "找到 {count} 個符合的職位連結。";
+    var labelSearchKeywordNotFoundMsg = "未找到符合的職位連結。";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "當有自動完成結果時，請使用上下箭頭鍵查看，然後按回車鍵選擇。觸控設備用戶，請使用觸控或滑動操作進行瀏覽。";
 } else if (currentPageLanguage === "hr") {
 
     // Remove Job Filter
@@ -234,6 +270,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "otvara se u novom prozoru";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Odgovarajuće poveznice za poslove prikazivat će se ispod dok tipkate.";
+    var labelSearchKeywordFoundMsg = "Pronađene su odgovarajuće poveznice za poslove ({count}).";
+    var labelSearchKeywordNotFoundMsg = "Nisu pronađene odgovarajuće poveznice za posao.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Kada su dostupni rezultati automatskog dovršavanja, koristite strelice gore i dolje za pregled i Enter za odabir. Korisnici dodirnih uređaja istražuju dodirom ili pokretima prsta.";
 } else if (currentPageLanguage === "cs") {
 
     // Remove Job Filter
@@ -278,6 +323,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "otevře se v novém okně";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Odpovídající odkazy na pracovní nabídky se budou zobrazovat níže během psaní.";
+    var labelSearchKeywordFoundMsg = "Nalezeno {count} odpovídajících odkazů na pracovní nabídky.";
+    var labelSearchKeywordNotFoundMsg = "Nenalezeny žádné odpovídající odkazy na pracovní nabídky.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Pokud jsou k dispozici výsledky automatického doplňování, použijte šipky nahoru a dolů k prohlédnutí a klávesu Enter k výběru. Uživatelé dotykových zařízení mohou prozkoumávat výsledky dotykem nebo přejetím prstem.";
 } else if (currentPageLanguage === "da") {
 
     // Remove Job Filter
@@ -322,6 +376,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "åbner i et nyt vindue";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Matchende joblinks vises nedenfor, mens du skriver.";
+    var labelSearchKeywordFoundMsg = "{count} matchende joblinks fundet.";
+    var labelSearchKeywordNotFoundMsg = "Ingen matchende joblinks fundet.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Når autofuldførelsesresultater er tilgængelige, skal du bruge pil op og pil ned til at gennemgå og Enter for at vælge. Brugere af berøringsenheder kan udforske ved at trykke eller med swipe-bevægelser.";
 } else if (currentPageLanguage === "nl") {
 
     // Remove Job Filter
@@ -366,6 +429,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "wordt in een nieuw venster geopend";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Relevante vacaturelinks verschijnen hieronder terwijl u typt.";
+    var labelSearchKeywordFoundMsg = "{count} overeenkomende vacaturelinks gevonden.";
+    var labelSearchKeywordNotFoundMsg = "Geen overeenkomende vacatures gevonden.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Gebruik de pijltoetsen omhoog en omlaag om de resultaten te bekijken en druk op Enter om een ​​keuze te maken wanneer er automatisch aanvullende resultaten beschikbaar zijn. Gebruikers van touchscreens kunnen de resultaten verkennen door te tikken of te vegen.";
 } else if (currentPageLanguage === "en-GB") {
 
     // Remove Job Filter
@@ -410,6 +482,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "opens in new window";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Matching job links will appear below as you type.";
+    var labelSearchKeywordFoundMsg = "{count} matching job links found.";
+    var labelSearchKeywordNotFoundMsg = "No matching job links found.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
 } else if (currentPageLanguage === "et") {
 
     // Remove Job Filter
@@ -454,6 +535,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "avaneb uues aknas";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Sobivate töökohtade lingid kuvatakse allpool sisestamise ajal.";
+    var labelSearchKeywordFoundMsg = "Leiti {count} sobivat töökuulutuse linki.";
+    var labelSearchKeywordNotFoundMsg = "Sobivaid tööpakkumiste linke ei leitud.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Kui automaatse täitmise tulemused on saadaval, kasutage ülevaatamiseks üles- ja allanooli ning valimiseks sisestusklahvi. Puudutage seadme kasutajaid, uurige puudutuse või pühkimisliigutuste abil.";
 } else if (currentPageLanguage === "fi") {
 
     // Remove Job Filter
@@ -498,6 +588,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "avautuu uuteen ikkunaan";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Vastaavat työpaikkalinkit näkyvät alla kirjoittaessasi.";
+    var labelSearchKeywordFoundMsg = "Löytyi {count} vastaavaa työpaikkalinkkiä.";
+    var labelSearchKeywordNotFoundMsg = "Ei vastaavia työpaikkalinkkejä.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Kun automaattisen täydennyksen tulokset ovat saatavilla, tarkista ne ylä- ja alanuolilla ja valitse Enter-näppäimellä. Kosketa laitteen käyttäjiä, tutki koskettamalla tai pyyhkäisemällä.";
 } else if (currentPageLanguage === "fr") {
 
     // Remove Job Filter
@@ -542,6 +641,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "ouvre dans une nouvelle fenêtre";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Les liens vers les offres d'emploi correspondantes apparaîtront ci-dessous au fur et à mesure que vous taperez.";
+    var labelSearchKeywordFoundMsg = "{count} liens d'emploi correspondants trouvés.";
+    var labelSearchKeywordNotFoundMsg = "Aucun lien vers une offre d'emploi correspondante n'a été trouvé.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Lorsque des suggestions de saisie semi-automatique sont disponibles, utilisez les flèches haut et bas pour les parcourir et appuyez sur Entrée pour sélectionner. Sur les appareils tactiles, explorez les options par le toucher ou par glissement.";
 } else if (currentPageLanguage === "de") {
 
     // Remove Job Filter
@@ -586,6 +694,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "wird in einem neuen Fenster geöffnet";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Passende Stellenlinks werden während Ihrer Eingabe unten angezeigt.";
+    var labelSearchKeywordFoundMsg = "{count} passende Stellenangebote gefunden.";
+    var labelSearchKeywordNotFoundMsg = "Es wurden keine passenden Stellenangebote gefunden.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Wenn Autovervollständigungsvorschläge verfügbar sind, können Sie diese mit den Pfeiltasten nach oben und unten durchsuchen und mit der Eingabetaste auswählen. Nutzer von Touchscreen-Geräten können die Vorschläge per Berührung oder Wischgesten erkunden.";
 } else if (currentPageLanguage === "he") {
 
     // Remove Job Filter
@@ -630,6 +747,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "נפתח בחלון חדש";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "קישורים למשרות תואמות יופיעו למטה בזמן ההקלדה.";
+    var labelSearchKeywordFoundMsg = "נמצאו קישורי עבודה תואמים ({count}).";
+    var labelSearchKeywordNotFoundMsg = "לא נמצאו קישורי עבודה תואמים.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "כאשר תוצאות השלמה אוטומטית זמינות, השתמש בחצים למעלה ולמטה כדי לסקור ו-Enter כדי לבחור. משתמשי מכשירים יכולים לגלות באמצעות מגע או תנועות החלקה.";
 } else if (currentPageLanguage === "hu") {
 
     // Remove Job Filter
@@ -674,6 +800,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "új ablakban nyílik meg";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "A keresésnek megfelelő álláshirdetések linkjei gépelés közben jelennek meg alább.";
+    var labelSearchKeywordFoundMsg = "{count} egyező álláshirdetési link található.";
+    var labelSearchKeywordNotFoundMsg = "Nincsenek megfelelő álláshirdetési linkek.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Amikor az automatikus kiegészítés eredményei elérhetők, a fel és le nyilakat használd az áttekintéshez, és az Enter billentyűt a kiválasztáshoz. Érintős eszközhasználók számára a böngészés érintéssel vagy húzással történik.";
 } else if (currentPageLanguage === "is") {
 
     // Remove Job Filter
@@ -718,6 +853,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "opnast í nýjum glugga";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Tenglar sem passa við störf birtast hér að neðan þegar þú skrifar.";
+    var labelSearchKeywordFoundMsg = "{count} samsvarandi atvinnutenglar fundust.";
+    var labelSearchKeywordNotFoundMsg = "Engir samsvarandi starfstenglar fundust.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Þegar sjálfvirkar niðurstöður eru tiltækar skaltu nota örvarnar upp og niður til að skoða og færa inn til að velja. Notendur sem nota snertingu geta skoðað tækið með snertingu eða strjúkbendingum.";
 } else if (currentPageLanguage === "it") {
 
     // Remove Job Filter
@@ -762,6 +906,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "si apre in una nuova finestra";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "I link alle offerte di lavoro corrispondenti appariranno qui sotto man mano che digiti.";
+    var labelSearchKeywordFoundMsg = "{count} link di lavoro corrispondenti trovati.";
+    var labelSearchKeywordNotFoundMsg = "Nessun link di lavoro corrispondente trovato.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Quando sono disponibili i risultati del completamento automatico, utilizzare le frecce su e giù per visualizzarli e il tasto Invio per selezionarli. Gli utenti di dispositivi touch possono esplorare i risultati tramite tocco o gesti di scorrimento.";
 } else if (currentPageLanguage === "ja") {
 
     // Remove Job Filter
@@ -806,6 +959,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "新しいウィンドウで開きます";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "入力内容に応じて、関連する求人リンクが下に表示されます。";
+    var labelSearchKeywordFoundMsg = "{count}件の一致する求人リンクが見つかりました。";
+    var labelSearchKeywordNotFoundMsg = "一致する求人リンクは見つかりませんでした。";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "オートコンプリートの結果が表示されたら、上下矢印キーで確認し、Enterキーで選択します。タッチデバイスをご利用の場合は、タッチ操作またはスワイプ操作で探索してください。";
 } else if (currentPageLanguage === "ko") {
 
     // Remove Job Filter
@@ -850,6 +1012,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "새 창에서 열립니다";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "입력하시는 동안 아래에 관련 채용 정보 링크가 표시됩니다.";
+    var labelSearchKeywordFoundMsg = "{count}개의 일치하는 채용 링크가 발견되었습니다.";
+    var labelSearchKeywordNotFoundMsg = "일치하는 채용 정보 링크를 찾을 수 없습니다.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "자동 완성 결과가 표시되면 위아래 화살표를 사용하여 내용을 검토하고 Enter 키를 눌러 선택하세요. 터치 기기 사용자는 터치 또는 스와이프 제스처를 사용하여 탐색할 수 있습니다.";
 } else if (currentPageLanguage === "lv") {
 
     // Remove Job Filter
@@ -894,6 +1065,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "atveras jaunā logā";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Atbilstošas ​​darba sludinājumu saites parādīsies zemāk, kamēr rakstāt.";
+    var labelSearchKeywordFoundMsg = "Atrastas {count} atbilstošas ​​darba sludinājumu saites.";
+    var labelSearchKeywordNotFoundMsg = "Nav atrastas atbilstošas ​​darba saites.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Kad ir pieejami automātiskās pabeigšanas rezultāti, izmantojiet augšupvērsto un lejupvērsto bultiņu, lai tos pārskatītu, un taustiņu Enter, lai atlasītu. Pieskarieties ierīču lietotājiem, pārlūkojiet tos ar pieskārienu vai ar vilkšanas žestiem.";
 } else if (currentPageLanguage === "lt") {
 
     // Remove Job Filter
@@ -938,6 +1118,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "atsidaro naujame lange";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Atitinkančios darbo nuorodos bus rodomos žemiau, kai rašysite.";
+    var labelSearchKeywordFoundMsg = "Rasta atitinkančių darbo pasiūlymų nuorodų: {count}";
+    var labelSearchKeywordNotFoundMsg = "Nerasta atitinkančių darbo nuorodų.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Kai pasiekiami automatinio užbaigimo rezultatai, naudokite rodykles aukštyn ir žemyn, kad peržiūrėtumėte, ir „Enter“, kad pasirinktumėte. Palieskite įrenginių naudotojus, naršykite liesdami arba braukimo gestais.";
 } else if (currentPageLanguage === "ms") {
 
     // Remove Job Filter
@@ -982,6 +1171,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "dibuka dalam tetingkap baharu";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Pautan kerja yang sepadan akan dipaparkan di bawah semasa anda menaip.";
+    var labelSearchKeywordFoundMsg = "{count} pautan kerja yang sepadan ditemui.";
+    var labelSearchKeywordNotFoundMsg = "Tiada pautan kerja yang sepadan ditemui.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Apabila hasil autolengkap tersedia, gunakan anak panah atas dan bawah untuk menyemak dan masuk untuk memilih. Sentuh pengguna peranti, terokai dengan sentuhan atau dengan gerak isyarat leret.";
 } else if (currentPageLanguage === "no") {
 
     // Remove Job Filter
@@ -1026,6 +1224,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "åpnes i nytt vindu";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Matchende jobblenker vil vises nedenfor mens du skriver.";
+    var labelSearchKeywordFoundMsg = "{count} samsvarende jobblenker funnet.";
+    var labelSearchKeywordNotFoundMsg = "Ingen samsvarende jobblenker funnet.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Når autofullfør-resultater er tilgjengelige, bruk pil opp og pil ned for å se gjennom og Enter for å velge. Brukere av berøringsenheter kan utforske ved å berøre eller sveipe.";
 } else if (currentPageLanguage === "pl") {
 
     // Remove Job Filter
@@ -1070,6 +1277,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "otwiera się w nowym oknie";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "W miarę wpisywania tekstu poniżej pojawią się pasujące linki do ofert pracy.";
+    var labelSearchKeywordFoundMsg = "Znaleziono {count} pasujących linków do ofert pracy.";
+    var labelSearchKeywordNotFoundMsg = "Nie znaleziono pasujących linków do ofert pracy.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Gdy wyniki autouzupełniania są dostępne, użyj strzałek w górę i w dół, aby je przejrzeć i wybrać Enter. Użytkownicy urządzeń dotykowych mogą przeglądać wyniki dotykiem lub gestami przesuwania.";
 } else if (currentPageLanguage === "pt") {
 
     // Remove Job Filter
@@ -1114,6 +1330,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "abre em nova janela";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Os links para vagas de emprego correspondentes aparecerão abaixo conforme você digita.";
+    var labelSearchKeywordFoundMsg = "{count} links de emprego correspondentes encontrados.";
+    var labelSearchKeywordNotFoundMsg = "Não foram encontrados links de emprego correspondentes.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Quando os resultados de preenchimento automático estiverem disponíveis, use as setas para cima e para baixo para revisar e pressione Enter para selecionar. Usuários de dispositivos com tela sensível ao toque podem explorar tocando na tela ou deslizando o dedo na tela.";
 } else if (currentPageLanguage === "ro") {
 
     // Remove Job Filter
@@ -1158,6 +1383,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "se deschide într-o fereastră nouă";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Linkurile către locuri de muncă corespunzătoare vor apărea mai jos pe măsură ce tastați.";
+    var labelSearchKeywordFoundMsg = "Au fost găsite {count} linkuri de locuri de muncă corespunzătoare.";
+    var labelSearchKeywordNotFoundMsg = "Nu au fost găsite linkuri către locuri de muncă potrivite.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Când rezultatele completării automate sunt disponibile, folosiți săgețile sus și jos pentru a le revizui și Enter pentru a selecta. Utilizatorii dispozitivului pot explora prin atingere sau cu gesturi de glisare.";
 } else if (currentPageLanguage === "ru") {
 
     // Remove Job Filter
@@ -1202,6 +1436,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "открывается в новом окне";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "По мере ввода текста ниже будут появляться ссылки на подходящие вакансии.";
+    var labelSearchKeywordFoundMsg = "Найдено {count} соответствующих ссылок на вакансии.";
+    var labelSearchKeywordNotFoundMsg = "Ссылки на подходящие вакансии не найдены.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "При наличии результатов автозаполнения используйте стрелки вверх и вниз для просмотра и клавишу Enter для выбора. Пользователи сенсорных устройств могут осуществлять поиск с помощью касаний или жестов смахивания.";
 } else if (currentPageLanguage === "sr") {
 
     // Remove Job Filter
@@ -1246,6 +1489,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "отвара се у новом прозору";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Линкови за послове који одговарају вашим потребама ће се појављивати испод док куцате.";
+    var labelSearchKeywordFoundMsg = "Пронађено је {count} одговарајућих линкова за послове.";
+    var labelSearchKeywordNotFoundMsg = "Нису пронађени одговарајући линкови за посао.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Када су доступни резултати аутоматског довршавања, користите стрелице нагоре и надоле за преглед и ентер за избор. Корисници додирних уређаја могу да истражују додиром или превлачењем.";
 } else if (currentPageLanguage === "sk") {
 
     // Remove Job Filter
@@ -1290,6 +1542,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "otvorí sa v novom okne";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Počas písania sa nižšie zobrazia zodpovedajúce odkazy na pracovné ponuky.";
+    var labelSearchKeywordFoundMsg = "Nájdených {count} zodpovedajúcich pracovných odkazov.";
+    var labelSearchKeywordNotFoundMsg = "Nenašli sa žiadne zodpovedajúce pracovné odkazy.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Keď sú k dispozícii výsledky automatického dopĺňania, použite na kontrolu šípky nahor a nadol a na výber kláves Enter. Používatelia dotykových zariadení môžu vyhľadávať dotykom alebo gestami potiahnutia prstom.";
 } else if (currentPageLanguage === "sl") {
 
     // Remove Job Filter
@@ -1334,6 +1595,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "odpre se v novem oknu";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Med tipkanjem se bodo spodaj prikazale ustrezne povezave do delovnih mest.";
+    var labelSearchKeywordFoundMsg = "Najdenih je bilo {count} ustreznih povezav za zaposlitev.";
+    var labelSearchKeywordNotFoundMsg = "Ni najdenih ustreznih povezav za delovna mesta.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Ko so na voljo rezultati samodokončanja, uporabite puščici gor in dol za pregled in enter za izbiro. Uporabniki naprav z dotikom lahko raziskujejo z dotikom ali s gibi vlečenja.";
 } else if (currentPageLanguage === "es") {
 
     // Remove Job Filter
@@ -1378,6 +1648,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "Se abre en una ventana nueva";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "A medida que escribas, aparecerán enlaces a ofertas de empleo que coincidan con tu perfil.";
+    var labelSearchKeywordFoundMsg = "{count} enlaces de trabajo coincidentes encontrados.";
+    var labelSearchKeywordNotFoundMsg = "No se encontraron enlaces de empleo que coincidan.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Cuando haya resultados de autocompletar disponibles, use las flechas arriba y abajo para revisarlos y presione Enter para seleccionar. Los usuarios de dispositivos táctiles pueden explorar mediante gestos táctiles o deslizando el dedo.";
 } else if (currentPageLanguage === "sv") {
 
     // Remove Job Filter
@@ -1422,6 +1701,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "öppnas i nytt fönster";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Matchande jobblänkar visas nedan medan du skriver.";
+    var labelSearchKeywordFoundMsg = "{count} matchande jobblänkar hittades.";
+    var labelSearchKeywordNotFoundMsg = "Inga matchande jobblänkar hittades.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "När autoslutföranderesultat är tillgängliga, använd uppåt- och nedåtpilarna för att granska och returnera för att välja. Användare av pekskärmen kan utforska genom att peka eller svepa.";
 } else if (currentPageLanguage === "th") {
 
     // Remove Job Filter
@@ -1466,6 +1754,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "เปิดในหน้าต่างใหม่";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "ลิงก์ตำแหน่งงานที่ตรงกับคุณสมบัติจะปรากฏด้านล่างขณะที่คุณพิมพ์";
+    var labelSearchKeywordFoundMsg = "พบลิงก์งานที่ตรงกันจำนวน {count} รายการ";
+    var labelSearchKeywordNotFoundMsg = "ไม่พบลิงก์งานที่ตรงกัน";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "เมื่อมีผลลัพธ์การเติมข้อความอัตโนมัติ ให้ใช้ลูกศรขึ้นและลงเพื่อตรวจสอบ และกด Enter เพื่อเลือก สำหรับผู้ใช้อุปกรณ์ระบบสัมผัส ให้สำรวจโดยการสัมผัสหรือใช้ท่าทางปัดนิ้ว";
 } else if (currentPageLanguage === "uk") {
 
     // Remove Job Filter
@@ -1510,6 +1807,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "відкривається в новому вікні";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Відповідні посилання на вакансії з’являтимуться нижче під час введення тексту.";
+    var labelSearchKeywordFoundMsg = "Знайдено {count} відповідних посилань на вакансії.";
+    var labelSearchKeywordNotFoundMsg = "Відповідних посилань на вакансії не знайдено.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Коли доступні результати автозаповнення, використовуйте стрілки вгору та вниз для перегляду та Enter для вибору. Користувачі сенсорних пристроїв можуть досліджувати дотиком або жестами пальцем.";
 } else if (currentPageLanguage === "vi") {
 
     // Remove Job Filter
@@ -1554,6 +1860,15 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "(mở trong cửa sổ mới)";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Các liên kết việc làm phù hợp sẽ xuất hiện bên dưới khi bạn nhập.";
+    var labelSearchKeywordFoundMsg = "{count} Đã tìm thấy các liên kết việc làm phù hợp.";
+    var labelSearchKeywordNotFoundMsg = "Không tìm thấy liên kết việc làm phù hợp.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "Khi kết quả tự động hoàn thành hiển thị, hãy sử dụng các phím mũi tên lên và xuống để xem lại và nhấn Enter để chọn. Người dùng thiết bị cảm ứng có thể khám phá bằng cách chạm hoặc vuốt.";
 } else {
 
     // English (Default)
@@ -1600,4 +1915,13 @@ if(currentPageLanguage === "ar") {
 
     var labelNewWindow = "opens in new window";
 
+    // Search Keyword
+
+    var labelSearchKeywordDesc = "Matching job links will appear below as you type.";
+    var labelSearchKeywordFoundMsg = "{count} matching job links found.";
+    var labelSearchKeywordNotFoundMsg = "No matching job links found.";
+
+    // Autocomplete
+
+    var labelAutoCompleteDesc = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
 }

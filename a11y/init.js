@@ -945,7 +945,7 @@ function fixKeywordSearch() {
       var autoCompleteMessage = document.createElement("span");
       autoCompleteMessage.setAttribute("id", "autocomplete-message-" + inputId);
       autoCompleteMessage.setAttribute("hidden", "");
-      autoCompleteMessage.textContent = "Matching job links will appear below as you type.";
+      autoCompleteMessage.textContent = labelSearchKeywordDesc;
       input.parentNode.appendChild(autoCompleteMessage);
 
     }
@@ -1009,7 +1009,7 @@ function fixKeywordSearch() {
 
         var resultCount = popup.querySelectorAll("li").length;
 
-        ariaMsg.textContent = resultCount > 0 ? resultCount + " matching job links found." : "No matching job links found.";
+        ariaMsg.textContent = resultCount > 0 ? formatMessage(labelSearchKeywordFoundMsg, { count: resultCount }) : labelSearchKeywordNotFoundMsg;
 
       }, 500);
 
@@ -1063,7 +1063,7 @@ function fixMindReaderInput() {
       var autoCompleteMessage = document.createElement("span");
       autoCompleteMessage.setAttribute("id", "autocomplete-message-" + inputId);
       autoCompleteMessage.setAttribute("hidden", "");
-      autoCompleteMessage.textContent = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
+      autoCompleteMessage.textContent = labelAutoCompleteDesc;
       input.parentNode.appendChild(autoCompleteMessage);
 
     }
