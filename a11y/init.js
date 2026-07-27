@@ -967,27 +967,24 @@ function fixKeywordSearch() {
 
     }
 
-    // Fix: Turn each results section into a labelled region, and remove the bogus aria-expanded
+    // Fix: Turn the popup into a labelled region, and remove the bogus aria-expanded
     // from its heading (it's a static label here, not an actual expandable disclosure trigger).
 
-    var popupSections = popup.querySelectorAll(".auto-complete-keyword-popup");
+    var popupContainer = popup.querySelector(".auto-complete-keyword-popup");
+    var popupHeading = popupContainer.querySelector(".expandable-parent");
 
-    popupSections.forEach(function(section) {
+    if (popupHeading) {
 
-      var heading = section.querySelector(".expandable-parent");
+      var headingId = "search-keyword__hdr";
 
-      if (heading) {
+      popupHeading.setAttribute("id", headingId);
+      popupHeading.removeAttribute("aria-expanded");
+      popupHeading.removeAttribute("tabindex");
 
-        heading.setAttribute("id", "search-keyword__hdr");
-        heading.removeAttribute("aria-expanded");
-        heading.removeAttribute("tabindex");
+      popup.setAttribute("role", "region");
+      popup.setAttribute("aria-labelledby", headingId);
 
-      }
-
-      section.setAttribute("role", "region");
-      section.setAttribute("aria-labelledby", "search-keyword__hdr");
-
-    });
+    }
 
     // Fix: Guard against binding more than one observer to the same popup.
 
