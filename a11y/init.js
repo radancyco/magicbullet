@@ -477,6 +477,8 @@ function fixDataForm() {
 
             element.remove();
 
+            console.log("something was removed");
+
           });
 
         }
