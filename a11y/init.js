@@ -970,7 +970,7 @@ function fixKeywordSearch() {
     // Fix: Turn each results section into a labelled region, and remove the bogus aria-expanded
     // from its heading (it's a static label here, not an actual expandable disclosure trigger).
 
-    var popupSections = popup.querySelectorAll(".auto-complete-keyword-popup-section");
+    var popupSections = popup.querySelectorAll(".auto-complete-keyword-popup");
 
     popupSections.forEach(function(section) {
 
