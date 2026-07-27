@@ -72,10 +72,10 @@ loadA11yPatch(languagePackSrc, function(){
 
   // Create a new MutationObserver instance
 
-  // TODO: Instead of having an observer to watch _everything_ in main (#content), consider setting up multiple observers per component.
+  // TODO: Instead of having an observer to watch _everything_ in main (#page), consider setting up multiple observers per component.
   // This might be better and less prone to creating interference on site. Similar to MindReaders seperate observer.
 
-  var targetNode = document.querySelector("#content");
+  var targetNode = document.querySelector("#page");
 
   // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
   
@@ -476,8 +476,6 @@ function fixDataForm() {
           getAriaRequiredSpan.forEach(function(element) {
 
             element.remove();
-
-            console.log("something was removed");
 
           });
 
