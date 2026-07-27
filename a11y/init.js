@@ -920,7 +920,7 @@ function fixIframeElement() {
 
 }
 
-// Accessibility Patch: Keyword Search Combobox
+// Accessibility Patch: Keyword Search Results
 
 function fixKeywordSearch() {
 
@@ -931,11 +931,12 @@ function fixKeywordSearch() {
     // Precompute IDs and frequently used elements
 
     var inputId = input.getAttribute("id");
-    var label = document.querySelector("label[for=" + inputId + "]");
     var popupID = inputId + "-auto-complete-popup";
     var popup = document.getElementById(popupID);
 
-    // Set Autocomplete Description
+    if (!popup) return;
+
+    // Fix: Let the user know that matching job links will appear below as they type.
 
     var autoCompleteID = document.getElementById("autocomplete-message-" + inputId);
 
@@ -944,30 +945,12 @@ function fixKeywordSearch() {
       var autoCompleteMessage = document.createElement("span");
       autoCompleteMessage.setAttribute("id", "autocomplete-message-" + inputId);
       autoCompleteMessage.setAttribute("hidden", "");
-      autoCompleteMessage.textContent = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
+      autoCompleteMessage.textContent = "Matching job links will appear below as you type.";
       input.parentNode.appendChild(autoCompleteMessage);
 
     }
 
-    // Fix: Set unique ID on label
-
-    if (label) {
-
-      label.setAttribute("id", inputId + "-label");
-
-    }
-
-    // Fix: Prep Combobox with proper ARIA
-
-    input.setAttribute("aria-autocomplete", "list");
-    input.setAttribute("aria-haspopup", "listbox");
-    input.setAttribute("aria-expanded", "false");
-    input.setAttribute("autocomplete", "off");
-    input.setAttribute("role", "combobox");
-    input.setAttribute("aria-controls", popupID);
-
     var currentDescribedBy = input.getAttribute("aria-describedby");
-
     var newDescriptionId = "autocomplete-message-" + inputId;
 
     if (currentDescribedBy) {
@@ -984,144 +967,33 @@ function fixKeywordSearch() {
 
     }
 
-    // Fix: Add listbox/option roles to the popup and its results
+    // Fix: Guard against binding more than one observer to the same popup.
 
-    if (popup) {
+    if (popup.dataset.a11yKeywordObserverBound === "1") return;
 
-      popup.setAttribute("role", "listbox");
+    popup.dataset.a11yKeywordObserverBound = "1";
 
-      var options = popup.querySelectorAll("li");
+    // Fix: Announce the result count via the shared live region whenever the results change.
 
-      options.forEach(function(option, index) {
+    var keywordObserver = new MutationObserver(function() {
 
-        if (!option.hasAttribute("id")) {
+      clearTimeout(keywordObserver.timeout);
 
-          option.setAttribute("id", inputId + "-option-" + index);
+      keywordObserver.timeout = setTimeout(function() {
 
-        }
+        var ariaMsg = document.querySelector("#magicbullet-message");
 
-        option.setAttribute("role", "option");
+        if (!ariaMsg) return;
 
-      });
+        var resultCount = popup.querySelectorAll("li").length;
 
-    }
+        ariaMsg.textContent = resultCount > 0 ? resultCount + " matching job links found." : "No matching job links found.";
 
-    // Fix: Get current options fresh, since results reload as the user types
-
-    var activeIndex = -1;
-
-    function getOptions() {
-
-      return popup ? Array.from(popup.querySelectorAll("li")) : [];
-
-    }
-
-    // Fix: Highlight a single option by index, clearing any previous highlight
-
-    function setActiveOption(index) {
-
-      var options = getOptions();
-
-      options.forEach(function(option) {
-
-        option.classList.remove("active");
-        option.removeAttribute("aria-selected");
-
-      });
-
-      activeIndex = index;
-
-      if (index < 0 || index >= options.length) {
-
-        input.removeAttribute("aria-activedescendant");
-
-        return;
-
-      }
-
-      var option = options[index];
-
-      option.classList.add("active");
-      option.setAttribute("aria-selected", "true");
-      option.scrollIntoView({ block: "nearest" });
-
-      input.setAttribute("aria-activedescendant", option.getAttribute("id"));
-
-    }
-
-    // Fix: Update input as needed based on whether the popup currently has results
-
-    function checkInput() {
-
-      if (popup && popup.children.length > 0) {
-
-        input.setAttribute("aria-expanded", "true");
-
-      } else {
-
-        input.setAttribute("aria-expanded", "false");
-        setActiveOption(-1);
-
-      }
-
-    }
-
-    checkInput();
-
-    // Fix: Reset the highlighted option whenever the results change
-
-    input.addEventListener("input", function() {
-
-      setActiveOption(-1);
+      }, 500);
 
     });
 
-    // Fix: Arrow keys move the highlight, Enter selects the highlighted result
-
-    input.addEventListener("keydown", function(event) {
-
-      var options = getOptions();
-
-      if (!options.length) return;
-
-      if (event.key === "ArrowDown") {
-
-        event.preventDefault();
-        setActiveOption((activeIndex + 1) % options.length);
-
-      } else if (event.key === "ArrowUp") {
-
-        event.preventDefault();
-        setActiveOption((activeIndex - 1 + options.length) % options.length);
-
-      } else if (event.key === "Enter" && activeIndex > -1) {
-
-        event.preventDefault();
-        options[activeIndex].querySelector("a").click();
-
-      }
-
-    });
-
-    // Fix: Update input as needed when focus leaves the field
-
-    input.addEventListener("focusout", function() {
-
-      checkInput();
-
-    });
-
-    // Fix: Update input as needed when Escape is pressed
-
-    input.addEventListener("keydown", function(event) {
-
-      if (event.key === "Escape") {
-
-        checkInput();
-
-      }
-
-    });
+    keywordObserver.observe(popup, { childList: true, subtree: true });
 
   });
 
