@@ -980,6 +980,7 @@ function fixKeywordSearch() {
 
         heading.setAttribute("id", "search-keyword__hdr");
         heading.removeAttribute("aria-expanded");
+        heading.removeAttribute("tabindex");
 
       }
 
