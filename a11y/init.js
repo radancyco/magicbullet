@@ -72,13 +72,13 @@ loadA11yPatch(languagePackSrc, function(){
 
   // Create a new MutationObserver instance
 
-  // TODO: Instead of having an observer to watch _everything_ in main (#page), consider setting up multiple observers per component.
-  // This might be better and less prone to creating interference on site. Similar to MindReaders seperate observer.
+  // TODO: This one observer re-runs every fix via initDynamicPatch() on any mutation anywhere on the page,
+  // so a change in one component re-triggers fixes for components that never changed at all. Eventually each
+  // fix should own its own independent observer scoped to just what it needs to watch, rather than being
+  // called from this shared dispatcher. Similar to MindReader's separate observer below.
 
   var targetNode = document.querySelector("#page");
 
-  // TODO: Rather than observe everything in main, only observe certain components on page that may be impacted. 
-  
   var config = { childList: true, subtree: true };
   
   var a11yObserver = new MutationObserver(function(mutationsList) {
@@ -153,6 +153,7 @@ function initDynamicPatch() {
   fixDataForm();
   fixGlobalDisclosure();
   fixIframeElement();
+  fixKeywordSearch();
   fixInputElements();
   fixMindReaderInput();
   fixSaveJobButton();
@@ -918,6 +919,161 @@ function fixIframeElement() {
   });
 
 }
+
+// Accessibility Patch: Keyword Search Combobox
+
+function fixKeywordSearch() {
+
+  var comboBoxInput = document.querySelectorAll(".search-keyword");
+
+  comboBoxInput.forEach(function(input) {
+
+    // Precompute IDs and frequently used elements
+
+    var inputId = input.getAttribute("id");
+    var label = document.querySelector("label[for=" + inputId + "]");
+    var popupID = inputId + "-auto-complete-popup";
+    var popup = document.getElementById(popupID);
+
+    // Set Autocomplete Description
+
+    var autoCompleteID = document.getElementById("autocomplete-message-" + inputId);
+
+    if (!autoCompleteID) {
+
+      var autoCompleteMessage = document.createElement("span");
+      autoCompleteMessage.setAttribute("id", "autocomplete-message-" + inputId);
+      autoCompleteMessage.setAttribute("hidden", "");
+      autoCompleteMessage.textContent = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
+      input.parentNode.appendChild(autoCompleteMessage);
+
+    }
+
+    // Fix: Set unique ID on label
+
+    if (label) {
+
+      label.setAttribute("id", inputId + "-label");
+
+    }
+
+    // Fix: Prep Combobox with proper ARIA
+
+    input.setAttribute("aria-autocomplete", "list");
+    input.setAttribute("aria-haspopup", "listbox");
+    input.setAttribute("aria-expanded", "false");
+    input.setAttribute("autocomplete", "off");
+    input.setAttribute("role", "combobox");
+    input.setAttribute("aria-controls", popupID);
+
+    var currentDescribedBy = input.getAttribute("aria-describedby");
+
+    var newDescriptionId = "autocomplete-message-" + inputId;
+
+    if (currentDescribedBy) {
+
+      if (!currentDescribedBy.includes(newDescriptionId)) {
+
+        input.setAttribute("aria-describedby", currentDescribedBy + " " + newDescriptionId);
+
+      }
+
+    } else {
+
+      input.setAttribute("aria-describedby", newDescriptionId);
+
+    }
+
+    // Fix: Add listbox/option roles to the popup and its results
+
+    if (popup) {
+
+      popup.setAttribute("role", "listbox");
+
+      var options = popup.querySelectorAll("li");
+
+      options.forEach(function(option, index) {
+
+        if (!option.hasAttribute("id")) {
+
+          option.setAttribute("id", inputId + "-option-" + index);
+
+        }
+
+        option.setAttribute("role", "option");
+
+      });
+
+    }
+
+    // Fix: Update input as needed based on whether the popup currently has results
+
+    function checkInput() {
+
+      if (popup && popup.children.length > 0) {
+
+        input.setAttribute("aria-expanded", "true");
+
+      } else {
+
+        input.setAttribute("aria-expanded", "false");
+        input.removeAttribute("aria-activedescendant");
+
+      }
+
+    }
+
+    checkInput();
+
+    // Function to check the active item in the popup
+
+    function checkActiveClass() {
+
+      if (popup) {
+
+        var activeItem = popup.querySelector("a.active");
+
+        if (activeItem) {
+
+          var listID = activeItem.parentElement.getAttribute("id");
+
+          input.setAttribute("aria-activedescendant", listID);
+
+        }
+
+      }
+
+    }
+
+    // Add event listener for when focus leaves the input field (focusout)
+
+    input.addEventListener("focusout", function() {
+
+      checkInput();
+
+    });
+
+    // Add event listener for when Escape key is pressed
+
+    input.addEventListener("keydown", function(event) {
+
+      if (event.key === "Escape") {
+
+        checkInput();
+
+      }
+
+    });
+
+    // Listen for both keydown and keyup events
+
+    document.addEventListener("keydown", checkActiveClass);
+    document.addEventListener("keyup", checkActiveClass);
+
+  });
+
+}
+
 
 // Accessibility Patch: Input Elements (Utility)
 
