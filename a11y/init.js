@@ -1006,6 +1006,49 @@ function fixKeywordSearch() {
 
     }
 
+    // Fix: Get current options fresh, since results reload as the user types
+
+    var activeIndex = -1;
+
+    function getOptions() {
+
+      return popup ? Array.from(popup.querySelectorAll("li")) : [];
+
+    }
+
+    // Fix: Highlight a single option by index, clearing any previous highlight
+
+    function setActiveOption(index) {
+
+      var options = getOptions();
+
+      options.forEach(function(option) {
+
+        option.classList.remove("active");
+        option.removeAttribute("aria-selected");
+
+      });
+
+      activeIndex = index;
+
+      if (index < 0 || index >= options.length) {
+
+        input.removeAttribute("aria-activedescendant");
+
+        return;
+
+      }
+
+      var option = options[index];
+
+      option.classList.add("active");
+      option.setAttribute("aria-selected", "true");
+      option.scrollIntoView({ block: "nearest" });
+
+      input.setAttribute("aria-activedescendant", option.getAttribute("id"));
+
+    }
+
     // Fix: Update input as needed based on whether the popup currently has results
 
     function checkInput() {
@@ -1017,7 +1060,7 @@ function fixKeywordSearch() {
       } else {
 
         input.setAttribute("aria-expanded", "false");
-        input.removeAttribute("aria-activedescendant");
+        setActiveOption(-1);
 
       }
 
@@ -1025,27 +1068,42 @@ function fixKeywordSearch() {
 
     checkInput();
 
-    // Function to check the active item in the popup
+    // Fix: Reset the highlighted option whenever the results change
 
-    function checkActiveClass() {
+    input.addEventListener("input", function() {
 
-      if (popup) {
+      setActiveOption(-1);
 
-        var activeItem = popup.querySelector("a.active");
+    });
 
-        if (activeItem) {
+    // Fix: Arrow keys move the highlight, Enter selects the highlighted result
 
-          var listID = activeItem.parentElement.getAttribute("id");
+    input.addEventListener("keydown", function(event) {
 
-          input.setAttribute("aria-activedescendant", listID);
+      var options = getOptions();
 
-        }
+      if (!options.length) return;
+
+      if (event.key === "ArrowDown") {
+
+        event.preventDefault();
+        setActiveOption((activeIndex + 1) % options.length);
+
+      } else if (event.key === "ArrowUp") {
+
+        event.preventDefault();
+        setActiveOption((activeIndex - 1 + options.length) % options.length);
+
+      } else if (event.key === "Enter" && activeIndex > -1) {
+
+        event.preventDefault();
+        options[activeIndex].querySelector("a").click();
 
       }
 
-    }
+    });
 
-    // Add event listener for when focus leaves the input field (focusout)
+    // Fix: Update input as needed when focus leaves the field
 
     input.addEventListener("focusout", function() {
 
@@ -1053,7 +1111,7 @@ function fixKeywordSearch() {
 
     });
 
-    // Add event listener for when Escape key is pressed
+    // Fix: Update input as needed when Escape is pressed
 
     input.addEventListener("keydown", function(event) {
 
@@ -1064,11 +1122,6 @@ function fixKeywordSearch() {
       }
 
     });
-
-    // Listen for both keydown and keyup events
-
-    document.addEventListener("keydown", checkActiveClass);
-    document.addEventListener("keyup", checkActiveClass);
 
   });
 
