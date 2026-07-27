@@ -452,7 +452,7 @@ function fixDataForm() {
 
       if(getRequiredIcon === null) {
 
-        // HACK: This check ensures that the asterisk is only added to labels that are actually require it. 
+        // HACK: This check ensures that the asterisk is only added to labels that actually require it. 
         // Currently, the required class is applied to the fieldset itself, causing an asterisk to be added 
         // to all labels within the keyword area section, even when the associated field is not required.
 
@@ -465,6 +465,7 @@ function fixDataForm() {
       }
 
       // Fix: Remove asterick from Job Category and Location whenever "Add" keyowrd button is pressed. 
+      // TODO: Revist all asterick logic eventually to see if we need to remove it on all labels when each filed is valid. 
 
       keywordSelected.forEach(function(region) {
 
@@ -938,7 +939,7 @@ function fixInputElements() {
 
 function fixMindReaderInput() {
 
-  var comboBoxInput = document.querySelectorAll(".search-location, .keyword-location");
+  var comboBoxInput = document.querySelectorAll(".search-location, .keyword-category, .keyword-location");
 
   comboBoxInput.forEach(function(input) {
 
