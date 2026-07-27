@@ -998,6 +998,17 @@ function fixKeywordSearch() {
 
     popup.dataset.a11yKeywordObserverBound = "1";
 
+    // Fix: Always return focus to the input when Escape is pressed, even if focus had moved onto
+    // a result link inside the popup (the keydown bubbles up from the link to popup either way).
+
+    popup.addEventListener("keydown", function(event) {
+
+      if (event.key !== "Escape") return;
+
+      input.focus();
+
+    });
+
     // Fix: Re-apply the heading/region labelling immediately on every popup mutation (rather than
     // waiting on the page-wide debounced patch cycle), and announce the result count via the shared
     // live region whenever the results change.
