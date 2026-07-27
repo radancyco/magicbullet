@@ -969,10 +969,15 @@ function fixKeywordSearch() {
 
     // Fix: Turn the popup into a labelled region, and remove the bogus aria-expanded
     // from its heading (it's a static label here, not an actual expandable disclosure trigger).
+    // Pulled into its own function because the site's autocomplete script re-renders the popup's
+    // markup (wiping these attributes) on every keystroke, so this needs to re-run on every
+    // mutation via keywordObserver below, not just once here.
 
-    var popupHeading = popup.querySelector(".expandable-parent");
+    function applyKeywordPopupLabel() {
 
-    if (popupHeading) {
+      var popupHeading = popup.querySelector(".expandable-parent");
+
+      if (!popupHeading) return;
 
       var headingId = popupID + "__hdr";
 
@@ -985,15 +990,21 @@ function fixKeywordSearch() {
 
     }
 
+    applyKeywordPopupLabel();
+
     // Fix: Guard against binding more than one observer to the same popup.
 
     if (popup.dataset.a11yKeywordObserverBound === "1") return;
 
     popup.dataset.a11yKeywordObserverBound = "1";
 
-    // Fix: Announce the result count via the shared live region whenever the results change.
+    // Fix: Re-apply the heading/region labelling immediately on every popup mutation (rather than
+    // waiting on the page-wide debounced patch cycle), and announce the result count via the shared
+    // live region whenever the results change.
 
     var keywordObserver = new MutationObserver(function() {
+
+      applyKeywordPopupLabel();
 
       clearTimeout(keywordObserver.timeout);
 
