@@ -970,12 +970,11 @@ function fixKeywordSearch() {
     // Fix: Turn the popup into a labelled region, and remove the bogus aria-expanded
     // from its heading (it's a static label here, not an actual expandable disclosure trigger).
 
-    var popupContainer = popup.querySelector(".auto-complete-keyword-popup");
-    var popupHeading = popupContainer.querySelector(".expandable-parent");
+    var popupHeading = popup.querySelector(".expandable-parent");
 
     if (popupHeading) {
 
-      var headingId = "search-keyword__hdr";
+      var headingId = popupID + "__hdr";
 
       popupHeading.setAttribute("id", headingId);
       popupHeading.removeAttribute("aria-expanded");
