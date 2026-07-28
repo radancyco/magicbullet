@@ -968,25 +968,35 @@ function fixKeywordSearch() {
     }
 
     // Fix: Turn the popup into a labelled region, and remove the bogus aria-expanded
-    // from its heading (it's a static label here, not an actual expandable disclosure trigger).
+    // from each heading (they're static labels here, not actual expandable disclosure triggers).
+    // The popup can contain an unknown number of these (one per results grouping), so every
+    // heading gets its own id and all of them are referenced together in aria-labelledby.
     // Pulled into its own function because the site's autocomplete script re-renders the popup's
     // markup (wiping these attributes) on every keystroke, so this needs to re-run on every
     // mutation via keywordObserver below, not just once here.
 
     function applyKeywordPopupLabel() {
 
-      var popupHeading = popup.querySelector(".expandable-parent");
+      var popupHeadings = popup.querySelectorAll(".expandable-parent");
 
-      if (!popupHeading) return;
+      if (!popupHeadings.length) return;
 
-      var headingId = popupID + "__hdr";
+      var headingIds = "";
 
-      popupHeading.setAttribute("id", headingId);
-      popupHeading.removeAttribute("aria-expanded");
-      popupHeading.removeAttribute("tabindex");
+      popupHeadings.forEach(function(popupHeading, index) {
+
+        var headingId = popupID + "__hdr-" + index;
+
+        popupHeading.setAttribute("id", headingId);
+        popupHeading.removeAttribute("aria-expanded");
+        popupHeading.removeAttribute("tabindex");
+
+        headingIds += (headingIds ? " " : "") + headingId;
+
+      });
 
       popup.setAttribute("role", "region");
-      popup.setAttribute("aria-labelledby", headingId);
+      popup.setAttribute("aria-labelledby", headingIds);
 
     }
 
