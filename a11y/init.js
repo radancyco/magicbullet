@@ -1897,6 +1897,38 @@ function fixSearchSort() {
 
   sortSelect.addEventListener("change", function() {
 
+    // Fix: Re-sorting is an in-place data refresh, not a navigation. The site's own script
+    // runs a jQuery .animate({scrollTop}) once the reorder completes, visibly relocating the
+    // user down the page. Cancel that animation the instant it starts (via jQuery's own .stop,
+    // rather than fighting it) and snap back to where they were.
+
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
+    const cancelUnwantedScroll = function() {
+
+      if (window.scrollX === scrollX && window.scrollY === scrollY) return;
+
+      window.removeEventListener("scroll", cancelUnwantedScroll);
+
+      if (window.jQuery) {
+
+        window.jQuery("html, body").stop(true, false);
+
+      }
+
+      window.scrollTo(scrollX, scrollY);
+
+    };
+
+    window.addEventListener("scroll", cancelUnwantedScroll, { passive: true });
+
+    setTimeout(function() {
+
+      window.removeEventListener("scroll", cancelUnwantedScroll);
+
+    }, 3000); // Safety net in case the site's scroll animation never happens.
+
     const ariaMsg = document.querySelector("#magicbullet-message");
 
     if (!ariaMsg) return;
