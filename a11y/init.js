@@ -142,6 +142,44 @@ function formatMessage(template, values) {
 
 }
 
+// Accessibility Patch: Preserve Scroll Position (Utility)
+// Desc: Some site scripts run a jQuery .animate({scrollTop}) after an in-place data refresh
+// (sort, filter, pagination, etc.), visibly relocating the user even though nothing navigated.
+// Call this right before triggering that refresh (e.g. at the top of a "change"/"click" handler)
+// to snap back to the current scroll position the instant such a scroll starts, cancelling the
+// site's animation via jQuery's own .stop() rather than fighting it frame by frame.
+
+function preserveScrollPosition(timeoutMs) {
+
+  const scrollX = window.scrollX;
+  const scrollY = window.scrollY;
+
+  const cancelUnwantedScroll = function() {
+
+    if (window.scrollX === scrollX && window.scrollY === scrollY) return;
+
+    window.removeEventListener("scroll", cancelUnwantedScroll);
+
+    if (window.jQuery) {
+
+      window.jQuery("html, body").stop(true, false);
+
+    }
+
+    window.scrollTo(scrollX, scrollY);
+
+  };
+
+  window.addEventListener("scroll", cancelUnwantedScroll, { passive: true });
+
+  setTimeout(function() {
+
+    window.removeEventListener("scroll", cancelUnwantedScroll);
+
+  }, timeoutMs || 3000); // Safety net in case the expected scroll never happens.
+
+}
+
 // Accessibility Patch: Dynamic
 // Desc: These fixes address issues that occur both on page load and during dynamic DOM changes.
 // For instance, a script might add a new node to the DOM or refresh content on the page. When this happens, each fix will be reapplied to DOM.
@@ -1899,35 +1937,9 @@ function fixSearchSort() {
 
     // Fix: Re-sorting is an in-place data refresh, not a navigation. The site's own script
     // runs a jQuery .animate({scrollTop}) once the reorder completes, visibly relocating the
-    // user down the page. Cancel that animation the instant it starts (via jQuery's own .stop,
-    // rather than fighting it) and snap back to where they were.
+    // user down the page.
 
-    const scrollX = window.scrollX;
-    const scrollY = window.scrollY;
-
-    const cancelUnwantedScroll = function() {
-
-      if (window.scrollX === scrollX && window.scrollY === scrollY) return;
-
-      window.removeEventListener("scroll", cancelUnwantedScroll);
-
-      if (window.jQuery) {
-
-        window.jQuery("html, body").stop(true, false);
-
-      }
-
-      window.scrollTo(scrollX, scrollY);
-
-    };
-
-    window.addEventListener("scroll", cancelUnwantedScroll, { passive: true });
-
-    setTimeout(function() {
-
-      window.removeEventListener("scroll", cancelUnwantedScroll);
-
-    }, 3000); // Safety net in case the site's scroll animation never happens.
+    preserveScrollPosition();
 
     const ariaMsg = document.querySelector("#magicbullet-message");
 
