@@ -324,7 +324,7 @@ width: auto !important;
 
 /* Fix: The AJD Header should nto be "sticky" under certain condisitons as this impacts Reflow, Resize, etc. */
 
-@media (max-height: 420px) {
+@media (max-height: 455px) {
 
   #ajd-header {
   position: relative !important;
