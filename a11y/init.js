@@ -968,6 +968,11 @@ function fixKeywordSearch() {
 
   comboBoxInput.forEach(function(input) {
 
+    // Fix: On the keyword input, change type from "search" to "text". Due to the native "X" beign weird cross-browser. 
+    // Gret read here: https://adrianroselli.com/2019/07/ignore-typesearch.html
+
+    input.setAttribute("type", "text");
+
     // Precompute IDs and frequently used elements
 
     var inputId = input.getAttribute("id");
