@@ -7,18 +7,6 @@
 
 */
 
-/* TODO */
-
-/* 
-
-  Consider adding pseudo generated alt text to all links on site that open in new windows, may need to remove visually hidden JS inserted content 
-
-  Example: content: "\f35d" / "(opens in new window)";
-
-*/
-
-/* Global Issues */
-
 /* Visually Hidde Content */
 
 .magicbullet-visually-hidden:not(:focus):not(:active) {
@@ -54,8 +42,16 @@ h1, h2, h3, h4, h5, h6, label, a {
 
 /* Access Link - Ensure accesslink always has _highest_ index. */
 
-.access-link {
+a.access-link {
+outline-color: revert !important;
+outline-offset: 4px !important;
+top: 8px !important;
 z-index: 2147483647 !important;
+
+  &:focus {
+  left: 8px !important;
+  }
+
 }
 
 /* Search Location Datalist */
