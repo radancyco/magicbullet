@@ -322,9 +322,9 @@ width: auto !important;
 
 }
 
-/* Fix: The AJD Header should nto be "sticky" under certain condisitons as this impacts Reflow, Resize, etc. */
+/* Fix: The AJD header should not be "sticky" under certain conditions as this impacts Reflow, Resize, Focus Obscured, etc. */
 
-@media (max-height: 600px) {
+@media (height <= 600px) {
 
   #ajd-header {
   position: relative !important;
