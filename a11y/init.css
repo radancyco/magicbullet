@@ -311,8 +311,8 @@ opacity: 1;
 .pagination-current {
 max-inline-size: fit-content !important;
 appearance: auto !important;
--moz-appearance: auto !important;
 width: auto !important;
+-moz-appearance: auto !important;
 
   &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
 
