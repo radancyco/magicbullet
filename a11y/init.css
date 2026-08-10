@@ -19,13 +19,6 @@ white-space: nowrap;
 width: 1px;
 }
 
-
-/* Global: Focus Outline Override in Normalize */
-
-*:focus-visible {
-outline: 2px solid black;
-}
-
 /* Ensure that all placeholder text is contrast friendly. */
 
 ::-moz-placeholder {
