@@ -30,6 +30,17 @@ opacity: 1;
 color: currentColor;
 }
 
+/* 
+
+Create default outline for FireFox. 
+This override the rest and normalize CSS and is not a permanent solution, but better than what we have now. 
+See https://github.com/radancy-pe/uid-base-gst/issues/155
+*/
+
+button:-moz-focusring {
+outline-style: auto !important;
+}
+
 /* Hide Empty Elements */
 
 h1, h2, h3, h4, h5, h6, label {
