@@ -526,6 +526,32 @@ function fixDataForm() {
 
     });
 
+    // Fix: Remove placeholder text from text inputs when it duplicates the associated label. Redundant placeholders offer no additional value and can be confusing to AT users when the label and placeholder are announced back to back.
+
+    var textInputsWithPlaceholder = form.querySelectorAll(".form-field input[type='text'][placeholder]");
+
+    textInputsWithPlaceholder.forEach(function(input) {
+
+      var label = input.closest(".form-field")?.querySelector("label");
+
+      if (!label) return;
+
+      var labelClone = label.cloneNode(true);
+      var requiredIcon = labelClone.querySelector(iconClass);
+
+      if (requiredIcon) requiredIcon.remove();
+
+      var labelText = labelClone.textContent.trim().toLowerCase();
+      var placeholderText = input.getAttribute("placeholder").trim().toLowerCase();
+
+      if (labelText === placeholderText) {
+
+        input.removeAttribute("placeholder");
+
+      }
+
+    });
+
     // Fix: Remove "role" from field-validation-error (it's not needed).
 
     validationMsg.forEach(function(element) {
