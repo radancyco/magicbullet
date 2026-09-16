@@ -2111,6 +2111,16 @@ function fixSearchPagination() {
     paginationNextPrev.forEach((btn) => {
 
       btn.setAttribute("role", "button");
+      btn.addEventListener("keydown", (e) => {
+
+        if (e.key === " " || e.key === "Spacebar") {
+
+          e.preventDefault();
+          btn.click();
+
+        }
+
+      });
 
     });
 
