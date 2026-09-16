@@ -194,6 +194,7 @@ function initDynamicPatch() {
   fixKeywordSearch();
   fixInputElements();
   fixMindReaderInput();
+  fixPrivacyNotice();
   fixSaveJobButton();
   fixSearchFilters();
   fixSearchResults();
@@ -430,6 +431,7 @@ function fixDataForm() {
     var formMessageButton = form.querySelector(".form-field.form-message a");
     var keyWordCategory = form.querySelector(".keyword-category");
     var addJobAlertFieldset = form.querySelector("fieldset");
+    var textInputsWithPlaceholder = form.querySelectorAll(".form-field input[type='text'][placeholder]");
 
     // Clean-up: Remove empty instruction-text spans as they can sometimes cause undesired spacing issues.
 
@@ -527,8 +529,6 @@ function fixDataForm() {
     });
 
     // Fix: Remove placeholder text from text inputs when it duplicates the associated label. Redundant placeholders offer no additional value and can be confusing to AT users when the label and placeholder are announced back to back.
-
-    var textInputsWithPlaceholder = form.querySelectorAll(".form-field input[type='text'][placeholder]");
 
     textInputsWithPlaceholder.forEach(function(input) {
 
@@ -2147,5 +2147,32 @@ function fixSocialShare() {
     // NICE TO HAVE: We don't really need the rel attribute anymore. Ask prodcut to eventually remove it.
 
   });
+
+}
+
+// Accessibility Patch: Mindreader Combobox
+
+//<div id="system-imessage" role="dialog" aria-label="Important System Message" aria-modal="true">
+
+//<button id="system-ialert-close-button">X</button>
+
+//<button id="system-ialert-button">Accepter</button>
+//<button id="system-ialert-reject-button">Refuser</button>
+//<button id="system-ialert-manage-button">Gestion des préférences</button>
+
+//</div>
+
+function fixPrivacyNotice() {
+
+  const privacyNotice = document.querySelector("#system-imessage");
+
+  if (!privacyNotice) return;
+
+  // Fix: The Privacy Notice Button is missing an accName, so let's add it. 
+
+  let privacyNoticeClose = privacyNotice.querySelector("#system-ialert-close-button");
+
+  privacyNoticeClose.setAttribute("aria-label", "Close");
+
 
 }
