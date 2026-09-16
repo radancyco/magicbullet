@@ -67,6 +67,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "عند توفر نتائج الإكمال التلقائي، استخدم أسهم الأعلى والأسفل للمراجعة، ثم اضغط على زر الإدخال للاختيار. لمستخدمي الأجهزة التي تعمل باللمس، استكشفوا عبر اللمس أو باستخدام إيماءات التمرير.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "يغلق";
+
 } else if (currentPageLanguage === "bg") {
 
     // Remove Job Filter
@@ -120,6 +125,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Когато са налични резултати от автоматично довършване, използвайте стрелките нагоре и надолу за преглед и Enter за избор. Потребителите на устройства с докосване могат да изследват чрез докосване или с плъзгане.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Затвори";
+
 } else if (currentPageLanguage === "zh-Hans") {
 
     // Remove Job Filter
@@ -173,6 +183,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "当有自动完成结果时，请使用上下箭头键查看，然后按回车键选择。触控设备用户，请使用触控或滑动操作进行浏览。";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "关闭";
+
 } else if (currentPageLanguage === "zh-Hant") {
 
     // Remove Job Filter
@@ -226,6 +241,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "當有自動完成結果時，請使用上下箭頭鍵查看，然後按回車鍵選擇。觸控設備用戶，請使用觸控或滑動操作進行瀏覽。";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "關閉";
+
 } else if (currentPageLanguage === "hr") {
 
     // Remove Job Filter
@@ -279,6 +299,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Kada su dostupni rezultati automatskog dovršavanja, koristite strelice gore i dolje za pregled i Enter za odabir. Korisnici dodirnih uređaja istražuju dodirom ili pokretima prsta.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Zatvoriti";
+
 } else if (currentPageLanguage === "cs") {
 
     // Remove Job Filter
@@ -332,6 +357,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Pokud jsou k dispozici výsledky automatického doplňování, použijte šipky nahoru a dolů k prohlédnutí a klávesu Enter k výběru. Uživatelé dotykových zařízení mohou prozkoumávat výsledky dotykem nebo přejetím prstem.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Blízko";
+
 } else if (currentPageLanguage === "da") {
 
     // Remove Job Filter
@@ -385,6 +415,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Når autofuldførelsesresultater er tilgængelige, skal du bruge pil op og pil ned til at gennemgå og Enter for at vælge. Brugere af berøringsenheder kan udforske ved at trykke eller med swipe-bevægelser.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Tæt";
+
 } else if (currentPageLanguage === "nl") {
 
     // Remove Job Filter
@@ -438,6 +473,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Gebruik de pijltoetsen omhoog en omlaag om de resultaten te bekijken en druk op Enter om een ​​keuze te maken wanneer er automatisch aanvullende resultaten beschikbaar zijn. Gebruikers van touchscreens kunnen de resultaten verkennen door te tikken of te vegen.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Dichtbij";
+
 } else if (currentPageLanguage === "en-GB") {
 
     // Remove Job Filter
@@ -491,6 +531,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Close";
+
 } else if (currentPageLanguage === "et") {
 
     // Remove Job Filter
@@ -544,6 +589,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Kui automaatse täitmise tulemused on saadaval, kasutage ülevaatamiseks üles- ja allanooli ning valimiseks sisestusklahvi. Puudutage seadme kasutajaid, uurige puudutuse või pühkimisliigutuste abil.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Sule";
+
 } else if (currentPageLanguage === "fi") {
 
     // Remove Job Filter
@@ -597,6 +647,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Kun automaattisen täydennyksen tulokset ovat saatavilla, tarkista ne ylä- ja alanuolilla ja valitse Enter-näppäimellä. Kosketa laitteen käyttäjiä, tutki koskettamalla tai pyyhkäisemällä.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Lähellä";
+
 } else if (currentPageLanguage === "fr") {
 
     // Remove Job Filter
@@ -650,6 +705,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Lorsque des suggestions de saisie semi-automatique sont disponibles, utilisez les flèches haut et bas pour les parcourir et appuyez sur Entrée pour sélectionner. Sur les appareils tactiles, explorez les options par le toucher ou par glissement.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Fermer";
+
 } else if (currentPageLanguage === "de") {
 
     // Remove Job Filter
@@ -703,6 +763,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Wenn Autovervollständigungsvorschläge verfügbar sind, können Sie diese mit den Pfeiltasten nach oben und unten durchsuchen und mit der Eingabetaste auswählen. Nutzer von Touchscreen-Geräten können die Vorschläge per Berührung oder Wischgesten erkunden.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Schließen";
+
 } else if (currentPageLanguage === "he") {
 
     // Remove Job Filter
@@ -756,6 +821,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "כאשר תוצאות השלמה אוטומטית זמינות, השתמש בחצים למעלה ולמטה כדי לסקור ו-Enter כדי לבחור. משתמשי מכשירים יכולים לגלות באמצעות מגע או תנועות החלקה.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "לִסְגוֹר";
+
 } else if (currentPageLanguage === "hu") {
 
     // Remove Job Filter
@@ -809,6 +879,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Amikor az automatikus kiegészítés eredményei elérhetők, a fel és le nyilakat használd az áttekintéshez, és az Enter billentyűt a kiválasztáshoz. Érintős eszközhasználók számára a böngészés érintéssel vagy húzással történik.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Közeli";
+
 } else if (currentPageLanguage === "is") {
 
     // Remove Job Filter
@@ -862,6 +937,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Þegar sjálfvirkar niðurstöður eru tiltækar skaltu nota örvarnar upp og niður til að skoða og færa inn til að velja. Notendur sem nota snertingu geta skoðað tækið með snertingu eða strjúkbendingum.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Loka";
+
 } else if (currentPageLanguage === "it") {
 
     // Remove Job Filter
@@ -915,6 +995,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Quando sono disponibili i risultati del completamento automatico, utilizzare le frecce su e giù per visualizzarli e il tasto Invio per selezionarli. Gli utenti di dispositivi touch possono esplorare i risultati tramite tocco o gesti di scorrimento.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Vicino";
+
 } else if (currentPageLanguage === "ja") {
 
     // Remove Job Filter
@@ -968,6 +1053,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "オートコンプリートの結果が表示されたら、上下矢印キーで確認し、Enterキーで選択します。タッチデバイスをご利用の場合は、タッチ操作またはスワイプ操作で探索してください。";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "近い";
+
 } else if (currentPageLanguage === "ko") {
 
     // Remove Job Filter
@@ -1021,6 +1111,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "자동 완성 결과가 표시되면 위아래 화살표를 사용하여 내용을 검토하고 Enter 키를 눌러 선택하세요. 터치 기기 사용자는 터치 또는 스와이프 제스처를 사용하여 탐색할 수 있습니다.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "닫다";
+
 } else if (currentPageLanguage === "lv") {
 
     // Remove Job Filter
@@ -1074,6 +1169,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Kad ir pieejami automātiskās pabeigšanas rezultāti, izmantojiet augšupvērsto un lejupvērsto bultiņu, lai tos pārskatītu, un taustiņu Enter, lai atlasītu. Pieskarieties ierīču lietotājiem, pārlūkojiet tos ar pieskārienu vai ar vilkšanas žestiem.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Aizvērt";
+
 } else if (currentPageLanguage === "lt") {
 
     // Remove Job Filter
@@ -1127,6 +1227,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Kai pasiekiami automatinio užbaigimo rezultatai, naudokite rodykles aukštyn ir žemyn, kad peržiūrėtumėte, ir „Enter“, kad pasirinktumėte. Palieskite įrenginių naudotojus, naršykite liesdami arba braukimo gestais.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Uždaryti";
+
 } else if (currentPageLanguage === "ms") {
 
     // Remove Job Filter
@@ -1180,6 +1285,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Apabila hasil autolengkap tersedia, gunakan anak panah atas dan bawah untuk menyemak dan masuk untuk memilih. Sentuh pengguna peranti, terokai dengan sentuhan atau dengan gerak isyarat leret.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Tutup";
+
 } else if (currentPageLanguage === "no") {
 
     // Remove Job Filter
@@ -1233,6 +1343,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Når autofullfør-resultater er tilgjengelige, bruk pil opp og pil ned for å se gjennom og Enter for å velge. Brukere av berøringsenheter kan utforske ved å berøre eller sveipe.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Lukke";
+
 } else if (currentPageLanguage === "pl") {
 
     // Remove Job Filter
@@ -1286,6 +1401,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Gdy wyniki autouzupełniania są dostępne, użyj strzałek w górę i w dół, aby je przejrzeć i wybrać Enter. Użytkownicy urządzeń dotykowych mogą przeglądać wyniki dotykiem lub gestami przesuwania.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Zamknąć";
+
 } else if (currentPageLanguage === "pt") {
 
     // Remove Job Filter
@@ -1339,6 +1459,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Quando os resultados de preenchimento automático estiverem disponíveis, use as setas para cima e para baixo para revisar e pressione Enter para selecionar. Usuários de dispositivos com tela sensível ao toque podem explorar tocando na tela ou deslizando o dedo na tela.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Fechar";
+
 } else if (currentPageLanguage === "ro") {
 
     // Remove Job Filter
@@ -1392,6 +1517,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Când rezultatele completării automate sunt disponibile, folosiți săgețile sus și jos pentru a le revizui și Enter pentru a selecta. Utilizatorii dispozitivului pot explora prin atingere sau cu gesturi de glisare.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Aproape";
+
 } else if (currentPageLanguage === "ru") {
 
     // Remove Job Filter
@@ -1445,6 +1575,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "При наличии результатов автозаполнения используйте стрелки вверх и вниз для просмотра и клавишу Enter для выбора. Пользователи сенсорных устройств могут осуществлять поиск с помощью касаний или жестов смахивания.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Закрывать";
+
 } else if (currentPageLanguage === "sr") {
 
     // Remove Job Filter
@@ -1498,6 +1633,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Када су доступни резултати аутоматског довршавања, користите стрелице нагоре и надоле за преглед и ентер за избор. Корисници додирних уређаја могу да истражују додиром или превлачењем.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Затвори";
+
 } else if (currentPageLanguage === "sk") {
 
     // Remove Job Filter
@@ -1551,6 +1691,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Keď sú k dispozícii výsledky automatického dopĺňania, použite na kontrolu šípky nahor a nadol a na výber kláves Enter. Používatelia dotykových zariadení môžu vyhľadávať dotykom alebo gestami potiahnutia prstom.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Zatvoriť";
+
 } else if (currentPageLanguage === "sl") {
 
     // Remove Job Filter
@@ -1604,6 +1749,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Ko so na voljo rezultati samodokončanja, uporabite puščici gor in dol za pregled in enter za izbiro. Uporabniki naprav z dotikom lahko raziskujejo z dotikom ali s gibi vlečenja.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Zapri";
+
 } else if (currentPageLanguage === "es") {
 
     // Remove Job Filter
@@ -1657,6 +1807,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Cuando haya resultados de autocompletar disponibles, use las flechas arriba y abajo para revisarlos y presione Enter para seleccionar. Los usuarios de dispositivos táctiles pueden explorar mediante gestos táctiles o deslizando el dedo.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Cerca";
+
 } else if (currentPageLanguage === "sv") {
 
     // Remove Job Filter
@@ -1710,6 +1865,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "När autoslutföranderesultat är tillgängliga, använd uppåt- och nedåtpilarna för att granska och returnera för att välja. Användare av pekskärmen kan utforska genom att peka eller svepa.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Nära";
+
 } else if (currentPageLanguage === "th") {
 
     // Remove Job Filter
@@ -1763,6 +1923,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "เมื่อมีผลลัพธ์การเติมข้อความอัตโนมัติ ให้ใช้ลูกศรขึ้นและลงเพื่อตรวจสอบ และกด Enter เพื่อเลือก สำหรับผู้ใช้อุปกรณ์ระบบสัมผัส ให้สำรวจโดยการสัมผัสหรือใช้ท่าทางปัดนิ้ว";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "ปิด";
+
 } else if (currentPageLanguage === "uk") {
 
     // Remove Job Filter
@@ -1816,6 +1981,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Коли доступні результати автозаповнення, використовуйте стрілки вгору та вниз для перегляду та Enter для вибору. Користувачі сенсорних пристроїв можуть досліджувати дотиком або жестами пальцем.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Закрити";
+
 } else if (currentPageLanguage === "vi") {
 
     // Remove Job Filter
@@ -1869,6 +2039,11 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "Khi kết quả tự động hoàn thành hiển thị, hãy sử dụng các phím mũi tên lên và xuống để xem lại và nhấn Enter để chọn. Người dùng thiết bị cảm ứng có thể khám phá bằng cách chạm hoặc vuốt.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Đóng";
+
 } else {
 
     // English (Default)
@@ -1924,4 +2099,8 @@ if(currentPageLanguage === "ar") {
     // Autocomplete
 
     var labelAutoCompleteDesc = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
+
+    // Dialog Close Button
+
+    var labelDialogClose = "Close";
 }

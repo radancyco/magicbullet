@@ -2172,7 +2172,7 @@ function fixPrivacyNotice() {
 
   let privacyNoticeClose = privacyNotice.querySelector("#system-ialert-close-button");
 
-  privacyNoticeClose.setAttribute("aria-label", "Close");
+  privacyNoticeClose.setAttribute("aria-label", labelDialogClose);
 
 
 }
