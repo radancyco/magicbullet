@@ -309,7 +309,7 @@ function fixAppliedFilter() {
   appliedFilters.forEach(function(filter){
 
     var appliedFiltersList = filter.querySelectorAll("ul[aria-labelledby]");
-    var btnSearchFilter = filter.querySelectorAll(".filter-button:not([disabled])");
+    var btnSearchFilter = filter.querySelectorAll(".filter-button:not([disabled]), .applied-filters__btn");
 
     // Fix: Remove aria-labeledby from UL
 
