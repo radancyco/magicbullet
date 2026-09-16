@@ -346,5 +346,5 @@ width: auto !important;
 /* Fix: The keyword-region in job alerts is still present to AT users even though it is not populated with content. To fix, simply hiding with CSS, tho I should check to see if i can do this in the JS instead if thise is a section I am dynamically adding to the DOM */
 
 .keyword-region:not(:has(li)) {
-display: none;
+display: none !important;
 }
