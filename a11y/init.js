@@ -2104,6 +2104,16 @@ function fixSearchPagination() {
 
     });
 
+    // Fix: The Next and Previous buttons should really read back as buttons and not links and trigger event with spacebar. 
+
+    const paginationNextPrev = pagination.querySelectorAll(".prev, .next");
+
+    paginationNextPrev.forEach((btn) => {
+
+      btn.setAttribute("role", "button");
+
+    });
+
   });
 
 }
