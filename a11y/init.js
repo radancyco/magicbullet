@@ -1141,7 +1141,7 @@ function fixInputElements() {
 
 function fixMindReaderInput() {
 
-  var comboBoxInput = document.querySelectorAll(".search-location, .keyword-category, .keyword-location");
+  var comboBoxInput = document.querySelectorAll(".search-location, .keyword-category[data-keyword-list], .keyword-location[data-keyword-list]");
 
   comboBoxInput.forEach(function(input) {
 
