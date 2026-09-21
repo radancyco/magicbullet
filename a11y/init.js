@@ -503,6 +503,14 @@ function fixDataForm() {
 
           label.appendChild(span);
 
+          // Fix: Set required on element that do not have them
+
+          if (!label.nextElementSibling.hasAttribute("required")) {
+
+            label.nextElementSibling.setAttribute("required", "");
+
+          }
+
         }
 
       }
@@ -1141,7 +1149,7 @@ function fixInputElements() {
 
 function fixMindReaderInput() {
 
-  var comboBoxInput = document.querySelectorAll("input.search-location, input.keyword-category, input.keyword-location");
+  var comboBoxInput = document.querySelectorAll("input.search-location, input.keyword-category, input.keyword-location, input.keyword-facet");
 
   comboBoxInput.forEach(function(input) {
 
