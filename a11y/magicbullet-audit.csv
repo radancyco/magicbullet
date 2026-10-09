@@ -1022,7 +1022,7 @@ Automated audits flag the unnamed field and the obsolete attribute. This relates
 2. Remove {{frameborder}} from the iframes and set {{border: 0}} in CSS instead.
 3. Make sure the badge comes after the submit button in the tab order.
 
-*MagicBullet:* Currently patched sitewide by {{fixDataForm()}} plus {{init.css}}. The script doesn't yet move the badge after the submit button, despite its comment saying so.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}} plus {{init.css}}. The script intentionally doesn't move the badge, since moving the iframe reloads it and can reset the reCAPTCHA token, so the tab order fix (step 3) needs to happen product-side.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
 "A11YMAGICBULLET0068","2.4.3: Focus Order - Level A","A","Logical order","https://www.w3.org/WAI/WCAG22/Understanding/focus-order","None","","","","None","","","","","Data Form - Form Message Remains in Tab Order","","The confirmation message shown after submitting a data form ({{.form-message b}}) has {{tabindex=""0""}}.
 
 Focus should move to a message only briefly to announce it. With {{tabindex=""0""}}, it stays a permanent tab stop that keyboard users keep landing on. This relates to Success Criterion 2.4.3 (Focus Order).
