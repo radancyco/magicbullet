@@ -1,0 +1,1043 @@
+ID,SC1,Level1,Synopsis1,Understanding1,SC2,Level2,Synopsis2,Understanding2,SC3,Level3,Synopsis3,Understanding3,Links,Summary,Environment,Issue,Testing,Screengrab,Translation?,ProductNote,Labels,Impact,Status,Assignment,Effort,JIRASeverity,Specialist,Implementation,Notes,JIRA,Estimate
+"A11YMAGICBULLET0001","1.1.1: Non-text Content - Level A","A","Provide text alternatives for non-text content","https://www.w3.org/WAI/WCAG22/Understanding/non-text-content","None","","","","None","","","","","Global - Images Missing Alt Attribute","","Images across career sites, most often in delivery templates and CMS-authored content, are frequently output with no {{alt}} attribute at all, or with an {{alt}} containing only whitespace.
+
+When {{alt}} is missing, screen readers fall back to announcing the image's file name or URL, which is noise at best and confusing at worst. A whitespace-only value is treated inconsistently across browser and screen reader pairings and is flagged by automated linters. This fails Success Criterion 1.1.1 (Non-text Content), since every image must either carry a text alternative or be explicitly marked as decorative.
+
+*Recommendation*
+
+1. Make {{alt}} a required field on every image the product and CMS output, so an image can never be published without one.
+2. Default decorative or non-essential images to a null alt ({{alt=""""}}) so assistive technology skips them.
+3. For informative images, require authors to supply meaningful alternative text describing the image's purpose.
+
+*Before*
+
+{code}<img src=""/images/team-photo.jpg"">{code}
+
+*After*
+
+{code}<img src=""/images/team-photo.jpg"" alt="""">{code}
+
+This keeps screen reader output free of file names while ensuring meaningful images can still be described.
+
+*MagicBullet:* Currently patched sitewide by {{fixAltAttribute()}}, which adds {{alt=""""}} to any image missing it or carrying a whitespace-only value. Documented as [A11Y001|https://radancy.dev/magicbullet/a11y/#A11Y001].","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0002","4.1.1: Parsing (Obsolete in WCAG 2.2, Radancy Best Practice) - Level A","A","No major code errors","https://www.w3.org/WAI/WCAG22/Understanding/parsing","Best Practice","BP","The issues does not fail WCAG, but is a well-established and recommended design or usability best practice on the web","https://radancy.dev/component-library/guidance/","None","","","","","Global - Invalid Alt Attribute on Picture Source Element","","The image module outputs an {{alt}} attribute on the {{source}} elements inside {{picture}}. The {{alt}} attribute is not valid on {{source}}; only the fallback {{img}} carries the text alternative for the whole {{picture}} element.
+
+The attribute is ignored by browsers and assistive technology, but it is invalid HTML and is regularly flagged in automated and third-party audits, and it can mislead authors into thinking the image already has a working text alternative. This falls under Success Criterion 4.1.1 (Parsing), which is obsolete in WCAG 2.2 but retained as a Radancy best practice.
+
+*Recommendation*
+
+Remove {{alt}} from every {{source}} element output by the image module and make sure the text alternative lives on the child {{img}} only.
+
+*Before*
+
+{code}<picture>
+
+    <source srcset=""hero.webp"" type=""image/webp"" alt=""Hero"">
+
+    <img src=""hero.jpg"" alt=""Hero"">
+
+</picture>{code}
+
+*After*
+
+{code}<picture>
+
+    <source srcset=""hero.webp"" type=""image/webp"">
+
+    <img src=""hero.jpg"" alt=""Hero"">
+
+</picture>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixAltAttribute()}}, which strips {{alt}} from every {{source}} element.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0003","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","None","","","","","Global - Disclosure State Set on Content Instead of Toggle Button","","Components built on the core {{.expandable-parent}} disclosure pattern (most visibly the Search Filters, but also elsewhere) place {{aria-expanded}} and {{aria-hidden}} on the adjacent, non-interactive content container instead of on the {{button}} that toggles it. The toggle button itself exposes no expanded or collapsed state.
+
+{{aria-expanded}} only conveys state when it sits on the interactive element that controls the content. On a {{div}} or {{ul}} it is ignored or produces invalid ARIA, so screen reader users pressing the button never hear whether the section opened or closed. This fails Success Criterion 4.1.2 (Name, Role, Value) and 1.3.1 (Info and Relationships).
+
+*Recommendation*
+
+1. Move {{aria-expanded}} onto the {{.expandable-parent}} button and set its initial value from the open class on page load ({{true}} when {{expandable-child-open}} is present, otherwise {{false}}).
+2. Toggle that value on the button whenever it is activated.
+3. Stop writing {{aria-expanded}} and {{aria-hidden}} to the adjacent content element. Show and hide the content with CSS (or the {{hidden}} attribute) instead.
+
+*Before*
+
+{code}<button class=""expandable-parent"">Category</button>
+
+<ul class=""search-filter-list"" aria-expanded=""true"" aria-hidden=""false"">...</ul>{code}
+
+*After*
+
+{code}<button class=""expandable-parent"" aria-expanded=""true"">Category</button>
+
+<ul class=""search-filter-list"">...</ul>{code}
+
+This lets screen reader users hear the current state of each disclosure as they operate it.
+
+*MagicBullet:* Currently patched sitewide by {{fixGlobalDisclosure()}}. Because the attributes are removed from the content element, {{init.css}} also forces {{.expandable-childlist-open}} lists to {{display: block}} so AJAX scripts that key off the old attribute don't collapse them. Documented as [A11Y005|https://radancy.dev/magicbullet/a11y/#A11Y005].","","","","","","Serious","Fail","Product Engineer","Medium","","Yes","Failed in Preview","","","0"
+"A11YMAGICBULLET0004","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","2.4.1: Bypass Blocks - Level A","A","Provide a 'Skip to Content' link","https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks","None","","","","","Global - Video Embed Iframes Missing Title","","YouTube and Vimeo embeds, especially those added through CMS content, are frequently output without a {{title}} attribute on the {{iframe}}.
+
+The {{title}} is the iframe's accessible name. Without it, screen reader users navigating by frame or tabbing into the player hear only ""frame"" or the raw URL, with no indication of what the embedded content is. This fails Success Criterion 4.1.2 (Name, Role, Value) and makes the frame harder to identify and skip, relevant to 2.4.1 (Bypass Blocks).
+
+*Recommendation*
+
+1. Require a {{title}} on every embedded {{iframe}} the product or CMS outputs.
+2. Ideally describe the specific content (e.g. {{title=""Video: A day in the life of a nurse""}}); at minimum, identify the player type.
+
+*Before*
+
+{code}<iframe src=""https://www.youtube.com/embed/abc123""></iframe>{code}
+
+*After*
+
+{code}<iframe src=""https://www.youtube.com/embed/abc123"" title=""YouTube video player""></iframe>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixIframeElement()}}, which adds a generic ""Youtube video player"" or ""Vimeo video player"" title to untitled embeds. Documented as [A11Y006|https://radancy.dev/magicbullet/a11y/#A11Y006].","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0005","4.1.1: Parsing (Obsolete in WCAG 2.2, Radancy Best Practice) - Level A","A","No major code errors","https://www.w3.org/WAI/WCAG22/Understanding/parsing","None","","","","None","","","","","Global - Checkbox Inputs Contain Invalid Autocomplete Attribute","","Many {{input type=""checkbox""}} elements across the site are output with an {{autocomplete}} attribute. {{autocomplete}} only applies to text-entry and select controls; on checkboxes it is invalid and has no effect.
+
+The attribute is flagged in automated audits and adds noise when reviewing which fields genuinely identify their input purpose. This falls under Success Criterion 4.1.1 (Parsing), obsolete in WCAG 2.2 but retained as a Radancy best practice.
+
+*Recommendation*
+
+Remove {{autocomplete}} from all checkbox inputs output by the product.
+
+*Before*
+
+{code}<input type=""checkbox"" id=""agree"" autocomplete=""off"">{code}
+
+*After*
+
+{code}<input type=""checkbox"" id=""agree"">{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixInputElements()}}. Documented as [A11Y007|https://radancy.dev/magicbullet/a11y/#A11Y007].","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0006","1.4.3: Contrast (Minimum) - Level AA","AA","Contrast ratio between text and background is at least 4.5 : 1","https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum","None","","","","None","","","","","Global - Placeholder Text Has Insufficient Contrast","","Placeholder text in inputs inherits the browser default styling, which renders in a light grey and, in Firefox, at reduced opacity. Against typical white field backgrounds this regularly falls below the 4.5:1 contrast ratio.
+
+Low vision users can't read the hint text, and because placeholder text is often the only example of the expected format, the field's purpose becomes harder to work out. This fails Success Criterion 1.4.3 (Contrast (Minimum)).
+
+*Recommendation*
+
+Set placeholder color to the field's text color (or another value with at least 4.5:1 contrast) and reset Firefox's default opacity.
+
+*After*
+
+{code}::placeholder {
+
+color: currentColor;
+
+opacity: 1;
+
+}{code}
+
+*MagicBullet:* Currently patched sitewide by {{init.css}} ({{::-moz-placeholder}} and {{::-webkit-input-placeholder}} rules).","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0007","2.4.7: Focus Visible - Level AA","AA","Ensure keyboard focus is visible and clear","https://www.w3.org/WAI/WCAG22/Understanding/focus-visible","None","","","","None","","","","","Global - Firefox Button Focus Outline Suppressed","","The base theme and normalize CSS remove the default focus outline from {{button}} elements without a replacement indicator in Firefox.
+
+Keyboard users in Firefox can't see which button currently has focus, so they lose their place when tabbing through forms, filters, and dialogs. This fails Success Criterion 2.4.7 (Focus Visible).
+
+*Recommendation*
+
+1. Remove the outline reset from the base stylesheet, or replace it with a clearly visible {{:focus-visible}} style for all buttons.
+2. Verify focus is visible on every button in Firefox, Chrome, and Safari.
+
+*After*
+
+{code}button:focus-visible {
+
+outline: 2px solid currentColor;
+
+outline-offset: 2px;
+
+}{code}
+
+*More Info*
+
+* [https://github.com/radancy-pe/uid-base-gst/issues/155|https://github.com/radancy-pe/uid-base-gst/issues/155]
+
+*MagicBullet:* Currently patched sitewide by {{init.css}}, which forces {{outline-style: auto !important}} on {{button:-moz-focusring}} as a stopgap.","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0008","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","2.4.6: Headings and Labels - Level AA","AA","Use clear headings and labels","https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels","None","","","","","Global - Empty Headings and Labels Exposed to Assistive Technology","","Templates and CMS modules sometimes render heading ({{h1}} to {{h6}}) and {{label}} elements with no content, for example when an optional title field is left blank.
+
+Screen reader users navigating by heading land on items announced as ""heading level 2"" with nothing after it, and empty labels add confusing stops when exploring forms. This conflicts with Success Criterion 1.3.1 (Info and Relationships) and 2.4.6 (Headings and Labels), since the structure no longer reflects real content.
+
+*Recommendation*
+
+Update templates and modules so heading and label wrappers are only output when they contain text, rather than rendering empty elements and hiding them afterward.
+
+*MagicBullet:* Currently patched sitewide by {{init.css}}, which applies {{display: none}} to empty headings and labels via {{:empty}}.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0009","2.4.7: Focus Visible - Level AA","AA","Ensure keyboard focus is visible and clear","https://www.w3.org/WAI/WCAG22/Understanding/focus-visible","2.4.11: Focus Not Obscured (Minimum) - Level AA","AA","Ensure when an item gets keyboard focus, it is at least partially visible.","https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum","2.4.1: Bypass Blocks - Level A","A","Provide a 'Skip to Content' link","https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks","","Global - Skip Link Focus Indicator Obscured or Hard to See","","The {{a.access-link}} skip link appears on focus, but its theme styling removes or weakens the focus outline and places it behind sticky headers, cookie banners, and other high {{z-index}} content.
+
+Keyboard users who press Tab first may not see the skip link at all, or can't tell it's focused, so they don't know the bypass mechanism exists. This fails Success Criterion 2.4.7 (Focus Visible) and 2.4.11 (Focus Not Obscured (Minimum)), and undermines 2.4.1 (Bypass Blocks).
+
+*Recommendation*
+
+1. Restore the browser's default focus outline (or a clearly visible custom one) on the skip link, offset so it isn't clipped.
+2. Position it in the top-left corner on focus and give it a stacking order above all sticky and fixed content.
+
+*After*
+
+{code}a.access-link {
+
+outline-color: revert;
+
+outline-offset: 4px;
+
+top: 8px;
+
+z-index: 2147483647;
+
+}{code}
+
+*MagicBullet:* Currently patched sitewide by {{init.css}} ({{a.access-link}} rules).","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0010","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","None","","","","None","","","","","Global - Save Job Button State Conveyed by Text Change Only","","The Save Job button ({{.js-save-job-btn}}), used in search results, job details, and other modules, signals its state by swapping its visible text (e.g. ""Save Job"" to ""Job Saved""), and some delivery builds remove the text entirely. It exposes no programmatic toggle state.
+
+Changing a button's name to signal state is unreliable: screen readers often don't re-announce the new name, and users can't tell whether the label describes the current state or the action. In addition, iOS VoiceOver and NVDA fail to read state back on this button while it carries a {{type}} attribute. This fails Success Criterion 4.1.2 (Name, Role, Value).
+
+*Recommendation*
+
+1. Give the button a stable accessible name (""Save Job"") that doesn't change.
+2. Convey state with {{aria-pressed}}, initialized from {{data-job-saved}} and toggled on click.
+3. When the same job appears more than once on a page, keep {{aria-pressed}} in sync on every button sharing the same {{data-job-id}}.
+4. Confirm state is announced in iOS VoiceOver and NVDA; if the {{type}} attribute still blocks it, apply {{role=""button""}} as MagicBullet does today.
+
+*Before*
+
+{code}<button type=""button"" class=""js-save-job-btn"" data-job-id=""123"" data-job-saved=""true"">Job Saved</button>{code}
+
+*After*
+
+{code}<button class=""js-save-job-btn"" role=""button"" aria-label=""Save Job"" aria-pressed=""true"" data-job-id=""123"" data-job-saved=""true"">Job Saved</button>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixSaveJobButton()}}. Documented as [A11Y011|https://radancy.dev/magicbullet/a11y/#A11Y011].","","","","","","Serious","Fail","Product Engineer","Medium","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0011","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","2.4.1: Bypass Blocks - Level A","A","Provide a 'Skip to Content' link","https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks","None","","","","","Header - Primary Navigation Landmark Missing Accessible Name","","The {{nav}} inside the site {{header}} has no accessible name.
+
+When a page contains several {{nav}} landmarks (header, footer, pagination, in-page nav), screen reader users browsing landmarks hear several identical ""navigation"" entries and can't tell which one is the main menu. This relates to Success Criterion 1.3.1 (Info and Relationships) and 2.4.1 (Bypass Blocks).
+
+*Recommendation*
+
+Add an {{aria-label}} (translated) to the header {{nav}}, unless one is already present. If a header contains more than one {{nav}}, give each a distinct name.
+
+*Before*
+
+{code}<nav>...</nav>{code}
+
+*After*
+
+{code}<nav aria-label=""Main"">...</nav>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixHeader()}}, which labels the first header {{nav}} ""Main"" (translated via the language pack).","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0012","2.4.4: Link Purpose (In Context) - Level A","A","Every link's purpose is clear from its context","https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-in-context","None","","","","None","","","","","Header - Saved Jobs Link Count Lacks Context","","The Saved Jobs link ({{[data-selector-name=recentlyviewedjoblist]}}) displays a saved-job count alongside its text. Screen readers read the number as a bare value in whatever position the markup puts it (e.g. ""Saved Jobs 3""), with nothing to explain what the number means or what the link does.
+
+Screen reader users can't reliably tell how many jobs they've saved or that the link opens the saved jobs list. This fails Success Criterion 2.4.4 (Link Purpose (In Context)).
+
+*Recommendation*
+
+When at least one job is saved ({{data-recently-viewed-jobs=""true""}}), give the link an accessible name that reads naturally and states the action, e.g. ""3 Saved Jobs (View Saved Jobs)"". Keep the count in sync as jobs are saved or removed, and fall back to the visible text when no jobs are saved.
+
+*Before*
+
+{code}<a href=""/saved-jobs"">Saved Jobs <span data-selector-name=""recentlyviewedjoblist"" data-recently-viewed-jobs=""true"">3</span></a>{code}
+
+*After*
+
+{code}<a href=""/saved-jobs"" aria-label=""3 Saved Jobs (View Saved Jobs)"">Saved Jobs <span data-selector-name=""recentlyviewedjoblist"" data-recently-viewed-jobs=""true"">3</span></a>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixSaveJobButton()}}, using a {{MutationObserver}} to rebuild the link's {{aria-label}} whenever the count changes.","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0013","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","2.4.6: Headings and Labels - Level AA","AA","Use clear headings and labels","https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels","None","","","","","Privacy Notice - Dialog and Close Button Lack Meaningful Names","","The privacy notice dialog ({{#system-imessage}}) has a close button ({{#system-ialert-close-button}}) whose only content is a visual ""X"" glyph, so it has no meaningful accessible name. The dialog itself is hard-coded with {{aria-label=""Important System Message""}}, which often doesn't match the visible heading or the client's wording.
+
+Screen reader users hear ""X, button"" (or just ""button"") and the dialog is announced with a generic name that doesn't describe its content. This fails Success Criterion 4.1.2 (Name, Role, Value) and 2.4.6 (Headings and Labels).
+
+*Recommendation*
+
+1. Give the close button a translated accessible name such as ""Close"".
+2. Name the dialog from its visible heading with {{aria-labelledby}} instead of a fixed {{aria-label}}, or let implementers supply a custom label element.
+
+*Before*
+
+{code}<div id=""system-imessage"" role=""dialog"" aria-label=""Important System Message"" aria-modal=""true"">
+
+    <button id=""system-ialert-close-button"">X</button>
+
+</div>{code}
+
+*After*
+
+{code}<div id=""system-imessage"" role=""dialog"" aria-labelledby=""privacy-title"" aria-modal=""true"">
+
+    <h2 id=""privacy-title"" data-custom-label>Your Privacy</h2>
+
+    <button id=""system-ialert-close-button"" aria-label=""Close"">X</button>
+
+</div>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixPrivacyNotice()}}, which adds a translated ""Close"" label and, when an element with {{data-custom-label}} and an {{id}} exists, swaps the dialog's {{aria-label}} for {{aria-labelledby}}.","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0014","3.1.2: Language of Parts - Level AA","AA","Tell users when the language on a page changes","https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts","None","","","","None","","","","","CMS Content - Language Attributes Stripped by Editor","","The CMS WYSIWYG editor strips {{lang}} attributes from authored content, so passages written in a language other than the page's default can't be marked up.
+
+Screen readers then read foreign-language passages using the page language's pronunciation rules, which can make them unintelligible. This fails Success Criterion 3.1.2 (Language of Parts).
+
+*Recommendation*
+
+Allow the {{lang}} attribute through the editor's sanitizer on all block and inline elements.
+
+*Before*
+
+{code}<p data-cms-mb-lang=""fr"">Rejoignez notre équipe.</p>{code}
+
+*After*
+
+{code}<p lang=""fr"">Rejoignez notre équipe.</p>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixCMS()}}: authors add {{data-cms-mb-lang}} (which the editor keeps) and the script copies it to {{lang}}.","","","","","","Moderate","Fail","Product Engineer","Medium","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0015","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","None","","","","None","","","","","CMS Content - Table Header Scope Stripped by Editor","","The CMS WYSIWYG editor strips the {{scope}} attribute from table header cells in authored tables.
+
+Without {{scope}}, screen readers can't reliably determine whether a {{th}} labels a row or a column in complex tables, so cell-by-cell navigation loses header context. This fails Success Criterion 1.3.1 (Info and Relationships).
+
+*Recommendation*
+
+Allow the {{scope}} attribute through the editor's sanitizer on {{th}} elements.
+
+*Before*
+
+{code}<th data-cms-mb-scope=""col"">Location</th>{code}
+
+*After*
+
+{code}<th scope=""col"">Location</th>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixCMS()}}: authors add {{data-cms-mb-scope}} and the script copies it to {{scope}}.","","","","","","Moderate","Fail","Product Engineer","Medium","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0016","3.2.5: Change on Request - Level AAA","AAA","Don't change elements on your website until users ask","https://www.w3.org/WAI/WCAG22/Understanding/change-on-request","None","","","","None","","","","","CMS Content - New Window Links Lack Warning","","Links in CMS-authored content ({{data-custom-category=""UserCreatedContent""}}) set to open in a new window via {{target=""_blank""}} give no indication of that behavior.
+
+Screen reader and screen magnifier users can be disoriented when a new window opens without warning, since the Back button no longer works and focus lands somewhere unexpected. This relates to Success Criterion 3.2.5 (Change on Request).
+
+*Recommendation*
+
+Append visually hidden, translated text such as ""(opens in new window)"" to every CMS link that opens a new window, and pair it with a visible new-window icon.
+
+*After*
+
+{code}<a href=""https://example.com"" target=""_blank"">Benefits guide<span class=""visually-hidden""> (opens in new window)</span></a>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixCMS()}}. Delivery still needs to add the visible icon.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0017","4.1.1: Parsing (Obsolete in WCAG 2.2, Radancy Best Practice) - Level A","A","No major code errors","https://www.w3.org/WAI/WCAG22/Understanding/parsing","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","None","","","","","Cookie Management - Aria-describedby References Non-Existent ID","","Inputs on the Cookie Management page carry {{aria-describedby=""cookieDescriptionIdAttr""}}, but no element with that ID exists. The value appears to be an unrendered template token rather than a real ID.
+
+The broken reference provides no description to assistive technology and is flagged as an error by automated audits. This falls under Success Criterion 4.1.1 (Parsing), retained as a Radancy best practice, and 1.3.1 (Info and Relationships).
+
+*Recommendation*
+
+Render the real description ID into {{aria-describedby}} (the template is missing the {{@}} prefix on the token), or omit the attribute until the referenced element exists.
+
+*MagicBullet:* Currently patched sitewide by {{fixCookieManagement()}}, which removes the broken attribute. Documented as [A11Y003|https://radancy.dev/magicbullet/a11y/#A11Y003].","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0018","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","2.4.1: Bypass Blocks - Level A","A","Provide a 'Skip to Content' link","https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks","None","","","","","Search Form - Form Not Exposed as Search Landmark","","The job search forms ({{.search-form}} and {{.advanced-search-form}}) are not exposed as search landmarks.
+
+Screen reader users who jump between landmarks can't go straight to the job search, the primary task on most career site pages. This relates to Success Criterion 1.3.1 (Info and Relationships) and 2.4.1 (Bypass Blocks).
+
+*Recommendation*
+
+Add {{role=""search""}} to each job search {{form}} (or wrap it in the {{search}} element).
+
+*Before*
+
+{code}<form class=""search-form"">...</form>{code}
+
+*After*
+
+{code}<form class=""search-form"" role=""search"">...</form>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchForm()}} and {{fixAdvancedSearchForm()}}. Documented as [A11Y012|https://radancy.dev/magicbullet/a11y/#A11Y012].","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0019","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","None","","","","None","","","","","Search Form - Field Group Missing Accessible Name","","The wrapper around the search form fields ({{.search-form-fields}} / {{.search-form__fields}}) groups the keyword and location inputs visually but exposes no group role or name.
+
+Screen reader users entering the form get no context that the fields belong together as ""Search Jobs"". This relates to Success Criterion 1.3.1 (Info and Relationships).
+
+*Recommendation*
+
+Give the wrapper {{role=""group""}} and name it from a visible legend-style element (a {{div class=""job-search-legend""}}, not a heading) with {{aria-labelledby}}. When no legend is present, fall back to a translated {{aria-label}} of ""Search Jobs"".
+
+*After*
+
+{code}<div class=""job-search-legend"" id=""job-search-legend-1"">Find your next role</div>
+
+<div class=""search-form-fields"" role=""group"" aria-labelledby=""job-search-legend-1"">...</div>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchForm()}}. Documented as [A11Y012|https://radancy.dev/magicbullet/a11y/#A11Y012].","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0020","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","None","","","","None","","","","","Search Form - Invalid Aria-expanded on Field Wrappers","","The non-interactive field wrappers {{.search-form-fields}} and {{.advanced-search-form-fields}} carry {{aria-expanded}}.
+
+{{aria-expanded}} is only valid on interactive controls. On a {{div}} it's either ignored or announced as a meaningless state, and it's flagged by automated audits. This relates to Success Criterion 4.1.2 (Name, Role, Value).
+
+*Recommendation*
+
+Remove {{aria-expanded}} from both wrappers. If the advanced fields are collapsible, put {{aria-expanded}} on the toggle button that controls them.
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchForm()}} and {{fixAdvancedSearchForm()}}. Documented as [A11Y012|https://radancy.dev/magicbullet/a11y/#A11Y012].","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0021","3.3.1: Error Identification - Level A","A","Clearly identify input errors","https://www.w3.org/WAI/WCAG22/Understanding/error-identification","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","2.4.3: Focus Order - Level A","A","Logical order","https://www.w3.org/WAI/WCAG22/Understanding/focus-order","","Search Form - Location Error Not Associated or Focus Managed","","When an invalid location is entered, the error message ({{.search-location-error}} / {{.search-form__location-error}}) is shown and focus is moved onto the error message itself (it carries a {{tabindex}}). The location input is not marked invalid and isn't programmatically associated with the message.
+
+Keyboard users end up past the field and have to Shift+Tab back to fix it, and screen reader users who return to the field hear nothing about the error. This fails Success Criterion 3.3.1 (Error Identification), 1.3.1 (Info and Relationships), and 2.4.3 (Focus Order).
+
+*Recommendation*
+
+1. Give the error message a unique {{id}} and reference it from the location input with {{aria-describedby}}.
+2. Set {{aria-invalid=""true""}} on the input while the error is visible and {{false}} otherwise.
+3. On submit or change, move focus back to the location input (not the error) so the description is read and the user can correct it in place.
+4. Remove {{tabindex}} from the error message.
+
+*Before*
+
+{code}<input class=""search-location"" id=""location"">
+
+<span class=""search-location-error"" tabindex=""0"" aria-hidden=""false"">Please select a valid location.</span>{code}
+
+*After*
+
+{code}<input class=""search-location"" id=""location"" aria-invalid=""true"" aria-describedby=""search-error-1"">
+
+<span class=""search-location-error"" id=""search-error-1"">Please select a valid location.</span>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchForm()}}, with {{init.css}} removing the outline left on the no-longer-focused error message. Documented as [A11Y012|https://radancy.dev/magicbullet/a11y/#A11Y012].","","","","","","Serious","Fail","Product Engineer","Medium","","Yes","Failed in Preview","","","0"
+"A11YMAGICBULLET0022","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","None","","","","","Search Form - Visible Location Pin Button Hidden from Assistive Technology","","The ""use my location"" pin button ({{.location-pin}}) is output with {{aria-hidden=""true""}} even when it is visible and operable.
+
+Screen reader users can't perceive or use the control, and because it's still focusable, keyboard and screen reader users land on an empty, unannounced focus stop. This fails Success Criterion 4.1.2 (Name, Role, Value) and 1.3.1 (Info and Relationships).
+
+*Recommendation*
+
+Only apply {{aria-hidden}} (or better, don't render the button) when the feature is disabled in admin. When it is shown, remove {{aria-hidden}} and make sure it has an accessible name.
+
+*Before*
+
+{code}<button class=""location-pin"" aria-hidden=""true"" aria-label=""Use my location""></button>{code}
+
+*After*
+
+{code}<button class=""location-pin"" aria-label=""Use my location""></button>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchForm()}}, which removes {{aria-hidden}} only when the pin is actually displayed. Documented as [A11Y012|https://radancy.dev/magicbullet/a11y/#A11Y012].","","","","","","Serious","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0023","Best Practice","BP","The issues does not fail WCAG, but is a well-established and recommended design or usability best practice on the web","https://radancy.dev/component-library/guidance/","None","","","","None","","","","","Keyword Search - Native Search Input Clear Button Inconsistent","","The keyword field ({{.search-keyword}}) uses {{type=""search""}}. Browsers add their own inconsistent clear ""X"" control to search inputs, which varies in visibility, keyboard reachability, and announcement across browser and screen reader pairings, and some screen readers announce the field differently from a standard text field.
+
+This is a best practice issue rather than a WCAG failure.
+
+*Recommendation*
+
+Use {{type=""text""}} for the keyword field, relying on the {{role=""search""}} landmark to convey the form's purpose. If a clear control is needed, add a real, labeled {{button}}.
+
+*More Info*
+
+* [https://adrianroselli.com/2019/07/ignore-typesearch.html|https://adrianroselli.com/2019/07/ignore-typesearch.html]
+
+*MagicBullet:* Currently patched sitewide by {{fixKeywordSearch()}}.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0024","4.1.3: Status Messages - Level AA","AA","Let assistive technologies notify users about changes to the content that don't take focus","https://www.w3.org/WAI/WCAG22/Understanding/status-messages","3.3.2: Labels or Instructions - Level A","A","Label elements and give instructions","https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions","None","","","","","Keyword Search - Autocomplete Results Not Described or Announced","","As users type in the keyword field, a popup of matching job links appears below it ({{#<input-id>-auto-complete-popup}}). Nothing tells screen reader users this will happen, and nothing announces when results appear, how many there are, or that none were found.
+
+Screen reader users don't know the results exist unless they happen to explore below the field. This fails Success Criterion 4.1.3 (Status Messages) and 3.3.2 (Labels or Instructions).
+
+*Recommendation*
+
+1. Add a hidden description to the input with {{aria-describedby}}, e.g. ""Matching job links will appear below as you type.""
+2. After typing settles, announce the result count through a polite live region, e.g. ""5 matching job links found."" or ""No matching job links found."" Debounce so it isn't announced on every keystroke.
+
+*After*
+
+{code}<input class=""search-keyword"" id=""keyword"" type=""text"" aria-describedby=""autocomplete-message-keyword"">
+
+<span id=""autocomplete-message-keyword"" hidden>Matching job links will appear below as you type.</span>
+
+<div aria-live=""polite"" class=""visually-hidden"">5 matching job links found.</div>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixKeywordSearch()}}, using the shared {{#magicbullet-message}} live region.","","","","","","Moderate","Fail","Product Engineer","Medium","","Yes","Failed in Preview","","","0"
+"A11YMAGICBULLET0025","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","None","","","","","Keyword Search - Popup Headings Misused as Disclosure Triggers","","Each results grouping heading in the keyword popup is rendered with the {{.expandable-parent}} class, a {{tabindex}}, and {{aria-expanded}}, even though it is a static label and doesn't expand or collapse anything. The popup itself has no role or accessible name.
+
+Keyboard users hit extra focus stops that do nothing, and screen reader users hear a collapsible state on plain text and get no name for the results area. This fails Success Criterion 4.1.2 (Name, Role, Value) and 1.3.1 (Info and Relationships). The site script re-renders this markup on every keystroke, so any fix must apply to each render.
+
+*Recommendation*
+
+1. Remove {{tabindex}}, {{aria-expanded}}, and the disclosure class from the grouping headings.
+2. Give each heading an {{id}} and expose the popup as {{role=""region""}} labeled by those headings via {{aria-labelledby}}.
+
+*After*
+
+{code}<div id=""keyword-auto-complete-popup"" role=""region"" aria-labelledby=""keyword-auto-complete-popup__hdr-0"">
+
+    <h3 id=""keyword-auto-complete-popup__hdr-0"">Jobs</h3>
+
+    <ul>...</ul>
+
+</div>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixKeywordSearch()}}, re-applied on every popup mutation via a dedicated {{MutationObserver}}.","","","","","","Moderate","Fail","Product Engineer","Medium","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0026","2.1.1: Keyboard - Level A","A","Accessible by keyboard only","https://www.w3.org/WAI/WCAG22/Understanding/keyboard","2.4.3: Focus Order - Level A","A","Logical order","https://www.w3.org/WAI/WCAG22/Understanding/focus-order","None","","","","","Keyword Search - Escape Does Not Return Focus to Input","","When focus is on a result link inside the keyword autocomplete popup, pressing Escape doesn't return focus to the keyword input.
+
+Keyboard users who arrow or Tab into the results have no quick way back to editing their search and must Shift+Tab through results. This relates to Success Criterion 2.1.1 (Keyboard) and 2.4.3 (Focus Order).
+
+*Recommendation*
+
+Handle Escape anywhere inside the popup by closing it and returning focus to the keyword input.
+
+*MagicBullet:* Currently patched sitewide by {{fixKeywordSearch()}}.","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0027","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","4.1.3: Status Messages - Level AA","AA","Let assistive technologies notify users about changes to the content that don't take focus","https://www.w3.org/WAI/WCAG22/Understanding/status-messages","","Location Autocomplete - Combobox Missing Required ARIA Semantics","","The MindReader autocomplete used by the location, job alert category, job alert location, and facet inputs ({{input.search-location}}, {{.keyword-category}}, {{.keyword-location}}, {{.keyword-facet}}) is built as a plain text input with a list of links. It has no combobox role, no expanded state, no relationship to its suggestion list, and the list and its items have no listbox/option roles. Arrow-key highlighting is only a CSS class, so the active suggestion is never exposed.
+
+Screen reader users don't know suggestions exist, whether the list is open, or which suggestion is highlighted while arrowing, and the MindReader status region announces redundantly on top of it. This fails Success Criterion 4.1.2 (Name, Role, Value) and 1.3.1 (Info and Relationships), and the competing announcements relate to 4.1.3 (Status Messages).
+
+*Recommendation*
+
+1. On the input, set {{role=""combobox""}}, {{aria-autocomplete=""list""}}, {{aria-controls}} pointing to the list, {{autocomplete=""off""}}, and {{aria-expanded}} reflecting whether the list is open.
+2. Give the list {{role=""listbox""}} labeled by the field's {{label}}, and each item {{role=""option""}} with a unique {{id}}.
+3. As the user arrows, set {{aria-activedescendant}} on the input to the highlighted option's {{id}}, and clear it when the list closes (on blur or Escape).
+4. Avoid duplicate announcements from the status region while an option is active.
+
+*After*
+
+{code}<label id=""location-label"" for=""location"">Location</label>
+
+<input id=""location"" role=""combobox"" aria-autocomplete=""list"" aria-expanded=""true"" aria-controls=""location-mindreader"" aria-activedescendant=""combobox-item-1-2"" autocomplete=""off"">
+
+<ul id=""location-mindreader"" role=""listbox"" aria-labelledby=""location-label"">
+
+    <li role=""option"" id=""combobox-item-1-1""><a>Boston, MA</a></li>
+
+    <li role=""option"" id=""combobox-item-1-2""><a class=""active"">Boston, NY</a></li>
+
+</ul>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixMindReaderInput()}} and {{fixMindReaderList()}}. {{init.css}} also provides an opt-in {{.a11y-search-location}} wrapper class that hides MindReader entirely for sites using a native {{datalist}} alternative.","","","","","","Serious","Fail","Product Engineer","Difficult","","Yes","Failed in Preview","","","0"
+"A11YMAGICBULLET0028","3.3.2: Labels or Instructions - Level A","A","Label elements and give instructions","https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions","None","","","","None","","","","","Location Autocomplete - Missing Usage Instructions","","The MindReader autocomplete fields give no instructions on how to review and choose suggestions.
+
+Screen reader and touch users don't know suggestions can be browsed with arrow keys (or swipe gestures) and selected with Enter, so many will type a full value that then fails validation. This fails Success Criterion 3.3.2 (Labels or Instructions).
+
+*Recommendation*
+
+Add a hidden, translated description to each autocomplete input with {{aria-describedby}}, e.g. ""When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures."" Append to, rather than replace, any existing {{aria-describedby}} value.
+
+*MagicBullet:* Currently patched sitewide by {{fixMindReaderInput()}}.","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0029","2.4.7: Focus Visible - Level AA","AA","Ensure keyboard focus is visible and clear","https://www.w3.org/WAI/WCAG22/Understanding/focus-visible","1.4.11: Non-text Contrast - Level AA","AA","Ensure important visual information such as graphics and icons meets the same minimum contrast that is required for larger text (3:1)","https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast","None","","","","","Location Autocomplete - Highlighted Suggestion Not Visually Indicated","","When arrowing through MindReader suggestions, the {{.active}} suggestion often has no visible highlight, and the links are inline so any background only covers the text.
+
+Keyboard users, including sighted screen reader and low vision users, can't see which suggestion Enter will select. This fails Success Criterion 2.4.7 (Focus Visible) and 1.4.11 (Non-text Contrast).
+
+*Recommendation*
+
+Make suggestion links block-level with padding and give the active item a visible background change plus an outline with sufficient contrast.
+
+*After*
+
+{code}.mindreader-results a {
+
+display: block;
+
+padding: .5em 1em;
+
+}
+
+.mindreader-results a.active {
+
+background-color: #eee;
+
+outline: 1px #000 solid;
+
+outline-offset: -4px;
+
+}{code}
+
+*MagicBullet:* Currently patched sitewide by {{init.css}} ({{.mindreader-results}} rules).","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0030","Best Practice","BP","The issues does not fail WCAG, but is a well-established and recommended design or usability best practice on the web","https://radancy.dev/component-library/guidance/","None","","","","None","","","","","Location Autocomplete - Typeahead Ghost Text Obscures Typed Input","","The {{.display-typeahead}} element overlays suggested completion text inside the input as the user types. It frequently misaligns with or overlaps the user's own characters, making the typed value hard to read.
+
+This particularly affects users with low vision or cognitive and reading disabilities, and it adds nothing the suggestion list doesn't already provide. This is a best practice issue rather than a specific WCAG failure.
+
+*Recommendation*
+
+Remove the inline typeahead overlay and rely on the suggestion list.
+
+*MagicBullet:* Currently patched sitewide by {{init.css}}, which hides {{.display-typeahead}}.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0031","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","None","","","","None","","","","","Search Filters - Filter Region and Groups Missing Names","","The Search Filters panel ({{#search-filters}}) isn't exposed as a named region, and each filter section ({{.expandable}}) groups its checkboxes visually without a group role or name.
+
+Screen reader users can't jump to the filters as a landmark, and when tabbing into a checkbox they don't hear which filter category (e.g. ""Location"", ""Category"") it belongs to. This fails Success Criterion 1.3.1 (Info and Relationships).
+
+*Recommendation*
+
+1. Give {{#search-filters}} {{role=""region""}} and a translated name, ideally via {{aria-labelledby}} pointing to its visible heading.
+2. Give each filter section's checkbox list {{role=""group""}} labeled by its toggle button via {{aria-labelledby}}. Apply the group to a wrapper around the list, not the whole section, so the button isn't nested inside its own group.
+
+*After*
+
+{code}<section class=""expandable"">
+
+    <button id=""category-toggle"" class=""expandable-parent"" aria-expanded=""true"">Category</button>
+
+    <div role=""group"" aria-labelledby=""category-toggle"">
+
+        <ul class=""search-filter-list"">...</ul>
+
+    </div>
+
+</section>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchFilters()}} (the docs list this under {{fixSearchResults()}}). It currently applies the group to the whole {{section}}. Documented as [A11Y013|https://radancy.dev/magicbullet/a11y/#A11Y013].","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0032","3.3.1: Error Identification - Level A","A","Clearly identify input errors","https://www.w3.org/WAI/WCAG22/Understanding/error-identification","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","None","","","","","Search Filters - Refine Keyword Error Not Associated or Focus Managed","","In the Refine Search keyword field ({{#refined-search #keyword-tag}}), the error message ({{.keyword-tag-error}}) isn't associated with the input, focus isn't returned to the input when the error appears, and the error element carries stray {{aria-expanded}} and inline {{style}} attributes.
+
+Screen reader users aren't told why their keyword was rejected and have to hunt for the message. This fails Success Criterion 3.3.1 (Error Identification) and 1.3.1 (Info and Relationships).
+
+*Recommendation*
+
+1. Give the error an {{id}} and reference it from the input with {{aria-describedby}}.
+2. When the error becomes visible, move focus to the input so the description is read.
+3. Remove {{aria-expanded}} and inline {{style}} from the error element.
+
+*After*
+
+{code}<input id=""keyword-tag"" aria-describedby=""keyword-error-msg"">
+
+<span class=""keyword-tag-error"" id=""keyword-error-msg"">Please enter a keyword.</span>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchFilters()}}.","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0033","Best Practice","BP","The issues does not fail WCAG, but is a well-established and recommended design or usability best practice on the web","https://radancy.dev/component-library/guidance/","None","","","","None","","","","","Search Filters - Disabled Add Keyword Button Styled as Enabled","","The Refine Search ""Add"" button ({{#add-keyword}}) keeps its enabled colors, hover styles, and pointer cursor while {{disabled}}.
+
+Sighted users, including those with cognitive disabilities, try to activate a control that does nothing, with no visual cue why. This is a best practice issue.
+
+*Recommendation*
+
+Give {{#add-keyword[disabled]}} a distinct disabled appearance (or the browser's native one) and no hover or pointer styling.
+
+*MagicBullet:* Currently patched sitewide by {{init.css}}, which reverts the theme's styles on the disabled button.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0034","Best Practice","BP","The issues does not fail WCAG, but is a well-established and recommended design or usability best practice on the web","https://radancy.dev/component-library/guidance/","None","","","","None","","","","","Search Filters - Mobile Filter Panel Triggers Pull-to-Refresh","","On mobile, scrolling the open filter panel ({{#search-filters.open}}) past its end chains the scroll to the page, which can trigger pull-to-refresh and reload the page.
+
+Users lose their filter selections and have to reopen the panel. This is especially costly for users with motor impairments or tremors, for whom precise scroll gestures are difficult. This is a best practice issue.
+
+*Recommendation*
+
+Set {{overscroll-behavior: none}} (or {{contain}}) on the filter panel while it is open.
+
+*MagicBullet:* Currently patched sitewide by {{init.css}}.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0035","2.4.6: Headings and Labels - Level AA","AA","Use clear headings and labels","https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","None","","","","","Applied Filters - Remove Filter Buttons Have Ambiguous Names","","The applied filter buttons above the results ({{.filter-button}} / {{.applied-filters__btn}}) are named only by the filter value (e.g. ""Boston"").
+
+Screen reader and voice control users hear ""Boston, button"" with no indication that activating it removes the filter. This fails Success Criterion 2.4.6 (Headings and Labels) and 4.1.2 (Name, Role, Value).
+
+*Recommendation*
+
+Give each enabled button a translated name that includes both the action and the visible value, keeping the visible text in the name for voice control users.
+
+*Before*
+
+{code}<button class=""filter-button"">Boston</button>{code}
+
+*After*
+
+{code}<button class=""filter-button"" aria-label=""Remove Filter (Boston)"">Boston</button>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixAppliedFilter()}}. Documented as [A11Y002|https://radancy.dev/magicbullet/a11y/#A11Y002].","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0036","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","None","","","","","Applied Filters - Container Has Stale State and Broken Labelling","","The applied filters container ({{.search-results-options}}) carries {{aria-hidden}} and {{aria-expanded}} even though it's not a disclosure, and the inner {{ul}} has its own {{aria-labelledby}}.
+
+Depending on the {{aria-hidden}} value, the filters can be hidden from screen readers while visible, and the misplaced state attributes produce invalid ARIA. The group of buttons is also not exposed as a single named group. This fails Success Criterion 4.1.2 (Name, Role, Value) and 1.3.1 (Info and Relationships).
+
+*Recommendation*
+
+1. Remove {{aria-hidden}} and {{aria-expanded}} from the container and {{aria-labelledby}} from the {{ul}}.
+2. Expose the container as {{role=""group""}} labeled by the visible ""Applied Filters"" label ({{aria-labelledby=""applied-filters-label""}}).
+
+*After*
+
+{code}<div class=""search-results-options"" role=""group"" aria-labelledby=""applied-filters-label"">
+
+    <span id=""applied-filters-label"">Applied Filters</span>
+
+    <ul>...</ul>
+
+</div>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixAppliedFilter()}}. Documented as [A11Y002|https://radancy.dev/magicbullet/a11y/#A11Y002].","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0037","4.1.3: Status Messages - Level AA","AA","Let assistive technologies notify users about changes to the content that don't take focus","https://www.w3.org/WAI/WCAG22/Understanding/status-messages","None","","","","None","","","","","Search Results - Results Updates Not Announced","","When filters, pagination, or other actions refresh the results via AJAX, {{#search-results}} is replaced in place with no announcement.
+
+Screen reader users get no feedback that loading started, that it finished, or how many results are now shown, so they can't tell whether their action worked. This fails Success Criterion 4.1.3 (Status Messages).
+
+*Recommendation*
+
+1. Provide a polite live region that persists across updates (outside the replaced container).
+2. Announce ""Loading new results."" when an update starts.
+3. When it completes, announce the new count only if it changed, e.g. ""15 of 230 results are now available."" Count job links ({{a[data-job-id]}}) rather than list items so differing templates are handled.
+4. Don't announce during initial page load.
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchResults()}}, using the shared {{#magicbullet-message}} live region.","","","","","","Moderate","Fail","Product Engineer","Medium","","Yes","Failed in Preview","","","0"
+"A11YMAGICBULLET0038","4.1.3: Status Messages - Level AA","AA","Let assistive technologies notify users about changes to the content that don't take focus","https://www.w3.org/WAI/WCAG22/Understanding/status-messages","3.2.2: On Input - Level A","A","Elements do not change when they receive input","https://www.w3.org/WAI/WCAG22/Understanding/on-input","None","","","","","Search Results - Sort Change Not Announced and Page Scrolls Unexpectedly","","Changing the sort order ({{select[data-search-results-sort-enhanced=""true""]}}) reorders the results with no announcement, and once the reorder completes the site's script animates the page to a new scroll position.
+
+Screen reader users get no confirmation the results were re-sorted, and keyboard and screen magnifier users are visibly relocated down the page even though they only changed a dropdown. This fails Success Criterion 4.1.3 (Status Messages) and relates to 3.2.2 (On Input).
+
+*Recommendation*
+
+1. After the reorder renders, announce the new order through a polite live region, e.g. ""Results sorted by Date Posted.""
+2. Remove the scroll animation that runs after an in-place sort, or keep the user's scroll position.
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchSort()}}, which announces the change and uses {{preserveScrollPosition()}} to cancel the site's jQuery scroll.","","","","","","Moderate","Fail","Product Engineer","Medium","","Yes","Failed in Preview","","","0"
+"A11YMAGICBULLET0039","2.4.1: Bypass Blocks - Level A","A","Provide a 'Skip to Content' link","https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks","Best Practice","BP","The issues does not fail WCAG, but is a well-established and recommended design or usability best practice on the web","https://radancy.dev/component-library/guidance/","None","","","","","Search Results - Obsolete Skip Links Present","","The search results page outputs extra skip links ({{.access-link}}) to {{#search-results-list}} and {{#search-filters}} in addition to the main skip link.
+
+These targets are no longer reliable skip destinations and the extra links add tab stops before the main content, working against the purpose of a bypass mechanism. This relates to Success Criterion 2.4.1 (Bypass Blocks).
+
+*Recommendation*
+
+Remove these page-specific skip links and rely on the main content skip link and properly named landmarks.
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchResults()}}.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0040","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","2.4.1: Bypass Blocks - Level A","A","Provide a 'Skip to Content' link","https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks","None","","","","","Pagination - Navigation Landmark Missing Accessible Name","","The pagination {{nav}} in search results ({{.pagination}}) has no accessible name.
+
+Screen reader users browsing landmarks can't tell pagination apart from the main and footer navigation. This relates to Success Criterion 1.3.1 (Info and Relationships) and 2.4.1 (Bypass Blocks).
+
+*Recommendation*
+
+Add a translated {{aria-label}} such as ""Pagination"" to each pagination {{nav}} that doesn't already have one.
+
+*After*
+
+{code}<nav class=""pagination"" aria-label=""Pagination"">...</nav>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchPagination()}}. Documented as [A11Y015|https://radancy.dev/magicbullet/a11y/#A11Y015].","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0041","2.4.3: Focus Order - Level A","A","Logical order","https://www.w3.org/WAI/WCAG22/Understanding/focus-order","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","None","","","","","Pagination - Disabled Previous and Next Links Remain Interactive","","On the first and last pages, the ""Previous"" or ""Next"" control ({{.prev.disabled}} / {{.next.disabled}}) keeps its {{href}} and {{rel}}, so it's still focusable, and it carries {{aria-hidden}}, which produces a console error when focused. It also keeps its hover styling.
+
+Keyboard users tab onto a control that does nothing, screen reader users land on a hidden focus stop, and sighted users see a hover state implying it works. This fails Success Criterion 2.4.3 (Focus Order) and 4.1.2 (Name, Role, Value).
+
+*Recommendation*
+
+1. Remove {{href}} and {{rel}} from the disabled control and set {{aria-disabled=""true""}}; don't use {{aria-hidden}} on it.
+2. Give it a non-interactive visual state: no hover background, muted color, {{pointer-events: none}}.
+
+*Before*
+
+{code}<a class=""prev disabled"" href=""?p=0"" rel=""prev"" aria-hidden=""true"">Previous</a>{code}
+
+*After*
+
+{code}<a class=""prev disabled"" aria-disabled=""true"">Previous</a>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchPagination()}} plus {{init.css}} ({{.pagination .disabled}} rules). Documented as [A11Y015|https://radancy.dev/magicbullet/a11y/#A11Y015].","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0042","2.4.3: Focus Order - Level A","A","Logical order","https://www.w3.org/WAI/WCAG22/Understanding/focus-order","None","","","","None","","","","","Pagination - Focus Lost After Changing Page","","Activating Previous, Next, a page jump, or entering a page number replaces {{#search-results}} via AJAX, destroying the control that had focus. Focus falls back to the document body.
+
+Keyboard and screen reader users are sent back to the top of the page and must navigate all the way back to the results each time they change page. This fails Success Criterion 2.4.3 (Focus Order).
+
+*Recommendation*
+
+After the new page of results renders, move focus to the first result link (or a results heading with {{tabindex=""-1""}}). Apply this for clicks on Previous/Next/page jump and for Enter in the page number input.
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchPagination()}}, which focuses the first {{#search-results a}} after the next DOM update.","","","","","","Serious","Fail","Product Engineer","Medium","","Yes","Failed in Preview","","","0"
+"A11YMAGICBULLET0043","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","2.1.1: Keyboard - Level A","A","Accessible by keyboard only","https://www.w3.org/WAI/WCAG22/Understanding/keyboard","None","","","","","Pagination - Previous and Next Links Behave as Buttons","","The Previous and Next controls ({{.prev}}, {{.next}}) are links, but they update the results in place via AJAX rather than navigating.
+
+Screen reader users expect a link to navigate to a new page, and the controls don't respond to Space as a button would. This relates to Success Criterion 4.1.2 (Name, Role, Value) and 2.1.1 (Keyboard).
+
+*Recommendation*
+
+Render these as {{button}} elements. If they must stay links, add {{role=""button""}} and Space key support.
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchPagination()}}.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0044","Best Practice","BP","The issues does not fail WCAG, but is a well-established and recommended design or usability best practice on the web","https://radancy.dev/component-library/guidance/","None","","","","None","","","","","Pagination - Redundant Title and Hidden Instruction Text","","The ""View More"" buttons ({{.pagination-view-more}}) carry a {{title}} that duplicates their visible text, and the page number input's label includes visually hidden instruction text ({{.pagination-current-label b}}).
+
+Screen readers announce the duplicate {{title}} twice, and the hidden instructions add verbosity without helping users operate a standard number field. This is a best practice issue.
+
+*Recommendation*
+
+Remove the {{title}} from View More buttons and the hidden instruction text from the page number label.
+
+*MagicBullet:* Currently patched sitewide by {{fixSearchPagination()}}.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0045","3.3.2: Labels or Instructions - Level A","A","Label elements and give instructions","https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions","None","","","","None","","","","","Pagination - Page Number Input Spin Buttons Removed","","The theme removes the native up/down spin buttons from the page number input ({{.pagination-current}}) with {{appearance: none}} and fixes its width.
+
+The spin buttons are the main visual cue that the field takes a number and can be stepped. Without them, users, particularly those with cognitive disabilities, may not realize the field is editable or how to use it. This relates to Success Criterion 3.3.2 (Labels or Instructions).
+
+*Recommendation*
+
+Keep the native number input appearance and spin buttons, and size the field to its content.
+
+*MagicBullet:* Currently patched sitewide by {{init.css}} ({{.pagination-current}} rules).","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0046","2.4.3: Focus Order - Level A","A","Logical order","https://www.w3.org/WAI/WCAG22/Understanding/focus-order","None","","","","None","","","","","Job Description - Positive Tabindex in ATS Content","","ATS-supplied job descriptions ({{.ats-description}}) often contain elements with positive {{tabindex}} values.
+
+Positive {{tabindex}} pulls those elements to the front of the tab order, ahead of the header, search, and apply button, so keyboard users move through the page in an order that doesn't match the layout. This fails Success Criterion 2.4.3 (Focus Order).
+
+*Recommendation*
+
+Strip any {{tabindex}} that isn't {{0}} or negative from ATS description content during import or rendering.
+
+*MagicBullet:* Currently patched sitewide by {{fixJobDescription()}}. Documented as [A11Y008|https://radancy.dev/magicbullet/a11y/#A11Y008].","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0047","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","None","","","","None","","","","","Job Description - Layout Tables Exposed as Data Tables","","ATS job descriptions ({{.ats-description}}) commonly use {{table}} elements purely for layout.
+
+Screen readers announce them as data tables with row and column counts, and users navigating by table get meaningless coordinates for ordinary paragraphs. This fails Success Criterion 1.3.1 (Info and Relationships).
+
+*Recommendation*
+
+Apply {{role=""presentation""}} to layout tables in ATS content, or convert them to non-table markup during import.
+
+*MagicBullet:* Currently patched sitewide by {{fixJobDescription()}}, which applies {{role=""presentation""}} to every table in the description. Documented as [A11Y008|https://radancy.dev/magicbullet/a11y/#A11Y008].","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0048","4.1.1: Parsing (Obsolete in WCAG 2.2, Radancy Best Practice) - Level A","A","No major code errors","https://www.w3.org/WAI/WCAG22/Understanding/parsing","None","","","","None","","","","","Job Description - Obsolete and Conflicting Markup in ATS Content","","ATS job descriptions ({{.ats-description}}) contain obsolete presentational markup ({{font}} elements, {{face}} and {{size}} attributes), redundant {{title}} attributes, and {{id}} values that often duplicate IDs elsewhere on the page.
+
+Duplicate IDs can break label, description, and skip-link references, {{title}} attributes add redundant announcements, and the obsolete markup is flagged in audits. This falls under Success Criterion 4.1.1 (Parsing), retained as a Radancy best practice.
+
+*Recommendation*
+
+Sanitize ATS description content on import: unwrap {{font}} elements and strip {{face}}, {{size}}, {{title}}, and {{id}} attributes.
+
+*MagicBullet:* Currently patched sitewide by {{fixJobDescription()}}. Documented as [A11Y008|https://radancy.dev/magicbullet/a11y/#A11Y008].","","","","","","Minor","Fail","Product Engineer","Medium","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0049","3.2.5: Change on Request - Level AAA","AAA","Don't change elements on your website until users ask","https://www.w3.org/WAI/WCAG22/Understanding/change-on-request","None","","","","None","","","","","Job Description - New Window Links Lack Warning","","Links in ATS job descriptions ({{.ats-description a[target=""_blank""]}}) open in a new window with no indication.
+
+Screen reader and screen magnifier users can be disoriented when a new window opens unexpectedly. This relates to Success Criterion 3.2.5 (Change on Request).
+
+*Recommendation*
+
+Append visually hidden, translated text such as ""(opens in new window)"" to each link, and pair it with a visible icon.
+
+*MagicBullet:* Currently patched sitewide by {{fixJobDescription()}}. Delivery still needs to add the visible icon.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0050","2.4.11: Focus Not Obscured (Minimum) - Level AA","AA","Ensure when an item gets keyboard focus, it is at least partially visible.","https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum","1.4.10: Reflow - Level AA","AA","Ensure content can be enlarged without requiring horizontal scrolling","https://www.w3.org/WAI/WCAG22/Understanding/reflow.html","1.4.4: Resize text - Level AA","AA","Text can be resized to 200% without loss of content or function","https://www.w3.org/WAI/WCAG22/Understanding/resize-text","","Job Description - Sticky AJD Header Obscures Content at Short Viewports","","The Advanced Job Description header ({{#ajd-header}}) stays sticky regardless of viewport height. At short heights, such as landscape phones or desktop browsers zoomed to 200% or more, it takes up a large share of the screen.
+
+Focused elements scroll underneath it and become hidden, and the remaining reading area is too small to use. This fails Success Criterion 2.4.11 (Focus Not Obscured (Minimum)), 1.4.10 (Reflow), and 1.4.4 (Resize Text).
+
+*Recommendation*
+
+Disable sticky positioning when the viewport is short.
+
+*After*
+
+{code}@media (height <= 600px) {
+
+#ajd-header { position: relative; }
+
+}{code}
+
+*MagicBullet:* Currently patched sitewide by {{init.css}}.","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0051","2.4.7: Focus Visible - Level AA","AA","Ensure keyboard focus is visible and clear","https://www.w3.org/WAI/WCAG22/Understanding/focus-visible","1.4.3: Contrast (Minimum) - Level AA","AA","Contrast ratio between text and background is at least 4.5 : 1","https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum","None","","","","","Job Description - Back to Navigation Links Invisible on Focus","","The AJD ""Back to Navigation"" links ({{.inPageNav__back-link}}, {{.back-to-ajd-nav__a}}) are hidden with {{opacity: 0}}.
+
+Opacity hides them from view even when focused, so keyboard users tab onto invisible links, and checkers report contrast failures on the transparent text. This fails Success Criterion 2.4.7 (Focus Visible) and 1.4.3 (Contrast (Minimum)).
+
+*Recommendation*
+
+Hide the links with a clip-based visually hidden technique instead of opacity, reveal them on focus, and give them text and background colors with at least 4.5:1 contrast.
+
+*MagicBullet:* Currently patched sitewide by {{init.css}}.","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0052","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","2.1.1: Keyboard - Level A","A","Accessible by keyboard only","https://www.w3.org/WAI/WCAG22/Understanding/keyboard","None","","","","","Job Location - Nearby Map Toggle Links Missing Button Semantics","","The ""Search Nearby"" options on the Job Location page ({{.job-map-nearby a}}) are links that change what the map shows. Only one is active at a time, but none expose a role or selected state.
+
+Screen reader users hear a list of links with no indication which one is active or that they switch the map in place, and the controls don't respond to Space. This fails Success Criterion 4.1.2 (Name, Role, Value) and relates to 2.1.1 (Keyboard).
+
+*Recommendation*
+
+Render the options as {{button}} elements with {{aria-pressed}}, set to {{true}} on the active option and {{false}} on the rest. This needs a product change, since GST can't change the markup.
+
+*Before*
+
+{code}<a href=""#"">Restaurants</a>{code}
+
+*After*
+
+{code}<button aria-pressed=""true"">Restaurants</button>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixJobLocation()}}, which adds {{role=""button""}}, {{aria-pressed}}, and Space key support.","","","","","","Moderate","Fail","Product Engineer","Medium","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0053","1.3.5: Identify Input Purpose - Level AA","AA","Make the meaning of common inputs available via technology","https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose","4.1.1: Parsing (Obsolete in WCAG 2.2, Radancy Best Practice) - Level A","A","No major code errors","https://www.w3.org/WAI/WCAG22/Understanding/parsing","None","","","","","Job Location - Get Directions Form Input Purpose and Required Markup","","On the Job Location ""Get Directions"" form ({{.job-map-directions}}), the starting address input ({{input[name=saddr]}}) has no {{autocomplete}} value, and inputs use {{aria-required}} and XHTML-style {{required=""required""}} rather than the boolean {{required}} attribute.
+
+Without an {{autocomplete}} token, users with motor or cognitive disabilities can't have the browser fill in their address. This fails Success Criterion 1.3.5 (Identify Input Purpose); the required markup falls under 4.1.1 (Parsing), retained as a Radancy best practice.
+
+*Recommendation*
+
+1. Add {{autocomplete=""street-address""}} to the starting address input.
+2. Replace {{aria-required}} and {{required=""required""}} with the boolean {{required}} attribute.
+
+*After*
+
+{code}<input name=""saddr"" autocomplete=""street-address"" required>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixJobLocation()}}. The required markup has reportedly been fixed in Base GST. Documented as [A11Y010|https://radancy.dev/magicbullet/a11y/#A11Y010].","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0054","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","2.1.1: Keyboard - Level A","A","Accessible by keyboard only","https://www.w3.org/WAI/WCAG22/Understanding/keyboard","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","https://greatclips-refresh-1.runmytests.com/jobs-map","Job Map - City Combobox Inaccessible","","The Job Map page's city picker uses a custom combobox ({{.combobox-container}}) layered over the {{#sel-city}} select. The custom widget can't be reliably operated with a keyboard or screen reader, and the city field is shown on page load even though it's empty until a state or ZIP is chosen.
+
+Keyboard and screen reader users can't pick a city, and everyone meets an empty field before it's usable. This fails Success Criterion 4.1.2 (Name, Role, Value), 2.1.1 (Keyboard), and 1.3.1 (Info and Relationships).
+
+*Recommendation*
+
+1. Replace the custom combobox with the native {{#sel-city}} {{select}} and its visible {{label}}.
+2. Hide the city field until the user selects a state or enters a ZIP, then reveal it.
+3. Don't output an empty placeholder option as the first choice.
+
+*More Info*
+
+* [https://greatclips-refresh-1.runmytests.com/jobs-map|https://greatclips-refresh-1.runmytests.com/jobs-map]
+
+*MagicBullet:* Currently patched sitewide by {{fixJobMap()}} plus {{init.css}}, which hides the custom combobox and forces the native select to display.","","","","","","Serious","Fail","Product Engineer","Medium","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0055","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","2.4.3: Focus Order - Level A","A","Logical order","https://www.w3.org/WAI/WCAG22/Understanding/focus-order","None","","","","","Sitemap - Static Headings Exposed as Disclosure Controls","","On the Sitemap page, the {{h2}} headings in the Job Location and Job Category modules ({{.job-location h2}}, {{.job-category h2}}) carry {{tabindex}}, {{aria-expanded}}, and the {{.expandable-parent}} class, though they don't expand anything.
+
+Keyboard users hit focus stops that do nothing, and screen reader users hear a collapsible state on a plain heading. This fails Success Criterion 4.1.2 (Name, Role, Value) and 2.4.3 (Focus Order).
+
+*Recommendation*
+
+Remove {{tabindex}}, {{aria-expanded}}, and {{.expandable-parent}} from these headings. If they're meant to toggle content, put a {{button}} with {{aria-expanded}} inside the heading.
+
+*MagicBullet:* Currently patched sitewide by {{fixSitemap()}}. Documented as [A11Y016|https://radancy.dev/magicbullet/a11y/#A11Y016].","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0056","3.2.5: Change on Request - Level AAA","AAA","Don't change elements on your website until users ask","https://www.w3.org/WAI/WCAG22/Understanding/change-on-request","None","","","","None","","","","","Social Share - New Window Links Lack Warning","","The social share links on job description pages ({{.social-share__item a[target=""_blank""]}}) open in a new window with no indication.
+
+Screen reader and screen magnifier users can be disoriented when a new window opens unexpectedly. This relates to Success Criterion 3.2.5 (Change on Request).
+
+*Recommendation*
+
+Append visually hidden, translated text such as ""(opens in new window)"" to each share link.
+
+*After*
+
+{code}<a href=""https://www.linkedin.com/share..."" target=""_blank"">LinkedIn<span class=""visually-hidden""> (opens in new window)</span></a>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixSocialShare()}}. Documented as [A11Y017|https://radancy.dev/magicbullet/a11y/#A11Y017].","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0057","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","3.3.2: Labels or Instructions - Level A","A","Label elements and give instructions","https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions","None","","","","","Data Form - Required Indicators Announced and Required State Missing","","Required fields in data capture forms ({{.data-form}}, e.g. Job Alert and Talent Community) show an asterisk added either through CSS {{content}} or as a literal ""*"" in the label text. Both are read aloud by screen readers. Some required fields also lack the {{required}} attribute, and because the {{required}} class sits on the whole keyword {{fieldset}}, asterisks appear on optional fields and on the {{legend}}. The asterisks stay on Job Category and Location after a keyword has been added.
+
+Screen reader users hear ""star"" mid-label, and the required state they rely on is missing on some fields and wrong on others. This fails Success Criterion 1.3.1 (Info and Relationships) and 3.3.2 (Labels or Instructions).
+
+*Recommendation*
+
+1. Render the asterisk as a separate {{span aria-hidden=""true""}} inside the label, and remove the CSS {{::after}} asterisk and inline text asterisks.
+2. Set the boolean {{required}} attribute on every required field.
+3. Only mark fields that are actually required; don't mark the {{legend}} or optional fields in the keyword fieldset.
+4. Remove the indicator from Job Category and Location once a keyword has been added.
+
+*Before*
+
+{code}<label for=""email"">Email *</label>
+
+<input id=""email"" name=""EmailAddress"">{code}
+
+*After*
+
+{code}<label for=""email"">Email<span class=""ico-required-indicator"" aria-hidden=""true"">*</span></label>
+
+<input id=""email"" name=""EmailAddress"" required>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}} plus {{init.css}} ({{.data-form}} rules). Documented as [A11Y004|https://radancy.dev/magicbullet/a11y/#A11Y004].","","","","","","Moderate","Fail","Product Engineer","Medium","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0058","4.1.1: Parsing (Obsolete in WCAG 2.2, Radancy Best Practice) - Level A","A","No major code errors","https://www.w3.org/WAI/WCAG22/Understanding/parsing","None","","","","None","","","","","Data Form - Redundant and Invalid Required Markup","","Data form fields ({{.data-form}}) use {{aria-required}} alongside or instead of {{required}}, use XHTML-style {{required=""required""}}, and output empty {{.instruction-text}} spans.
+
+These are flagged in automated audits and the empty spans cause inconsistent spacing. This falls under Success Criterion 4.1.1 (Parsing), retained as a Radancy best practice.
+
+*Recommendation*
+
+1. Use only the boolean {{required}} attribute and drop {{aria-required}}.
+2. Only output {{.instruction-text}} when it has content.
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}}. Documented as [A11Y004|https://radancy.dev/magicbullet/a11y/#A11Y004].","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0059","3.3.1: Error Identification - Level A","A","Clearly identify input errors","https://www.w3.org/WAI/WCAG22/Understanding/error-identification","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","None","","","","","Data Form - Validation State Not Exposed or Kept in Sync","","Data form fields ({{.data-form}}) don't expose {{aria-invalid}} on load, and once set to {{true}} it stays {{true}} after the user corrects the field and the {{input-validation-error}} class is removed. Valid-state validation messages ({{.field-validation-valid}}) also carry an unnecessary {{role}}, and the job alert Keyword Location field has no {{aria-describedby}} pointing to its error message.
+
+Screen reader users hear fields announced as invalid after fixing them, and the location field's error isn't read when they return to it. This fails Success Criterion 3.3.1 (Error Identification) and 4.1.2 (Name, Role, Value).
+
+*Recommendation*
+
+1. Set {{aria-invalid=""false""}} on required fields at load and update it on blur based on the field's validation state.
+2. Remove {{role}} from {{.field-validation-valid}} messages.
+3. Give the Keyword Location field ({{.keyword-location}}) an {{aria-describedby}} referencing its error message, as the Keyword Category field already does.
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}}. Documented as [A11Y004|https://radancy.dev/magicbullet/a11y/#A11Y004].","","","","","","Moderate","Fail","Product Engineer","Medium","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0060","1.3.5: Identify Input Purpose - Level AA","AA","Make the meaning of common inputs available via technology","https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose","None","","","","None","","","","","Data Form - Personal Data Fields Missing Autocomplete","","Data form fields that collect personal information (first name, last name, email, phone, street address, city, state/province, postal code) have no {{autocomplete}} tokens, and the email field uses {{type=""text""}}.
+
+Users with motor or cognitive disabilities can't have the browser fill in these fields, and mobile users don't get the email keyboard. This fails Success Criterion 1.3.5 (Identify Input Purpose).
+
+*Recommendation*
+
+Add these {{autocomplete}} tokens and change the email field to {{type=""email""}}:
+
+* {{FirstName}}: {{given-name}}
+* {{LastName}}: {{family-name}}
+* {{EmailAddress}}: {{email}}
+* {{MobilePhone}}: {{tel}}
+* {{StreetAddress}}: {{street-address}}
+* {{City}}: {{address-level2}}
+* State/Province: {{address-level1}}
+* {{PostalCode}}: {{postal-code}}
+
+*Before*
+
+{code}<input name=""EmailAddress"" type=""text"">{code}
+
+*After*
+
+{code}<input name=""EmailAddress"" type=""email"" autocomplete=""email"">{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}}. State/Province is currently targeted by a client-specific field name ({{Custom-92392}}), so it needs a product-side solution. Documented as [A11Y004|https://radancy.dev/magicbullet/a11y/#A11Y004].","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0061","Best Practice","BP","The issues does not fail WCAG, but is a well-established and recommended design or usability best practice on the web","https://radancy.dev/component-library/guidance/","None","","","","None","","","","","Data Form - Placeholder Text Duplicates Label","","Many data form text inputs have placeholder text identical to their label.
+
+Screen readers announce the same text twice, which adds verbosity without new information. This is a best practice issue.
+
+*Recommendation*
+
+Remove placeholders that repeat the label, and only use placeholders for supplemental format hints.
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}}, which removes a placeholder when it matches the label text (ignoring case and the required indicator).","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0062","2.4.6: Headings and Labels - Level AA","AA","Use clear headings and labels","https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels","None","","","","None","","","","","Data Form - Add Job Alert Button Has Ambiguous Name","","The job alert keyword ""Add"" button ({{.keyword-add}}) is named only ""Add"".
+
+Screen reader users navigating by buttons hear ""Add, button"" with no indication of what it adds. This fails Success Criterion 2.4.6 (Headings and Labels).
+
+*Recommendation*
+
+Give the button a translated name that starts with its visible text, e.g. ""Add Job Alert"", or make the visible text more specific.
+
+*After*
+
+{code}<button class=""keyword-add"" aria-label=""Add Job Alert"">Add</button>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}}. Documented as [A11Y004|https://radancy.dev/magicbullet/a11y/#A11Y004].","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0063","1.3.1: Info and Relationships - Level A","A","Semantic markup is used appropriately. Logical structure, etc.","https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships","None","","","","None","","","","","Data Form - Selected Job Alerts List Missing Region and Name","","The list of selected job alert keywords ({{.keyword-selected}}) isn't grouped or named, and its wrapper is still announced when no keywords have been added.
+
+Screen reader users can't easily find or identify the list of alerts they've added, and an empty container is exposed before any are added. This relates to Success Criterion 1.3.1 (Info and Relationships).
+
+*Recommendation*
+
+Wrap the list in a container with {{role=""region""}} and a translated {{aria-label}} of ""Selected Job Alerts"", and hide the container when it has no items.
+
+*After*
+
+{code}<div class=""keyword-region"" role=""region"" aria-label=""Selected Job Alerts"">
+
+    <ul class=""keyword-selected"">...</ul>
+
+</div>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}} plus {{init.css}}, which hides {{.keyword-region}} when it contains no {{li}}. Documented as [A11Y004|https://radancy.dev/magicbullet/a11y/#A11Y004].","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0064","2.4.3: Focus Order - Level A","A","Logical order","https://www.w3.org/WAI/WCAG22/Understanding/focus-order","None","","","","None","","","","","Data Form - Focus Lost When Adding or Removing Job Alert Keywords","","In the job alert keyword fieldset, activating ""Add"" or a keyword's ""Remove"" link changes the list and drops focus to the document body.
+
+Keyboard and screen reader users lose their place and must navigate back through the form after every add or remove. This fails Success Criterion 2.4.3 (Focus Order).
+
+*Recommendation*
+
+1. After a keyword is added, move focus to the first keyword select ({{.keyword-category}}) so the next alert can be entered.
+2. After a keyword is removed, move focus to the next remaining Remove control (or the previous one if it was last). When none remain, move focus to {{.keyword-category}}.
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}}. Documented as [A11Y004|https://radancy.dev/magicbullet/a11y/#A11Y004].","","","","","","Serious","Fail","Product Engineer","Medium","","Yes","Failed in Preview","","","0"
+"A11YMAGICBULLET0065","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","2.1.1: Keyboard - Level A","A","Accessible by keyboard only","https://www.w3.org/WAI/WCAG22/Understanding/keyboard","None","","","","","Data Form - Keyword Remove Links Missing Button Semantics","","Each selected job alert keyword's remove control ({{.keyword-remove}}) is a link, though it removes an item in place rather than navigating.
+
+Screen reader users hear a link and expect navigation, and the control doesn't respond to Space. This fails Success Criterion 4.1.2 (Name, Role, Value) and relates to 2.1.1 (Keyboard).
+
+*Recommendation*
+
+Render the control as a {{button type=""button""}} with a name identifying the keyword, e.g. ""Remove Engineering, Boston"".
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}}, which adds {{role=""button""}} and Enter/Space handling via a {{MutationObserver}}.","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0066","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","None","","","","None","","","","","Data Form - Resume Remove Control Is a Hash Link","","The control to remove an uploaded resume ({{input[name='Resume']}} sibling) is an {{a href=""#""}}.
+
+Screen reader users hear a link that appears to navigate, and activating it can jump the page to the top. This fails Success Criterion 4.1.2 (Name, Role, Value).
+
+*Recommendation*
+
+Replace the link with a {{button type=""button""}} that keeps its visible text and is described by the file input it clears.
+
+*Before*
+
+{code}<input type=""file"" id=""resume"" name=""Resume"">
+
+<a href=""#"">Remove</a>{code}
+
+*After*
+
+{code}<input type=""file"" id=""resume"" name=""Resume"">
+
+<button type=""button"" class=""file-remove"" aria-describedby=""resume"">Remove</button>{code}
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}}.","","","","","","Moderate","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0067","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","4.1.1: Parsing (Obsolete in WCAG 2.2, Radancy Best Practice) - Level A","A","No major code errors","https://www.w3.org/WAI/WCAG22/Understanding/parsing","None","","","","","Data Form - reCAPTCHA Response Field Missing Accessible Name","","The reCAPTCHA badge in data forms ({{.grecaptcha-badge}}) includes a {{textarea.g-recaptcha-response}} with no accessible name, and its {{iframe}} elements use the obsolete {{frameborder}} attribute.
+
+Automated audits flag the unnamed field and the obsolete attribute. This relates to Success Criterion 4.1.2 (Name, Role, Value), and the obsolete attribute to 4.1.1 (Parsing), retained as a Radancy best practice.
+
+*Recommendation*
+
+1. Give the response {{textarea}} a translated {{aria-label}} such as ""Captcha"".
+2. Remove {{frameborder}} from the iframes and set {{border: 0}} in CSS instead.
+3. Make sure the badge comes after the submit button in the tab order.
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}} plus {{init.css}}. The script doesn't yet move the badge after the submit button, despite its comment saying so.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0068","2.4.3: Focus Order - Level A","A","Logical order","https://www.w3.org/WAI/WCAG22/Understanding/focus-order","None","","","","None","","","","","Data Form - Form Message Remains in Tab Order","","The confirmation message shown after submitting a data form ({{.form-message b}}) has {{tabindex=""0""}}.
+
+Focus should move to a message only briefly to announce it. With {{tabindex=""0""}}, it stays a permanent tab stop that keyboard users keep landing on. This relates to Success Criterion 2.4.3 (Focus Order).
+
+*Recommendation*
+
+Use {{tabindex=""-1""}} so the message can receive focus from script without becoming a tab stop.
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}}.","","","","","","Minor","Fail","Product Engineer","Easy","","","Failed in Preview","","","0"
+"A11YMAGICBULLET0069","4.1.2: Name, Role, Value - Level A","A","Build all elements for accessibility","https://www.w3.org/WAI/WCAG22/Understanding/name-role-value","2.1.1: Keyboard - Level A","A","Accessible by keyboard only","https://www.w3.org/WAI/WCAG22/Understanding/keyboard","None","","","","","Data Form - Form Message Close Link Missing Button Semantics","","The form message close control ({{.form-message a}}) is a link with no meaningful visual icon, though it dismisses the message rather than navigating.
+
+Screen reader users hear a link, and the control doesn't respond to Space. This fails Success Criterion 4.1.2 (Name, Role, Value) and relates to 2.1.1 (Keyboard).
+
+*Recommendation*
+
+Render the control as a {{button type=""button""}} with an accessible name such as ""Close"", support both Enter and Space, and give it a decorative, {{aria-hidden}} close icon.
+
+*MagicBullet:* Currently patched sitewide by {{fixDataForm()}} plus {{init.css}}, which adds {{role=""button""}} and a CSS ""×"" icon. Space key support is still to do.","","","","","","Moderate","Fail","Product Engineer","Medium","","","Failed in Preview","","","0"

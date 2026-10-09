@@ -22,7 +22,7 @@ width: 1px;
 /* Ensure that all placeholder text is contrast friendly. */
 
 ::-moz-placeholder {
-color: curretColor;
+color: currentColor;
 opacity: 1;
 }
     

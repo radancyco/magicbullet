@@ -812,6 +812,7 @@ function fixDataForm() {
       var resumeRemoveLabel = fileUploadLink.textContent.trim();
 
       var fileUploadButton = document.createElement("button");
+      fileUploadButton.setAttribute("type", "button"); // Without this, the button defaults to type="submit" and submits the form.
       fileUploadButton.setAttribute("aria-describedby", input.getAttribute("id"));
       fileUploadButton.classList.add("file-remove");
       fileUploadButton.style.display = "none";
@@ -821,7 +822,9 @@ function fixDataForm() {
 
     });
 
-    // Fix: Adding an accName to textarea, removing iframe garbage, and moving captcha to end of form to address tab order. It should not exist before submit button.
+    // Fix: Adding an accName to textarea and removing iframe garbage.
+    // Note: The badge should ideally come after the submit button in tab order, but we do not move it here. Moving an
+    // element that contains an iframe reloads the iframe, which can reset the reCAPTCHA token. Needs a product-side fix.
 
     if(captchaBadge) {
 
@@ -1158,8 +1161,6 @@ function fixMindReaderInput() {
     var inputId = input.getAttribute("id");
     var label = document.querySelector("label[for=" + inputId + "]");
     var mindReaderID = inputId + "-mindreader";
-    var mindReader = document.getElementById(mindReaderID);
-    var mindReaderStatus = document.getElementById(inputId + "-mindreader-status");
 
     // Set Autocomplete Description 
 
@@ -1233,22 +1234,30 @@ function fixMindReaderInput() {
     
     function checkActiveClass() {
 
-      if(mindReader) {
-    
-        var activeItem = mindReader.querySelector("a.active"); 
+      // Fix: Look up the list and status fresh each time. MindReader re-renders them, so references captured at
+      // setup go stale (this was throwing "Cannot read properties of null" on second use, e.g. https://kpmg.runmytests.eu).
 
-        // BUG: See https://kpmg.runmytests.eu, Dropdown works initially, but on second try, does not apper to work correctly. Throwing folling, can't find mindReader ID. 
-        // Uncaught TypeError: Cannot read properties of null (reading 'querySelector') at HTMLDocument.checkActiveClass (init.js:720:35)
+      var mindReader = document.getElementById(mindReaderID);
+
+      if(mindReader) {
+
+        var activeItem = mindReader.querySelector("a.active");
 
         if (activeItem) {
 
           // Get li ID
 
           var listID = activeItem.parentElement.getAttribute("id");
-  
+
           // Remove redundant screen reader announcements
 
-          mindReaderStatus.textContent = "";
+          var mindReaderStatus = document.getElementById(inputId + "-mindreader-status");
+
+          if (mindReaderStatus) {
+
+            mindReaderStatus.textContent = "";
+
+          }
 
           // Pass selected ID to aria-activedescendant
 
@@ -1257,41 +1266,41 @@ function fixMindReaderInput() {
         }
 
       }
-    
+
     }
 
-    // Add event listener for when focus leaves the input field (focusout)
-    
-    input.addEventListener("focusout", function() {
-    
-      checkInput();  // Update aria-expanded to false
-    
-    });
+    // Fix: initDynamicPatch() re-runs this function on every DOM mutation. Guarding here prevents the listeners below
+    // from stacking up on the same input each time.
+
+    if (input.dataset.a11yComboboxBound === "1") return;
+
+    input.dataset.a11yComboboxBound = "1";
 
     // Add event listener for when focus leaves the input field (focusout)
-    
+
     input.addEventListener("focusout", function() {
-    
+
       checkInput();  // Update aria-expanded to false
-    
+
     });
 
     // Add event listener for when Escape key is pressed
 
     input.addEventListener("keydown", function(event) {
-  
+
       if (event.key === "Escape") {
-    
+
         checkInput();  // Update aria-expanded to false
 
       }
 
     });
 
-    // Listen for both keydown and keyup events
+    // Listen for both keydown and keyup events. Bound to the input rather than document, since focus stays on the
+    // input while arrowing through options (aria-activedescendant), and one document listener per input per patch run was piling up.
 
-    document.addEventListener("keydown", checkActiveClass); 
-    document.addEventListener("keyup", checkActiveClass);
+    input.addEventListener("keydown", checkActiveClass);
+    input.addEventListener("keyup", checkActiveClass);
 
   });
 
@@ -1524,18 +1533,22 @@ function fixJobLocation() {
 
 function fixJobMap() {
 
-  var jobMapInputs = document.querySelector("#sel-state, #tbx-zip")
+  var jobMapInputs = document.querySelectorAll("#sel-state, #tbx-zip");
   var jobMapCityWrapper = document.querySelector("#wrapper-sel-city");
 
-  if (jobMapInputs && jobMapCityWrapper) {
+  if (jobMapInputs.length && jobMapCityWrapper) {
 
-    // Since the select is blank on page load, it should not be shown until action taken in either the state or zip dropdowns. 
+    // Since the select is blank on page load, it should not be shown until action taken in either the state or zip dropdowns.
 
     jobMapCityWrapper.setAttribute("hidden", "");
 
-    jobMapInputs.addEventListener("change", function() {
+    jobMapInputs.forEach(function(input) {
 
-      jobMapCityWrapper.removeAttribute("hidden");
+      input.addEventListener("change", function() {
+
+        jobMapCityWrapper.removeAttribute("hidden");
+
+      });
 
     });
 
@@ -2169,7 +2182,7 @@ function fixSocialShare() {
 
     var span = document.createElement("span");
     span.classList.add("magicbullet-visually-hidden");
-    span.textContent = labelNewWindow;
+    span.textContent = " (" + labelNewWindow + ")";
     link.append(span);
 
     // NICE TO HAVE: We don't really need the rel attribute anymore. Ask prodcut to eventually remove it.

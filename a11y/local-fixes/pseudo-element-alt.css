@@ -1,0 +1,4 @@
+.search-results-list__content:after {
+content: "\f105"; /* fallback for older browsers */
+content: "\f105" / ""; /* gives CSS content a null alt */
+}
