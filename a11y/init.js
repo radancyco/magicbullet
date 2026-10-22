@@ -2176,7 +2176,7 @@ function fixSocialShare() {
 
   // TODO: Add language support.
 
-  var socialShareLinks = document.querySelectorAll(".social-share__item a[target='_blank']");
+  var socialShareLinks = document.querySelectorAll(".social-share a[target='blank']");
 
   socialShareLinks.forEach(function(link) {
 
@@ -2192,16 +2192,6 @@ function fixSocialShare() {
 }
 
 // Accessibility Patch: Mindreader Combobox
-
-//<div id="system-imessage" role="dialog" aria-label="Important System Message" aria-modal="true">
-
-//<button id="system-ialert-close-button">X</button>
-
-//<button id="system-ialert-button">Accepter</button>
-//<button id="system-ialert-reject-button">Refuser</button>
-//<button id="system-ialert-manage-button">Gestion des préférences</button>
-
-//</div>
 
 function fixPrivacyNotice() {
 
