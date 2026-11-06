@@ -12,6 +12,12 @@
 
 */
 
+// Note: Dedicated "finished executing" signal for loadA11yPatch() in a11y/init.js. A script's "load" event fires only once,
+// so a consumer that finds this file already on the page checks this marker instead of waiting on an event that may
+// have already fired. Keep this line unconditional and outside the language branches below.
+
+var magicBulletLanguagePackLoaded = true;
+
 var currentPageLanguage = document.documentElement.getAttribute("lang");
 
 if(currentPageLanguage === "ar") {

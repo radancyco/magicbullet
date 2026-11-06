@@ -1,0 +1,197 @@
+/*!
+
+  Radancy MagicBullet: Accessibility Patch
+
+  Contributor(s):
+  Michael "Spell" Spellacy
+
+*/
+
+/* TODO
+
+1. Add new fix for keyword autocomplete. See https://dwhite-rds.runmytests.com/documentation#section-auto-complete 
+   Similar was implemented on Intuit some time ago. Will probably not use, except for refrence. See https://tbadmin.radancy.net/sassjs/updatejavascript/27595/27595/70305
+
+*/ 
+
+// Note: Load this file with <script type="module">. Each fix lives in ./fixes/ and each helper in ./utils/.
+
+import { loadA11yPatch } from "./utils/load-a11y-patch.js";
+import { observeComponent, bindComponents } from "./utils/observe-component.js";
+import { runSafely } from "./utils/run-safely.js";
+
+import { fixA11y } from "./fixes/fix-a11y.js";
+import { fixAdvancedSearchForm } from "./fixes/fix-advanced-search-form.js";
+import { fixAltAttribute } from "./fixes/fix-alt-attribute.js";
+import { fixAppliedFilter } from "./fixes/fix-applied-filter.js";
+import { fixCookieManagement } from "./fixes/fix-cookie-management.js";
+import { fixCMS } from "./fixes/fix-cms.js";
+import { fixDataForm } from "./fixes/fix-data-form.js";
+import { fixGlobalDisclosure } from "./fixes/fix-global-disclosure.js";
+import { fixIframeElement } from "./fixes/fix-iframe-element.js";
+import { fixKeywordSearch } from "./fixes/fix-keyword-search.js";
+import { fixInputElements } from "./fixes/fix-input-elements.js";
+import { fixMindReaderInput } from "./fixes/fix-mind-reader-input.js";
+import { fixMindReaderList } from "./fixes/fix-mind-reader-list.js";
+import { fixHeader } from "./fixes/fix-header.js";
+import { fixJobDescription } from "./fixes/fix-job-description.js";
+import { fixJobLocation } from "./fixes/fix-job-location.js";
+import { fixJobMap } from "./fixes/fix-job-map.js";
+import { fixSaveJobButton } from "./fixes/fix-save-job-button.js";
+import { fixSavedJobsLink } from "./fixes/fix-saved-jobs-link.js";
+import { fixSearchForm } from "./fixes/fix-search-form.js";
+import { fixSearchFilters } from "./fixes/fix-search-filters.js";
+import { fixSearchResults } from "./fixes/fix-search-results.js";
+import { fixSearchSort } from "./fixes/fix-search-sort.js";
+import { fixSearchPagination } from "./fixes/fix-search-pagination.js";
+import { fixSitemap } from "./fixes/fix-sitemap.js";
+import { fixSocialShare } from "./fixes/fix-social-share.js";
+import { fixPrivacyNotice } from "./fixes/fix-privacy-notice.js";
+// import { fixJobList } from "./fixes/fix-job-list.js"; // Retired, see file.
+
+// var languagePackSrc = "https://services.tmpwebeng.com/magicbullet/language-pack.js";
+
+var languagePackSrc = "https://radancy.dev/magicbullet/language-pack.js";
+
+loadA11yPatch(languagePackSrc, function(){
+
+  console.log("%cMagicBullet: A11y%cv2.0.5", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+
+  var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
+
+  var a11yBody = document.body;
+
+  // Add A11y hook for implementation team. May come in handy.
+
+  a11yBody.classList.add("magicbullet-a11y");
+
+  // Add global aria-live to pass messages to when needed.
+
+  let globalA11yMessage = document.querySelector("#magicbullet-message");
+
+  if(!globalA11yMessage) {
+
+    let a11yMessage = document.createElement("div");
+  
+    a11yMessage.classList.add("magicbullet-visually-hidden");
+    a11yMessage.setAttribute("id", "magicbullet-message");
+    a11yMessage.setAttribute("aria-live", "polite");
+    a11yBody.append(a11yMessage);
+
+  }
+
+  // Architecture: Each component fix owns a MutationObserver scoped to its own container (see initComponentPatch()
+  // and observeComponent()), so a change in one component only re-runs that component's fix. The one page-wide
+  // observer below handles the two jobs that have no single container: running the sitewide fixes (images, iframes,
+  // checkboxes, disclosures, save job buttons) and discovering component containers added or replaced after load.
+
+  var targetNode = document.querySelector("#page") || document.body;
+
+  var config = { childList: true, subtree: true };
+
+  var sitewideObserver = new MutationObserver(function() {
+
+    clearTimeout(sitewideObserver.timeout);
+
+    sitewideObserver.disconnect();
+
+    sitewideObserver.timeout = setTimeout(function() {
+
+      initDynamicPatch();
+
+      bindComponents();
+
+      sitewideObserver.observe(targetNode, config);
+
+    }, 1000);
+
+  });
+
+  initStaticPatch();
+
+  initDynamicPatch();
+
+  initComponentPatch();
+
+  sitewideObserver.observe(targetNode, config);
+
+});
+
+// Accessibility Patch: Dynamic (Sitewide)
+// Desc: These fixes target elements that can appear anywhere on the page, with no single container to observe.
+// They run on page load and again whenever the sitewide observer sees a change under #page.
+
+function initDynamicPatch() {
+
+  runSafely(fixAltAttribute);
+  runSafely(fixGlobalDisclosure);
+  runSafely(fixIframeElement);
+  runSafely(fixInputElements);
+  runSafely(fixSaveJobButton);
+
+  console.log("%cMagicBullet: A11y%cDynamic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+
+}
+
+// Accessibility Patch: Dynamic (Components)
+// Desc: These fixes each target a specific component. Each component instance is fixed once when found, then
+// re-fixed by its own observer whenever its container changes. See observeComponent() for the options.
+
+function initComponentPatch() {
+
+  observeComponent(".search-results-options", fixAppliedFilter);
+  observeComponent(".data-form", fixDataForm);
+
+  // Note: Observing the input's form so the fix re-runs if the autocomplete popup is added after load.
+  // The popup's own contents are watched by the dedicated keywordObserver inside fixKeywordSearch().
+
+  observeComponent(".search-keyword", fixKeywordSearch, { target: function(input) { return input.form || input.parentNode; } });
+  observeComponent("input.search-location, input.keyword-category, input.keyword-location, input.keyword-facet", fixMindReaderInput, { target: function(input) { return input.form || input.parentNode; } });
+
+  // Note: The list fix runs immediately (no debounce) so roles and IDs are on the options before the user arrows through them.
+
+  observeComponent(".mindreader-status, #wrapper-sel-city", fixMindReaderList, { debounce: 0 });
+  observeComponent("#system-imessage", fixPrivacyNotice);
+  observeComponent("[data-selector-name=recentlyviewedjoblist]", fixSavedJobsLink, {
+
+    target: function(jobList) { return jobList.parentNode; },
+    config: { childList: true, subtree: true, attributes: true, attributeFilter: ["data-recently-viewed-jobs"] },
+    debounce: 0
+
+  });
+  observeComponent("#search-filters", fixSearchFilters);
+
+  // Note: #search-results is replaced wholesale on update, so these observe its parent. fixSearchResults and fixSearchSort
+  // only bind once per component (they manage their own observer/listener), so they don't need a re-run observer.
+
+  observeComponent("#search-results", fixSearchResults, { observe: false });
+  observeComponent("select[data-search-results-sort-enhanced='true']", fixSearchSort, { observe: false });
+  observeComponent("#search-results", fixSearchPagination, { target: function(searchResults) { return searchResults.parentNode; } });
+
+  bindComponents();
+
+  console.log("%cMagicBullet: A11y%cComponent Scripts ✔", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+
+}
+
+// Accessibility Patch: Static
+// Desc: These fixes address issues that occur on page load only.
+
+function initStaticPatch() {
+
+  runSafely(fixA11y);
+  runSafely(fixAdvancedSearchForm);
+  runSafely(fixCookieManagement);
+  runSafely(fixCMS);
+  runSafely(fixHeader);
+  runSafely(fixJobDescription);
+  // fixJobList();
+  runSafely(fixJobLocation); 
+  runSafely(fixJobMap);
+  runSafely(fixSearchForm);
+  runSafely(fixSitemap);
+  runSafely(fixSocialShare);
+
+  console.log("%cMagicBullet: A11y%cStatic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+
+}
