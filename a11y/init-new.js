@@ -89,13 +89,15 @@ loadA11yPatch(languagePackSrc, function(){
 
   var config = { childList: true, subtree: true };
 
-  var sitewideObserver = new MutationObserver(function() {
+  // Note: The first mutation disconnects the observer and schedules one run after the burst settles. No clearTimeout is
+  // needed: the callback can't fire again until the timer has run and reconnected the observer. Mutations made while
+  // disconnected are still covered, since the run scans the whole page.
 
-    clearTimeout(sitewideObserver.timeout);
+  var sitewideObserver = new MutationObserver(function() {
 
     sitewideObserver.disconnect();
 
-    sitewideObserver.timeout = setTimeout(function() {
+    setTimeout(function() {
 
       initDynamicPatch();
 
@@ -159,6 +161,7 @@ function initComponentPatch() {
     debounce: 0
 
   });
+
   observeComponent("#search-filters", fixSearchFilters);
 
   // Note: #search-results is replaced wholesale on update, so these observe its parent. fixSearchResults and fixSearchSort
