@@ -14,40 +14,40 @@
 
 */ 
 
-// Note: Load this file with <script type="module">. Each fix lives in ./fixes/ and each helper in ./utils/.
+// Note: Load this file with <script type="module">. Each fix (fix-*.js) and utility (util-*.js) sits beside this file.
 
-import { loadA11yPatch } from "./utils/load-a11y-patch.js";
-import { observeComponent, bindComponents } from "./utils/observe-component.js";
-import { runSafely } from "./utils/run-safely.js";
+import { loadA11yPatch } from "./util-load-a11y-patch.js";
+import { observeComponent, bindComponents } from "./util-observe-component.js";
+import { runSafely } from "./util-run-safely.js";
 
-import { fixA11y } from "./fixes/fix-a11y.js";
-import { fixAdvancedSearchForm } from "./fixes/fix-advanced-search-form.js";
-import { fixAltAttribute } from "./fixes/fix-alt-attribute.js";
-import { fixAppliedFilter } from "./fixes/fix-applied-filter.js";
-import { fixCookieManagement } from "./fixes/fix-cookie-management.js";
-import { fixCMS } from "./fixes/fix-cms.js";
-import { fixDataForm } from "./fixes/fix-data-form.js";
-import { fixGlobalDisclosure } from "./fixes/fix-global-disclosure.js";
-import { fixIframeElement } from "./fixes/fix-iframe-element.js";
-import { fixKeywordSearch } from "./fixes/fix-keyword-search.js";
-import { fixInputElements } from "./fixes/fix-input-elements.js";
-import { fixMindReaderInput } from "./fixes/fix-mind-reader-input.js";
-import { fixMindReaderList } from "./fixes/fix-mind-reader-list.js";
-import { fixHeader } from "./fixes/fix-header.js";
-import { fixJobDescription } from "./fixes/fix-job-description.js";
-import { fixJobLocation } from "./fixes/fix-job-location.js";
-import { fixJobMap } from "./fixes/fix-job-map.js";
-import { fixSaveJobButton } from "./fixes/fix-save-job-button.js";
-import { fixSavedJobsLink } from "./fixes/fix-saved-jobs-link.js";
-import { fixSearchForm } from "./fixes/fix-search-form.js";
-import { fixSearchFilters } from "./fixes/fix-search-filters.js";
-import { fixSearchResults } from "./fixes/fix-search-results.js";
-import { fixSearchSort } from "./fixes/fix-search-sort.js";
-import { fixSearchPagination } from "./fixes/fix-search-pagination.js";
-import { fixSitemap } from "./fixes/fix-sitemap.js";
-import { fixSocialShare } from "./fixes/fix-social-share.js";
-import { fixPrivacyNotice } from "./fixes/fix-privacy-notice.js";
-// import { fixJobList } from "./fixes/fix-job-list.js"; // Retired, see file.
+import { fixA11y } from "./fix-a11y.js";
+import { fixAdvancedSearchForm } from "./fix-advanced-search-form.js";
+import { fixAltAttribute } from "./fix-alt-attribute.js";
+import { fixAppliedFilter } from "./fix-applied-filter.js";
+import { fixCookieManagement } from "./fix-cookie-management.js";
+import { fixCMS } from "./fix-cms.js";
+import { fixDataForm } from "./fix-data-form.js";
+import { fixGlobalDisclosure } from "./fix-global-disclosure.js";
+import { fixIframeElement } from "./fix-iframe-element.js";
+import { fixKeywordSearch } from "./fix-keyword-search.js";
+import { fixInputElements } from "./fix-input-elements.js";
+import { fixMindReaderInput } from "./fix-mind-reader-input.js";
+import { fixMindReaderList } from "./fix-mind-reader-list.js";
+import { fixHeader } from "./fix-header.js";
+import { fixJobDescription } from "./fix-job-description.js";
+import { fixJobLocation } from "./fix-job-location.js";
+import { fixJobMap } from "./fix-job-map.js";
+import { fixSaveJobButton } from "./fix-save-job-button.js";
+import { fixSavedJobsLink } from "./fix-saved-jobs-link.js";
+import { fixSearchForm } from "./fix-search-form.js";
+import { fixSearchFilters } from "./fix-search-filters.js";
+import { fixSearchResults } from "./fix-search-results.js";
+import { fixSearchSort } from "./fix-search-sort.js";
+import { fixSearchPagination } from "./fix-search-pagination.js";
+import { fixSitemap } from "./fix-sitemap.js";
+import { fixSocialShare } from "./fix-social-share.js";
+import { fixPrivacyNotice } from "./fix-privacy-notice.js";
+// import { fixJobList } from "./fix-job-list.js"; // Retired, see file.
 
 // var languagePackSrc = "https://services.tmpwebeng.com/magicbullet/language-pack.js";
 

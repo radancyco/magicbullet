@@ -1,4 +1,4 @@
-// Accessibility Patch: Mindreader Combobox
+// Accessibility Patch: Privacy Notice
 
 export function fixPrivacyNotice(privacyNotice) {
 

@@ -1,5 +1,5 @@
-import { formatMessage } from "../utils/format-message.js";
-import { preserveScrollPosition } from "../utils/preserve-scroll-position.js";
+import { formatMessage } from "./util-format-message.js";
+import { preserveScrollPosition } from "./util-preserve-scroll-position.js";
 
 // Accessibility Patch: Search Results Sort
 // Desc: Sorting reorders existing results without changing the count, so fixSearchResults' change detection

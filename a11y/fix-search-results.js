@@ -1,4 +1,4 @@
-import { formatMessage } from "../utils/format-message.js";
+import { formatMessage } from "./util-format-message.js";
 
 // Accessibility Patch: Search Results
 
