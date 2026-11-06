@@ -97,7 +97,7 @@ loadA11yPatch(languagePackSrc, function(){
   // observer below handles the two jobs that have no single container: running the sitewide fixes (images, iframes,
   // checkboxes, disclosures, save job buttons) and discovering component containers added or replaced after load.
 
-  var targetNode = document.querySelector("#page") || document.body;
+  var targetNode = document.querySelector("#page") || a11yBody;
 
   var config = { childList: true, subtree: true };
 
