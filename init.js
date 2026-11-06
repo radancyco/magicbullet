@@ -15,6 +15,10 @@
 
   const magicBulletDisabled = params.get("magicbullet") === "false";
 
+  // Allow loading the new (ES module) A11y patch, a11y/init-new.js, on QA domains via ?magicbullet-a11y=new
+
+  const a11yNew = params.get("magicbullet-a11y") === "new";
+
   // If disabled, bail out immediately
 
   if (magicBulletDisabled) {
@@ -145,8 +149,20 @@
 
       if(testPaths) {
 
-        a11yCSS.setAttribute("href", "https://radancy.dev/magicbullet/a11y/init.css");
-        a11yExec.setAttribute("src", "https://radancy.dev/magicbullet/a11y/init.js");
+        // init-new.js uses import statements, so it must load as a module.
+
+        if (a11yNew) {
+
+          a11yCSS.setAttribute("href", "https://radancy.dev/magicbullet/a11y/init-new.css");
+          a11yExec.setAttribute("type", "module");
+          a11yExec.setAttribute("src", "https://radancy.dev/magicbullet/a11y/init-new.js");
+
+        } else {
+
+          a11yCSS.setAttribute("href", "https://radancy.dev/magicbullet/a11y/init.css");
+          a11yExec.setAttribute("src", "https://radancy.dev/magicbullet/a11y/init.js");
+
+        }
 
       } else {
 
