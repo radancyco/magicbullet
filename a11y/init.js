@@ -1298,9 +1298,17 @@ function fixMindReaderInput() {
 
     // Listen for both keydown and keyup events. Bound to the input rather than document, since focus stays on the
     // input while arrowing through options (aria-activedescendant), and one document listener per input per patch run was piling up.
+    // Fix: Deferred with setTimeout. MindReader moves the "active" class in its own keyup handler, which runs after ours,
+    // so reading it synchronously left aria-activedescendant one option behind.
 
-    input.addEventListener("keydown", checkActiveClass);
-    input.addEventListener("keyup", checkActiveClass);
+    function checkActiveClassDeferred() {
+
+      setTimeout(checkActiveClass, 0);
+
+    }
+
+    input.addEventListener("keydown", checkActiveClassDeferred);
+    input.addEventListener("keyup", checkActiveClassDeferred);
 
   });
 
