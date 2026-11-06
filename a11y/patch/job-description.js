@@ -2,7 +2,7 @@
 
 export function fixJobDescription() {
 
-  var atsDescription = document.querySelectorAll(".ats-description");
+  const atsDescription = document.querySelectorAll(".ats-description");
 
   atsDescription.forEach(function(desc) {
 
@@ -37,7 +37,7 @@ export function fixJobDescription() {
 
     desc.querySelectorAll("font").forEach(function(font) {
   
-      var parent = font.parentNode;
+      const parent = font.parentNode;
   
       while (font.firstChild) {
   

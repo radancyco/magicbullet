@@ -14,8 +14,6 @@
 
 */ 
 
-// Note: Load this file with <script type="module">. Each fix lives in ./patch/ and each utility in ./util/.
-
 import { loadA11yPatch } from "./util/load-a11y-patch.js";
 import { observeComponent, bindComponents } from "./util/observe-component.js";
 import { runSafely } from "./util/run-safely.js";
@@ -47,15 +45,14 @@ import { fixSearchPagination } from "./patch/search-pagination.js";
 import { fixSitemap } from "./patch/sitemap.js";
 import { fixSocialShare } from "./patch/social-share.js";
 import { fixPrivacyNotice } from "./patch/privacy-notice.js";
-// import { fixJobList } from "./patch/job-list.js"; // Retired, see file.
 
-// Load the QA language pack on test domains, else the production one. Same domain check as the root init.js loader.
+// Load the QA language pack on test domains, else the production one.
 
 const hostName = location.hostname.substring(location.hostname.indexOf(".") + 1);
 
 const testPaths = hostName === "runmytests.com" || hostName === "runmytests.eu" || hostName === "talentbrew.com" || hostName === "tmpqa.com";
 
-var languagePackSrc;
+let languagePackSrc;
 
 if (testPaths) {
 
@@ -69,21 +66,21 @@ if (testPaths) {
 
 loadA11yPatch(languagePackSrc, function(){
 
-  console.log("%cMagicBullet: A11y%cv2.0.5", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+  console.log("%cMagicBullet: A11y%cv3.0.0", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
-  var a11yBody = document.body;
+  const a11yBody = document.body;
 
-  // Add A11y hook for implementation team. May come in handy.
+  // Add A11y hook for implementation team. May come in handy. Or not.
 
   a11yBody.classList.add("magicbullet-a11y");
 
   // Add global aria-live to pass messages to when needed.
 
-  let globalA11yMessage = document.querySelector("#magicbullet-message");
+  const globalA11yMessage = document.querySelector("#magicbullet-message");
 
   if(!globalA11yMessage) {
 
-    let a11yMessage = document.createElement("div");
+    const a11yMessage = document.createElement("div");
   
     a11yMessage.classList.add("magicbullet-visually-hidden");
     a11yMessage.setAttribute("id", "magicbullet-message");
@@ -97,15 +94,15 @@ loadA11yPatch(languagePackSrc, function(){
   // observer below handles the two jobs that have no single container: running the sitewide fixes (images, iframes,
   // checkboxes, disclosures, save job buttons) and discovering component containers added or replaced after load.
 
-  var targetNode = document.querySelector("#page") || a11yBody;
+  const targetNode = document.querySelector("#page") || a11yBody;
 
-  var config = { childList: true, subtree: true };
+  const config = { childList: true, subtree: true };
 
   // Note: The first mutation disconnects the observer and schedules one run after the burst settles. No clearTimeout is
   // needed: the callback can't fire again until the timer has run and reconnected the observer. Mutations made while
   // disconnected are still covered, since the run scans the whole page.
 
-  var sitewideObserver = new MutationObserver(function() {
+  const sitewideObserver = new MutationObserver(function() {
 
     sitewideObserver.disconnect();
 

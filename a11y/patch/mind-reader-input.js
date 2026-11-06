@@ -4,17 +4,17 @@ export function fixMindReaderInput(input) {
 
   // Precompute IDs and frequently used elements
   
-  var inputId = input.getAttribute("id");
-  var label = document.querySelector("label[for=" + inputId + "]");
-  var mindReaderID = inputId + "-mindreader";
+  const inputId = input.getAttribute("id");
+  const label = document.querySelector("label[for=" + inputId + "]");
+  const mindReaderID = inputId + "-mindreader";
 
   // Set Autocomplete Description 
 
-  var autoCompleteID = document.getElementById("autocomplete-message-" + inputId);
+  const autoCompleteID = document.getElementById("autocomplete-message-" + inputId);
 
   if (!autoCompleteID) {
 
-    var autoCompleteMessage = document.createElement("span");
+    const autoCompleteMessage = document.createElement("span");
     autoCompleteMessage.setAttribute("id", "autocomplete-message-" + inputId);
     autoCompleteMessage.setAttribute("hidden", "");
     autoCompleteMessage.textContent = labelAutoCompleteDesc;
@@ -39,9 +39,9 @@ export function fixMindReaderInput(input) {
   input.setAttribute("role", "combobox");
   input.setAttribute("aria-controls", mindReaderID);
 
-  var currentDescribedBy = input.getAttribute("aria-describedby");
+  const currentDescribedBy = input.getAttribute("aria-describedby");
 
-  var newDescriptionId = "autocomplete-message-" + inputId;
+  const newDescriptionId = "autocomplete-message-" + inputId;
 
   if (currentDescribedBy) {
 
@@ -83,21 +83,21 @@ export function fixMindReaderInput(input) {
     // Fix: Look up the list and status fresh each time. MindReader re-renders them, so references captured at
     // setup go stale (this was throwing "Cannot read properties of null" on second use, e.g. https://kpmg.runmytests.eu).
 
-    var mindReader = document.getElementById(mindReaderID);
+    const mindReader = document.getElementById(mindReaderID);
 
     if(mindReader) {
 
-      var activeItem = mindReader.querySelector("a.active");
+      const activeItem = mindReader.querySelector("a.active");
 
       if (activeItem) {
 
         // Get li ID
 
-        var listID = activeItem.parentElement.getAttribute("id");
+        const listID = activeItem.parentElement.getAttribute("id");
 
         // Remove redundant screen reader announcements
 
-        var mindReaderStatus = document.getElementById(inputId + "-mindreader-status");
+        const mindReaderStatus = document.getElementById(inputId + "-mindreader-status");
 
         if (mindReaderStatus) {
 

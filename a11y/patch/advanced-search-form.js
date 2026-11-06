@@ -2,14 +2,14 @@
 
 export function fixAdvancedSearchForm() {
 
-  var searchForm = document.querySelectorAll(".advanced-search-form");
+  const searchForm = document.querySelectorAll(".advanced-search-form");
 
   searchForm.forEach(function(form, i){
 
     form.setAttribute("role", "search"); // Fix: Add search role to form so that it becomes a seach landmark. 
 
-    var formID = (i + 1); // Not used (yet).
-    var searchFormFields = form.querySelector(".advanced-search-form-fields");
+    const formID = (i + 1); // Not used (yet).
+    const searchFormFields = form.querySelector(".advanced-search-form-fields");
 
     if(searchFormFields) {
 

@@ -6,7 +6,7 @@ export function fixSearchResults(searchResultsContainer) {
 
   // Fix: Remove skip links from search results page. These are no longer needed. 
 
-  var searchResultsSkip = document.querySelectorAll(".access-link[href='#search-results-list'], .access-link[href='#search-filters']");
+  const searchResultsSkip = document.querySelectorAll(".access-link[href='#search-results-list'], .access-link[href='#search-filters']");
 
   searchResultsSkip.forEach(function(link){
 

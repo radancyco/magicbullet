@@ -3,7 +3,7 @@
 
 export function loadA11yPatch(url, callback) {
 
-  var getComponentLanguagePack = document.getElementById("magicbullet-language-pack");
+  const getComponentLanguagePack = document.getElementById("magicbullet-language-pack");
 
   if (getComponentLanguagePack) {
 
@@ -24,7 +24,7 @@ export function loadA11yPatch(url, callback) {
 
     // Install Language Pack.
 
-    var componentLanguagePack = document.createElement("script");
+    const componentLanguagePack = document.createElement("script");
 
     componentLanguagePack.setAttribute("src", url);
     componentLanguagePack.setAttribute("id", "magicbullet-language-pack");

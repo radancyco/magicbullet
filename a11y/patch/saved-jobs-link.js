@@ -9,7 +9,7 @@ export function fixSavedJobsLink(recentlyViewedJobList) {
 
   const isActive = recentlyViewedJobList.getAttribute("data-recently-viewed-jobs") === "true";
 
-  let link = recentlyViewedJobList.closest(savedJobsLink) || recentlyViewedJobList.querySelector(savedJobsLink);
+  const link = recentlyViewedJobList.closest(savedJobsLink) || recentlyViewedJobList.querySelector(savedJobsLink);
 
   if (!link) return;
 

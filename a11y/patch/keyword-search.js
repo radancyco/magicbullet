@@ -11,19 +11,19 @@ export function fixKeywordSearch(input) {
 
   // Precompute IDs and frequently used elements
 
-  var inputId = input.getAttribute("id");
-  var popupID = inputId + "-auto-complete-popup";
-  var popup = document.getElementById(popupID);
+  const inputId = input.getAttribute("id");
+  const popupID = inputId + "-auto-complete-popup";
+  const popup = document.getElementById(popupID);
 
   if (!popup) return;
 
   // Fix: Let the user know that matching job links will appear below as they type.
 
-  var autoCompleteID = document.getElementById("autocomplete-message-" + inputId);
+  const autoCompleteID = document.getElementById("autocomplete-message-" + inputId);
 
   if (!autoCompleteID) {
 
-    var autoCompleteMessage = document.createElement("span");
+    const autoCompleteMessage = document.createElement("span");
     autoCompleteMessage.setAttribute("id", "autocomplete-message-" + inputId);
     autoCompleteMessage.setAttribute("hidden", "");
     autoCompleteMessage.textContent = labelSearchKeywordDesc;
@@ -31,8 +31,8 @@ export function fixKeywordSearch(input) {
 
   }
 
-  var currentDescribedBy = input.getAttribute("aria-describedby");
-  var newDescriptionId = "autocomplete-message-" + inputId;
+  const currentDescribedBy = input.getAttribute("aria-describedby");
+  const newDescriptionId = "autocomplete-message-" + inputId;
 
   if (currentDescribedBy) {
 
@@ -58,15 +58,15 @@ export function fixKeywordSearch(input) {
 
   function applyKeywordPopupLabel() {
 
-    var popupHeadings = popup.querySelectorAll(".expandable-parent");
+    const popupHeadings = popup.querySelectorAll(".expandable-parent");
 
     if (!popupHeadings.length) return;
 
-    var headingIds = "";
+    let headingIds = "";
 
     popupHeadings.forEach(function(popupHeading, index) {
 
-      var headingId = popupID + "__hdr-" + index;
+      const headingId = popupID + "__hdr-" + index;
 
       popupHeading.setAttribute("id", headingId);
       popupHeading.removeAttribute("aria-expanded");
@@ -104,7 +104,7 @@ export function fixKeywordSearch(input) {
   // waiting on the page-wide debounced patch cycle), and announce the result count via the shared
   // live region whenever the results change.
 
-  var keywordObserver = new MutationObserver(function() {
+  const keywordObserver = new MutationObserver(function() {
 
     applyKeywordPopupLabel();
 
@@ -112,11 +112,11 @@ export function fixKeywordSearch(input) {
 
     keywordObserver.timeout = setTimeout(function() {
 
-      var ariaMsg = document.querySelector("#magicbullet-message");
+      const ariaMsg = document.querySelector("#magicbullet-message");
 
       if (!ariaMsg) return;
 
-      var resultCount = popup.querySelectorAll("li").length;
+      const resultCount = popup.querySelectorAll("li").length;
 
       ariaMsg.textContent = resultCount > 0 ? formatMessage(labelSearchKeywordFoundMsg, { count: resultCount }) : labelSearchKeywordNotFoundMsg;
 

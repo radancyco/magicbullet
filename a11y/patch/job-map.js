@@ -3,8 +3,8 @@
 
 export function fixJobMap() {
 
-  var jobMapInputs = document.querySelectorAll("#sel-state, #tbx-zip");
-  var jobMapCityWrapper = document.querySelector("#wrapper-sel-city");
+  const jobMapInputs = document.querySelectorAll("#sel-state, #tbx-zip");
+  const jobMapCityWrapper = document.querySelector("#wrapper-sel-city");
 
   if (jobMapInputs.length && jobMapCityWrapper) {
 

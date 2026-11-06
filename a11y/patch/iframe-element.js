@@ -4,7 +4,7 @@ export function fixIframeElement() {
 
   // Fix: Find YouTube embeds that may be missing the title attribute and add a generic one.
 
-  var missingTitleYoutube = document.querySelectorAll("iframe[src*='https://www.youtube.com/']:not([title])");
+  const missingTitleYoutube = document.querySelectorAll("iframe[src*='https://www.youtube.com/']:not([title])");
 
   missingTitleYoutube.forEach(function(title){
 
@@ -12,7 +12,7 @@ export function fixIframeElement() {
 
   });
 
-  var missingTitleVimeo = document.querySelectorAll("iframe[src*='https://player.vimeo.com/']:not([title])");
+  const missingTitleVimeo = document.querySelectorAll("iframe[src*='https://player.vimeo.com/']:not([title])");
 
   missingTitleVimeo.forEach(function(title){
 

@@ -57,13 +57,13 @@ function bindComponent(entry, component) {
 
   if (!entry.observe) return;
 
-  var target = entry.target(component);
+  const target = entry.target(component);
 
   if (!target) return;
 
-  var timeout = null;
+  let timeout = null;
 
-  var observer = new MutationObserver(function() {
+  const observer = new MutationObserver(function() {
 
     clearTimeout(timeout);
 

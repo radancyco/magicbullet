@@ -2,7 +2,7 @@
 
 export function fixGlobalDisclosure() {
 
-  var expandableParentBtn = document.querySelectorAll(".expandable-parent");
+  const expandableParentBtn = document.querySelectorAll(".expandable-parent");
 
   expandableParentBtn.forEach(function(button) {
 

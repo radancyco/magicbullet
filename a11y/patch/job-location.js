@@ -5,7 +5,7 @@ export function fixJobLocation() {
   // Fix: Job map links should really be buttons, not links. Including role="button" and spacebar key support for now for aria-pressed.
   // BaseGST: Unfortunately, the team cannot change these to buttons in GST, so this will need to be a product request.
 
-  var mapButton = document.querySelectorAll(".job-map-nearby a");
+  const mapButton = document.querySelectorAll(".job-map-nearby a");
 
   mapButton.forEach(function(btn){
 
@@ -38,7 +38,7 @@ export function fixJobLocation() {
 
   // Fix: Google Form Related Fixes on Job Location Pages
 
-  var mapFormInputs = document.querySelectorAll(".job-map-directions input");
+  const mapFormInputs = document.querySelectorAll(".job-map-directions input");
 
   // Clean-up: Remove aria-required from various elements. This attribute is sometimes flagged in automated testing and just the boolean required attribute is now recommended.
   // Clean-up: required="required" is XHTML serialization and may throw a11y validation issues if not set to blank or true.
@@ -53,7 +53,7 @@ export function fixJobLocation() {
 
   // Fix: The address label on "Get Directions" form, requires a proper autocomplete. 
 
-  var GetDirectionsAddress = document.querySelector(".job-map-directions input[name=saddr]");
+  const GetDirectionsAddress = document.querySelector(".job-map-directions input[name=saddr]");
 
   if(GetDirectionsAddress) {
 

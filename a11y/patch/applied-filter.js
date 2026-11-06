@@ -2,8 +2,8 @@
 
 export function fixAppliedFilter(filter) {
 
-  var appliedFiltersList = filter.querySelectorAll("ul[aria-labelledby]");
-  var btnSearchFilter = filter.querySelectorAll(".filter-button:not([disabled]), .applied-filters__btn");
+  const appliedFiltersList = filter.querySelectorAll("ul[aria-labelledby]");
+  const btnSearchFilter = filter.querySelectorAll(".filter-button:not([disabled]), .applied-filters__btn");
 
   // Fix: Remove aria-labeledby from UL
 

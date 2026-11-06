@@ -2,30 +2,30 @@
 
 export function fixDataForm(form) {
 
-  var instructionTexts = form.querySelectorAll(".instruction-text");
-  var requiredLabels = form.querySelectorAll(".form-field.required label");
-  var ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
-  var requiredXHTML = form.querySelectorAll("*[required='required']");
-  var validationMsg = form.querySelectorAll(".field-validation-valid");
-  var requiredFields = form.querySelectorAll(".form-field.required input, .form-field.required select");
-  var dataFormElement = form.querySelectorAll("input, select");
-  var autoCompleteFirstName = form.querySelectorAll("input[name='FirstName']");
-  var autoCompleteLastName = form.querySelectorAll("input[name='LastName']");
-  var autoCompleteAddress = form.querySelectorAll("input[name='StreetAddress']");
-  var autoCompleteCity = form.querySelectorAll("input[name='City']");
-  var autoCompleteEmailAddress = form.querySelectorAll("input[name='EmailAddress']");
-  var autoCompletePhoneNumber = form.querySelectorAll("input[name='MobilePhone']");
-  var autoCompleteZipCode = form.querySelectorAll("input[name='PostalCode']");
-  var autoCompleteStateProvince = form.querySelectorAll("select[name='Custom-92392']"); // Targeing custom filed; need better way to handle this, probably product side fix eventually.
-  var addJobAlertButtons = form.querySelectorAll(".keyword-add");
-  var keywordSelected = form.querySelectorAll(".keyword-selected");
-  var fileUploadButtons = form.querySelectorAll(".form-field input[name='Resume']");
-  var captchaBadge = form.querySelector(".grecaptcha-badge");
-  var signUpButtons = form.querySelectorAll("button[type='submit']");
-  var formMessage = form.querySelector(".form-field.form-message b");
-  var formMessageButton = form.querySelector(".form-field.form-message a");
-  var addJobAlertFieldset = form.querySelector("fieldset");
-  var textInputsWithPlaceholder = form.querySelectorAll(".form-field input[type='text'][placeholder]");
+  const instructionTexts = form.querySelectorAll(".instruction-text");
+  const requiredLabels = form.querySelectorAll(".form-field.required label");
+  const ariaRequired = form.querySelectorAll(".form-field.required input:not([type='checkbox']), .form-field.required select, .form-field.required textarea");
+  const requiredXHTML = form.querySelectorAll("*[required='required']");
+  const validationMsg = form.querySelectorAll(".field-validation-valid");
+  const requiredFields = form.querySelectorAll(".form-field.required input, .form-field.required select");
+  const dataFormElement = form.querySelectorAll("input, select");
+  const autoCompleteFirstName = form.querySelectorAll("input[name='FirstName']");
+  const autoCompleteLastName = form.querySelectorAll("input[name='LastName']");
+  const autoCompleteAddress = form.querySelectorAll("input[name='StreetAddress']");
+  const autoCompleteCity = form.querySelectorAll("input[name='City']");
+  const autoCompleteEmailAddress = form.querySelectorAll("input[name='EmailAddress']");
+  const autoCompletePhoneNumber = form.querySelectorAll("input[name='MobilePhone']");
+  const autoCompleteZipCode = form.querySelectorAll("input[name='PostalCode']");
+  const autoCompleteStateProvince = form.querySelectorAll("select[name='Custom-92392']"); // Targeing custom filed; need better way to handle this, probably product side fix eventually.
+  const addJobAlertButtons = form.querySelectorAll(".keyword-add");
+  const keywordSelected = form.querySelectorAll(".keyword-selected");
+  const fileUploadButtons = form.querySelectorAll(".form-field input[name='Resume']");
+  const captchaBadge = form.querySelector(".grecaptcha-badge");
+  const signUpButtons = form.querySelectorAll("button[type='submit']");
+  const formMessage = form.querySelector(".form-field.form-message b");
+  const formMessageButton = form.querySelector(".form-field.form-message a");
+  const addJobAlertFieldset = form.querySelector("fieldset");
+  const textInputsWithPlaceholder = form.querySelectorAll(".form-field input[type='text'][placeholder]");
 
   // Clean-up: Remove empty instruction-text spans as they can sometimes cause undesired spacing issues.
 
@@ -57,20 +57,20 @@ export function fixDataForm(form) {
 
   // Fix: Remove the CSS asterisk (see init.scss) because it reads out to assistive tech (AT) when added via content property and include a span with aria-hidden on it so that it is not picked up by AT. New asterisk applied via CSS.
 
-  var iconClassName = "ico-required-indicator";
-  var iconClass = "." + iconClassName;
+  const iconClassName = "ico-required-indicator";
+  const iconClass = "." + iconClassName;
 
   requiredLabels.forEach(function(label) {
 
     // Fix: Remove textNodes that are inline astericks, instead of using a pseudo-element. 
 
-    var labelTextNode = label.childNodes[0]; 
+    const labelTextNode = label.childNodes[0]; 
 
     if (labelTextNode && labelTextNode.nodeType === Node.TEXT_NODE) {
 
       // var cleanedText = labelTextNode.nodeValue.trim().replace("*", ""); // Removing trim as it it causing some layout issues. labels with link in them, like privacy policy, were being trimmed, cauing pacing issues.
 
-      var cleanedText = labelTextNode.nodeValue.replace("*", "");
+      const cleanedText = labelTextNode.nodeValue.replace("*", "");
 
       // Update the text node without the asterisk
 
@@ -78,14 +78,14 @@ export function fixDataForm(form) {
 
     }
 
-    var span = document.createElement("span");
+    const span = document.createElement("span");
     span.classList.add(iconClassName);
     span.setAttribute("aria-hidden", "true");
     span.textContent = "*";
 
     // See if icon we wish to append already exists.
 
-    var getRequiredIcon = label.querySelector(iconClass);
+    const getRequiredIcon = label.querySelector(iconClass);
 
     if(getRequiredIcon === null) {
 
@@ -116,7 +116,7 @@ export function fixDataForm(form) {
 
       if (region.querySelector("li")) {
 
-        var getAriaRequiredSpan = addJobAlertFieldset.querySelectorAll(".ico-required-indicator");
+        const getAriaRequiredSpan = addJobAlertFieldset.querySelectorAll(".ico-required-indicator");
 
         getAriaRequiredSpan.forEach(function(element) {
 
@@ -134,17 +134,17 @@ export function fixDataForm(form) {
 
   textInputsWithPlaceholder.forEach(function(input) {
 
-    var label = input.closest(".form-field")?.querySelector("label");
+    const label = input.closest(".form-field")?.querySelector("label");
 
     if (!label) return;
 
-    var labelClone = label.cloneNode(true);
-    var requiredIcon = labelClone.querySelector(iconClass);
+    const labelClone = label.cloneNode(true);
+    const requiredIcon = labelClone.querySelector(iconClass);
 
     if (requiredIcon) requiredIcon.remove();
 
-    var labelText = labelClone.textContent.trim().toLowerCase();
-    var placeholderText = input.getAttribute("placeholder").trim().toLowerCase();
+    const labelText = labelClone.textContent.trim().toLowerCase();
+    const placeholderText = input.getAttribute("placeholder").trim().toLowerCase();
 
     if (labelText === placeholderText) {
 
@@ -283,20 +283,20 @@ export function fixDataForm(form) {
 
   // Fix: The keyword list requires a more accessible grouping to better identify it; adding proper role and accName, etc.
 
-  var keywordSelectedRegionClassName = "keyword-region";
-  var keywordSelectedRegionClass = "." + keywordSelectedRegionClassName;
-  var keywordSelectedRegionLabel = labelSelectedJobAlerts;
+  const keywordSelectedRegionClassName = "keyword-region";
+  const keywordSelectedRegionClass = "." + keywordSelectedRegionClassName;
+  const keywordSelectedRegionLabel = labelSelectedJobAlerts;
 
   keywordSelected.forEach(function(region) {
 
-    var keywordSelectedRegion = document.createElement("div");
+    const keywordSelectedRegion = document.createElement("div");
     keywordSelectedRegion.classList.add(keywordSelectedRegionClassName);
     keywordSelectedRegion.setAttribute("role", "region");
     keywordSelectedRegion.setAttribute("aria-label", keywordSelectedRegionLabel);
 
     // See if region we wish to append already exists.
 
-    var getKeywordRegion = form.querySelector(keywordSelectedRegionClass);
+    const getKeywordRegion = form.querySelector(keywordSelectedRegionClass);
 
     if(getKeywordRegion === null) {
 
@@ -414,16 +414,16 @@ export function fixDataForm(form) {
 
   fileUploadButtons.forEach(function(input) {
 
-    var fileUploadLink = input.nextElementSibling;
+    const fileUploadLink = input.nextElementSibling;
 
     // Fix: Only replace the original link. On re-runs the sibling is already our button, and replacing it again
     // would reset it to display: none even while a file is attached.
 
     if (!fileUploadLink || fileUploadLink.tagName !== "A") return;
 
-    var resumeRemoveLabel = fileUploadLink.textContent.trim();
+    const resumeRemoveLabel = fileUploadLink.textContent.trim();
 
-    var fileUploadButton = document.createElement("button");
+    const fileUploadButton = document.createElement("button");
     fileUploadButton.setAttribute("type", "button"); // Without this, the button defaults to type="submit" and submits the form.
     fileUploadButton.setAttribute("aria-describedby", input.getAttribute("id"));
     fileUploadButton.classList.add("file-remove");
@@ -440,9 +440,9 @@ export function fixDataForm(form) {
 
   if(captchaBadge) {
 
-    var captchaResponse = captchaBadge.querySelector(".g-recaptcha-response");
-    var captchaResponseLabel = labelCaptcha;
-    var captchaIframe = captchaBadge.querySelectorAll("iframe");
+    const captchaResponse = captchaBadge.querySelector(".g-recaptcha-response");
+    const captchaResponseLabel = labelCaptcha;
+    const captchaIframe = captchaBadge.querySelectorAll("iframe");
 
     // Add accName to textarea
 
@@ -488,7 +488,7 @@ export function fixDataForm(form) {
     formMessageButton.classList.add("data-form__close");
     formMessageButton.setAttribute("role", "button");
 
-    var formMessageButtonIcon = document.createElement("span");
+    const formMessageButtonIcon = document.createElement("span");
     formMessageButtonIcon.setAttribute("aria-hidden", "true");
     formMessageButtonIcon.classList.add("data-form__closeicon");
 
@@ -510,13 +510,13 @@ export function fixDataForm(form) {
     // Fix: The Keyword Location field does not appear to have an aria-describedby on it when an error is returned, so we need to grab it from Keyword Category and dupe it here.
     // Note: Look Keyword Category up at submit time, since the listener is now bound once and the field may have been re-rendered since.
 
-    var keyWordCategory = form.querySelector(".keyword-category");
+    const keyWordCategory = form.querySelector(".keyword-category");
 
     if(keyWordCategory) {
 
-      var keyWordLocationDesc = keyWordCategory.getAttribute("aria-describedby");
+      const keyWordLocationDesc = keyWordCategory.getAttribute("aria-describedby");
 
-      var keywordLocation = form.querySelector(".keyword-location");
+      const keywordLocation = form.querySelector(".keyword-location");
 
       if(keywordLocation) {
 

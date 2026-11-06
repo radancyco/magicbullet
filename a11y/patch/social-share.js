@@ -6,11 +6,11 @@ export function fixSocialShare() {
 
   // TODO: Add language support.
 
-  var socialShareLinks = document.querySelectorAll(".social-share a[target='_blank']");
+  const socialShareLinks = document.querySelectorAll(".social-share a[target='_blank']");
 
   socialShareLinks.forEach(function(link) {
 
-    var span = document.createElement("span");
+    const span = document.createElement("span");
     span.classList.add("magicbullet-visually-hidden");
     span.textContent = " (" + labelNewWindow + ")";
     link.append(span);

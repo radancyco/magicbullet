@@ -2,17 +2,17 @@
 
 export function fixSearchForm() {
 
-  var searchForm = document.querySelectorAll(".search-form");
+  const searchForm = document.querySelectorAll(".search-form");
 
   searchForm.forEach(function(form, i){
 
-    var formID = (i + 1);
-    var searchFormLegend = form.querySelector(".job-search-legend");
-    var searchFormFields = form.querySelector(".search-form-fields, .search-form__fields");
-    var searchFormLocationInput = form.querySelector(".search-location");
-    var searchFormLocationPin = form.querySelector(".location-pin");
-    var searchFormLocationError = form.querySelector(".search-location-error, .search-form__location-error");
-    var searchFormSubmit = form.querySelector("button, .search-form__search-btn");
+    const formID = (i + 1);
+    const searchFormLegend = form.querySelector(".job-search-legend");
+    const searchFormFields = form.querySelector(".search-form-fields, .search-form__fields");
+    const searchFormLocationInput = form.querySelector(".search-location");
+    const searchFormLocationPin = form.querySelector(".location-pin");
+    const searchFormLocationError = form.querySelector(".search-location-error, .search-form__location-error");
+    const searchFormSubmit = form.querySelector("button, .search-form__search-btn");
 
     // Shared Function(s)
 
@@ -22,7 +22,7 @@ export function fixSearchForm() {
 
         searchFormLocationError.removeAttribute("tabindex");
 
-        var ariaHiddenHook = searchFormLocationError.getAttribute("aria-hidden");
+        const ariaHiddenHook = searchFormLocationError.getAttribute("aria-hidden");
 
           if(ariaHiddenHook === "false") {
 

@@ -5,7 +5,7 @@ export function fixSitemap() {
   // Fix: Remove `tabindex`, `aria-expanded`, and `.expandable-parent` from `.job-location h2` and `.job-category h2`.
   // TODO: Investigate possibly removing this. Tabindex may have been addressed by product. 
 
-  var sitemapHeadings = document.querySelectorAll(".job-location h2, .job-category h2");
+  const sitemapHeadings = document.querySelectorAll(".job-location h2, .job-category h2");
 
   sitemapHeadings.forEach(function(heading) {
 
