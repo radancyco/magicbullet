@@ -14,40 +14,40 @@
 
 */ 
 
-// Note: Load this file with <script type="module">. Each fix (fix-*.js) and utility (util-*.js) sits beside this file.
+// Note: Load this file with <script type="module">. Each fix lives in ./patch/ and each utility in ./util/.
 
-import { loadA11yPatch } from "./util-load-a11y-patch.js";
-import { observeComponent, bindComponents } from "./util-observe-component.js";
-import { runSafely } from "./util-run-safely.js";
+import { loadA11yPatch } from "./util/load-a11y-patch.js";
+import { observeComponent, bindComponents } from "./util/observe-component.js";
+import { runSafely } from "./util/run-safely.js";
 
-import { fixA11y } from "./fix-a11y.js";
-import { fixAdvancedSearchForm } from "./fix-advanced-search-form.js";
-import { fixAltAttribute } from "./fix-alt-attribute.js";
-import { fixAppliedFilter } from "./fix-applied-filter.js";
-import { fixCookieManagement } from "./fix-cookie-management.js";
-import { fixCMS } from "./fix-cms.js";
-import { fixDataForm } from "./fix-data-form.js";
-import { fixGlobalDisclosure } from "./fix-global-disclosure.js";
-import { fixIframeElement } from "./fix-iframe-element.js";
-import { fixKeywordSearch } from "./fix-keyword-search.js";
-import { fixInputElements } from "./fix-input-elements.js";
-import { fixMindReaderInput } from "./fix-mind-reader-input.js";
-import { fixMindReaderList } from "./fix-mind-reader-list.js";
-import { fixHeader } from "./fix-header.js";
-import { fixJobDescription } from "./fix-job-description.js";
-import { fixJobLocation } from "./fix-job-location.js";
-import { fixJobMap } from "./fix-job-map.js";
-import { fixSaveJobButton } from "./fix-save-job-button.js";
-import { fixSavedJobsLink } from "./fix-saved-jobs-link.js";
-import { fixSearchForm } from "./fix-search-form.js";
-import { fixSearchFilters } from "./fix-search-filters.js";
-import { fixSearchResults } from "./fix-search-results.js";
-import { fixSearchSort } from "./fix-search-sort.js";
-import { fixSearchPagination } from "./fix-search-pagination.js";
-import { fixSitemap } from "./fix-sitemap.js";
-import { fixSocialShare } from "./fix-social-share.js";
-import { fixPrivacyNotice } from "./fix-privacy-notice.js";
-// import { fixJobList } from "./fix-job-list.js"; // Retired, see file.
+import { fixA11y } from "./patch/a11y.js";
+import { fixAdvancedSearchForm } from "./patch/advanced-search-form.js";
+import { fixAltAttribute } from "./patch/alt-attribute.js";
+import { fixAppliedFilter } from "./patch/applied-filter.js";
+import { fixCookieManagement } from "./patch/cookie-management.js";
+import { fixCMS } from "./patch/cms.js";
+import { fixDataForm } from "./patch/data-form.js";
+import { fixGlobalDisclosure } from "./patch/global-disclosure.js";
+import { fixIframeElement } from "./patch/iframe-element.js";
+import { fixKeywordSearch } from "./patch/keyword-search.js";
+import { fixInputElements } from "./patch/input-elements.js";
+import { fixMindReaderInput } from "./patch/mind-reader-input.js";
+import { fixMindReaderList } from "./patch/mind-reader-list.js";
+import { fixHeader } from "./patch/header.js";
+import { fixJobDescription } from "./patch/job-description.js";
+import { fixJobLocation } from "./patch/job-location.js";
+import { fixJobMap } from "./patch/job-map.js";
+import { fixSaveJobButton } from "./patch/save-job-button.js";
+import { fixSavedJobsLink } from "./patch/saved-jobs-link.js";
+import { fixSearchForm } from "./patch/search-form.js";
+import { fixSearchFilters } from "./patch/search-filters.js";
+import { fixSearchResults } from "./patch/search-results.js";
+import { fixSearchSort } from "./patch/search-sort.js";
+import { fixSearchPagination } from "./patch/search-pagination.js";
+import { fixSitemap } from "./patch/sitemap.js";
+import { fixSocialShare } from "./patch/social-share.js";
+import { fixPrivacyNotice } from "./patch/privacy-notice.js";
+// import { fixJobList } from "./patch/job-list.js"; // Retired, see file.
 
 // var languagePackSrc = "https://services.tmpwebeng.com/magicbullet/language-pack.js";
 

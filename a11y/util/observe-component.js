@@ -1,4 +1,4 @@
-import { runSafely } from "./util-run-safely.js";
+import { runSafely } from "./run-safely.js";
 
 // Accessibility Patch: Component Observer (Utility)
 // Desc: Registers a component fix. Every element matching `selector` gets the fix applied once when found, then
