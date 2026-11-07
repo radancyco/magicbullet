@@ -197,7 +197,6 @@ function initStaticPatch() {
   runSafely(fixCMS);
   runSafely(fixHeader);
   runSafely(fixJobDescription);
-  // fixJobList();
   runSafely(fixJobLocation); 
   runSafely(fixJobMap);
   runSafely(fixSearchForm);

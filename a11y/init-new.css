@@ -188,6 +188,16 @@ padding: 0;
 
   .search-location-error, .search-form__location-error {
   outline: 0;
+
+    /* New as of 11/7/2026, add to ACR */
+    /* QA is not calling out contrast erros in search message, so we need to force it, also, hide the element if not popultated */
+
+    background-color: #fff;
+
+    &:empty {
+    display: none
+    }
+
   }
 
 }
