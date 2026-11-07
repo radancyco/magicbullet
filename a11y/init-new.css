@@ -193,10 +193,10 @@ padding: 0;
     /* QA is not calling out contrast erros in search message, which are red by default, so we need to force it, also, hide the element if not popultated */
 
     background-color: #fff;
-    padding: 0.5rem
+    padding: 0.5rem; 
 
     &:empty {
-    display: none
+    display: none;
     }
 
   }
