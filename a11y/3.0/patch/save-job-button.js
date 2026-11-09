@@ -1,4 +1,4 @@
-import { labelSaveJob } from "../language-pack.js";
+import { labelSaveJob } from "../lang.js";
 
 // Accessibility Patch: Save Job Button 
 

@@ -14,7 +14,7 @@
 
 // Note: This is an ES module. Each label is declared once here, set by the matching language branch below, and
 // exported at the end of the file. Fixes import only the labels they use, e.g.
-// import { labelNewWindow } from "../language-pack.js";
+// import { labelNewWindow } from "../lang.js";
 
 let labelAddJobAlert,
     labelAutoCompleteDesc,

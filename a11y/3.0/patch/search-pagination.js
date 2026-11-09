@@ -1,4 +1,4 @@
-import { labelPagination } from "../language-pack.js";
+import { labelPagination } from "../lang.js";
 
 // Accessibility Patch: Search Results Pagination
 

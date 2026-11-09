@@ -1,4 +1,4 @@
-import { labelNewWindow } from "../language-pack.js";
+import { labelNewWindow } from "../lang.js";
 
 // Accessibility Patch: Job Description (Utility)
 

@@ -1,6 +1,6 @@
 import { formatMessage } from "../util/format-message.js";
 import { preserveScrollPosition } from "../util/preserve-scroll-position.js";
-import { labelResultsSorted } from "../language-pack.js";
+import { labelResultsSorted } from "../lang.js";
 
 // Accessibility Patch: Search Results Sort
 // Desc: Sorting reorders existing results without changing the count, so fixSearchResults' change detection

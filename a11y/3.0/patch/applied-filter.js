@@ -1,4 +1,4 @@
-import { labelRemoveFilter } from "../language-pack.js";
+import { labelRemoveFilter } from "../lang.js";
 
 // Accessibility Patch: Applied Filter
 

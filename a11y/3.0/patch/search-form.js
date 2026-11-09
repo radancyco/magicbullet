@@ -1,4 +1,4 @@
-import { labelSearchJobs } from "../language-pack.js";
+import { labelSearchJobs } from "../lang.js";
 
 // Accessibility Patch: Search Form
 

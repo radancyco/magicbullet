@@ -1,4 +1,4 @@
-import { labelDialogClose } from "../language-pack.js";
+import { labelDialogClose } from "../lang.js";
 
 // Accessibility Patch: Privacy Notice
 
