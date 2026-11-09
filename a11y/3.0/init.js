@@ -46,23 +46,11 @@ import { fixSitemap } from "./patch/sitemap.js";
 import { fixSocialShare } from "./patch/social-share.js";
 import { fixPrivacyNotice } from "./patch/privacy-notice.js";
 
-// Load the QA language pack on test domains, else the production one.
+// Load the language pack from the same place this file was served from (one folder up), so the QA copy of this patch
+// gets the QA language pack and the production copy gets the production one, with no hostname check. This also keeps
+// working if MagicBullet moves to another host or folder (e.g. a shared-libraries version or rolling/ folder).
 
-const hostName = location.hostname.substring(location.hostname.indexOf(".") + 1);
-
-const testPaths = hostName === "runmytests.com" || hostName === "runmytests.eu" || hostName === "talentbrew.com" || hostName === "tmpqa.com";
-
-let languagePackSrc;
-
-if (testPaths) {
-
-  languagePackSrc = "https://radancy.dev/magicbullet/language-pack.js";
-
-} else {
-
-  languagePackSrc = "https://services.tmpwebeng.com/magicbullet/language-pack.js";
-
-}
+const languagePackSrc = new URL("../language-pack.js", import.meta.url).href;
 
 loadA11yPatch(languagePackSrc, function(){
 

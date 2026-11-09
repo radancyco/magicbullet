@@ -153,9 +153,9 @@
 
         if (a11yNew) {
 
-          a11yCSS.setAttribute("href", "https://radancy.dev/magicbullet/a11y/init-new.css");
+          a11yCSS.setAttribute("href", "https://radancy.dev/magicbullet/a11y/3.0/init.css");
           a11yExec.setAttribute("type", "module");
-          a11yExec.setAttribute("src", "https://radancy.dev/magicbullet/a11y/init-new.js");
+          a11yExec.setAttribute("src", "https://radancy.dev/magicbullet/a11y/3.0/init.js");
 
         } else {
 
