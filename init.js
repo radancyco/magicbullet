@@ -149,7 +149,7 @@
 
       if(testPaths) {
 
-        // init-new.js uses import statements, so it must load as a module.
+        // 3.0 uses import statements, so it must load as a module.
 
         if (a11yNew) {
 
