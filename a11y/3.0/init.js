@@ -46,11 +46,11 @@ import { fixSitemap } from "./patch/sitemap.js";
 import { fixSocialShare } from "./patch/social-share.js";
 import { fixPrivacyNotice } from "./patch/privacy-notice.js";
 
-// Load the language pack from the same place this file was served from (one folder up), so the QA copy of this patch
+// Load the language pack from the same folder this file was served from, so the QA copy of this patch
 // gets the QA language pack and the production copy gets the production one, with no hostname check. This also keeps
 // working if MagicBullet moves to another host or folder (e.g. a shared-libraries version or rolling/ folder).
 
-const languagePackSrc = new URL("../language-pack.js", import.meta.url).href;
+const languagePackSrc = new URL("./language-pack.js", import.meta.url).href;
 
 loadA11yPatch(languagePackSrc, function(){
 
