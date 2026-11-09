@@ -35,10 +35,13 @@ export function fixSearchResults(searchResultsContainer) {
   // "#search-results-list > ul > li" breaks whenever a site's markup doesn't match that exact shape
   // (e.g. a header row ul sitting alongside the results ul). Each job link reliably carries
   // data-job-id regardless of the surrounding markup, so count those instead.
+  // Fix: Include the current page. Moving between full pages keeps the same total and count (e.g. 15 of 66 on
+  // pages 1 and 2), so without it the change went undetected and the "loading" message was never replaced.
+  // Sorting keeps the page, so it still doesn't trigger this (fixSearchSort announces sorting itself).
 
   const getResultState = function(container) {
 
-    return container.dataset.totalResults + ":" + container.querySelectorAll("#search-results-list a[data-job-id]").length;
+    return container.dataset.totalResults + ":" + container.querySelectorAll("#search-results-list a[data-job-id]").length + ":" + container.dataset.currentPage;
 
   };
 

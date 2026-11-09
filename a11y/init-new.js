@@ -98,6 +98,24 @@ loadA11yPatch(languagePackSrc, function(){
 
   const config = { childList: true, subtree: true };
 
+  // Fix: Some components are injected straight into <body>, outside #page (e.g. the cookie consent dialog,
+  // #system-ialert, and MindReader's result lists). Also watch body's direct children (not its subtree, so busy
+  // third-party widgets don't trigger runs) so those are found when added, not on the next unrelated #page change.
+
+  const bodyConfig = { childList: true };
+
+  function observeSitewide() {
+
+    sitewideObserver.observe(targetNode, config);
+
+    if (targetNode !== a11yBody) {
+
+      sitewideObserver.observe(a11yBody, bodyConfig);
+
+    }
+
+  }
+
   // Note: The first mutation disconnects the observer and schedules one run after the burst settles. No clearTimeout is
   // needed: the callback can't fire again until the timer has run and reconnected the observer. Mutations made while
   // disconnected are still covered, since the run scans the whole page.
@@ -112,7 +130,7 @@ loadA11yPatch(languagePackSrc, function(){
 
       bindComponents();
 
-      sitewideObserver.observe(targetNode, config);
+      observeSitewide();
 
     }, 1000);
 
@@ -124,7 +142,7 @@ loadA11yPatch(languagePackSrc, function(){
 
   initComponentPatch();
 
-  sitewideObserver.observe(targetNode, config);
+  observeSitewide();
 
 });
 
