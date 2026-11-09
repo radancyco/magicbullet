@@ -1,4 +1,5 @@
 import { formatMessage } from "../util/format-message.js";
+import { labelSearchKeywordDesc, labelSearchKeywordFoundMsg, labelSearchKeywordNotFoundMsg } from "../language-pack.js";
 
 // Accessibility Patch: Keyword Search Results
 

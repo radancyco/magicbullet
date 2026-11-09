@@ -1,3 +1,5 @@
+import { labelPrimaryNavigation } from "../language-pack.js";
+
 // Accessibility Patch: Header (Utility) - Fixes common issues in header. 
 
 export function fixHeader() {

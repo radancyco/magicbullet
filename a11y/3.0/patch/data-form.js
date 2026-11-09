@@ -1,3 +1,5 @@
+import { labelAddJobAlert, labelCaptcha, labelSelectedJobAlerts } from "../language-pack.js";
+
 // Accessibility Patch: Data Form
 
 export function fixDataForm(form) {

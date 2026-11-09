@@ -1,3 +1,5 @@
+import { labelAutoCompleteDesc } from "../language-pack.js";
+
 // Accessibility Patch: Mindreader Combobox
 
 export function fixMindReaderInput(input) {

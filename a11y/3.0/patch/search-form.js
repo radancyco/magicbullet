@@ -1,3 +1,5 @@
+import { labelSearchJobs } from "../language-pack.js";
+
 // Accessibility Patch: Search Form
 
 export function fixSearchForm() {

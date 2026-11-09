@@ -1,3 +1,5 @@
+import { labelRemoveFilter } from "../language-pack.js";
+
 // Accessibility Patch: Applied Filter
 
 export function fixAppliedFilter(filter) {

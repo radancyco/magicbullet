@@ -14,7 +14,6 @@
 
 */ 
 
-import { loadA11yPatch } from "./util/load-a11y-patch.js";
 import { observeComponent, bindComponents } from "./util/observe-component.js";
 import { runSafely } from "./util/run-safely.js";
 
@@ -46,93 +45,86 @@ import { fixSitemap } from "./patch/sitemap.js";
 import { fixSocialShare } from "./patch/social-share.js";
 import { fixPrivacyNotice } from "./patch/privacy-notice.js";
 
-// Load the language pack from the same folder this file was served from, so the QA copy of this patch
-// gets the QA language pack and the production copy gets the production one, with no hostname check. This also keeps
-// working if MagicBullet moves to another host or folder (e.g. a shared-libraries version or rolling/ folder).
+// Note: The language pack is imported like any other module (see the patch/ files), so the browser has run it, and
+// every label is set, before this file runs. No loader or callback needed.
 
-const languagePackSrc = new URL("./language-pack.js", import.meta.url).href;
+console.log("%cMagicBullet: A11y%cv3.0.0", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
-loadA11yPatch(languagePackSrc, function(){
+const a11yBody = document.body;
 
-  console.log("%cMagicBullet: A11y%cv3.0.0", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+// Add A11y hook for implementation team. May come in handy. Or not.
 
-  const a11yBody = document.body;
+a11yBody.classList.add("magicbullet-a11y");
 
-  // Add A11y hook for implementation team. May come in handy. Or not.
+// Add global aria-live to pass messages to when needed.
 
-  a11yBody.classList.add("magicbullet-a11y");
+const globalA11yMessage = document.querySelector("#magicbullet-message");
 
-  // Add global aria-live to pass messages to when needed.
+if(!globalA11yMessage) {
 
-  const globalA11yMessage = document.querySelector("#magicbullet-message");
+  const a11yMessage = document.createElement("div");
 
-  if(!globalA11yMessage) {
+  a11yMessage.classList.add("magicbullet-visually-hidden");
+  a11yMessage.setAttribute("id", "magicbullet-message");
+  a11yMessage.setAttribute("aria-live", "polite");
+  a11yBody.append(a11yMessage);
 
-    const a11yMessage = document.createElement("div");
-  
-    a11yMessage.classList.add("magicbullet-visually-hidden");
-    a11yMessage.setAttribute("id", "magicbullet-message");
-    a11yMessage.setAttribute("aria-live", "polite");
-    a11yBody.append(a11yMessage);
+}
 
-  }
+// Architecture: Each component fix owns a MutationObserver scoped to its own container (see initComponentPatch()
+// and observeComponent()), so a change in one component only re-runs that component's fix. The one page-wide
+// observer below handles the two jobs that have no single container: running the sitewide fixes (images, iframes,
+// checkboxes, disclosures, save job buttons) and discovering component containers added or replaced after load.
 
-  // Architecture: Each component fix owns a MutationObserver scoped to its own container (see initComponentPatch()
-  // and observeComponent()), so a change in one component only re-runs that component's fix. The one page-wide
-  // observer below handles the two jobs that have no single container: running the sitewide fixes (images, iframes,
-  // checkboxes, disclosures, save job buttons) and discovering component containers added or replaced after load.
+const targetNode = document.querySelector("#page") || a11yBody;
 
-  const targetNode = document.querySelector("#page") || a11yBody;
+const config = { childList: true, subtree: true };
 
-  const config = { childList: true, subtree: true };
+// Fix: Some components are injected straight into <body>, outside #page (e.g. the cookie consent dialog,
+// #system-ialert, and MindReader's result lists). Also watch body's direct children (not its subtree, so busy
+// third-party widgets don't trigger runs) so those are found when added, not on the next unrelated #page change.
 
-  // Fix: Some components are injected straight into <body>, outside #page (e.g. the cookie consent dialog,
-  // #system-ialert, and MindReader's result lists). Also watch body's direct children (not its subtree, so busy
-  // third-party widgets don't trigger runs) so those are found when added, not on the next unrelated #page change.
+const bodyConfig = { childList: true };
 
-  const bodyConfig = { childList: true };
+function observeSitewide() {
 
-  function observeSitewide() {
+  sitewideObserver.observe(targetNode, config);
 
-    sitewideObserver.observe(targetNode, config);
+  if (targetNode !== a11yBody) {
 
-    if (targetNode !== a11yBody) {
-
-      sitewideObserver.observe(a11yBody, bodyConfig);
-
-    }
+    sitewideObserver.observe(a11yBody, bodyConfig);
 
   }
 
-  // Note: The first mutation disconnects the observer and schedules one run after the burst settles. No clearTimeout is
-  // needed: the callback can't fire again until the timer has run and reconnected the observer. Mutations made while
-  // disconnected are still covered, since the run scans the whole page.
+}
 
-  const sitewideObserver = new MutationObserver(function() {
+// Note: The first mutation disconnects the observer and schedules one run after the burst settles. No clearTimeout is
+// needed: the callback can't fire again until the timer has run and reconnected the observer. Mutations made while
+// disconnected are still covered, since the run scans the whole page.
 
-    sitewideObserver.disconnect();
+const sitewideObserver = new MutationObserver(function() {
 
-    setTimeout(function() {
+  sitewideObserver.disconnect();
 
-      initDynamicPatch();
+  setTimeout(function() {
 
-      bindComponents();
+    initDynamicPatch();
 
-      observeSitewide();
+    bindComponents();
 
-    }, 1000);
+    observeSitewide();
 
-  });
-
-  initStaticPatch();
-
-  initDynamicPatch();
-
-  initComponentPatch();
-
-  observeSitewide();
+  }, 1000);
 
 });
+
+initStaticPatch();
+
+initDynamicPatch();
+
+initComponentPatch();
+
+observeSitewide();
 
 // Accessibility Patch: Dynamic (Sitewide)
 // Desc: These fixes target elements that can appear anywhere on the page, with no single container to observe.

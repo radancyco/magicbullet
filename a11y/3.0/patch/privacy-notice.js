@@ -1,3 +1,5 @@
+import { labelDialogClose } from "../language-pack.js";
+
 // Accessibility Patch: Privacy Notice
 
 export function fixPrivacyNotice(privacyNotice) {

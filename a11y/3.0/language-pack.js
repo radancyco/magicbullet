@@ -12,2043 +12,2062 @@
 
 */
 
-// Note: Dedicated "finished executing" signal for loadA11yPatch() in a11y/init.js. A script's "load" event fires only once,
-// so a consumer that finds this file already on the page checks this marker instead of waiting on an event that may
-// have already fired. Keep this line unconditional and outside the language branches below.
+// Note: This is an ES module. Each label is declared once here, set by the matching language branch below, and
+// exported at the end of the file. Fixes import only the labels they use, e.g.
+// import { labelNewWindow } from "../language-pack.js";
 
-var magicBulletLanguagePackLoaded = true;
+let labelAddJobAlert,
+    labelAutoCompleteDesc,
+    labelCaptcha,
+    labelDialogClose,
+    labelLoadingMsg,
+    labelNewWindow,
+    labelPagination,
+    labelPrimaryNavigation,
+    labelRemoveFilter,
+    labelResultsAvailable,
+    labelResultsSorted,
+    labelSaveJob,
+    labelSearchFilter,
+    labelSearchJobs,
+    labelSearchKeywordDesc,
+    labelSearchKeywordFoundMsg,
+    labelSearchKeywordNotFoundMsg,
+    labelSelectedJobAlerts,
+    labelSubmitJobAlerts,
+    labelViewSavedJobs;
 
-var currentPageLanguage = document.documentElement.getAttribute("lang");
+const currentPageLanguage = document.documentElement.getAttribute("lang");
 
 if(currentPageLanguage === "ar") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "قم بإزالة الفلتر";
+    labelRemoveFilter = "قم بإزالة الفلتر";
 
     // Job Alert
 
-    var labelAddJobAlert = "إضافة تنبيه وظيفة";
-    var labelSelectedJobAlerts = "تنبيهات الوظائف المختارة";
-    var labelCaptcha = "كابتشا";
-    var labelSubmitJobAlerts = "إرسال تنبيهات الوظائف";
+    labelAddJobAlert = "إضافة تنبيه وظيفة";
+    labelSelectedJobAlerts = "تنبيهات الوظائف المختارة";
+    labelCaptcha = "كابتشا";
+    labelSubmitJobAlerts = "إرسال تنبيهات الوظائف";
 
     // Global Header
 
-    var labelPrimaryNavigation = "رئيسي";
-    var labelViewSavedJobs = "عرض الوظائف المحفوظة";
+    labelPrimaryNavigation = "رئيسي";
+    labelViewSavedJobs = "عرض الوظائف المحفوظة";
 
     // Save Job Button
 
-    var labelSaveJob = "حفظ الوظيفة";
+    labelSaveJob = "حفظ الوظيفة";
 
     // Search Form
 
-    var labelSearchJobs = "ابحث عن وظائف";
+    labelSearchJobs = "ابحث عن وظائف";
 
     // Search Filter
 
-    var labelSearchFilter = "فلتر البحث";
+    labelSearchFilter = "فلتر البحث";
 
     // Pagination
 
-    var labelPagination = "ترقيم الصفحات";
+    labelPagination = "ترقيم الصفحات";
 
     // Search Results
 
-    var labelLoadingMsg = "جارٍ تحميل نتائج جديدة.";
-    var labelResultsAvailable = "{count} من أصل {total} نتائج متاحة الآن.";
-    var labelResultsSorted = "النتائج مرتبة حسب {label}";
+    labelLoadingMsg = "جارٍ تحميل نتائج جديدة.";
+    labelResultsAvailable = "{count} من أصل {total} نتائج متاحة الآن.";
+    labelResultsSorted = "النتائج مرتبة حسب {label}";
 
     // New Window
 
-    var labelNewWindow = "يفتح في نافذة جديدة";
+    labelNewWindow = "يفتح في نافذة جديدة";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "ستظهر روابط الوظائف المطابقة أدناه أثناء الكتابة.";
-    var labelSearchKeywordFoundMsg = "تم العثور على {count} من روابط الوظائف المطابقة.";
-    var labelSearchKeywordNotFoundMsg = "لم يتم العثور على روابط وظائف مطابقة.";
+    labelSearchKeywordDesc = "ستظهر روابط الوظائف المطابقة أدناه أثناء الكتابة.";
+    labelSearchKeywordFoundMsg = "تم العثور على {count} من روابط الوظائف المطابقة.";
+    labelSearchKeywordNotFoundMsg = "لم يتم العثور على روابط وظائف مطابقة.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "عند توفر نتائج الإكمال التلقائي، استخدم أسهم الأعلى والأسفل للمراجعة، ثم اضغط على زر الإدخال للاختيار. لمستخدمي الأجهزة التي تعمل باللمس، استكشفوا عبر اللمس أو باستخدام إيماءات التمرير.";
+    labelAutoCompleteDesc = "عند توفر نتائج الإكمال التلقائي، استخدم أسهم الأعلى والأسفل للمراجعة، ثم اضغط على زر الإدخال للاختيار. لمستخدمي الأجهزة التي تعمل باللمس، استكشفوا عبر اللمس أو باستخدام إيماءات التمرير.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "يغلق";
+    labelDialogClose = "يغلق";
 
 } else if (currentPageLanguage === "bg") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Премахване на филтъра";
+    labelRemoveFilter = "Премахване на филтъра";
 
     // Job Alert
 
-    var labelAddJobAlert = "Добавяне на известие за работа";
-    var labelSelectedJobAlerts = "Избрани сигнали за работа";
-    var labelCaptcha = "Капча";
-    var labelSubmitJobAlerts = "Изпращане на известия за работа";
+    labelAddJobAlert = "Добавяне на известие за работа";
+    labelSelectedJobAlerts = "Избрани сигнали за работа";
+    labelCaptcha = "Капча";
+    labelSubmitJobAlerts = "Изпращане на известия за работа";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Главно";
-    var labelViewSavedJobs = "Преглед на запазените работни места";
+    labelPrimaryNavigation = "Главно";
+    labelViewSavedJobs = "Преглед на запазените работни места";
 
     // Save Job Button
 
-    var labelSaveJob = "Запазване на задачата";
+    labelSaveJob = "Запазване на задачата";
 
     // Search Form
 
-    var labelSearchJobs = "Търсене на работа";
+    labelSearchJobs = "Търсене на работа";
 
     // Search Filter
 
-    var labelSearchFilter = "Филтър за търсене";
+    labelSearchFilter = "Филтър за търсене";
 
     // Pagination
 
-    var labelPagination = "Пагинация";
+    labelPagination = "Пагинация";
 
     // Search Results
 
-    var labelLoadingMsg = "Зареждане на нови резултати.";
-    var labelResultsAvailable = "Вече са налични {count} от {total} резултата.";
-    var labelResultsSorted = "Резултати, сортирани по {label}";
+    labelLoadingMsg = "Зареждане на нови резултати.";
+    labelResultsAvailable = "Вече са налични {count} от {total} резултата.";
+    labelResultsSorted = "Резултати, сортирани по {label}";
 
     // New Window
 
-    var labelNewWindow = "отваря се в нов прозорец";
+    labelNewWindow = "отваря се в нов прозорец";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Съответстващи връзки за работа ще се показват по-долу, докато пишете.";
-    var labelSearchKeywordFoundMsg = "Намерени са {count} съответстващи връзки за работа.";
-    var labelSearchKeywordNotFoundMsg = "Няма намерени съответстващи връзки за работа.";
+    labelSearchKeywordDesc = "Съответстващи връзки за работа ще се показват по-долу, докато пишете.";
+    labelSearchKeywordFoundMsg = "Намерени са {count} съответстващи връзки за работа.";
+    labelSearchKeywordNotFoundMsg = "Няма намерени съответстващи връзки за работа.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Когато са налични резултати от автоматично довършване, използвайте стрелките нагоре и надолу за преглед и Enter за избор. Потребителите на устройства с докосване могат да изследват чрез докосване или с плъзгане.";
+    labelAutoCompleteDesc = "Когато са налични резултати от автоматично довършване, използвайте стрелките нагоре и надолу за преглед и Enter за избор. Потребителите на устройства с докосване могат да изследват чрез докосване или с плъзгане.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Затвори";
+    labelDialogClose = "Затвори";
 
 } else if (currentPageLanguage === "zh-Hans") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "移除过滤器";
+    labelRemoveFilter = "移除过滤器";
 
     // Job Alert
 
-    var labelAddJobAlert = "添加职位提醒";
-    var labelSelectedJobAlerts = "精选职位提醒";
-    var labelCaptcha = "验证码";
-    var labelSubmitJobAlerts = "提交职位提醒";
+    labelAddJobAlert = "添加职位提醒";
+    labelSelectedJobAlerts = "精选职位提醒";
+    labelCaptcha = "验证码";
+    labelSubmitJobAlerts = "提交职位提醒";
 
     // Global Header
 
-    var labelPrimaryNavigation = "主要的";
-    var labelViewSavedJobs = "查看已保存的职位";
+    labelPrimaryNavigation = "主要的";
+    labelViewSavedJobs = "查看已保存的职位";
 
     // Save Job Button
 
-    var labelSaveJob = "保住工作";
+    labelSaveJob = "保住工作";
 
     // Search Form
 
-    var labelSearchJobs = "搜索职位";
+    labelSearchJobs = "搜索职位";
 
     // Search Filter
 
-    var labelSearchFilter = "搜索筛选器";
+    labelSearchFilter = "搜索筛选器";
 
     // Pagination
 
-    var labelPagination = "分页";
+    labelPagination = "分页";
 
     // Search Results
 
-    var labelLoadingMsg = "正在加载新结果。";
-    var labelResultsAvailable = "现在共有 {count} 条结果，总计 {total} 条结果。";
-    var labelResultsSorted = "按 {label} 排序的结果";
+    labelLoadingMsg = "正在加载新结果。";
+    labelResultsAvailable = "现在共有 {count} 条结果，总计 {total} 条结果。";
+    labelResultsSorted = "按 {label} 排序的结果";
 
     // New Window
 
-    var labelNewWindow = "在新窗口中打开";
+    labelNewWindow = "在新窗口中打开";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "输入内容时，下方将显示匹配的职位链接。";
-    var labelSearchKeywordFoundMsg = "找到 {count} 个匹配的职位链接。";
-    var labelSearchKeywordNotFoundMsg = "未找到匹配的职位链接。";
+    labelSearchKeywordDesc = "输入内容时，下方将显示匹配的职位链接。";
+    labelSearchKeywordFoundMsg = "找到 {count} 个匹配的职位链接。";
+    labelSearchKeywordNotFoundMsg = "未找到匹配的职位链接。";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "当有自动完成结果时，请使用上下箭头键查看，然后按回车键选择。触控设备用户，请使用触控或滑动操作进行浏览。";
+    labelAutoCompleteDesc = "当有自动完成结果时，请使用上下箭头键查看，然后按回车键选择。触控设备用户，请使用触控或滑动操作进行浏览。";
 
     // Dialog Close Button
 
-    var labelDialogClose = "关闭";
+    labelDialogClose = "关闭";
 
 } else if (currentPageLanguage === "zh-Hant") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "移除過濾器";
+    labelRemoveFilter = "移除過濾器";
 
     // Job Alert
 
-    var labelAddJobAlert = "新增職位提醒";
-    var labelSelectedJobAlerts = "精選職位提醒";
-    var labelCaptcha = "驗證碼";
-    var labelSubmitJobAlerts = "提交職位提醒";
+    labelAddJobAlert = "新增職位提醒";
+    labelSelectedJobAlerts = "精選職位提醒";
+    labelCaptcha = "驗證碼";
+    labelSubmitJobAlerts = "提交職位提醒";
 
     // Global Header
 
-    var labelPrimaryNavigation = "主要的";
-    var labelViewSavedJobs = "查看已保存的職位";
+    labelPrimaryNavigation = "主要的";
+    labelViewSavedJobs = "查看已保存的職位";
 
     // Save Job Button
 
-    var labelSaveJob = "保住工作";
+    labelSaveJob = "保住工作";
 
     // Search Form
 
-    var labelSearchJobs = "搜尋職位";
+    labelSearchJobs = "搜尋職位";
 
     // Search Filter
 
-    var labelSearchFilter = "搜尋篩選器";
+    labelSearchFilter = "搜尋篩選器";
 
     // Pagination
 
-    var labelPagination = "分頁";
+    labelPagination = "分頁";
 
     // Search Results
 
-    var labelLoadingMsg = "正在載入新結果。";
-    var labelResultsAvailable = "現在共有 {count} 項結果，總計 {total} 條結果。";
-    var labelResultsSorted = "按 {label} 排序的結果";
+    labelLoadingMsg = "正在載入新結果。";
+    labelResultsAvailable = "現在共有 {count} 項結果，總計 {total} 條結果。";
+    labelResultsSorted = "按 {label} 排序的結果";
 
     // New Window
 
-    var labelNewWindow = "在新視窗中開啟";
+    labelNewWindow = "在新視窗中開啟";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "輸入內容時，下方將顯示相符的職位連結。";
-    var labelSearchKeywordFoundMsg = "找到 {count} 個符合的職位連結。";
-    var labelSearchKeywordNotFoundMsg = "未找到符合的職位連結。";
+    labelSearchKeywordDesc = "輸入內容時，下方將顯示相符的職位連結。";
+    labelSearchKeywordFoundMsg = "找到 {count} 個符合的職位連結。";
+    labelSearchKeywordNotFoundMsg = "未找到符合的職位連結。";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "當有自動完成結果時，請使用上下箭頭鍵查看，然後按回車鍵選擇。觸控設備用戶，請使用觸控或滑動操作進行瀏覽。";
+    labelAutoCompleteDesc = "當有自動完成結果時，請使用上下箭頭鍵查看，然後按回車鍵選擇。觸控設備用戶，請使用觸控或滑動操作進行瀏覽。";
 
     // Dialog Close Button
 
-    var labelDialogClose = "關閉";
+    labelDialogClose = "關閉";
 
 } else if (currentPageLanguage === "hr") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Ukloni filtar";
+    labelRemoveFilter = "Ukloni filtar";
 
     // Job Alert
 
-    var labelAddJobAlert = "Dodaj upozorenje o poslu";
-    var labelSelectedJobAlerts = "Odabrana upozorenja o poslovima";
-    var labelCaptcha = "Kapča";
-    var labelSubmitJobAlerts = "Pošalji upozorenja o poslovima";
+    labelAddJobAlert = "Dodaj upozorenje o poslu";
+    labelSelectedJobAlerts = "Odabrana upozorenja o poslovima";
+    labelCaptcha = "Kapča";
+    labelSubmitJobAlerts = "Pošalji upozorenja o poslovima";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Glavni";
-    var labelViewSavedJobs = "Prikaži spremljene poslove";
+    labelPrimaryNavigation = "Glavni";
+    labelViewSavedJobs = "Prikaži spremljene poslove";
 
     // Save Job Button
 
-    var labelSaveJob = "Spremi posao";
+    labelSaveJob = "Spremi posao";
 
     // Search Form
 
-    var labelSearchJobs = "Pretraživanje poslova";
+    labelSearchJobs = "Pretraživanje poslova";
 
     // Search Filter
 
-    var labelSearchFilter = "Filter za pretraživanje";
+    labelSearchFilter = "Filter za pretraživanje";
 
     // Pagination
 
-    var labelPagination = "Paginacija";
+    labelPagination = "Paginacija";
 
     // Search Results
 
-    var labelLoadingMsg = "Učitavanje novih rezultata.";
-    var labelResultsAvailable = "Sada je dostupno {count} od {total} rezultata.";
-    var labelResultsSorted = "Rezultati sortirani po {label}";
+    labelLoadingMsg = "Učitavanje novih rezultata.";
+    labelResultsAvailable = "Sada je dostupno {count} od {total} rezultata.";
+    labelResultsSorted = "Rezultati sortirani po {label}";
 
     // New Window
 
-    var labelNewWindow = "otvara se u novom prozoru";
+    labelNewWindow = "otvara se u novom prozoru";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Odgovarajuće poveznice za poslove prikazivat će se ispod dok tipkate.";
-    var labelSearchKeywordFoundMsg = "Pronađene su odgovarajuće poveznice za poslove ({count}).";
-    var labelSearchKeywordNotFoundMsg = "Nisu pronađene odgovarajuće poveznice za posao.";
+    labelSearchKeywordDesc = "Odgovarajuće poveznice za poslove prikazivat će se ispod dok tipkate.";
+    labelSearchKeywordFoundMsg = "Pronađene su odgovarajuće poveznice za poslove ({count}).";
+    labelSearchKeywordNotFoundMsg = "Nisu pronađene odgovarajuće poveznice za posao.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Kada su dostupni rezultati automatskog dovršavanja, koristite strelice gore i dolje za pregled i Enter za odabir. Korisnici dodirnih uređaja istražuju dodirom ili pokretima prsta.";
+    labelAutoCompleteDesc = "Kada su dostupni rezultati automatskog dovršavanja, koristite strelice gore i dolje za pregled i Enter za odabir. Korisnici dodirnih uređaja istražuju dodirom ili pokretima prsta.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Zatvoriti";
+    labelDialogClose = "Zatvoriti";
 
 } else if (currentPageLanguage === "cs") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Odebrat filtr";
+    labelRemoveFilter = "Odebrat filtr";
 
     // Job Alert
 
-    var labelAddJobAlert = "Přidat upozornění na pracovní nabídku";
-    var labelSelectedJobAlerts = "Vybraná upozornění na pracovní nabídky";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Odeslat upozornění na pracovní nabídky";
+    labelAddJobAlert = "Přidat upozornění na pracovní nabídku";
+    labelSelectedJobAlerts = "Vybraná upozornění na pracovní nabídky";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Odeslat upozornění na pracovní nabídky";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Hlavní";
-    var labelViewSavedJobs = "Zobrazit uložené úlohy";
+    labelPrimaryNavigation = "Hlavní";
+    labelViewSavedJobs = "Zobrazit uložené úlohy";
 
     // Save Job Button
 
-    var labelSaveJob = "Uložit úlohu";
+    labelSaveJob = "Uložit úlohu";
 
     // Search Form
 
-    var labelSearchJobs = "Hledat pracovní nabídky";
+    labelSearchJobs = "Hledat pracovní nabídky";
 
     // Search Filter
 
-    var labelSearchFilter = "Vyhledávací filtr";
+    labelSearchFilter = "Vyhledávací filtr";
 
     // Pagination
 
-    var labelPagination = "Stránkování";
+    labelPagination = "Stránkování";
 
     // Search Results
 
-    var labelLoadingMsg = "Načítání nových výsledků.";
-    var labelResultsAvailable = "Nyní je k dispozici {count} z {total} výsledků.";
-    var labelResultsSorted = "Výsledky seřazené podle {label}";
+    labelLoadingMsg = "Načítání nových výsledků.";
+    labelResultsAvailable = "Nyní je k dispozici {count} z {total} výsledků.";
+    labelResultsSorted = "Výsledky seřazené podle {label}";
 
     // New Window
 
-    var labelNewWindow = "otevře se v novém okně";
+    labelNewWindow = "otevře se v novém okně";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Odpovídající odkazy na pracovní nabídky se budou zobrazovat níže během psaní.";
-    var labelSearchKeywordFoundMsg = "Nalezeno {count} odpovídajících odkazů na pracovní nabídky.";
-    var labelSearchKeywordNotFoundMsg = "Nenalezeny žádné odpovídající odkazy na pracovní nabídky.";
+    labelSearchKeywordDesc = "Odpovídající odkazy na pracovní nabídky se budou zobrazovat níže během psaní.";
+    labelSearchKeywordFoundMsg = "Nalezeno {count} odpovídajících odkazů na pracovní nabídky.";
+    labelSearchKeywordNotFoundMsg = "Nenalezeny žádné odpovídající odkazy na pracovní nabídky.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Pokud jsou k dispozici výsledky automatického doplňování, použijte šipky nahoru a dolů k prohlédnutí a klávesu Enter k výběru. Uživatelé dotykových zařízení mohou prozkoumávat výsledky dotykem nebo přejetím prstem.";
+    labelAutoCompleteDesc = "Pokud jsou k dispozici výsledky automatického doplňování, použijte šipky nahoru a dolů k prohlédnutí a klávesu Enter k výběru. Uživatelé dotykových zařízení mohou prozkoumávat výsledky dotykem nebo přejetím prstem.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Blízko";
+    labelDialogClose = "Blízko";
 
 } else if (currentPageLanguage === "da") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Fjern filter";
+    labelRemoveFilter = "Fjern filter";
 
     // Job Alert
 
-    var labelAddJobAlert = "Tilføj jobalarm";
-    var labelSelectedJobAlerts = "Udvalgte jobalarmer";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Indsend jobalarmer";
+    labelAddJobAlert = "Tilføj jobalarm";
+    labelSelectedJobAlerts = "Udvalgte jobalarmer";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Indsend jobalarmer";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Hoved";
-    var labelViewSavedJobs = "Se gemte job";
+    labelPrimaryNavigation = "Hoved";
+    labelViewSavedJobs = "Se gemte job";
 
     // Save Job Button
 
-    var labelSaveJob = "Gem job";
+    labelSaveJob = "Gem job";
 
     // Search Form
 
-    var labelSearchJobs = "Søg job";
+    labelSearchJobs = "Søg job";
 
     // Search Filter
 
-    var labelSearchFilter = "Søgefilter";
+    labelSearchFilter = "Søgefilter";
 
     // Pagination
 
-    var labelPagination = "Paginering";
+    labelPagination = "Paginering";
 
     // Search Results
 
-    var labelLoadingMsg = "Indlæser nye resultater.";
-    var labelResultsAvailable = "{count} af {total} resultater er nu tilgængelige.";
-    var labelResultsSorted = "Resultater sorteret efter {label}";
+    labelLoadingMsg = "Indlæser nye resultater.";
+    labelResultsAvailable = "{count} af {total} resultater er nu tilgængelige.";
+    labelResultsSorted = "Resultater sorteret efter {label}";
 
     // New Window
 
-    var labelNewWindow = "åbner i et nyt vindue";
+    labelNewWindow = "åbner i et nyt vindue";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Matchende joblinks vises nedenfor, mens du skriver.";
-    var labelSearchKeywordFoundMsg = "{count} matchende joblinks fundet.";
-    var labelSearchKeywordNotFoundMsg = "Ingen matchende joblinks fundet.";
+    labelSearchKeywordDesc = "Matchende joblinks vises nedenfor, mens du skriver.";
+    labelSearchKeywordFoundMsg = "{count} matchende joblinks fundet.";
+    labelSearchKeywordNotFoundMsg = "Ingen matchende joblinks fundet.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Når autofuldførelsesresultater er tilgængelige, skal du bruge pil op og pil ned til at gennemgå og Enter for at vælge. Brugere af berøringsenheder kan udforske ved at trykke eller med swipe-bevægelser.";
+    labelAutoCompleteDesc = "Når autofuldførelsesresultater er tilgængelige, skal du bruge pil op og pil ned til at gennemgå og Enter for at vælge. Brugere af berøringsenheder kan udforske ved at trykke eller med swipe-bevægelser.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Tæt";
+    labelDialogClose = "Tæt";
 
 } else if (currentPageLanguage === "nl") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Filter verwijderen";
+    labelRemoveFilter = "Filter verwijderen";
 
     // Job Alert
 
-    var labelAddJobAlert = "Vacaturemelding toevoegen";
-    var labelSelectedJobAlerts = "Geselecteerde vacaturemeldingen";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Vacaturemeldingen indienen";
+    labelAddJobAlert = "Vacaturemelding toevoegen";
+    labelSelectedJobAlerts = "Geselecteerde vacaturemeldingen";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Vacaturemeldingen indienen";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Voornaamst";
-    var labelViewSavedJobs = "Bekijk opgeslagen vacatures";
+    labelPrimaryNavigation = "Voornaamst";
+    labelViewSavedJobs = "Bekijk opgeslagen vacatures";
 
     // Save Job Button
 
-    var labelSaveJob = "Baan behouden";
+    labelSaveJob = "Baan behouden";
 
     // Search Form
 
-    var labelSearchJobs = "Vacatures zoeken";
+    labelSearchJobs = "Vacatures zoeken";
 
     // Search Filter
 
-    var labelSearchFilter = "Zoekfilter";
+    labelSearchFilter = "Zoekfilter";
 
     // Pagination
 
-    var labelPagination = "Paginering";
+    labelPagination = "Paginering";
 
     // Search Results
 
-    var labelLoadingMsg = "Nieuwe resultaten worden geladen.";
-    var labelResultsAvailable = "{count} van {total} resultaten zijn nu beschikbaar.";
-    var labelResultsSorted = "Resultaten gesorteerd op {label}";
+    labelLoadingMsg = "Nieuwe resultaten worden geladen.";
+    labelResultsAvailable = "{count} van {total} resultaten zijn nu beschikbaar.";
+    labelResultsSorted = "Resultaten gesorteerd op {label}";
 
     // New Window
 
-    var labelNewWindow = "wordt in een nieuw venster geopend";
+    labelNewWindow = "wordt in een nieuw venster geopend";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Relevante vacaturelinks verschijnen hieronder terwijl u typt.";
-    var labelSearchKeywordFoundMsg = "{count} overeenkomende vacaturelinks gevonden.";
-    var labelSearchKeywordNotFoundMsg = "Geen overeenkomende vacatures gevonden.";
+    labelSearchKeywordDesc = "Relevante vacaturelinks verschijnen hieronder terwijl u typt.";
+    labelSearchKeywordFoundMsg = "{count} overeenkomende vacaturelinks gevonden.";
+    labelSearchKeywordNotFoundMsg = "Geen overeenkomende vacatures gevonden.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Gebruik de pijltoetsen omhoog en omlaag om de resultaten te bekijken en druk op Enter om een ​​keuze te maken wanneer er automatisch aanvullende resultaten beschikbaar zijn. Gebruikers van touchscreens kunnen de resultaten verkennen door te tikken of te vegen.";
+    labelAutoCompleteDesc = "Gebruik de pijltoetsen omhoog en omlaag om de resultaten te bekijken en druk op Enter om een ​​keuze te maken wanneer er automatisch aanvullende resultaten beschikbaar zijn. Gebruikers van touchscreens kunnen de resultaten verkennen door te tikken of te vegen.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Dichtbij";
+    labelDialogClose = "Dichtbij";
 
 } else if (currentPageLanguage === "en-GB") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Remove Filter";
+    labelRemoveFilter = "Remove Filter";
 
     // Job Alert
 
-    var labelAddJobAlert = "Add Job Alert";
-    var labelSelectedJobAlerts = "Selected Job Alerts";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Submit Job Alerts";
+    labelAddJobAlert = "Add Job Alert";
+    labelSelectedJobAlerts = "Selected Job Alerts";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Submit Job Alerts";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Main";
-    var labelViewSavedJobs = "View Saved Jobs";
+    labelPrimaryNavigation = "Main";
+    labelViewSavedJobs = "View Saved Jobs";
 
     // Save Job Button
 
-    var labelSaveJob = "Save Job";
+    labelSaveJob = "Save Job";
 
     // Search Form
 
-    var labelSearchJobs = "Search Jobs";
+    labelSearchJobs = "Search Jobs";
 
     // Search Filter
 
-    var labelSearchFilter = "Search Filter";
+    labelSearchFilter = "Search Filter";
 
     // Pagination
 
-    var labelPagination = "Pagination";
+    labelPagination = "Pagination";
 
     // Search Results
 
-    var labelLoadingMsg = "Loading new results.";
-    var labelResultsAvailable = "{count} of {total} results are now available.";
-    var labelResultsSorted = "Results sorted by {label}.";
+    labelLoadingMsg = "Loading new results.";
+    labelResultsAvailable = "{count} of {total} results are now available.";
+    labelResultsSorted = "Results sorted by {label}.";
 
     // New Window
 
-    var labelNewWindow = "opens in new window";
+    labelNewWindow = "opens in new window";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Matching job links will appear below as you type.";
-    var labelSearchKeywordFoundMsg = "{count} matching job links found.";
-    var labelSearchKeywordNotFoundMsg = "No matching job links found.";
+    labelSearchKeywordDesc = "Matching job links will appear below as you type.";
+    labelSearchKeywordFoundMsg = "{count} matching job links found.";
+    labelSearchKeywordNotFoundMsg = "No matching job links found.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
+    labelAutoCompleteDesc = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Close";
+    labelDialogClose = "Close";
 
 } else if (currentPageLanguage === "et") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Eemalda filter";
+    labelRemoveFilter = "Eemalda filter";
 
     // Job Alert
 
-    var labelAddJobAlert = "Lisa tööhoiatus";
-    var labelSelectedJobAlerts = "Valitud tööpakkumiste teavitused";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Esita tööpakkumiste teavitusi";
+    labelAddJobAlert = "Lisa tööhoiatus";
+    labelSelectedJobAlerts = "Valitud tööpakkumiste teavitused";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Esita tööpakkumiste teavitusi";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Peamine";
-    var labelViewSavedJobs = "Kuva salvestatud töökohad";
+    labelPrimaryNavigation = "Peamine";
+    labelViewSavedJobs = "Kuva salvestatud töökohad";
 
     // Save Job Button
 
-    var labelSaveJob = "Salvesta töökoht";
+    labelSaveJob = "Salvesta töökoht";
 
     // Search Form
 
-    var labelSearchJobs = "Otsi töökohti";
+    labelSearchJobs = "Otsi töökohti";
 
     // Search Filter
 
-    var labelSearchFilter = "Otsingufilter";
+    labelSearchFilter = "Otsingufilter";
 
     // Pagination
 
-    var labelPagination = "Lehekülgede arv";
+    labelPagination = "Lehekülgede arv";
 
     // Search Results
 
-    var labelLoadingMsg = "Uute tulemuste laadimine.";
-    var labelResultsAvailable = "{count} tulemust {total} tulemusest on nüüd saadaval.";
-    var labelResultsSorted = "Tulemused sorteeritud sildi {label} järgi";
+    labelLoadingMsg = "Uute tulemuste laadimine.";
+    labelResultsAvailable = "{count} tulemust {total} tulemusest on nüüd saadaval.";
+    labelResultsSorted = "Tulemused sorteeritud sildi {label} järgi";
 
     // New Window
 
-    var labelNewWindow = "avaneb uues aknas";
+    labelNewWindow = "avaneb uues aknas";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Sobivate töökohtade lingid kuvatakse allpool sisestamise ajal.";
-    var labelSearchKeywordFoundMsg = "Leiti {count} sobivat töökuulutuse linki.";
-    var labelSearchKeywordNotFoundMsg = "Sobivaid tööpakkumiste linke ei leitud.";
+    labelSearchKeywordDesc = "Sobivate töökohtade lingid kuvatakse allpool sisestamise ajal.";
+    labelSearchKeywordFoundMsg = "Leiti {count} sobivat töökuulutuse linki.";
+    labelSearchKeywordNotFoundMsg = "Sobivaid tööpakkumiste linke ei leitud.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Kui automaatse täitmise tulemused on saadaval, kasutage ülevaatamiseks üles- ja allanooli ning valimiseks sisestusklahvi. Puudutage seadme kasutajaid, uurige puudutuse või pühkimisliigutuste abil.";
+    labelAutoCompleteDesc = "Kui automaatse täitmise tulemused on saadaval, kasutage ülevaatamiseks üles- ja allanooli ning valimiseks sisestusklahvi. Puudutage seadme kasutajaid, uurige puudutuse või pühkimisliigutuste abil.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Sule";
+    labelDialogClose = "Sule";
 
 } else if (currentPageLanguage === "fi") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Poista suodatin";
+    labelRemoveFilter = "Poista suodatin";
 
     // Job Alert
 
-    var labelAddJobAlert = "Lisää työpaikkailmoitus";
-    var labelSelectedJobAlerts = "Valitut työpaikkailmoitukset";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Lähetä työpaikkahälytyksiä";
+    labelAddJobAlert = "Lisää työpaikkailmoitus";
+    labelSelectedJobAlerts = "Valitut työpaikkailmoitukset";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Lähetä työpaikkahälytyksiä";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Pääasiallinen";
-    var labelViewSavedJobs = "Näytä tallennetut työpaikat";
+    labelPrimaryNavigation = "Pääasiallinen";
+    labelViewSavedJobs = "Näytä tallennetut työpaikat";
 
     // Save Job Button
 
-    var labelSaveJob = "Tallenna työ";
+    labelSaveJob = "Tallenna työ";
 
     // Search Form
 
-    var labelSearchJobs = "Hae työpaikkoja";
+    labelSearchJobs = "Hae työpaikkoja";
 
     // Search Filter
 
-    var labelSearchFilter = "Hakusuodatin";
+    labelSearchFilter = "Hakusuodatin";
 
     // Pagination
 
-    var labelPagination = "Sivunumerointi";
+    labelPagination = "Sivunumerointi";
 
     // Search Results
 
-    var labelLoadingMsg = "Ladataan uusia tuloksia.";
-    var labelResultsAvailable = "{count} / {total} tulosta on nyt saatavilla.";
-    var labelResultsSorted = "Tulokset lajiteltu {label} -perusteella";
+    labelLoadingMsg = "Ladataan uusia tuloksia.";
+    labelResultsAvailable = "{count} / {total} tulosta on nyt saatavilla.";
+    labelResultsSorted = "Tulokset lajiteltu {label} -perusteella";
 
     // New Window
 
-    var labelNewWindow = "avautuu uuteen ikkunaan";
+    labelNewWindow = "avautuu uuteen ikkunaan";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Vastaavat työpaikkalinkit näkyvät alla kirjoittaessasi.";
-    var labelSearchKeywordFoundMsg = "Löytyi {count} vastaavaa työpaikkalinkkiä.";
-    var labelSearchKeywordNotFoundMsg = "Ei vastaavia työpaikkalinkkejä.";
+    labelSearchKeywordDesc = "Vastaavat työpaikkalinkit näkyvät alla kirjoittaessasi.";
+    labelSearchKeywordFoundMsg = "Löytyi {count} vastaavaa työpaikkalinkkiä.";
+    labelSearchKeywordNotFoundMsg = "Ei vastaavia työpaikkalinkkejä.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Kun automaattisen täydennyksen tulokset ovat saatavilla, tarkista ne ylä- ja alanuolilla ja valitse Enter-näppäimellä. Kosketa laitteen käyttäjiä, tutki koskettamalla tai pyyhkäisemällä.";
+    labelAutoCompleteDesc = "Kun automaattisen täydennyksen tulokset ovat saatavilla, tarkista ne ylä- ja alanuolilla ja valitse Enter-näppäimellä. Kosketa laitteen käyttäjiä, tutki koskettamalla tai pyyhkäisemällä.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Lähellä";
+    labelDialogClose = "Lähellä";
 
 } else if (currentPageLanguage === "fr") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Supprimer le filtre";
+    labelRemoveFilter = "Supprimer le filtre";
 
     // Job Alert
 
-    var labelAddJobAlert = "Ajouter une alerte emploi";
-    var labelSelectedJobAlerts = "Alertes emploi sélectionnées";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Envoyer des alertes emploi";
+    labelAddJobAlert = "Ajouter une alerte emploi";
+    labelSelectedJobAlerts = "Alertes emploi sélectionnées";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Envoyer des alertes emploi";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Menu principal";
-    var labelViewSavedJobs = "Voir les offres d'emploi enregistrées";
+    labelPrimaryNavigation = "Menu principal";
+    labelViewSavedJobs = "Voir les offres d'emploi enregistrées";
 
     // Save Job Button
 
-    var labelSaveJob = "Enregistrer pour plus tard";
+    labelSaveJob = "Enregistrer pour plus tard";
 
     // Search Form
 
-    var labelSearchJobs = "Recherche d'emplois";
+    labelSearchJobs = "Recherche d'emplois";
 
     // Search Filter
 
-    var labelSearchFilter = "Filtre de recherche";
+    labelSearchFilter = "Filtre de recherche";
 
     // Pagination
 
-    var labelPagination = "Pagination";
+    labelPagination = "Pagination";
 
     // Search Results
 
-    var labelLoadingMsg = "Chargement des nouveaux résultats.";
-    var labelResultsAvailable = "{count} des {total} résultats sont maintenant disponibles.";
-    var labelResultsSorted = "Résultats triés par {label}";
+    labelLoadingMsg = "Chargement des nouveaux résultats.";
+    labelResultsAvailable = "{count} des {total} résultats sont maintenant disponibles.";
+    labelResultsSorted = "Résultats triés par {label}";
 
     // New Window
 
-    var labelNewWindow = "ouvre dans une nouvelle fenêtre";
+    labelNewWindow = "ouvre dans une nouvelle fenêtre";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Les liens vers les offres d'emploi correspondantes apparaîtront ci-dessous au fur et à mesure que vous taperez.";
-    var labelSearchKeywordFoundMsg = "{count} liens d'emploi correspondants trouvés.";
-    var labelSearchKeywordNotFoundMsg = "Aucun lien vers une offre d'emploi correspondante n'a été trouvé.";
+    labelSearchKeywordDesc = "Les liens vers les offres d'emploi correspondantes apparaîtront ci-dessous au fur et à mesure que vous taperez.";
+    labelSearchKeywordFoundMsg = "{count} liens d'emploi correspondants trouvés.";
+    labelSearchKeywordNotFoundMsg = "Aucun lien vers une offre d'emploi correspondante n'a été trouvé.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Lorsque des suggestions de saisie semi-automatique sont disponibles, utilisez les flèches haut et bas pour les parcourir et appuyez sur Entrée pour sélectionner. Sur les appareils tactiles, explorez les options par le toucher ou par glissement.";
+    labelAutoCompleteDesc = "Lorsque des suggestions de saisie semi-automatique sont disponibles, utilisez les flèches haut et bas pour les parcourir et appuyez sur Entrée pour sélectionner. Sur les appareils tactiles, explorez les options par le toucher ou par glissement.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Fermer";
+    labelDialogClose = "Fermer";
 
 } else if (currentPageLanguage === "de") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Filter entfernen";
+    labelRemoveFilter = "Filter entfernen";
 
     // Job Alert
 
-    var labelAddJobAlert = "Jobbenachrichtigung hinzufügen";
-    var labelSelectedJobAlerts = "Ausgewählte Jobbenachrichtigungen";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Jobbenachrichtigungen einreichen";
+    labelAddJobAlert = "Jobbenachrichtigung hinzufügen";
+    labelSelectedJobAlerts = "Ausgewählte Jobbenachrichtigungen";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Jobbenachrichtigungen einreichen";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Hauptsächlich";
-    var labelViewSavedJobs = "Gespeicherte Jobs ansehen";
+    labelPrimaryNavigation = "Hauptsächlich";
+    labelViewSavedJobs = "Gespeicherte Jobs ansehen";
 
     // Save Job Button
 
-    var labelSaveJob = "Job retten";
+    labelSaveJob = "Job retten";
 
     // Search Form
 
-    var labelSearchJobs = "Stellenangebote suchen";
+    labelSearchJobs = "Stellenangebote suchen";
 
     // Search Filter
 
-    var labelSearchFilter = "Suchfilter";
+    labelSearchFilter = "Suchfilter";
 
     // Pagination
 
-    var labelPagination = "Pagination";
+    labelPagination = "Pagination";
 
     // Search Results
 
-    var labelLoadingMsg = "Neue Ergebnisse werden geladen.";
-    var labelResultsAvailable = "Es sind nun {count} von {total} Ergebnissen verfügbar.";
-    var labelResultsSorted = "Ergebnisse sortiert nach {label}";
+    labelLoadingMsg = "Neue Ergebnisse werden geladen.";
+    labelResultsAvailable = "Es sind nun {count} von {total} Ergebnissen verfügbar.";
+    labelResultsSorted = "Ergebnisse sortiert nach {label}";
 
     // New Window
 
-    var labelNewWindow = "wird in einem neuen Fenster geöffnet";
+    labelNewWindow = "wird in einem neuen Fenster geöffnet";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Passende Stellenlinks werden während Ihrer Eingabe unten angezeigt.";
-    var labelSearchKeywordFoundMsg = "{count} passende Stellenangebote gefunden.";
-    var labelSearchKeywordNotFoundMsg = "Es wurden keine passenden Stellenangebote gefunden.";
+    labelSearchKeywordDesc = "Passende Stellenlinks werden während Ihrer Eingabe unten angezeigt.";
+    labelSearchKeywordFoundMsg = "{count} passende Stellenangebote gefunden.";
+    labelSearchKeywordNotFoundMsg = "Es wurden keine passenden Stellenangebote gefunden.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Wenn Autovervollständigungsvorschläge verfügbar sind, können Sie diese mit den Pfeiltasten nach oben und unten durchsuchen und mit der Eingabetaste auswählen. Nutzer von Touchscreen-Geräten können die Vorschläge per Berührung oder Wischgesten erkunden.";
+    labelAutoCompleteDesc = "Wenn Autovervollständigungsvorschläge verfügbar sind, können Sie diese mit den Pfeiltasten nach oben und unten durchsuchen und mit der Eingabetaste auswählen. Nutzer von Touchscreen-Geräten können die Vorschläge per Berührung oder Wischgesten erkunden.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Schließen";
+    labelDialogClose = "Schließen";
 
 } else if (currentPageLanguage === "he") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "הסר מסנן";
+    labelRemoveFilter = "הסר מסנן";
 
     // Job Alert
 
-    var labelAddJobAlert = "הוסף התראת דרושים";
-    var labelSelectedJobAlerts = "התראות דרושים נבחרות";
-    var labelCaptcha = "קפטצ'ה";
-    var labelSubmitJobAlerts = "שלח התראות דרושים";
+    labelAddJobAlert = "הוסף התראת דרושים";
+    labelSelectedJobAlerts = "התראות דרושים נבחרות";
+    labelCaptcha = "קפטצ'ה";
+    labelSubmitJobAlerts = "שלח התראות דרושים";
 
     // Global Header
 
-    var labelPrimaryNavigation = "רָאשִׁי";
-    var labelViewSavedJobs = "הצג עבודות שנשמרו";
+    labelPrimaryNavigation = "רָאשִׁי";
+    labelViewSavedJobs = "הצג עבודות שנשמרו";
 
     // Save Job Button
 
-    var labelSaveJob = "שמור עבודה";
+    labelSaveJob = "שמור עבודה";
 
     // Search Form
 
-    var labelSearchJobs = "חיפוש משרות";
+    labelSearchJobs = "חיפוש משרות";
 
     // Search Filter
 
-    var labelSearchFilter = "מסנן חיפוש";
+    labelSearchFilter = "מסנן חיפוש";
 
     // Pagination
 
-    var labelPagination = "דִפּוּף";
+    labelPagination = "דִפּוּף";
 
     // Search Results
 
-    var labelLoadingMsg = "טוען תוצאות חדשות.";
-    var labelResultsAvailable = "{count} מתוך {total} תוצאות זמינות כעת.";
-    var labelResultsSorted = "תוצאות ממוינות לפי {label}";
+    labelLoadingMsg = "טוען תוצאות חדשות.";
+    labelResultsAvailable = "{count} מתוך {total} תוצאות זמינות כעת.";
+    labelResultsSorted = "תוצאות ממוינות לפי {label}";
 
     // New Window
 
-    var labelNewWindow = "נפתח בחלון חדש";
+    labelNewWindow = "נפתח בחלון חדש";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "קישורים למשרות תואמות יופיעו למטה בזמן ההקלדה.";
-    var labelSearchKeywordFoundMsg = "נמצאו קישורי עבודה תואמים ({count}).";
-    var labelSearchKeywordNotFoundMsg = "לא נמצאו קישורי עבודה תואמים.";
+    labelSearchKeywordDesc = "קישורים למשרות תואמות יופיעו למטה בזמן ההקלדה.";
+    labelSearchKeywordFoundMsg = "נמצאו קישורי עבודה תואמים ({count}).";
+    labelSearchKeywordNotFoundMsg = "לא נמצאו קישורי עבודה תואמים.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "כאשר תוצאות השלמה אוטומטית זמינות, השתמש בחצים למעלה ולמטה כדי לסקור ו-Enter כדי לבחור. משתמשי מכשירים יכולים לגלות באמצעות מגע או תנועות החלקה.";
+    labelAutoCompleteDesc = "כאשר תוצאות השלמה אוטומטית זמינות, השתמש בחצים למעלה ולמטה כדי לסקור ו-Enter כדי לבחור. משתמשי מכשירים יכולים לגלות באמצעות מגע או תנועות החלקה.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "לִסְגוֹר";
+    labelDialogClose = "לִסְגוֹר";
 
 } else if (currentPageLanguage === "hu") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Szűrő eltávolítása";
+    labelRemoveFilter = "Szűrő eltávolítása";
 
     // Job Alert
 
-    var labelAddJobAlert = "Állásértesítés hozzáadása";
-    var labelSelectedJobAlerts = "Kiválasztott állásértesítések";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Állásértesítések beküldése";
+    labelAddJobAlert = "Állásértesítés hozzáadása";
+    labelSelectedJobAlerts = "Kiválasztott állásértesítések";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Állásértesítések beküldése";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Fő";
-    var labelViewSavedJobs = "Mentett állások megtekintése";
+    labelPrimaryNavigation = "Fő";
+    labelViewSavedJobs = "Mentett állások megtekintése";
 
     // Save Job Button
 
-    var labelSaveJob = "Állás mentése";
+    labelSaveJob = "Állás mentése";
 
     // Search Form
 
-    var labelSearchJobs = "Álláskeresés";
+    labelSearchJobs = "Álláskeresés";
 
     // Search Filter
 
-    var labelSearchFilter = "Keresési szűrő";
+    labelSearchFilter = "Keresési szűrő";
 
     // Pagination
 
-    var labelPagination = "Lapszámozás";
+    labelPagination = "Lapszámozás";
 
     // Search Results
 
-    var labelLoadingMsg = "Új találatok betöltése.";
-    var labelResultsAvailable = "{count} / {total} találat most elérhető.";
-    var labelResultsSorted = "Eredmények rendezve {label} szerint";
+    labelLoadingMsg = "Új találatok betöltése.";
+    labelResultsAvailable = "{count} / {total} találat most elérhető.";
+    labelResultsSorted = "Eredmények rendezve {label} szerint";
 
     // New Window
 
-    var labelNewWindow = "új ablakban nyílik meg";
+    labelNewWindow = "új ablakban nyílik meg";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "A keresésnek megfelelő álláshirdetések linkjei gépelés közben jelennek meg alább.";
-    var labelSearchKeywordFoundMsg = "{count} egyező álláshirdetési link található.";
-    var labelSearchKeywordNotFoundMsg = "Nincsenek megfelelő álláshirdetési linkek.";
+    labelSearchKeywordDesc = "A keresésnek megfelelő álláshirdetések linkjei gépelés közben jelennek meg alább.";
+    labelSearchKeywordFoundMsg = "{count} egyező álláshirdetési link található.";
+    labelSearchKeywordNotFoundMsg = "Nincsenek megfelelő álláshirdetési linkek.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Amikor az automatikus kiegészítés eredményei elérhetők, a fel és le nyilakat használd az áttekintéshez, és az Enter billentyűt a kiválasztáshoz. Érintős eszközhasználók számára a böngészés érintéssel vagy húzással történik.";
+    labelAutoCompleteDesc = "Amikor az automatikus kiegészítés eredményei elérhetők, a fel és le nyilakat használd az áttekintéshez, és az Enter billentyűt a kiválasztáshoz. Érintős eszközhasználók számára a böngészés érintéssel vagy húzással történik.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Közeli";
+    labelDialogClose = "Közeli";
 
 } else if (currentPageLanguage === "is") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Fjarlægja síu";
+    labelRemoveFilter = "Fjarlægja síu";
 
     // Job Alert
 
-    var labelAddJobAlert = "Bæta við atvinnuviðvörun";
-    var labelSelectedJobAlerts = "Valdar atvinnuviðvaranir";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Senda inn atvinnuviðvaranir";
+    labelAddJobAlert = "Bæta við atvinnuviðvörun";
+    labelSelectedJobAlerts = "Valdar atvinnuviðvaranir";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Senda inn atvinnuviðvaranir";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Aðal";
-    var labelViewSavedJobs = "Skoða vistaðar störf";
+    labelPrimaryNavigation = "Aðal";
+    labelViewSavedJobs = "Skoða vistaðar störf";
 
     // Save Job Button
 
-    var labelSaveJob = "Vista verk";
+    labelSaveJob = "Vista verk";
 
     // Search Form
 
-    var labelSearchJobs = "Leita að störfum";
+    labelSearchJobs = "Leita að störfum";
 
     // Search Filter
 
-    var labelSearchFilter = "Leitarsía";
+    labelSearchFilter = "Leitarsía";
 
     // Pagination
 
-    var labelPagination = "Síðunúmeraskipti";
+    labelPagination = "Síðunúmeraskipti";
 
     // Search Results
 
-    var labelLoadingMsg = "Hleður inn nýjum niðurstöðum.";
-    var labelResultsAvailable = "{count} af {total} niðurstöðum eru nú tiltækar.";
-    var labelResultsSorted = "Niðurstöður raðaðar eftir {label}";
+    labelLoadingMsg = "Hleður inn nýjum niðurstöðum.";
+    labelResultsAvailable = "{count} af {total} niðurstöðum eru nú tiltækar.";
+    labelResultsSorted = "Niðurstöður raðaðar eftir {label}";
 
     // New Window
 
-    var labelNewWindow = "opnast í nýjum glugga";
+    labelNewWindow = "opnast í nýjum glugga";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Tenglar sem passa við störf birtast hér að neðan þegar þú skrifar.";
-    var labelSearchKeywordFoundMsg = "{count} samsvarandi atvinnutenglar fundust.";
-    var labelSearchKeywordNotFoundMsg = "Engir samsvarandi starfstenglar fundust.";
+    labelSearchKeywordDesc = "Tenglar sem passa við störf birtast hér að neðan þegar þú skrifar.";
+    labelSearchKeywordFoundMsg = "{count} samsvarandi atvinnutenglar fundust.";
+    labelSearchKeywordNotFoundMsg = "Engir samsvarandi starfstenglar fundust.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Þegar sjálfvirkar niðurstöður eru tiltækar skaltu nota örvarnar upp og niður til að skoða og færa inn til að velja. Notendur sem nota snertingu geta skoðað tækið með snertingu eða strjúkbendingum.";
+    labelAutoCompleteDesc = "Þegar sjálfvirkar niðurstöður eru tiltækar skaltu nota örvarnar upp og niður til að skoða og færa inn til að velja. Notendur sem nota snertingu geta skoðað tækið með snertingu eða strjúkbendingum.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Loka";
+    labelDialogClose = "Loka";
 
 } else if (currentPageLanguage === "it") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Rimuovere il filtro";
+    labelRemoveFilter = "Rimuovere il filtro";
 
     // Job Alert
 
-    var labelAddJobAlert = "Aggiungi avviso di lavoro";
-    var labelSelectedJobAlerts = "Avvisi di lavoro selezionati";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Invia avvisi di lavoro";
+    labelAddJobAlert = "Aggiungi avviso di lavoro";
+    labelSelectedJobAlerts = "Avvisi di lavoro selezionati";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Invia avvisi di lavoro";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Principale";
-    var labelViewSavedJobs = "Visualizza i lavori salvati";
+    labelPrimaryNavigation = "Principale";
+    labelViewSavedJobs = "Visualizza i lavori salvati";
 
     // Save Job Button
 
-    var labelSaveJob = "Salva lavoro";
+    labelSaveJob = "Salva lavoro";
 
     // Search Form
 
-    var labelSearchJobs = "Cerca lavoro";
+    labelSearchJobs = "Cerca lavoro";
 
     // Search Filter
 
-    var labelSearchFilter = "Filtro di ricerca";
+    labelSearchFilter = "Filtro di ricerca";
 
     // Pagination
 
-    var labelPagination = "Paginazione";
+    labelPagination = "Paginazione";
 
     // Search Results
 
-    var labelLoadingMsg = "Caricamento dei nuovi risultati.";
-    var labelResultsAvailable = "{count} di {total} risultati sono ora disponibili.";
-    var labelResultsSorted = "Risultati ordinati per {label}";
+    labelLoadingMsg = "Caricamento dei nuovi risultati.";
+    labelResultsAvailable = "{count} di {total} risultati sono ora disponibili.";
+    labelResultsSorted = "Risultati ordinati per {label}";
 
     // New Window
 
-    var labelNewWindow = "si apre in una nuova finestra";
+    labelNewWindow = "si apre in una nuova finestra";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "I link alle offerte di lavoro corrispondenti appariranno qui sotto man mano che digiti.";
-    var labelSearchKeywordFoundMsg = "{count} link di lavoro corrispondenti trovati.";
-    var labelSearchKeywordNotFoundMsg = "Nessun link di lavoro corrispondente trovato.";
+    labelSearchKeywordDesc = "I link alle offerte di lavoro corrispondenti appariranno qui sotto man mano che digiti.";
+    labelSearchKeywordFoundMsg = "{count} link di lavoro corrispondenti trovati.";
+    labelSearchKeywordNotFoundMsg = "Nessun link di lavoro corrispondente trovato.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Quando sono disponibili i risultati del completamento automatico, utilizzare le frecce su e giù per visualizzarli e il tasto Invio per selezionarli. Gli utenti di dispositivi touch possono esplorare i risultati tramite tocco o gesti di scorrimento.";
+    labelAutoCompleteDesc = "Quando sono disponibili i risultati del completamento automatico, utilizzare le frecce su e giù per visualizzarli e il tasto Invio per selezionarli. Gli utenti di dispositivi touch possono esplorare i risultati tramite tocco o gesti di scorrimento.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Vicino";
+    labelDialogClose = "Vicino";
 
 } else if (currentPageLanguage === "ja") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "フィルターを削除";
+    labelRemoveFilter = "フィルターを削除";
 
     // Job Alert
 
-    var labelAddJobAlert = "求人アラートを追加";
-    var labelSelectedJobAlerts = "厳選された求人情報";
-    var labelCaptcha = "キャプチャ";
-    var labelSubmitJobAlerts = "求人アラートを送信する";
+    labelAddJobAlert = "求人アラートを追加";
+    labelSelectedJobAlerts = "厳選された求人情報";
+    labelCaptcha = "キャプチャ";
+    labelSubmitJobAlerts = "求人アラートを送信する";
 
     // Global Header
 
-    var labelPrimaryNavigation = "主要";
-    var labelViewSavedJobs = "保存した求人を見る";
+    labelPrimaryNavigation = "主要";
+    labelViewSavedJobs = "保存した求人を見る";
 
     // Save Job Button
 
-    var labelSaveJob = "ジョブを保存";
+    labelSaveJob = "ジョブを保存";
 
     // Search Form
 
-    var labelSearchJobs = "求人検索";
+    labelSearchJobs = "求人検索";
 
     // Search Filter
 
-    var labelSearchFilter = "検索フィルター";
+    labelSearchFilter = "検索フィルター";
 
     // Pagination
 
-    var labelPagination = "ページネーション";
+    labelPagination = "ページネーション";
 
     // Search Results
 
-    var labelLoadingMsg = "新しい結果を読み込んでいます。";
-    var labelResultsAvailable = "{total}件中{count}件の結果が表示されました。";
-    var labelResultsSorted = "結果は{label}でソートされています。";
+    labelLoadingMsg = "新しい結果を読み込んでいます。";
+    labelResultsAvailable = "{total}件中{count}件の結果が表示されました。";
+    labelResultsSorted = "結果は{label}でソートされています。";
 
     // New Window
 
-    var labelNewWindow = "新しいウィンドウで開きます";
+    labelNewWindow = "新しいウィンドウで開きます";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "入力内容に応じて、関連する求人リンクが下に表示されます。";
-    var labelSearchKeywordFoundMsg = "{count}件の一致する求人リンクが見つかりました。";
-    var labelSearchKeywordNotFoundMsg = "一致する求人リンクは見つかりませんでした。";
+    labelSearchKeywordDesc = "入力内容に応じて、関連する求人リンクが下に表示されます。";
+    labelSearchKeywordFoundMsg = "{count}件の一致する求人リンクが見つかりました。";
+    labelSearchKeywordNotFoundMsg = "一致する求人リンクは見つかりませんでした。";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "オートコンプリートの結果が表示されたら、上下矢印キーで確認し、Enterキーで選択します。タッチデバイスをご利用の場合は、タッチ操作またはスワイプ操作で探索してください。";
+    labelAutoCompleteDesc = "オートコンプリートの結果が表示されたら、上下矢印キーで確認し、Enterキーで選択します。タッチデバイスをご利用の場合は、タッチ操作またはスワイプ操作で探索してください。";
 
     // Dialog Close Button
 
-    var labelDialogClose = "近い";
+    labelDialogClose = "近い";
 
 } else if (currentPageLanguage === "ko") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "필터 제거";
+    labelRemoveFilter = "필터 제거";
 
     // Job Alert
 
-    var labelAddJobAlert = "채용 알림 추가";
-    var labelSelectedJobAlerts = "선택된 채용 공고 알림";
-    var labelCaptcha = "캡차";
-    var labelSubmitJobAlerts = "채용 공고 알림 신청하기";
+    labelAddJobAlert = "채용 알림 추가";
+    labelSelectedJobAlerts = "선택된 채용 공고 알림";
+    labelCaptcha = "캡차";
+    labelSubmitJobAlerts = "채용 공고 알림 신청하기";
 
     // Global Header
 
-    var labelPrimaryNavigation = "기본";
-    var labelViewSavedJobs = "저장된 채용 정보 보기";
+    labelPrimaryNavigation = "기본";
+    labelViewSavedJobs = "저장된 채용 정보 보기";
 
     // Save Job Button
 
-    var labelSaveJob = "일자리 저장";
+    labelSaveJob = "일자리 저장";
 
     // Search Form
 
-    var labelSearchJobs = "채용 정보 검색";
+    labelSearchJobs = "채용 정보 검색";
 
     // Search Filter
 
-    var labelSearchFilter = "검색 필터";
+    labelSearchFilter = "검색 필터";
 
     // Pagination
 
-    var labelPagination = "쪽수 매기기";
+    labelPagination = "쪽수 매기기";
 
     // Search Results
 
-    var labelLoadingMsg = "새로운 검색 결과를 불러오는 중입니다.";
-    var labelResultsAvailable = "{total}개의 결과 중 {count}개의 결과가 나왔습니다.";
-    var labelResultsSorted = "{label} 기준으로 정렬된 결과";
+    labelLoadingMsg = "새로운 검색 결과를 불러오는 중입니다.";
+    labelResultsAvailable = "{total}개의 결과 중 {count}개의 결과가 나왔습니다.";
+    labelResultsSorted = "{label} 기준으로 정렬된 결과";
 
     // New Window
 
-    var labelNewWindow = "새 창에서 열립니다";
+    labelNewWindow = "새 창에서 열립니다";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "입력하시는 동안 아래에 관련 채용 정보 링크가 표시됩니다.";
-    var labelSearchKeywordFoundMsg = "{count}개의 일치하는 채용 링크가 발견되었습니다.";
-    var labelSearchKeywordNotFoundMsg = "일치하는 채용 정보 링크를 찾을 수 없습니다.";
+    labelSearchKeywordDesc = "입력하시는 동안 아래에 관련 채용 정보 링크가 표시됩니다.";
+    labelSearchKeywordFoundMsg = "{count}개의 일치하는 채용 링크가 발견되었습니다.";
+    labelSearchKeywordNotFoundMsg = "일치하는 채용 정보 링크를 찾을 수 없습니다.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "자동 완성 결과가 표시되면 위아래 화살표를 사용하여 내용을 검토하고 Enter 키를 눌러 선택하세요. 터치 기기 사용자는 터치 또는 스와이프 제스처를 사용하여 탐색할 수 있습니다.";
+    labelAutoCompleteDesc = "자동 완성 결과가 표시되면 위아래 화살표를 사용하여 내용을 검토하고 Enter 키를 눌러 선택하세요. 터치 기기 사용자는 터치 또는 스와이프 제스처를 사용하여 탐색할 수 있습니다.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "닫다";
+    labelDialogClose = "닫다";
 
 } else if (currentPageLanguage === "lv") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Noņemt filtru";
+    labelRemoveFilter = "Noņemt filtru";
 
     // Job Alert
 
-    var labelAddJobAlert = "Pievienot darba brīdinājumu";
-    var labelSelectedJobAlerts = "Atlasītie darba brīdinājumi";
-    var labelCaptcha = "CAPTCHA";
-    var labelSubmitJobAlerts = "Iesniegt darba brīdinājumus";
+    labelAddJobAlert = "Pievienot darba brīdinājumu";
+    labelSelectedJobAlerts = "Atlasītie darba brīdinājumi";
+    labelCaptcha = "CAPTCHA";
+    labelSubmitJobAlerts = "Iesniegt darba brīdinājumus";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Galvenais";
-    var labelViewSavedJobs = "Skatīt saglabātos darbus";
+    labelPrimaryNavigation = "Galvenais";
+    labelViewSavedJobs = "Skatīt saglabātos darbus";
 
     // Save Job Button
 
-    var labelSaveJob = "Saglabāt darbu";
+    labelSaveJob = "Saglabāt darbu";
 
     // Search Form
 
-    var labelSearchJobs = "Meklēt darba sludinājumus";
+    labelSearchJobs = "Meklēt darba sludinājumus";
 
     // Search Filter
 
-    var labelSearchFilter = "Meklēšanas filtrs";
+    labelSearchFilter = "Meklēšanas filtrs";
 
     // Pagination
 
-    var labelPagination = "Lappušu numerācija";
+    labelPagination = "Lappušu numerācija";
 
     // Search Results
 
-    var labelLoadingMsg = "Notiek jaunu rezultātu ielāde.";
-    var labelResultsAvailable = "Tagad ir pieejami {count} no {total} rezultātiem.";
-    var labelResultsSorted = "Rezultāti sakārtoti pēc {label}";
+    labelLoadingMsg = "Notiek jaunu rezultātu ielāde.";
+    labelResultsAvailable = "Tagad ir pieejami {count} no {total} rezultātiem.";
+    labelResultsSorted = "Rezultāti sakārtoti pēc {label}";
 
     // New Window
 
-    var labelNewWindow = "atveras jaunā logā";
+    labelNewWindow = "atveras jaunā logā";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Atbilstošas ​​darba sludinājumu saites parādīsies zemāk, kamēr rakstāt.";
-    var labelSearchKeywordFoundMsg = "Atrastas {count} atbilstošas ​​darba sludinājumu saites.";
-    var labelSearchKeywordNotFoundMsg = "Nav atrastas atbilstošas ​​darba saites.";
+    labelSearchKeywordDesc = "Atbilstošas ​​darba sludinājumu saites parādīsies zemāk, kamēr rakstāt.";
+    labelSearchKeywordFoundMsg = "Atrastas {count} atbilstošas ​​darba sludinājumu saites.";
+    labelSearchKeywordNotFoundMsg = "Nav atrastas atbilstošas ​​darba saites.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Kad ir pieejami automātiskās pabeigšanas rezultāti, izmantojiet augšupvērsto un lejupvērsto bultiņu, lai tos pārskatītu, un taustiņu Enter, lai atlasītu. Pieskarieties ierīču lietotājiem, pārlūkojiet tos ar pieskārienu vai ar vilkšanas žestiem.";
+    labelAutoCompleteDesc = "Kad ir pieejami automātiskās pabeigšanas rezultāti, izmantojiet augšupvērsto un lejupvērsto bultiņu, lai tos pārskatītu, un taustiņu Enter, lai atlasītu. Pieskarieties ierīču lietotājiem, pārlūkojiet tos ar pieskārienu vai ar vilkšanas žestiem.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Aizvērt";
+    labelDialogClose = "Aizvērt";
 
 } else if (currentPageLanguage === "lt") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Pašalinti filtrą";
+    labelRemoveFilter = "Pašalinti filtrą";
 
     // Job Alert
 
-    var labelAddJobAlert = "Pridėti darbo įspėjimą";
-    var labelSelectedJobAlerts = "Pasirinktų darbo skelbimų įspėjimai";
-    var labelCaptcha = '„Captcha"';
-    var labelSubmitJobAlerts = "Pateikti darbo skelbimų įspėjimus";
+    labelAddJobAlert = "Pridėti darbo įspėjimą";
+    labelSelectedJobAlerts = "Pasirinktų darbo skelbimų įspėjimai";
+    labelCaptcha = '„Captcha"';
+    labelSubmitJobAlerts = "Pateikti darbo skelbimų įspėjimus";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Pagrindinis";
-    var labelViewSavedJobs = "Peržiūrėti išsaugotus darbus";
+    labelPrimaryNavigation = "Pagrindinis";
+    labelViewSavedJobs = "Peržiūrėti išsaugotus darbus";
 
     // Save Job Button
 
-    var labelSaveJob = "Išsaugoti darbą";
+    labelSaveJob = "Išsaugoti darbą";
 
     // Search Form
 
-    var labelSearchJobs = "Ieškoti darbo";
+    labelSearchJobs = "Ieškoti darbo";
 
     // Search Filter
 
-    var labelSearchFilter = "Paieškos filtras";
+    labelSearchFilter = "Paieškos filtras";
 
     // Pagination
 
-    var labelPagination = "Puslapavimas";
+    labelPagination = "Puslapavimas";
 
     // Search Results
 
-    var labelLoadingMsg = "Įkeliami nauji rezultatai.";
-    var labelResultsAvailable = "{count} iš {total} rezultatų jau pasiekiami.";
-    var labelResultsSorted = "Rezultatai surūšiuoti pagal {label}";
+    labelLoadingMsg = "Įkeliami nauji rezultatai.";
+    labelResultsAvailable = "{count} iš {total} rezultatų jau pasiekiami.";
+    labelResultsSorted = "Rezultatai surūšiuoti pagal {label}";
 
     // New Window
 
-    var labelNewWindow = "atsidaro naujame lange";
+    labelNewWindow = "atsidaro naujame lange";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Atitinkančios darbo nuorodos bus rodomos žemiau, kai rašysite.";
-    var labelSearchKeywordFoundMsg = "Rasta atitinkančių darbo pasiūlymų nuorodų: {count}";
-    var labelSearchKeywordNotFoundMsg = "Nerasta atitinkančių darbo nuorodų.";
+    labelSearchKeywordDesc = "Atitinkančios darbo nuorodos bus rodomos žemiau, kai rašysite.";
+    labelSearchKeywordFoundMsg = "Rasta atitinkančių darbo pasiūlymų nuorodų: {count}";
+    labelSearchKeywordNotFoundMsg = "Nerasta atitinkančių darbo nuorodų.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Kai pasiekiami automatinio užbaigimo rezultatai, naudokite rodykles aukštyn ir žemyn, kad peržiūrėtumėte, ir „Enter“, kad pasirinktumėte. Palieskite įrenginių naudotojus, naršykite liesdami arba braukimo gestais.";
+    labelAutoCompleteDesc = "Kai pasiekiami automatinio užbaigimo rezultatai, naudokite rodykles aukštyn ir žemyn, kad peržiūrėtumėte, ir „Enter“, kad pasirinktumėte. Palieskite įrenginių naudotojus, naršykite liesdami arba braukimo gestais.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Uždaryti";
+    labelDialogClose = "Uždaryti";
 
 } else if (currentPageLanguage === "ms") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Alih Keluar Penapis";
+    labelRemoveFilter = "Alih Keluar Penapis";
 
     // Job Alert
 
-    var labelAddJobAlert = "Tambah Amaran Pekerjaan";
-    var labelSelectedJobAlerts = "Amaran Pekerjaan Terpilih";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Hantar Makluman Pekerjaan";
+    labelAddJobAlert = "Tambah Amaran Pekerjaan";
+    labelSelectedJobAlerts = "Amaran Pekerjaan Terpilih";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Hantar Makluman Pekerjaan";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Utama";
-    var labelViewSavedJobs = "Lihat Pekerjaan yang Disimpan";
+    labelPrimaryNavigation = "Utama";
+    labelViewSavedJobs = "Lihat Pekerjaan yang Disimpan";
 
     // Save Job Button
 
-    var labelSaveJob = "Simpan Kerja";
+    labelSaveJob = "Simpan Kerja";
 
     // Search Form
 
-    var labelSearchJobs = "Cari Pekerjaan";
+    labelSearchJobs = "Cari Pekerjaan";
 
     // Search Filter
 
-    var labelSearchFilter = "Penapis Carian";
+    labelSearchFilter = "Penapis Carian";
 
     // Pagination
 
-    var labelPagination = "Penomboran halaman";
+    labelPagination = "Penomboran halaman";
 
     // Search Results
 
-    var labelLoadingMsg = "Memuatkan hasil baharu.";
-    var labelResultsAvailable = "{count} daripada {total} keputusan kini tersedia.";
-    var labelResultsSorted = "Keputusan disusun mengikut {label}";
+    labelLoadingMsg = "Memuatkan hasil baharu.";
+    labelResultsAvailable = "{count} daripada {total} keputusan kini tersedia.";
+    labelResultsSorted = "Keputusan disusun mengikut {label}";
 
     // New Window
 
-    var labelNewWindow = "dibuka dalam tetingkap baharu";
+    labelNewWindow = "dibuka dalam tetingkap baharu";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Pautan kerja yang sepadan akan dipaparkan di bawah semasa anda menaip.";
-    var labelSearchKeywordFoundMsg = "{count} pautan kerja yang sepadan ditemui.";
-    var labelSearchKeywordNotFoundMsg = "Tiada pautan kerja yang sepadan ditemui.";
+    labelSearchKeywordDesc = "Pautan kerja yang sepadan akan dipaparkan di bawah semasa anda menaip.";
+    labelSearchKeywordFoundMsg = "{count} pautan kerja yang sepadan ditemui.";
+    labelSearchKeywordNotFoundMsg = "Tiada pautan kerja yang sepadan ditemui.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Apabila hasil autolengkap tersedia, gunakan anak panah atas dan bawah untuk menyemak dan masuk untuk memilih. Sentuh pengguna peranti, terokai dengan sentuhan atau dengan gerak isyarat leret.";
+    labelAutoCompleteDesc = "Apabila hasil autolengkap tersedia, gunakan anak panah atas dan bawah untuk menyemak dan masuk untuk memilih. Sentuh pengguna peranti, terokai dengan sentuhan atau dengan gerak isyarat leret.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Tutup";
+    labelDialogClose = "Tutup";
 
 } else if (currentPageLanguage === "no") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Fjern filter";
+    labelRemoveFilter = "Fjern filter";
 
     // Job Alert
 
-    var labelAddJobAlert = "Legg til jobbvarsel";
-    var labelSelectedJobAlerts = "Utvalgte jobbvarsler";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Send inn jobbvarsler";
+    labelAddJobAlert = "Legg til jobbvarsel";
+    labelSelectedJobAlerts = "Utvalgte jobbvarsler";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Send inn jobbvarsler";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Hoved";
-    var labelViewSavedJobs = "Vis lagrede jobber";
+    labelPrimaryNavigation = "Hoved";
+    labelViewSavedJobs = "Vis lagrede jobber";
 
     // Save Job Button
 
-    var labelSaveJob = "Lagre jobb";
+    labelSaveJob = "Lagre jobb";
 
     // Search Form
 
-    var labelSearchJobs = "Søk etter jobber";
+    labelSearchJobs = "Søk etter jobber";
 
     // Search Filter
 
-    var labelSearchFilter = "Søkefilter";
+    labelSearchFilter = "Søkefilter";
 
     // Pagination
 
-    var labelPagination = "Paginering";
+    labelPagination = "Paginering";
 
     // Search Results
 
-    var labelLoadingMsg = "Laster inn nye resultater.";
-    var labelResultsAvailable = "{count} av {total} resultater er nå tilgjengelige.";
-    var labelResultsSorted = "Resultater sortert etter {label}";
+    labelLoadingMsg = "Laster inn nye resultater.";
+    labelResultsAvailable = "{count} av {total} resultater er nå tilgjengelige.";
+    labelResultsSorted = "Resultater sortert etter {label}";
 
     // New Window
 
-    var labelNewWindow = "åpnes i nytt vindu";
+    labelNewWindow = "åpnes i nytt vindu";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Matchende jobblenker vil vises nedenfor mens du skriver.";
-    var labelSearchKeywordFoundMsg = "{count} samsvarende jobblenker funnet.";
-    var labelSearchKeywordNotFoundMsg = "Ingen samsvarende jobblenker funnet.";
+    labelSearchKeywordDesc = "Matchende jobblenker vil vises nedenfor mens du skriver.";
+    labelSearchKeywordFoundMsg = "{count} samsvarende jobblenker funnet.";
+    labelSearchKeywordNotFoundMsg = "Ingen samsvarende jobblenker funnet.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Når autofullfør-resultater er tilgjengelige, bruk pil opp og pil ned for å se gjennom og Enter for å velge. Brukere av berøringsenheter kan utforske ved å berøre eller sveipe.";
+    labelAutoCompleteDesc = "Når autofullfør-resultater er tilgjengelige, bruk pil opp og pil ned for å se gjennom og Enter for å velge. Brukere av berøringsenheter kan utforske ved å berøre eller sveipe.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Lukke";
+    labelDialogClose = "Lukke";
 
 } else if (currentPageLanguage === "pl") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Usuń filtr";
+    labelRemoveFilter = "Usuń filtr";
 
     // Job Alert
 
-    var labelAddJobAlert = "Dodaj alert pracy";
-    var labelSelectedJobAlerts = "Wybrane alerty dotyczące ofert pracy";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Prześlij alerty o pracy";
+    labelAddJobAlert = "Dodaj alert pracy";
+    labelSelectedJobAlerts = "Wybrane alerty dotyczące ofert pracy";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Prześlij alerty o pracy";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Główny";
-    var labelViewSavedJobs = "Wyświetl zapisane oferty pracy";
+    labelPrimaryNavigation = "Główny";
+    labelViewSavedJobs = "Wyświetl zapisane oferty pracy";
 
     // Save Job Button
 
-    var labelSaveJob = "Zapisz zadanie";
+    labelSaveJob = "Zapisz zadanie";
 
     // Search Form
 
-    var labelSearchJobs = "Szukaj ofert pracy";
+    labelSearchJobs = "Szukaj ofert pracy";
 
     // Search Filter
 
-    var labelSearchFilter = "Filtr wyszukiwania";
+    labelSearchFilter = "Filtr wyszukiwania";
 
     // Pagination
 
-    var labelPagination = "Paginacja";
+    labelPagination = "Paginacja";
 
     // Search Results
 
-    var labelLoadingMsg = "Ładowanie nowych wyników.";
-    var labelResultsAvailable = "{count} z {total} wyników jest teraz dostępnych.";
-    var labelResultsSorted = "Wyniki posortowane według {label}";
+    labelLoadingMsg = "Ładowanie nowych wyników.";
+    labelResultsAvailable = "{count} z {total} wyników jest teraz dostępnych.";
+    labelResultsSorted = "Wyniki posortowane według {label}";
 
     // New Window
 
-    var labelNewWindow = "otwiera się w nowym oknie";
+    labelNewWindow = "otwiera się w nowym oknie";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "W miarę wpisywania tekstu poniżej pojawią się pasujące linki do ofert pracy.";
-    var labelSearchKeywordFoundMsg = "Znaleziono {count} pasujących linków do ofert pracy.";
-    var labelSearchKeywordNotFoundMsg = "Nie znaleziono pasujących linków do ofert pracy.";
+    labelSearchKeywordDesc = "W miarę wpisywania tekstu poniżej pojawią się pasujące linki do ofert pracy.";
+    labelSearchKeywordFoundMsg = "Znaleziono {count} pasujących linków do ofert pracy.";
+    labelSearchKeywordNotFoundMsg = "Nie znaleziono pasujących linków do ofert pracy.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Gdy wyniki autouzupełniania są dostępne, użyj strzałek w górę i w dół, aby je przejrzeć i wybrać Enter. Użytkownicy urządzeń dotykowych mogą przeglądać wyniki dotykiem lub gestami przesuwania.";
+    labelAutoCompleteDesc = "Gdy wyniki autouzupełniania są dostępne, użyj strzałek w górę i w dół, aby je przejrzeć i wybrać Enter. Użytkownicy urządzeń dotykowych mogą przeglądać wyniki dotykiem lub gestami przesuwania.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Zamknąć";
+    labelDialogClose = "Zamknąć";
 
 } else if (currentPageLanguage === "pt") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Remover filtro";
+    labelRemoveFilter = "Remover filtro";
 
     // Job Alert
 
-    var labelAddJobAlert = "Adicionar alerta de emprego";
-    var labelSelectedJobAlerts = "Alertas de emprego selecionados";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Enviar alertas de emprego";
+    labelAddJobAlert = "Adicionar alerta de emprego";
+    labelSelectedJobAlerts = "Alertas de emprego selecionados";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Enviar alertas de emprego";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Principal";
-    var labelViewSavedJobs = "Ver trabalhos salvos";
+    labelPrimaryNavigation = "Principal";
+    labelViewSavedJobs = "Ver trabalhos salvos";
 
     // Save Job Button
 
-    var labelSaveJob = "Salvar emprego";
+    labelSaveJob = "Salvar emprego";
 
     // Search Form
 
-    var labelSearchJobs = "Procurar empregos";
+    labelSearchJobs = "Procurar empregos";
 
     // Search Filter
 
-    var labelSearchFilter = "Filtro de pesquisa";
+    labelSearchFilter = "Filtro de pesquisa";
 
     // Pagination
 
-    var labelPagination = "Paginação";
+    labelPagination = "Paginação";
 
     // Search Results
 
-    var labelLoadingMsg = "Carregando novos resultados.";
-    var labelResultsAvailable = "{count} de {total} resultados já estão disponíveis.";
-    var labelResultsSorted = "Resultados ordenados por {label}";
+    labelLoadingMsg = "Carregando novos resultados.";
+    labelResultsAvailable = "{count} de {total} resultados já estão disponíveis.";
+    labelResultsSorted = "Resultados ordenados por {label}";
 
     // New Window
 
-    var labelNewWindow = "abre em nova janela";
+    labelNewWindow = "abre em nova janela";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Os links para vagas de emprego correspondentes aparecerão abaixo conforme você digita.";
-    var labelSearchKeywordFoundMsg = "{count} links de emprego correspondentes encontrados.";
-    var labelSearchKeywordNotFoundMsg = "Não foram encontrados links de emprego correspondentes.";
+    labelSearchKeywordDesc = "Os links para vagas de emprego correspondentes aparecerão abaixo conforme você digita.";
+    labelSearchKeywordFoundMsg = "{count} links de emprego correspondentes encontrados.";
+    labelSearchKeywordNotFoundMsg = "Não foram encontrados links de emprego correspondentes.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Quando os resultados de preenchimento automático estiverem disponíveis, use as setas para cima e para baixo para revisar e pressione Enter para selecionar. Usuários de dispositivos com tela sensível ao toque podem explorar tocando na tela ou deslizando o dedo na tela.";
+    labelAutoCompleteDesc = "Quando os resultados de preenchimento automático estiverem disponíveis, use as setas para cima e para baixo para revisar e pressione Enter para selecionar. Usuários de dispositivos com tela sensível ao toque podem explorar tocando na tela ou deslizando o dedo na tela.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Fechar";
+    labelDialogClose = "Fechar";
 
 } else if (currentPageLanguage === "ro") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Eliminați filtrul";
+    labelRemoveFilter = "Eliminați filtrul";
 
     // Job Alert
 
-    var labelAddJobAlert = "Adăugați o alertă de job";
-    var labelSelectedJobAlerts = "Alerte de locuri de muncă selectate";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Trimiteți alerte de locuri de muncă";
+    labelAddJobAlert = "Adăugați o alertă de job";
+    labelSelectedJobAlerts = "Alerte de locuri de muncă selectate";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Trimiteți alerte de locuri de muncă";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Principal";
-    var labelViewSavedJobs = "Vizualizați locurile de muncă salvate";
+    labelPrimaryNavigation = "Principal";
+    labelViewSavedJobs = "Vizualizați locurile de muncă salvate";
 
     // Save Job Button
 
-    var labelSaveJob = "Salvați jobul";
+    labelSaveJob = "Salvați jobul";
 
     // Search Form
 
-    var labelSearchJobs = "Căutare locuri de muncă";
+    labelSearchJobs = "Căutare locuri de muncă";
 
     // Search Filter
 
-    var labelSearchFilter = "Filtru de căutare";
+    labelSearchFilter = "Filtru de căutare";
 
     // Pagination
 
-    var labelPagination = "Paginare";
+    labelPagination = "Paginare";
 
     // Search Results
 
-    var labelLoadingMsg = "Se încarcă rezultatele noi.";
-    var labelResultsAvailable = "{count} din {total} rezultate sunt acum disponibile.";
-    var labelResultsSorted = "Rezultate sortate după {label}";
+    labelLoadingMsg = "Se încarcă rezultatele noi.";
+    labelResultsAvailable = "{count} din {total} rezultate sunt acum disponibile.";
+    labelResultsSorted = "Rezultate sortate după {label}";
 
     // New Window
 
-    var labelNewWindow = "se deschide într-o fereastră nouă";
+    labelNewWindow = "se deschide într-o fereastră nouă";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Linkurile către locuri de muncă corespunzătoare vor apărea mai jos pe măsură ce tastați.";
-    var labelSearchKeywordFoundMsg = "Au fost găsite {count} linkuri de locuri de muncă corespunzătoare.";
-    var labelSearchKeywordNotFoundMsg = "Nu au fost găsite linkuri către locuri de muncă potrivite.";
+    labelSearchKeywordDesc = "Linkurile către locuri de muncă corespunzătoare vor apărea mai jos pe măsură ce tastați.";
+    labelSearchKeywordFoundMsg = "Au fost găsite {count} linkuri de locuri de muncă corespunzătoare.";
+    labelSearchKeywordNotFoundMsg = "Nu au fost găsite linkuri către locuri de muncă potrivite.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Când rezultatele completării automate sunt disponibile, folosiți săgețile sus și jos pentru a le revizui și Enter pentru a selecta. Utilizatorii dispozitivului pot explora prin atingere sau cu gesturi de glisare.";
+    labelAutoCompleteDesc = "Când rezultatele completării automate sunt disponibile, folosiți săgețile sus și jos pentru a le revizui și Enter pentru a selecta. Utilizatorii dispozitivului pot explora prin atingere sau cu gesturi de glisare.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Aproape";
+    labelDialogClose = "Aproape";
 
 } else if (currentPageLanguage === "ru") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Удалить фильтр";
+    labelRemoveFilter = "Удалить фильтр";
 
     // Job Alert
 
-    var labelAddJobAlert = "Добавить оповещение о вакансии";
-    var labelSelectedJobAlerts = "Уведомления о вакансиях";
-    var labelCaptcha = "Капча";
-    var labelSubmitJobAlerts = "Отправить уведомление о вакансиях";
+    labelAddJobAlert = "Добавить оповещение о вакансии";
+    labelSelectedJobAlerts = "Уведомления о вакансиях";
+    labelCaptcha = "Капча";
+    labelSubmitJobAlerts = "Отправить уведомление о вакансиях";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Основной";
-    var labelViewSavedJobs = "Просмотреть сохраненные вакансии";
+    labelPrimaryNavigation = "Основной";
+    labelViewSavedJobs = "Просмотреть сохраненные вакансии";
 
     // Save Job Button
 
-    var labelSaveJob = "Сохранить вакансию";
+    labelSaveJob = "Сохранить вакансию";
 
     // Search Form
 
-    var labelSearchJobs = "Поиск работы";
+    labelSearchJobs = "Поиск работы";
 
     // Search Filter
 
-    var labelSearchFilter = "Фильтр поиска";
+    labelSearchFilter = "Фильтр поиска";
 
     // Pagination
 
-    var labelPagination = "Пагинация";
+    labelPagination = "Пагинация";
 
     // Search Results
 
-    var labelLoadingMsg = "Загрузка новых результатов.";
-    var labelResultsAvailable = "Теперь доступно {count} из {total} результатов.";
-    var labelResultsSorted = "Результаты отсортированы по {label}";
+    labelLoadingMsg = "Загрузка новых результатов.";
+    labelResultsAvailable = "Теперь доступно {count} из {total} результатов.";
+    labelResultsSorted = "Результаты отсортированы по {label}";
 
     // New Window
 
-    var labelNewWindow = "открывается в новом окне";
+    labelNewWindow = "открывается в новом окне";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "По мере ввода текста ниже будут появляться ссылки на подходящие вакансии.";
-    var labelSearchKeywordFoundMsg = "Найдено {count} соответствующих ссылок на вакансии.";
-    var labelSearchKeywordNotFoundMsg = "Ссылки на подходящие вакансии не найдены.";
+    labelSearchKeywordDesc = "По мере ввода текста ниже будут появляться ссылки на подходящие вакансии.";
+    labelSearchKeywordFoundMsg = "Найдено {count} соответствующих ссылок на вакансии.";
+    labelSearchKeywordNotFoundMsg = "Ссылки на подходящие вакансии не найдены.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "При наличии результатов автозаполнения используйте стрелки вверх и вниз для просмотра и клавишу Enter для выбора. Пользователи сенсорных устройств могут осуществлять поиск с помощью касаний или жестов смахивания.";
+    labelAutoCompleteDesc = "При наличии результатов автозаполнения используйте стрелки вверх и вниз для просмотра и клавишу Enter для выбора. Пользователи сенсорных устройств могут осуществлять поиск с помощью касаний или жестов смахивания.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Закрывать";
+    labelDialogClose = "Закрывать";
 
 } else if (currentPageLanguage === "sr") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Уклони филтер";
+    labelRemoveFilter = "Уклони филтер";
 
     // Job Alert
 
-    var labelAddJobAlert = "Додај обавештење о послу";
-    var labelSelectedJobAlerts = "Одабрана обавештења о пословима";
-    var labelCaptcha = "Капча";
-    var labelSubmitJobAlerts = "Пошаљи обавештења о пословима";
+    labelAddJobAlert = "Додај обавештење о послу";
+    labelSelectedJobAlerts = "Одабрана обавештења о пословима";
+    labelCaptcha = "Капча";
+    labelSubmitJobAlerts = "Пошаљи обавештења о пословима";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Главни";
-    var labelViewSavedJobs = "Погледајте сачуване послове";
+    labelPrimaryNavigation = "Главни";
+    labelViewSavedJobs = "Погледајте сачуване послове";
 
     // Save Job Button
 
-    var labelSaveJob = "Сачувај посао";
+    labelSaveJob = "Сачувај посао";
 
     // Search Form
 
-    var labelSearchJobs = "Претрага послова";
+    labelSearchJobs = "Претрага послова";
 
     // Search Filter
 
-    var labelSearchFilter = "Филтер за претрагу";
+    labelSearchFilter = "Филтер за претрагу";
 
     // Pagination
 
-    var labelPagination = "Пагинација";
+    labelPagination = "Пагинација";
 
     // Search Results
 
-    var labelLoadingMsg = "Учитавање нових резултата.";
-    var labelResultsAvailable = "Сада је доступно {count} од {total} резултата.";
-    var labelResultsSorted = "Резултати сортирани по {label}";
+    labelLoadingMsg = "Учитавање нових резултата.";
+    labelResultsAvailable = "Сада је доступно {count} од {total} резултата.";
+    labelResultsSorted = "Резултати сортирани по {label}";
 
     // New Window
 
-    var labelNewWindow = "отвара се у новом прозору";
+    labelNewWindow = "отвара се у новом прозору";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Линкови за послове који одговарају вашим потребама ће се појављивати испод док куцате.";
-    var labelSearchKeywordFoundMsg = "Пронађено је {count} одговарајућих линкова за послове.";
-    var labelSearchKeywordNotFoundMsg = "Нису пронађени одговарајући линкови за посао.";
+    labelSearchKeywordDesc = "Линкови за послове који одговарају вашим потребама ће се појављивати испод док куцате.";
+    labelSearchKeywordFoundMsg = "Пронађено је {count} одговарајућих линкова за послове.";
+    labelSearchKeywordNotFoundMsg = "Нису пронађени одговарајући линкови за посао.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Када су доступни резултати аутоматског довршавања, користите стрелице нагоре и надоле за преглед и ентер за избор. Корисници додирних уређаја могу да истражују додиром или превлачењем.";
+    labelAutoCompleteDesc = "Када су доступни резултати аутоматског довршавања, користите стрелице нагоре и надоле за преглед и ентер за избор. Корисници додирних уређаја могу да истражују додиром или превлачењем.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Затвори";
+    labelDialogClose = "Затвори";
 
 } else if (currentPageLanguage === "sk") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Odstrániť filter";
+    labelRemoveFilter = "Odstrániť filter";
 
     // Job Alert
 
-    var labelAddJobAlert = "Pridať upozornenie na pracovnú ponuku";
-    var labelSelectedJobAlerts = "Vybrané upozornenia na pracovné ponuky";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Odoslať upozornenia na pracovné ponuky";
+    labelAddJobAlert = "Pridať upozornenie na pracovnú ponuku";
+    labelSelectedJobAlerts = "Vybrané upozornenia na pracovné ponuky";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Odoslať upozornenia na pracovné ponuky";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Hlavné";
-    var labelViewSavedJobs = "Zobraziť uložené úlohy";
+    labelPrimaryNavigation = "Hlavné";
+    labelViewSavedJobs = "Zobraziť uložené úlohy";
 
     // Save Job Button
 
-    var labelSaveJob = "Uložiť úlohu";
+    labelSaveJob = "Uložiť úlohu";
 
     // Search Form
 
-    var labelSearchJobs = "Hľadať pracovné ponuky";
+    labelSearchJobs = "Hľadať pracovné ponuky";
 
     // Search Filter
 
-    var labelSearchFilter = "Vyhľadávací filter";
+    labelSearchFilter = "Vyhľadávací filter";
 
     // Pagination
 
-    var labelPagination = "Stránkovanie";
+    labelPagination = "Stránkovanie";
 
     // Search Results
 
-    var labelLoadingMsg = "Načítavajú sa nové výsledky.";
-    var labelResultsAvailable = "K dispozícii je {count} z {total} výsledkov.";
-    var labelResultsSorted = "Výsledky zoradené podľa {label}";
+    labelLoadingMsg = "Načítavajú sa nové výsledky.";
+    labelResultsAvailable = "K dispozícii je {count} z {total} výsledkov.";
+    labelResultsSorted = "Výsledky zoradené podľa {label}";
 
     // New Window
 
-    var labelNewWindow = "otvorí sa v novom okne";
+    labelNewWindow = "otvorí sa v novom okne";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Počas písania sa nižšie zobrazia zodpovedajúce odkazy na pracovné ponuky.";
-    var labelSearchKeywordFoundMsg = "Nájdených {count} zodpovedajúcich pracovných odkazov.";
-    var labelSearchKeywordNotFoundMsg = "Nenašli sa žiadne zodpovedajúce pracovné odkazy.";
+    labelSearchKeywordDesc = "Počas písania sa nižšie zobrazia zodpovedajúce odkazy na pracovné ponuky.";
+    labelSearchKeywordFoundMsg = "Nájdených {count} zodpovedajúcich pracovných odkazov.";
+    labelSearchKeywordNotFoundMsg = "Nenašli sa žiadne zodpovedajúce pracovné odkazy.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Keď sú k dispozícii výsledky automatického dopĺňania, použite na kontrolu šípky nahor a nadol a na výber kláves Enter. Používatelia dotykových zariadení môžu vyhľadávať dotykom alebo gestami potiahnutia prstom.";
+    labelAutoCompleteDesc = "Keď sú k dispozícii výsledky automatického dopĺňania, použite na kontrolu šípky nahor a nadol a na výber kláves Enter. Používatelia dotykových zariadení môžu vyhľadávať dotykom alebo gestami potiahnutia prstom.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Zatvoriť";
+    labelDialogClose = "Zatvoriť";
 
 } else if (currentPageLanguage === "sl") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Odstrani filter";
+    labelRemoveFilter = "Odstrani filter";
 
     // Job Alert
 
-    var labelAddJobAlert = "Dodaj opozorilo o delovnem mestu";
-    var labelSelectedJobAlerts = "Izbrana opozorila o delovnih mestih";
-    var labelCaptcha = "Kapča";
-    var labelSubmitJobAlerts = "Pošlji opozorila o delovnih mestih";
+    labelAddJobAlert = "Dodaj opozorilo o delovnem mestu";
+    labelSelectedJobAlerts = "Izbrana opozorila o delovnih mestih";
+    labelCaptcha = "Kapča";
+    labelSubmitJobAlerts = "Pošlji opozorila o delovnih mestih";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Glavni";
-    var labelViewSavedJobs = "Ogled shranjenih delovnih mest";
+    labelPrimaryNavigation = "Glavni";
+    labelViewSavedJobs = "Ogled shranjenih delovnih mest";
 
     // Save Job Button
 
-    var labelSaveJob = "Shrani opravilo";
+    labelSaveJob = "Shrani opravilo";
 
     // Search Form
 
-    var labelSearchJobs = "Iskanje delovnih mest";
+    labelSearchJobs = "Iskanje delovnih mest";
 
     // Search Filter
 
-    var labelSearchFilter = "Iskalni filter";
+    labelSearchFilter = "Iskalni filter";
 
     // Pagination
 
-    var labelPagination = "Oštevilčenje strani";
+    labelPagination = "Oštevilčenje strani";
 
     // Search Results
 
-    var labelLoadingMsg = "Nalaganje novih rezultatov.";
-    var labelResultsAvailable = "Na voljo je {count} od {total} rezultatov.";
-    var labelResultsSorted = "Rezultati razvrščeni po {label}";
+    labelLoadingMsg = "Nalaganje novih rezultatov.";
+    labelResultsAvailable = "Na voljo je {count} od {total} rezultatov.";
+    labelResultsSorted = "Rezultati razvrščeni po {label}";
 
     // New Window
 
-    var labelNewWindow = "odpre se v novem oknu";
+    labelNewWindow = "odpre se v novem oknu";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Med tipkanjem se bodo spodaj prikazale ustrezne povezave do delovnih mest.";
-    var labelSearchKeywordFoundMsg = "Najdenih je bilo {count} ustreznih povezav za zaposlitev.";
-    var labelSearchKeywordNotFoundMsg = "Ni najdenih ustreznih povezav za delovna mesta.";
+    labelSearchKeywordDesc = "Med tipkanjem se bodo spodaj prikazale ustrezne povezave do delovnih mest.";
+    labelSearchKeywordFoundMsg = "Najdenih je bilo {count} ustreznih povezav za zaposlitev.";
+    labelSearchKeywordNotFoundMsg = "Ni najdenih ustreznih povezav za delovna mesta.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Ko so na voljo rezultati samodokončanja, uporabite puščici gor in dol za pregled in enter za izbiro. Uporabniki naprav z dotikom lahko raziskujejo z dotikom ali s gibi vlečenja.";
+    labelAutoCompleteDesc = "Ko so na voljo rezultati samodokončanja, uporabite puščici gor in dol za pregled in enter za izbiro. Uporabniki naprav z dotikom lahko raziskujejo z dotikom ali s gibi vlečenja.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Zapri";
+    labelDialogClose = "Zapri";
 
 } else if (currentPageLanguage === "es") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Quitar filtro";
+    labelRemoveFilter = "Quitar filtro";
 
     // Job Alert
 
-    var labelAddJobAlert = "Agregar alerta de empleo";
-    var labelSelectedJobAlerts = "Alertas de empleo seleccionadas";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Enviar alertas de empleo";
+    labelAddJobAlert = "Agregar alerta de empleo";
+    labelSelectedJobAlerts = "Alertas de empleo seleccionadas";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Enviar alertas de empleo";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Principal";
-    var labelViewSavedJobs = "Ver trabajos guardados";
+    labelPrimaryNavigation = "Principal";
+    labelViewSavedJobs = "Ver trabajos guardados";
 
     // Save Job Button
 
-    var labelSaveJob = "Guardar empleo";
+    labelSaveJob = "Guardar empleo";
 
     // Search Form
 
-    var labelSearchJobs = "Buscar empleos";
+    labelSearchJobs = "Buscar empleos";
 
     // Search Filter
 
-    var labelSearchFilter = "Filtro de búsqueda";
+    labelSearchFilter = "Filtro de búsqueda";
 
     // Pagination
 
-    var labelPagination = "Paginación";
+    labelPagination = "Paginación";
 
     // Search Results
 
-    var labelLoadingMsg = "Cargando nuevos resultados.";
-    var labelResultsAvailable = "Ya están disponibles {count} de {total} resultados.";
-    var labelResultsSorted = "Resultados ordenados por {label}";
+    labelLoadingMsg = "Cargando nuevos resultados.";
+    labelResultsAvailable = "Ya están disponibles {count} de {total} resultados.";
+    labelResultsSorted = "Resultados ordenados por {label}";
 
     // New Window
 
-    var labelNewWindow = "Se abre en una ventana nueva";
+    labelNewWindow = "Se abre en una ventana nueva";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "A medida que escribas, aparecerán enlaces a ofertas de empleo que coincidan con tu perfil.";
-    var labelSearchKeywordFoundMsg = "{count} enlaces de trabajo coincidentes encontrados.";
-    var labelSearchKeywordNotFoundMsg = "No se encontraron enlaces de empleo que coincidan.";
+    labelSearchKeywordDesc = "A medida que escribas, aparecerán enlaces a ofertas de empleo que coincidan con tu perfil.";
+    labelSearchKeywordFoundMsg = "{count} enlaces de trabajo coincidentes encontrados.";
+    labelSearchKeywordNotFoundMsg = "No se encontraron enlaces de empleo que coincidan.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Cuando haya resultados de autocompletar disponibles, use las flechas arriba y abajo para revisarlos y presione Enter para seleccionar. Los usuarios de dispositivos táctiles pueden explorar mediante gestos táctiles o deslizando el dedo.";
+    labelAutoCompleteDesc = "Cuando haya resultados de autocompletar disponibles, use las flechas arriba y abajo para revisarlos y presione Enter para seleccionar. Los usuarios de dispositivos táctiles pueden explorar mediante gestos táctiles o deslizando el dedo.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Cerca";
+    labelDialogClose = "Cerca";
 
 } else if (currentPageLanguage === "sv") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Ta bort filter";
+    labelRemoveFilter = "Ta bort filter";
 
     // Job Alert
 
-    var labelAddJobAlert = "Lägg till jobbavisering";
-    var labelSelectedJobAlerts = "Valda jobbaviseringar";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Skicka jobbaviseringar";
+    labelAddJobAlert = "Lägg till jobbavisering";
+    labelSelectedJobAlerts = "Valda jobbaviseringar";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Skicka jobbaviseringar";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Huvudsaklig";
-    var labelViewSavedJobs = "Visa sparade jobb";
+    labelPrimaryNavigation = "Huvudsaklig";
+    labelViewSavedJobs = "Visa sparade jobb";
 
     // Save Job Button
 
-    var labelSaveJob = "Spara jobb";
+    labelSaveJob = "Spara jobb";
 
     // Search Form
 
-    var labelSearchJobs = "Sök jobb";
+    labelSearchJobs = "Sök jobb";
 
     // Search Filter
 
-    var labelSearchFilter = "Sökfilter";
+    labelSearchFilter = "Sökfilter";
 
     // Pagination
 
-    var labelPagination = "Paginering";
+    labelPagination = "Paginering";
 
     // Search Results
 
-    var labelLoadingMsg = "Laddar nya resultat.";
-    var labelResultsAvailable = "{count} av {total} resultat är nu tillgängliga.";
-    var labelResultsSorted = "Resultat sorterade efter {label}";
+    labelLoadingMsg = "Laddar nya resultat.";
+    labelResultsAvailable = "{count} av {total} resultat är nu tillgängliga.";
+    labelResultsSorted = "Resultat sorterade efter {label}";
 
     // New Window
 
-    var labelNewWindow = "öppnas i nytt fönster";
+    labelNewWindow = "öppnas i nytt fönster";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Matchande jobblänkar visas nedan medan du skriver.";
-    var labelSearchKeywordFoundMsg = "{count} matchande jobblänkar hittades.";
-    var labelSearchKeywordNotFoundMsg = "Inga matchande jobblänkar hittades.";
+    labelSearchKeywordDesc = "Matchande jobblänkar visas nedan medan du skriver.";
+    labelSearchKeywordFoundMsg = "{count} matchande jobblänkar hittades.";
+    labelSearchKeywordNotFoundMsg = "Inga matchande jobblänkar hittades.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "När autoslutföranderesultat är tillgängliga, använd uppåt- och nedåtpilarna för att granska och returnera för att välja. Användare av pekskärmen kan utforska genom att peka eller svepa.";
+    labelAutoCompleteDesc = "När autoslutföranderesultat är tillgängliga, använd uppåt- och nedåtpilarna för att granska och returnera för att välja. Användare av pekskärmen kan utforska genom att peka eller svepa.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Nära";
+    labelDialogClose = "Nära";
 
 } else if (currentPageLanguage === "th") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "ลบตัวกรอง";
+    labelRemoveFilter = "ลบตัวกรอง";
 
     // Job Alert
 
-    var labelAddJobAlert = "เพิ่มการแจ้งเตือนงาน";
-    var labelSelectedJobAlerts = "การแจ้งเตือนงานที่เลือก";
-    var labelCaptcha = "แคปชา";
-    var labelSubmitJobAlerts = "ส่งการแจ้งเตือนงาน";
+    labelAddJobAlert = "เพิ่มการแจ้งเตือนงาน";
+    labelSelectedJobAlerts = "การแจ้งเตือนงานที่เลือก";
+    labelCaptcha = "แคปชา";
+    labelSubmitJobAlerts = "ส่งการแจ้งเตือนงาน";
 
     // Global Header
 
-    var labelPrimaryNavigation = "หลัก";
-    var labelViewSavedJobs = "ดูงานที่บันทึกไว้";
+    labelPrimaryNavigation = "หลัก";
+    labelViewSavedJobs = "ดูงานที่บันทึกไว้";
 
     // Save Job Button
 
-    var labelSaveJob = "บันทึกงาน";
+    labelSaveJob = "บันทึกงาน";
 
     // Search Form
 
-    var labelSearchJobs = "ค้นหางาน";
+    labelSearchJobs = "ค้นหางาน";
 
     // Search Filter
 
-    var labelSearchFilter = "ตัวกรองการค้นหา";
+    labelSearchFilter = "ตัวกรองการค้นหา";
 
     // Pagination
 
-    var labelPagination = "การแบ่งหน้า";
+    labelPagination = "การแบ่งหน้า";
 
     // Search Results
 
-    var labelLoadingMsg = "กำลังโหลดผลลัพธ์ใหม่";
-    var labelResultsAvailable = "ขณะนี้มีผลลัพธ์ {count} จากทั้งหมด {total} รายการให้ดูแล้ว";
-    var labelResultsSorted = "ผลลัพธ์เรียงลำดับตาม {label}";
+    labelLoadingMsg = "กำลังโหลดผลลัพธ์ใหม่";
+    labelResultsAvailable = "ขณะนี้มีผลลัพธ์ {count} จากทั้งหมด {total} รายการให้ดูแล้ว";
+    labelResultsSorted = "ผลลัพธ์เรียงลำดับตาม {label}";
 
     // New Window
 
-    var labelNewWindow = "เปิดในหน้าต่างใหม่";
+    labelNewWindow = "เปิดในหน้าต่างใหม่";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "ลิงก์ตำแหน่งงานที่ตรงกับคุณสมบัติจะปรากฏด้านล่างขณะที่คุณพิมพ์";
-    var labelSearchKeywordFoundMsg = "พบลิงก์งานที่ตรงกันจำนวน {count} รายการ";
-    var labelSearchKeywordNotFoundMsg = "ไม่พบลิงก์งานที่ตรงกัน";
+    labelSearchKeywordDesc = "ลิงก์ตำแหน่งงานที่ตรงกับคุณสมบัติจะปรากฏด้านล่างขณะที่คุณพิมพ์";
+    labelSearchKeywordFoundMsg = "พบลิงก์งานที่ตรงกันจำนวน {count} รายการ";
+    labelSearchKeywordNotFoundMsg = "ไม่พบลิงก์งานที่ตรงกัน";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "เมื่อมีผลลัพธ์การเติมข้อความอัตโนมัติ ให้ใช้ลูกศรขึ้นและลงเพื่อตรวจสอบ และกด Enter เพื่อเลือก สำหรับผู้ใช้อุปกรณ์ระบบสัมผัส ให้สำรวจโดยการสัมผัสหรือใช้ท่าทางปัดนิ้ว";
+    labelAutoCompleteDesc = "เมื่อมีผลลัพธ์การเติมข้อความอัตโนมัติ ให้ใช้ลูกศรขึ้นและลงเพื่อตรวจสอบ และกด Enter เพื่อเลือก สำหรับผู้ใช้อุปกรณ์ระบบสัมผัส ให้สำรวจโดยการสัมผัสหรือใช้ท่าทางปัดนิ้ว";
 
     // Dialog Close Button
 
-    var labelDialogClose = "ปิด";
+    labelDialogClose = "ปิด";
 
 } else if (currentPageLanguage === "uk") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Видалити фільтр";
+    labelRemoveFilter = "Видалити фільтр";
 
     // Job Alert
 
-    var labelAddJobAlert = "Додати сповіщення про вакансію";
-    var labelSelectedJobAlerts = "Вибрані сповіщення про вакансії";
-    var labelCaptcha = "Капча";
-    var labelSubmitJobAlerts = "Надіслати сповіщення про вакансії";
+    labelAddJobAlert = "Додати сповіщення про вакансію";
+    labelSelectedJobAlerts = "Вибрані сповіщення про вакансії";
+    labelCaptcha = "Капча";
+    labelSubmitJobAlerts = "Надіслати сповіщення про вакансії";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Головний";
-    var labelViewSavedJobs = "Переглянути збережені вакансії";
+    labelPrimaryNavigation = "Головний";
+    labelViewSavedJobs = "Переглянути збережені вакансії";
 
     // Save Job Button
 
-    var labelSaveJob = "Зберегти завдання";
+    labelSaveJob = "Зберегти завдання";
 
     // Search Form
 
-    var labelSearchJobs = "Пошук вакансій";
+    labelSearchJobs = "Пошук вакансій";
 
     // Search Filter
 
-    var labelSearchFilter = "Фільтр пошуку";
+    labelSearchFilter = "Фільтр пошуку";
 
     // Pagination
 
-    var labelPagination = "Пагінація";
+    labelPagination = "Пагінація";
 
     // Search Results
 
-    var labelLoadingMsg = "Завантаження нових результатів.";
-    var labelResultsAvailable = "Доступно {count} з {total} результатів.";
-    var labelResultsSorted = "Результати відсортовано за {label}";
+    labelLoadingMsg = "Завантаження нових результатів.";
+    labelResultsAvailable = "Доступно {count} з {total} результатів.";
+    labelResultsSorted = "Результати відсортовано за {label}";
 
     // New Window
 
-    var labelNewWindow = "відкривається в новому вікні";
+    labelNewWindow = "відкривається в новому вікні";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Відповідні посилання на вакансії з’являтимуться нижче під час введення тексту.";
-    var labelSearchKeywordFoundMsg = "Знайдено {count} відповідних посилань на вакансії.";
-    var labelSearchKeywordNotFoundMsg = "Відповідних посилань на вакансії не знайдено.";
+    labelSearchKeywordDesc = "Відповідні посилання на вакансії з’являтимуться нижче під час введення тексту.";
+    labelSearchKeywordFoundMsg = "Знайдено {count} відповідних посилань на вакансії.";
+    labelSearchKeywordNotFoundMsg = "Відповідних посилань на вакансії не знайдено.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Коли доступні результати автозаповнення, використовуйте стрілки вгору та вниз для перегляду та Enter для вибору. Користувачі сенсорних пристроїв можуть досліджувати дотиком або жестами пальцем.";
+    labelAutoCompleteDesc = "Коли доступні результати автозаповнення, використовуйте стрілки вгору та вниз для перегляду та Enter для вибору. Користувачі сенсорних пристроїв можуть досліджувати дотиком або жестами пальцем.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Закрити";
+    labelDialogClose = "Закрити";
 
 } else if (currentPageLanguage === "vi") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Xóa bộ lọc";
+    labelRemoveFilter = "Xóa bộ lọc";
 
     // Job Alert
 
-    var labelAddJobAlert = "Thêm thông báo việc làm";
-    var labelSelectedJobAlerts = "Thông báo việc làm được chọn lọc";
-    var labelCaptcha = "Mã xác nhận";
-    var labelSubmitJobAlerts = "Đăng ký nhận thông báo việc làm";
+    labelAddJobAlert = "Thêm thông báo việc làm";
+    labelSelectedJobAlerts = "Thông báo việc làm được chọn lọc";
+    labelCaptcha = "Mã xác nhận";
+    labelSubmitJobAlerts = "Đăng ký nhận thông báo việc làm";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Chủ yếu";
-    var labelViewSavedJobs = "Xem các công việc đã lưu";
+    labelPrimaryNavigation = "Chủ yếu";
+    labelViewSavedJobs = "Xem các công việc đã lưu";
 
     // Save Job Button
 
-    var labelSaveJob = "Lưu công việc";
+    labelSaveJob = "Lưu công việc";
 
     // Search Form
 
-    var labelSearchJobs = "Tìm việc làm";
+    labelSearchJobs = "Tìm việc làm";
 
     // Search Filter
 
-    var labelSearchFilter = "Bộ lọc tìm kiếm";
+    labelSearchFilter = "Bộ lọc tìm kiếm";
 
     // Pagination
 
-    var labelPagination = "Đánh số trang";
+    labelPagination = "Đánh số trang";
 
     // Search Results
 
-    var labelLoadingMsg = "Đang tải kết quả mới.";
-    var labelResultsAvailable = "Hiện đã có {count} trong tổng số {total} kết quả.";
-    var labelResultsSorted = "Kết quả được sắp xếp theo {label}";
+    labelLoadingMsg = "Đang tải kết quả mới.";
+    labelResultsAvailable = "Hiện đã có {count} trong tổng số {total} kết quả.";
+    labelResultsSorted = "Kết quả được sắp xếp theo {label}";
 
     // New Window
 
-    var labelNewWindow = "(mở trong cửa sổ mới)";
+    labelNewWindow = "(mở trong cửa sổ mới)";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Các liên kết việc làm phù hợp sẽ xuất hiện bên dưới khi bạn nhập.";
-    var labelSearchKeywordFoundMsg = "{count} Đã tìm thấy các liên kết việc làm phù hợp.";
-    var labelSearchKeywordNotFoundMsg = "Không tìm thấy liên kết việc làm phù hợp.";
+    labelSearchKeywordDesc = "Các liên kết việc làm phù hợp sẽ xuất hiện bên dưới khi bạn nhập.";
+    labelSearchKeywordFoundMsg = "{count} Đã tìm thấy các liên kết việc làm phù hợp.";
+    labelSearchKeywordNotFoundMsg = "Không tìm thấy liên kết việc làm phù hợp.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "Khi kết quả tự động hoàn thành hiển thị, hãy sử dụng các phím mũi tên lên và xuống để xem lại và nhấn Enter để chọn. Người dùng thiết bị cảm ứng có thể khám phá bằng cách chạm hoặc vuốt.";
+    labelAutoCompleteDesc = "Khi kết quả tự động hoàn thành hiển thị, hãy sử dụng các phím mũi tên lên và xuống để xem lại và nhấn Enter để chọn. Người dùng thiết bị cảm ứng có thể khám phá bằng cách chạm hoặc vuốt.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Đóng";
+    labelDialogClose = "Đóng";
 
 } else {
 
@@ -2056,57 +2075,80 @@ if(currentPageLanguage === "ar") {
 
     // Remove Job Filter
 
-    var labelRemoveFilter = "Remove Filter";
+    labelRemoveFilter = "Remove Filter";
 
     // Job Alert
 
-    var labelAddJobAlert = "Add Job Alert";
-    var labelSelectedJobAlerts = "Selected Job Alerts";
-    var labelCaptcha = "Captcha";
-    var labelSubmitJobAlerts = "Submit Job Alerts";
+    labelAddJobAlert = "Add Job Alert";
+    labelSelectedJobAlerts = "Selected Job Alerts";
+    labelCaptcha = "Captcha";
+    labelSubmitJobAlerts = "Submit Job Alerts";
 
     // Global Header
 
-    var labelPrimaryNavigation = "Main";
-    var labelViewSavedJobs = "View Saved Jobs";
+    labelPrimaryNavigation = "Main";
+    labelViewSavedJobs = "View Saved Jobs";
 
     // Save Job Button
 
-    var labelSaveJob = "Save Job";
+    labelSaveJob = "Save Job";
 
     // Search Form
 
-    var labelSearchJobs = "Search Jobs";
+    labelSearchJobs = "Search Jobs";
 
     // Search Filter
 
-    var labelSearchFilter = "Search Filter";
+    labelSearchFilter = "Search Filter";
 
     // Pagination
 
-    var labelPagination = "Pagination";
+    labelPagination = "Pagination";
 
     // Search Results
 
-    var labelLoadingMsg = "Loading new results.";
-    var labelResultsAvailable = "{count} of {total} results are now available.";
-    var labelResultsSorted = "Results sorted by {label}.";
+    labelLoadingMsg = "Loading new results.";
+    labelResultsAvailable = "{count} of {total} results are now available.";
+    labelResultsSorted = "Results sorted by {label}.";
 
     // New Window
 
-    var labelNewWindow = "opens in new window";
+    labelNewWindow = "opens in new window";
 
     // Search Keyword
 
-    var labelSearchKeywordDesc = "Matching job links will appear below as you type.";
-    var labelSearchKeywordFoundMsg = "{count} matching job links found.";
-    var labelSearchKeywordNotFoundMsg = "No matching job links found.";
+    labelSearchKeywordDesc = "Matching job links will appear below as you type.";
+    labelSearchKeywordFoundMsg = "{count} matching job links found.";
+    labelSearchKeywordNotFoundMsg = "No matching job links found.";
 
     // Autocomplete
 
-    var labelAutoCompleteDesc = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
+    labelAutoCompleteDesc = "When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.";
 
     // Dialog Close Button
 
-    var labelDialogClose = "Close";
+    labelDialogClose = "Close";
 }
+
+export {
+  labelAddJobAlert,
+  labelAutoCompleteDesc,
+  labelCaptcha,
+  labelDialogClose,
+  labelLoadingMsg,
+  labelNewWindow,
+  labelPagination,
+  labelPrimaryNavigation,
+  labelRemoveFilter,
+  labelResultsAvailable,
+  labelResultsSorted,
+  labelSaveJob,
+  labelSearchFilter,
+  labelSearchJobs,
+  labelSearchKeywordDesc,
+  labelSearchKeywordFoundMsg,
+  labelSearchKeywordNotFoundMsg,
+  labelSelectedJobAlerts,
+  labelSubmitJobAlerts,
+  labelViewSavedJobs
+};

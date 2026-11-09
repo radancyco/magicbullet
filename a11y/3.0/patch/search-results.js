@@ -1,4 +1,5 @@
 import { formatMessage } from "../util/format-message.js";
+import { labelLoadingMsg, labelResultsAvailable } from "../language-pack.js";
 
 // Accessibility Patch: Search Results
 

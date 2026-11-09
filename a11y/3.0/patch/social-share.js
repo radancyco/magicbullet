@@ -1,3 +1,5 @@
+import { labelNewWindow } from "../language-pack.js";
+
 // Accessibility Patch: Social Share
 
 export function fixSocialShare() {

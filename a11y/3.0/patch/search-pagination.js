@@ -1,3 +1,5 @@
+import { labelPagination } from "../language-pack.js";
+
 // Accessibility Patch: Search Results Pagination
 
 export function fixSearchPagination(searchResults) {

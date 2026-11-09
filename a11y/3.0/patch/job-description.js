@@ -1,3 +1,5 @@
+import { labelNewWindow } from "../language-pack.js";
+
 // Accessibility Patch: Job Description (Utility)
 
 export function fixJobDescription() {

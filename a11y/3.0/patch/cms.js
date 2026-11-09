@@ -1,3 +1,5 @@
+import { labelNewWindow } from "../language-pack.js";
+
 // Accessibility: Patch: CMS Content
 
 export function fixCMS() {

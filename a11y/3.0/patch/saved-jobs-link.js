@@ -1,3 +1,5 @@
+import { labelViewSavedJobs } from "../language-pack.js";
+
 // Accessibility Patch: Saved Jobs Link
 // Desc: Adds additional information to the Saved Jobs link based on whether any jobs have been saved. This additional text will better serve AT users.
 // Note: Previously part of fixSaveJobButton(), which created a new observer on every run. Now registered in initComponentPatch(),
