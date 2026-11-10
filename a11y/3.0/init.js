@@ -7,13 +7,6 @@
 
 */
 
-/* TODO
-
-1. Add new fix for keyword autocomplete. See https://dwhite-rds.runmytests.com/documentation#section-auto-complete 
-   Similar was implemented on Intuit some time ago. Will probably not use, except for refrence. See https://tbadmin.radancy.net/sassjs/updatejavascript/27595/27595/70305
-
-*/ 
-
 import { observeComponent, bindComponents } from "./util/observe-component.js";
 import { runSafely } from "./util/run-safely.js";
 
@@ -50,24 +43,24 @@ import { fixPrivacyNotice } from "./patch/privacy-notice.js";
 
 console.log("%cMagicBullet: A11y%cv3.0.0", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
-const a11yBody = document.body;
+const bodyNode = document.body;
 
 // Add A11y hook for implementation team. May come in handy. Or not.
 
-a11yBody.classList.add("magicbullet-a11y");
+bodyNode.classList.add("magicbullet-a11y");
 
 // Add global aria-live to pass messages to when needed.
 
-const globalA11yMessage = document.querySelector("#magicbullet-message");
+const existingLiveRegion = document.querySelector("#magicbullet-message");
 
-if(!globalA11yMessage) {
+if(!existingLiveRegion) {
 
-  const a11yMessage = document.createElement("div");
+  const liveRegion = document.createElement("div");
 
-  a11yMessage.classList.add("magicbullet-visually-hidden");
-  a11yMessage.setAttribute("id", "magicbullet-message");
-  a11yMessage.setAttribute("aria-live", "polite");
-  a11yBody.append(a11yMessage);
+  liveRegion.classList.add("magicbullet-visually-hidden");
+  liveRegion.setAttribute("id", "magicbullet-message");
+  liveRegion.setAttribute("aria-live", "polite");
+  bodyNode.append(liveRegion);
 
 }
 
@@ -76,23 +69,23 @@ if(!globalA11yMessage) {
 // observer below handles the two jobs that have no single container: running the sitewide fixes (images, iframes,
 // checkboxes, disclosures, save job buttons) and discovering component containers added or replaced after load.
 
-const targetNode = document.querySelector("#page") || a11yBody;
+const pageNode = document.querySelector("#page") || bodyNode;
 
-const config = { childList: true, subtree: true };
+const pageConfig = { childList: true, subtree: true };
 
 // Fix: Some components are injected straight into <body>, outside #page (e.g. the cookie consent dialog,
 // #system-ialert, and MindReader's result lists). Also watch body's direct children (not its subtree, so busy
 // third-party widgets don't trigger runs) so those are found when added, not on the next unrelated #page change.
 
-const bodyConfig = { childList: true };
+const bodyChildrenConfig = { childList: true };
 
 function observeSitewide() {
 
-  sitewideObserver.observe(targetNode, config);
+  sitewideObserver.observe(pageNode, pageConfig);
 
-  if (targetNode !== a11yBody) {
+  if (pageNode !== bodyNode) {
 
-    sitewideObserver.observe(a11yBody, bodyConfig);
+    sitewideObserver.observe(bodyNode, bodyChildrenConfig);
 
   }
 

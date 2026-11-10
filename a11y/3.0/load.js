@@ -26,13 +26,13 @@
   // Add A11y CSS
 
   const magicBulletCSS = document.createElement("link");
-  magicBulletCSS.setAttribute("id", "a11y-patch-css");
+  magicBulletCSS.setAttribute("id", "magicbullet-a11y-css");
   magicBulletCSS.setAttribute("rel", "stylesheet");
 
   // Create A11y Script. 3.0 uses import statements, so it must load as a module.
 
   const magicBulletScript = document.createElement("script");
-  magicBulletScript.setAttribute("id", "a11y-patch-js");
+  magicBulletScript.setAttribute("id", "magicbullet-a11y-js");
   magicBulletScript.setAttribute("type", "module");
 
   // Run QA version on following domains only...
