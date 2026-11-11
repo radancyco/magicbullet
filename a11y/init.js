@@ -39,13 +39,13 @@ function loadA11yPatch(url, callback) {
 
 }
 
-// var languagePackSrc = "https://services.tmpwebeng.com/magicbullet/language-pack.js";
+var languagePackSrc = "https://services.tmpwebeng.com/magicbullet/language-pack.js";
 
-var languagePackSrc = "https://radancy.dev/magicbullet/language-pack.js";
+// var languagePackSrc = "https://radancy.dev/magicbullet/language-pack.js";
 
 loadA11yPatch(languagePackSrc, function(){
 
-  console.log("%cMagicBullet: A11y%cv2.0.5", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+  console.log("%cMagicBullet: A11y%cv2.9.9", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
   var magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
 

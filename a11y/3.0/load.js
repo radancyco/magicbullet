@@ -9,6 +9,8 @@
 
 (() => {
 
+  const magicBullet = document.getElementById("radancy-magicbullet");
+
   // Get hostname so that we can select between QA and Production files.
 
   let hostName = location.hostname;
@@ -23,19 +25,19 @@
 
   const testPaths = localHost || hostName === "runmytests.com" || hostName === "runmytests.eu" || hostName === "talentbrew.com" || hostName === "tmpqa.com";
 
-  // Add A11y CSS
+  // Add MagicBullet CSS
 
   const magicBulletCSS = document.createElement("link");
-  magicBulletCSS.setAttribute("id", "magicbullet-a11y-css");
+  magicBulletCSS.setAttribute("id", "magicbullet-css");
   magicBulletCSS.setAttribute("rel", "stylesheet");
 
-  // Create A11y Script. 3.0 uses import statements, so it must load as a module.
+  // Add MagicBullet Script
 
   const magicBulletScript = document.createElement("script");
-  magicBulletScript.setAttribute("id", "magicbullet-a11y-js");
+  magicBulletScript.setAttribute("id", "magicbullet-js");
   magicBulletScript.setAttribute("type", "module");
 
-  // Run QA version on following domains only...
+  // Run QA version...
 
   if (testPaths) {
 
@@ -44,11 +46,17 @@
 
   } else {
 
-    // ... else, run the production version, from the shared-libraries path every career site serves (root-relative,
-    // so it loads from the same domain as the page).
+    // ... else, run the production version. If this loader was included from clientfiles.tmpwebeng.com, or the
+    // #radancy-magicbullet tag is missing, load the files from clientfiles too (full path). 
+    // Otherwise use the shared-libraries path every career site set up via DDR 
 
-    magicBulletCSS.setAttribute("href", "/shared-libraries/magicbullet/rolling/init.css");
-    magicBulletScript.setAttribute("src", "/shared-libraries/magicbullet/rolling/init.js");
+    const clientFiles = "https://clientfiles.tmpwebeng.com";
+    const relativePath = "/shared-libraries/magicbullet/rolling/";
+    const fullPath = clientFiles + relativePath;
+    const path = !magicBullet || magicBullet.src.includes(clientFiles) ? fullPath : relativePath;
+
+    magicBulletCSS.setAttribute("href", path + "init.css");
+    magicBulletScript.setAttribute("src", path + "init.js");
 
   }
 

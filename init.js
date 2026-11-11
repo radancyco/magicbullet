@@ -15,10 +15,6 @@
 
   const magicBulletDisabled = params.get("magicbullet") === "false";
 
-  // Allow loading the new (ES module) A11y patch, a11y/init-new.js, on QA domains via ?magicbullet-a11y=new
-
-  const a11yNew = params.get("magicbullet-a11y") === "new";
-
   // If disabled, bail out immediately
 
   if (magicBulletDisabled) {
@@ -134,6 +130,7 @@
 
     const a11yExec = document.createElement("script");
     a11yExec.setAttribute("id", "a11y-patch-js");
+    a11yExec.setAttribute("type", "module");
 
     // Run script locally when these domains present...
     // Feel free to add your own IP address.
@@ -149,20 +146,8 @@
 
       if(testPaths) {
 
-        // 3.0 uses import statements, so it must load as a module.
-
-        if (a11yNew) {
-
-          a11yCSS.setAttribute("href", "https://radancy.dev/magicbullet/a11y/3.0/init.css");
-          a11yExec.setAttribute("type", "module");
-          a11yExec.setAttribute("src", "https://radancy.dev/magicbullet/a11y/3.0/init.js");
-
-        } else {
-
-          a11yCSS.setAttribute("href", "https://radancy.dev/magicbullet/a11y/init.css");
-          a11yExec.setAttribute("src", "https://radancy.dev/magicbullet/a11y/init.js");
-
-        }
+        a11yCSS.setAttribute("href", "https://radancy.dev/magicbullet/a11y/3.0/init.css");
+        a11yExec.setAttribute("src", "https://radancy.dev/magicbullet/a11y/3.0/init.js");
 
       } else {
 
@@ -236,15 +221,15 @@
 
         if (alertBanner !== null) {
 
-          alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/banner.css");
+          alertCSS.setAttribute("href", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-alert/rolling/banner.css");
 
         } else {
 
-          alertCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/alert/dialog.css");
+          alertCSS.setAttribute("href", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-alert/rolling/dialog.css");
 
         }
 
-       alertExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/alert/init.js");
+       alertExec.setAttribute("src", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-alert/rolling/init.js");
 
       }
 
@@ -291,8 +276,8 @@
 
         // ... else, run the production version.
 
-        gdprCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/gdpr/init.css");
-        gdprExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/gdpr/init.js");
+        gdprCSS.setAttribute("href", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-gdpr/rolling/init.css");
+        gdprExec.setAttribute("src", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-gdpr/rolling/init.js");
 
       }
 
@@ -339,8 +324,8 @@
 
         // ... else, run the production version.
 
-        ccpaCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/ccpa/init.css");
-        ccpaExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/ccpa/init.js");
+        ccpaCSS.setAttribute("href", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-ccpa/rolling/init.css");
+        ccpaExec.setAttribute("src", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-ccpa/rolling/init.js");
 
       }
 
