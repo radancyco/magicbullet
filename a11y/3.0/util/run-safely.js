@@ -10,7 +10,7 @@ export function runSafely(fix, component) {
 
   } catch (error) {
 
-    console.error("MagicBullet: A11y - " + fix.name + "() failed.", error);
+    console.error("MagicBullet - " + fix.name + "() failed.", error);
 
   }
 

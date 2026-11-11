@@ -41,7 +41,7 @@ import { fixPrivacyNotice } from "./patch/privacy-notice.js";
 // Note: The language pack is imported like any other module (see the patch/ files), so the browser has run it, and
 // every label is set, before this file runs. No loader or callback needed.
 
-console.log("%cMagicBullet: A11y%cv3.0.0", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+console.log("%cMagicBullet%cv3.0.0", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
 const bodyNode = document.body;
 
@@ -131,7 +131,7 @@ function initDynamicPatch() {
   runSafely(fixInputElements);
   runSafely(fixSaveJobButton);
 
-  console.log("%cMagicBullet: A11y%cDynamic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+  console.log("%cMagicBullet%cDynamic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
 }
 
@@ -173,7 +173,7 @@ function initComponentPatch() {
 
   bindComponents();
 
-  console.log("%cMagicBullet: A11y%cComponent Scripts ✔", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+  console.log("%cMagicBullet%cComponent Scripts ✔", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
 }
 
@@ -194,6 +194,6 @@ function initStaticPatch() {
   runSafely(fixSitemap);
   runSafely(fixSocialShare);
 
-  console.log("%cMagicBullet: A11y%cStatic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+  console.log("%cMagicBullet%cStatic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
 }
