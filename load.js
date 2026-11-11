@@ -23,7 +23,7 @@
 
   hostName = hostName.substring(hostName.indexOf(".") + 1);
 
-  const QADomanins = localHost || hostName === "runmytests.com" || hostName === "runmytests.eu" || hostName === "talentbrew.com" || hostName === "tmpqa.com";
+  const QADomains = localHost || hostName === "runmytests.com" || hostName === "runmytests.eu" || hostName === "talentbrew.com" || hostName === "tmpqa.com";
 
   // Add MagicBullet CSS
 
@@ -39,10 +39,10 @@
 
   // Run QA version
 
-  if (QADomanins) {
+  if (QADomains) {
 
-    magicBulletCSS.setAttribute("href", "https://radancy.dev/magicbullet/a11y/3.0/init.css");
-    magicBulletScript.setAttribute("src", "https://radancy.dev/magicbullet/a11y/3.0/init.js");
+    magicBulletCSS.setAttribute("href", "https://radancy.dev/magicbullet/init.css");
+    magicBulletScript.setAttribute("src", "https://radancy.dev/magicbullet/init.js");
 
   } else {
 

@@ -1,341 +1,199 @@
 /*!
 
-  Radancy MagicBullet
+  Radancy MagicBullet: Accessibility Patch
 
   Contributor(s):
   Michael "Spell" Spellacy
 
 */
 
-(() => {
+import { observeComponent, bindComponents } from "./util/observe-component.js";
+import { runSafely } from "./util/run-safely.js";
 
-  // Allow disabling MagicBullet via URL parameter
+import { fixA11y } from "./patch/a11y.js";
+import { fixAdvancedSearchForm } from "./patch/advanced-search-form.js";
+import { fixAltAttribute } from "./patch/alt-attribute.js";
+import { fixAppliedFilter } from "./patch/applied-filter.js";
+import { fixCookieManagement } from "./patch/cookie-management.js";
+import { fixCMS } from "./patch/cms.js";
+import { fixDataForm } from "./patch/data-form.js";
+import { fixGlobalDisclosure } from "./patch/global-disclosure.js";
+import { fixIframeElement } from "./patch/iframe-element.js";
+import { fixKeywordSearch } from "./patch/keyword-search.js";
+import { fixInputElements } from "./patch/input-elements.js";
+import { fixMindReaderInput } from "./patch/mind-reader-input.js";
+import { fixMindReaderList } from "./patch/mind-reader-list.js";
+import { fixHeader } from "./patch/header.js";
+import { fixJobDescription } from "./patch/job-description.js";
+import { fixJobLocation } from "./patch/job-location.js";
+import { fixJobMap } from "./patch/job-map.js";
+import { fixSaveJobButton } from "./patch/save-job-button.js";
+import { fixSavedJobsLink } from "./patch/saved-jobs-link.js";
+import { fixSearchForm } from "./patch/search-form.js";
+import { fixSearchFilters } from "./patch/search-filters.js";
+import { fixSearchResults } from "./patch/search-results.js";
+import { fixSearchSort } from "./patch/search-sort.js";
+import { fixSearchPagination } from "./patch/search-pagination.js";
+import { fixSitemap } from "./patch/sitemap.js";
+import { fixSocialShare } from "./patch/social-share.js";
+import { fixPrivacyNotice } from "./patch/privacy-notice.js";
 
-  const params = new URLSearchParams(window.location.search);
+// Note: The language pack is imported like any other module (see the patch/ files), so the browser has run it, and
+// every label is set, before this file runs. No loader or callback needed.
 
-  const magicBulletDisabled = params.get("magicbullet") === "false";
+console.log("%cMagicBullet%cv3.0.0", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
-  // If disabled, bail out immediately
+const bodyNode = document.body;
 
-  if (magicBulletDisabled) {
+// Add A11y hook for implementation team. May come in handy. Or not.
 
-    console.log("%cMagicBullet Disabled", "background: #FFA500; color: #000; padding: 6px 10px; border-radius: 16px; font-weight: 600;");
-    return;
+bodyNode.classList.add("magicbullet-a11y");
 
-  }
+// Add global aria-live to pass messages to when needed.
 
-  console.log("%cMagicBullet%cv2.2", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #6e00ee; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
+const existingLiveRegion = document.querySelector("#magicbullet-message");
 
-  // Get MagicBullet Script
+if(!existingLiveRegion) {
 
-  const magicBulletScript = document.getElementById("tmp-magic-bullet") ? document.getElementById("tmp-magic-bullet") : document.getElementById("radancy-magicbullet");
+  const liveRegion = document.createElement("div");
 
-  // Get data-a11y attribute, if present.
+  liveRegion.classList.add("magicbullet-visually-hidden");
+  liveRegion.setAttribute("id", "magicbullet-message");
+  liveRegion.setAttribute("aria-live", "polite");
+  bodyNode.append(liveRegion);
 
-  const a11yScript = magicBulletScript.getAttribute("data-a11y");
+}
 
-  // Get data-alert attribute, if present.
+// Architecture: Each component fix owns a MutationObserver scoped to its own container (see initComponentPatch()
+// and observeComponent()), so a change in one component only re-runs that component's fix. The one page-wide
+// observer below handles the two jobs that have no single container: running the sitewide fixes (images, iframes,
+// checkboxes, disclosures, save job buttons) and discovering component containers added or replaced after load.
 
-  const alertScript = magicBulletScript.getAttribute("data-alert");
+const pageNode = document.querySelector("#page") || bodyNode;
 
-  // Temp: Get alert type
+const pageConfig = { childList: true, subtree: true };
 
-  const alertBanner = magicBulletScript.getAttribute("data-alert-banner");
-  
-  // Get data-gdpr attribute, if present.
+// Fix: Some components are injected straight into <body>, outside #page (e.g. the cookie consent dialog,
+// #system-ialert, and MindReader's result lists). Also watch body's direct children (not its subtree, so busy
+// third-party widgets don't trigger runs) so those are found when added, not on the next unrelated #page change.
 
-  const gdprScript = magicBulletScript.getAttribute("data-gdpr");
+const bodyChildrenConfig = { childList: true };
 
-  // Get hostname so that we can select between QA and Production scripts.
+function observeSitewide() {
 
-  // Get data-ccpa attribute, if present.
+  sitewideObserver.observe(pageNode, pageConfig);
 
-  const ccpaScript = magicBulletScript.getAttribute("data-ccpa");
+  if (pageNode !== bodyNode) {
 
-  let hostName = location.hostname;
-
-  const hostWithPort = location.host;
-
-  // Strip subdomain for test paths
-
-  hostName = hostName.substring(hostName.indexOf(".") + 1);
-
-  // TRUE only for localhost:4010
-
-  const localPaths = hostWithPort === "localhost:4010";
-
-  const testPaths = hostName === "runmytests.com" || hostName === "runmytests.eu" || hostName === "talentbrew.com" || hostName === "tmpqa.com";
-
-  // Execute A11y
-
-  if (a11yScript !== null) {
-
-    showA11y();
-
-  }
-
-  // Execute Alert
-
-  if (alertScript !== null) {
-
-    showAlert();
-
-  }
-
-  // Check to see if both the GDPR and CCPA attributes exist together.
-
-  if (gdprScript !== null && ccpaScript !== null) {
-
-    alert("CCPA & GDPR cannot be initiated on the same site. You may only use data-ccpa=\"true\" or data-gdpr=\"true\".");
-
-  } else {
-
-    // Execute GDPR
-
-    if (gdprScript !== null) {
-
-      if(gdprScript === "true") {
-
-          showGDPR();
-
-      }
-
-    }
-
-    // Execute CCPA
-
-    if (ccpaScript !== null) {
-
-      if(ccpaScript === "true") {
-
-        showCCPA();
-
-      }
-
-    }
+    sitewideObserver.observe(bodyNode, bodyChildrenConfig);
 
   }
 
-  // Functions
+}
 
-  function showA11y() {
+// Note: The first mutation disconnects the observer and schedules one run after the burst settles. No clearTimeout is
+// needed: the callback can't fire again until the timer has run and reconnected the observer. Mutations made while
+// disconnected are still covered, since the run scans the whole page.
 
-    // Add A11y CSS
+const sitewideObserver = new MutationObserver(function() {
 
-    const a11yCSS = document.createElement("link");
-    a11yCSS.setAttribute("id", "a11y-patch-css");
-    a11yCSS.setAttribute("rel", "stylesheet");
+  sitewideObserver.disconnect();
 
-    // Create A11y Script
+  setTimeout(function() {
 
-    const a11yExec = document.createElement("script");
-    a11yExec.setAttribute("id", "a11y-patch-js");
-    a11yExec.setAttribute("type", "module");
+    initDynamicPatch();
 
-    // Run script locally when these domains present...
-    // Feel free to add your own IP address.
+    bindComponents();
 
-    if (localPaths) {
+    observeSitewide();
 
-      a11yCSS.setAttribute("href", "/a11y/init.css");
-      a11yExec.setAttribute("src", "/a11y/init.js");
+  }, 1000);
 
-    } else {
+});
 
-      // Run QA version on following domains only...
+initStaticPatch();
 
-      if(testPaths) {
+initDynamicPatch();
 
-        a11yCSS.setAttribute("href", "https://radancy.dev/magicbullet/a11y/3.0/init.css");
-        a11yExec.setAttribute("src", "https://radancy.dev/magicbullet/a11y/3.0/init.js");
+initComponentPatch();
 
-      } else {
+observeSitewide();
 
-        // ... else, run the production version.
+// Accessibility Patch: Dynamic (Sitewide)
+// Desc: These fixes target elements that can appear anywhere on the page, with no single container to observe.
+// They run on page load and again whenever the sitewide observer sees a change under #page.
 
-        a11yCSS.setAttribute("href", "https://services.tmpwebeng.com/magicbullet/a11y/init.css");
-        a11yExec.setAttribute("src", "https://services.tmpwebeng.com/magicbullet/a11y/init.js");
+function initDynamicPatch() {
 
-      }
+  runSafely(fixAltAttribute);
+  runSafely(fixGlobalDisclosure);
+  runSafely(fixIframeElement);
+  runSafely(fixInputElements);
+  runSafely(fixSaveJobButton);
 
-    }
+  console.log("%cMagicBullet%cDynamic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
-    // Append CSS and Script to DOM.
+}
 
-    document.head.appendChild(a11yCSS);
-    document.body.appendChild(a11yExec);
+// Accessibility Patch: Dynamic (Components)
+// Desc: These fixes each target a specific component. Each component instance is fixed once when found, then
+// re-fixed by its own observer whenever its container changes. See observeComponent() for the options.
 
-  }
+function initComponentPatch() {
 
-  function showAlert() {
+  observeComponent(".search-results-options", fixAppliedFilter);
+  observeComponent(".data-form", fixDataForm);
 
-    // Create Alert CSS
+  // Note: Observing the input's form so the fix re-runs if the autocomplete popup is added after load.
+  // The popup's own contents are watched by the dedicated keywordObserver inside fixKeywordSearch().
 
-    const alertCSS = document.createElement("link");
-    alertCSS.setAttribute("id", "alert-css");
-    alertCSS.setAttribute("rel", "stylesheet");
+  observeComponent(".search-keyword", fixKeywordSearch, { target: function(input) { return input.form || input.parentNode; } });
+  observeComponent("input.search-location, input.keyword-category, input.keyword-location, input.keyword-facet", fixMindReaderInput, { target: function(input) { return input.form || input.parentNode; } });
 
-    // Create Alert Script
+  // Note: The list fix runs immediately (no debounce) so roles and IDs are on the options before the user arrows through them.
 
-    const alertExec = document.createElement("script");
-    alertExec.setAttribute("id", "alert-js");
+  observeComponent(".mindreader-status, #wrapper-sel-city", fixMindReaderList, { debounce: 0 });
+  observeComponent("#system-imessage", fixPrivacyNotice);
+  observeComponent("[data-selector-name=recentlyviewedjoblist]", fixSavedJobsLink, {
 
-    // Run script locally when these domains present...
-    // Feel free to add your own IP address.
+    target: function(jobList) { return jobList.parentNode; },
+    config: { childList: true, subtree: true, attributes: true, attributeFilter: ["data-recently-viewed-jobs"] },
+    debounce: 0
 
-    if (localPaths) {
+  });
 
-      if (alertBanner !== null) {
+  observeComponent("#search-filters", fixSearchFilters);
 
-        alertCSS.setAttribute("href", "/alert/banner.css");
+  // Note: #search-results is replaced wholesale on update, so these observe its parent. fixSearchResults and fixSearchSort
+  // only bind once per component (they manage their own observer/listener), so they don't need a re-run observer.
 
-      } else {
+  observeComponent("#search-results", fixSearchResults, { observe: false });
+  observeComponent("select[data-search-results-sort-enhanced='true']", fixSearchSort, { observe: false });
+  observeComponent("#search-results", fixSearchPagination, { target: function(searchResults) { return searchResults.parentNode; } });
 
-        alertCSS.setAttribute("href", "/alert/dialog.css");
+  bindComponents();
 
-      }
+  console.log("%cMagicBullet%cComponent Scripts ✔", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
-      alertExec.setAttribute("src", "/alert/init.js");
+}
 
-    } else {
+// Accessibility Patch: Static
+// Desc: These fixes address issues that occur on page load only.
 
-      // Run QA version on following domains only...
+function initStaticPatch() {
 
-      if(testPaths) {
+  runSafely(fixA11y);
+  runSafely(fixAdvancedSearchForm);
+  runSafely(fixCookieManagement);
+  runSafely(fixCMS);
+  runSafely(fixHeader);
+  runSafely(fixJobDescription);
+  runSafely(fixJobLocation); 
+  runSafely(fixJobMap);
+  runSafely(fixSearchForm);
+  runSafely(fixSitemap);
+  runSafely(fixSocialShare);
 
-        if (alertBanner !== null) {
+  console.log("%cMagicBullet%cStatic Scripts \u2714", "background: #2d2d2d; color: #fff; padding: 6px 10px; border-radius: 16px 0 0 16px; font-weight: 600;" , "background: #228B22; color: #fff; padding: 6px 10px; border-radius: 0 16px 16px 0; font-weight: 600;");
 
-          alertCSS.setAttribute("href", "https://radancy.dev/magicbullet/alert/banner.css");
-
-        } else {
-
-          alertCSS.setAttribute("href", "https://radancy.dev/magicbullet/alert/dialog.css");
-
-        }
-
-        alertExec.setAttribute("src", "https://radancy.dev/magicbullet/alert/init.js");
-
-      } else {
-
-        // ... else, run the production version.
-
-        if (alertBanner !== null) {
-
-          alertCSS.setAttribute("href", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-alert/rolling/banner.css");
-
-        } else {
-
-          alertCSS.setAttribute("href", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-alert/rolling/dialog.css");
-
-        }
-
-       alertExec.setAttribute("src", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-alert/rolling/init.js");
-
-      }
-
-    }
-
-    // Append CSS and Script to DOM.
-
-    document.head.appendChild(alertCSS);
-    document.body.appendChild(alertExec);
-
-  }
-
-  function showGDPR() {
-
-    // Add GDPR CSS
-
-    const gdprCSS = document.createElement("link");
-    gdprCSS.setAttribute("id", "gdpr-css");
-    gdprCSS.setAttribute("rel", "stylesheet");
-
-    // Create and add GDPR script
-
-    const gdprExec = document.createElement("script");
-    gdprExec.setAttribute("id", "gdpr-js");
-
-    // Run script locally when these domains present...
-    // Feel free to add your own IP address.
-
-    if (localPaths) {
-
-      gdprCSS.setAttribute("href", "/gdpr/init.css");
-      gdprExec.setAttribute("src", "/gdpr/init.js");
-
-    } else {
-
-      // Run QA version on following domains only...
-
-      if(testPaths) {
-
-        gdprCSS.setAttribute("href", "https://radancy.dev/magicbullet/gdpr/init.css");
-        gdprExec.setAttribute("src", "https://radancy.dev/magicbullet/gdpr/init.js");
-
-      } else {
-
-        // ... else, run the production version.
-
-        gdprCSS.setAttribute("href", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-gdpr/rolling/init.css");
-        gdprExec.setAttribute("src", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-gdpr/rolling/init.js");
-
-      }
-
-    }
-
-    // Append CSS and Script to DOM.
-
-    document.head.appendChild(gdprCSS);
-    document.body.appendChild(gdprExec);
-
-  }
-
-  function showCCPA() {
-
-    // Create Privacy Notice CSS
-
-    const ccpaCSS = document.createElement("link");
-    ccpaCSS.setAttribute("id", "ccpa-css");
-    ccpaCSS.setAttribute("rel", "stylesheet");
-
-    // Create Privacy Notice script
-
-    const ccpaExec = document.createElement("script");
-    ccpaExec.setAttribute("id", "ccpa-js");
-
-    // Run script locally when these domains present...
-    // Feel free to add your own IP address.
-
-    if (localPaths) {
-
-      ccpaCSS.setAttribute("href", "/ccpa/init.css");
-      ccpaExec.setAttribute("src", "/ccpa/init.js");
-
-    } else {
-
-      // Run QA version on following domains only...
-
-      if(testPaths) {
-
-        ccpaCSS.setAttribute("href", "https://radancy.dev/magicbullet/ccpa/init.css");
-        ccpaExec.setAttribute("src", "https://radancy.dev/magicbullet/ccpa/init.js");
-
-      } else {
-
-        // ... else, run the production version.
-
-        ccpaCSS.setAttribute("href", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-ccpa/rolling/init.css");
-        ccpaExec.setAttribute("src", "https://clientfiles.tmpwebeng.com/shared-libraries/legacy-ccpa/rolling/init.js");
-
-      }
-
-    }
-
-    // Append CSS and Script to DOM.
-
-    document.head.appendChild(ccpaCSS);
-    document.body.appendChild(ccpaExec);
-
-  }
-
-})();
+}
