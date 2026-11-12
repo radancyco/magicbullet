@@ -231,6 +231,18 @@ function syncFilterDialog() {
 
       }
 
+      // Fix: Site CSS can add a decorative "X" through a pseudo-element, which AT reads as part of the name ("Close Filters X").
+      // Copy the button's own text into aria-label so the name is just the text. textContent never includes pseudo-element
+      // content, and the text comes from the site, so it's already in the page's language.
+
+      const closeButtonText = closeButton.textContent.trim();
+
+      if (closeButtonText) {
+
+        closeButton.setAttribute("aria-label", closeButtonText);
+
+      }
+
       // Fix: The platform binds a blur handler to the Close button that focuses the panel, as a makeshift focus trap. With inert
       // doing the trapping, it only gets in the way: clicking any other control while Close has focus yanks focus to the first
       // control and the click is lost, and Shift+Tab from Close jumps forward. Remove it (jQuery-bound, so off() is the only way).
