@@ -192,7 +192,7 @@ padding: 0;
     /* New as of 11/7/2026, add to ACR */
     /* QA is not calling out contrast erros in search message, which are red by default, so we need to force it, also, hide the element if not popultated */
 
-    background-color: #fff;
+    background-color: contrast-color(black);
 
     &:empty {
     display: none;
