@@ -14,11 +14,13 @@ export function fixSearchFilters(searchFilters) {
 
   if (searchFilters) {
 
-    // Fix: Add role and accName to Search Filter section. 
+    // Fix: Add role and accName to Search Filter section. Role is "region" on large viewports and "dialog" on small
+    // viewports, where the section becomes a slideout panel. See bindFilterDialog() below.
     // TODO: Add langauge support.
-    
-    searchFilters.setAttribute("role", "region");
-    searchFilters.setAttribute("aria-label", "Search Filter");
+
+    bindFilterDialog(searchFilters);
+
+    searchFilters.setAttribute("aria-label", "Search Filter"); // TODO: Translate this label for different languages.
 
     // TODO: It would be great if we could use aria-labelledby instead of aria-label as accName for region so that we would not requre custom translation, but heading has no distinct class to leverage. Look into adding unique ID to h2 instead maybe?
 
@@ -67,5 +69,174 @@ export function fixSearchFilters(searchFilters) {
     }
 
   }
+
+}
+
+// Small Viewport: Search Filter Dialog
+// Desc: Below the site's breakpoint, the platform (FilterSlideOut in tb-corepack.js) turns #search-filters into a slideout
+// panel opened by #filter-slideout-toggle. It looks and acts like a modal dialog, but has none of the markup or behavior.
+// The platform adds the toggle only on small viewports and removes it on large ones, so the toggle being present is our
+// signal that we're in the small viewport experience.
+// Already handled by the platform, so not repeated here: focus moves to #search-filters when opened (it calls focus() on
+// the panel ~200ms after opening, which works once tabindex="-1" is in place), and focus returns to the toggle when closed.
+// Note: Every checkbox change triggers an ajax refresh that replaces #search-filters, #search-results and the toggle, then
+// reopens the panel. The sitewide observer only picks up replaced components after 1s, which is too late (the platform
+// focuses the new panel ~200ms after reopening), so the dialog state is kept in sync by its own observer, which reacts
+// immediately.
+
+const filterDialogInertMarker = "data-magicbullet-inert";
+
+let filterDialogObserver = null;
+let filterDialogParent = null;
+
+function bindFilterDialog(searchFilters) {
+
+  syncFilterDialog();
+
+  const parent = searchFilters.parentNode;
+
+  if (!parent || parent === filterDialogParent) return;
+
+  if (filterDialogObserver) {
+
+    filterDialogObserver.disconnect();
+
+  } else {
+
+    // Watches the section's parent for the section being replaced (ajax refresh), and the section itself for being
+    // opened, closed, shown or hidden (open class, style and aria-hidden are all set by the platform).
+
+    filterDialogObserver = new MutationObserver(function() {
+
+      observeFilterDialog();
+
+      syncFilterDialog();
+
+    });
+
+    // Fix: Escape closes the dialog. Clicking the platform's own close button keeps its cookie and focus return in step.
+
+    document.addEventListener("keydown", function(event) {
+
+      if (event.key !== "Escape" || !isFilterDialogOpen()) return;
+
+      const closeButton = document.getElementById("filter-close-toggle");
+
+      if (closeButton) {
+
+        event.preventDefault();
+
+        closeButton.click();
+
+      }
+
+    });
+
+  }
+
+  filterDialogParent = parent;
+
+  filterDialogObserver.observe(parent, { childList: true });
+
+  observeFilterDialog();
+
+}
+
+function observeFilterDialog() {
+
+  const searchFilters = document.getElementById("search-filters");
+
+  if (!searchFilters || searchFilters.magicBulletDialogObserved) return;
+
+  searchFilters.magicBulletDialogObserved = true;
+
+  filterDialogObserver.observe(searchFilters, { attributes: true, attributeFilter: ["class", "style", "aria-hidden"] });
+
+}
+
+function isFilterDialogOpen() {
+
+  const searchFilters = document.getElementById("search-filters");
+
+  return !!(searchFilters && document.getElementById("filter-slideout-toggle") && searchFilters.classList.contains("open"));
+
+}
+
+function syncFilterDialog() {
+
+  const searchFilters = document.getElementById("search-filters");
+  const filterToggle = document.getElementById("filter-slideout-toggle");
+
+  if (!searchFilters) return;
+
+  if (filterToggle) {
+
+    // Fix: Small viewport. Toggle tells AT it opens a dialog, and the section gets dialog semantics. tabindex="-1" lets the
+    // platform's own focus() call land on the panel in every browser.
+
+    filterToggle.setAttribute("aria-haspopup", "dialog");
+
+    searchFilters.setAttribute("role", "dialog");
+    searchFilters.setAttribute("aria-modal", "true");
+    searchFilters.setAttribute("tabindex", "-1");
+
+  } else {
+
+    // Fix: Large viewport. Filters sit inline with the results, so they're a region, not a dialog.
+
+    searchFilters.setAttribute("role", "region");
+    searchFilters.removeAttribute("aria-modal");
+    searchFilters.removeAttribute("tabindex");
+
+  }
+
+  // Fix: Trap focus while open by making everything outside the dialog inert.
+
+  if (isFilterDialogOpen()) {
+
+    setFilterDialogInert(searchFilters);
+
+  } else {
+
+    clearFilterDialogInert();
+
+  }
+
+}
+
+// The section can't be moved to <body> (the platform's script and CSS expect it where it is), so instead of inerting body's
+// other children, walk up from the section and inert the siblings at every level. Runs again after each ajax refresh, so
+// replaced content (e.g. a new #search-results) is inerted too. Elements the site already made inert are left alone, and
+// MagicBullet's live region stays live so result counts are still announced.
+
+function setFilterDialogInert(searchFilters) {
+
+  let node = searchFilters;
+
+  while (node.parentElement && node !== document.body) {
+
+    Array.from(node.parentElement.children).forEach(function(sibling) {
+
+      if (sibling === node || sibling.inert || sibling.id === "magicbullet-message") return;
+
+      sibling.inert = true;
+      sibling.setAttribute(filterDialogInertMarker, "");
+
+    });
+
+    node = node.parentElement;
+
+  }
+
+}
+
+function clearFilterDialogInert() {
+
+  document.querySelectorAll("[" + filterDialogInertMarker + "]").forEach(function(element) {
+
+    element.inert = false;
+    element.removeAttribute(filterDialogInertMarker);
+
+  });
 
 }
