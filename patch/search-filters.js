@@ -219,6 +219,31 @@ function syncFilterDialog() {
     searchFilters.setAttribute("role", "dialog");
     searchFilters.setAttribute("aria-modal", "true");
 
+    // Fix: The platform appends the Close button to the end of the panel, and site CSS often shows it at the top (e.g. 3M uses
+    // order: -1 on a flex column). Move it to the start of the panel so keyboard and screen reader order match the screen.
+
+    const closeButton = searchFilters.querySelector("#filter-close-toggle");
+
+    if (closeButton) {
+
+      if (searchFilters.firstElementChild !== closeButton) {
+
+        searchFilters.prepend(closeButton);
+
+      }
+
+      // Fix: The platform binds a blur handler to the Close button that focuses the panel, as a makeshift focus trap. With inert
+      // doing the trapping, it only gets in the way: clicking any other control while Close has focus yanks focus to the first
+      // control and the click is lost, and Shift+Tab from Close jumps forward. Remove it (jQuery-bound, so off() is the only way).
+
+      if (window.jQuery) {
+
+        window.jQuery(closeButton).off("blur");
+
+      }
+
+    }
+
   } else {
 
     // Fix: Large viewport. Filters sit inline with the results, so they're a region, not a dialog.
