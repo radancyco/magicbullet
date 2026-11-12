@@ -157,7 +157,7 @@ function observeFilterDialog() {
   //   - Focus already inside the panel: do nothing. After each ajax refresh, the site puts focus back on the checkbox the user
   //     pressed (~100ms), then the platform reopens the panel and calls focus() (~200ms), which would pull focus off that checkbox.
   //   - Otherwise (opened from the toggle): focus the first interactive item instead of the panel itself. That's the refined
-  //     search input when present, else the first category toggle, else the first focusable control.
+  //     search input (#keyword-tag) when present, else the first button (the Close button aside, which now comes first).
 
   searchFilters.focus = function(options) {
 
@@ -181,9 +181,8 @@ function getFirstFilterControl(searchFilters) {
 
   const candidates = [
 
-    searchFilters.querySelector(".search-filters__refined-search-input"),
-    searchFilters.querySelector(".search-filters__list-toggle"),
-    searchFilters.querySelector("a[href], button:not([disabled]), input:not([type='hidden']):not([disabled]), select:not([disabled]), textarea:not([disabled])")
+    searchFilters.querySelector("#keyword-tag"),
+    ...searchFilters.querySelectorAll("button:not(#filter-close-toggle):not([disabled])")
 
   ];
 
