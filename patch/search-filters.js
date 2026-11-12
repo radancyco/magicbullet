@@ -77,8 +77,8 @@ export function fixSearchFilters(searchFilters) {
 // panel opened by #filter-slideout-toggle. It looks and acts like a modal dialog, but has none of the markup or behavior.
 // The platform adds the toggle only on small viewports and removes it on large ones, so the toggle being present is our
 // signal that we're in the small viewport experience.
-// Already handled by the platform, so not repeated here: focus moves to #search-filters when opened (it calls focus() on
-// the panel ~200ms after opening, which works once tabindex="-1" is in place), and focus returns to the toggle when closed.
+// Already handled by the platform, so not repeated here: focus returns to the toggle when closed. The platform also calls
+// focus() on the panel when opened; observeFilterDialog() redirects that to the first interactive item.
 // Note: Every checkbox change triggers an ajax refresh that replaces #search-filters, #search-results and the toggle, then
 // reopens the panel. The sitewide observer only picks up replaced components after 1s, which is too late (the platform
 // focuses the new panel ~200ms after reopening), so the dialog state is kept in sync by its own observer, which reacts
@@ -152,6 +152,47 @@ function observeFilterDialog() {
 
   filterDialogObserver.observe(searchFilters, { attributes: true, attributeFilter: ["class", "style", "aria-hidden"] });
 
+  // Fix: The platform calls focus() on the panel ~200ms after opening it. Overriding the element's own focus() catches that call
+  // before focus moves (the platform's jQuery trigger("focus") calls it), so we can decide where focus actually goes:
+  //   - Focus already inside the panel: do nothing. After each ajax refresh, the site puts focus back on the checkbox the user
+  //     pressed (~100ms), then the platform reopens the panel and calls focus() (~200ms), which would pull focus off that checkbox.
+  //   - Otherwise (opened from the toggle): focus the first interactive item instead of the panel itself. That's the refined
+  //     search input when present, else the first category toggle, else the first focusable control.
+
+  searchFilters.focus = function(options) {
+
+    const activeElement = document.activeElement;
+
+    if (activeElement !== searchFilters && searchFilters.contains(activeElement)) return;
+
+    const firstControl = getFirstFilterControl(searchFilters);
+
+    if (firstControl) {
+
+      firstControl.focus(options);
+
+    }
+
+  };
+
+}
+
+function getFirstFilterControl(searchFilters) {
+
+  const candidates = [
+
+    searchFilters.querySelector(".search-filters__refined-search-input"),
+    searchFilters.querySelector(".search-filters__list-toggle"),
+    searchFilters.querySelector("a[href], button:not([disabled]), input:not([type='hidden']):not([disabled]), select:not([disabled]), textarea:not([disabled])")
+
+  ];
+
+  return candidates.find(function(control) {
+
+    return control && control.getClientRects().length > 0;
+
+  });
+
 }
 
 function isFilterDialogOpen() {
@@ -171,14 +212,12 @@ function syncFilterDialog() {
 
   if (filterToggle) {
 
-    // Fix: Small viewport. Toggle tells AT it opens a dialog, and the section gets dialog semantics. tabindex="-1" lets the
-    // platform's own focus() call land on the panel in every browser.
+    // Fix: Small viewport. Toggle tells AT it opens a dialog, and the section gets dialog semantics.
 
     filterToggle.setAttribute("aria-haspopup", "dialog");
 
     searchFilters.setAttribute("role", "dialog");
     searchFilters.setAttribute("aria-modal", "true");
-    searchFilters.setAttribute("tabindex", "-1");
 
   } else {
 
@@ -186,7 +225,6 @@ function syncFilterDialog() {
 
     searchFilters.setAttribute("role", "region");
     searchFilters.removeAttribute("aria-modal");
-    searchFilters.removeAttribute("tabindex");
 
   }
 
