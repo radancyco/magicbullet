@@ -132,6 +132,28 @@ function bindFilterDialog(searchFilters) {
 
     });
 
+    // Fix: Light dismiss. A click anywhere outside the panel closes it, same as the Close button. Most sites show the panel
+    // full screen today, so this only matters if a site's UI leaves part of the page visible. The background is inert, so a
+    // click there lands on the nearest non-inert ancestor (e.g. #page or body), which is still outside the panel. Clicks on
+    // nodes removed during the click (e.g. by an ajax refresh) are ignored, as are clicks on the toggle that opens the panel.
+
+    document.addEventListener("click", function(event) {
+
+      const searchFilters = document.getElementById("search-filters");
+      const target = event.target;
+
+      if (!isFilterDialogOpen() || !target.isConnected || searchFilters.contains(target) || target.closest("#filter-slideout-toggle")) return;
+
+      const closeButton = document.getElementById("filter-close-toggle");
+
+      if (closeButton) {
+
+        closeButton.click();
+
+      }
+
+    });
+
   }
 
   filterDialogParent = parent;
