@@ -78,7 +78,7 @@ export function fixSearchFilters(searchFilters) {
 // The platform adds the toggle only on small viewports and removes it on large ones, so the toggle being present is our
 // signal that we're in the small viewport experience.
 // Already handled by the platform, so not repeated here: focus returns to the toggle when closed. The platform also calls
-// focus() on the panel when opened; observeFilterDialog() redirects that to the first interactive item.
+// focus() on the panel when opened; observeFilterDialog() redirects that to the Close button.
 // Note: Every checkbox change triggers an ajax refresh that replaces #search-filters, #search-results and the toggle, then
 // reopens the panel. The sitewide observer only picks up replaced components after 1s, which is too late (the platform
 // focuses the new panel ~200ms after reopening), so the dialog state is kept in sync by its own observer, which reacts
@@ -178,8 +178,8 @@ function observeFilterDialog() {
   // before focus moves (the platform's jQuery trigger("focus") calls it), so we can decide where focus actually goes:
   //   - Focus already inside the panel: do nothing. After each ajax refresh, the site puts focus back on the checkbox the user
   //     pressed (~100ms), then the platform reopens the panel and calls focus() (~200ms), which would pull focus off that checkbox.
-  //   - Otherwise (opened from the toggle): focus the first interactive item instead of the panel itself. That's the refined
-  //     search input (#keyword-tag) when present, else the first button (the Close button aside, which now comes first).
+  //   - Otherwise (opened from the toggle): focus the Close button instead of the panel itself. It's the first item in the
+  //     panel (see syncFilterDialog()), so focus starts at the top of the dialog.
 
   searchFilters.focus = function(options) {
 
@@ -187,32 +187,15 @@ function observeFilterDialog() {
 
     if (activeElement !== searchFilters && searchFilters.contains(activeElement)) return;
 
-    const firstControl = getFirstFilterControl(searchFilters);
+    const closeButton = searchFilters.querySelector("#filter-close-toggle");
 
-    if (firstControl) {
+    if (closeButton) {
 
-      firstControl.focus(options);
+      closeButton.focus(options);
 
     }
 
   };
-
-}
-
-function getFirstFilterControl(searchFilters) {
-
-  const candidates = [
-
-    searchFilters.querySelector("#keyword-tag"),
-    ...searchFilters.querySelectorAll("button:not(#filter-close-toggle):not([disabled])")
-
-  ];
-
-  return candidates.find(function(control) {
-
-    return control && control.getClientRects().length > 0;
-
-  });
 
 }
 
