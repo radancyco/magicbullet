@@ -14,7 +14,7 @@ export function fixMindReaderList() {
     const ariaLabelledBy = listID.replace("-mindreader", "-label");
 
     // Fix: Skip lists that belong to a native <select>. The platform adds an empty results list after some dropdowns
-    // (e.g. Job Category and Location on Walmart's talent community form), but nothing ever fills or controls it.
+    // (e.g. Job Category and Location talent community forms), but nothing ever fills or controls it initially.
     // fixMindReaderInput() only runs on inputs, so the <select>'s label never gets the "-label" ID, and patching
     // these lists would leave a listbox with a broken aria-labelledby reference.
 
