@@ -23,7 +23,7 @@
 
   hostName = hostName.substring(hostName.indexOf(".") + 1);
 
-  const QADomains = localHost || hostName === "runmytests.com" || hostName === "runmytests.eu" || hostName === "talentbrew.com" || hostName === "tmpqa.com" || hostName === "radancy.net";
+  const QADomains = localHost || hostName === "runmytests.com" || hostName === "runmytests.eu" || hostName === "talentbrew.com" || hostName === "tmpqa.com" || hostName === "radancy.net" || hostName === "searchgreatcareers.com" || hostName === "searchgreatcareers.eu";
 
   // Add MagicBullet CSS
 
