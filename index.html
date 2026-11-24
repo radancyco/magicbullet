@@ -1,18 +1,374 @@
 ---
-changelog: 
+changelog:
+
+  - label: Maintenance
+    content: "November 23, 2026: The loader now treats <code>searchgreatcareers.com</code> and <code>searchgreatcareers.eu</code> as QA domains."
+
+  - label: Bug
+    content: "November 18, 2026: MindReader results lists next to a native <code>select</code> are now skipped, fixing a broken <code>aria-labelledby</code> reference flagged by WAVE."
+
+  - label: Feature
+    content: "November 12, 2026: On small viewports, the search filters panel is now a modal dialog (<code>role='dialog'</code>, <code>aria-modal</code>, <code>inert</code> background) that closes with Escape or a click outside, with focus starting on the Close button."
+
+  - label: Behavior
+    content: "November 12, 2026: Main content gets <code>tabindex='-1'</code> again so skip links can move focus to it. On large viewports, search filters are a <code>region</code>."
+
+  - label: Maintenance
+    content: "November 11, 2026: Rebuilt the patch as ES modules, with one file per fix in <code>patch/</code> and helpers in <code>util/</code>. Each fix runs inside <code>runSafely()</code>, so one failing fix no longer stops the rest."
+
+  - label: Maintenance
+    content: "November 9, 2026: The language pack is now an ES module (<code>lang.js</code>) imported by each fix, so translated labels are ready before any fix runs."
+
+  - label: Feature
+    content: "November 7, 2026: Search form location errors now have a solid background for contrast and are hidden when empty."
+
+  - label: Behavior
+    content: "November 6, 2026: Each component now has its own MutationObserver through <code>observeComponent()</code>, so a change in one component only re-runs that component's fix."
+
+  - label: Bug
+    content: "October 22, 2026: MindReader comboboxes no longer bind duplicate key listeners, job map State and ZIP fields both update the city field, and share link 'opens in new window' text is spaced correctly."
+
+  - label: Bug
+    content: "October 9, 2026: Data form file upload buttons now get <code>type='button'</code>, so pressing them no longer submits the form."
+
+  - label: Feature
+    content: "September 16, 2026: The privacy notice close button gets a translated name, and the notice is labelled by its own heading. Pagination Previous and Next links get <code>role='button'</code> and Spacebar support."
+
+  - label: Feature
+    content: "September 16, 2026: Required job alert fields get <code>required</code>, the empty keyword region is hidden until it has items, and the combobox fix now covers keyword facet inputs."
+
+  - label: Feature
+    content: "September 1, 2026: Data form placeholders that repeat the field's label are removed, so screen readers no longer read the same text twice."
+
+  - label: Feature
+    content: "August 7, 2026: The skip link is offset from the viewport edge, Firefox shows a focus ring on buttons, the search form becomes a <code>search</code> landmark, and the sticky AJD header stops sticking on short viewports."
+
+  - label: Bug
+    content: "July 28, 2026: The page no longer jumps when MagicBullet updates a component, because the scroll position is saved and restored."
+
+  - label: Feature
+    content: "July 27, 2026: Keyword search autocomplete gets usage instructions, a labelled popup and an announced suggestion count, and Escape returns focus to the input."
+
+  - label: Feature
+    content: "July 21, 2026: A translated 'Loading new results' message is announced when results update, and result counts are now based on actual job links."
+
+  - label: Feature
+    content: "July 15, 2026: Job map Search Nearby buttons (Bus, Metro, Restaurants, etc.) use <code>aria-pressed</code>, the Get Directions address field gets <code>autocomplete='street-address'</code>, and sort order changes are announced."
+
+  - label: Bug
+    content: "July 15, 2026: The search results count is now announced once per real change instead of on every DOM update."
+
+  - label: Feature
+    content: "June 25, 2026: Links that open in a new window (job descriptions, CMS content, social share) now include translated, visually hidden 'opens in new window' text."
+
+  - label: Feature
+    content: "June 24, 2026: Job alert keyword areas now manage focus after a keyword is added or removed, remove links get <code>role='button'</code>, and asterisks only appear on required fields."
 
   - label: Feature
     content: "June 20, 2026: Language support now added! Switched to thee point version and bumped up to 3.0.0"
 
-notes: 
+  - label: Maintenance
+    content: "June 17, 2026: Added the <code>load.js</code> loader, which loads the patch as an ES module or a classic script depending on the embed tag."
 
-  - label: Note
-    content: Issues immediately corrected by the script when any Career Site page loads are considered "Static." Those corrected both on page load and during DOM updates, such as Ajax changes, are "Dynamic."
+  - label: Bug
+    content: "June 4, 2026: Fixed selectors that stopped the YouTube and Vimeo iframe title fix from running. The results count now only counts top-level result items."
 
-roadmap: 
+  - label: Behavior
+    content: "April 6, 2026: The job alerts submit button is labelled 'Submit Job Alerts', and the English 'Search Jobs' label is only applied on English pages."
 
   - label: Feature
-    content: Open the majority of these issues into JIRA in 2027! (High)
+    content: "March 19, 2026: Added Fix CMS, which turns <code>data-cms-mb-lang</code> and <code>data-cms-mb-scope</code> into real <code>lang</code> and <code>scope</code> attributes."
+
+  - label: Feature
+    content: "February 10, 2026: Disabled pagination Previous and Next controls get <code>aria-disabled='true'</code> and lose their hover styling."
+
+  - label: Bug
+    content: "January 12, 2026: Save job and search filter fixes no longer throw errors on pages without the recently viewed list or refined search section."
+
+  - label: Feature
+    content: "January 3, 2026: Result updates are announced as 'X of Y results', the pagination number input shows its spin buttons again, and the refine search keyword error is linked to its input."
+
+  - label: Feature
+    content: "December 18, 2025: Saved Jobs links get an <code>aria-label</code> with the saved count, and duplicate Save buttons for the same job update <code>aria-pressed</code> together."
+
+  - label: Feature
+    content: "December 17, 2025: The Refine Search keyword field announces added keywords, and focus returns to the input when an error shows."
+
+  - label: Feature
+    content: "December 12, 2025: MagicBullet can now be turned off for testing with <code>?magicbullet=false</code>."
+
+  - label: Maintenance
+    content: "December 12, 2025: The patch stylesheet is now plain CSS with native nesting instead of compiled Sass."
+
+  - label: Feature
+    content: "December 11, 2025: Search results pagination announces 'Loading New Results', then moves focus to the first link in the new results."
+
+  - label: Behavior
+    content: "December 11, 2025: Pagination cleanup is limited to search results, an existing <code>aria-label</code> is no longer overwritten, and disabled controls can no longer be focused."
+
+  - label: Bug
+    content: "September 12, 2025: Fixed a class name typo that left the global live region visible on screen."
+
+  - label: Feature
+    content: "September 3, 2025: The number of available results is announced after search results update."
+
+  - label: Feature
+    content: "September 2, 2025: Added a sitewide polite live region (<code>#magicbullet-message</code>) for screen reader announcements."
+
+  - label: Bug
+    content: "August 28, 2025: The data form close button icon stays visible and no longer blocks clicks."
+
+  - label: Feature
+    content: "July 16, 2025: AJD 'Back to Navigation' links have enough contrast and appear when they receive keyboard focus."
+
+  - label: Bug
+    content: "June 26, 2025: <code>aria-hidden</code> is only removed from the search form location pin when the pin is displayed."
+
+  - label: Feature
+    content: "June 24, 2025: Vimeo iframes with no <code>title</code> now get 'Vimeo video player'."
+
+  - label: Behavior
+    content: "June 9, 2025: Empty links are now hidden, along with empty headings and labels."
+
+  - label: Feature
+    content: "June 7, 2025: The main header <code>nav</code> is named 'Main' when it has no name, and outdated skip links on search results pages are removed."
+
+  - label: Behavior
+    content: "April 16, 2025: MindReader autocomplete sets <code>aria-expanded</code> on load and resets it when focus leaves or Escape is pressed."
+
+  - label: Bug
+    content: "April 2, 2025: Removed the invalid <code>aria-expanded</code> from the Refine Search keyword error message."
+
+  - label: Bug
+    content: "March 26, 2025: Form labels are no longer trimmed when the required asterisk is removed, fixing missing spaces in labels that contain links."
+
+  - label: Bug
+    content: "March 20, 2025: The search form fix no longer throws an error when the form has no fields wrapper."
+
+  - label: Feature
+    content: "March 12, 2025: The highlighted MindReader autocomplete option now has a visible outline."
+
+  - label: Behavior
+    content: "February 18, 2025: Removed redundant hidden instruction text from the search results pagination label."
+
+  - label: Maintenance
+    content: "February 12, 2025: Turned off the Job List fix that moved location and date into the job link, as it caused problems on some lists."
+
+  - label: Behavior
+    content: "February 3, 2025: Applied Filters now use <code>role='group'</code> instead of <code>region</code>, and the search form and filter fixes support the newer BEM class names."
+
+  - label: Maintenance
+    content: "February 2, 2025: Removed the email confirmation override, which caused too many issues, so the platform default is used again."
+
+  - label: Behavior
+    content: "January 17, 2025: Placeholder text now uses the field's own text color instead of a fixed gray."
+
+  - label: Behavior
+    content: "January 14, 2025: Social share links now say '(Opens in new tab or window)' in visually hidden text."
+
+  - label: Bug
+    content: "January 13, 2025: Fixes run again on content loaded with AJAX, and global disclosure <code>aria-expanded</code> now follows the component's open state."
+
+  - label: Bug
+    content: "December 10, 2024: The job alert keyword region no longer disturbs the form layout."
+
+  - label: Bug
+    content: "December 3, 2024: Dynamic fixes no longer run twice on load, which had made disclosure <code>aria-expanded</code> toggle back."
+
+  - label: Behavior
+    content: "December 3, 2024: Required fields with server-returned errors now get <code>aria-invalid='true'</code> on load."
+
+  - label: Feature
+    content: "December 2, 2024: Added <code>autocomplete</code> tokens to job alert phone, address, city, state and postal code fields."
+
+  - label: Behavior
+    content: "December 2, 2024: The global disclosure fix now removes <code>aria-hidden</code> as well as <code>aria-expanded</code> from each disclosure panel."
+
+  - label: Feature
+    content: "October 11, 2024: Location comboboxes now point to hidden autocomplete instructions through <code>aria-describedby</code>."
+
+  - label: Feature
+    content: "October 11, 2024: On job map pages, the city <code>select</code> stays hidden until a state or ZIP is chosen, so users don't land on an empty dropdown."
+
+  - label: Feature
+    content: "October 3, 2024: Removed <code>aria-required</code> from the job location Get Directions inputs."
+
+  - label: Feature
+    content: "September 26, 2024: Removed invalid <code>alt</code> attributes from <code>source</code> elements."
+
+  - label: Feature
+    content: "September 19, 2024: Removed literal asterisks typed into required field labels, so screen readers don't announce them."
+
+  - label: Behavior
+    content: "September 13, 2024: MindReader comboboxes keep <code>aria-expanded</code> in sync with the results list, and each <code>listbox</code> is named by its label."
+
+  - label: Feature
+    content: "September 13, 2024: On job map pages, the native city <code>select</code> replaces the inaccessible custom combobox."
+
+  - label: Bug
+    content: "September 6, 2024: The CSS required asterisk no longer appears on <code>legend</code> elements in data forms."
+
+  - label: Behavior
+    content: "August 28, 2024: The alt fix now also empties whitespace-only <code>alt</code> values."
+
+  - label: Feature
+    content: "August 27, 2024: The highlighted MindReader suggestion now has a visible background, so keyboard users can see it."
+
+  - label: Feature
+    content: "August 22, 2024: Removed the incorrect <code>aria-expanded</code> from the advanced search form fields."
+
+  - label: Feature
+    content: "August 14, 2024: MindReader location and keyword inputs are now comboboxes, with <code>listbox</code> and <code>option</code> roles on the results and <code>aria-activedescendant</code> tracking the highlighted option."
+
+  - label: Feature
+    content: "July 9, 2024: Removed the incorrect <code>aria-expanded</code> from the search form fields."
+
+  - label: Feature
+    content: "June 25, 2024: The search filters panel is a labelled region, and each filter section is a group labelled by its toggle button."
+
+  - label: Feature
+    content: "June 24, 2024: YouTube iframes with no <code>title</code> now get one."
+
+  - label: Maintenance
+    content: "June 21, 2024: Reorganized the patch (v2.0) into static fixes that run once on load and dynamic fixes that a MutationObserver reapplies after DOM changes."
+
+  - label: Behavior
+    content: "June 19, 2024: Search form fields are a group named by the form's legend, and location errors are tied to the input with <code>aria-describedby</code> and <code>aria-invalid</code>, with focus moved back to the field."
+
+  - label: Feature
+    content: "June 17, 2024: Disclosure buttons that start open now report <code>aria-expanded='true'</code>."
+
+  - label: Maintenance
+    content: "May 30, 2024: Rewrote the patch from jQuery to vanilla JavaScript and retired several legacy fixes (Google Translate, Olivia, Altru, old Slick carousels and others)."
+
+  - label: Feature
+    content: "May 30, 2024: Job alert forms: the form message gets <code>tabindex='-1'</code>, its close link gets <code>role='button'</code>, and selected keywords sit in a labelled region."
+
+  - label: Maintenance
+    content: "April 24, 2024: The loader now treats <code>runmytests.eu</code> as a QA domain."
+
+  - label: Feature
+    content: "April 19, 2024: Added a MutationObserver that runs fixes once the DOM settles, starting with an accessible name on the reCAPTCHA response <code>textarea</code>."
+
+  - label: Maintenance
+    content: "February 18, 2024: The loader loads the QA patch from radancy.dev and production from services.tmpwebeng.com, and also accepts the <code>radancy-magicbullet</code> script ID."
+
+  - label: Behavior
+    content: "February 15, 2024: Stopped moving focus to the cookie banner button on page load, because it caused cookie issues."
+
+  - label: Feature
+    content: "August 30, 2023: Focus moves to the cookie banner button when it is present, so keyboard and screen reader users meet it first."
+
+  - label: Behavior
+    content: "November 2, 2022: Applied filter buttons now read 'Remove [name] filter'."
+
+  - label: Bug
+    content: "May 19, 2022: The hidden 'Selected Job Alerts' label gets a unique ID per form, fixing duplicate IDs."
+
+  - label: Feature
+    content: "May 17, 2022: <code>role='search'</code> now also applies to advanced search forms, the skip link is forced above other content, and placeholder text is darkened for contrast."
+
+  - label: Feature
+    content: "April 14, 2022: Added an accessible name to the Olivia chatbot toggle, and the empty <code>alt</code> fallback now also runs after AJAX updates."
+
+  - label: Feature
+    content: "March 16, 2022: Job alert forms get an <code>aria-hidden</code> asterisk, <code>autocomplete</code> tokens on name and email fields, and <code>aria-invalid</code> that updates on submit and blur."
+
+  - label: Feature
+    content: "March 10, 2022: Removed <code>user-scalable=no</code> viewport tags so users can zoom, and placeholder text uses a higher-contrast color."
+
+  - label: Feature
+    content: "February 9, 2022: Removed broken <code>aria-describedby</code> references on the Cookie Management page."
+
+  - label: Behavior
+    content: "January 25, 2022: Save Job buttons get <code>role='button'</code> and a 'Save Job' label, working around iOS and NVDA not announcing <code>aria-pressed</code>."
+
+  - label: Bug
+    content: "January 10, 2022: The personalization section <code>tabindex</code> fix matches the current markup again."
+
+  - label: Behavior
+    content: "December 29, 2021: Following Level Access feedback, <code>#search-results</code> no longer gets a 'page X of Y' label."
+
+  - label: Feature
+    content: "December 17, 2021: Job alert forms label the selected keywords list and give clearer names to the Add and Sign Up buttons. Older Slick carousel arrows get 'Previous' and 'Next' labels."
+
+  - label: Maintenance
+    content: "November 19, 2021: Removed the old Simple Toggle helper (<code>data-a11y-button</code>) from the patch."
+
+  - label: Feature
+    content: "November 15, 2021: Added the patch stylesheet (<code>a11y/init.css</code>), an opt-in native <code>datalist</code> for location search, and an opt-in job list fix."
+
+  - label: Behavior
+    content: "November 15, 2021: The loader turns on the patch when a bare <code>data-a11y</code> attribute is present, instead of requiring <code>data-a11y='true'</code>."
+
+  - label: Feature
+    content: "October 14, 2021: Search location errors are tied to their field with <code>aria-describedby</code> and <code>aria-invalid</code>, search legends label their group, and pagination gets an <code>aria-label</code>."
+
+  - label: Maintenance
+    content: "October 4, 2021: The loader now treats <code>radancy.dev</code> as a QA domain."
+
+  - label: Feature
+    content: "September 13, 2021: Removed <code>tabindex='0'</code> from personalization sections, and removed misleading expand behavior from headings on sitemap pages."
+
+  - label: Behavior
+    content: "October 7, 2020: Job description cleanup no longer strips <code>style</code> and <code>align</code>, so client formatting is kept."
+
+  - label: Maintenance
+    content: "March 25, 2020: The loader's QA domains are now <code>tmpworldwide.dev</code> and <code>tmpqa.com</code>."
+
+  - label: Feature
+    content: "February 19, 2020: Job description cleanup unwraps legacy <code>font</code> elements."
+
+  - label: Feature
+    content: "December 17, 2019: Job descriptions are stripped of legacy presentational attributes, and applied filter buttons are labelled 'Remove [name]'."
+
+  - label: Behavior
+    content: "October 3, 2019: Removing <code>role='status'</code> from headings is limited to search results headings."
+
+  - label: Behavior
+    content: "June 24, 2019: Applied filter buttons use their visible text as their label, dropping the extra keyboard instructions."
+
+  - label: Maintenance
+    content: "May 20, 2019: Merged the separate QA and production copies of the patch into a single <code>a11y/init.js</code>."
+
+  - label: Feature
+    content: "April 4, 2019: Removed <code>tabindex='0'</code> from search filters and results. When an applied filter is removed, focus moves to the next filter or the first result."
+
+  - label: Bug
+    content: "January 30, 2019: The job description <code>tabindex</code> fix removes only the attribute instead of the whole element, and the applied filters fix also runs on page load."
+
+  - label: Behavior
+    content: "December 6, 2018: Form and applied filter fixes now run again after every AJAX update, so content loaded later is fixed too."
+
+  - label: Behavior
+    content: "December 3, 2018: Rebuilt the <code>data-a11y-button</code> toggle with real <code>button</code> elements and <code>aria-controls</code>, and opening it moves focus to the revealed content."
+
+  - label: Bug
+    content: "September 30, 2018: Removed the empty <code>aria-describedby</code> from the resume upload field, and its 'remove file' link is now a <code>button</code>."
+
+  - label: Behavior
+    content: "August 14, 2018: Links marked with <code>data-a11y-button</code> are converted to real <code>button</code> elements."
+
+  - label: Feature
+    content: "August 9, 2018: Added <code>role='search'</code> to search forms."
+
+  - label: Bug
+    content: "August 7, 2018: Added <code>type='button'</code> to Save Job buttons so VoiceOver announces their pressed state."
+
+  - label: Feature
+    content: "July 17, 2018: Added <code>aria-pressed</code> to Save Job buttons, updated on click and after AJAX updates."
+
+  - label: Feature
+    content: "July 11, 2018: Added a reusable toggle (<code>data-a11y-button</code>) with <code>aria-expanded</code>, keyboard support and Escape to close."
+
+  - label: Feature
+    content: "June 21, 2018: Disabled pagination links can no longer be reached by keyboard, and the search results announce the current page."
+
+  - label: Feature
+    content: "May 3, 2018: Added a label to the Google Translate language select, <code>role='presentation'</code> on job description tables, and removed <code>autocomplete</code> from checkboxes."
+
+  - label: Feature
+    content: "May 1, 2018: Initial accessibility patch, turned on with <code>data-a11y</code>. Fixes <code>aria-expanded</code> on expandable toggles, missing <code>alt</code>, new window links, Applied Filters ARIA, form markup and positive <code>tabindex</code> in job descriptions."
 
 title: "MagicBullet v3.0.0"
 accordion: true
@@ -23,49 +379,57 @@ tablist: true
 
 {% capture contentblock %}
 
-<p>This patch addresses various accessibility issues across all Career Sites. This is a temporary solution until these issues can be resolved by the product team. If there are any questions or concerns with the script, please reach out to <a href="mailto:{{ site.owner-email }}?subject={{ page.title }}">{{ site.owner-name }}</a></p>
+<p>This patch addresses various accessibility issues across all Career Sites. This is a <em>temporary</em> solution until these issues can be resolved by the product team. The issues that are remediated by this script can now be found in the <a href="https://a11y.radancy.dev/audit/career-site/acr/wcag/">Career Site ACR</a>. If there are any questions or concerns with the script, please reach out to <a href="mailto:{{ site.owner-email }}?subject={{ page.title }}">{{ site.owner-name }}</a>.
 
 <h2 id="installation">Installation {% include permalink.html hash="installation" %}</h2>
 
-<p>Before installing MagicBullet, please <a href="#verification">verify</a> that it is not already running. If it is not, add the following script:</p>
+<p>Before installing MagicBullet, please <a href="#verification">verify</a> that it is not already running. If it is not, add the following:</p>
 
 {% highlight html %}<script id="radancy-magicbullet" src="https://clientfiles.tmpwebeng.com/shared-libraries/magicbullet/rolling/load.js" type="module"></script>{% endhighlight %}
 
-<h3>Where To Install</h3>
+<p>If you are accomodating an Akamai configuration request, then you may use a relative path:
 
-<ul> 
-  <li>For older GST career sites that may not have MagicBullet, add it under <strong>Settings > General > Footer</strong>.</li> 
-  <li>On Legacy career sites that may not have MagicBullet, add it under <strong>Settings > General > Pixel Tracking</strong>.</li> 
-</ul>
+{% highlight html %}<script id="radancy-magicbullet" src="/shared-libraries/magicbullet/rolling/load.js" type="module"></script>{% endhighlight %}
+
+<h3>Where To Install</h3>
 
 <div class="info info--warning">
 
-  <p>Never install MagicBullet at the theme level, as doing so can cause script conflicts and complicate future maintenance.</p>
+  <p><strong>Important:</strong> Never install MagicBullet at the theme level, as doing so can cause script conflicts and complicate future maintenance.</p>
 
 </div>
 
-<h2 id="verification">Verification {% include permalink.html hash="verification" %}</h2>
+<ul> 
+  <li>For older GST career sites that may not have MagicBullet, add it to the script module:
+    
+<p>{% highlight html %}Html.AddScriptBlock(
 
-<p>There are two ways to verify that this script is running:</p>
+  @* Note: If accomodating an Akamai configuration request, you may use the relative path to MagicBullet by removing https://clientfiles.tmpwebeng.com *@
 
-<ul>
-  <li>Check your browsers DevTools console for the following:
+  @<script id="radancy-magicbullet" src="https://clientfiles.tmpwebeng.com/shared-libraries/magicbullet/rolling/load.js" type="module"></script>
+    
+);{% endhighlight %}</p>
 
-  <p><img src="data:image/png;base64,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" alt="Screenshot of console messages, which include MagicBullet v3.0 in use." loading="lazy"></p>
-  
   </li>
-  <li>If you've installed <a href="/a11y/pulse/">A11y Pulse</a>, running it will <a href="a11y-pulse.png">also indicate</a> whether the patch is active.</li>
+  <li>For older GST career sites that may not have a script module, add it under <strong>Settings > General > Footer</strong>.</li> 
+  <li>On Legacy career sites that may not have MagicBullet, add it under <strong>Settings > General > Pixel Tracking</strong>.</li> 
 </ul>
 
-<p>If these messages are missing or you are receiving an alert in A11y Pulse, the patch isn't loading and you'll need to troubleshoot.</p>
+<h2 id="verification">Verification {% include permalink.html hash="verification" %}</h2>
+
+<p>To verify that the script is running, check your browsers DevTools console for the following:<p>
+
+<img src="data:image/png;base64,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" alt="Screenshot of console messages, which include MagicBullet v3.0 in use." loading="lazy">
+  
+<p>If these messages are missing then the patch isn't loading and you'll need to troubleshoot.</p>
 
 <section aria-labelledby="hdr-troubleshooting" class="info info--reminder" id="troubleshooting" tabindex="-1">
 
   <h2 id="hdr-troubleshooting" class="info__heading">Troubleshooting {% include permalink.html hash="troubleshooting" %}</h2>
 
   <ol>
-    <li><strong>Ensure only one instance of MagicBullet loads per page.</strong> Multiple MagicBullet scripts can prevent associated features, like the Accessibility Patch, from running.</li>
-    <li>MagicBullet can also be initiated via JavaScript to support conditional loading (usually of data attributes). If a conflict occurs, check whether the script is created dynamically. If it exists in your JavaScript, you may be able to remove it and copy the attributes over to the inline version or add the <code>data-a11y</code> attribute here instead. It may look like this: 
+    <li><strong>Ensure only one instance of MagicBullet loads per page.</strong> Multiple MagicBullet scripts can prevent it from running.</li>
+    <li>MagicBullet can also be initiated via JavaScript to support conditional loading (usually of data attributes). If a conflict occurs, check whether the script is created dynamically. If it exists in your JavaScript, please reach out to {{site.owner-name}} for further assistance. It may look like this: 
 
 <p>{% highlight javascript %}var magicBullet = document.createElement("script");
 magicBullet.setAttribute("id", "radancy-magicbullet");
@@ -77,7 +441,7 @@ document.body.appendChild(magicBullet);{%endhighlight%}</p>
 
     </li>
     <li>Razor commenting does not appear to be supported in <strong>Settings</strong>. If an older version of MagicBullet exists there, delete it entirely or use HTML comments to remove it.</li>
-    <li>Alternatively, if you beleive that MagicBullet is causing an issue on your page, you may temporarily disabled it by passing the following URL paramater: <code>?magicbullet=false</code>.</li>
+    <li>If you believe that MagicBullet is causing an issue on your page, you may temporarily disable it by passing the following URL parameter: <code>?magicbullet=false</code>.</li>
   </ol>
 
 </section>
@@ -86,110 +450,6 @@ document.body.appendChild(magicBullet);{%endhighlight%}</p>
 
 <p>After it has been confirmed that the script is running <em>you must smoke-test your pages to ensure the site's core functionality still works and that there are no visual issues</em>. MagicBullet only addresses issues under the hood that relate to accessibility, but minor issues can occasionally occur. If you are sure that MagicBullet is causing an issue, please reach out to <a href="mailto:{{ site.owner-email }}?Subject=MagicBullet Issue">{{ site.owner-name }}</a>.</p>
 
-<h2 id="issue-log">Issue Log {% include permalink.html hash="issue-log" %}</h2>
-
-{% for bug in site.data.a11y %}
-
-  <div id="{{ bug.ID }}" class="{% if bug.Priority == "High" %} info info--warning{%else%}info info--note{% endif %}">
-
-    <h2 class="info__heading">{{ bug.Summary }} {% include permalink.html hash=bug.ID %}</h2>
-
-    <dl>
-        
-      <div>
-        
-        <dt>Priority</dt>
-        <dd>{{ bug.Priority }}</dd>
-
-      </div>
-
-      <div>
-        
-        <dt>Product</dt>
-        <dd>{{ bug.Product }}</dd>
-
-      </div>
-
-      <div>
-        
-        <dt>Associated Module</dt>
-        <dd>{{ bug.Module }}</dd>
-
-      </div>
-
-      {% if bug.Function %}
-        
-        <div>
-        
-          <dt>Associated Function</dt>
-          <dd>{{ bug.Function }}</dd>
-
-        </div>
-
-      {% endif %}
-        
-      {% if bug.JIRA %}
-
-        <div>
-        
-          <dt>JIRA</dt>
-          <dd><a href="{{ bug.JIRA }}" target="_blank">View <span class="visually-hidden">(opens in new tab)</span></a></dd>
-
-        </div>
-
-      {% endif %}
-        
-      {% if bug.Language != "NA" %}
-
-        <div>
-        
-          <dt>Language Support</dt>
-          <dd>{{ bug.Language }}</dd>
-
-        </div>
-
-      {% endif %}
-        
-      {% if bug.Screengrab %}
-
-        <div>
-        
-          <dt>Screengrab</dt>
-          <dd><a href="{{ bug.Screengrab }}" target="_blank">View <span class="visually-hidden">(opens in new tab)</span></a></dd>
-
-        </div>
-
-      {% endif %}
-
-      {% if bug.Overview %}
-
-      <div>
-      
-        <dt>Description</dt>
-        <dd>{{ bug.Overview | markdownify }}</dd>
-
-      </div>
-
-    {% endif %}
-
-    </dl>
-
-    {% if bug.Fixes %}
-
-      <details>
-
-        <summary>Fixes</summary>
-
-        {{ bug.Fixes | markdownify }}
-        
-      </details>
-        
-    {% endif %}
-
-  </div>
-
-{% endfor %}
-
 <div class="content-view-code">
 
   <div class="tablist" data-scroll data-fixed-height="">
@@ -197,13 +457,24 @@ document.body.appendChild(magicBullet);{%endhighlight%}</p>
     <div class="tablist__container">
 
         <ul class="tablist__list">  
-          <li><a class="tablist__tab" href="#javascript">{{ iconJS }} JavaScript</a></li>
+          <li><a class="tablist__tab" href="#load">{{ iconJS }} Loader</a></li>
+          <li><a class="tablist__tab" href="#patch">{{ iconJS }} Patch</a></li>
           <li><a class="tablist__tab" href="#css">{{ iconJS }} CSS</a></li>
         </ul>
 
     </div>
 
-    <div class="tablist__panel" id="javascript">
+    <div class="tablist__panel" id="load">
+
+        <div class="tablist__content">
+
+          {% highlight javascript %}{% include_relative load.js %}{% endhighlight %}
+           
+        </div>
+
+    </div>
+
+    <div class="tablist__panel" id="patch">
 
         <div class="tablist__content">
 
